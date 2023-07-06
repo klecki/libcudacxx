@@ -190,7 +190,7 @@ void __throw_bad_optional_access() {
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
         throw bad_optional_access();
 #else
-        _CUDA_VSTD::abort();
+        _CUDA_FOR_DALI_VSTD::abort();
 #endif
 }
 
@@ -233,7 +233,7 @@ struct __optional_destruct_base<_Tp, false>
     template <class... _Args>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     constexpr explicit __optional_destruct_base(in_place_t, _Args&&... __args)
-        :  __val_(_CUDA_VSTD::forward<_Args>(__args)...),
+        :  __val_(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...),
            __engaged_(true) {}
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -268,7 +268,7 @@ struct __optional_destruct_base<_Tp, true>
     template <class... _Args>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     constexpr explicit __optional_destruct_base(in_place_t, _Args&&... __args)
-        :  __val_(_CUDA_VSTD::forward<_Args>(__args)...),
+        :  __val_(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...),
            __engaged_(true) {}
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -307,12 +307,12 @@ struct __optional_storage_base : __optional_destruct_base<_Tp>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     constexpr value_type&& __get() && noexcept
     {
-        return _CUDA_VSTD::move(this->__val_);
+        return _CUDA_FOR_DALI_VSTD::move(this->__val_);
     }
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     constexpr const value_type&& __get() const&& noexcept
     {
-        return _CUDA_VSTD::move(this->__val_);
+        return _CUDA_FOR_DALI_VSTD::move(this->__val_);
     }
 
     template <class... _Args>
@@ -320,7 +320,7 @@ struct __optional_storage_base : __optional_destruct_base<_Tp>
     void __construct(_Args&&... __args)
     {
         _LIBCUDAFORDALICXX_ASSERT(!has_value(), "__construct called for engaged __optional_storage");
-        ::new((void*)_CUDA_VSTD::addressof(this->__val_)) value_type(_CUDA_VSTD::forward<_Args>(__args)...);
+        ::new((void*)_CUDA_FOR_DALI_VSTD::addressof(this->__val_)) value_type(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
         this->__engaged_ = true;
     }
 
@@ -329,7 +329,7 @@ struct __optional_storage_base : __optional_destruct_base<_Tp>
     void __construct_from(_That&& __opt)
     {
         if (__opt.has_value())
-            __construct(_CUDA_VSTD::forward<_That>(__opt).__get());
+            __construct(_CUDA_FOR_DALI_VSTD::forward<_That>(__opt).__get());
     }
 
     template <class _That>
@@ -339,14 +339,14 @@ struct __optional_storage_base : __optional_destruct_base<_Tp>
         if (this->__engaged_ == __opt.has_value())
         {
             if (this->__engaged_)
-                this->__val_ = _CUDA_VSTD::forward<_That>(__opt).__get();
+                this->__val_ = _CUDA_FOR_DALI_VSTD::forward<_That>(__opt).__get();
         }
         else
         {
             if (this->__engaged_)
                 this->reset();
             else
-                __construct(_CUDA_VSTD::forward<_That>(__opt).__get());
+                __construct(_CUDA_FOR_DALI_VSTD::forward<_That>(__opt).__get());
         }
     }
 };
@@ -384,7 +384,7 @@ struct __optional_storage_base<_Tp, true>
     template <class _UArg>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     constexpr explicit __optional_storage_base(in_place_t, _UArg&& __uarg)
-        :  __value_(_CUDA_VSTD::addressof(__uarg))
+        :  __value_(_CUDA_FOR_DALI_VSTD::addressof(__uarg))
     {
       static_assert(__can_bind_reference<_UArg>(),
         "Attempted to construct a reference element in tuple from a "
@@ -404,7 +404,7 @@ struct __optional_storage_base<_Tp, true>
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     constexpr value_type&& __get() const&& noexcept
-      { return _CUDA_VSTD::forward<value_type>(*__value_); }
+      { return _CUDA_FOR_DALI_VSTD::forward<value_type>(*__value_); }
 
     template <class _UArg>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -414,7 +414,7 @@ struct __optional_storage_base<_Tp, true>
         static_assert(__can_bind_reference<_UArg>(),
             "Attempted to construct a reference element in tuple from a "
             "possible temporary");
-        __value_ = _CUDA_VSTD::addressof(__val);
+        __value_ = _CUDA_FOR_DALI_VSTD::addressof(__val);
     }
 
     template <class _That>
@@ -422,7 +422,7 @@ struct __optional_storage_base<_Tp, true>
     void __construct_from(_That&& __opt)
     {
         if (__opt.has_value())
-            __construct(_CUDA_VSTD::forward<_That>(__opt).__get());
+            __construct(_CUDA_FOR_DALI_VSTD::forward<_That>(__opt).__get());
     }
 
     template <class _That>
@@ -432,14 +432,14 @@ struct __optional_storage_base<_Tp, true>
         if (has_value() == __opt.has_value())
         {
             if (has_value())
-                *__value_ = _CUDA_VSTD::forward<_That>(__opt).__get();
+                *__value_ = _CUDA_FOR_DALI_VSTD::forward<_That>(__opt).__get();
         }
         else
         {
             if (has_value())
                 reset();
             else
-                __construct(_CUDA_VSTD::forward<_That>(__opt).__get());
+                __construct(_CUDA_FOR_DALI_VSTD::forward<_That>(__opt).__get());
         }
     }
 };
@@ -493,7 +493,7 @@ struct __optional_move_base<_Tp, false> : __optional_copy_base<_Tp>
     __optional_move_base(__optional_move_base&& __opt)
         noexcept(is_nothrow_move_constructible_v<value_type>)
     {
-        this->__construct_from(_CUDA_VSTD::move(__opt));
+        this->__construct_from(_CUDA_FOR_DALI_VSTD::move(__opt));
     }
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -563,7 +563,7 @@ struct __optional_move_assign_base<_Tp, false> : __optional_copy_assign_base<_Tp
         noexcept(is_nothrow_move_assignable_v<value_type> &&
                  is_nothrow_move_constructible_v<value_type>)
     {
-        this->__assign_from(_CUDA_VSTD::move(__opt));
+        this->__assign_from(_CUDA_FOR_DALI_VSTD::move(__opt));
         return *this;
     }
 };
@@ -698,28 +698,28 @@ public:
     >
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     constexpr explicit optional(_InPlaceT, _Args&&... __args)
-        : __base(in_place, _CUDA_VSTD::forward<_Args>(__args)...) {}
+        : __base(in_place, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...) {}
 
     template <class _Up, class... _Args, class = _EnableIf<
         is_constructible_v<value_type, initializer_list<_Up>&, _Args...>>
     >
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     constexpr explicit optional(in_place_t, initializer_list<_Up> __il, _Args&&... __args)
-        : __base(in_place, __il, _CUDA_VSTD::forward<_Args>(__args)...) {}
+        : __base(in_place, __il, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...) {}
 
     template <class _Up = value_type, _EnableIf<
         _CheckOptionalArgsCtor<_Up>::template __enable_implicit<_Up>()
     , int> = 0>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     constexpr optional(_Up&& __v)
-        : __base(in_place, _CUDA_VSTD::forward<_Up>(__v)) {}
+        : __base(in_place, _CUDA_FOR_DALI_VSTD::forward<_Up>(__v)) {}
 
     template <class _Up, _EnableIf<
         _CheckOptionalArgsCtor<_Up>::template __enable_explicit<_Up>()
     , int> = 0>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     constexpr explicit optional(_Up&& __v)
-        : __base(in_place, _CUDA_VSTD::forward<_Up>(__v)) {}
+        : __base(in_place, _CUDA_FOR_DALI_VSTD::forward<_Up>(__v)) {}
 
     // LWG2756: conditionally explicit conversion from const optional<_Up>&
     template <class _Up, _EnableIf<
@@ -746,7 +746,7 @@ public:
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     optional(optional<_Up>&& __v)
     {
-        this->__construct_from(_CUDA_VSTD::move(__v));
+        this->__construct_from(_CUDA_FOR_DALI_VSTD::move(__v));
     }
     template <class _Up, _EnableIf<
         _CheckOptionalLikeCtor<_Up, _Up &&>::template __enable_explicit<_Up>()
@@ -754,7 +754,7 @@ public:
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     explicit optional(optional<_Up>&& __v)
     {
-        this->__construct_from(_CUDA_VSTD::move(__v));
+        this->__construct_from(_CUDA_FOR_DALI_VSTD::move(__v));
     }
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -785,9 +785,9 @@ public:
     operator=(_Up&& __v)
     {
         if (this->has_value())
-            this->__get() = _CUDA_VSTD::forward<_Up>(__v);
+            this->__get() = _CUDA_FOR_DALI_VSTD::forward<_Up>(__v);
         else
-            this->__construct(_CUDA_VSTD::forward<_Up>(__v));
+            this->__construct(_CUDA_FOR_DALI_VSTD::forward<_Up>(__v));
         return *this;
     }
 
@@ -811,7 +811,7 @@ public:
     optional&
     operator=(optional<_Up>&& __v)
     {
-        this->__assign_from(_CUDA_VSTD::move(__v));
+        this->__assign_from(_CUDA_FOR_DALI_VSTD::move(__v));
         return *this;
     }
 
@@ -826,7 +826,7 @@ public:
     emplace(_Args&&... __args)
     {
         reset();
-        this->__construct(_CUDA_VSTD::forward<_Args>(__args)...);
+        this->__construct(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
         return this->__get();
     }
 
@@ -841,7 +841,7 @@ public:
     emplace(initializer_list<_Up> __il, _Args&&... __args)
     {
         reset();
-        this->__construct(__il, _CUDA_VSTD::forward<_Args>(__args)...);
+        this->__construct(__il, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
         return this->__get();
     }
 
@@ -852,7 +852,7 @@ public:
     {
         if (this->has_value() == __opt.has_value())
         {
-            using _CUDA_VSTD::swap;
+            using _CUDA_FOR_DALI_VSTD::swap;
             if (this->has_value())
                 swap(this->__get(), __opt.__get());
         }
@@ -860,12 +860,12 @@ public:
         {
             if (this->has_value())
             {
-                __opt.__construct(_CUDA_VSTD::move(this->__get()));
+                __opt.__construct(_CUDA_FOR_DALI_VSTD::move(this->__get()));
                 reset();
             }
             else
             {
-                this->__construct(_CUDA_VSTD::move(__opt.__get()));
+                this->__construct(_CUDA_FOR_DALI_VSTD::move(__opt.__get()));
                 __opt.reset();
             }
         }
@@ -878,7 +878,7 @@ public:
     {
         _LIBCUDAFORDALICXX_ASSERT(this->has_value(), "optional operator-> called for disengaged value");
 #if defined(_LIBCUDAFORDALICXX_ADDRESSOF)
-        return _CUDA_VSTD::addressof(this->__get());
+        return _CUDA_FOR_DALI_VSTD::addressof(this->__get());
 #else
         return __operator_arrow(__has_operator_addressof<value_type>{}, this->__get());
 #endif
@@ -891,7 +891,7 @@ public:
     {
         _LIBCUDAFORDALICXX_ASSERT(this->has_value(), "optional operator-> called for disengaged value");
 #if defined(_LIBCUDAFORDALICXX_ADDRESSOF)
-        return _CUDA_VSTD::addressof(this->__get());
+        return _CUDA_FOR_DALI_VSTD::addressof(this->__get());
 #else
         return __operator_arrow(__has_operator_addressof<value_type>{}, this->__get());
 #endif
@@ -921,7 +921,7 @@ public:
     operator*() &&
     {
         _LIBCUDAFORDALICXX_ASSERT(this->has_value(), "optional operator* called for disengaged value");
-        return _CUDA_VSTD::move(this->__get());
+        return _CUDA_FOR_DALI_VSTD::move(this->__get());
     }
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -930,7 +930,7 @@ public:
     operator*() const&&
     {
         _LIBCUDAFORDALICXX_ASSERT(this->has_value(), "optional operator* called for disengaged value");
-        return _CUDA_VSTD::move(this->__get());
+        return _CUDA_FOR_DALI_VSTD::move(this->__get());
     }
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -963,7 +963,7 @@ public:
     {
         if (!this->has_value())
             __throw_bad_optional_access();
-        return _CUDA_VSTD::move(this->__get());
+        return _CUDA_FOR_DALI_VSTD::move(this->__get());
     }
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -972,7 +972,7 @@ public:
     {
         if (!this->has_value())
             __throw_bad_optional_access();
-        return _CUDA_VSTD::move(this->__get());
+        return _CUDA_FOR_DALI_VSTD::move(this->__get());
     }
 
     template <class _Up>
@@ -984,7 +984,7 @@ public:
         static_assert(is_convertible_v<_Up, value_type>,
                       "optional<T>::value_or: U must be convertible to T");
         return this->has_value() ? this->__get() :
-                                  static_cast<value_type>(_CUDA_VSTD::forward<_Up>(__v));
+                                  static_cast<value_type>(_CUDA_FOR_DALI_VSTD::forward<_Up>(__v));
     }
 
     template <class _Up>
@@ -995,8 +995,8 @@ public:
                       "optional<T>::value_or: T must be move constructible");
         static_assert(is_convertible_v<_Up, value_type>,
                       "optional<T>::value_or: U must be convertible to T");
-        return this->has_value() ? _CUDA_VSTD::move(this->__get()) :
-                                  static_cast<value_type>(_CUDA_VSTD::forward<_Up>(__v));
+        return this->has_value() ? _CUDA_FOR_DALI_VSTD::move(this->__get()) :
+                                  static_cast<value_type>(_CUDA_FOR_DALI_VSTD::forward<_Up>(__v));
     }
 
     using __base::reset;
@@ -1007,7 +1007,7 @@ private:
     static _Up*
     __operator_arrow(true_type, _Up& __x)
     {
-        return _CUDA_VSTD::addressof(__x);
+        return _CUDA_FOR_DALI_VSTD::addressof(__x);
     }
 
     template <class _Up>
@@ -1028,8 +1028,8 @@ template<class T>
 template <class _Tp, class _Up>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY constexpr
 _EnableIf<
-    is_convertible_v<decltype(_CUDA_VSTD::declval<const _Tp&>() ==
-        _CUDA_VSTD::declval<const _Up&>()), bool>,
+    is_convertible_v<decltype(_CUDA_FOR_DALI_VSTD::declval<const _Tp&>() ==
+        _CUDA_FOR_DALI_VSTD::declval<const _Up&>()), bool>,
     bool
 >
 operator==(const optional<_Tp>& __x, const optional<_Up>& __y)
@@ -1044,8 +1044,8 @@ operator==(const optional<_Tp>& __x, const optional<_Up>& __y)
 template <class _Tp, class _Up>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY constexpr
 _EnableIf<
-    is_convertible_v<decltype(_CUDA_VSTD::declval<const _Tp&>() !=
-        _CUDA_VSTD::declval<const _Up&>()), bool>,
+    is_convertible_v<decltype(_CUDA_FOR_DALI_VSTD::declval<const _Tp&>() !=
+        _CUDA_FOR_DALI_VSTD::declval<const _Up&>()), bool>,
     bool
 >
 operator!=(const optional<_Tp>& __x, const optional<_Up>& __y)
@@ -1060,8 +1060,8 @@ operator!=(const optional<_Tp>& __x, const optional<_Up>& __y)
 template <class _Tp, class _Up>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY constexpr
 _EnableIf<
-    is_convertible_v<decltype(_CUDA_VSTD::declval<const _Tp&>() <
-        _CUDA_VSTD::declval<const _Up&>()), bool>,
+    is_convertible_v<decltype(_CUDA_FOR_DALI_VSTD::declval<const _Tp&>() <
+        _CUDA_FOR_DALI_VSTD::declval<const _Up&>()), bool>,
     bool
 >
 operator<(const optional<_Tp>& __x, const optional<_Up>& __y)
@@ -1076,8 +1076,8 @@ operator<(const optional<_Tp>& __x, const optional<_Up>& __y)
 template <class _Tp, class _Up>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY constexpr
 _EnableIf<
-    is_convertible_v<decltype(_CUDA_VSTD::declval<const _Tp&>() >
-        _CUDA_VSTD::declval<const _Up&>()), bool>,
+    is_convertible_v<decltype(_CUDA_FOR_DALI_VSTD::declval<const _Tp&>() >
+        _CUDA_FOR_DALI_VSTD::declval<const _Up&>()), bool>,
     bool
 >
 operator>(const optional<_Tp>& __x, const optional<_Up>& __y)
@@ -1092,8 +1092,8 @@ operator>(const optional<_Tp>& __x, const optional<_Up>& __y)
 template <class _Tp, class _Up>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY constexpr
 _EnableIf<
-    is_convertible_v<decltype(_CUDA_VSTD::declval<const _Tp&>() <=
-        _CUDA_VSTD::declval<const _Up&>()), bool>,
+    is_convertible_v<decltype(_CUDA_FOR_DALI_VSTD::declval<const _Tp&>() <=
+        _CUDA_FOR_DALI_VSTD::declval<const _Up&>()), bool>,
     bool
 >
 operator<=(const optional<_Tp>& __x, const optional<_Up>& __y)
@@ -1108,8 +1108,8 @@ operator<=(const optional<_Tp>& __x, const optional<_Up>& __y)
 template <class _Tp, class _Up>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY constexpr
 _EnableIf<
-    is_convertible_v<decltype(_CUDA_VSTD::declval<const _Tp&>() >=
-        _CUDA_VSTD::declval<const _Up&>()), bool>,
+    is_convertible_v<decltype(_CUDA_FOR_DALI_VSTD::declval<const _Tp&>() >=
+        _CUDA_FOR_DALI_VSTD::declval<const _Up&>()), bool>,
     bool
 >
 operator>=(const optional<_Tp>& __x, const optional<_Up>& __y)
@@ -1222,8 +1222,8 @@ operator>=(nullopt_t, const optional<_Tp>& __x) noexcept
 template <class _Tp, class _Up>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY constexpr
 _EnableIf<
-    is_convertible_v<decltype(_CUDA_VSTD::declval<const _Tp&>() ==
-        _CUDA_VSTD::declval<const _Up&>()), bool>,
+    is_convertible_v<decltype(_CUDA_FOR_DALI_VSTD::declval<const _Tp&>() ==
+        _CUDA_FOR_DALI_VSTD::declval<const _Up&>()), bool>,
     bool
 >
 operator==(const optional<_Tp>& __x, const _Up& __v)
@@ -1234,8 +1234,8 @@ operator==(const optional<_Tp>& __x, const _Up& __v)
 template <class _Tp, class _Up>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY constexpr
 _EnableIf<
-    is_convertible_v<decltype(_CUDA_VSTD::declval<const _Tp&>() ==
-        _CUDA_VSTD::declval<const _Up&>()), bool>,
+    is_convertible_v<decltype(_CUDA_FOR_DALI_VSTD::declval<const _Tp&>() ==
+        _CUDA_FOR_DALI_VSTD::declval<const _Up&>()), bool>,
     bool
 >
 operator==(const _Tp& __v, const optional<_Up>& __x)
@@ -1246,8 +1246,8 @@ operator==(const _Tp& __v, const optional<_Up>& __x)
 template <class _Tp, class _Up>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY constexpr
 _EnableIf<
-    is_convertible_v<decltype(_CUDA_VSTD::declval<const _Tp&>() !=
-        _CUDA_VSTD::declval<const _Up&>()), bool>,
+    is_convertible_v<decltype(_CUDA_FOR_DALI_VSTD::declval<const _Tp&>() !=
+        _CUDA_FOR_DALI_VSTD::declval<const _Up&>()), bool>,
     bool
 >
 operator!=(const optional<_Tp>& __x, const _Up& __v)
@@ -1258,8 +1258,8 @@ operator!=(const optional<_Tp>& __x, const _Up& __v)
 template <class _Tp, class _Up>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY constexpr
 _EnableIf<
-    is_convertible_v<decltype(_CUDA_VSTD::declval<const _Tp&>() !=
-        _CUDA_VSTD::declval<const _Up&>()), bool>,
+    is_convertible_v<decltype(_CUDA_FOR_DALI_VSTD::declval<const _Tp&>() !=
+        _CUDA_FOR_DALI_VSTD::declval<const _Up&>()), bool>,
     bool
 >
 operator!=(const _Tp& __v, const optional<_Up>& __x)
@@ -1270,8 +1270,8 @@ operator!=(const _Tp& __v, const optional<_Up>& __x)
 template <class _Tp, class _Up>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY constexpr
 _EnableIf<
-    is_convertible_v<decltype(_CUDA_VSTD::declval<const _Tp&>() <
-        _CUDA_VSTD::declval<const _Up&>()), bool>,
+    is_convertible_v<decltype(_CUDA_FOR_DALI_VSTD::declval<const _Tp&>() <
+        _CUDA_FOR_DALI_VSTD::declval<const _Up&>()), bool>,
     bool
 >
 operator<(const optional<_Tp>& __x, const _Up& __v)
@@ -1282,8 +1282,8 @@ operator<(const optional<_Tp>& __x, const _Up& __v)
 template <class _Tp, class _Up>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY constexpr
 _EnableIf<
-    is_convertible_v<decltype(_CUDA_VSTD::declval<const _Tp&>() <
-        _CUDA_VSTD::declval<const _Up&>()), bool>,
+    is_convertible_v<decltype(_CUDA_FOR_DALI_VSTD::declval<const _Tp&>() <
+        _CUDA_FOR_DALI_VSTD::declval<const _Up&>()), bool>,
     bool
 >
 operator<(const _Tp& __v, const optional<_Up>& __x)
@@ -1294,8 +1294,8 @@ operator<(const _Tp& __v, const optional<_Up>& __x)
 template <class _Tp, class _Up>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY constexpr
 _EnableIf<
-    is_convertible_v<decltype(_CUDA_VSTD::declval<const _Tp&>() <=
-        _CUDA_VSTD::declval<const _Up&>()), bool>,
+    is_convertible_v<decltype(_CUDA_FOR_DALI_VSTD::declval<const _Tp&>() <=
+        _CUDA_FOR_DALI_VSTD::declval<const _Up&>()), bool>,
     bool
 >
 operator<=(const optional<_Tp>& __x, const _Up& __v)
@@ -1306,8 +1306,8 @@ operator<=(const optional<_Tp>& __x, const _Up& __v)
 template <class _Tp, class _Up>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY constexpr
 _EnableIf<
-    is_convertible_v<decltype(_CUDA_VSTD::declval<const _Tp&>() <=
-        _CUDA_VSTD::declval<const _Up&>()), bool>,
+    is_convertible_v<decltype(_CUDA_FOR_DALI_VSTD::declval<const _Tp&>() <=
+        _CUDA_FOR_DALI_VSTD::declval<const _Up&>()), bool>,
     bool
 >
 operator<=(const _Tp& __v, const optional<_Up>& __x)
@@ -1318,8 +1318,8 @@ operator<=(const _Tp& __v, const optional<_Up>& __x)
 template <class _Tp, class _Up>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY constexpr
 _EnableIf<
-    is_convertible_v<decltype(_CUDA_VSTD::declval<const _Tp&>() >
-        _CUDA_VSTD::declval<const _Up&>()), bool>,
+    is_convertible_v<decltype(_CUDA_FOR_DALI_VSTD::declval<const _Tp&>() >
+        _CUDA_FOR_DALI_VSTD::declval<const _Up&>()), bool>,
     bool
 >
 operator>(const optional<_Tp>& __x, const _Up& __v)
@@ -1330,8 +1330,8 @@ operator>(const optional<_Tp>& __x, const _Up& __v)
 template <class _Tp, class _Up>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY constexpr
 _EnableIf<
-    is_convertible_v<decltype(_CUDA_VSTD::declval<const _Tp&>() >
-        _CUDA_VSTD::declval<const _Up&>()), bool>,
+    is_convertible_v<decltype(_CUDA_FOR_DALI_VSTD::declval<const _Tp&>() >
+        _CUDA_FOR_DALI_VSTD::declval<const _Up&>()), bool>,
     bool
 >
 operator>(const _Tp& __v, const optional<_Up>& __x)
@@ -1342,8 +1342,8 @@ operator>(const _Tp& __v, const optional<_Up>& __x)
 template <class _Tp, class _Up>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY constexpr
 _EnableIf<
-    is_convertible_v<decltype(_CUDA_VSTD::declval<const _Tp&>() >=
-        _CUDA_VSTD::declval<const _Up&>()), bool>,
+    is_convertible_v<decltype(_CUDA_FOR_DALI_VSTD::declval<const _Tp&>() >=
+        _CUDA_FOR_DALI_VSTD::declval<const _Up&>()), bool>,
     bool
 >
 operator>=(const optional<_Tp>& __x, const _Up& __v)
@@ -1354,8 +1354,8 @@ operator>=(const optional<_Tp>& __x, const _Up& __v)
 template <class _Tp, class _Up>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY constexpr
 _EnableIf<
-    is_convertible_v<decltype(_CUDA_VSTD::declval<const _Tp&>() >=
-        _CUDA_VSTD::declval<const _Up&>()), bool>,
+    is_convertible_v<decltype(_CUDA_FOR_DALI_VSTD::declval<const _Tp&>() >=
+        _CUDA_FOR_DALI_VSTD::declval<const _Up&>()), bool>,
     bool
 >
 operator>=(const _Tp& __v, const optional<_Up>& __x)
@@ -1379,21 +1379,21 @@ template <class _Tp>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY constexpr
 optional<decay_t<_Tp>> make_optional(_Tp&& __v)
 {
-    return optional<decay_t<_Tp>>(_CUDA_VSTD::forward<_Tp>(__v));
+    return optional<decay_t<_Tp>>(_CUDA_FOR_DALI_VSTD::forward<_Tp>(__v));
 }
 
 template <class _Tp, class... _Args>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY constexpr
 optional<_Tp> make_optional(_Args&&... __args)
 {
-    return optional<_Tp>(in_place, _CUDA_VSTD::forward<_Args>(__args)...);
+    return optional<_Tp>(in_place, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
 }
 
 template <class _Tp, class _Up, class... _Args>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY constexpr
 optional<_Tp> make_optional(initializer_list<_Up> __il,  _Args&&... __args)
 {
-    return optional<_Tp>(in_place, __il, _CUDA_VSTD::forward<_Args>(__args)...);
+    return optional<_Tp>(in_place, __il, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
 }
 
 template <class _Tp>

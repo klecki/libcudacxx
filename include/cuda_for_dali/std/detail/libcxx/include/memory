@@ -647,7 +647,7 @@ void* align(size_t alignment, size_t size, void*& ptr, size_t& space);
 }  // std
 
 */
-#ifndef __cuda_std__
+#ifndef __cuda_for_dali_std__
 #include <__config>
 #include <type_traits>
 #include <typeinfo>
@@ -667,7 +667,7 @@ void* align(size_t alignment, size_t size, void*& ptr, size_t& space);
 #endif
 #include <version>
 #include <__pragma_push>
-#endif //__cuda_std__
+#endif //__cuda_for_dali_std__
 
 #if defined(_LIBCUDAFORDALICXX_USE_PRAGMA_GCC_SYSTEM_HEADER)
 #pragma GCC system_header
@@ -983,7 +983,7 @@ public:
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX17
     static pointer pointer_to(typename conditional<is_void<element_type>::value,
                                       __nat, element_type>::type& __r) _NOEXCEPT
-        {return _CUDA_VSTD::addressof(__r);}
+        {return _CUDA_FOR_DALI_VSTD::addressof(__r);}
 };
 
 template <class _From, class _To>
@@ -1110,7 +1110,7 @@ inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 typename pointer_traits<_Pointer>::element_type*
 __to_raw_pointer(_Pointer __p) _NOEXCEPT
 {
-    return _CUDA_VSTD::__to_raw_pointer(__p.operator->());
+    return _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__p.operator->());
 }
 #else
 template <class _Pointer>
@@ -1127,7 +1127,7 @@ inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 auto
 __to_raw_pointer(const _Pointer& __p, _None...) _NOEXCEPT
 {
-    return _CUDA_VSTD::__to_raw_pointer(__p.operator->());
+    return _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__p.operator->());
 }
 
 template <class _Tp>
@@ -1144,7 +1144,7 @@ inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 auto
 to_address(const _Pointer& __p) _NOEXCEPT
 {
-    return _CUDA_VSTD::__to_raw_pointer(__p);
+    return _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__p);
 }
 #endif
 
@@ -1238,7 +1238,7 @@ struct __has_is_always_equal<_Tp,
 template <class _Alloc, bool = __has_is_always_equal<_Alloc>::value>
 struct __is_always_equal
 {
-    typedef _LIBCUDAFORDALICXX_NODEBUG_TYPE typename _CUDA_VSTD::is_empty<_Alloc>::type type;
+    typedef _LIBCUDAFORDALICXX_NODEBUG_TYPE typename _CUDA_FOR_DALI_VSTD::is_empty<_Alloc>::type type;
 };
 
 template <class _Alloc>
@@ -1356,7 +1356,7 @@ template <class _Alloc, class _SizeType, class _ConstVoidPtr>
 struct __has_allocate_hint
     : integral_constant<bool,
         is_same<
-            decltype(_CUDA_VSTD::__has_allocate_hint_test(declval<_Alloc>(),
+            decltype(_CUDA_FOR_DALI_VSTD::__has_allocate_hint_test(declval<_Alloc>(),
                                           declval<_SizeType>(),
                                           declval<_ConstVoidPtr>())),
             true_type>::value>
@@ -1376,8 +1376,8 @@ struct __has_allocate_hint
 #if !defined(_LIBCUDAFORDALICXX_CXX03_LANG)
 
 template <class _Alloc, class _Tp, class ..._Args>
-decltype(_CUDA_VSTD::declval<_Alloc>().construct(_CUDA_VSTD::declval<_Tp*>(),
-                                           _CUDA_VSTD::declval<_Args>()...),
+decltype(_CUDA_FOR_DALI_VSTD::declval<_Alloc>().construct(_CUDA_FOR_DALI_VSTD::declval<_Tp*>(),
+                                           _CUDA_FOR_DALI_VSTD::declval<_Args>()...),
                                            true_type())
 __has_construct_test(_Alloc&& __a, _Tp* __p, _Args&& ...__args);
 
@@ -1389,7 +1389,7 @@ template <class _Alloc, class _Pointer, class ..._Args>
 struct __has_construct
     : integral_constant<bool,
         is_same<
-            decltype(_CUDA_VSTD::__has_construct_test(declval<_Alloc>(),
+            decltype(_CUDA_FOR_DALI_VSTD::__has_construct_test(declval<_Alloc>(),
                                           declval<_Pointer>(),
                                           declval<_Args>()...)),
             true_type>::value>
@@ -1410,7 +1410,7 @@ template <class _Alloc, class _Pointer>
 struct __has_destroy
     : integral_constant<bool,
         is_same<
-            decltype(_CUDA_VSTD::__has_destroy_test(declval<_Alloc>(),
+            decltype(_CUDA_FOR_DALI_VSTD::__has_destroy_test(declval<_Alloc>(),
                                         declval<_Pointer>())),
             true_type>::value>
 {
@@ -1430,7 +1430,7 @@ template <class _Alloc>
 struct __has_max_size
     : integral_constant<bool,
         is_same<
-            decltype(_CUDA_VSTD::__has_max_size_test(declval<_Alloc&>())),
+            decltype(_CUDA_FOR_DALI_VSTD::__has_max_size_test(declval<_Alloc&>())),
             true_type>::value>
 {
 };
@@ -1449,7 +1449,7 @@ template <class _Alloc>
 struct __has_select_on_container_copy_construction
     : integral_constant<bool,
         is_same<
-            decltype(_CUDA_VSTD::__has_select_on_container_copy_construction_test(declval<_Alloc&>())),
+            decltype(_CUDA_FOR_DALI_VSTD::__has_select_on_container_copy_construction_test(declval<_Alloc&>())),
             true_type>::value>
 {
 };
@@ -1461,7 +1461,7 @@ struct __has_construct : std::false_type {};
 
 template <class _Alloc, class _Pointer, class _Tp>
 struct __has_construct<_Alloc, _Pointer, _Tp, typename __void_t<
-    decltype(_CUDA_VSTD::declval<_Alloc>().construct(_CUDA_VSTD::declval<_Pointer>(), _CUDA_VSTD::declval<_Tp>()))
+    decltype(_CUDA_FOR_DALI_VSTD::declval<_Alloc>().construct(_CUDA_FOR_DALI_VSTD::declval<_Pointer>(), _CUDA_FOR_DALI_VSTD::declval<_Tp>()))
 >::type> : std::true_type {};
 
 template <class _Alloc, class _Pointer, class = void>
@@ -1469,7 +1469,7 @@ struct __has_destroy : false_type {};
 
 template <class _Alloc, class _Pointer>
 struct __has_destroy<_Alloc, _Pointer, typename __void_t<
-    decltype(_CUDA_VSTD::declval<_Alloc>().destroy(_CUDA_VSTD::declval<_Pointer>()))
+    decltype(_CUDA_FOR_DALI_VSTD::declval<_Alloc>().destroy(_CUDA_FOR_DALI_VSTD::declval<_Pointer>()))
 >::type> : std::true_type {};
 
 template <class _Alloc>
@@ -1502,7 +1502,7 @@ template <class _Tp>
 struct __is_default_allocator : false_type {};
 
 template <class _Tp>
-struct __is_default_allocator<_CUDA_VSTD::allocator<_Tp> > : true_type {};
+struct __is_default_allocator<_CUDA_FOR_DALI_VSTD::allocator<_Tp> > : true_type {};
 
 
 
@@ -1580,7 +1580,7 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS allocator_traits
         _LIBCUDAFORDALICXX_INLINE_VISIBILITY
         static void construct(allocator_type& __a, _Tp* __p, _Args&&... __args)
             {__construct(__has_construct<allocator_type, _Tp*, _Args...>(),
-                         __a, __p, _CUDA_VSTD::forward<_Args>(__args)...);}
+                         __a, __p, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);}
 #else  // _LIBCUDAFORDALICXX_HAS_NO_VARIADICS
     template <class _Tp>
         _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -1636,11 +1636,11 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS allocator_traits
             static_assert(__is_cpp17_move_insertable<allocator_type>::value,
               "The specified type does not meet the requirements of Cpp17MoveInsertible");
             for (; __begin1 != __end1; ++__begin1, (void) ++__begin2)
-              construct(__a, _CUDA_VSTD::__to_raw_pointer(__begin2),
+              construct(__a, _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__begin2),
 #ifdef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
-                        _CUDA_VSTD::move(*__begin1)
+                        _CUDA_FOR_DALI_VSTD::move(*__begin1)
 #else
-                        _CUDA_VSTD::move_if_noexcept(*__begin1)
+                        _CUDA_FOR_DALI_VSTD::move_if_noexcept(*__begin1)
 #endif
                         );
         }
@@ -1660,7 +1660,7 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS allocator_traits
             ptrdiff_t _Np = __end1 - __begin1;
             if (_Np > 0)
             {
-                _CUDA_VSTD::memcpy(__begin2, __begin1, _Np * sizeof(_Tp));
+                _CUDA_FOR_DALI_VSTD::memcpy(__begin2, __begin1, _Np * sizeof(_Tp));
                 __begin2 += _Np;
             }
         }
@@ -1672,7 +1672,7 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS allocator_traits
         __construct_range_forward(allocator_type& __a, _Iter __begin1, _Iter __end1, _Ptr& __begin2)
         {
             for (; __begin1 != __end1; ++__begin1, (void) ++__begin2)
-                construct(__a, _CUDA_VSTD::__to_raw_pointer(__begin2), *__begin1);
+                construct(__a, _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__begin2), *__begin1);
         }
 
     template <class _SourceTp, class _DestTp,
@@ -1693,7 +1693,7 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS allocator_traits
             ptrdiff_t _Np = __end1 - __begin1;
             if (_Np > 0)
             {
-                _CUDA_VSTD::memcpy(const_cast<_RawDestTp*>(__begin2), __begin1, _Np * sizeof(_DestTp));
+                _CUDA_FOR_DALI_VSTD::memcpy(const_cast<_RawDestTp*>(__begin2), __begin1, _Np * sizeof(_DestTp));
                 __begin2 += _Np;
             }
         }
@@ -1708,11 +1708,11 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS allocator_traits
               "The specified type does not meet the requirements of Cpp17MoveInsertable");
             while (__end1 != __begin1)
             {
-              construct(__a, _CUDA_VSTD::__to_raw_pointer(__end2 - 1),
+              construct(__a, _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__end2 - 1),
 #ifdef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
-                        _CUDA_VSTD::move(*--__end1)
+                        _CUDA_FOR_DALI_VSTD::move(*--__end1)
 #else
-                        _CUDA_VSTD::move_if_noexcept(*--__end1)
+                        _CUDA_FOR_DALI_VSTD::move_if_noexcept(*--__end1)
 #endif
                         );
               --__end2;
@@ -1734,7 +1734,7 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS allocator_traits
             ptrdiff_t _Np = __end1 - __begin1;
             __end2 -= _Np;
             if (_Np > 0)
-                _CUDA_VSTD::memcpy(__end2, __begin1, _Np * sizeof(_Tp));
+                _CUDA_FOR_DALI_VSTD::memcpy(__end2, __begin1, _Np * sizeof(_Tp));
         }
 
 private:
@@ -1752,12 +1752,12 @@ private:
     template <class _Tp, class... _Args>
         _LIBCUDAFORDALICXX_INLINE_VISIBILITY
         static void __construct(true_type, allocator_type& __a, _Tp* __p, _Args&&... __args)
-            {__a.construct(__p, _CUDA_VSTD::forward<_Args>(__args)...);}
+            {__a.construct(__p, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);}
     template <class _Tp, class... _Args>
         _LIBCUDAFORDALICXX_INLINE_VISIBILITY
         static void __construct(false_type, allocator_type&, _Tp* __p, _Args&&... __args)
             {
-                ::new ((void*)__p) _Tp(_CUDA_VSTD::forward<_Args>(__args)...);
+                ::new ((void*)__p) _Tp(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
             }
 #else  // _LIBCUDAFORDALICXX_HAS_NO_VARIADICS
     template <class _Tp, class _A0>
@@ -1839,19 +1839,19 @@ public:
     allocator(const allocator<_Up>&) _NOEXCEPT {}
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY pointer address(reference __x) const _NOEXCEPT
-        {return _CUDA_VSTD::addressof(__x);}
+        {return _CUDA_FOR_DALI_VSTD::addressof(__x);}
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY const_pointer address(const_reference __x) const _NOEXCEPT
-        {return _CUDA_VSTD::addressof(__x);}
+        {return _CUDA_FOR_DALI_VSTD::addressof(__x);}
     _LIBCUDAFORDALICXX_NODISCARD_AFTER_CXX17 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     pointer allocate(size_type __n, allocator<void>::const_pointer = 0)
         {
         if (__n > max_size())
             __throw_length_error("allocator<T>::allocate(size_t n)"
                                  " 'n' exceeds maximum supported size");
-        return static_cast<pointer>(_CUDA_VSTD::__libcpp_allocate(__n * sizeof(_Tp), _LIBCUDAFORDALICXX_ALIGNOF(_Tp)));
+        return static_cast<pointer>(_CUDA_FOR_DALI_VSTD::__libcpp_allocate(__n * sizeof(_Tp), _LIBCUDAFORDALICXX_ALIGNOF(_Tp)));
         }
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY void deallocate(pointer __p, size_type __n) _NOEXCEPT
-        {_CUDA_VSTD::__libcpp_deallocate((void*)__p, __n * sizeof(_Tp), _LIBCUDAFORDALICXX_ALIGNOF(_Tp));}
+        {_CUDA_FOR_DALI_VSTD::__libcpp_deallocate((void*)__p, __n * sizeof(_Tp), _LIBCUDAFORDALICXX_ALIGNOF(_Tp));}
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY size_type max_size() const _NOEXCEPT
         {return size_type(~0) / sizeof(_Tp);}
 #if !defined(_LIBCUDAFORDALICXX_HAS_NO_RVALUE_REFERENCES) && !defined(_LIBCUDAFORDALICXX_HAS_NO_VARIADICS)
@@ -1860,7 +1860,7 @@ public:
         void
         construct(_Up* __p, _Args&&... __args)
         {
-            ::new((void*)__p) _Up(_CUDA_VSTD::forward<_Args>(__args)...);
+            ::new((void*)__p) _Up(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
         }
 #else  // !defined(_LIBCUDAFORDALICXX_HAS_NO_RVALUE_REFERENCES) && !defined(_LIBCUDAFORDALICXX_HAS_NO_VARIADICS)
         _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -1943,16 +1943,16 @@ public:
     allocator(const allocator<_Up>&) _NOEXCEPT {}
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY const_pointer address(const_reference __x) const _NOEXCEPT
-        {return _CUDA_VSTD::addressof(__x);}
+        {return _CUDA_FOR_DALI_VSTD::addressof(__x);}
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY pointer allocate(size_type __n, allocator<void>::const_pointer = 0)
     {
         if (__n > max_size())
             __throw_length_error("allocator<const T>::allocate(size_t n)"
                                  " 'n' exceeds maximum supported size");
-        return static_cast<pointer>(_CUDA_VSTD::__libcpp_allocate(__n * sizeof(_Tp), _LIBCUDAFORDALICXX_ALIGNOF(_Tp)));
+        return static_cast<pointer>(_CUDA_FOR_DALI_VSTD::__libcpp_allocate(__n * sizeof(_Tp), _LIBCUDAFORDALICXX_ALIGNOF(_Tp)));
     }
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY void deallocate(pointer __p, size_type __n) _NOEXCEPT
-        {_CUDA_VSTD::__libcpp_deallocate((void*) const_cast<_Tp *>(__p), __n * sizeof(_Tp), _LIBCUDAFORDALICXX_ALIGNOF(_Tp));}
+        {_CUDA_FOR_DALI_VSTD::__libcpp_deallocate((void*) const_cast<_Tp *>(__p), __n * sizeof(_Tp), _LIBCUDAFORDALICXX_ALIGNOF(_Tp));}
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY size_type max_size() const _NOEXCEPT
         {return size_type(~0) / sizeof(_Tp);}
 #if !defined(_LIBCUDAFORDALICXX_HAS_NO_RVALUE_REFERENCES) && !defined(_LIBCUDAFORDALICXX_HAS_NO_VARIADICS)
@@ -1961,7 +1961,7 @@ public:
         void
         construct(_Up* __p, _Args&&... __args)
         {
-            ::new((void*)__p) _Up(_CUDA_VSTD::forward<_Args>(__args)...);
+            ::new((void*)__p) _Up(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
         }
 #else  // !defined(_LIBCUDAFORDALICXX_HAS_NO_RVALUE_REFERENCES) && !defined(_LIBCUDAFORDALICXX_HAS_NO_VARIADICS)
         _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -2041,10 +2041,10 @@ public:
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY explicit raw_storage_iterator(_OutputIterator __x) : __x_(__x) {}
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY raw_storage_iterator& operator*() {return *this;}
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY raw_storage_iterator& operator=(const _Tp& __element)
-        {::new(_CUDA_VSTD::addressof(*__x_)) _Tp(__element); return *this;}
+        {::new(_CUDA_FOR_DALI_VSTD::addressof(*__x_)) _Tp(__element); return *this;}
 #if _LIBCUDAFORDALICXX_STD_VER >= 14
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY raw_storage_iterator& operator=(_Tp&& __element)
-        {::new(_CUDA_VSTD::addressof(*__x_)) _Tp(_CUDA_VSTD::move(__element)); return *this;}
+        {::new(_CUDA_FOR_DALI_VSTD::addressof(*__x_)) _Tp(_CUDA_FOR_DALI_VSTD::move(__element)); return *this;}
 #endif
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY raw_storage_iterator& operator++() {++__x_; return *this;}
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY raw_storage_iterator  operator++(int)
@@ -2103,7 +2103,7 @@ template <class _Tp>
 inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 void return_temporary_buffer(_Tp* __p) _NOEXCEPT
 {
-  _CUDA_VSTD::__libcpp_deallocate_unsized((void*)__p, _LIBCUDAFORDALICXX_ALIGNOF(_Tp));
+  _CUDA_FOR_DALI_VSTD::__libcpp_deallocate_unsized((void*)__p, _LIBCUDAFORDALICXX_ALIGNOF(_Tp));
 }
 
 #if _LIBCUDAFORDALICXX_STD_VER <= 14 || defined(_LIBCUDAFORDALICXX_ENABLE_CXX17_REMOVED_AUTO_PTR)
@@ -2182,7 +2182,7 @@ struct __compressed_pair_elem {
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   constexpr explicit
   __compressed_pair_elem(_Up&& __u)
-      : __value_(_CUDA_VSTD::forward<_Up>(__u))
+      : __value_(_CUDA_FOR_DALI_VSTD::forward<_Up>(__u))
     {
     }
 
@@ -2190,7 +2190,7 @@ struct __compressed_pair_elem {
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX14
   __compressed_pair_elem(piecewise_construct_t, tuple<_Args...> __args,
                          __tuple_indices<_Indexes...>)
-      : __value_(_CUDA_VSTD::forward<_Args>(_CUDA_VSTD::get<_Indexes>(__args))...) {}
+      : __value_(_CUDA_FOR_DALI_VSTD::forward<_Args>(_CUDA_FOR_DALI_VSTD::get<_Indexes>(__args))...) {}
 #else
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY __compressed_pair_elem() : __value_() {}
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -2221,14 +2221,14 @@ struct __compressed_pair_elem<_Tp, _Idx, true> : private _Tp {
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   constexpr explicit
   __compressed_pair_elem(_Up&& __u)
-      : __value_type(_CUDA_VSTD::forward<_Up>(__u))
+      : __value_type(_CUDA_FOR_DALI_VSTD::forward<_Up>(__u))
   {}
 
   template <class... _Args, size_t... _Indexes>
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX14
   __compressed_pair_elem(piecewise_construct_t, tuple<_Args...> __args,
                          __tuple_indices<_Indexes...>)
-      : __value_type(_CUDA_VSTD::forward<_Args>(_CUDA_VSTD::get<_Indexes>(__args))...) {}
+      : __value_type(_CUDA_FOR_DALI_VSTD::forward<_Args>(_CUDA_FOR_DALI_VSTD::get<_Indexes>(__args))...) {}
 #else
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY __compressed_pair_elem() : __value_type() {}
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -2291,9 +2291,9 @@ public:
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX14
   __compressed_pair(piecewise_construct_t __pc, tuple<_Args1...> __first_args,
                     tuple<_Args2...> __second_args)
-      : _Base1(__pc, _CUDA_VSTD::move(__first_args),
+      : _Base1(__pc, _CUDA_FOR_DALI_VSTD::move(__first_args),
                typename __make_tuple_indices<sizeof...(_Args1)>::type()),
-        _Base2(__pc, _CUDA_VSTD::move(__second_args),
+        _Base2(__pc, _CUDA_FOR_DALI_VSTD::move(__second_args),
                typename __make_tuple_indices<sizeof...(_Args2)>::type()) {}
 
 #else
@@ -2301,15 +2301,15 @@ public:
   __compressed_pair() {}
 
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY explicit
-  __compressed_pair(_T1 __t1) : _Base1(_CUDA_VSTD::forward<_T1>(__t1)) {}
+  __compressed_pair(_T1 __t1) : _Base1(_CUDA_FOR_DALI_VSTD::forward<_T1>(__t1)) {}
 
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   __compressed_pair(__second_tag, _T2 __t2)
-      : _Base1(), _Base2(_CUDA_VSTD::forward<_T2>(__t2)) {}
+      : _Base1(), _Base2(_CUDA_FOR_DALI_VSTD::forward<_T2>(__t2)) {}
 
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   __compressed_pair(_T1 __t1, _T2 __t2)
-      : _Base1(_CUDA_VSTD::forward<_T1>(__t1)), _Base2(_CUDA_VSTD::forward<_T2>(__t2)) {}
+      : _Base1(_CUDA_FOR_DALI_VSTD::forward<_T1>(__t1)), _Base2(_CUDA_FOR_DALI_VSTD::forward<_T2>(__t2)) {}
 #endif
 
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -2512,7 +2512,7 @@ public:
             class = _EnableIfDeleterConstructible<_GoodRValRefType<_Dummy> > >
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   unique_ptr(pointer __p, _GoodRValRefType<_Dummy> __d) _NOEXCEPT
-      : __ptr_(__p, _CUDA_VSTD::move(__d)) {
+      : __ptr_(__p, _CUDA_FOR_DALI_VSTD::move(__d)) {
     static_assert(!is_reference<deleter_type>::value,
                   "rvalue deleter bound to reference");
   }
@@ -2524,7 +2524,7 @@ public:
 
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   unique_ptr(unique_ptr&& __u) _NOEXCEPT
-      : __ptr_(__u.release(), _CUDA_VSTD::forward<deleter_type>(__u.get_deleter())) {
+      : __ptr_(__u.release(), _CUDA_FOR_DALI_VSTD::forward<deleter_type>(__u.get_deleter())) {
   }
 
   template <class _Up, class _Ep,
@@ -2533,7 +2533,7 @@ public:
   >
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   unique_ptr(unique_ptr<_Up, _Ep>&& __u) _NOEXCEPT
-      : __ptr_(__u.release(), _CUDA_VSTD::forward<_Ep>(__u.get_deleter())) {}
+      : __ptr_(__u.release(), _CUDA_FOR_DALI_VSTD::forward<_Ep>(__u.get_deleter())) {}
 
 #if _LIBCUDAFORDALICXX_STD_VER <= 14 || defined(_LIBCUDAFORDALICXX_ENABLE_CXX17_REMOVED_AUTO_PTR)
   template <class _Up>
@@ -2548,7 +2548,7 @@ public:
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   unique_ptr& operator=(unique_ptr&& __u) _NOEXCEPT {
     reset(__u.release());
-    __ptr_.second() = _CUDA_VSTD::forward<deleter_type>(__u.get_deleter());
+    __ptr_.second() = _CUDA_FOR_DALI_VSTD::forward<deleter_type>(__u.get_deleter());
     return *this;
   }
 
@@ -2559,7 +2559,7 @@ public:
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   unique_ptr& operator=(unique_ptr<_Up, _Ep>&& __u) _NOEXCEPT {
     reset(__u.release());
-    __ptr_.second() = _CUDA_VSTD::forward<_Ep>(__u.get_deleter());
+    __ptr_.second() = _CUDA_FOR_DALI_VSTD::forward<_Ep>(__u.get_deleter());
     return *this;
   }
 
@@ -2745,7 +2745,7 @@ public:
             class = _EnableIfPointerConvertible<_Pp> >
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   unique_ptr(_Pp __p, _GoodRValRefType<_Dummy> __d) _NOEXCEPT
-      : __ptr_(__p, _CUDA_VSTD::move(__d)) {
+      : __ptr_(__p, _CUDA_FOR_DALI_VSTD::move(__d)) {
     static_assert(!is_reference<deleter_type>::value,
                   "rvalue deleter bound to reference");
   }
@@ -2754,7 +2754,7 @@ public:
             class = _EnableIfDeleterConstructible<_GoodRValRefType<_Dummy> > >
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   unique_ptr(nullptr_t, _GoodRValRefType<_Dummy> __d) _NOEXCEPT
-      : __ptr_(nullptr, _CUDA_VSTD::move(__d)) {
+      : __ptr_(nullptr, _CUDA_FOR_DALI_VSTD::move(__d)) {
     static_assert(!is_reference<deleter_type>::value,
                   "rvalue deleter bound to reference");
   }
@@ -2767,13 +2767,13 @@ public:
 
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   unique_ptr(unique_ptr&& __u) _NOEXCEPT
-      : __ptr_(__u.release(), _CUDA_VSTD::forward<deleter_type>(__u.get_deleter())) {
+      : __ptr_(__u.release(), _CUDA_FOR_DALI_VSTD::forward<deleter_type>(__u.get_deleter())) {
   }
 
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   unique_ptr& operator=(unique_ptr&& __u) _NOEXCEPT {
     reset(__u.release());
-    __ptr_.second() = _CUDA_VSTD::forward<deleter_type>(__u.get_deleter());
+    __ptr_.second() = _CUDA_FOR_DALI_VSTD::forward<deleter_type>(__u.get_deleter());
     return *this;
   }
 
@@ -2783,7 +2783,7 @@ public:
   >
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   unique_ptr(unique_ptr<_Up, _Ep>&& __u) _NOEXCEPT
-      : __ptr_(__u.release(), _CUDA_VSTD::forward<_Ep>(__u.get_deleter())) {
+      : __ptr_(__u.release(), _CUDA_FOR_DALI_VSTD::forward<_Ep>(__u.get_deleter())) {
   }
 
   template <class _Up, class _Ep,
@@ -2794,7 +2794,7 @@ public:
   unique_ptr&
   operator=(unique_ptr<_Up, _Ep>&& __u) _NOEXCEPT {
     reset(__u.release());
-    __ptr_.second() = _CUDA_VSTD::forward<_Ep>(__u.get_deleter());
+    __ptr_.second() = _CUDA_FOR_DALI_VSTD::forward<_Ep>(__u.get_deleter());
     return *this;
   }
 
@@ -3038,7 +3038,7 @@ inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 typename __unique_if<_Tp>::__unique_single
 make_unique(_Args&&... __args)
 {
-    return unique_ptr<_Tp>(new _Tp(_CUDA_VSTD::forward<_Args>(__args)...));
+    return unique_ptr<_Tp>(new _Tp(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...));
 }
 
 template<class _Tp>
@@ -3143,7 +3143,7 @@ uninitialized_copy(_InputIterator __f, _InputIterator __l, _ForwardIterator __r)
     {
 #endif
         for (; __f != __l; ++__f, (void) ++__r)
-            ::new (static_cast<void*>(_CUDA_VSTD::addressof(*__r))) value_type(*__f);
+            ::new (static_cast<void*>(_CUDA_FOR_DALI_VSTD::addressof(*__r))) value_type(*__f);
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
     }
     catch (...)
@@ -3167,7 +3167,7 @@ uninitialized_copy_n(_InputIterator __f, _Size __n, _ForwardIterator __r)
     {
 #endif
         for (; __n > 0; ++__f, (void) ++__r, (void) --__n)
-            ::new (static_cast<void*>(_CUDA_VSTD::addressof(*__r))) value_type(*__f);
+            ::new (static_cast<void*>(_CUDA_FOR_DALI_VSTD::addressof(*__r))) value_type(*__f);
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
     }
     catch (...)
@@ -3191,7 +3191,7 @@ uninitialized_fill(_ForwardIterator __f, _ForwardIterator __l, const _Tp& __x)
     {
 #endif
         for (; __f != __l; ++__f)
-            ::new (static_cast<void*>(_CUDA_VSTD::addressof(*__f))) value_type(__x);
+            ::new (static_cast<void*>(_CUDA_FOR_DALI_VSTD::addressof(*__f))) value_type(__x);
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
     }
     catch (...)
@@ -3214,7 +3214,7 @@ uninitialized_fill_n(_ForwardIterator __f, _Size __n, const _Tp& __x)
     {
 #endif
         for (; __n > 0; ++__f, (void) --__n)
-            ::new (static_cast<void*>(_CUDA_VSTD::addressof(*__f))) value_type(__x);
+            ::new (static_cast<void*>(_CUDA_FOR_DALI_VSTD::addressof(*__f))) value_type(__x);
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
     }
     catch (...)
@@ -3240,14 +3240,14 @@ template <class _ForwardIterator>
 inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 void destroy(_ForwardIterator __first, _ForwardIterator __last) {
     for (; __first != __last; ++__first)
-        _CUDA_VSTD::destroy_at(_CUDA_VSTD::addressof(*__first));
+        _CUDA_FOR_DALI_VSTD::destroy_at(_CUDA_FOR_DALI_VSTD::addressof(*__first));
 }
 
 template <class _ForwardIterator, class _Size>
 inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 _ForwardIterator destroy_n(_ForwardIterator __first, _Size __n) {
     for (; __n > 0; (void)++__first, --__n)
-        _CUDA_VSTD::destroy_at(_CUDA_VSTD::addressof(*__first));
+        _CUDA_FOR_DALI_VSTD::destroy_at(_CUDA_FOR_DALI_VSTD::addressof(*__first));
     return __first;
 }
 
@@ -3260,10 +3260,10 @@ void uninitialized_default_construct(_ForwardIterator __first, _ForwardIterator 
     try {
 #endif
     for (; __idx != __last; ++__idx)
-        ::new((void*)_CUDA_VSTD::addressof(*__idx)) _Vt;
+        ::new((void*)_CUDA_FOR_DALI_VSTD::addressof(*__idx)) _Vt;
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
     } catch (...) {
-        _CUDA_VSTD::destroy(__first, __idx);
+        _CUDA_FOR_DALI_VSTD::destroy(__first, __idx);
         throw;
     }
 #endif
@@ -3278,11 +3278,11 @@ _ForwardIterator uninitialized_default_construct_n(_ForwardIterator __first, _Si
     try {
 #endif
     for (; __n > 0; (void)++__idx, --__n)
-        ::new((void*)_CUDA_VSTD::addressof(*__idx)) _Vt;
+        ::new((void*)_CUDA_FOR_DALI_VSTD::addressof(*__idx)) _Vt;
     return __idx;
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
     } catch (...) {
-        _CUDA_VSTD::destroy(__first, __idx);
+        _CUDA_FOR_DALI_VSTD::destroy(__first, __idx);
         throw;
     }
 #endif
@@ -3298,10 +3298,10 @@ void uninitialized_value_construct(_ForwardIterator __first, _ForwardIterator __
     try {
 #endif
     for (; __idx != __last; ++__idx)
-        ::new((void*)_CUDA_VSTD::addressof(*__idx)) _Vt();
+        ::new((void*)_CUDA_FOR_DALI_VSTD::addressof(*__idx)) _Vt();
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
     } catch (...) {
-        _CUDA_VSTD::destroy(__first, __idx);
+        _CUDA_FOR_DALI_VSTD::destroy(__first, __idx);
         throw;
     }
 #endif
@@ -3316,11 +3316,11 @@ _ForwardIterator uninitialized_value_construct_n(_ForwardIterator __first, _Size
     try {
 #endif
     for (; __n > 0; (void)++__idx, --__n)
-        ::new((void*)_CUDA_VSTD::addressof(*__idx)) _Vt();
+        ::new((void*)_CUDA_FOR_DALI_VSTD::addressof(*__idx)) _Vt();
     return __idx;
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
     } catch (...) {
-        _CUDA_VSTD::destroy(__first, __idx);
+        _CUDA_FOR_DALI_VSTD::destroy(__first, __idx);
         throw;
     }
 #endif
@@ -3336,11 +3336,11 @@ _ForwardIt uninitialized_move(_InputIt __first, _InputIt __last, _ForwardIt __fi
     try {
 #endif
     for (; __first != __last; (void)++__idx, ++__first)
-        ::new((void*)_CUDA_VSTD::addressof(*__idx)) _Vt(std::move(*__first));
+        ::new((void*)_CUDA_FOR_DALI_VSTD::addressof(*__idx)) _Vt(std::move(*__first));
     return __idx;
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
     } catch (...) {
-        _CUDA_VSTD::destroy(__first_res, __idx);
+        _CUDA_FOR_DALI_VSTD::destroy(__first_res, __idx);
         throw;
     }
 #endif
@@ -3356,11 +3356,11 @@ uninitialized_move_n(_InputIt __first, _Size __n, _ForwardIt __first_res) {
     try {
 #endif
     for (; __n > 0; ++__idx, (void)++__first, --__n)
-        ::new((void*)_CUDA_VSTD::addressof(*__idx)) _Vt(std::move(*__first));
+        ::new((void*)_CUDA_FOR_DALI_VSTD::addressof(*__idx)) _Vt(std::move(*__first));
     return {__first, __idx};
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
     } catch (...) {
-        _CUDA_VSTD::destroy(__first_res, __idx);
+        _CUDA_FOR_DALI_VSTD::destroy(__first_res, __idx);
         throw;
     }
 #endif
@@ -3416,7 +3416,7 @@ void __throw_bad_weak_ptr()
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
     throw bad_weak_ptr();
 #else
-    _CUDA_VSTD::abort();
+    _CUDA_FOR_DALI_VSTD::abort();
 #endif
 }
 
@@ -3520,7 +3520,7 @@ class __shared_ptr_pointer
 public:
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     __shared_ptr_pointer(_Tp __p, _Dp __d, _Alloc __a)
-        :  __data_(__compressed_pair<_Tp, _Dp>(__p, _CUDA_VSTD::move(__d)), _CUDA_VSTD::move(__a)) {}
+        :  __data_(__compressed_pair<_Tp, _Dp>(__p, _CUDA_FOR_DALI_VSTD::move(__d)), _CUDA_FOR_DALI_VSTD::move(__a)) {}
 
 #ifndef _LIBCUDAFORDALICXX_NO_RTTI
     virtual const void* __get_deleter(const type_info&) const _NOEXCEPT;
@@ -3537,7 +3537,7 @@ template <class _Tp, class _Dp, class _Alloc>
 const void*
 __shared_ptr_pointer<_Tp, _Dp, _Alloc>::__get_deleter(const type_info& __t) const _NOEXCEPT
 {
-    return __t == typeid(_Dp) ? _CUDA_VSTD::addressof(__data_.first().second()) : nullptr;
+    return __t == typeid(_Dp) ? _CUDA_FOR_DALI_VSTD::addressof(__data_.first().second()) : nullptr;
 }
 
 #endif  // _LIBCUDAFORDALICXX_NO_RTTI
@@ -3573,13 +3573,13 @@ public:
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     __shared_ptr_emplace(_Alloc __a)
-        :  __data_(_CUDA_VSTD::move(__a)) {}
+        :  __data_(_CUDA_FOR_DALI_VSTD::move(__a)) {}
 
     template <class ..._Args>
         _LIBCUDAFORDALICXX_INLINE_VISIBILITY
         __shared_ptr_emplace(_Alloc __a, _Args&& ...__args)
-            :  __data_(piecewise_construct, _CUDA_VSTD::forward_as_tuple(__a),
-                   _CUDA_VSTD::forward_as_tuple(_CUDA_VSTD::forward<_Args>(__args)...)) {}
+            :  __data_(piecewise_construct, _CUDA_FOR_DALI_VSTD::forward_as_tuple(__a),
+                   _CUDA_FOR_DALI_VSTD::forward_as_tuple(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...)) {}
 
 #else  // _LIBCUDAFORDALICXX_HAS_NO_VARIADICS
 
@@ -3609,7 +3609,7 @@ private:
     virtual void __on_zero_shared_weak() _NOEXCEPT;
 public:
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
-    _Tp* get() _NOEXCEPT {return _CUDA_VSTD::addressof(__data_.second());}
+    _Tp* get() _NOEXCEPT {return _CUDA_FOR_DALI_VSTD::addressof(__data_.second());}
 };
 
 template <class _Tp, class _Alloc>
@@ -4009,9 +4009,9 @@ shared_ptr<_Tp>::shared_ptr(_Yp* __p, _Dp __d, _Alloc __a,
         typedef __allocator_destructor<_A2> _D2;
         _A2 __a2(__a);
         unique_ptr<_CntrlBlk, _D2> __hold2(__a2.allocate(1), _D2(__a2, 1));
-        ::new(static_cast<void*>(_CUDA_VSTD::addressof(*__hold2.get())))
+        ::new(static_cast<void*>(_CUDA_FOR_DALI_VSTD::addressof(*__hold2.get())))
             _CntrlBlk(__p, __d, __a);
-        __cntrl_ = _CUDA_VSTD::addressof(*__hold2.release());
+        __cntrl_ = _CUDA_FOR_DALI_VSTD::addressof(*__hold2.release());
         __enable_weak_this(__p, __p);
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
     }
@@ -4037,9 +4037,9 @@ shared_ptr<_Tp>::shared_ptr(nullptr_t __p, _Dp __d, _Alloc __a)
         typedef __allocator_destructor<_A2> _D2;
         _A2 __a2(__a);
         unique_ptr<_CntrlBlk, _D2> __hold2(__a2.allocate(1), _D2(__a2, 1));
-        ::new(static_cast<void*>(_CUDA_VSTD::addressof(*__hold2.get())))
+        ::new(static_cast<void*>(_CUDA_FOR_DALI_VSTD::addressof(*__hold2.get())))
             _CntrlBlk(__p, __d, __a);
-        __cntrl_ = _CUDA_VSTD::addressof(*__hold2.release());
+        __cntrl_ = _CUDA_FOR_DALI_VSTD::addressof(*__hold2.release());
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
     }
     catch (...)
@@ -4202,7 +4202,7 @@ shared_ptr<_Tp>::make_shared(_Args&& ...__args)
     typedef __allocator_destructor<_A2> _D2;
     _A2 __a2;
     unique_ptr<_CntrlBlk, _D2> __hold2(__a2.allocate(1), _D2(__a2, 1));
-    ::new(__hold2.get()) _CntrlBlk(__a2, _CUDA_VSTD::forward<_Args>(__args)...);
+    ::new(__hold2.get()) _CntrlBlk(__a2, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
     shared_ptr<_Tp> __r;
     __r.__ptr_ = __hold2.get()->get();
     __r.__cntrl_ = __hold2.release();
@@ -4221,11 +4221,11 @@ shared_ptr<_Tp>::allocate_shared(const _Alloc& __a, _Args&& ...__args)
     typedef __allocator_destructor<_A2> _D2;
     _A2 __a2(__a);
     unique_ptr<_CntrlBlk, _D2> __hold2(__a2.allocate(1), _D2(__a2, 1));
-    ::new(static_cast<void*>(_CUDA_VSTD::addressof(*__hold2.get())))
-        _CntrlBlk(__a, _CUDA_VSTD::forward<_Args>(__args)...);
+    ::new(static_cast<void*>(_CUDA_FOR_DALI_VSTD::addressof(*__hold2.get())))
+        _CntrlBlk(__a, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
     shared_ptr<_Tp> __r;
     __r.__ptr_ = __hold2.get()->get();
-    __r.__cntrl_ = _CUDA_VSTD::addressof(*__hold2.release());
+    __r.__cntrl_ = _CUDA_FOR_DALI_VSTD::addressof(*__hold2.release());
     __r.__enable_weak_this(__r.__ptr_, __r.__ptr_);
     return __r;
 }
@@ -4267,7 +4267,7 @@ inline
 shared_ptr<_Tp>&
 shared_ptr<_Tp>::operator=(shared_ptr&& __r) _NOEXCEPT
 {
-    shared_ptr(_CUDA_VSTD::move(__r)).swap(*this);
+    shared_ptr(_CUDA_FOR_DALI_VSTD::move(__r)).swap(*this);
     return *this;
 }
 
@@ -4281,7 +4281,7 @@ typename enable_if
 >::type
 shared_ptr<_Tp>::operator=(shared_ptr<_Yp>&& __r)
 {
-    shared_ptr(_CUDA_VSTD::move(__r)).swap(*this);
+    shared_ptr(_CUDA_FOR_DALI_VSTD::move(__r)).swap(*this);
     return *this;
 }
 
@@ -4297,7 +4297,7 @@ typename enable_if
 >::type&
 shared_ptr<_Tp>::operator=(auto_ptr<_Yp>&& __r)
 {
-    shared_ptr(_CUDA_VSTD::move(__r)).swap(*this);
+    shared_ptr(_CUDA_FOR_DALI_VSTD::move(__r)).swap(*this);
     return *this;
 }
 #endif
@@ -4314,7 +4314,7 @@ typename enable_if
 >::type
 shared_ptr<_Tp>::operator=(unique_ptr<_Yp, _Dp>&& __r)
 {
-    shared_ptr(_CUDA_VSTD::move(__r)).swap(*this);
+    shared_ptr(_CUDA_FOR_DALI_VSTD::move(__r)).swap(*this);
     return *this;
 }
 
@@ -4349,7 +4349,7 @@ typename enable_if
 >::type
 shared_ptr<_Tp>::operator=(unique_ptr<_Yp, _Dp> __r)
 {
-    shared_ptr(_CUDA_VSTD::move(__r)).swap(*this);
+    shared_ptr(_CUDA_FOR_DALI_VSTD::move(__r)).swap(*this);
     return *this;
 }
 
@@ -4360,8 +4360,8 @@ inline
 void
 shared_ptr<_Tp>::swap(shared_ptr& __r) _NOEXCEPT
 {
-    _CUDA_VSTD::swap(__ptr_, __r.__ptr_);
-    _CUDA_VSTD::swap(__cntrl_, __r.__cntrl_);
+    _CUDA_FOR_DALI_VSTD::swap(__ptr_, __r.__ptr_);
+    _CUDA_FOR_DALI_VSTD::swap(__cntrl_, __r.__cntrl_);
 }
 
 template<class _Tp>
@@ -4422,7 +4422,7 @@ typename enable_if
 >::type
 make_shared(_Args&& ...__args)
 {
-    return shared_ptr<_Tp>::make_shared(_CUDA_VSTD::forward<_Args>(__args)...);
+    return shared_ptr<_Tp>::make_shared(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
 }
 
 template<class _Tp, class _Alloc, class ..._Args>
@@ -4434,7 +4434,7 @@ typename enable_if
 >::type
 allocate_shared(const _Alloc& __a, _Args&& ...__args)
 {
-    return shared_ptr<_Tp>::allocate_shared(__a, _CUDA_VSTD::forward<_Args>(__args)...);
+    return shared_ptr<_Tp>::allocate_shared(__a, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
 }
 
 #else  // _LIBCUDAFORDALICXX_HAS_NO_VARIADICS
@@ -4911,7 +4911,7 @@ inline
 weak_ptr<_Tp>&
 weak_ptr<_Tp>::operator=(weak_ptr&& __r) _NOEXCEPT
 {
-    weak_ptr(_CUDA_VSTD::move(__r)).swap(*this);
+    weak_ptr(_CUDA_FOR_DALI_VSTD::move(__r)).swap(*this);
     return *this;
 }
 
@@ -4925,7 +4925,7 @@ typename enable_if
 >::type
 weak_ptr<_Tp>::operator=(weak_ptr<_Yp>&& __r) _NOEXCEPT
 {
-    weak_ptr(_CUDA_VSTD::move(__r)).swap(*this);
+    weak_ptr(_CUDA_FOR_DALI_VSTD::move(__r)).swap(*this);
     return *this;
 }
 
@@ -4950,8 +4950,8 @@ inline
 void
 weak_ptr<_Tp>::swap(weak_ptr& __r) _NOEXCEPT
 {
-    _CUDA_VSTD::swap(__ptr_, __r.__ptr_);
-    _CUDA_VSTD::swap(__cntrl_, __r.__cntrl_);
+    _CUDA_FOR_DALI_VSTD::swap(__ptr_, __r.__ptr_);
+    _CUDA_FOR_DALI_VSTD::swap(__cntrl_, __r.__cntrl_);
 }
 
 template<class _Tp>
@@ -5208,12 +5208,12 @@ atomic_compare_exchange_strong(shared_ptr<_Tp>* __p, shared_ptr<_Tp>* __v, share
     __m.lock();
     if (__p->__owner_equivalent(*__v))
     {
-        _CUDA_VSTD::swap(__temp, *__p);
+        _CUDA_FOR_DALI_VSTD::swap(__temp, *__p);
         *__p = __w;
         __m.unlock();
         return true;
     }
-    _CUDA_VSTD::swap(__temp, *__v);
+    _CUDA_FOR_DALI_VSTD::swap(__temp, *__v);
     *__v = *__p;
     __m.unlock();
     return false;
@@ -5321,7 +5321,7 @@ void __swap_allocator(_Alloc & __a1, _Alloc & __a2)
 #endif
 {
     __swap_allocator(__a1, __a2,
-      integral_constant<bool, _CUDA_VSTD::allocator_traits<_Alloc>::propagate_on_container_swap::value>());
+      integral_constant<bool, _CUDA_FOR_DALI_VSTD::allocator_traits<_Alloc>::propagate_on_container_swap::value>());
 }
 
 template <typename _Alloc>
@@ -5333,7 +5333,7 @@ void __swap_allocator(_Alloc & __a1, _Alloc & __a2, true_type)
     _NOEXCEPT_(__is_nothrow_swappable<_Alloc>::value)
 #endif
 {
-    using _CUDA_VSTD::swap;
+    using _CUDA_FOR_DALI_VSTD::swap;
     swap(__a1, __a2);
 }
 
@@ -5367,7 +5367,7 @@ struct __temp_value {
     _LIBCUDAFORDALICXX_NO_CFI
     __temp_value(_Alloc &__alloc, _Args&& ... __args) : __a(__alloc) {
       _Traits::construct(__a, reinterpret_cast<_Tp*>(addressof(__v)),
-                         _CUDA_VSTD::forward<_Args>(__args)...);
+                         _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
     }
 
     ~__temp_value() { _Traits::destroy(__a, __addr()); }
@@ -5380,7 +5380,7 @@ struct __is_allocator : false_type {};
 template<typename _Alloc>
 struct __is_allocator<_Alloc,
        typename __void_t<typename _Alloc::value_type>::type,
-       typename __void_t<decltype(_CUDA_VSTD::declval<_Alloc&>().allocate(size_t(0)))>::type
+       typename __void_t<decltype(_CUDA_FOR_DALI_VSTD::declval<_Alloc&>().allocate(size_t(0)))>::type
      >
    : true_type {};
 
@@ -5432,9 +5432,9 @@ struct __builtin_new_allocator {
 
 _LIBCUDAFORDALICXX_END_NAMESPACE_STD
 
-#ifndef __cuda_std__
+#ifndef __cuda_for_dali_std__
 #include <__pragma_pop>
-#endif //__cuda_std__
+#endif //__cuda_for_dali_std__
 
 #if defined(_LIBCUDAFORDALICXX_HAS_PARALLEL_ALGORITHMS) && _LIBCUDAFORDALICXX_STD_VER >= 17
 #   include <__pstl_memory>

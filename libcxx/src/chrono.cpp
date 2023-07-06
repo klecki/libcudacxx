@@ -56,8 +56,8 @@ system_clock::now() _NOEXCEPT
 #if defined(_LIBCUDAFORDALICXX_WIN32API)
   // FILETIME is in 100ns units
   using filetime_duration =
-      _CUDA_VSTD::chrono::duration<__int64,
-                              _CUDA_VSTD::ratio_multiply<_CUDA_VSTD::ratio<100, 1>,
+      _CUDA_FOR_DALI_VSTD::chrono::duration<__int64,
+                              _CUDA_FOR_DALI_VSTD::ratio_multiply<_CUDA_FOR_DALI_VSTD::ratio<100, 1>,
                                                     nanoseconds::period>>;
 
   // The Windows epoch is Jan 1 1601, the Unix epoch Jan 1 1970.

@@ -251,7 +251,7 @@ public:
         typedef typename remove_cv<_Promise>::type _RawPromise;
         coroutine_handle __tmp;
         __tmp.__handle_ = __builtin_coro_promise(
-            _CUDA_VSTD::addressof(const_cast<_RawPromise&>(__promise)),
+            _CUDA_FOR_DALI_VSTD::addressof(const_cast<_RawPromise&>(__promise)),
              _LIBCUDAFORDALICXX_ALIGNOF(_Promise), true);
         return __tmp;
     }
@@ -320,8 +320,8 @@ _LIBCUDAFORDALICXX_END_NAMESPACE_EXPERIMENTAL_COROUTINES
 _LIBCUDAFORDALICXX_BEGIN_NAMESPACE_STD
 
 template <class _Tp>
-struct hash<_CUDA_VSTD_CORO::coroutine_handle<_Tp> > {
-    using __arg_type = _CUDA_VSTD_CORO::coroutine_handle<_Tp>;
+struct hash<_CUDA_FOR_DALI_VSTD_CORO::coroutine_handle<_Tp> > {
+    using __arg_type = _CUDA_FOR_DALI_VSTD_CORO::coroutine_handle<_Tp>;
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     size_t operator()(__arg_type const& __v) const _NOEXCEPT
     {return hash<void*>()(__v.address());}

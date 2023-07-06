@@ -91,11 +91,11 @@ typedef fpos<char_traits<wchar_t>::state_type> wstreampos;
 
 */
 
-#ifndef __cuda_std__
+#ifndef __cuda_for_dali_std__
 #include <__config>
 #include <wchar.h>  // for mbstate_t
 #include <__pragma_push>
-#endif //__cuda_std__
+#endif //__cuda_for_dali_std__
 
 #if defined(_LIBCUDAFORDALICXX_USE_PRAGMA_GCC_SYSTEM_HEADER)
 #pragma GCC system_header
@@ -220,8 +220,8 @@ class _LIBCUDAFORDALICXX_TEMPLATE_VIS vector;
 
 _LIBCUDAFORDALICXX_END_NAMESPACE_STD
 
-#ifndef __cuda_std__
+#ifndef __cuda_for_dali_std__
 #include <__pragma_pop>
-#endif //__cuda_std__
+#endif //__cuda_for_dali_std__
 
 #endif  // _LIBCUDAFORDALICXX_IOSFWD

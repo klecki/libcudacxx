@@ -348,7 +348,7 @@ struct FileDescriptor {
   file_status get_status() const { return m_status; }
   StatT const& get_stat() const { return m_stat; }
 
-  bool status_known() const { return _CUDA_VSTD_FS::status_known(m_status); }
+  bool status_known() const { return _CUDA_FOR_DALI_VSTD_FS::status_known(m_status); }
 
   file_status refresh_status(error_code& ec);
 
@@ -1694,7 +1694,7 @@ error_code directory_entry::__do_refresh() noexcept {
     return failure_ec;
   }
 
-  if (!_CUDA_VSTD_FS::exists(st) || !_CUDA_VSTD_FS::is_symlink(st)) {
+  if (!_CUDA_FOR_DALI_VSTD_FS::exists(st) || !_CUDA_FOR_DALI_VSTD_FS::is_symlink(st)) {
     __data_.__cache_type_ = directory_entry::_RefreshNonSymlink;
     __data_.__type_ = st.type();
     __data_.__non_sym_perms_ = st.permissions();
@@ -1720,10 +1720,10 @@ error_code directory_entry::__do_refresh() noexcept {
     __data_.__cache_type_ = directory_entry::_RefreshSymlink;
   }
 
-  if (_CUDA_VSTD_FS::is_regular_file(st))
+  if (_CUDA_FOR_DALI_VSTD_FS::is_regular_file(st))
     __data_.__size_ = static_cast<uintmax_t>(full_st.st_size);
 
-  if (_CUDA_VSTD_FS::exists(st)) {
+  if (_CUDA_FOR_DALI_VSTD_FS::exists(st)) {
     __data_.__nlink_ = static_cast<uintmax_t>(full_st.st_nlink);
 
     // Attempt to extract the mtime, and fail if it's not representable using
@@ -1741,13 +1741,13 @@ error_code directory_entry::__do_refresh() noexcept {
   __data_.__reset();
   error_code failure_ec;
 
-  file_status st = _CUDA_VSTD_FS::symlink_status(__p_, failure_ec);
+  file_status st = _CUDA_FOR_DALI_VSTD_FS::symlink_status(__p_, failure_ec);
   if (!status_known(st)) {
     __data_.__reset();
     return failure_ec;
   }
 
-  if (!_CUDA_VSTD_FS::exists(st) || !_CUDA_VSTD_FS::is_symlink(st)) {
+  if (!_CUDA_FOR_DALI_VSTD_FS::exists(st) || !_CUDA_FOR_DALI_VSTD_FS::is_symlink(st)) {
     __data_.__cache_type_ = directory_entry::_RefreshNonSymlink;
     __data_.__type_ = st.type();
     __data_.__non_sym_perms_ = st.permissions();
@@ -1757,7 +1757,7 @@ error_code directory_entry::__do_refresh() noexcept {
     // Ignore errors from stat, since we don't want errors regarding symlink
     // resolution to be reported to the user.
     error_code ignored_ec;
-    st = _CUDA_VSTD_FS::status(__p_, ignored_ec);
+    st = _CUDA_FOR_DALI_VSTD_FS::status(__p_, ignored_ec);
 
     __data_.__type_ = st.type();
     __data_.__non_sym_perms_ = st.permissions();

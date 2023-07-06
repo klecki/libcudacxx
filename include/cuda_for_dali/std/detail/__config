@@ -7,8 +7,8 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef __cuda_std__
-#define __cuda_std__
+#ifndef __cuda_for_dali_std__
+#define __cuda_for_dali_std__
 
 #ifdef __CUDACC__
     #if defined(__clang__)
@@ -176,12 +176,12 @@
 #undef _LIBCUDAFORDALICXX_END_NAMESPACE_STD
 #define _LIBCUDAFORDALICXX_END_NAMESPACE_STD } } }
 
-#undef _CUDA_VSTD
-#define _CUDA_VSTD cuda_for_dali::std::_LIBCUDAFORDALICXX_CUDA_ABI_NAMESPACE
+#undef _CUDA_FOR_DALI_VSTD
+#define _CUDA_FOR_DALI_VSTD cuda_for_dali::std::_LIBCUDAFORDALICXX_CUDA_ABI_NAMESPACE
 
 #undef _LIBCUDAFORDALICXX_BEGIN_NAMESPACE_STD_NOVERSION
 #define _LIBCUDAFORDALICXX_BEGIN_NAMESPACE_STD_NOVERSION namespace cuda_for_dali { namespace std {
 #undef _LIBCUDAFORDALICXX_END_NAMESPACE_STD_NOVERSION
 #define _LIBCUDAFORDALICXX_END_NAMESPACE_STD_NOVERSION } }
 
-#endif //__cuda_std__
+#endif //__cuda_for_dali_std__

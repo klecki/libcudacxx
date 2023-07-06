@@ -163,7 +163,7 @@ static size_t __ios_new_cap(size_t __req_size, size_t __current_cap)
 { // Precondition: __req_size > __current_cap
 	const size_t mx = std::numeric_limits<size_t>::max() / sizeof(_Tp);
 	if (__req_size < mx/2)
-		return _CUDA_VSTD::max(2 * __current_cap, __req_size);
+		return _CUDA_FOR_DALI_VSTD::max(2 * __current_cap, __req_size);
 	else
 		return mx;
 }
@@ -405,24 +405,24 @@ ios_base::move(ios_base& rhs)
 void
 ios_base::swap(ios_base& rhs) _NOEXCEPT
 {
-    _CUDA_VSTD::swap(__fmtflags_, rhs.__fmtflags_);
-    _CUDA_VSTD::swap(__precision_, rhs.__precision_);
-    _CUDA_VSTD::swap(__width_, rhs.__width_);
-    _CUDA_VSTD::swap(__rdstate_, rhs.__rdstate_);
-    _CUDA_VSTD::swap(__exceptions_, rhs.__exceptions_);
+    _CUDA_FOR_DALI_VSTD::swap(__fmtflags_, rhs.__fmtflags_);
+    _CUDA_FOR_DALI_VSTD::swap(__precision_, rhs.__precision_);
+    _CUDA_FOR_DALI_VSTD::swap(__width_, rhs.__width_);
+    _CUDA_FOR_DALI_VSTD::swap(__rdstate_, rhs.__rdstate_);
+    _CUDA_FOR_DALI_VSTD::swap(__exceptions_, rhs.__exceptions_);
     locale& lhs_loc = *reinterpret_cast<locale*>(&__loc_);
     locale& rhs_loc = *reinterpret_cast<locale*>(&rhs.__loc_);
-    _CUDA_VSTD::swap(lhs_loc, rhs_loc);
-    _CUDA_VSTD::swap(__fn_, rhs.__fn_);
-    _CUDA_VSTD::swap(__index_, rhs.__index_);
-    _CUDA_VSTD::swap(__event_size_, rhs.__event_size_);
-    _CUDA_VSTD::swap(__event_cap_, rhs.__event_cap_);
-    _CUDA_VSTD::swap(__iarray_, rhs.__iarray_);
-    _CUDA_VSTD::swap(__iarray_size_, rhs.__iarray_size_);
-    _CUDA_VSTD::swap(__iarray_cap_, rhs.__iarray_cap_);
-    _CUDA_VSTD::swap(__parray_, rhs.__parray_);
-    _CUDA_VSTD::swap(__parray_size_, rhs.__parray_size_);
-    _CUDA_VSTD::swap(__parray_cap_, rhs.__parray_cap_);
+    _CUDA_FOR_DALI_VSTD::swap(lhs_loc, rhs_loc);
+    _CUDA_FOR_DALI_VSTD::swap(__fn_, rhs.__fn_);
+    _CUDA_FOR_DALI_VSTD::swap(__index_, rhs.__index_);
+    _CUDA_FOR_DALI_VSTD::swap(__event_size_, rhs.__event_size_);
+    _CUDA_FOR_DALI_VSTD::swap(__event_cap_, rhs.__event_cap_);
+    _CUDA_FOR_DALI_VSTD::swap(__iarray_, rhs.__iarray_);
+    _CUDA_FOR_DALI_VSTD::swap(__iarray_size_, rhs.__iarray_size_);
+    _CUDA_FOR_DALI_VSTD::swap(__iarray_cap_, rhs.__iarray_cap_);
+    _CUDA_FOR_DALI_VSTD::swap(__parray_, rhs.__parray_);
+    _CUDA_FOR_DALI_VSTD::swap(__parray_size_, rhs.__parray_size_);
+    _CUDA_FOR_DALI_VSTD::swap(__parray_cap_, rhs.__parray_cap_);
 }
 
 void

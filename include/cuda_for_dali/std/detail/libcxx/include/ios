@@ -273,8 +273,8 @@ public:
     typedef openmode     open_mode;
     typedef seekdir      seek_dir;
 
-    typedef _CUDA_VSTD::streamoff streamoff;
-    typedef _CUDA_VSTD::streampos streampos;
+    typedef _CUDA_FOR_DALI_VSTD::streamoff streamoff;
+    typedef _CUDA_FOR_DALI_VSTD::streampos streampos;
 #endif
 
     class _LIBCUDAFORDALICXX_TYPE_VIS Init;
@@ -440,7 +440,7 @@ void __throw_failure(char const* __msg) {
     throw ios_base::failure(__msg);
 #else
     ((void)__msg);
-    _CUDA_VSTD::abort();
+    _CUDA_FOR_DALI_VSTD::abort();
 #endif
 }
 
@@ -830,8 +830,8 @@ void
 basic_ios<_CharT, _Traits>::swap(basic_ios& __rhs) _NOEXCEPT
 {
     ios_base::swap(__rhs);
-    _CUDA_VSTD::swap(__tie_, __rhs.__tie_);
-    _CUDA_VSTD::swap(__fill_, __rhs.__fill_);
+    _CUDA_FOR_DALI_VSTD::swap(__tie_, __rhs.__tie_);
+    _CUDA_FOR_DALI_VSTD::swap(__fill_, __rhs.__fill_);
 }
 
 template <class _CharT, class _Traits>

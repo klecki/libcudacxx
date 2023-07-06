@@ -202,7 +202,7 @@ protected:
 
     inline _LIBCUDAFORDALICXX_HIDE_FROM_ABI_AFTER_V1
     void swap(basic_istream& __rhs) {
-      _CUDA_VSTD::swap(__gc_, __rhs.__gc_);
+      _CUDA_FOR_DALI_VSTD::swap(__gc_, __rhs.__gc_);
       basic_ios<char_type, traits_type>::swap(__rhs);
     }
 
@@ -394,77 +394,77 @@ template <class _CharT, class _Traits>
 basic_istream<_CharT, _Traits>&
 basic_istream<_CharT, _Traits>::operator>>(unsigned short& __n)
 {
-    return _CUDA_VSTD::__input_arithmetic<unsigned short>(*this, __n);
+    return _CUDA_FOR_DALI_VSTD::__input_arithmetic<unsigned short>(*this, __n);
 }
 
 template <class _CharT, class _Traits>
 basic_istream<_CharT, _Traits>&
 basic_istream<_CharT, _Traits>::operator>>(unsigned int& __n)
 {
-    return _CUDA_VSTD::__input_arithmetic<unsigned int>(*this, __n);
+    return _CUDA_FOR_DALI_VSTD::__input_arithmetic<unsigned int>(*this, __n);
 }
 
 template <class _CharT, class _Traits>
 basic_istream<_CharT, _Traits>&
 basic_istream<_CharT, _Traits>::operator>>(long& __n)
 {
-    return _CUDA_VSTD::__input_arithmetic<long>(*this, __n);
+    return _CUDA_FOR_DALI_VSTD::__input_arithmetic<long>(*this, __n);
 }
 
 template <class _CharT, class _Traits>
 basic_istream<_CharT, _Traits>&
 basic_istream<_CharT, _Traits>::operator>>(unsigned long& __n)
 {
-    return _CUDA_VSTD::__input_arithmetic<unsigned long>(*this, __n);
+    return _CUDA_FOR_DALI_VSTD::__input_arithmetic<unsigned long>(*this, __n);
 }
 
 template <class _CharT, class _Traits>
 basic_istream<_CharT, _Traits>&
 basic_istream<_CharT, _Traits>::operator>>(long long& __n)
 {
-    return _CUDA_VSTD::__input_arithmetic<long long>(*this, __n);
+    return _CUDA_FOR_DALI_VSTD::__input_arithmetic<long long>(*this, __n);
 }
 
 template <class _CharT, class _Traits>
 basic_istream<_CharT, _Traits>&
 basic_istream<_CharT, _Traits>::operator>>(unsigned long long& __n)
 {
-    return _CUDA_VSTD::__input_arithmetic<unsigned long long>(*this, __n);
+    return _CUDA_FOR_DALI_VSTD::__input_arithmetic<unsigned long long>(*this, __n);
 }
 
 template <class _CharT, class _Traits>
 basic_istream<_CharT, _Traits>&
 basic_istream<_CharT, _Traits>::operator>>(float& __n)
 {
-    return _CUDA_VSTD::__input_arithmetic<float>(*this, __n);
+    return _CUDA_FOR_DALI_VSTD::__input_arithmetic<float>(*this, __n);
 }
 
 template <class _CharT, class _Traits>
 basic_istream<_CharT, _Traits>&
 basic_istream<_CharT, _Traits>::operator>>(double& __n)
 {
-    return _CUDA_VSTD::__input_arithmetic<double>(*this, __n);
+    return _CUDA_FOR_DALI_VSTD::__input_arithmetic<double>(*this, __n);
 }
 
 template <class _CharT, class _Traits>
 basic_istream<_CharT, _Traits>&
 basic_istream<_CharT, _Traits>::operator>>(long double& __n)
 {
-    return _CUDA_VSTD::__input_arithmetic<long double>(*this, __n);
+    return _CUDA_FOR_DALI_VSTD::__input_arithmetic<long double>(*this, __n);
 }
 
 template <class _CharT, class _Traits>
 basic_istream<_CharT, _Traits>&
 basic_istream<_CharT, _Traits>::operator>>(bool& __n)
 {
-    return _CUDA_VSTD::__input_arithmetic<bool>(*this, __n);
+    return _CUDA_FOR_DALI_VSTD::__input_arithmetic<bool>(*this, __n);
 }
 
 template <class _CharT, class _Traits>
 basic_istream<_CharT, _Traits>&
 basic_istream<_CharT, _Traits>::operator>>(void*& __n)
 {
-    return _CUDA_VSTD::__input_arithmetic<void*>(*this, __n);
+    return _CUDA_FOR_DALI_VSTD::__input_arithmetic<void*>(*this, __n);
 }
 
 template <class _Tp, class _CharT, class _Traits>
@@ -518,14 +518,14 @@ template <class _CharT, class _Traits>
 basic_istream<_CharT, _Traits>&
 basic_istream<_CharT, _Traits>::operator>>(short& __n)
 {
-    return _CUDA_VSTD::__input_arithmetic_with_numeric_limits<short>(*this, __n);
+    return _CUDA_FOR_DALI_VSTD::__input_arithmetic_with_numeric_limits<short>(*this, __n);
 }
 
 template <class _CharT, class _Traits>
 basic_istream<_CharT, _Traits>&
 basic_istream<_CharT, _Traits>::operator>>(int& __n)
 {
-    return _CUDA_VSTD::__input_arithmetic_with_numeric_limits<int>(*this, __n);
+    return _CUDA_FOR_DALI_VSTD::__input_arithmetic_with_numeric_limits<int>(*this, __n);
 }
 
 template<class _CharT, class _Traits>
@@ -587,8 +587,8 @@ operator>>(basic_istream<_CharT, _Traits>& __is, _CharT (&__buf)[_Np])
 {
     size_t __n = _Np;
     if (__is.width() > 0)
-        __n = _CUDA_VSTD::min(size_t(__is.width()), _Np);
-    return _CUDA_VSTD::__input_c_string(__is, __buf, __n);
+        __n = _CUDA_FOR_DALI_VSTD::min(size_t(__is.width()), _Np);
+    return _CUDA_FOR_DALI_VSTD::__input_c_string(__is, __buf, __n);
 }
 
 template<class _Traits, size_t _Np>
@@ -617,7 +617,7 @@ operator>>(basic_istream<_CharT, _Traits>& __is, _CharT* __s)
     streamsize __n = __is.width();
     if (__n <= 0)
         __n = numeric_limits<streamsize>::max() / sizeof(_CharT) - 1;
-    return _CUDA_VSTD::__input_c_string(__is, __s, size_t(__n));
+    return _CUDA_FOR_DALI_VSTD::__input_c_string(__is, __s, size_t(__n));
 }
 
 template<class _Traits>
@@ -1101,7 +1101,7 @@ basic_istream<_CharT, _Traits>::readsome(char_type* __s, streamsize __n)
             case 0:
                 break;
             default:
-                __n = _CUDA_VSTD::min(__c, __n);
+                __n = _CUDA_FOR_DALI_VSTD::min(__c, __n);
                 __gc_ = this->rdbuf()->sgetn(__s, __n);
                 if (__gc_ != __n)
                     __state |= ios_base::failbit | ios_base::eofbit;
@@ -1383,7 +1383,7 @@ inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 basic_istream<_CharT, _Traits>&
 operator>>(basic_istream<_CharT, _Traits>&& __is, _Tp&& __x)
 {
-    __is >> _CUDA_VSTD::forward<_Tp>(__x);
+    __is >> _CUDA_FOR_DALI_VSTD::forward<_Tp>(__x);
     return __is;
 }
 
@@ -1427,7 +1427,7 @@ protected:
 
 template <class _CharT, class _Traits>
 basic_iostream<_CharT, _Traits>::basic_iostream(basic_iostream&& __rhs)
-    : basic_istream<_CharT, _Traits>(_CUDA_VSTD::move(__rhs))
+    : basic_istream<_CharT, _Traits>(_CUDA_FOR_DALI_VSTD::move(__rhs))
 {
 }
 

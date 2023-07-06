@@ -117,10 +117,10 @@ void
 strstreambuf::swap(strstreambuf& __rhs)
 {
     streambuf::swap(__rhs);
-    _CUDA_VSTD::swap(__strmode_, __rhs.__strmode_);
-    _CUDA_VSTD::swap(__alsize_, __rhs.__alsize_);
-    _CUDA_VSTD::swap(__palloc_, __rhs.__palloc_);
-    _CUDA_VSTD::swap(__pfree_, __rhs.__pfree_);
+    _CUDA_FOR_DALI_VSTD::swap(__strmode_, __rhs.__strmode_);
+    _CUDA_FOR_DALI_VSTD::swap(__alsize_, __rhs.__alsize_);
+    _CUDA_FOR_DALI_VSTD::swap(__palloc_, __rhs.__palloc_);
+    _CUDA_FOR_DALI_VSTD::swap(__pfree_, __rhs.__pfree_);
 }
 
 void
@@ -275,7 +275,7 @@ strstreambuf::seekoff(off_type __off, ios_base::seekdir __way, ios_base::openmod
         {
             char* newpos = eback() + newoff;
             if (pos_in)
-                setg(eback(), newpos, _CUDA_VSTD::max(newpos, egptr()));
+                setg(eback(), newpos, _CUDA_FOR_DALI_VSTD::max(newpos, egptr()));
             if (pos_out)
             {
                 // min(pbase, newpos), newpos, epptr()
@@ -305,7 +305,7 @@ strstreambuf::seekpos(pos_type __sp, ios_base::openmode __which)
             {
                 char* newpos = eback() + newoff;
                 if (pos_in)
-                    setg(eback(), newpos, _CUDA_VSTD::max(newpos, egptr()));
+                    setg(eback(), newpos, _CUDA_FOR_DALI_VSTD::max(newpos, egptr()));
                 if (pos_out)
                 {
                     // min(pbase, newpos), newpos, epptr()

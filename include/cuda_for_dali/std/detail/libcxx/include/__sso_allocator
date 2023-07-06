@@ -54,14 +54,14 @@ public:
             __allocated_ = true;
             return (pointer)&buf_;
         }
-        return static_cast<pointer>(_CUDA_VSTD::__libcpp_allocate(__n * sizeof(_Tp), _LIBCUDAFORDALICXX_ALIGNOF(_Tp)));
+        return static_cast<pointer>(_CUDA_FOR_DALI_VSTD::__libcpp_allocate(__n * sizeof(_Tp), _LIBCUDAFORDALICXX_ALIGNOF(_Tp)));
     }
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY void deallocate(pointer __p, size_type __n)
     {
         if (__p == (pointer)&buf_)
             __allocated_ = false;
         else
-            _CUDA_VSTD::__libcpp_deallocate(__p, __n * sizeof(_Tp), _LIBCUDAFORDALICXX_ALIGNOF(_Tp));
+            _CUDA_FOR_DALI_VSTD::__libcpp_deallocate(__p, __n * sizeof(_Tp), _LIBCUDAFORDALICXX_ALIGNOF(_Tp));
     }
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY size_type max_size() const throw() {return size_type(~0) / sizeof(_Tp);}
 

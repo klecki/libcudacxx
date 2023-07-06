@@ -342,7 +342,7 @@ void __throw_bad_cast()
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
     throw bad_cast();
 #else
-    _CUDA_VSTD::abort();
+    _CUDA_FOR_DALI_VSTD::abort();
 #endif
 }
 _LIBCUDAFORDALICXX_END_NAMESPACE_STD

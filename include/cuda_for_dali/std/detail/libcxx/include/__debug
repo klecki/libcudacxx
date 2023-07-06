@@ -10,7 +10,7 @@
 #ifndef _LIBCUDAFORDALICXX_DEBUG_H
 #define _LIBCUDAFORDALICXX_DEBUG_H
 
-#ifndef __cuda_std__
+#ifndef __cuda_for_dali_std__
 #include <__config>
 #include <iosfwd>
 #if defined(_LIBCUDAFORDALICXX_HAS_NO_NULLPTR)
@@ -22,7 +22,7 @@
 #  include <cstddef>
 #endif
 #include <__pragma_push>
-#endif //__cuda_std__
+#endif //__cuda_for_dali_std__
 
 #if defined(_LIBCUDAFORDALICXX_USE_PRAGMA_GCC_SYSTEM_HEADER)
 #pragma GCC system_header
@@ -30,7 +30,7 @@
 
 #if _LIBCUDAFORDALICXX_DEBUG_LEVEL >= 1 && !defined(_LIBCUDAFORDALICXX_ASSERT)
 # define _LIBCUDAFORDALICXX_ASSERT(x, m) ((x) ? (void)0 : \
-  _CUDA_VSTD::__libcpp_debug_function(_CUDA_VSTD::__libcpp_debug_info(__FILE__, __LINE__, #x, m)))
+  _CUDA_FOR_DALI_VSTD::__libcpp_debug_function(_CUDA_FOR_DALI_VSTD::__libcpp_debug_info(__FILE__, __LINE__, #x, m)))
 #endif
 
 #if _LIBCUDAFORDALICXX_DEBUG_LEVEL >= 2
@@ -276,7 +276,7 @@ _LIBCUDAFORDALICXX_FUNC_VIS const __libcpp_db* __get_const_db();
 
 _LIBCUDAFORDALICXX_END_NAMESPACE_STD
 
-#ifndef __cuda_std__
+#ifndef __cuda_for_dali_std__
   #include <__pragma_pop>
 #endif
 

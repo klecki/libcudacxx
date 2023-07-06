@@ -10,7 +10,7 @@
 #ifndef _LIBCUDAFORDALICXX_FUNCTIONAL_BASE
 #define _LIBCUDAFORDALICXX_FUNCTIONAL_BASE
 
-#ifndef __cuda_std__
+#ifndef __cuda_for_dali_std__
 #include <__config>
 #include <type_traits>
 #include <typeinfo>
@@ -18,7 +18,7 @@
 #include <new>
 #include <utility>
 #include <__pragma_push>
-#endif //__cuda_std__
+#endif //__cuda_for_dali_std__
 
 #if defined(_LIBCUDAFORDALICXX_USE_PRAGMA_GCC_SYSTEM_HEADER)
 #pragma GCC system_header
@@ -64,9 +64,9 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS less<void>
     template <class _T1, class _T2>
     _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX11 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     auto operator()(_T1&& __t, _T2&& __u) const
-    _NOEXCEPT_(noexcept(_CUDA_VSTD::forward<_T1>(__t) < _CUDA_VSTD::forward<_T2>(__u)))
-    -> decltype        (_CUDA_VSTD::forward<_T1>(__t) < _CUDA_VSTD::forward<_T2>(__u))
-        { return        _CUDA_VSTD::forward<_T1>(__t) < _CUDA_VSTD::forward<_T2>(__u); }
+    _NOEXCEPT_(noexcept(_CUDA_FOR_DALI_VSTD::forward<_T1>(__t) < _CUDA_FOR_DALI_VSTD::forward<_T2>(__u)))
+    -> decltype        (_CUDA_FOR_DALI_VSTD::forward<_T1>(__t) < _CUDA_FOR_DALI_VSTD::forward<_T2>(__u))
+        { return        _CUDA_FOR_DALI_VSTD::forward<_T1>(__t) < _CUDA_FOR_DALI_VSTD::forward<_T2>(__u); }
     typedef void is_transparent;
 };
 #endif
@@ -305,7 +305,7 @@ struct __weak_result_type<_Rp (_Cp::*)(_A1, _A2, _A3...) const volatile>
 template <class _Tp, class ..._Args>
 struct __invoke_return
 {
-    typedef decltype(__invoke(_CUDA_VSTD::declval<_Tp>(), _CUDA_VSTD::declval<_Args>()...)) type;
+    typedef decltype(__invoke(_CUDA_FOR_DALI_VSTD::declval<_Tp>(), _CUDA_FOR_DALI_VSTD::declval<_Args>()...)) type;
 };
 
 #else // defined(_LIBCUDAFORDALICXX_CXX03_LANG)
@@ -322,7 +322,7 @@ struct __invoke_void_return_wrapper
     template <class ..._Args>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     static _Ret __call(_Args&&... __args) {
-        return __invoke(_CUDA_VSTD::forward<_Args>(__args)...);
+        return __invoke(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
     }
 #else
     template <class _Fn>
@@ -358,7 +358,7 @@ struct __invoke_void_return_wrapper<void>
     template <class ..._Args>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     static void __call(_Args&&... __args) {
-        __invoke(_CUDA_VSTD::forward<_Args>(__args)...);
+        __invoke(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
     }
 #else
     template <class _Fn>
@@ -400,7 +400,7 @@ private:
 public:
     // construct/copy/destroy
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY reference_wrapper(type& __f) _NOEXCEPT
-        : __f_(_CUDA_VSTD::addressof(__f)) {}
+        : __f_(_CUDA_FOR_DALI_VSTD::addressof(__f)) {}
 #ifndef _LIBCUDAFORDALICXX_CXX03_LANG
     private: _LIBCUDAFORDALICXX_INLINE_VISIBILITY reference_wrapper(type&&); public: // = delete; // do not bind to temps
 #endif
@@ -415,7 +415,7 @@ public:
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     typename __invoke_of<type&, _ArgTypes...>::type
     operator() (_ArgTypes&&... __args) const {
-        return __invoke(get(), _CUDA_VSTD::forward<_ArgTypes>(__args)...);
+        return __invoke(get(), _CUDA_FOR_DALI_VSTD::forward<_ArgTypes>(__args)...);
     }
 #else
 
@@ -643,7 +643,7 @@ template <class _Tp, class _Allocator, class... _Args>
 inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 void __user_alloc_construct_impl (integral_constant<int, 0>, _Tp *__storage, const _Allocator &, _Args &&... __args )
 {
-    new (__storage) _Tp (_CUDA_VSTD::forward<_Args>(__args)...);
+    new (__storage) _Tp (_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
 }
 
 // FIXME: This should have a version which takes a non-const alloc.
@@ -651,7 +651,7 @@ template <class _Tp, class _Allocator, class... _Args>
 inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 void __user_alloc_construct_impl (integral_constant<int, 1>, _Tp *__storage, const _Allocator &__a, _Args &&... __args )
 {
-    new (__storage) _Tp (allocator_arg, __a, _CUDA_VSTD::forward<_Args>(__args)...);
+    new (__storage) _Tp (allocator_arg, __a, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
 }
 
 // FIXME: This should have a version which takes a non-const alloc.
@@ -659,14 +659,14 @@ template <class _Tp, class _Allocator, class... _Args>
 inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 void __user_alloc_construct_impl (integral_constant<int, 2>, _Tp *__storage, const _Allocator &__a, _Args &&... __args )
 {
-    new (__storage) _Tp (_CUDA_VSTD::forward<_Args>(__args)..., __a);
+    new (__storage) _Tp (_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)..., __a);
 }
 
 #endif  // _LIBCUDAFORDALICXX_CXX03_LANG
 
 _LIBCUDAFORDALICXX_END_NAMESPACE_STD
 
-#ifndef __cuda_std__
+#ifndef __cuda_for_dali_std__
 #include <__pragma_pop>
 #endif
 

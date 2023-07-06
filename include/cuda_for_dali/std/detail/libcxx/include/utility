@@ -195,7 +195,7 @@ template <size_t I>
 
 */
 
-#ifndef __cuda_std__
+#ifndef __cuda_for_dali_std__
 #include <__config>
 #include <__tuple>
 #include <type_traits>
@@ -206,7 +206,7 @@ template <size_t I>
 #include <version>
 #include <__debug>
 #include <__pragma_push>
-#endif //__cuda_std__
+#endif //__cuda_for_dali_std__
 
 #if defined(_LIBCUDAFORDALICXX_USE_PRAGMA_GCC_SYSTEM_HEADER)
 #pragma GCC system_header
@@ -217,7 +217,7 @@ _LIBCUDAFORDALICXX_BEGIN_NAMESPACE_STD
 // This header is not currently supported. It exists to allow for the use of
 // `unary_function`, needed by `<cuda/std/functional>`, which happens to be defined here.
 
-#ifndef __cuda_std__
+#ifndef __cuda_for_dali_std__
 
 namespace rel_ops
 {
@@ -276,7 +276,7 @@ const _Tp&
 #endif
 move_if_noexcept(_Tp& __x) _NOEXCEPT
 {
-    return _CUDA_VSTD::move(__x);
+    return _CUDA_FOR_DALI_VSTD::move(__x);
 }
 
 #if _LIBCUDAFORDALICXX_STD_VER > 14
@@ -284,7 +284,7 @@ template <class _Tp> constexpr add_const_t<_Tp>& as_const(_Tp& __t) noexcept { r
 template <class _Tp>                        void as_const(const _Tp&&) = delete;
 #endif
 
-#endif //__cuda_std__
+#endif //__cuda_for_dali_std__
 
 struct _LIBCUDAFORDALICXX_TEMPLATE_VIS piecewise_construct_t { explicit piecewise_construct_t() = default; };
 #if defined(_LIBCUDAFORDALICXX_CXX03_LANG) || defined(_LIBCUDAFORDALICXX_BUILDING_LIBRARY)
@@ -458,7 +458,7 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS pair
     explicit pair(_U1&& __u1, _U2&& __u2)
         _NOEXCEPT_((is_nothrow_constructible<first_type, _U1>::value &&
                     is_nothrow_constructible<second_type, _U2>::value))
-        : first(_CUDA_VSTD::forward<_U1>(__u1)), second(_CUDA_VSTD::forward<_U2>(__u2)) {}
+        : first(_CUDA_FOR_DALI_VSTD::forward<_U1>(__u1)), second(_CUDA_FOR_DALI_VSTD::forward<_U2>(__u2)) {}
 
     template<class _U1, class _U2, _EnableB<
             _CheckArgs::template __enable_implicit<_U1, _U2>::value
@@ -467,7 +467,7 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS pair
     pair(_U1&& __u1, _U2&& __u2)
         _NOEXCEPT_((is_nothrow_constructible<first_type, _U1>::value &&
                     is_nothrow_constructible<second_type, _U2>::value))
-        : first(_CUDA_VSTD::forward<_U1>(__u1)), second(_CUDA_VSTD::forward<_U2>(__u2)) {}
+        : first(_CUDA_FOR_DALI_VSTD::forward<_U1>(__u1)), second(_CUDA_FOR_DALI_VSTD::forward<_U2>(__u2)) {}
 
     template<class _U1, class _U2, _EnableB<
             _CheckArgs::template __enable_explicit<_U1 const&, _U2 const&>::value
@@ -494,7 +494,7 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS pair
     explicit pair(pair<_U1, _U2>&&__p)
         _NOEXCEPT_((is_nothrow_constructible<first_type, _U1&&>::value &&
                     is_nothrow_constructible<second_type, _U2&&>::value))
-        : first(_CUDA_VSTD::forward<_U1>(__p.first)), second(_CUDA_VSTD::forward<_U2>(__p.second)) {}
+        : first(_CUDA_FOR_DALI_VSTD::forward<_U1>(__p.first)), second(_CUDA_FOR_DALI_VSTD::forward<_U2>(__p.second)) {}
 
     template<class _U1, class _U2, _EnableB<
             _CheckArgs::template __enable_implicit<_U1, _U2>::value
@@ -503,23 +503,23 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS pair
     pair(pair<_U1, _U2>&& __p)
         _NOEXCEPT_((is_nothrow_constructible<first_type, _U1&&>::value &&
                     is_nothrow_constructible<second_type, _U2&&>::value))
-        : first(_CUDA_VSTD::forward<_U1>(__p.first)), second(_CUDA_VSTD::forward<_U2>(__p.second)) {}
+        : first(_CUDA_FOR_DALI_VSTD::forward<_U1>(__p.first)), second(_CUDA_FOR_DALI_VSTD::forward<_U2>(__p.second)) {}
 
     template<class _Tuple, _EnableB<
             _CheckTLC<_Tuple>::template __enable_explicit<_Tuple>::value
     > = false>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX11
     explicit pair(_Tuple&& __p)
-        : first(_CUDA_VSTD::get<0>(_CUDA_VSTD::forward<_Tuple>(__p))),
-          second(_CUDA_VSTD::get<1>(_CUDA_VSTD::forward<_Tuple>(__p))) {}
+        : first(_CUDA_FOR_DALI_VSTD::get<0>(_CUDA_FOR_DALI_VSTD::forward<_Tuple>(__p))),
+          second(_CUDA_FOR_DALI_VSTD::get<1>(_CUDA_FOR_DALI_VSTD::forward<_Tuple>(__p))) {}
 
     template<class _Tuple, _EnableB<
             _CheckTLC<_Tuple>::template __enable_implicit<_Tuple>::value
     > = false>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX11
     pair(_Tuple&& __p)
-        : first(_CUDA_VSTD::get<0>(_CUDA_VSTD::forward<_Tuple>(__p))),
-          second(_CUDA_VSTD::get<1>(_CUDA_VSTD::forward<_Tuple>(__p))) {}
+        : first(_CUDA_FOR_DALI_VSTD::get<0>(_CUDA_FOR_DALI_VSTD::forward<_Tuple>(__p))),
+          second(_CUDA_FOR_DALI_VSTD::get<1>(_CUDA_FOR_DALI_VSTD::forward<_Tuple>(__p))) {}
 
     template <class... _Args1, class... _Args2>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -552,8 +552,8 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS pair
         _NOEXCEPT_(is_nothrow_move_assignable<first_type>::value &&
                    is_nothrow_move_assignable<second_type>::value)
     {
-        first = _CUDA_VSTD::forward<first_type>(__p.first);
-        second = _CUDA_VSTD::forward<second_type>(__p.second);
+        first = _CUDA_FOR_DALI_VSTD::forward<first_type>(__p.first);
+        second = _CUDA_FOR_DALI_VSTD::forward<second_type>(__p.second);
         return *this;
     }
 
@@ -562,8 +562,8 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS pair
      > = false>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     pair& operator=(_Tuple&& __p) {
-        first = _CUDA_VSTD::get<0>(_CUDA_VSTD::forward<_Tuple>(__p));
-        second = _CUDA_VSTD::get<1>(_CUDA_VSTD::forward<_Tuple>(__p));
+        first = _CUDA_FOR_DALI_VSTD::get<0>(_CUDA_FOR_DALI_VSTD::forward<_Tuple>(__p));
+        second = _CUDA_FOR_DALI_VSTD::get<1>(_CUDA_FOR_DALI_VSTD::forward<_Tuple>(__p));
         return *this;
     }
 #endif
@@ -573,7 +573,7 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS pair
     swap(pair& __p) _NOEXCEPT_(__is_nothrow_swappable<first_type>::value &&
                                __is_nothrow_swappable<second_type>::value)
     {
-        using _CUDA_VSTD::swap;
+        using _CUDA_FOR_DALI_VSTD::swap;
         swap(first,  __p.first);
         swap(second, __p.second);
     }
@@ -687,7 +687,7 @@ pair<typename __unwrap_ref_decay<_T1>::type, typename __unwrap_ref_decay<_T2>::t
 make_pair(_T1&& __t1, _T2&& __t2)
 {
     return pair<typename __unwrap_ref_decay<_T1>::type, typename __unwrap_ref_decay<_T2>::type>
-               (_CUDA_VSTD::forward<_T1>(__t1), _CUDA_VSTD::forward<_T2>(__t2));
+               (_CUDA_FOR_DALI_VSTD::forward<_T1>(__t1), _CUDA_FOR_DALI_VSTD::forward<_T2>(__t2));
 }
 
 #else  // _LIBCUDAFORDALICXX_CXX03_LANG
@@ -746,13 +746,13 @@ struct __get_pair<0>
     static
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX11
     _T1&&
-    get(pair<_T1, _T2>&& __p) _NOEXCEPT {return _CUDA_VSTD::forward<_T1>(__p.first);}
+    get(pair<_T1, _T2>&& __p) _NOEXCEPT {return _CUDA_FOR_DALI_VSTD::forward<_T1>(__p.first);}
 
     template <class _T1, class _T2>
     static
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX11
     const _T1&&
-    get(const pair<_T1, _T2>&& __p) _NOEXCEPT {return _CUDA_VSTD::forward<const _T1>(__p.first);}
+    get(const pair<_T1, _T2>&& __p) _NOEXCEPT {return _CUDA_FOR_DALI_VSTD::forward<const _T1>(__p.first);}
 #endif  // _LIBCUDAFORDALICXX_CXX03_LANG
 };
 
@@ -776,13 +776,13 @@ struct __get_pair<1>
     static
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX11
     _T2&&
-    get(pair<_T1, _T2>&& __p) _NOEXCEPT {return _CUDA_VSTD::forward<_T2>(__p.second);}
+    get(pair<_T1, _T2>&& __p) _NOEXCEPT {return _CUDA_FOR_DALI_VSTD::forward<_T2>(__p.second);}
 
     template <class _T1, class _T2>
     static
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX11
     const _T2&&
-    get(const pair<_T1, _T2>&& __p) _NOEXCEPT {return _CUDA_VSTD::forward<const _T2>(__p.second);}
+    get(const pair<_T1, _T2>&& __p) _NOEXCEPT {return _CUDA_FOR_DALI_VSTD::forward<const _T2>(__p.second);}
 #endif  // _LIBCUDAFORDALICXX_CXX03_LANG
 };
 
@@ -808,7 +808,7 @@ inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_C
 typename tuple_element<_Ip, pair<_T1, _T2> >::type&&
 get(pair<_T1, _T2>&& __p) _NOEXCEPT
 {
-    return __get_pair<_Ip>::get(_CUDA_VSTD::move(__p));
+    return __get_pair<_Ip>::get(_CUDA_FOR_DALI_VSTD::move(__p));
 }
 
 template <size_t _Ip, class _T1, class _T2>
@@ -816,7 +816,7 @@ inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_C
 const typename tuple_element<_Ip, pair<_T1, _T2> >::type&&
 get(const pair<_T1, _T2>&& __p) _NOEXCEPT
 {
-    return __get_pair<_Ip>::get(_CUDA_VSTD::move(__p));
+    return __get_pair<_Ip>::get(_CUDA_FOR_DALI_VSTD::move(__p));
 }
 #endif  // _LIBCUDAFORDALICXX_CXX03_LANG
 
@@ -839,14 +839,14 @@ template <class _T1, class _T2>
 inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 constexpr _T1 && get(pair<_T1, _T2>&& __p) _NOEXCEPT
 {
-    return __get_pair<0>::get(_CUDA_VSTD::move(__p));
+    return __get_pair<0>::get(_CUDA_FOR_DALI_VSTD::move(__p));
 }
 
 template <class _T1, class _T2>
 inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 constexpr _T1 const && get(pair<_T1, _T2> const&& __p) _NOEXCEPT
 {
-    return __get_pair<0>::get(_CUDA_VSTD::move(__p));
+    return __get_pair<0>::get(_CUDA_FOR_DALI_VSTD::move(__p));
 }
 
 template <class _T1, class _T2>
@@ -867,14 +867,14 @@ template <class _T1, class _T2>
 inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 constexpr _T1 && get(pair<_T2, _T1>&& __p) _NOEXCEPT
 {
-    return __get_pair<1>::get(_CUDA_VSTD::move(__p));
+    return __get_pair<1>::get(_CUDA_FOR_DALI_VSTD::move(__p));
 }
 
 template <class _T1, class _T2>
 inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 constexpr _T1 const && get(pair<_T2, _T1> const&& __p) _NOEXCEPT
 {
-    return __get_pair<1>::get(_CUDA_VSTD::move(__p));
+    return __get_pair<1>::get(_CUDA_FOR_DALI_VSTD::move(__p));
 }
 
 #endif
@@ -939,8 +939,8 @@ template<class _T1, class _T2 = _T1>
 inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX17
 _T1 exchange(_T1& __obj, _T2 && __new_value)
 {
-    _T1 __old_value = _CUDA_VSTD::move(__obj);
-    __obj = _CUDA_VSTD::forward<_T2>(__new_value);
+    _T1 __old_value = _CUDA_FOR_DALI_VSTD::move(__obj);
+    __obj = _CUDA_FOR_DALI_VSTD::forward<_T2>(__new_value);
     return __old_value;
 }
 #endif  // _LIBCUDAFORDALICXX_STD_VER > 11
@@ -987,7 +987,7 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS unary_function
     typedef _Result result_type;
 };
 
-#ifndef __cuda_std__
+#ifndef __cuda_for_dali_std__
 
 template <class _Size>
 inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -1639,12 +1639,12 @@ using __enable_hash_helper _LIBCUDAFORDALICXX_NODEBUG_TYPE = _Type;
 
 #endif // !_LIBCUDAFORDALICXX_CXX03_LANG
 
-#endif // __cuda_std__
+#endif // __cuda_for_dali_std__
 
 _LIBCUDAFORDALICXX_END_NAMESPACE_STD
 
-#ifndef __cuda_std__
+#ifndef __cuda_for_dali_std__
 #include <__pragma_pop>
-#endif //__cuda_std__
+#endif //__cuda_for_dali_std__
 
 #endif  // _LIBCUDAFORDALICXX_UTILITY

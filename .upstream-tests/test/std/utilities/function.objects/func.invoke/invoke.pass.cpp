@@ -189,7 +189,7 @@ void bullet_one_two_tests() {
         test_b12<int volatile&&(NonCopyable&&) volatile &&, int volatile&&>(cuda_for_dali::std::move(cl));
         test_b12<int const volatile&&(NonCopyable&&) const volatile &&, int const volatile&&>(cuda_for_dali::std::move(cl));
     }
-#ifndef __cuda_std__
+#ifndef __cuda_for_dali_std__
     // uncomment when reenabling reference_wrapper
     {
         TestClass cl_obj(42);
@@ -264,7 +264,7 @@ void bullet_three_four_tests() {
         test_b34<int volatile&&>(static_cast<Fn volatile&&>(cl));
         test_b34<int const volatile&&>(static_cast<Fn const volatile&&>(cl));
     }
-#ifndef __cuda_std__
+#ifndef __cuda_for_dali_std__
     // uncomment when reenabling reference_wrapper
     {
         typedef TestClass Fn;

@@ -41,7 +41,7 @@ __throw_bad_alloc()
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
     throw bad_alloc();
 #else
-    _CUDA_VSTD::abort();
+    _CUDA_FOR_DALI_VSTD::abort();
 #endif
 }
 

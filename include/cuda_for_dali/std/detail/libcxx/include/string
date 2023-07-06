@@ -606,14 +606,14 @@ template <bool __b>
 void
 __basic_string_common<__b>::__throw_length_error() const
 {
-    _CUDA_VSTD::__throw_length_error("basic_string");
+    _CUDA_FOR_DALI_VSTD::__throw_length_error("basic_string");
 }
 
 template <bool __b>
 void
 __basic_string_common<__b>::__throw_out_of_range() const
 {
-    _CUDA_VSTD::__throw_out_of_range("basic_string");
+    _CUDA_FOR_DALI_VSTD::__throw_out_of_range("basic_string");
 }
 
 _LIBCUDAFORDALICXX_EXTERN_TEMPLATE(class _LIBCUDAFORDALICXX_EXTERN_TEMPLATE_TYPE_VIS __basic_string_common<true>)
@@ -695,8 +695,8 @@ public:
     typedef __wrap_iter<pointer>                         iterator;
     typedef __wrap_iter<const_pointer>                   const_iterator;
 #endif  // defined(_LIBCUDAFORDALICXX_RAW_ITERATORS)
-    typedef _CUDA_VSTD::reverse_iterator<iterator>             reverse_iterator;
-    typedef _CUDA_VSTD::reverse_iterator<const_iterator>       const_reverse_iterator;
+    typedef _CUDA_FOR_DALI_VSTD::reverse_iterator<iterator>             reverse_iterator;
+    typedef _CUDA_FOR_DALI_VSTD::reverse_iterator<const_iterator>       const_reverse_iterator;
 
 private:
 
@@ -1073,7 +1073,7 @@ public:
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     basic_string& assign(basic_string&& __str)
         _NOEXCEPT_((__noexcept_move_assign_container<_Allocator, __alloc_traits>::value))
-        {*this = _CUDA_VSTD::move(__str); return *this;}
+        {*this = _CUDA_FOR_DALI_VSTD::move(__str); return *this;}
 #endif
     basic_string& assign(const basic_string& __str, size_type __pos, size_type __n=npos);
     template <class _Tp>
@@ -1239,10 +1239,10 @@ public:
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     const value_type* c_str() const _NOEXCEPT {return data();}
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
-    const value_type* data() const _NOEXCEPT  {return _CUDA_VSTD::__to_raw_pointer(__get_pointer());}
+    const value_type* data() const _NOEXCEPT  {return _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__get_pointer());}
 #if _LIBCUDAFORDALICXX_STD_VER > 14 || defined(_LIBCUDAFORDALICXX_BUILDING_LIBRARY)
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
-    value_type* data()             _NOEXCEPT  {return _CUDA_VSTD::__to_raw_pointer(__get_pointer());}
+    value_type* data()             _NOEXCEPT  {return _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__get_pointer());}
 #endif
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -1592,7 +1592,7 @@ private:
                     allocator_type __a = __str.__alloc();
                     pointer __p = __alloc_traits::allocate(__a, __str.__get_long_cap());
                     __clear_and_shrink();
-                    __alloc() = _CUDA_VSTD::move(__a);
+                    __alloc() = _CUDA_FOR_DALI_VSTD::move(__a);
                     __set_long_pointer(__p);
                     __set_long_cap(__str.__get_long_cap());
                     __set_long_size(__str.size());
@@ -1630,7 +1630,7 @@ private:
     void __move_assign_alloc(basic_string& __c, true_type)
         _NOEXCEPT_(is_nothrow_move_assignable<allocator_type>::value)
         {
-            __alloc() = _CUDA_VSTD::move(__c.__alloc());
+            __alloc() = _CUDA_FOR_DALI_VSTD::move(__c.__alloc());
         }
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -1765,7 +1765,7 @@ void basic_string<_CharT, _Traits, _Allocator>::__init(const value_type* __s,
         __set_long_cap(__cap+1);
         __set_long_size(__sz);
     }
-    traits_type::copy(_CUDA_VSTD::__to_raw_pointer(__p), __s, __sz);
+    traits_type::copy(_CUDA_FOR_DALI_VSTD::__to_raw_pointer(__p), __s, __sz);
     traits_type::assign(__p[__sz], value_type());
 }
 
@@ -1789,7 +1789,7 @@ basic_string<_CharT, _Traits, _Allocator>::__init(const value_type* __s, size_ty
         __set_long_cap(__cap+1);
         __set_long_size(__sz);
     }
-    traits_type::copy(_CUDA_VSTD::__to_raw_pointer(__p), __s, __sz);
+    traits_type::copy(_CUDA_FOR_DALI_VSTD::__to_raw_pointer(__p), __s, __sz);
     traits_type::assign(__p[__sz], value_type());
 }
 
@@ -1835,7 +1835,7 @@ basic_string<_CharT, _Traits, _Allocator>::basic_string(const basic_string& __st
     if (!__str.__is_long())
         __r_.first().__r = __str.__r_.first().__r;
     else
-        __init(_CUDA_VSTD::__to_raw_pointer(__str.__get_long_pointer()), __str.__get_long_size());
+        __init(_CUDA_FOR_DALI_VSTD::__to_raw_pointer(__str.__get_long_pointer()), __str.__get_long_size());
 #if _LIBCUDAFORDALICXX_DEBUG_LEVEL >= 2
     __get_db()->__insert_c(this);
 #endif
@@ -1849,7 +1849,7 @@ basic_string<_CharT, _Traits, _Allocator>::basic_string(
     if (!__str.__is_long())
         __r_.first().__r = __str.__r_.first().__r;
     else
-        __init(_CUDA_VSTD::__to_raw_pointer(__str.__get_long_pointer()), __str.__get_long_size());
+        __init(_CUDA_FOR_DALI_VSTD::__to_raw_pointer(__str.__get_long_pointer()), __str.__get_long_size());
 #if _LIBCUDAFORDALICXX_DEBUG_LEVEL >= 2
     __get_db()->__insert_c(this);
 #endif
@@ -1865,7 +1865,7 @@ basic_string<_CharT, _Traits, _Allocator>::basic_string(basic_string&& __str)
 #else
         _NOEXCEPT
 #endif
-    : __r_(_CUDA_VSTD::move(__str.__r_))
+    : __r_(_CUDA_FOR_DALI_VSTD::move(__str.__r_))
 {
     __str.__zero();
 #if _LIBCUDAFORDALICXX_DEBUG_LEVEL >= 2
@@ -1881,7 +1881,7 @@ basic_string<_CharT, _Traits, _Allocator>::basic_string(basic_string&& __str, co
     : __r_(__second_tag(), __a)
 {
     if (__str.__is_long() && __a != __str.__alloc()) // copy, not move
-        __init(_CUDA_VSTD::__to_raw_pointer(__str.__get_long_pointer()), __str.__get_long_size());
+        __init(_CUDA_FOR_DALI_VSTD::__to_raw_pointer(__str.__get_long_pointer()), __str.__get_long_size());
     else
     {
         __r_.first().__r = __str.__r_.first().__r;
@@ -1916,7 +1916,7 @@ basic_string<_CharT, _Traits, _Allocator>::__init(size_type __n, value_type __c)
         __set_long_cap(__cap+1);
         __set_long_size(__n);
     }
-    traits_type::assign(_CUDA_VSTD::__to_raw_pointer(__p), __n, __c);
+    traits_type::assign(_CUDA_FOR_DALI_VSTD::__to_raw_pointer(__p), __n, __c);
     traits_type::assign(__p[__n], value_type());
 }
 
@@ -1950,7 +1950,7 @@ basic_string<_CharT, _Traits, _Allocator>::basic_string(const basic_string& __st
     size_type __str_sz = __str.size();
     if (__pos > __str_sz)
         this->__throw_out_of_range();
-    __init(__str.data() + __pos, _CUDA_VSTD::min(__n, __str_sz - __pos));
+    __init(__str.data() + __pos, _CUDA_FOR_DALI_VSTD::min(__n, __str_sz - __pos));
 #if _LIBCUDAFORDALICXX_DEBUG_LEVEL >= 2
     __get_db()->__insert_c(this);
 #endif
@@ -2044,7 +2044,7 @@ typename enable_if
 >::type
 basic_string<_CharT, _Traits, _Allocator>::__init(_ForwardIterator __first, _ForwardIterator __last)
 {
-    size_type __sz = static_cast<size_type>(_CUDA_VSTD::distance(__first, __last));
+    size_type __sz = static_cast<size_type>(_CUDA_FOR_DALI_VSTD::distance(__first, __last));
     if (__sz > max_size())
         this->__throw_length_error();
     pointer __p;
@@ -2139,19 +2139,19 @@ basic_string<_CharT, _Traits, _Allocator>::__grow_by_and_replace
         this->__throw_length_error();
     pointer __old_p = __get_pointer();
     size_type __cap = __old_cap < __ms / 2 - __alignment ?
-                          __recommend(_CUDA_VSTD::max(__old_cap + __delta_cap, 2 * __old_cap)) :
+                          __recommend(_CUDA_FOR_DALI_VSTD::max(__old_cap + __delta_cap, 2 * __old_cap)) :
                           __ms - 1;
     pointer __p = __alloc_traits::allocate(__alloc(), __cap+1);
     __invalidate_all_iterators();
     if (__n_copy != 0)
-        traits_type::copy(_CUDA_VSTD::__to_raw_pointer(__p),
-                          _CUDA_VSTD::__to_raw_pointer(__old_p), __n_copy);
+        traits_type::copy(_CUDA_FOR_DALI_VSTD::__to_raw_pointer(__p),
+                          _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__old_p), __n_copy);
     if (__n_add != 0)
-        traits_type::copy(_CUDA_VSTD::__to_raw_pointer(__p) + __n_copy, __p_new_stuff, __n_add);
+        traits_type::copy(_CUDA_FOR_DALI_VSTD::__to_raw_pointer(__p) + __n_copy, __p_new_stuff, __n_add);
     size_type __sec_cp_sz = __old_sz - __n_del - __n_copy;
     if (__sec_cp_sz != 0)
-        traits_type::copy(_CUDA_VSTD::__to_raw_pointer(__p) + __n_copy + __n_add,
-                          _CUDA_VSTD::__to_raw_pointer(__old_p) + __n_copy + __n_del, __sec_cp_sz);
+        traits_type::copy(_CUDA_FOR_DALI_VSTD::__to_raw_pointer(__p) + __n_copy + __n_add,
+                          _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__old_p) + __n_copy + __n_del, __sec_cp_sz);
     if (__old_cap+1 != __min_cap)
         __alloc_traits::deallocate(__alloc(), __old_p, __old_cap+1);
     __set_long_pointer(__p);
@@ -2171,17 +2171,17 @@ basic_string<_CharT, _Traits, _Allocator>::__grow_by(size_type __old_cap, size_t
         this->__throw_length_error();
     pointer __old_p = __get_pointer();
     size_type __cap = __old_cap < __ms / 2 - __alignment ?
-                          __recommend(_CUDA_VSTD::max(__old_cap + __delta_cap, 2 * __old_cap)) :
+                          __recommend(_CUDA_FOR_DALI_VSTD::max(__old_cap + __delta_cap, 2 * __old_cap)) :
                           __ms - 1;
     pointer __p = __alloc_traits::allocate(__alloc(), __cap+1);
     __invalidate_all_iterators();
     if (__n_copy != 0)
-        traits_type::copy(_CUDA_VSTD::__to_raw_pointer(__p),
-                          _CUDA_VSTD::__to_raw_pointer(__old_p), __n_copy);
+        traits_type::copy(_CUDA_FOR_DALI_VSTD::__to_raw_pointer(__p),
+                          _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__old_p), __n_copy);
     size_type __sec_cp_sz = __old_sz - __n_del - __n_copy;
     if (__sec_cp_sz != 0)
-        traits_type::copy(_CUDA_VSTD::__to_raw_pointer(__p) + __n_copy + __n_add,
-                          _CUDA_VSTD::__to_raw_pointer(__old_p) + __n_copy + __n_del,
+        traits_type::copy(_CUDA_FOR_DALI_VSTD::__to_raw_pointer(__p) + __n_copy + __n_add,
+                          _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__old_p) + __n_copy + __n_del,
                           __sec_cp_sz);
     if (__old_cap+1 != __min_cap)
         __alloc_traits::deallocate(__alloc(), __old_p, __old_cap+1);
@@ -2199,7 +2199,7 @@ basic_string<_CharT, _Traits, _Allocator>::assign(const value_type* __s, size_ty
     size_type __cap = capacity();
     if (__cap >= __n)
     {
-        value_type* __p = _CUDA_VSTD::__to_raw_pointer(__get_pointer());
+        value_type* __p = _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__get_pointer());
         traits_type::move(__p, __s, __n);
         traits_type::assign(__p[__n], value_type());
         __set_size(__n);
@@ -2225,7 +2225,7 @@ basic_string<_CharT, _Traits, _Allocator>::assign(size_type __n, value_type __c)
     }
     else
         __invalidate_iterators_past(__n);
-    value_type* __p = _CUDA_VSTD::__to_raw_pointer(__get_pointer());
+    value_type* __p = _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__get_pointer());
     traits_type::assign(__p, __n, __c);
     traits_type::assign(__p[__n], value_type());
     __set_size(__n);
@@ -2333,7 +2333,7 @@ typename enable_if
 >::type
 basic_string<_CharT, _Traits, _Allocator>::assign(_ForwardIterator __first, _ForwardIterator __last)
 {
-    size_type __n = static_cast<size_type>(_CUDA_VSTD::distance(__first, __last));
+    size_type __n = static_cast<size_type>(_CUDA_FOR_DALI_VSTD::distance(__first, __last));
     size_type __cap = capacity();
     if (__cap < __n)
     {
@@ -2357,7 +2357,7 @@ basic_string<_CharT, _Traits, _Allocator>::assign(const basic_string& __str, siz
     size_type __sz = __str.size();
     if (__pos > __sz)
         this->__throw_out_of_range();
-    return assign(__str.data() + __pos, _CUDA_VSTD::min(__n, __sz - __pos));
+    return assign(__str.data() + __pos, _CUDA_FOR_DALI_VSTD::min(__n, __sz - __pos));
 }
 
 template <class _CharT, class _Traits, class _Allocator>
@@ -2373,7 +2373,7 @@ basic_string<_CharT, _Traits, _Allocator>::assign(const _Tp & __t, size_type __p
     size_type __sz = __sv.size();
     if (__pos > __sz)
         this->__throw_out_of_range();
-    return assign(__sv.data() + __pos, _CUDA_VSTD::min(__n, __sz - __pos));
+    return assign(__sv.data() + __pos, _CUDA_FOR_DALI_VSTD::min(__n, __sz - __pos));
 }
 
 
@@ -2398,7 +2398,7 @@ basic_string<_CharT, _Traits, _Allocator>::append(const value_type* __s, size_ty
     {
         if (__n)
         {
-            value_type* __p = _CUDA_VSTD::__to_raw_pointer(__get_pointer());
+            value_type* __p = _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__get_pointer());
             traits_type::copy(__p + __sz, __s, __n);
             __sz += __n;
             __set_size(__sz);
@@ -2421,7 +2421,7 @@ basic_string<_CharT, _Traits, _Allocator>::append(size_type __n, value_type __c)
         if (__cap - __sz < __n)
             __grow_by(__cap, __sz + __n - __cap, __sz, __sz, 0);
         pointer __p = __get_pointer();
-        traits_type::assign(_CUDA_VSTD::__to_raw_pointer(__p) + __sz, __n, __c);
+        traits_type::assign(_CUDA_FOR_DALI_VSTD::__to_raw_pointer(__p) + __sz, __n, __c);
         __sz += __n;
         __set_size(__sz);
         traits_type::assign(__p[__sz], value_type());
@@ -2505,12 +2505,12 @@ basic_string<_CharT, _Traits, _Allocator>::__append_forward_unsafe(
                   "function requires a ForwardIterator");
     size_type __sz = size();
     size_type __cap = capacity();
-    size_type __n = static_cast<size_type>(_CUDA_VSTD::distance(__first, __last));
+    size_type __n = static_cast<size_type>(_CUDA_FOR_DALI_VSTD::distance(__first, __last));
     if (__n)
     {
         typedef typename iterator_traits<_ForwardIterator>::reference _CharRef;
         _CharRef __tmp_ref = *__first;
-        if (__ptr_in_range(_CUDA_VSTD::addressof(__tmp_ref), data(), data() + size()))
+        if (__ptr_in_range(_CUDA_FOR_DALI_VSTD::addressof(__tmp_ref), data(), data() + size()))
         {
             const basic_string __temp (__first, __last, __alloc());
             append(__temp.data(), __temp.size());
@@ -2544,7 +2544,7 @@ basic_string<_CharT, _Traits, _Allocator>::append(const basic_string& __str, siz
     size_type __sz = __str.size();
     if (__pos > __sz)
         this->__throw_out_of_range();
-    return append(__str.data() + __pos, _CUDA_VSTD::min(__n, __sz - __pos));
+    return append(__str.data() + __pos, _CUDA_FOR_DALI_VSTD::min(__n, __sz - __pos));
 }
 
 template <class _CharT, class _Traits, class _Allocator>
@@ -2560,7 +2560,7 @@ basic_string<_CharT, _Traits, _Allocator>::append(const _Tp & __t, size_type __p
     size_type __sz = __sv.size();
     if (__pos > __sz)
         this->__throw_out_of_range();
-    return append(__sv.data() + __pos, _CUDA_VSTD::min(__n, __sz - __pos));
+    return append(__sv.data() + __pos, _CUDA_FOR_DALI_VSTD::min(__n, __sz - __pos));
 }
 
 template <class _CharT, class _Traits, class _Allocator>
@@ -2586,7 +2586,7 @@ basic_string<_CharT, _Traits, _Allocator>::insert(size_type __pos, const value_t
     {
         if (__n)
         {
-            value_type* __p = _CUDA_VSTD::__to_raw_pointer(__get_pointer());
+            value_type* __p = _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__get_pointer());
             size_type __n_move = __sz - __pos;
             if (__n_move != 0)
             {
@@ -2618,7 +2618,7 @@ basic_string<_CharT, _Traits, _Allocator>::insert(size_type __pos, size_type __n
         value_type* __p;
         if (__cap - __sz >= __n)
         {
-            __p = _CUDA_VSTD::__to_raw_pointer(__get_pointer());
+            __p = _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__get_pointer());
             size_type __n_move = __sz - __pos;
             if (__n_move != 0)
                 traits_type::move(__p + __pos + __n, __p + __pos, __n_move);
@@ -2626,7 +2626,7 @@ basic_string<_CharT, _Traits, _Allocator>::insert(size_type __pos, size_type __n
         else
         {
             __grow_by(__cap, __sz + __n - __cap, __sz, __pos, 0, __n);
-            __p = _CUDA_VSTD::__to_raw_pointer(__get_long_pointer());
+            __p = _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__get_long_pointer());
         }
         traits_type::assign(__p + __pos, __n, __c);
         __sz += __n;
@@ -2671,12 +2671,12 @@ basic_string<_CharT, _Traits, _Allocator>::insert(const_iterator __pos, _Forward
         " referring to this string");
 #endif
     size_type __ip = static_cast<size_type>(__pos - begin());
-    size_type __n = static_cast<size_type>(_CUDA_VSTD::distance(__first, __last));
+    size_type __n = static_cast<size_type>(_CUDA_FOR_DALI_VSTD::distance(__first, __last));
     if (__n)
     {
         typedef typename iterator_traits<_ForwardIterator>::reference _CharRef;
         _CharRef __tmp_char = *__first;
-        if (__ptr_in_range(_CUDA_VSTD::addressof(__tmp_char), data(), data() + size()))
+        if (__ptr_in_range(_CUDA_FOR_DALI_VSTD::addressof(__tmp_char), data(), data() + size()))
         {
             const basic_string __temp(__first, __last, __alloc());
             return insert(__pos, __temp.data(), __temp.data() + __temp.size());
@@ -2687,7 +2687,7 @@ basic_string<_CharT, _Traits, _Allocator>::insert(const_iterator __pos, _Forward
         value_type* __p;
         if (__cap - __sz >= __n)
         {
-            __p = _CUDA_VSTD::__to_raw_pointer(__get_pointer());
+            __p = _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__get_pointer());
             size_type __n_move = __sz - __ip;
             if (__n_move != 0)
                 traits_type::move(__p + __ip + __n, __p + __ip, __n_move);
@@ -2695,7 +2695,7 @@ basic_string<_CharT, _Traits, _Allocator>::insert(const_iterator __pos, _Forward
         else
         {
             __grow_by(__cap, __sz + __n - __cap, __sz, __ip, 0, __n);
-            __p = _CUDA_VSTD::__to_raw_pointer(__get_long_pointer());
+            __p = _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__get_long_pointer());
         }
         __sz += __n;
         __set_size(__sz);
@@ -2722,7 +2722,7 @@ basic_string<_CharT, _Traits, _Allocator>::insert(size_type __pos1, const basic_
     size_type __str_sz = __str.size();
     if (__pos2 > __str_sz)
         this->__throw_out_of_range();
-    return insert(__pos1, __str.data() + __pos2, _CUDA_VSTD::min(__n, __str_sz - __pos2));
+    return insert(__pos1, __str.data() + __pos2, _CUDA_FOR_DALI_VSTD::min(__n, __str_sz - __pos2));
 }
 
 template <class _CharT, class _Traits, class _Allocator>
@@ -2739,7 +2739,7 @@ basic_string<_CharT, _Traits, _Allocator>::insert(size_type __pos1, const _Tp& _
     size_type __str_sz = __sv.size();
     if (__pos2 > __str_sz)
         this->__throw_out_of_range();
-    return insert(__pos1, __sv.data() + __pos2, _CUDA_VSTD::min(__n, __str_sz - __pos2));
+    return insert(__pos1, __sv.data() + __pos2, _CUDA_FOR_DALI_VSTD::min(__n, __str_sz - __pos2));
 }
 
 template <class _CharT, class _Traits, class _Allocator>
@@ -2761,11 +2761,11 @@ basic_string<_CharT, _Traits, _Allocator>::insert(const_iterator __pos, value_ty
     if (__cap == __sz)
     {
         __grow_by(__cap, 1, __sz, __ip, 0, 1);
-        __p = _CUDA_VSTD::__to_raw_pointer(__get_long_pointer());
+        __p = _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__get_long_pointer());
     }
     else
     {
-        __p = _CUDA_VSTD::__to_raw_pointer(__get_pointer());
+        __p = _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__get_pointer());
         size_type __n_move = __sz - __ip;
         if (__n_move != 0)
             traits_type::move(__p + __ip + 1, __p + __ip, __n_move);
@@ -2802,11 +2802,11 @@ basic_string<_CharT, _Traits, _Allocator>::replace(size_type __pos, size_type __
     size_type __sz = size();
     if (__pos > __sz)
         this->__throw_out_of_range();
-    __n1 = _CUDA_VSTD::min(__n1, __sz - __pos);
+    __n1 = _CUDA_FOR_DALI_VSTD::min(__n1, __sz - __pos);
     size_type __cap = capacity();
     if (__cap - __sz + __n1 >= __n2)
     {
-        value_type* __p = _CUDA_VSTD::__to_raw_pointer(__get_pointer());
+        value_type* __p = _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__get_pointer());
         if (__n1 != __n2)
         {
             size_type __n_move = __sz - __pos - __n1;
@@ -2856,12 +2856,12 @@ basic_string<_CharT, _Traits, _Allocator>::replace(size_type __pos, size_type __
     size_type __sz = size();
     if (__pos > __sz)
         this->__throw_out_of_range();
-    __n1 = _CUDA_VSTD::min(__n1, __sz - __pos);
+    __n1 = _CUDA_FOR_DALI_VSTD::min(__n1, __sz - __pos);
     size_type __cap = capacity();
     value_type* __p;
     if (__cap - __sz + __n1 >= __n2)
     {
-        __p = _CUDA_VSTD::__to_raw_pointer(__get_pointer());
+        __p = _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__get_pointer());
         if (__n1 != __n2)
         {
             size_type __n_move = __sz - __pos - __n1;
@@ -2872,7 +2872,7 @@ basic_string<_CharT, _Traits, _Allocator>::replace(size_type __pos, size_type __
     else
     {
         __grow_by(__cap, __sz - __n1 + __n2 - __cap, __sz, __pos, __n1, __n2);
-        __p = _CUDA_VSTD::__to_raw_pointer(__get_long_pointer());
+        __p = _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__get_long_pointer());
     }
     traits_type::assign(__p + __pos, __n2, __c);
     __sz += __n2 - __n1;
@@ -2912,7 +2912,7 @@ basic_string<_CharT, _Traits, _Allocator>::replace(size_type __pos1, size_type _
     size_type __str_sz = __str.size();
     if (__pos2 > __str_sz)
         this->__throw_out_of_range();
-    return replace(__pos1, __n1, __str.data() + __pos2, _CUDA_VSTD::min(__n2, __str_sz - __pos2));
+    return replace(__pos1, __n1, __str.data() + __pos2, _CUDA_FOR_DALI_VSTD::min(__n2, __str_sz - __pos2));
 }
 
 template <class _CharT, class _Traits, class _Allocator>
@@ -2929,7 +2929,7 @@ basic_string<_CharT, _Traits, _Allocator>::replace(size_type __pos1, size_type _
     size_type __str_sz = __sv.size();
     if (__pos2 > __str_sz)
         this->__throw_out_of_range();
-    return replace(__pos1, __n1, __sv.data() + __pos2, _CUDA_VSTD::min(__n2, __str_sz - __pos2));
+    return replace(__pos1, __n1, __sv.data() + __pos2, _CUDA_FOR_DALI_VSTD::min(__n2, __str_sz - __pos2));
 }
 
 template <class _CharT, class _Traits, class _Allocator>
@@ -2984,8 +2984,8 @@ basic_string<_CharT, _Traits, _Allocator>::erase(size_type __pos, size_type __n)
         this->__throw_out_of_range();
     if (__n)
     {
-        value_type* __p = _CUDA_VSTD::__to_raw_pointer(__get_pointer());
-        __n = _CUDA_VSTD::min(__n, __sz - __pos);
+        value_type* __p = _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__get_pointer());
+        __n = _CUDA_FOR_DALI_VSTD::min(__n, __sz - __pos);
         size_type __n_move = __sz - __pos - __n;
         if (__n_move != 0)
             traits_type::move(__p + __pos, __p + __pos + __n, __n_move);
@@ -3133,7 +3133,7 @@ basic_string<_CharT, _Traits, _Allocator>::reserve(size_type __res_arg)
         this->__throw_length_error();
     size_type __cap = capacity();
     size_type __sz = size();
-    __res_arg = _CUDA_VSTD::max(__res_arg, __sz);
+    __res_arg = _CUDA_FOR_DALI_VSTD::max(__res_arg, __sz);
     __res_arg = __recommend(__res_arg);
     if (__res_arg != __cap)
     {
@@ -3172,8 +3172,8 @@ basic_string<_CharT, _Traits, _Allocator>::reserve(size_type __res_arg)
             __was_long = __is_long();
             __p = __get_pointer();
         }
-        traits_type::copy(_CUDA_VSTD::__to_raw_pointer(__new_data),
-                          _CUDA_VSTD::__to_raw_pointer(__p), size()+1);
+        traits_type::copy(_CUDA_FOR_DALI_VSTD::__to_raw_pointer(__new_data),
+                          _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__p), size()+1);
         if (__was_long)
             __alloc_traits::deallocate(__alloc(), __p, __cap+1);
         if (__now_long)
@@ -3267,7 +3267,7 @@ basic_string<_CharT, _Traits, _Allocator>::copy(value_type* __s, size_type __n, 
     size_type __sz = size();
     if (__pos > __sz)
         this->__throw_out_of_range();
-    size_type __rlen = _CUDA_VSTD::min(__n, __sz - __pos);
+    size_type __rlen = _CUDA_FOR_DALI_VSTD::min(__n, __sz - __pos);
     traits_type::copy(__s, data() + __pos, __rlen);
     return __rlen;
 }
@@ -3302,7 +3302,7 @@ basic_string<_CharT, _Traits, _Allocator>::swap(basic_string& __str)
         __alloc_traits::propagate_on_container_swap::value ||
         __alloc_traits::is_always_equal::value ||
         __alloc() == __str.__alloc(), "swapping non-equal allocators");
-    _CUDA_VSTD::swap(__r_.first(), __str.__r_.first());
+    _CUDA_FOR_DALI_VSTD::swap(__r_.first(), __str.__r_.first());
     __swap_allocator(__alloc(), __str.__alloc());
 }
 
@@ -3680,7 +3680,7 @@ basic_string<_CharT, _Traits, _Allocator>::compare(const _Tp& __t) const
     size_t __lhs_sz = size();
     size_t __rhs_sz = __sv.size();
     int __result = traits_type::compare(data(), __sv.data(),
-                                        _CUDA_VSTD::min(__lhs_sz, __rhs_sz));
+                                        _CUDA_FOR_DALI_VSTD::min(__lhs_sz, __rhs_sz));
     if (__result != 0)
         return __result;
     if (__lhs_sz < __rhs_sz)
@@ -3709,8 +3709,8 @@ basic_string<_CharT, _Traits, _Allocator>::compare(size_type __pos1,
     size_type __sz = size();
     if (__pos1 > __sz || __n2 == npos)
         this->__throw_out_of_range();
-    size_type __rlen = _CUDA_VSTD::min(__n1, __sz - __pos1);
-    int __r = traits_type::compare(data() + __pos1, __s, _CUDA_VSTD::min(__rlen, __n2));
+    size_type __rlen = _CUDA_FOR_DALI_VSTD::min(__n1, __sz - __pos1);
+    int __r = traits_type::compare(data() + __pos1, __s, _CUDA_FOR_DALI_VSTD::min(__rlen, __n2));
     if (__r == 0)
     {
         if (__rlen < __n2)
@@ -4097,7 +4097,7 @@ inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 basic_string<_CharT, _Traits, _Allocator>
 operator+(basic_string<_CharT, _Traits, _Allocator>&& __lhs, const basic_string<_CharT, _Traits, _Allocator>& __rhs)
 {
-    return _CUDA_VSTD::move(__lhs.append(__rhs));
+    return _CUDA_FOR_DALI_VSTD::move(__lhs.append(__rhs));
 }
 
 template<class _CharT, class _Traits, class _Allocator>
@@ -4105,7 +4105,7 @@ inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 basic_string<_CharT, _Traits, _Allocator>
 operator+(const basic_string<_CharT, _Traits, _Allocator>& __lhs, basic_string<_CharT, _Traits, _Allocator>&& __rhs)
 {
-    return _CUDA_VSTD::move(__rhs.insert(0, __lhs));
+    return _CUDA_FOR_DALI_VSTD::move(__rhs.insert(0, __lhs));
 }
 
 template<class _CharT, class _Traits, class _Allocator>
@@ -4113,7 +4113,7 @@ inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 basic_string<_CharT, _Traits, _Allocator>
 operator+(basic_string<_CharT, _Traits, _Allocator>&& __lhs, basic_string<_CharT, _Traits, _Allocator>&& __rhs)
 {
-    return _CUDA_VSTD::move(__lhs.append(__rhs));
+    return _CUDA_FOR_DALI_VSTD::move(__lhs.append(__rhs));
 }
 
 template<class _CharT, class _Traits, class _Allocator>
@@ -4121,7 +4121,7 @@ inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 basic_string<_CharT, _Traits, _Allocator>
 operator+(const _CharT* __lhs , basic_string<_CharT,_Traits,_Allocator>&& __rhs)
 {
-    return _CUDA_VSTD::move(__rhs.insert(0, __lhs));
+    return _CUDA_FOR_DALI_VSTD::move(__rhs.insert(0, __lhs));
 }
 
 template<class _CharT, class _Traits, class _Allocator>
@@ -4130,7 +4130,7 @@ basic_string<_CharT, _Traits, _Allocator>
 operator+(_CharT __lhs, basic_string<_CharT,_Traits,_Allocator>&& __rhs)
 {
     __rhs.insert(__rhs.begin(), __lhs);
-    return _CUDA_VSTD::move(__rhs);
+    return _CUDA_FOR_DALI_VSTD::move(__rhs);
 }
 
 template<class _CharT, class _Traits, class _Allocator>
@@ -4138,7 +4138,7 @@ inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 basic_string<_CharT, _Traits, _Allocator>
 operator+(basic_string<_CharT, _Traits, _Allocator>&& __lhs, const _CharT* __rhs)
 {
-    return _CUDA_VSTD::move(__lhs.append(__rhs));
+    return _CUDA_FOR_DALI_VSTD::move(__lhs.append(__rhs));
 }
 
 template<class _CharT, class _Traits, class _Allocator>
@@ -4147,7 +4147,7 @@ basic_string<_CharT, _Traits, _Allocator>
 operator+(basic_string<_CharT, _Traits, _Allocator>&& __lhs, _CharT __rhs)
 {
     __lhs.push_back(__rhs);
-    return _CUDA_VSTD::move(__lhs);
+    return _CUDA_FOR_DALI_VSTD::move(__lhs);
 }
 
 #endif  // _LIBCUDAFORDALICXX_CXX03_LANG
@@ -4270,12 +4270,12 @@ getline(basic_istream<_CharT, _Traits>&& __is,
 template<class _CharT, class _Traits, class _Allocator, class _Up>
 inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 void erase(basic_string<_CharT, _Traits, _Allocator>& __str, const _Up& __v)
-{ __str.erase(_CUDA_VSTD::remove(__str.begin(), __str.end(), __v), __str.end()); }
+{ __str.erase(_CUDA_FOR_DALI_VSTD::remove(__str.begin(), __str.end(), __v), __str.end()); }
 
 template<class _CharT, class _Traits, class _Allocator, class _Predicate>
 inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 void erase_if(basic_string<_CharT, _Traits, _Allocator>& __str, _Predicate __pred)
-{ __str.erase(_CUDA_VSTD::remove_if(__str.begin(), __str.end(), __pred), __str.end()); }
+{ __str.erase(_CUDA_FOR_DALI_VSTD::remove_if(__str.begin(), __str.end(), __pred), __str.end()); }
 #endif
 
 #if _LIBCUDAFORDALICXX_DEBUG_LEVEL >= 2
@@ -4284,23 +4284,23 @@ template<class _CharT, class _Traits, class _Allocator>
 bool
 basic_string<_CharT, _Traits, _Allocator>::__dereferenceable(const const_iterator* __i) const
 {
-    return this->data() <= _CUDA_VSTD::__to_raw_pointer(__i->base()) &&
-           _CUDA_VSTD::__to_raw_pointer(__i->base()) < this->data() + this->size();
+    return this->data() <= _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__i->base()) &&
+           _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__i->base()) < this->data() + this->size();
 }
 
 template<class _CharT, class _Traits, class _Allocator>
 bool
 basic_string<_CharT, _Traits, _Allocator>::__decrementable(const const_iterator* __i) const
 {
-    return this->data() < _CUDA_VSTD::__to_raw_pointer(__i->base()) &&
-           _CUDA_VSTD::__to_raw_pointer(__i->base()) <= this->data() + this->size();
+    return this->data() < _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__i->base()) &&
+           _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__i->base()) <= this->data() + this->size();
 }
 
 template<class _CharT, class _Traits, class _Allocator>
 bool
 basic_string<_CharT, _Traits, _Allocator>::__addable(const const_iterator* __i, ptrdiff_t __n) const
 {
-    const value_type* __p = _CUDA_VSTD::__to_raw_pointer(__i->base()) + __n;
+    const value_type* __p = _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__i->base()) + __n;
     return this->data() <= __p && __p <= this->data() + this->size();
 }
 
@@ -4308,7 +4308,7 @@ template<class _CharT, class _Traits, class _Allocator>
 bool
 basic_string<_CharT, _Traits, _Allocator>::__subscriptable(const const_iterator* __i, ptrdiff_t __n) const
 {
-    const value_type* __p = _CUDA_VSTD::__to_raw_pointer(__i->base()) + __n;
+    const value_type* __p = _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__i->base()) + __n;
     return this->data() <= __p && __p < this->data() + this->size();
 }
 

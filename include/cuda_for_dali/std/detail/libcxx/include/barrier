@@ -43,7 +43,7 @@ namespace std
 
 */
 
-#ifndef __cuda_std__
+#ifndef __cuda_for_dali_std__
 #include <__config>
 #include <__threading_support>
 #include <atomic>
@@ -292,7 +292,7 @@ private:
         _LIBCUDAFORDALICXX_INLINE_VISIBILITY
         __poll_tester(__barrier_base const* __this_, arrival_token&& __phase_)
           : __this(__this_)
-          , __phase(_CUDA_VSTD::move(__phase_))
+          , __phase(_CUDA_FOR_DALI_VSTD::move(__phase_))
         {}
 
         inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -343,7 +343,7 @@ public:
     inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     void wait(arrival_token&& __phase) const
     {
-        __libcpp_thread_poll_with_backoff(__poll_tester(this, _CUDA_VSTD::move(__phase)));
+        __libcpp_thread_poll_with_backoff(__poll_tester(this, _CUDA_FOR_DALI_VSTD::move(__phase)));
     }
     inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     void arrive_and_wait()
@@ -377,7 +377,7 @@ public:
 
 _LIBCUDAFORDALICXX_END_NAMESPACE_STD
 
-#ifndef __cuda_std__
+#ifndef __cuda_for_dali_std__
 #include <__pragma_pop>
 #endif
 

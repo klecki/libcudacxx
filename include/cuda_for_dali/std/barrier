@@ -96,7 +96,7 @@ private:
         _LIBCUDAFORDALICXX_INLINE_VISIBILITY
         __poll_tester(barrier const* __this_, arrival_token&& __phase_)
           : __this(__this_)
-          , __phase(_CUDA_VSTD::move(__phase_))
+          , __phase(_CUDA_FOR_DALI_VSTD::move(__phase_))
         {}
 
         inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -216,7 +216,7 @@ public:
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     void wait(arrival_token && __phase) const
     {
-        _CUDA_VSTD::__libcpp_thread_poll_with_backoff(__poll_tester(this, _CUDA_VSTD::move(__phase)));
+        _CUDA_FOR_DALI_VSTD::__libcpp_thread_poll_with_backoff(__poll_tester(this, _CUDA_FOR_DALI_VSTD::move(__phase)));
     }
 
     inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY

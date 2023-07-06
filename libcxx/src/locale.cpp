@@ -135,7 +135,7 @@ _LIBCUDAFORDALICXX_NORETURN static void __throw_runtime_error(const string &msg)
     throw runtime_error(msg);
 #else
     (void)msg;
-    _CUDA_VSTD::abort();
+    _CUDA_FOR_DALI_VSTD::abort();
 #endif
 }
 
@@ -196,10 +196,10 @@ locale::__imp::__imp(size_t refs)
       name_("C")
 {
     facets_.clear();
-    install(&make<_CUDA_VSTD::collate<char> >(1u));
-    install(&make<_CUDA_VSTD::collate<wchar_t> >(1u));
-    install(&make<_CUDA_VSTD::ctype<char> >(nullptr, false, 1u));
-    install(&make<_CUDA_VSTD::ctype<wchar_t> >(1u));
+    install(&make<_CUDA_FOR_DALI_VSTD::collate<char> >(1u));
+    install(&make<_CUDA_FOR_DALI_VSTD::collate<wchar_t> >(1u));
+    install(&make<_CUDA_FOR_DALI_VSTD::ctype<char> >(nullptr, false, 1u));
+    install(&make<_CUDA_FOR_DALI_VSTD::ctype<wchar_t> >(1u));
     install(&make<codecvt<char, char, mbstate_t> >(1u));
     install(&make<codecvt<wchar_t, char, mbstate_t> >(1u));
     install(&make<codecvt<char16_t, char, mbstate_t> >(1u));
@@ -222,8 +222,8 @@ locale::__imp::__imp(size_t refs)
     install(&make<time_get<wchar_t> >(1u));
     install(&make<time_put<char> >(1u));
     install(&make<time_put<wchar_t> >(1u));
-    install(&make<_CUDA_VSTD::messages<char> >(1u));
-    install(&make<_CUDA_VSTD::messages<wchar_t> >(1u));
+    install(&make<_CUDA_FOR_DALI_VSTD::messages<char> >(1u));
+    install(&make<_CUDA_FOR_DALI_VSTD::messages<wchar_t> >(1u));
 }
 
 locale::__imp::__imp(const string& name, size_t refs)
@@ -377,17 +377,17 @@ locale::__imp::__imp(const __imp& other, const __imp& one, locale::category c)
 #endif  // _LIBCUDAFORDALICXX_NO_EXCEPTIONS
         if (c & locale::collate)
         {
-            install_from<_CUDA_VSTD::collate<char> >(one);
-            install_from<_CUDA_VSTD::collate<wchar_t> >(one);
+            install_from<_CUDA_FOR_DALI_VSTD::collate<char> >(one);
+            install_from<_CUDA_FOR_DALI_VSTD::collate<wchar_t> >(one);
         }
         if (c & locale::ctype)
         {
-            install_from<_CUDA_VSTD::ctype<char> >(one);
-            install_from<_CUDA_VSTD::ctype<wchar_t> >(one);
-            install_from<_CUDA_VSTD::codecvt<char, char, mbstate_t> >(one);
-            install_from<_CUDA_VSTD::codecvt<char16_t, char, mbstate_t> >(one);
-            install_from<_CUDA_VSTD::codecvt<char32_t, char, mbstate_t> >(one);
-            install_from<_CUDA_VSTD::codecvt<wchar_t, char, mbstate_t> >(one);
+            install_from<_CUDA_FOR_DALI_VSTD::ctype<char> >(one);
+            install_from<_CUDA_FOR_DALI_VSTD::ctype<wchar_t> >(one);
+            install_from<_CUDA_FOR_DALI_VSTD::codecvt<char, char, mbstate_t> >(one);
+            install_from<_CUDA_FOR_DALI_VSTD::codecvt<char16_t, char, mbstate_t> >(one);
+            install_from<_CUDA_FOR_DALI_VSTD::codecvt<char32_t, char, mbstate_t> >(one);
+            install_from<_CUDA_FOR_DALI_VSTD::codecvt<wchar_t, char, mbstate_t> >(one);
         }
         if (c & locale::monetary)
         {
@@ -418,8 +418,8 @@ locale::__imp::__imp(const __imp& other, const __imp& one, locale::category c)
         }
         if (c & locale::messages)
         {
-            install_from<_CUDA_VSTD::messages<char> >(one);
-            install_from<_CUDA_VSTD::messages<wchar_t> >(one);
+            install_from<_CUDA_FOR_DALI_VSTD::messages<char> >(one);
+            install_from<_CUDA_FOR_DALI_VSTD::messages<wchar_t> >(one);
         }
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
     }
@@ -6087,7 +6087,7 @@ void __throw_runtime_error(const char* msg)
     throw runtime_error(msg);
 #else
     (void)msg;
-    _CUDA_VSTD::abort();
+    _CUDA_FOR_DALI_VSTD::abort();
 #endif
 }
 

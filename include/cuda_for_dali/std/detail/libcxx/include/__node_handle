@@ -59,7 +59,7 @@ private:
     void __release_ptr()
     {
         __ptr_ = nullptr;
-        __alloc_ = _CUDA_VSTD::nullopt;
+        __alloc_ = _CUDA_FOR_DALI_VSTD::nullopt;
     }
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -90,17 +90,17 @@ public:
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     __basic_node_handle(__basic_node_handle&& __other) noexcept
             : __ptr_(__other.__ptr_),
-              __alloc_(_CUDA_VSTD::move(__other.__alloc_))
+              __alloc_(_CUDA_FOR_DALI_VSTD::move(__other.__alloc_))
     {
         __other.__ptr_ = nullptr;
-        __other.__alloc_ = _CUDA_VSTD::nullopt;
+        __other.__alloc_ = _CUDA_FOR_DALI_VSTD::nullopt;
     }
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     __basic_node_handle& operator=(__basic_node_handle&& __other)
     {
         _LIBCUDAFORDALICXX_ASSERT(
-            __alloc_ == _CUDA_VSTD::nullopt ||
+            __alloc_ == _CUDA_FOR_DALI_VSTD::nullopt ||
             __alloc_traits::propagate_on_container_move_assignment::value ||
             __alloc_ == __other.__alloc_,
             "node_type with incompatible allocator passed to "
@@ -110,11 +110,11 @@ public:
         __ptr_ = __other.__ptr_;
 
         if (__alloc_traits::propagate_on_container_move_assignment::value ||
-            __alloc_ == _CUDA_VSTD::nullopt)
-            __alloc_ = _CUDA_VSTD::move(__other.__alloc_);
+            __alloc_ == _CUDA_FOR_DALI_VSTD::nullopt)
+            __alloc_ = _CUDA_FOR_DALI_VSTD::move(__other.__alloc_);
 
         __other.__ptr_ = nullptr;
-        __other.__alloc_ = _CUDA_VSTD::nullopt;
+        __other.__alloc_ = _CUDA_FOR_DALI_VSTD::nullopt;
 
         return *this;
     }
@@ -133,10 +133,10 @@ public:
         __alloc_traits::propagate_on_container_swap::value ||
         __alloc_traits::is_always_equal::value)
     {
-        using _CUDA_VSTD::swap;
+        using _CUDA_FOR_DALI_VSTD::swap;
         swap(__ptr_, __other.__ptr_);
         if (__alloc_traits::propagate_on_container_swap::value ||
-            __alloc_ == _CUDA_VSTD::nullopt || __other.__alloc_ == _CUDA_VSTD::nullopt)
+            __alloc_ == _CUDA_FOR_DALI_VSTD::nullopt || __other.__alloc_ == _CUDA_FOR_DALI_VSTD::nullopt)
             swap(__alloc_, __other.__alloc_);
     }
 

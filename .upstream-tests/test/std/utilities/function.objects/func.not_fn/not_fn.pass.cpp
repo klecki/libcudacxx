@@ -627,7 +627,7 @@ void call_operator_noexcept_test()
         T value(true);
         auto ret = cuda_for_dali::std::not_fn(value);
         (void)ret;
-        LIBCPP_STATIC_ASSERT(noexcept(!_CUDA_VSTD::__invoke(value)), "");
+        LIBCPP_STATIC_ASSERT(noexcept(!_CUDA_FOR_DALI_VSTD::__invoke(value)), "");
 #if TEST_STD_VER > 14
         static_assert(noexcept(!cuda_for_dali::std::invoke(value)), "");
 #endif

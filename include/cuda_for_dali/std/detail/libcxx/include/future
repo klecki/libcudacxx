@@ -519,7 +519,7 @@ void __throw_future_error(future_errc _Ev)
     throw future_error(make_error_code(_Ev));
 #else
     ((void)_Ev);
-    _CUDA_VSTD::abort();
+    _CUDA_FOR_DALI_VSTD::abort();
 #endif
 }
 
@@ -662,7 +662,7 @@ __assoc_state<_Rp>::set_value(_Arg& __arg)
     unique_lock<mutex> __lk(this->__mut_);
     if (this->__has_value())
         __throw_future_error(future_errc::promise_already_satisfied);
-    ::new(&__value_) _Rp(_CUDA_VSTD::forward<_Arg>(__arg));
+    ::new(&__value_) _Rp(_CUDA_FOR_DALI_VSTD::forward<_Arg>(__arg));
     this->__state_ |= base::__constructed | base::ready;
     __cv_.notify_all();
 }
@@ -679,7 +679,7 @@ __assoc_state<_Rp>::set_value_at_thread_exit(_Arg& __arg)
     unique_lock<mutex> __lk(this->__mut_);
     if (this->__has_value())
         __throw_future_error(future_errc::promise_already_satisfied);
-    ::new(&__value_) _Rp(_CUDA_VSTD::forward<_Arg>(__arg));
+    ::new(&__value_) _Rp(_CUDA_FOR_DALI_VSTD::forward<_Arg>(__arg));
     this->__state_ |= base::__constructed;
     __thread_local_data()->__make_ready_at_thread_exit(this);
 }
@@ -692,7 +692,7 @@ __assoc_state<_Rp>::move()
     this->__sub_wait(__lk);
     if (this->__exception_ != nullptr)
         rethrow_exception(this->__exception_);
-    return _CUDA_VSTD::move(*reinterpret_cast<_Rp*>(&__value_));
+    return _CUDA_FOR_DALI_VSTD::move(*reinterpret_cast<_Rp*>(&__value_));
 }
 
 template <class _Rp>
@@ -738,7 +738,7 @@ __assoc_state<_Rp&>::set_value(_Rp& __arg)
     unique_lock<mutex> __lk(this->__mut_);
     if (this->__has_value())
         __throw_future_error(future_errc::promise_already_satisfied);
-    __value_ = _CUDA_VSTD::addressof(__arg);
+    __value_ = _CUDA_FOR_DALI_VSTD::addressof(__arg);
     this->__state_ |= base::__constructed | base::ready;
     __cv_.notify_all();
 }
@@ -750,7 +750,7 @@ __assoc_state<_Rp&>::set_value_at_thread_exit(_Rp& __arg)
     unique_lock<mutex> __lk(this->__mut_);
     if (this->__has_value())
         __throw_future_error(future_errc::promise_already_satisfied);
-    __value_ = _CUDA_VSTD::addressof(__arg);
+    __value_ = _CUDA_FOR_DALI_VSTD::addressof(__arg);
     this->__state_ |= base::__constructed;
     __thread_local_data()->__make_ready_at_thread_exit(this);
 }
@@ -785,7 +785,7 @@ void
 __assoc_state_alloc<_Rp, _Alloc>::__on_zero_shared() _NOEXCEPT
 {
     if (this->__state_ & base::__constructed)
-        reinterpret_cast<_Rp*>(_CUDA_VSTD::addressof(this->__value_))->~_Rp();
+        reinterpret_cast<_Rp*>(_CUDA_FOR_DALI_VSTD::addressof(this->__value_))->~_Rp();
     typedef typename __allocator_traits_rebind<_Alloc, __assoc_state_alloc>::type _Al;
     typedef allocator_traits<_Al> _ATraits;
     typedef pointer_traits<typename _ATraits::pointer> _PTraits;
@@ -868,7 +868,7 @@ public:
 template <class _Rp, class _Fp>
 inline
 __deferred_assoc_state<_Rp, _Fp>::__deferred_assoc_state(_Fp&& __f)
-    : __func_(_CUDA_VSTD::forward<_Fp>(__f))
+    : __func_(_CUDA_FOR_DALI_VSTD::forward<_Fp>(__f))
 {
     this->__set_deferred();
 }
@@ -915,7 +915,7 @@ public:
 template <class _Fp>
 inline
 __deferred_assoc_state<void, _Fp>::__deferred_assoc_state(_Fp&& __f)
-    : __func_(_CUDA_VSTD::forward<_Fp>(__f))
+    : __func_(_CUDA_FOR_DALI_VSTD::forward<_Fp>(__f))
 {
     this->__set_deferred();
 }
@@ -964,7 +964,7 @@ public:
 template <class _Rp, class _Fp>
 inline
 __async_assoc_state<_Rp, _Fp>::__async_assoc_state(_Fp&& __f)
-    : __func_(_CUDA_VSTD::forward<_Fp>(__f))
+    : __func_(_CUDA_FOR_DALI_VSTD::forward<_Fp>(__f))
 {
 }
 
@@ -1019,7 +1019,7 @@ public:
 template <class _Fp>
 inline
 __async_assoc_state<void, _Fp>::__async_assoc_state(_Fp&& __f)
-    : __func_(_CUDA_VSTD::forward<_Fp>(__f))
+    : __func_(_CUDA_FOR_DALI_VSTD::forward<_Fp>(__f))
 {
 }
 
@@ -1126,7 +1126,7 @@ public:
     _Rp get();
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
-    void swap(future& __rhs) _NOEXCEPT {_CUDA_VSTD::swap(__state_, __rhs.__state_);}
+    void swap(future& __rhs) _NOEXCEPT {_CUDA_FOR_DALI_VSTD::swap(__state_, __rhs.__state_);}
 
     // functions to check state
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -1226,7 +1226,7 @@ public:
     _Rp& get();
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
-    void swap(future& __rhs) _NOEXCEPT {_CUDA_VSTD::swap(__state_, __rhs.__state_);}
+    void swap(future& __rhs) _NOEXCEPT {_CUDA_FOR_DALI_VSTD::swap(__state_, __rhs.__state_);}
 
     // functions to check state
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -1321,7 +1321,7 @@ public:
     void get();
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
-    void swap(future& __rhs) _NOEXCEPT {_CUDA_VSTD::swap(__state_, __rhs.__state_);}
+    void swap(future& __rhs) _NOEXCEPT {_CUDA_FOR_DALI_VSTD::swap(__state_, __rhs.__state_);}
 
     // functions to check state
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -1393,7 +1393,7 @@ private:
 public:
 #endif  // _LIBCUDAFORDALICXX_HAS_NO_RVALUE_REFERENCES
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
-    void swap(promise& __rhs) _NOEXCEPT {_CUDA_VSTD::swap(__state_, __rhs.__state_);}
+    void swap(promise& __rhs) _NOEXCEPT {_CUDA_FOR_DALI_VSTD::swap(__state_, __rhs.__state_);}
 
     // retrieving the result
     future<_Rp> get_future();
@@ -1428,8 +1428,8 @@ promise<_Rp>::promise(allocator_arg_t, const _Alloc& __a0)
     typedef __allocator_destructor<_A2> _D2;
     _A2 __a(__a0);
     unique_ptr<_State, _D2> __hold(__a.allocate(1), _D2(__a, 1));
-    ::new(static_cast<void*>(_CUDA_VSTD::addressof(*__hold.get()))) _State(__a0);
-    __state_ = _CUDA_VSTD::addressof(*__hold.release());
+    ::new(static_cast<void*>(_CUDA_FOR_DALI_VSTD::addressof(*__hold.get()))) _State(__a0);
+    __state_ = _CUDA_FOR_DALI_VSTD::addressof(*__hold.release());
 }
 
 template <class _Rp>
@@ -1471,7 +1471,7 @@ promise<_Rp>::set_value(_Rp&& __r)
 {
     if (__state_ == nullptr)
         __throw_future_error(future_errc::no_state);
-    __state_->set_value(_CUDA_VSTD::move(__r));
+    __state_->set_value(_CUDA_FOR_DALI_VSTD::move(__r));
 }
 
 #endif  // _LIBCUDAFORDALICXX_HAS_NO_RVALUE_REFERENCES
@@ -1503,7 +1503,7 @@ promise<_Rp>::set_value_at_thread_exit(_Rp&& __r)
 {
     if (__state_ == nullptr)
         __throw_future_error(future_errc::no_state);
-    __state_->set_value_at_thread_exit(_CUDA_VSTD::move(__r));
+    __state_->set_value_at_thread_exit(_CUDA_FOR_DALI_VSTD::move(__r));
 }
 
 #endif  // _LIBCUDAFORDALICXX_HAS_NO_RVALUE_REFERENCES
@@ -1561,7 +1561,7 @@ private:
 public:
 #endif  // _LIBCUDAFORDALICXX_HAS_NO_RVALUE_REFERENCES
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
-    void swap(promise& __rhs) _NOEXCEPT {_CUDA_VSTD::swap(__state_, __rhs.__state_);}
+    void swap(promise& __rhs) _NOEXCEPT {_CUDA_FOR_DALI_VSTD::swap(__state_, __rhs.__state_);}
 
     // retrieving the result
     future<_Rp&> get_future();
@@ -1590,8 +1590,8 @@ promise<_Rp&>::promise(allocator_arg_t, const _Alloc& __a0)
     typedef __allocator_destructor<_A2> _D2;
     _A2 __a(__a0);
     unique_ptr<_State, _D2> __hold(__a.allocate(1), _D2(__a, 1));
-    ::new(static_cast<void*>(_CUDA_VSTD::addressof(*__hold.get()))) _State(__a0);
-    __state_ = _CUDA_VSTD::addressof(*__hold.release());
+    ::new(static_cast<void*>(_CUDA_FOR_DALI_VSTD::addressof(*__hold.get()))) _State(__a0);
+    __state_ = _CUDA_FOR_DALI_VSTD::addressof(*__hold.release());
 }
 
 template <class _Rp>
@@ -1698,7 +1698,7 @@ private:
 public:
 #endif  // _LIBCUDAFORDALICXX_HAS_NO_RVALUE_REFERENCES
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
-    void swap(promise& __rhs) _NOEXCEPT {_CUDA_VSTD::swap(__state_, __rhs.__state_);}
+    void swap(promise& __rhs) _NOEXCEPT {_CUDA_FOR_DALI_VSTD::swap(__state_, __rhs.__state_);}
 
     // retrieving the result
     future<void> get_future();
@@ -1720,8 +1720,8 @@ promise<void>::promise(allocator_arg_t, const _Alloc& __a0)
     typedef __allocator_destructor<_A2> _D2;
     _A2 __a(__a0);
     unique_ptr<_State, _D2> __hold(__a.allocate(1), _D2(__a, 1));
-    ::new(static_cast<void*>(_CUDA_VSTD::addressof(*__hold.get()))) _State(__a0);
-    __state_ = _CUDA_VSTD::addressof(*__hold.release());
+    ::new(static_cast<void*>(_CUDA_FOR_DALI_VSTD::addressof(*__hold.get()))) _State(__a0);
+    __state_ = _CUDA_FOR_DALI_VSTD::addressof(*__hold.release());
 }
 
 template <class _Rp>
@@ -1769,13 +1769,13 @@ public:
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     explicit __packaged_task_func(const _Fp& __f) : __f_(__f) {}
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
-    explicit __packaged_task_func(_Fp&& __f) : __f_(_CUDA_VSTD::move(__f)) {}
+    explicit __packaged_task_func(_Fp&& __f) : __f_(_CUDA_FOR_DALI_VSTD::move(__f)) {}
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     __packaged_task_func(const _Fp& __f, const _Alloc& __a)
         : __f_(__f, __a) {}
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     __packaged_task_func(_Fp&& __f, const _Alloc& __a)
-        : __f_(_CUDA_VSTD::move(__f), __a) {}
+        : __f_(_CUDA_FOR_DALI_VSTD::move(__f), __a) {}
     virtual void __move_to(__packaged_task_base<_Rp(_ArgTypes...)>*) _NOEXCEPT;
     virtual void destroy();
     virtual void destroy_deallocate();
@@ -1787,7 +1787,7 @@ void
 __packaged_task_func<_Fp, _Alloc, _Rp(_ArgTypes...)>::__move_to(
                               __packaged_task_base<_Rp(_ArgTypes...)>* __p) _NOEXCEPT
 {
-    ::new (__p) __packaged_task_func(_CUDA_VSTD::move(__f_.first()), _CUDA_VSTD::move(__f_.second()));
+    ::new (__p) __packaged_task_func(_CUDA_FOR_DALI_VSTD::move(__f_.first()), _CUDA_FOR_DALI_VSTD::move(__f_.second()));
 }
 
 template<class _Fp, class _Alloc, class _Rp, class ..._ArgTypes>
@@ -1813,7 +1813,7 @@ template<class _Fp, class _Alloc, class _Rp, class ..._ArgTypes>
 _Rp
 __packaged_task_func<_Fp, _Alloc, _Rp(_ArgTypes...)>::operator()(_ArgTypes&& ... __arg)
 {
-    return __invoke(__f_.first(), _CUDA_VSTD::forward<_ArgTypes>(__arg)...);
+    return __invoke(__f_.first(), _CUDA_FOR_DALI_VSTD::forward<_ArgTypes>(__arg)...);
 }
 
 template <class _Callable> class __packaged_task_function;
@@ -1877,7 +1877,7 @@ __packaged_task_function<_Rp(_ArgTypes...)>::__packaged_task_function(_Fp&& __f)
     if (sizeof(_FF) <= sizeof(__buf_))
     {
         __f_ = (__base*)&__buf_;
-        ::new (__f_) _FF(_CUDA_VSTD::forward<_Fp>(__f));
+        ::new (__f_) _FF(_CUDA_FOR_DALI_VSTD::forward<_Fp>(__f));
     }
     else
     {
@@ -1885,7 +1885,7 @@ __packaged_task_function<_Rp(_ArgTypes...)>::__packaged_task_function(_Fp&& __f)
         _Ap __a;
         typedef __allocator_destructor<_Ap> _Dp;
         unique_ptr<__base, _Dp> __hold(__a.allocate(1), _Dp(__a, 1));
-        ::new (__hold.get()) _FF(_CUDA_VSTD::forward<_Fp>(__f), allocator<_FR>(__a));
+        ::new (__hold.get()) _FF(_CUDA_FOR_DALI_VSTD::forward<_Fp>(__f), allocator<_FR>(__a));
         __f_ = __hold.release();
     }
 }
@@ -1901,7 +1901,7 @@ __packaged_task_function<_Rp(_ArgTypes...)>::__packaged_task_function(
     if (sizeof(_FF) <= sizeof(__buf_))
     {
         __f_ = (__base*)&__buf_;
-        ::new (__f_) _FF(_CUDA_VSTD::forward<_Fp>(__f));
+        ::new (__f_) _FF(_CUDA_FOR_DALI_VSTD::forward<_Fp>(__f));
     }
     else
     {
@@ -1909,9 +1909,9 @@ __packaged_task_function<_Rp(_ArgTypes...)>::__packaged_task_function(
         _Ap __a(__a0);
         typedef __allocator_destructor<_Ap> _Dp;
         unique_ptr<__base, _Dp> __hold(__a.allocate(1), _Dp(__a, 1));
-        ::new (static_cast<void*>(_CUDA_VSTD::addressof(*__hold.get())))
-            _FF(_CUDA_VSTD::forward<_Fp>(__f), _Alloc(__a));
-        __f_ = _CUDA_VSTD::addressof(*__hold.release());
+        ::new (static_cast<void*>(_CUDA_FOR_DALI_VSTD::addressof(*__hold.get())))
+            _FF(_CUDA_FOR_DALI_VSTD::forward<_Fp>(__f), _Alloc(__a));
+        __f_ = _CUDA_FOR_DALI_VSTD::addressof(*__hold.release());
     }
 }
 
@@ -1982,7 +1982,7 @@ __packaged_task_function<_Rp(_ArgTypes...)>::swap(__packaged_task_function& __f)
         __f_ = (__base*)&__buf_;
     }
     else
-        _CUDA_VSTD::swap(__f_, __f.__f_);
+        _CUDA_FOR_DALI_VSTD::swap(__f_, __f.__f_);
 }
 
 template<class _Rp, class ..._ArgTypes>
@@ -1990,7 +1990,7 @@ inline
 _Rp
 __packaged_task_function<_Rp(_ArgTypes...)>::operator()(_ArgTypes... __arg) const
 {
-    return (*__f_)(_CUDA_VSTD::forward<_ArgTypes>(__arg)...);
+    return (*__f_)(_CUDA_FOR_DALI_VSTD::forward<_ArgTypes>(__arg)...);
 }
 
 template<class _Rp, class ..._ArgTypes>
@@ -2017,7 +2017,7 @@ public:
                   >::type
              >
         _LIBCUDAFORDALICXX_INLINE_VISIBILITY
-        explicit packaged_task(_Fp&& __f) : __f_(_CUDA_VSTD::forward<_Fp>(__f)) {}
+        explicit packaged_task(_Fp&& __f) : __f_(_CUDA_FOR_DALI_VSTD::forward<_Fp>(__f)) {}
     template <class _Fp, class _Allocator,
               class = typename enable_if
               <
@@ -2029,7 +2029,7 @@ public:
               >
         _LIBCUDAFORDALICXX_INLINE_VISIBILITY
         packaged_task(allocator_arg_t, const _Allocator& __a, _Fp&& __f)
-             : __f_(allocator_arg, __a, _CUDA_VSTD::forward<_Fp>(__f)),
+             : __f_(allocator_arg, __a, _CUDA_FOR_DALI_VSTD::forward<_Fp>(__f)),
                __p_(allocator_arg, __a) {}
     // ~packaged_task() = default;
 
@@ -2040,12 +2040,12 @@ public:
     // move support
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     packaged_task(packaged_task&& __other) _NOEXCEPT
-        : __f_(_CUDA_VSTD::move(__other.__f_)), __p_(_CUDA_VSTD::move(__other.__p_)) {}
+        : __f_(_CUDA_FOR_DALI_VSTD::move(__other.__f_)), __p_(_CUDA_FOR_DALI_VSTD::move(__other.__p_)) {}
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     packaged_task& operator=(packaged_task&& __other) _NOEXCEPT
     {
-        __f_ = _CUDA_VSTD::move(__other.__f_);
-        __p_ = _CUDA_VSTD::move(__other.__p_);
+        __f_ = _CUDA_FOR_DALI_VSTD::move(__other.__f_);
+        __p_ = _CUDA_FOR_DALI_VSTD::move(__other.__p_);
         return *this;
     }
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -2081,7 +2081,7 @@ packaged_task<_Rp(_ArgTypes...)>::operator()(_ArgTypes... __args)
     try
     {
 #endif  // _LIBCUDAFORDALICXX_NO_EXCEPTIONS
-        __p_.set_value(__f_(_CUDA_VSTD::forward<_ArgTypes>(__args)...));
+        __p_.set_value(__f_(_CUDA_FOR_DALI_VSTD::forward<_ArgTypes>(__args)...));
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
     }
     catch (...)
@@ -2103,7 +2103,7 @@ packaged_task<_Rp(_ArgTypes...)>::make_ready_at_thread_exit(_ArgTypes... __args)
     try
     {
 #endif  // _LIBCUDAFORDALICXX_NO_EXCEPTIONS
-        __p_.set_value_at_thread_exit(__f_(_CUDA_VSTD::forward<_ArgTypes>(__args)...));
+        __p_.set_value_at_thread_exit(__f_(_CUDA_FOR_DALI_VSTD::forward<_ArgTypes>(__args)...));
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
     }
     catch (...)
@@ -2146,7 +2146,7 @@ public:
                   >::type
               >
         _LIBCUDAFORDALICXX_INLINE_VISIBILITY
-        explicit packaged_task(_Fp&& __f) : __f_(_CUDA_VSTD::forward<_Fp>(__f)) {}
+        explicit packaged_task(_Fp&& __f) : __f_(_CUDA_FOR_DALI_VSTD::forward<_Fp>(__f)) {}
     template <class _Fp, class _Allocator,
               class = typename enable_if
               <
@@ -2158,7 +2158,7 @@ public:
               >
         _LIBCUDAFORDALICXX_INLINE_VISIBILITY
         packaged_task(allocator_arg_t, const _Allocator& __a, _Fp&& __f)
-             : __f_(allocator_arg, __a, _CUDA_VSTD::forward<_Fp>(__f)),
+             : __f_(allocator_arg, __a, _CUDA_FOR_DALI_VSTD::forward<_Fp>(__f)),
                __p_(allocator_arg, __a) {}
     // ~packaged_task() = default;
 
@@ -2169,12 +2169,12 @@ public:
     // move support
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     packaged_task(packaged_task&& __other) _NOEXCEPT
-        : __f_(_CUDA_VSTD::move(__other.__f_)), __p_(_CUDA_VSTD::move(__other.__p_)) {}
+        : __f_(_CUDA_FOR_DALI_VSTD::move(__other.__f_)), __p_(_CUDA_FOR_DALI_VSTD::move(__other.__p_)) {}
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     packaged_task& operator=(packaged_task&& __other) _NOEXCEPT
     {
-        __f_ = _CUDA_VSTD::move(__other.__f_);
-        __p_ = _CUDA_VSTD::move(__other.__p_);
+        __f_ = _CUDA_FOR_DALI_VSTD::move(__other.__f_);
+        __p_ = _CUDA_FOR_DALI_VSTD::move(__other.__p_);
         return *this;
     }
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -2210,7 +2210,7 @@ packaged_task<void(_ArgTypes...)>::operator()(_ArgTypes... __args)
     try
     {
 #endif  // _LIBCUDAFORDALICXX_NO_EXCEPTIONS
-        __f_(_CUDA_VSTD::forward<_ArgTypes>(__args)...);
+        __f_(_CUDA_FOR_DALI_VSTD::forward<_ArgTypes>(__args)...);
         __p_.set_value();
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
     }
@@ -2233,7 +2233,7 @@ packaged_task<void(_ArgTypes...)>::make_ready_at_thread_exit(_ArgTypes... __args
     try
     {
 #endif  // _LIBCUDAFORDALICXX_NO_EXCEPTIONS
-        __f_(_CUDA_VSTD::forward<_ArgTypes>(__args)...);
+        __f_(_CUDA_FOR_DALI_VSTD::forward<_ArgTypes>(__args)...);
         __p_.set_value_at_thread_exit();
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
     }
@@ -2274,7 +2274,7 @@ __make_deferred_assoc_state(_Fp __f)
 #endif
 {
     unique_ptr<__deferred_assoc_state<_Rp, _Fp>, __release_shared_count>
-        __h(new __deferred_assoc_state<_Rp, _Fp>(_CUDA_VSTD::forward<_Fp>(__f)));
+        __h(new __deferred_assoc_state<_Rp, _Fp>(_CUDA_FOR_DALI_VSTD::forward<_Fp>(__f)));
     return future<_Rp>(__h.get());
 }
 
@@ -2287,8 +2287,8 @@ __make_async_assoc_state(_Fp __f)
 #endif
 {
     unique_ptr<__async_assoc_state<_Rp, _Fp>, __release_shared_count>
-        __h(new __async_assoc_state<_Rp, _Fp>(_CUDA_VSTD::forward<_Fp>(__f)));
-    _CUDA_VSTD::thread(&__async_assoc_state<_Rp, _Fp>::__execute, __h.get()).detach();
+        __h(new __async_assoc_state<_Rp, _Fp>(_CUDA_FOR_DALI_VSTD::forward<_Fp>(__f)));
+    _CUDA_FOR_DALI_VSTD::thread(&__async_assoc_state<_Rp, _Fp>::__execute, __h.get()).detach();
     return future<_Rp>(__h.get());
 }
 
@@ -2302,10 +2302,10 @@ public:
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     explicit __async_func(_Fp&& __f, _Args&&... __args)
-        : __f_(_CUDA_VSTD::move(__f), _CUDA_VSTD::move(__args)...) {}
+        : __f_(_CUDA_FOR_DALI_VSTD::move(__f), _CUDA_FOR_DALI_VSTD::move(__args)...) {}
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
-    __async_func(__async_func&& __f) : __f_(_CUDA_VSTD::move(__f.__f_)) {}
+    __async_func(__async_func&& __f) : __f_(_CUDA_FOR_DALI_VSTD::move(__f.__f_)) {}
 
     _Rp operator()()
     {
@@ -2317,7 +2317,7 @@ private:
     _Rp
     __execute(__tuple_indices<_Indices...>)
     {
-        return __invoke(_CUDA_VSTD::move(_CUDA_VSTD::get<0>(__f_)), _CUDA_VSTD::move(_CUDA_VSTD::get<_Indices>(__f_))...);
+        return __invoke(_CUDA_FOR_DALI_VSTD::move(_CUDA_FOR_DALI_VSTD::get<0>(__f_)), _CUDA_FOR_DALI_VSTD::move(_CUDA_FOR_DALI_VSTD::get<_Indices>(__f_))...);
     }
 };
 
@@ -2337,16 +2337,16 @@ async(launch __policy, _Fp&& __f, _Args&&... __args)
     {
 #endif
         if (__does_policy_contain(__policy, launch::async))
-        return _CUDA_VSTD::__make_async_assoc_state<_Rp>(_BF(__decay_copy(_CUDA_VSTD::forward<_Fp>(__f)),
-                                                     __decay_copy(_CUDA_VSTD::forward<_Args>(__args))...));
+        return _CUDA_FOR_DALI_VSTD::__make_async_assoc_state<_Rp>(_BF(__decay_copy(_CUDA_FOR_DALI_VSTD::forward<_Fp>(__f)),
+                                                     __decay_copy(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args))...));
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
     }
     catch ( ... ) { if (__policy == launch::async) throw ; }
 #endif
 
     if (__does_policy_contain(__policy, launch::deferred))
-        return _CUDA_VSTD::__make_deferred_assoc_state<_Rp>(_BF(__decay_copy(_CUDA_VSTD::forward<_Fp>(__f)),
-                                                        __decay_copy(_CUDA_VSTD::forward<_Args>(__args))...));
+        return _CUDA_FOR_DALI_VSTD::__make_deferred_assoc_state<_Rp>(_BF(__decay_copy(_CUDA_FOR_DALI_VSTD::forward<_Fp>(__f)),
+                                                        __decay_copy(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args))...));
     return future<_Rp>{};
 }
 
@@ -2355,8 +2355,8 @@ _LIBCUDAFORDALICXX_NODISCARD_AFTER_CXX17 inline _LIBCUDAFORDALICXX_INLINE_VISIBI
 future<typename __invoke_of<typename decay<_Fp>::type, typename decay<_Args>::type...>::type>
 async(_Fp&& __f, _Args&&... __args)
 {
-    return _CUDA_VSTD::async(launch::any, _CUDA_VSTD::forward<_Fp>(__f),
-                                    _CUDA_VSTD::forward<_Args>(__args)...);
+    return _CUDA_FOR_DALI_VSTD::async(launch::any, _CUDA_FOR_DALI_VSTD::forward<_Fp>(__f),
+                                    _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
 }
 
 #endif  // _LIBCUDAFORDALICXX_HAS_NO_VARIADICS
@@ -2398,7 +2398,7 @@ public:
     const _Rp& get() const {return __state_->copy();}
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
-    void swap(shared_future& __rhs) _NOEXCEPT {_CUDA_VSTD::swap(__state_, __rhs.__state_);}
+    void swap(shared_future& __rhs) _NOEXCEPT {_CUDA_FOR_DALI_VSTD::swap(__state_, __rhs.__state_);}
 
     // functions to check state
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -2472,7 +2472,7 @@ public:
     _Rp& get() const {return __state_->copy();}
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
-    void swap(shared_future& __rhs) _NOEXCEPT {_CUDA_VSTD::swap(__state_, __rhs.__state_);}
+    void swap(shared_future& __rhs) _NOEXCEPT {_CUDA_FOR_DALI_VSTD::swap(__state_, __rhs.__state_);}
 
     // functions to check state
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -2546,7 +2546,7 @@ public:
     void get() const {__state_->copy();}
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
-    void swap(shared_future& __rhs) _NOEXCEPT {_CUDA_VSTD::swap(__state_, __rhs.__state_);}
+    void swap(shared_future& __rhs) _NOEXCEPT {_CUDA_FOR_DALI_VSTD::swap(__state_, __rhs.__state_);}
 
     // functions to check state
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -2579,7 +2579,7 @@ inline
 shared_future<_Rp>
 future<_Rp>::share() _NOEXCEPT
 {
-    return shared_future<_Rp>(_CUDA_VSTD::move(*this));
+    return shared_future<_Rp>(_CUDA_FOR_DALI_VSTD::move(*this));
 }
 
 template <class _Rp>
@@ -2587,7 +2587,7 @@ inline
 shared_future<_Rp&>
 future<_Rp&>::share() _NOEXCEPT
 {
-    return shared_future<_Rp&>(_CUDA_VSTD::move(*this));
+    return shared_future<_Rp&>(_CUDA_FOR_DALI_VSTD::move(*this));
 }
 
 #ifndef _LIBCUDAFORDALICXX_HAS_NO_RVALUE_REFERENCES
@@ -2596,7 +2596,7 @@ inline
 shared_future<void>
 future<void>::share() _NOEXCEPT
 {
-    return shared_future<void>(_CUDA_VSTD::move(*this));
+    return shared_future<void>(_CUDA_FOR_DALI_VSTD::move(*this));
 }
 
 #endif  // _LIBCUDAFORDALICXX_HAS_NO_RVALUE_REFERENCES

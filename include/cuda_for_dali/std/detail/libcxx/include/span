@@ -203,8 +203,8 @@ public:
     using const_reference        = const _Tp &;
     using iterator               =  __wrap_iter<pointer>;
     using const_iterator         =  __wrap_iter<const_pointer>;
-    using reverse_iterator       = _CUDA_VSTD::reverse_iterator<iterator>;
-    using const_reverse_iterator = _CUDA_VSTD::reverse_iterator<const_iterator>;
+    using reverse_iterator       = _CUDA_FOR_DALI_VSTD::reverse_iterator<iterator>;
+    using const_reverse_iterator = _CUDA_FOR_DALI_VSTD::reverse_iterator<const_iterator>;
 
     static constexpr index_type extent = _Extent;
 
@@ -364,8 +364,8 @@ public:
     using const_reference        = const _Tp &;
     using iterator               =  __wrap_iter<pointer>;
     using const_iterator         =  __wrap_iter<const_pointer>;
-    using reverse_iterator       = _CUDA_VSTD::reverse_iterator<iterator>;
-    using const_reverse_iterator = _CUDA_VSTD::reverse_iterator<const_iterator>;
+    using reverse_iterator       = _CUDA_FOR_DALI_VSTD::reverse_iterator<iterator>;
+    using const_reverse_iterator = _CUDA_FOR_DALI_VSTD::reverse_iterator<const_iterator>;
 
     static constexpr index_type extent = dynamic_extent;
 
@@ -394,13 +394,13 @@ public:
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
         constexpr span(      _Container& __c,
             enable_if_t<__is_span_compatible_container<_Container, _Tp>::value, nullptr_t> = nullptr)
-        : __data{_CUDA_VSTD::data(__c)}, __size{(index_type) _CUDA_VSTD::size(__c)} {}
+        : __data{_CUDA_FOR_DALI_VSTD::data(__c)}, __size{(index_type) _CUDA_FOR_DALI_VSTD::size(__c)} {}
 
     template <class _Container>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
         constexpr span(const _Container& __c,
             enable_if_t<__is_span_compatible_container<const _Container, _Tp>::value, nullptr_t> = nullptr)
-        : __data{_CUDA_VSTD::data(__c)}, __size{(index_type) _CUDA_VSTD::size(__c)} {}
+        : __data{_CUDA_FOR_DALI_VSTD::data(__c)}, __size{(index_type) _CUDA_FOR_DALI_VSTD::size(__c)} {}
 
 
     template <class _OtherElementType, size_t _OtherExtent>

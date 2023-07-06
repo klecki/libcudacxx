@@ -236,7 +236,7 @@ void __throw_bad_variant_access() {
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
         throw bad_variant_access();
 #else
-        _CUDA_VSTD::abort();
+        _CUDA_FOR_DALI_VSTD::abort();
 #endif
 }
 
@@ -400,13 +400,13 @@ struct __union {
   template <class _Vp>
   inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   static constexpr auto&& __get_alt(_Vp&& __v, in_place_index_t<0>) {
-    return _CUDA_VSTD::forward<_Vp>(__v).__head;
+    return _CUDA_FOR_DALI_VSTD::forward<_Vp>(__v).__head;
   }
 
   template <class _Vp, size_t _Ip>
   inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   static constexpr auto&& __get_alt(_Vp&& __v, in_place_index_t<_Ip>) {
-    return __get_alt(_CUDA_VSTD::forward<_Vp>(__v).__tail, in_place_index<_Ip - 1>);
+    return __get_alt(_CUDA_FOR_DALI_VSTD::forward<_Vp>(__v).__tail, in_place_index<_Ip - 1>);
   }
 };
 
@@ -414,7 +414,7 @@ struct __base {
   template <size_t _Ip, class _Vp>
   inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   static constexpr auto&& __get_alt(_Vp&& __v) {
-    return __union::__get_alt(_CUDA_VSTD::forward<_Vp>(__v).__data,
+    return __union::__get_alt(_CUDA_FOR_DALI_VSTD::forward<_Vp>(__v).__data,
                               in_place_index<_Ip>);
   }
 };
@@ -423,7 +423,7 @@ struct __variant {
   template <size_t _Ip, class _Vp>
   inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   static constexpr auto&& __get_alt(_Vp&& __v) {
-    return __base::__get_alt<_Ip>(_CUDA_VSTD::forward<_Vp>(__v).__impl);
+    return __base::__get_alt<_Ip>(_CUDA_FOR_DALI_VSTD::forward<_Vp>(__v).__impl);
   }
 };
 
@@ -438,9 +438,9 @@ struct __base {
   __visit_alt_at(size_t __index, _Visitor&& __visitor, _Vs&&... __vs) {
     constexpr auto __fdiagonal =
         __make_fdiagonal<_Visitor&&,
-                         decltype(_CUDA_VSTD::forward<_Vs>(__vs).__as_base())...>();
-    return __fdiagonal[__index](_CUDA_VSTD::forward<_Visitor>(__visitor),
-                                _CUDA_VSTD::forward<_Vs>(__vs).__as_base()...);
+                         decltype(_CUDA_FOR_DALI_VSTD::forward<_Vs>(__vs).__as_base())...>();
+    return __fdiagonal[__index](_CUDA_FOR_DALI_VSTD::forward<_Visitor>(__visitor),
+                                _CUDA_FOR_DALI_VSTD::forward<_Vs>(__vs).__as_base()...);
   }
 
   template <class _Visitor, class... _Vs>
@@ -449,10 +449,10 @@ struct __base {
                                               _Vs&&... __vs) {
     constexpr auto __fmatrix =
         __make_fmatrix<_Visitor&&,
-                       decltype(_CUDA_VSTD::forward<_Vs>(__vs).__as_base())...>();
+                       decltype(_CUDA_FOR_DALI_VSTD::forward<_Vs>(__vs).__as_base())...>();
     return __at(__fmatrix, __vs.index()...)(
-        _CUDA_VSTD::forward<_Visitor>(__visitor),
-        _CUDA_VSTD::forward<_Vs>(__vs).__as_base()...);
+        _CUDA_FOR_DALI_VSTD::forward<_Visitor>(__visitor),
+        _CUDA_FOR_DALI_VSTD::forward<_Vs>(__vs).__as_base()...);
   }
 
 private:
@@ -479,7 +479,7 @@ private:
   static constexpr auto __make_farray(_Fs&&... __fs) {
     __std_visit_visitor_return_type_check<__uncvref_t<_Fs>...>();
     using __result = array<common_type_t<__uncvref_t<_Fs>...>, sizeof...(_Fs)>;
-    return __result{{_CUDA_VSTD::forward<_Fs>(__fs)...}};
+    return __result{{_CUDA_FOR_DALI_VSTD::forward<_Fs>(__fs)...}};
   }
 
   template <std::size_t... _Is>
@@ -549,16 +549,16 @@ struct __variant {
   static constexpr decltype(auto)
   __visit_alt_at(size_t __index, _Visitor&& __visitor, _Vs&&... __vs) {
     return __base::__visit_alt_at(__index,
-                                  _CUDA_VSTD::forward<_Visitor>(__visitor),
-                                  _CUDA_VSTD::forward<_Vs>(__vs).__impl...);
+                                  _CUDA_FOR_DALI_VSTD::forward<_Visitor>(__visitor),
+                                  _CUDA_FOR_DALI_VSTD::forward<_Vs>(__vs).__impl...);
   }
 
   template <class _Visitor, class... _Vs>
   inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   static constexpr decltype(auto) __visit_alt(_Visitor&& __visitor,
                                               _Vs&&... __vs) {
-    return __base::__visit_alt(_CUDA_VSTD::forward<_Visitor>(__visitor),
-                               _CUDA_VSTD::forward<_Vs>(__vs).__impl...);
+    return __base::__visit_alt(_CUDA_FOR_DALI_VSTD::forward<_Visitor>(__visitor),
+                               _CUDA_FOR_DALI_VSTD::forward<_Vs>(__vs).__impl...);
   }
 
   template <class _Visitor, class... _Vs>
@@ -567,8 +567,8 @@ struct __variant {
   __visit_value_at(size_t __index, _Visitor&& __visitor, _Vs&&... __vs) {
     return __visit_alt_at(
         __index,
-        __make_value_visitor(_CUDA_VSTD::forward<_Visitor>(__visitor)),
-        _CUDA_VSTD::forward<_Vs>(__vs)...);
+        __make_value_visitor(_CUDA_FOR_DALI_VSTD::forward<_Visitor>(__visitor)),
+        _CUDA_FOR_DALI_VSTD::forward<_Vs>(__vs)...);
   }
 
   template <class _Visitor, class... _Vs>
@@ -576,8 +576,8 @@ struct __variant {
   static constexpr decltype(auto) __visit_value(_Visitor&& __visitor,
                                                 _Vs&&... __vs) {
     return __visit_alt(
-        __make_value_visitor(_CUDA_VSTD::forward<_Visitor>(__visitor)),
-        _CUDA_VSTD::forward<_Vs>(__vs)...);
+        __make_value_visitor(_CUDA_FOR_DALI_VSTD::forward<_Visitor>(__visitor)),
+        _CUDA_FOR_DALI_VSTD::forward<_Vs>(__vs)...);
   }
 
 private:
@@ -594,9 +594,9 @@ private:
     constexpr decltype(auto) operator()(_Alts&&... __alts) const {
       __std_visit_exhaustive_visitor_check<
           _Visitor,
-          decltype((_CUDA_VSTD::forward<_Alts>(__alts).__value))...>();
-      return __invoke_constexpr(_CUDA_VSTD::forward<_Visitor>(__visitor),
-                                _CUDA_VSTD::forward<_Alts>(__alts).__value...);
+          decltype((_CUDA_FOR_DALI_VSTD::forward<_Alts>(__alts).__value))...>();
+      return __invoke_constexpr(_CUDA_FOR_DALI_VSTD::forward<_Visitor>(__visitor),
+                                _CUDA_FOR_DALI_VSTD::forward<_Alts>(__alts).__value...);
     }
     _Visitor&& __visitor;
   };
@@ -604,7 +604,7 @@ private:
   template <class _Visitor>
   inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   static constexpr auto __make_value_visitor(_Visitor&& __visitor) {
-    return __value_visitor<_Visitor>{_CUDA_VSTD::forward<_Visitor>(__visitor)};
+    return __value_visitor<_Visitor>{_CUDA_FOR_DALI_VSTD::forward<_Visitor>(__visitor)};
   }
 };
 
@@ -617,7 +617,7 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS __alt {
   template <class... _Args>
   inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   explicit constexpr __alt(in_place_t, _Args&&... __args)
-      : __value(_CUDA_VSTD::forward<_Args>(__args)...) {}
+      : __value(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...) {}
 
   __value_type __value;
 };
@@ -641,12 +641,12 @@ union _LIBCUDAFORDALICXX_TEMPLATE_VIS __union<_DestructibleTrait, _Index> {};
     template <class... _Args>                                                  \
     inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY                                           \
     explicit constexpr __union(in_place_index_t<0>, _Args&&... __args)         \
-        : __head(in_place, _CUDA_VSTD::forward<_Args>(__args)...) {}                \
+        : __head(in_place, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...) {}                \
                                                                                \
     template <size_t _Ip, class... _Args>                                      \
     inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY                                           \
     explicit constexpr __union(in_place_index_t<_Ip>, _Args&&... __args)       \
-        : __tail(in_place_index<_Ip - 1>, _CUDA_VSTD::forward<_Args>(__args)...) {} \
+        : __tail(in_place_index<_Ip - 1>, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...) {} \
                                                                                \
     __union(const __union&) = default;                                         \
     __union(__union&&) = default;                                              \
@@ -683,7 +683,7 @@ public:
   inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   explicit constexpr __base(in_place_index_t<_Ip>, _Args&&... __args)
       :
-        __data(in_place_index<_Ip>, _CUDA_VSTD::forward<_Args>(__args)...),
+        __data(in_place_index<_Ip>, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...),
         __index(_Ip) {}
 
   inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -701,13 +701,13 @@ protected:
   constexpr auto&& __as_base() & { return *this; }
 
   inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
-  constexpr auto&& __as_base() && { return _CUDA_VSTD::move(*this); }
+  constexpr auto&& __as_base() && { return _CUDA_FOR_DALI_VSTD::move(*this); }
 
   inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   constexpr auto&& __as_base() const & { return *this; }
 
   inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
-  constexpr auto&& __as_base() const && { return _CUDA_VSTD::move(*this); }
+  constexpr auto&& __as_base() const && { return _CUDA_FOR_DALI_VSTD::move(*this); }
 
   inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   static constexpr size_t __size() { return sizeof...(_Types); }
@@ -784,8 +784,8 @@ protected:
   template <size_t _Ip, class _Tp, class... _Args>
   inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   static _Tp& __construct_alt(__alt<_Ip, _Tp>& __a, _Args&&... __args) {
-    ::new ((void*)_CUDA_VSTD::addressof(__a))
-        __alt<_Ip, _Tp>(in_place, _CUDA_VSTD::forward<_Args>(__args)...);
+    ::new ((void*)_CUDA_FOR_DALI_VSTD::addressof(__a))
+        __alt<_Ip, _Tp>(in_place, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
     return __a.__value;
   }
 
@@ -799,9 +799,9 @@ protected:
           [](auto& __lhs_alt, auto&& __rhs_alt) {
             __construct_alt(
                 __lhs_alt,
-                _CUDA_VSTD::forward<decltype(__rhs_alt)>(__rhs_alt).__value);
+                _CUDA_FOR_DALI_VSTD::forward<decltype(__rhs_alt)>(__rhs_alt).__value);
           },
-          __lhs, _CUDA_VSTD::forward<_Rhs>(__rhs));
+          __lhs, _CUDA_FOR_DALI_VSTD::forward<_Rhs>(__rhs));
       __lhs.__index = __rhs.index();
     }
   }
@@ -838,7 +838,7 @@ _LIBCUDAFORDALICXX_VARIANT_MOVE_CONSTRUCTOR(
     __move_constructor(__move_constructor&& __that) noexcept(
         __all<is_nothrow_move_constructible_v<_Types>...>::value)
         : __move_constructor(__valueless_t{}) {
-      this->__generic_construct(*this, _CUDA_VSTD::move(__that));
+      this->__generic_construct(*this, _CUDA_FOR_DALI_VSTD::move(__that));
     });
 
 _LIBCUDAFORDALICXX_VARIANT_MOVE_CONSTRUCTOR(
@@ -899,7 +899,7 @@ public:
   auto& __emplace(_Args&&... __args) {
     this->__destroy();
     auto& __res = this->__construct_alt(__access::__base::__get_alt<_Ip>(*this),
-                          _CUDA_VSTD::forward<_Args>(__args)...);
+                          _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
     this->__index = _Ip;
     return __res;
   }
@@ -909,18 +909,18 @@ protected:
   inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   void __assign_alt(__alt<_Ip, _Tp>& __a, _Arg&& __arg) {
     if (this->index() == _Ip) {
-      __a.__value = _CUDA_VSTD::forward<_Arg>(__arg);
+      __a.__value = _CUDA_FOR_DALI_VSTD::forward<_Arg>(__arg);
     } else {
       struct {
         void operator()(true_type) const {
-          __this->__emplace<_Ip>(_CUDA_VSTD::forward<_Arg>(__arg));
+          __this->__emplace<_Ip>(_CUDA_FOR_DALI_VSTD::forward<_Arg>(__arg));
         }
         void operator()(false_type) const {
-          __this->__emplace<_Ip>(_Tp(_CUDA_VSTD::forward<_Arg>(__arg)));
+          __this->__emplace<_Ip>(_Tp(_CUDA_FOR_DALI_VSTD::forward<_Arg>(__arg)));
         }
         __assignment* __this;
         _Arg&& __arg;
-      } __impl{this, _CUDA_VSTD::forward<_Arg>(__arg)};
+      } __impl{this, _CUDA_FOR_DALI_VSTD::forward<_Arg>(__arg)};
       __impl(bool_constant<is_nothrow_constructible_v<_Tp, _Arg> ||
                            !is_nothrow_move_constructible_v<_Tp>>{});
     }
@@ -939,9 +939,9 @@ protected:
           [this](auto& __this_alt, auto&& __that_alt) {
             this->__assign_alt(
                 __this_alt,
-                _CUDA_VSTD::forward<decltype(__that_alt)>(__that_alt).__value);
+                _CUDA_FOR_DALI_VSTD::forward<decltype(__that_alt)>(__that_alt).__value);
           },
-          *this, _CUDA_VSTD::forward<_That>(__that));
+          *this, _CUDA_FOR_DALI_VSTD::forward<_That>(__that));
     }
   }
 };
@@ -977,7 +977,7 @@ _LIBCUDAFORDALICXX_VARIANT_MOVE_ASSIGNMENT(
     __move_assignment& operator=(__move_assignment&& __that) noexcept(
         __all<(is_nothrow_move_constructible_v<_Types> &&
                is_nothrow_move_assignable_v<_Types>)...>::value) {
-      this->__generic_assign(_CUDA_VSTD::move(__that));
+      this->__generic_assign(_CUDA_FOR_DALI_VSTD::move(__that));
       return *this;
     });
 
@@ -1039,7 +1039,7 @@ public:
   inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   void __assign(_Arg&& __arg) {
     this->__assign_alt(__access::__base::__get_alt<_Ip>(*this),
-                       _CUDA_VSTD::forward<_Arg>(__arg));
+                       _CUDA_FOR_DALI_VSTD::forward<_Arg>(__arg));
   }
 
   inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -1050,34 +1050,34 @@ public:
       __visitation::__base::__visit_alt_at(
           this->index(),
           [](auto& __this_alt, auto& __that_alt) {
-            using _CUDA_VSTD::swap;
+            using _CUDA_FOR_DALI_VSTD::swap;
             swap(__this_alt.__value, __that_alt.__value);
           },
           *this,
           __that);
     } else {
       __impl* __lhs = this;
-      __impl* __rhs = _CUDA_VSTD::addressof(__that);
+      __impl* __rhs = _CUDA_FOR_DALI_VSTD::addressof(__that);
       if (__lhs->__move_nothrow() && !__rhs->__move_nothrow()) {
-        _CUDA_VSTD::swap(__lhs, __rhs);
+        _CUDA_FOR_DALI_VSTD::swap(__lhs, __rhs);
       }
-      __impl __tmp(_CUDA_VSTD::move(*__rhs));
+      __impl __tmp(_CUDA_FOR_DALI_VSTD::move(*__rhs));
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
       // EXTENSION: When the move construction of `__lhs` into `__rhs` throws
       // and `__tmp` is nothrow move constructible then we move `__tmp` back
       // into `__rhs` and provide the strong exception safety guarantee.
       try {
-        this->__generic_construct(*__rhs, _CUDA_VSTD::move(*__lhs));
+        this->__generic_construct(*__rhs, _CUDA_FOR_DALI_VSTD::move(*__lhs));
       } catch (...) {
         if (__tmp.__move_nothrow()) {
-          this->__generic_construct(*__rhs, _CUDA_VSTD::move(__tmp));
+          this->__generic_construct(*__rhs, _CUDA_FOR_DALI_VSTD::move(__tmp));
         }
         throw;
       }
 #else
-      this->__generic_construct(*__rhs, _CUDA_VSTD::move(*__lhs));
+      this->__generic_construct(*__rhs, _CUDA_FOR_DALI_VSTD::move(*__lhs));
 #endif
-      this->__generic_construct(*__lhs, _CUDA_VSTD::move(__tmp));
+      this->__generic_construct(*__lhs, _CUDA_FOR_DALI_VSTD::move(__tmp));
     }
   }
 
@@ -1207,7 +1207,7 @@ public:
   inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   constexpr variant(_Arg&& __arg) noexcept(
       is_nothrow_constructible_v<_Tp, _Arg>)
-      : __impl(in_place_index<_Ip>, _CUDA_VSTD::forward<_Arg>(__arg)) {}
+      : __impl(in_place_index<_Ip>, _CUDA_FOR_DALI_VSTD::forward<_Arg>(__arg)) {}
 
   template <size_t _Ip, class... _Args,
             class = enable_if_t<(_Ip < sizeof...(_Types)), int>,
@@ -1217,7 +1217,7 @@ public:
   explicit constexpr variant(
       in_place_index_t<_Ip>,
       _Args&&... __args) noexcept(is_nothrow_constructible_v<_Tp, _Args...>)
-      : __impl(in_place_index<_Ip>, _CUDA_VSTD::forward<_Args>(__args)...) {}
+      : __impl(in_place_index<_Ip>, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...) {}
 
   template <
       size_t _Ip,
@@ -1233,7 +1233,7 @@ public:
       initializer_list<_Up> __il,
       _Args&&... __args) noexcept(
       is_nothrow_constructible_v<_Tp, initializer_list<_Up>&, _Args...>)
-      : __impl(in_place_index<_Ip>, __il, _CUDA_VSTD::forward<_Args>(__args)...) {}
+      : __impl(in_place_index<_Ip>, __il, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...) {}
 
   template <
       class _Tp,
@@ -1244,7 +1244,7 @@ public:
   inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   explicit constexpr variant(in_place_type_t<_Tp>, _Args&&... __args) noexcept(
       is_nothrow_constructible_v<_Tp, _Args...>)
-      : __impl(in_place_index<_Ip>, _CUDA_VSTD::forward<_Args>(__args)...) {}
+      : __impl(in_place_index<_Ip>, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...) {}
 
   template <
       class _Tp,
@@ -1260,7 +1260,7 @@ public:
       initializer_list<_Up> __il,
       _Args&&... __args) noexcept(
       is_nothrow_constructible_v<_Tp, initializer_list< _Up>&, _Args...>)
-      : __impl(in_place_index<_Ip>, __il, _CUDA_VSTD::forward<_Args>(__args)...) {}
+      : __impl(in_place_index<_Ip>, __il, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...) {}
 
   ~variant() = default;
 
@@ -1279,7 +1279,7 @@ public:
   variant& operator=(_Arg&& __arg) noexcept(
       is_nothrow_assignable_v<_Tp&, _Arg> &&
       is_nothrow_constructible_v<_Tp, _Arg>) {
-    __impl.template __assign<_Ip>(_CUDA_VSTD::forward<_Arg>(__arg));
+    __impl.template __assign<_Ip>(_CUDA_FOR_DALI_VSTD::forward<_Arg>(__arg));
     return *this;
   }
 
@@ -1291,7 +1291,7 @@ public:
       enable_if_t<is_constructible_v<_Tp, _Args...>, int> = 0>
   inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   _Tp& emplace(_Args&&... __args) {
-    return __impl.template __emplace<_Ip>(_CUDA_VSTD::forward<_Args>(__args)...);
+    return __impl.template __emplace<_Ip>(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
   }
 
   template <
@@ -1304,7 +1304,7 @@ public:
                   int> = 0>
   inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   _Tp& emplace(initializer_list<_Up> __il, _Args&&... __args) {
-    return __impl.template __emplace<_Ip>(__il, _CUDA_VSTD::forward<_Args>(__args)...);
+    return __impl.template __emplace<_Ip>(__il, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
   }
 
   template <
@@ -1315,7 +1315,7 @@ public:
       enable_if_t<is_constructible_v<_Tp, _Args...>, int> = 0>
   inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   _Tp& emplace(_Args&&... __args) {
-    return __impl.template __emplace<_Ip>(_CUDA_VSTD::forward<_Args>(__args)...);
+    return __impl.template __emplace<_Ip>(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
   }
 
   template <
@@ -1328,7 +1328,7 @@ public:
                   int> = 0>
   inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   _Tp& emplace(initializer_list<_Up> __il, _Args&&... __args) {
-    return __impl.template __emplace<_Ip>(__il, _CUDA_VSTD::forward<_Args>(__args)...);
+    return __impl.template __emplace<_Ip>(__il, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
   }
 
   inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -1380,7 +1380,7 @@ constexpr auto&& __generic_get(_Vp&& __v) {
   if (!__holds_alternative<_Ip>(__v)) {
     __throw_bad_variant_access();
   }
-  return __variant::__get_alt<_Ip>(_CUDA_VSTD::forward<_Vp>(__v)).__value;
+  return __variant::__get_alt<_Ip>(_CUDA_FOR_DALI_VSTD::forward<_Vp>(__v)).__value;
 }
 
 template <size_t _Ip, class... _Types>
@@ -1400,7 +1400,7 @@ constexpr variant_alternative_t<_Ip, variant<_Types...>>&& get(
     variant<_Types...>&& __v) {
   static_assert(_Ip < sizeof...(_Types));
   static_assert(!is_void_v<variant_alternative_t<_Ip, variant<_Types...>>>);
-  return __generic_get<_Ip>(_CUDA_VSTD::move(__v));
+  return __generic_get<_Ip>(_CUDA_FOR_DALI_VSTD::move(__v));
 }
 
 template <size_t _Ip, class... _Types>
@@ -1420,7 +1420,7 @@ constexpr const variant_alternative_t<_Ip, variant<_Types...>>&& get(
     const variant<_Types...>&& __v) {
   static_assert(_Ip < sizeof...(_Types));
   static_assert(!is_void_v<variant_alternative_t<_Ip, variant<_Types...>>>);
-  return __generic_get<_Ip>(_CUDA_VSTD::move(__v));
+  return __generic_get<_Ip>(_CUDA_FOR_DALI_VSTD::move(__v));
 }
 
 template <class _Tp, class... _Types>
@@ -1428,7 +1428,7 @@ inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 _LIBCUDAFORDALICXX_AVAILABILITY_THROW_BAD_VARIANT_ACCESS
 constexpr _Tp& get(variant<_Types...>& __v) {
   static_assert(!is_void_v<_Tp>);
-  return _CUDA_VSTD::get<__find_exactly_one_t<_Tp, _Types...>::value>(__v);
+  return _CUDA_FOR_DALI_VSTD::get<__find_exactly_one_t<_Tp, _Types...>::value>(__v);
 }
 
 template <class _Tp, class... _Types>
@@ -1436,8 +1436,8 @@ inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 _LIBCUDAFORDALICXX_AVAILABILITY_THROW_BAD_VARIANT_ACCESS
 constexpr _Tp&& get(variant<_Types...>&& __v) {
   static_assert(!is_void_v<_Tp>);
-  return _CUDA_VSTD::get<__find_exactly_one_t<_Tp, _Types...>::value>(
-      _CUDA_VSTD::move(__v));
+  return _CUDA_FOR_DALI_VSTD::get<__find_exactly_one_t<_Tp, _Types...>::value>(
+      _CUDA_FOR_DALI_VSTD::move(__v));
 }
 
 template <class _Tp, class... _Types>
@@ -1445,7 +1445,7 @@ inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 _LIBCUDAFORDALICXX_AVAILABILITY_THROW_BAD_VARIANT_ACCESS
 constexpr const _Tp& get(const variant<_Types...>& __v) {
   static_assert(!is_void_v<_Tp>);
-  return _CUDA_VSTD::get<__find_exactly_one_t<_Tp, _Types...>::value>(__v);
+  return _CUDA_FOR_DALI_VSTD::get<__find_exactly_one_t<_Tp, _Types...>::value>(__v);
 }
 
 template <class _Tp, class... _Types>
@@ -1453,8 +1453,8 @@ inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 _LIBCUDAFORDALICXX_AVAILABILITY_THROW_BAD_VARIANT_ACCESS
 constexpr const _Tp&& get(const variant<_Types...>&& __v) {
   static_assert(!is_void_v<_Tp>);
-  return _CUDA_VSTD::get<__find_exactly_one_t<_Tp, _Types...>::value>(
-      _CUDA_VSTD::move(__v));
+  return _CUDA_FOR_DALI_VSTD::get<__find_exactly_one_t<_Tp, _Types...>::value>(
+      _CUDA_FOR_DALI_VSTD::move(__v));
 }
 
 template <size_t _Ip, class _Vp>
@@ -1462,7 +1462,7 @@ inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 constexpr auto* __generic_get_if(_Vp* __v) noexcept {
   using __variant_detail::__access::__variant;
   return __v && __holds_alternative<_Ip>(*__v)
-             ? _CUDA_VSTD::addressof(__variant::__get_alt<_Ip>(*__v).__value)
+             ? _CUDA_FOR_DALI_VSTD::addressof(__variant::__get_alt<_Ip>(*__v).__value)
              : nullptr;
 }
 
@@ -1489,7 +1489,7 @@ inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 constexpr add_pointer_t<_Tp>
 get_if(variant<_Types...>* __v) noexcept {
   static_assert(!is_void_v<_Tp>);
-  return _CUDA_VSTD::get_if<__find_exactly_one_t<_Tp, _Types...>::value>(__v);
+  return _CUDA_FOR_DALI_VSTD::get_if<__find_exactly_one_t<_Tp, _Types...>::value>(__v);
 }
 
 template <class _Tp, class... _Types>
@@ -1497,16 +1497,16 @@ inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 constexpr add_pointer_t<const _Tp>
 get_if(const variant<_Types...>* __v) noexcept {
   static_assert(!is_void_v<_Tp>);
-  return _CUDA_VSTD::get_if<__find_exactly_one_t<_Tp, _Types...>::value>(__v);
+  return _CUDA_FOR_DALI_VSTD::get_if<__find_exactly_one_t<_Tp, _Types...>::value>(__v);
 }
 
 template <class _Operator>
 struct __convert_to_bool {
   template <class _T1, class _T2>
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY constexpr bool operator()(_T1 && __t1, _T2&& __t2) const {
-    static_assert(std::is_convertible<decltype(_Operator{}(_CUDA_VSTD::forward<_T1>(__t1), _CUDA_VSTD::forward<_T2>(__t2))), bool>::value,
+    static_assert(std::is_convertible<decltype(_Operator{}(_CUDA_FOR_DALI_VSTD::forward<_T1>(__t1), _CUDA_FOR_DALI_VSTD::forward<_T2>(__t2))), bool>::value,
         "the relational operator does not return a type which is implicitly convertible to bool");
-    return _Operator{}(_CUDA_VSTD::forward<_T1>(__t1), _CUDA_VSTD::forward<_T2>(__t2));
+    return _Operator{}(_CUDA_FOR_DALI_VSTD::forward<_T1>(__t1), _CUDA_FOR_DALI_VSTD::forward<_T2>(__t2));
   }
 };
 
@@ -1592,8 +1592,8 @@ constexpr decltype(auto) visit(_Visitor&& __visitor, _Vs&&... __vs) {
       __throw_bad_variant_access();
     }
   }
-  return __variant::__visit_value(_CUDA_VSTD::forward<_Visitor>(__visitor),
-                                  _CUDA_VSTD::forward<_Vs>(__vs)...);
+  return __variant::__visit_value(_CUDA_FOR_DALI_VSTD::forward<_Visitor>(__visitor),
+                                  _CUDA_FOR_DALI_VSTD::forward<_Vs>(__vs)...);
 }
 
 struct _LIBCUDAFORDALICXX_TEMPLATE_VIS monostate {};

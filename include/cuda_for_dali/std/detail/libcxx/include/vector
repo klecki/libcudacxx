@@ -309,14 +309,14 @@ template <bool __b>
 void
 __vector_base_common<__b>::__throw_length_error() const
 {
-    _CUDA_VSTD::__throw_length_error("vector");
+    _CUDA_FOR_DALI_VSTD::__throw_length_error("vector");
 }
 
 template <bool __b>
 void
 __vector_base_common<__b>::__throw_out_of_range() const
 {
-    _CUDA_VSTD::__throw_out_of_range("vector");
+    _CUDA_FOR_DALI_VSTD::__throw_out_of_range("vector");
 }
 
 _LIBCUDAFORDALICXX_EXTERN_TEMPLATE(class _LIBCUDAFORDALICXX_EXTERN_TEMPLATE_TYPE_VIS __vector_base_common<true>)
@@ -407,7 +407,7 @@ private:
     void __move_assign_alloc(__vector_base& __c, true_type)
         _NOEXCEPT_(is_nothrow_move_assignable<allocator_type>::value)
         {
-            __alloc() = _CUDA_VSTD::move(__c.__alloc());
+            __alloc() = _CUDA_FOR_DALI_VSTD::move(__c.__alloc());
         }
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -423,7 +423,7 @@ __vector_base<_Tp, _Allocator>::__destruct_at_end(pointer __new_last) _NOEXCEPT
 {
     pointer __soon_to_be_end = __end_;
     while (__new_last != __soon_to_be_end)
-        __alloc_traits::destroy(__alloc(), _CUDA_VSTD::__to_raw_pointer(--__soon_to_be_end));
+        __alloc_traits::destroy(__alloc(), _CUDA_FOR_DALI_VSTD::__to_raw_pointer(--__soon_to_be_end));
     __end_ = __new_last;
 }
 
@@ -485,8 +485,8 @@ public:
     typedef typename __base::const_pointer           const_pointer;
     typedef __wrap_iter<pointer>                     iterator;
     typedef __wrap_iter<const_pointer>               const_iterator;
-    typedef _CUDA_VSTD::reverse_iterator<iterator>         reverse_iterator;
-    typedef _CUDA_VSTD::reverse_iterator<const_iterator>   const_reverse_iterator;
+    typedef _CUDA_FOR_DALI_VSTD::reverse_iterator<iterator>         reverse_iterator;
+    typedef _CUDA_FOR_DALI_VSTD::reverse_iterator<const_iterator>   const_reverse_iterator;
 
     static_assert((is_same<typename allocator_type::value_type, value_type>::value),
                   "Allocator::value_type must be same type as value_type");
@@ -692,10 +692,10 @@ public:
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     value_type*       data() _NOEXCEPT
-        {return _CUDA_VSTD::__to_raw_pointer(this->__begin_);}
+        {return _CUDA_FOR_DALI_VSTD::__to_raw_pointer(this->__begin_);}
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     const value_type* data() const _NOEXCEPT
-        {return _CUDA_VSTD::__to_raw_pointer(this->__begin_);}
+        {return _CUDA_FOR_DALI_VSTD::__to_raw_pointer(this->__begin_);}
 
 #ifdef _LIBCUDAFORDALICXX_CXX03_LANG
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -704,7 +704,7 @@ public:
     template <class _Arg>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     void __emplace_back(_Arg&& __arg) {
-      emplace_back(_CUDA_VSTD::forward<_Arg>(__arg));
+      emplace_back(_CUDA_FOR_DALI_VSTD::forward<_Arg>(__arg));
     }
 #endif
 
@@ -921,8 +921,8 @@ private:
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   void __construct_one_at_end(_Args&& ...__args) {
     _ConstructTransaction __tx(*this, 1);
-    __alloc_traits::construct(this->__alloc(), _CUDA_VSTD::__to_raw_pointer(__tx.__pos_),
-        _CUDA_VSTD::forward<_Args>(__args)...);
+    __alloc_traits::construct(this->__alloc(), _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__tx.__pos_),
+        _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
     ++__tx.__pos_;
   }
 };
@@ -951,9 +951,9 @@ vector<_Tp, _Allocator>::__swap_out_circular_buffer(__split_buffer<value_type, a
     __annotate_delete();
     __alloc_traits::__construct_backward_with_exception_guarantees(
         this->__alloc(), this->__begin_, this->__end_, __v.__begin_);
-    _CUDA_VSTD::swap(this->__begin_, __v.__begin_);
-    _CUDA_VSTD::swap(this->__end_, __v.__end_);
-    _CUDA_VSTD::swap(this->__end_cap(), __v.__end_cap());
+    _CUDA_FOR_DALI_VSTD::swap(this->__begin_, __v.__begin_);
+    _CUDA_FOR_DALI_VSTD::swap(this->__end_, __v.__end_);
+    _CUDA_FOR_DALI_VSTD::swap(this->__end_cap(), __v.__end_cap());
     __v.__first_ = __v.__begin_;
     __annotate_new(size());
     __invalidate_all_iterators();
@@ -969,9 +969,9 @@ vector<_Tp, _Allocator>::__swap_out_circular_buffer(__split_buffer<value_type, a
         this->__alloc(), this->__begin_, __p, __v.__begin_);
     __alloc_traits::__construct_forward_with_exception_guarantees(
         this->__alloc(), __p, this->__end_, __v.__end_);
-    _CUDA_VSTD::swap(this->__begin_, __v.__begin_);
-    _CUDA_VSTD::swap(this->__end_, __v.__end_);
-    _CUDA_VSTD::swap(this->__end_cap(), __v.__end_cap());
+    _CUDA_FOR_DALI_VSTD::swap(this->__begin_, __v.__begin_);
+    _CUDA_FOR_DALI_VSTD::swap(this->__end_, __v.__end_);
+    _CUDA_FOR_DALI_VSTD::swap(this->__end_cap(), __v.__end_cap());
     __v.__first_ = __v.__begin_;
     __annotate_new(size());
     __invalidate_all_iterators();
@@ -1012,7 +1012,7 @@ template <class _Tp, class _Allocator>
 typename vector<_Tp, _Allocator>::size_type
 vector<_Tp, _Allocator>::max_size() const _NOEXCEPT
 {
-    return _CUDA_VSTD::min<size_type>(__alloc_traits::max_size(this->__alloc()),
+    return _CUDA_FOR_DALI_VSTD::min<size_type>(__alloc_traits::max_size(this->__alloc()),
                                  numeric_limits<difference_type>::max());
 }
 
@@ -1028,7 +1028,7 @@ vector<_Tp, _Allocator>::__recommend(size_type __new_size) const
     const size_type __cap = capacity();
     if (__cap >= __ms / 2)
         return __ms;
-    return _CUDA_VSTD::max<size_type>(2*__cap, __new_size);
+    return _CUDA_FOR_DALI_VSTD::max<size_type>(2*__cap, __new_size);
 }
 
 //  Default constructs __n objects starting at __end_
@@ -1042,7 +1042,7 @@ vector<_Tp, _Allocator>::__construct_at_end(size_type __n)
 {
     _ConstructTransaction __tx(*this, __n);
     for (; __tx.__pos_ != __tx.__new_end_; ++__tx.__pos_) {
-      __alloc_traits::construct(this->__alloc(), _CUDA_VSTD::__to_raw_pointer(__tx.__pos_));
+      __alloc_traits::construct(this->__alloc(), _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__tx.__pos_));
     }
 }
 
@@ -1059,7 +1059,7 @@ vector<_Tp, _Allocator>::__construct_at_end(size_type __n, const_reference __x)
 {
     _ConstructTransaction __tx(*this, __n);
     for (; __tx.__pos_ != __tx.__new_end_; ++__tx.__pos_) {
-        __alloc_traits::construct(this->__alloc(), _CUDA_VSTD::__to_raw_pointer(__tx.__pos_), __x);
+        __alloc_traits::construct(this->__alloc(), _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__tx.__pos_), __x);
     }
 }
 
@@ -1216,7 +1216,7 @@ vector<_Tp, _Allocator>::vector(_ForwardIterator __first,
 #if _LIBCUDAFORDALICXX_DEBUG_LEVEL >= 2
     __get_db()->__insert_c(this);
 #endif
-    size_type __n = static_cast<size_type>(_CUDA_VSTD::distance(__first, __last));
+    size_type __n = static_cast<size_type>(_CUDA_FOR_DALI_VSTD::distance(__first, __last));
     if (__n > 0)
     {
         __vallocate(__n);
@@ -1236,7 +1236,7 @@ vector<_Tp, _Allocator>::vector(_ForwardIterator __first, _ForwardIterator __las
 #if _LIBCUDAFORDALICXX_DEBUG_LEVEL >= 2
     __get_db()->__insert_c(this);
 #endif
-    size_type __n = static_cast<size_type>(_CUDA_VSTD::distance(__first, __last));
+    size_type __n = static_cast<size_type>(_CUDA_FOR_DALI_VSTD::distance(__first, __last));
     if (__n > 0)
     {
         __vallocate(__n);
@@ -1284,7 +1284,7 @@ vector<_Tp, _Allocator>::vector(vector&& __x)
 #else
         _NOEXCEPT_(is_nothrow_move_constructible<allocator_type>::value)
 #endif
-    : __base(_CUDA_VSTD::move(__x.__alloc()))
+    : __base(_CUDA_FOR_DALI_VSTD::move(__x.__alloc()))
 {
 #if _LIBCUDAFORDALICXX_DEBUG_LEVEL >= 2
     __get_db()->__insert_c(this);
@@ -1436,7 +1436,7 @@ typename enable_if
 >::type
 vector<_Tp, _Allocator>::assign(_ForwardIterator __first, _ForwardIterator __last)
 {
-    size_type __new_size = static_cast<size_type>(_CUDA_VSTD::distance(__first, __last));
+    size_type __new_size = static_cast<size_type>(_CUDA_FOR_DALI_VSTD::distance(__first, __last));
     if (__new_size <= capacity())
     {
         _ForwardIterator __mid = __last;
@@ -1445,9 +1445,9 @@ vector<_Tp, _Allocator>::assign(_ForwardIterator __first, _ForwardIterator __las
         {
             __growing = true;
             __mid =  __first;
-            _CUDA_VSTD::advance(__mid, size());
+            _CUDA_FOR_DALI_VSTD::advance(__mid, size());
         }
-        pointer __m = _CUDA_VSTD::copy(__first, __mid, this->__begin_);
+        pointer __m = _CUDA_FOR_DALI_VSTD::copy(__first, __mid, this->__begin_);
         if (__growing)
             __construct_at_end(__mid, __last, __new_size - size());
         else
@@ -1469,7 +1469,7 @@ vector<_Tp, _Allocator>::assign(size_type __n, const_reference __u)
     if (__n <= capacity())
     {
         size_type __s = size();
-        _CUDA_VSTD::fill_n(this->__begin_, _CUDA_VSTD::min(__n, __s), __u);
+        _CUDA_FOR_DALI_VSTD::fill_n(this->__begin_, _CUDA_FOR_DALI_VSTD::min(__n, __s), __u);
         if (__n > __s)
             __construct_at_end(__n - __s, __u);
         else
@@ -1621,8 +1621,8 @@ vector<_Tp, _Allocator>::__push_back_slow_path(_Up& __x)
 {
     allocator_type& __a = this->__alloc();
     __split_buffer<value_type, allocator_type&> __v(__recommend(size() + 1), size(), __a);
-    // __v.push_back(_CUDA_VSTD::forward<_Up>(__x));
-    __alloc_traits::construct(__a, _CUDA_VSTD::__to_raw_pointer(__v.__end_), _CUDA_VSTD::forward<_Up>(__x));
+    // __v.push_back(_CUDA_FOR_DALI_VSTD::forward<_Up>(__x));
+    __alloc_traits::construct(__a, _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__v.__end_), _CUDA_FOR_DALI_VSTD::forward<_Up>(__x));
     __v.__end_++;
     __swap_out_circular_buffer(__v);
 }
@@ -1649,10 +1649,10 @@ vector<_Tp, _Allocator>::push_back(value_type&& __x)
 {
     if (this->__end_ < this->__end_cap())
     {
-        __construct_one_at_end(_CUDA_VSTD::move(__x));
+        __construct_one_at_end(_CUDA_FOR_DALI_VSTD::move(__x));
     }
     else
-        __push_back_slow_path(_CUDA_VSTD::move(__x));
+        __push_back_slow_path(_CUDA_FOR_DALI_VSTD::move(__x));
 }
 
 template <class _Tp, class _Allocator>
@@ -1662,8 +1662,8 @@ vector<_Tp, _Allocator>::__emplace_back_slow_path(_Args&&... __args)
 {
     allocator_type& __a = this->__alloc();
     __split_buffer<value_type, allocator_type&> __v(__recommend(size() + 1), size(), __a);
-//    __v.emplace_back(_CUDA_VSTD::forward<_Args>(__args)...);
-    __alloc_traits::construct(__a, _CUDA_VSTD::__to_raw_pointer(__v.__end_), _CUDA_VSTD::forward<_Args>(__args)...);
+//    __v.emplace_back(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
+    __alloc_traits::construct(__a, _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__v.__end_), _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
     __v.__end_++;
     __swap_out_circular_buffer(__v);
 }
@@ -1680,10 +1680,10 @@ vector<_Tp, _Allocator>::emplace_back(_Args&&... __args)
 {
     if (this->__end_ < this->__end_cap())
     {
-        __construct_one_at_end(_CUDA_VSTD::forward<_Args>(__args)...);
+        __construct_one_at_end(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
     }
     else
-        __emplace_back_slow_path(_CUDA_VSTD::forward<_Args>(__args)...);
+        __emplace_back_slow_path(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
 #if _LIBCUDAFORDALICXX_STD_VER > 14
     return this->back();
 #endif
@@ -1714,7 +1714,7 @@ vector<_Tp, _Allocator>::erase(const_iterator __position)
         "vector::erase(iterator) called with a non-dereferenceable iterator");
     difference_type __ps = __position - cbegin();
     pointer __p = this->__begin_ + __ps;
-    this->__destruct_at_end(_CUDA_VSTD::move(__p + 1, this->__end_, __p));
+    this->__destruct_at_end(_CUDA_FOR_DALI_VSTD::move(__p + 1, this->__end_, __p));
     this->__invalidate_iterators_past(__p-1);
     iterator __r = __make_iter(__p);
     return __r;
@@ -1735,7 +1735,7 @@ vector<_Tp, _Allocator>::erase(const_iterator __first, const_iterator __last)
     _LIBCUDAFORDALICXX_ASSERT(__first <= __last, "vector::erase(first, last) called with invalid range");
     pointer __p = this->__begin_ + (__first - begin());
     if (__first != __last) {
-        this->__destruct_at_end(_CUDA_VSTD::move(__p + (__last - __first), this->__end_, __p));
+        this->__destruct_at_end(_CUDA_FOR_DALI_VSTD::move(__p + (__last - __first), this->__end_, __p));
         this->__invalidate_iterators_past(__p - 1);
     }
     iterator __r = __make_iter(__p);
@@ -1753,11 +1753,11 @@ vector<_Tp, _Allocator>::__move_range(pointer __from_s, pointer __from_e, pointe
       _ConstructTransaction __tx(*this, __from_e - __i);
       for (; __i < __from_e; ++__i, ++__tx.__pos_) {
           __alloc_traits::construct(this->__alloc(),
-                                    _CUDA_VSTD::__to_raw_pointer(__tx.__pos_),
-                                    _CUDA_VSTD::move(*__i));
+                                    _CUDA_FOR_DALI_VSTD::__to_raw_pointer(__tx.__pos_),
+                                    _CUDA_FOR_DALI_VSTD::move(*__i));
       }
     }
-    _CUDA_VSTD::move_backward(__from_s, __from_s + __n, __old_last);
+    _CUDA_FOR_DALI_VSTD::move_backward(__from_s, __from_s + __n, __old_last);
 }
 
 template <class _Tp, class _Allocator>
@@ -1811,19 +1811,19 @@ vector<_Tp, _Allocator>::insert(const_iterator __position, value_type&& __x)
     {
         if (__p == this->__end_)
         {
-            __construct_one_at_end(_CUDA_VSTD::move(__x));
+            __construct_one_at_end(_CUDA_FOR_DALI_VSTD::move(__x));
         }
         else
         {
             __move_range(__p, this->__end_, __p + 1);
-            *__p = _CUDA_VSTD::move(__x);
+            *__p = _CUDA_FOR_DALI_VSTD::move(__x);
         }
     }
     else
     {
         allocator_type& __a = this->__alloc();
         __split_buffer<value_type, allocator_type&> __v(__recommend(size() + 1), __p - this->__begin_, __a);
-        __v.push_back(_CUDA_VSTD::move(__x));
+        __v.push_back(_CUDA_FOR_DALI_VSTD::move(__x));
         __p = __swap_out_circular_buffer(__v, __p);
     }
     return __make_iter(__p);
@@ -1844,20 +1844,20 @@ vector<_Tp, _Allocator>::emplace(const_iterator __position, _Args&&... __args)
     {
         if (__p == this->__end_)
         {
-            __construct_one_at_end(_CUDA_VSTD::forward<_Args>(__args)...);
+            __construct_one_at_end(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
         }
         else
         {
-            __temp_value<value_type, _Allocator> __tmp(this->__alloc(), _CUDA_VSTD::forward<_Args>(__args)...);
+            __temp_value<value_type, _Allocator> __tmp(this->__alloc(), _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
             __move_range(__p, this->__end_, __p + 1);
-            *__p = _CUDA_VSTD::move(__tmp.get());
+            *__p = _CUDA_FOR_DALI_VSTD::move(__tmp.get());
         }
     }
     else
     {
         allocator_type& __a = this->__alloc();
         __split_buffer<value_type, allocator_type&> __v(__recommend(size() + 1), __p - this->__begin_, __a);
-        __v.emplace_back(_CUDA_VSTD::forward<_Args>(__args)...);
+        __v.emplace_back(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
         __p = __swap_out_circular_buffer(__v, __p);
     }
     return __make_iter(__p);
@@ -1893,7 +1893,7 @@ vector<_Tp, _Allocator>::insert(const_iterator __position, size_type __n, const_
                 const_pointer __xr = pointer_traits<const_pointer>::pointer_to(__x);
                 if (__p <= __xr && __xr < this->__end_)
                     __xr += __old_n;
-                _CUDA_VSTD::fill_n(__p, __n, *__xr);
+                _CUDA_FOR_DALI_VSTD::fill_n(__p, __n, *__xr);
             }
         }
         else
@@ -1955,7 +1955,7 @@ vector<_Tp, _Allocator>::insert(const_iterator __position, _InputIterator __firs
         }
 #endif  // _LIBCUDAFORDALICXX_NO_EXCEPTIONS
     }
-    __p = _CUDA_VSTD::rotate(__p, __old_last, this->__end_);
+    __p = _CUDA_FOR_DALI_VSTD::rotate(__p, __old_last, this->__end_);
     insert(__make_iter(__p), make_move_iterator(__v.begin()),
                                     make_move_iterator(__v.end()));
     return begin() + __off;
@@ -1979,7 +1979,7 @@ vector<_Tp, _Allocator>::insert(const_iterator __position, _ForwardIterator __fi
         " referring to this vector");
 #endif
     pointer __p = this->__begin_ + (__position - begin());
-    difference_type __n = _CUDA_VSTD::distance(__first, __last);
+    difference_type __n = _CUDA_FOR_DALI_VSTD::distance(__first, __last);
     if (__n > 0)
     {
         if (__n <= this->__end_cap() - this->__end_)
@@ -1992,14 +1992,14 @@ vector<_Tp, _Allocator>::insert(const_iterator __position, _ForwardIterator __fi
             {
                 __m = __first;
                 difference_type __diff = this->__end_ - __p;
-                _CUDA_VSTD::advance(__m, __diff);
+                _CUDA_FOR_DALI_VSTD::advance(__m, __diff);
                 __construct_at_end(__m, __last, __n - __diff);
                 __n = __dx;
             }
             if (__n > 0)
             {
                 __move_range(__p, __old_last, __p + __old_n);
-                _CUDA_VSTD::copy(__first, __m, __p);
+                _CUDA_FOR_DALI_VSTD::copy(__first, __m, __p);
             }
         }
         else
@@ -2049,9 +2049,9 @@ vector<_Tp, _Allocator>::swap(vector& __x)
                    this->__alloc() == __x.__alloc(),
                    "vector::swap: Either propagate_on_container_swap must be true"
                    " or the allocators must compare equal");
-    _CUDA_VSTD::swap(this->__begin_, __x.__begin_);
-    _CUDA_VSTD::swap(this->__end_, __x.__end_);
-    _CUDA_VSTD::swap(this->__end_cap(), __x.__end_cap());
+    _CUDA_FOR_DALI_VSTD::swap(this->__begin_, __x.__begin_);
+    _CUDA_FOR_DALI_VSTD::swap(this->__end_, __x.__end_);
+    _CUDA_FOR_DALI_VSTD::swap(this->__end_cap(), __x.__end_cap());
     __swap_allocator(this->__alloc(), __x.__alloc(),
         integral_constant<bool,__alloc_traits::propagate_on_container_swap::value>());
 #if _LIBCUDAFORDALICXX_DEBUG_LEVEL >= 2
@@ -2174,8 +2174,8 @@ public:
     typedef __bit_iterator<vector, true>             const_pointer;
     typedef pointer                                  iterator;
     typedef const_pointer                            const_iterator;
-    typedef _CUDA_VSTD::reverse_iterator<iterator>         reverse_iterator;
-    typedef _CUDA_VSTD::reverse_iterator<const_iterator>   const_reverse_iterator;
+    typedef _CUDA_FOR_DALI_VSTD::reverse_iterator<iterator>         reverse_iterator;
+    typedef _CUDA_FOR_DALI_VSTD::reverse_iterator<const_iterator>   const_reverse_iterator;
 
 private:
     typedef typename __rebind_alloc_helper<__alloc_traits, __storage_type>::type __storage_allocator;
@@ -2368,7 +2368,7 @@ public:
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY void      emplace_back(_Args&&... __args)
 #endif
     {
-        push_back ( value_type ( _CUDA_VSTD::forward<_Args>(__args)... ));
+        push_back ( value_type ( _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)... ));
 #if _LIBCUDAFORDALICXX_STD_VER > 14
         return this->back();
 #endif
@@ -2380,7 +2380,7 @@ public:
 #if _LIBCUDAFORDALICXX_STD_VER > 11
     template <class... _Args>
    _LIBCUDAFORDALICXX_INLINE_VISIBILITY iterator emplace(const_iterator position, _Args&&... __args)
-        { return insert ( position, value_type ( _CUDA_VSTD::forward<_Args>(__args)... )); }
+        { return insert ( position, value_type ( _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)... )); }
 #endif
 
     iterator insert(const_iterator __position, const value_type& __x);
@@ -2421,7 +2421,7 @@ public:
         _NOEXCEPT_(!__alloc_traits::propagate_on_container_swap::value ||
                     __is_nothrow_swappable<allocator_type>::value);
 #endif
-    static void swap(reference __x, reference __y) _NOEXCEPT { _CUDA_VSTD::swap(__x, __y); }
+    static void swap(reference __x, reference __y) _NOEXCEPT { _CUDA_FOR_DALI_VSTD::swap(__x, __y); }
 
     void resize(size_type __sz, value_type __x = false);
     void flip() _NOEXCEPT;
@@ -2491,7 +2491,7 @@ private:
     void __move_assign_alloc(vector& __c, true_type)
         _NOEXCEPT_(is_nothrow_move_assignable<allocator_type>::value)
         {
-            __alloc() = _CUDA_VSTD::move(__c.__alloc());
+            __alloc() = _CUDA_FOR_DALI_VSTD::move(__c.__alloc());
         }
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -2571,7 +2571,7 @@ vector<bool, _Allocator>::__recommend(size_type __new_size) const
     const size_type __cap = capacity();
     if (__cap >= __ms / 2)
         return __ms;
-    return _CUDA_VSTD::max(2*__cap, __align_it(__new_size));
+    return _CUDA_FOR_DALI_VSTD::max(2*__cap, __align_it(__new_size));
 }
 
 //  Default constructs __n objects starting at __end_
@@ -2592,7 +2592,7 @@ vector<bool, _Allocator>::__construct_at_end(size_type __n, bool __x)
         else
             this->__begin_[(this->__size_ - 1) / __bits_per_word] = __storage_type(0);
     }
-    _CUDA_VSTD::fill_n(__make_iter(__old_size), __n, __x);
+    _CUDA_FOR_DALI_VSTD::fill_n(__make_iter(__old_size), __n, __x);
 }
 
 template <class _Allocator>
@@ -2605,7 +2605,7 @@ typename enable_if
 vector<bool, _Allocator>::__construct_at_end(_ForwardIterator __first, _ForwardIterator __last)
 {
     size_type __old_size = this->__size_;
-    this->__size_ += _CUDA_VSTD::distance(__first, __last);
+    this->__size_ += _CUDA_FOR_DALI_VSTD::distance(__first, __last);
     if (__old_size == 0 || ((__old_size - 1) / __bits_per_word) != ((this->__size_ - 1) / __bits_per_word))
     {
         if (this->__size_ <= __bits_per_word)
@@ -2613,7 +2613,7 @@ vector<bool, _Allocator>::__construct_at_end(_ForwardIterator __first, _ForwardI
         else
             this->__begin_[(this->__size_ - 1) / __bits_per_word] = __storage_type(0);
     }
-    _CUDA_VSTD::copy(__first, __last, __make_iter(__old_size));
+    _CUDA_FOR_DALI_VSTD::copy(__first, __last, __make_iter(__old_size));
 }
 
 template <class _Allocator>
@@ -2756,7 +2756,7 @@ vector<bool, _Allocator>::vector(_ForwardIterator __first, _ForwardIterator __la
       __size_(0),
       __cap_alloc_(0)
 {
-    size_type __n = static_cast<size_type>(_CUDA_VSTD::distance(__first, __last));
+    size_type __n = static_cast<size_type>(_CUDA_FOR_DALI_VSTD::distance(__first, __last));
     if (__n > 0)
     {
         __vallocate(__n);
@@ -2772,7 +2772,7 @@ vector<bool, _Allocator>::vector(_ForwardIterator __first, _ForwardIterator __la
       __size_(0),
       __cap_alloc_(0, static_cast<__storage_allocator>(__a))
 {
-    size_type __n = static_cast<size_type>(_CUDA_VSTD::distance(__first, __last));
+    size_type __n = static_cast<size_type>(_CUDA_FOR_DALI_VSTD::distance(__first, __last));
     if (__n > 0)
     {
         __vallocate(__n);
@@ -2860,7 +2860,7 @@ vector<bool, _Allocator>::operator=(const vector& __v)
                 __vdeallocate();
                 __vallocate(__v.__size_);
             }
-            _CUDA_VSTD::copy(__v.__begin_, __v.__begin_ + __external_cap_to_internal(__v.__size_), __begin_);
+            _CUDA_FOR_DALI_VSTD::copy(__v.__begin_, __v.__begin_ + __external_cap_to_internal(__v.__size_), __begin_);
         }
         __size_ = __v.__size_;
     }
@@ -2959,7 +2959,7 @@ vector<bool, _Allocator>::assign(size_type __n, const value_type& __x)
             __v.__size_ = __n;
             swap(__v);
         }
-        _CUDA_VSTD::fill_n(begin(), __n, __x);
+        _CUDA_FOR_DALI_VSTD::fill_n(begin(), __n, __x);
     }
   __invalidate_all_iterators();
 }
@@ -2989,7 +2989,7 @@ typename enable_if
 vector<bool, _Allocator>::assign(_ForwardIterator __first, _ForwardIterator __last)
 {
     clear();
-    difference_type __ns = _CUDA_VSTD::distance(__first, __last);
+    difference_type __ns = _CUDA_FOR_DALI_VSTD::distance(__first, __last);
     _LIBCUDAFORDALICXX_ASSERT(__ns >= 0, "invalid range specified");
     const size_t __n = static_cast<size_type>(__ns);
     if (__n)
@@ -3074,7 +3074,7 @@ vector<bool, _Allocator>::insert(const_iterator __position, const value_type& __
     {
         const_iterator __old_end = end();
         ++__size_;
-        _CUDA_VSTD::copy_backward(__position, __old_end, end());
+        _CUDA_FOR_DALI_VSTD::copy_backward(__position, __old_end, end());
         __r = __const_iterator_cast(__position);
     }
     else
@@ -3082,8 +3082,8 @@ vector<bool, _Allocator>::insert(const_iterator __position, const value_type& __
         vector __v(__alloc());
         __v.reserve(__recommend(__size_ + 1));
         __v.__size_ = __size_ + 1;
-        __r = _CUDA_VSTD::copy(cbegin(), __position, __v.begin());
-        _CUDA_VSTD::copy_backward(__position, cend(), __v.end());
+        __r = _CUDA_FOR_DALI_VSTD::copy(cbegin(), __position, __v.begin());
+        _CUDA_FOR_DALI_VSTD::copy_backward(__position, cend(), __v.end());
         swap(__v);
     }
     *__r = __x;
@@ -3100,7 +3100,7 @@ vector<bool, _Allocator>::insert(const_iterator __position, size_type __n, const
     {
         const_iterator __old_end = end();
         __size_ += __n;
-        _CUDA_VSTD::copy_backward(__position, __old_end, end());
+        _CUDA_FOR_DALI_VSTD::copy_backward(__position, __old_end, end());
         __r = __const_iterator_cast(__position);
     }
     else
@@ -3108,11 +3108,11 @@ vector<bool, _Allocator>::insert(const_iterator __position, size_type __n, const
         vector __v(__alloc());
         __v.reserve(__recommend(__size_ + __n));
         __v.__size_ = __size_ + __n;
-        __r = _CUDA_VSTD::copy(cbegin(), __position, __v.begin());
-        _CUDA_VSTD::copy_backward(__position, cend(), __v.end());
+        __r = _CUDA_FOR_DALI_VSTD::copy(cbegin(), __position, __v.begin());
+        _CUDA_FOR_DALI_VSTD::copy_backward(__position, cend(), __v.end());
         swap(__v);
     }
-    _CUDA_VSTD::fill_n(__r, __n, __x);
+    _CUDA_FOR_DALI_VSTD::fill_n(__r, __n, __x);
     return __r;
 }
 
@@ -3156,7 +3156,7 @@ vector<bool, _Allocator>::insert(const_iterator __position, _InputIterator __fir
         }
 #endif  // _LIBCUDAFORDALICXX_NO_EXCEPTIONS
     }
-    __p = _CUDA_VSTD::rotate(__p, __old_end, end());
+    __p = _CUDA_FOR_DALI_VSTD::rotate(__p, __old_end, end());
     insert(__p, __v.begin(), __v.end());
     return begin() + __off;
 }
@@ -3170,7 +3170,7 @@ typename enable_if
 >::type
 vector<bool, _Allocator>::insert(const_iterator __position, _ForwardIterator __first, _ForwardIterator __last)
 {
-    const difference_type __n_signed = _CUDA_VSTD::distance(__first, __last);
+    const difference_type __n_signed = _CUDA_FOR_DALI_VSTD::distance(__first, __last);
     _LIBCUDAFORDALICXX_ASSERT(__n_signed >= 0, "invalid range specified");
     const size_type __n = static_cast<size_type>(__n_signed);
     iterator __r;
@@ -3179,7 +3179,7 @@ vector<bool, _Allocator>::insert(const_iterator __position, _ForwardIterator __f
     {
         const_iterator __old_end = end();
         __size_ += __n;
-        _CUDA_VSTD::copy_backward(__position, __old_end, end());
+        _CUDA_FOR_DALI_VSTD::copy_backward(__position, __old_end, end());
         __r = __const_iterator_cast(__position);
     }
     else
@@ -3187,11 +3187,11 @@ vector<bool, _Allocator>::insert(const_iterator __position, _ForwardIterator __f
         vector __v(__alloc());
         __v.reserve(__recommend(__size_ + __n));
         __v.__size_ = __size_ + __n;
-        __r = _CUDA_VSTD::copy(cbegin(), __position, __v.begin());
-        _CUDA_VSTD::copy_backward(__position, cend(), __v.end());
+        __r = _CUDA_FOR_DALI_VSTD::copy(cbegin(), __position, __v.begin());
+        _CUDA_FOR_DALI_VSTD::copy_backward(__position, cend(), __v.end());
         swap(__v);
     }
-    _CUDA_VSTD::copy(__first, __last, __r);
+    _CUDA_FOR_DALI_VSTD::copy(__first, __last, __r);
     return __r;
 }
 
@@ -3201,7 +3201,7 @@ typename vector<bool, _Allocator>::iterator
 vector<bool, _Allocator>::erase(const_iterator __position)
 {
     iterator __r = __const_iterator_cast(__position);
-    _CUDA_VSTD::copy(__position + 1, this->cend(), __r);
+    _CUDA_FOR_DALI_VSTD::copy(__position + 1, this->cend(), __r);
     --__size_;
     return __r;
 }
@@ -3212,7 +3212,7 @@ vector<bool, _Allocator>::erase(const_iterator __first, const_iterator __last)
 {
     iterator __r = __const_iterator_cast(__first);
     difference_type __d = __last - __first;
-    _CUDA_VSTD::copy(__last, this->cend(), __r);
+    _CUDA_FOR_DALI_VSTD::copy(__last, this->cend(), __r);
     __size_ -= __d;
     return __r;
 }
@@ -3227,9 +3227,9 @@ vector<bool, _Allocator>::swap(vector& __x)
                 __is_nothrow_swappable<allocator_type>::value)
 #endif
 {
-    _CUDA_VSTD::swap(this->__begin_, __x.__begin_);
-    _CUDA_VSTD::swap(this->__size_, __x.__size_);
-    _CUDA_VSTD::swap(this->__cap(), __x.__cap());
+    _CUDA_FOR_DALI_VSTD::swap(this->__begin_, __x.__begin_);
+    _CUDA_FOR_DALI_VSTD::swap(this->__size_, __x.__size_);
+    _CUDA_FOR_DALI_VSTD::swap(this->__cap(), __x.__cap());
     __swap_allocator(this->__alloc(), __x.__alloc(),
         integral_constant<bool, __alloc_traits::propagate_on_container_swap::value>());
 }
@@ -3254,10 +3254,10 @@ vector<bool, _Allocator>::resize(size_type __sz, value_type __x)
             vector __v(__alloc());
             __v.reserve(__recommend(__size_ + __n));
             __v.__size_ = __size_ + __n;
-            __r = _CUDA_VSTD::copy(cbegin(), cend(), __v.begin());
+            __r = _CUDA_FOR_DALI_VSTD::copy(cbegin(), cend(), __v.begin());
             swap(__v);
         }
-        _CUDA_VSTD::fill_n(__r, __n, __x);
+        _CUDA_FOR_DALI_VSTD::fill_n(__r, __n, __x);
     }
     else
         __size_ = __sz;
@@ -3335,7 +3335,7 @@ bool
 operator==(const vector<_Tp, _Allocator>& __x, const vector<_Tp, _Allocator>& __y)
 {
     const typename vector<_Tp, _Allocator>::size_type __sz = __x.size();
-    return __sz == __y.size() && _CUDA_VSTD::equal(__x.begin(), __x.end(), __y.begin());
+    return __sz == __y.size() && _CUDA_FOR_DALI_VSTD::equal(__x.begin(), __x.end(), __y.begin());
 }
 
 template <class _Tp, class _Allocator>
@@ -3351,7 +3351,7 @@ inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 bool
 operator< (const vector<_Tp, _Allocator>& __x, const vector<_Tp, _Allocator>& __y)
 {
-    return _CUDA_VSTD::lexicographical_compare(__x.begin(), __x.end(), __y.begin(), __y.end());
+    return _CUDA_FOR_DALI_VSTD::lexicographical_compare(__x.begin(), __x.end(), __y.begin(), __y.end());
 }
 
 template <class _Tp, class _Allocator>
@@ -3391,12 +3391,12 @@ swap(vector<_Tp, _Allocator>& __x, vector<_Tp, _Allocator>& __y)
 template <class _Tp, class _Allocator, class _Up>
 inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 void erase(vector<_Tp, _Allocator>& __c, const _Up& __v)
-{ __c.erase(_CUDA_VSTD::remove(__c.begin(), __c.end(), __v), __c.end()); }
+{ __c.erase(_CUDA_FOR_DALI_VSTD::remove(__c.begin(), __c.end(), __v), __c.end()); }
 
 template <class _Tp, class _Allocator, class _Predicate>
 inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 void erase_if(vector<_Tp, _Allocator>& __c, _Predicate __pred)
-{ __c.erase(_CUDA_VSTD::remove_if(__c.begin(), __c.end(), __pred), __c.end()); }
+{ __c.erase(_CUDA_FOR_DALI_VSTD::remove_if(__c.begin(), __c.end(), __pred), __c.end()); }
 #endif
 
 _LIBCUDAFORDALICXX_END_NAMESPACE_STD

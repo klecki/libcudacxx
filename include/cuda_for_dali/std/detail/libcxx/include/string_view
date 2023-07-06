@@ -203,7 +203,7 @@ public:
     typedef const _CharT&                              const_reference;
     typedef const_pointer                              const_iterator; // See [string.view.iterators]
     typedef const_iterator                             iterator;
-    typedef _CUDA_VSTD::reverse_iterator<const_iterator>    const_reverse_iterator;
+    typedef _CUDA_FOR_DALI_VSTD::reverse_iterator<const_iterator>    const_reverse_iterator;
     typedef const_reverse_iterator                     reverse_iterator;
     typedef size_t                                     size_type;
     typedef ptrdiff_t                                  difference_type;
@@ -336,7 +336,7 @@ public:
     {
         if (__pos > size())
             __throw_out_of_range("string_view::copy");
-        size_type __rlen = _CUDA_VSTD::min(__n, size() - __pos);
+        size_type __rlen = _CUDA_FOR_DALI_VSTD::min(__n, size() - __pos);
         _Traits::copy(__s, data() + __pos, __rlen);
         return __rlen;
     }
@@ -346,12 +346,12 @@ public:
     {
         return __pos > size()
             ? (__throw_out_of_range("string_view::substr"), basic_string_view())
-            : basic_string_view(data() + __pos, _CUDA_VSTD::min(__n, size() - __pos));
+            : basic_string_view(data() + __pos, _CUDA_FOR_DALI_VSTD::min(__n, size() - __pos));
     }
 
     _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX11 int compare(basic_string_view __sv) const _NOEXCEPT
     {
-        size_type __rlen = _CUDA_VSTD::min( size(), __sv.size());
+        size_type __rlen = _CUDA_FOR_DALI_VSTD::min( size(), __sv.size());
         int __retval = _Traits::compare(data(), __sv.data(), __rlen);
         if ( __retval == 0 ) // first __rlen chars matched
             __retval = size() == __sv.size() ? 0 : ( size() < __sv.size() ? -1 : 1 );

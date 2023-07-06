@@ -255,7 +255,7 @@ condition_variable_any::wait_for(_Lock& __lock,
                                  _Predicate __pred)
 {
     return wait_until(__lock, chrono::steady_clock::now() + __d,
-                      _CUDA_VSTD::move(__pred));
+                      _CUDA_FOR_DALI_VSTD::move(__pred));
 }
 
 _LIBCUDAFORDALICXX_FUNC_VIS

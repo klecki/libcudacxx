@@ -10,7 +10,7 @@
 #ifndef _LIBCUDAFORDALICXX_THREADING_SUPPORT
 #define _LIBCUDAFORDALICXX_THREADING_SUPPORT
 
-#ifndef __cuda_std__
+#ifndef __cuda_for_dali_std__
 #include <__config>
 #include <chrono>
 #include <iosfwd>
@@ -24,7 +24,7 @@
 #endif
 
 #if defined(_LIBCUDAFORDALICXX_HAS_THREAD_API_EXTERNAL)
-# ifndef __cuda_std__
+# ifndef __cuda_for_dali_std__
 #  include <__external_threading>
 # else
 #  define _LIBCUDAFORDALICXX_THREAD_ABI_VISIBILITY inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -690,7 +690,7 @@ extern thread_local ptrdiff_t __libcpp_thread_favorite_barrier_index;
 
 #endif
 
-#ifndef __cuda_std__
+#ifndef __cuda_for_dali_std__
 
 class _LIBCUDAFORDALICXX_TYPE_VIS thread;
 class _LIBCUDAFORDALICXX_TYPE_VIS __thread_id;
@@ -745,7 +745,7 @@ public:
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     void __reset() { __id_ = 0; }
 
-#ifndef __cuda_std__
+#ifndef __cuda_for_dali_std__
     template<class _CharT, class _Traits>
     friend
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -774,13 +774,13 @@ get_id() _NOEXCEPT
 
 }  // this_thread
 
-#endif // __cuda_std__
+#endif // __cuda_for_dali_std__
 
 #endif // !_LIBCUDAFORDALICXX_HAS_NO_THREADS
 
 _LIBCUDAFORDALICXX_END_NAMESPACE_STD
 
-#ifndef __cuda_std__
+#ifndef __cuda_for_dali_std__
 #include <__pragma_pop>
 #endif
 

@@ -466,7 +466,7 @@ inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 void __unlock(_L0& __l0, _L1& __l1, _L2& __l2, _L3&... __l3) {
     __l0.unlock();
     __l1.unlock();
-    _CUDA_VSTD::__unlock(__l2, __l3...);
+    _CUDA_FOR_DALI_VSTD::__unlock(__l2, __l3...);
 }
 
 #endif  // _LIBCUDAFORDALICXX_CXX03_LANG
@@ -519,7 +519,7 @@ public:
     explicit scoped_lock(_MArgs&... __margs)
       : __t_(__margs...)
     {
-        _CUDA_VSTD::lock(__margs...);
+        _CUDA_FOR_DALI_VSTD::lock(__margs...);
     }
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -541,7 +541,7 @@ private:
     template <size_t ..._Indx>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     static void __unlock_unpack(__tuple_indices<_Indx...>, _MutexTuple& __mt) {
-        _CUDA_VSTD::__unlock(_CUDA_VSTD::get<_Indx>(__mt)...);
+        _CUDA_FOR_DALI_VSTD::__unlock(_CUDA_FOR_DALI_VSTD::get<_Indx>(__mt)...);
     }
 
     _MutexTuple __t_;
@@ -626,7 +626,7 @@ private:
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     void __execute(__tuple_indices<_Indices...>)
     {
-        __invoke(_CUDA_VSTD::get<0>(_CUDA_VSTD::move(__f_)), _CUDA_VSTD::get<_Indices>(_CUDA_VSTD::move(__f_))...);
+        __invoke(_CUDA_FOR_DALI_VSTD::get<0>(_CUDA_FOR_DALI_VSTD::move(__f_)), _CUDA_FOR_DALI_VSTD::get<_Indices>(_CUDA_FOR_DALI_VSTD::move(__f_))...);
     }
 };
 
@@ -670,7 +670,7 @@ call_once(once_flag& __flag, _Callable&& __func, _Args&&... __args)
     if (__libcpp_acquire_load(&__flag.__state_) != ~once_flag::_State_type(0))
     {
         typedef tuple<_Callable&&, _Args&&...> _Gp;
-        _Gp __f(_CUDA_VSTD::forward<_Callable>(__func), _CUDA_VSTD::forward<_Args>(__args)...);
+        _Gp __f(_CUDA_FOR_DALI_VSTD::forward<_Callable>(__func), _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
         __call_once_param<_Gp> __p(__f);
         __call_once(__flag.__state_, &__p, &__call_once_proxy<_Gp>);
     }

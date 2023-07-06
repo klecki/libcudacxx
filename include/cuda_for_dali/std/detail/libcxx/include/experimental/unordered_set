@@ -45,12 +45,12 @@ _LIBCUDAFORDALICXX_BEGIN_NAMESPACE_LFTS_PMR
 
 template <class _Value,
           class _Hash = hash<_Value>, class _Pred = equal_to<_Value>>
-using unordered_set = _CUDA_VSTD::unordered_set<_Value, _Hash, _Pred,
+using unordered_set = _CUDA_FOR_DALI_VSTD::unordered_set<_Value, _Hash, _Pred,
                         polymorphic_allocator<_Value>>;
 
 template <class _Value,
           class _Hash = hash<_Value>, class _Pred = equal_to<_Value>>
-using unordered_multiset = _CUDA_VSTD::unordered_multiset<_Value, _Hash, _Pred,
+using unordered_multiset = _CUDA_FOR_DALI_VSTD::unordered_multiset<_Value, _Hash, _Pred,
                         polymorphic_allocator<_Value>>;
 
 _LIBCUDAFORDALICXX_END_NAMESPACE_LFTS_PMR

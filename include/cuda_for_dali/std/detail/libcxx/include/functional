@@ -497,7 +497,7 @@ POLICY:  For non-variadic implementations, the number of arguments is limited
 
 */
 
-#ifndef __cuda_std__
+#ifndef __cuda_for_dali_std__
 #include <__config>
 #include <type_traits>
 #include <typeinfo>
@@ -535,9 +535,9 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS plus<void>
     template <class _T1, class _T2>
     _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX11 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     auto operator()(_T1&& __t, _T2&& __u) const
-    _NOEXCEPT_(noexcept(_CUDA_VSTD::forward<_T1>(__t) + _CUDA_VSTD::forward<_T2>(__u)))
-    -> decltype        (_CUDA_VSTD::forward<_T1>(__t) + _CUDA_VSTD::forward<_T2>(__u))
-        { return        _CUDA_VSTD::forward<_T1>(__t) + _CUDA_VSTD::forward<_T2>(__u); }
+    _NOEXCEPT_(noexcept(_CUDA_FOR_DALI_VSTD::forward<_T1>(__t) + _CUDA_FOR_DALI_VSTD::forward<_T2>(__u)))
+    -> decltype        (_CUDA_FOR_DALI_VSTD::forward<_T1>(__t) + _CUDA_FOR_DALI_VSTD::forward<_T2>(__u))
+        { return        _CUDA_FOR_DALI_VSTD::forward<_T1>(__t) + _CUDA_FOR_DALI_VSTD::forward<_T2>(__u); }
     typedef void is_transparent;
 };
 #endif
@@ -562,9 +562,9 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS minus<void>
     template <class _T1, class _T2>
     _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX11 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     auto operator()(_T1&& __t, _T2&& __u) const
-    _NOEXCEPT_(noexcept(_CUDA_VSTD::forward<_T1>(__t) - _CUDA_VSTD::forward<_T2>(__u)))
-    -> decltype        (_CUDA_VSTD::forward<_T1>(__t) - _CUDA_VSTD::forward<_T2>(__u))
-        { return        _CUDA_VSTD::forward<_T1>(__t) - _CUDA_VSTD::forward<_T2>(__u); }
+    _NOEXCEPT_(noexcept(_CUDA_FOR_DALI_VSTD::forward<_T1>(__t) - _CUDA_FOR_DALI_VSTD::forward<_T2>(__u)))
+    -> decltype        (_CUDA_FOR_DALI_VSTD::forward<_T1>(__t) - _CUDA_FOR_DALI_VSTD::forward<_T2>(__u))
+        { return        _CUDA_FOR_DALI_VSTD::forward<_T1>(__t) - _CUDA_FOR_DALI_VSTD::forward<_T2>(__u); }
     typedef void is_transparent;
 };
 #endif
@@ -589,9 +589,9 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS multiplies<void>
     template <class _T1, class _T2>
     _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX11 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     auto operator()(_T1&& __t, _T2&& __u) const
-    _NOEXCEPT_(noexcept(_CUDA_VSTD::forward<_T1>(__t) * _CUDA_VSTD::forward<_T2>(__u)))
-    -> decltype        (_CUDA_VSTD::forward<_T1>(__t) * _CUDA_VSTD::forward<_T2>(__u))
-        { return        _CUDA_VSTD::forward<_T1>(__t) * _CUDA_VSTD::forward<_T2>(__u); }
+    _NOEXCEPT_(noexcept(_CUDA_FOR_DALI_VSTD::forward<_T1>(__t) * _CUDA_FOR_DALI_VSTD::forward<_T2>(__u)))
+    -> decltype        (_CUDA_FOR_DALI_VSTD::forward<_T1>(__t) * _CUDA_FOR_DALI_VSTD::forward<_T2>(__u))
+        { return        _CUDA_FOR_DALI_VSTD::forward<_T1>(__t) * _CUDA_FOR_DALI_VSTD::forward<_T2>(__u); }
     typedef void is_transparent;
 };
 #endif
@@ -616,9 +616,9 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS divides<void>
     template <class _T1, class _T2>
     _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX11 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     auto operator()(_T1&& __t, _T2&& __u) const
-    _NOEXCEPT_(noexcept(_CUDA_VSTD::forward<_T1>(__t) / _CUDA_VSTD::forward<_T2>(__u)))
-    -> decltype        (_CUDA_VSTD::forward<_T1>(__t) / _CUDA_VSTD::forward<_T2>(__u))
-        { return        _CUDA_VSTD::forward<_T1>(__t) / _CUDA_VSTD::forward<_T2>(__u); }
+    _NOEXCEPT_(noexcept(_CUDA_FOR_DALI_VSTD::forward<_T1>(__t) / _CUDA_FOR_DALI_VSTD::forward<_T2>(__u)))
+    -> decltype        (_CUDA_FOR_DALI_VSTD::forward<_T1>(__t) / _CUDA_FOR_DALI_VSTD::forward<_T2>(__u))
+        { return        _CUDA_FOR_DALI_VSTD::forward<_T1>(__t) / _CUDA_FOR_DALI_VSTD::forward<_T2>(__u); }
     typedef void is_transparent;
 };
 #endif
@@ -643,9 +643,9 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS modulus<void>
     template <class _T1, class _T2>
     _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX11 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     auto operator()(_T1&& __t, _T2&& __u) const
-    _NOEXCEPT_(noexcept(_CUDA_VSTD::forward<_T1>(__t) % _CUDA_VSTD::forward<_T2>(__u)))
-    -> decltype        (_CUDA_VSTD::forward<_T1>(__t) % _CUDA_VSTD::forward<_T2>(__u))
-        { return        _CUDA_VSTD::forward<_T1>(__t) % _CUDA_VSTD::forward<_T2>(__u); }
+    _NOEXCEPT_(noexcept(_CUDA_FOR_DALI_VSTD::forward<_T1>(__t) % _CUDA_FOR_DALI_VSTD::forward<_T2>(__u)))
+    -> decltype        (_CUDA_FOR_DALI_VSTD::forward<_T1>(__t) % _CUDA_FOR_DALI_VSTD::forward<_T2>(__u))
+        { return        _CUDA_FOR_DALI_VSTD::forward<_T1>(__t) % _CUDA_FOR_DALI_VSTD::forward<_T2>(__u); }
     typedef void is_transparent;
 };
 #endif
@@ -670,9 +670,9 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS negate<void>
     template <class _Tp>
     _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX11 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     auto operator()(_Tp&& __x) const
-    _NOEXCEPT_(noexcept(- _CUDA_VSTD::forward<_Tp>(__x)))
-    -> decltype        (- _CUDA_VSTD::forward<_Tp>(__x))
-        { return        - _CUDA_VSTD::forward<_Tp>(__x); }
+    _NOEXCEPT_(noexcept(- _CUDA_FOR_DALI_VSTD::forward<_Tp>(__x)))
+    -> decltype        (- _CUDA_FOR_DALI_VSTD::forward<_Tp>(__x))
+        { return        - _CUDA_FOR_DALI_VSTD::forward<_Tp>(__x); }
     typedef void is_transparent;
 };
 #endif
@@ -697,9 +697,9 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS equal_to<void>
     template <class _T1, class _T2>
     _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX11 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     auto operator()(_T1&& __t, _T2&& __u) const
-    _NOEXCEPT_(noexcept(_CUDA_VSTD::forward<_T1>(__t) == _CUDA_VSTD::forward<_T2>(__u)))
-    -> decltype        (_CUDA_VSTD::forward<_T1>(__t) == _CUDA_VSTD::forward<_T2>(__u))
-        { return        _CUDA_VSTD::forward<_T1>(__t) == _CUDA_VSTD::forward<_T2>(__u); }
+    _NOEXCEPT_(noexcept(_CUDA_FOR_DALI_VSTD::forward<_T1>(__t) == _CUDA_FOR_DALI_VSTD::forward<_T2>(__u)))
+    -> decltype        (_CUDA_FOR_DALI_VSTD::forward<_T1>(__t) == _CUDA_FOR_DALI_VSTD::forward<_T2>(__u))
+        { return        _CUDA_FOR_DALI_VSTD::forward<_T1>(__t) == _CUDA_FOR_DALI_VSTD::forward<_T2>(__u); }
     typedef void is_transparent;
 };
 #endif
@@ -724,9 +724,9 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS not_equal_to<void>
     template <class _T1, class _T2>
     _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX11 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     auto operator()(_T1&& __t, _T2&& __u) const
-    _NOEXCEPT_(noexcept(_CUDA_VSTD::forward<_T1>(__t) != _CUDA_VSTD::forward<_T2>(__u)))
-    -> decltype        (_CUDA_VSTD::forward<_T1>(__t) != _CUDA_VSTD::forward<_T2>(__u))
-        { return        _CUDA_VSTD::forward<_T1>(__t) != _CUDA_VSTD::forward<_T2>(__u); }
+    _NOEXCEPT_(noexcept(_CUDA_FOR_DALI_VSTD::forward<_T1>(__t) != _CUDA_FOR_DALI_VSTD::forward<_T2>(__u)))
+    -> decltype        (_CUDA_FOR_DALI_VSTD::forward<_T1>(__t) != _CUDA_FOR_DALI_VSTD::forward<_T2>(__u))
+        { return        _CUDA_FOR_DALI_VSTD::forward<_T1>(__t) != _CUDA_FOR_DALI_VSTD::forward<_T2>(__u); }
     typedef void is_transparent;
 };
 #endif
@@ -751,9 +751,9 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS greater<void>
     template <class _T1, class _T2>
     _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX11 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     auto operator()(_T1&& __t, _T2&& __u) const
-    _NOEXCEPT_(noexcept(_CUDA_VSTD::forward<_T1>(__t) > _CUDA_VSTD::forward<_T2>(__u)))
-    -> decltype        (_CUDA_VSTD::forward<_T1>(__t) > _CUDA_VSTD::forward<_T2>(__u))
-        { return        _CUDA_VSTD::forward<_T1>(__t) > _CUDA_VSTD::forward<_T2>(__u); }
+    _NOEXCEPT_(noexcept(_CUDA_FOR_DALI_VSTD::forward<_T1>(__t) > _CUDA_FOR_DALI_VSTD::forward<_T2>(__u)))
+    -> decltype        (_CUDA_FOR_DALI_VSTD::forward<_T1>(__t) > _CUDA_FOR_DALI_VSTD::forward<_T2>(__u))
+        { return        _CUDA_FOR_DALI_VSTD::forward<_T1>(__t) > _CUDA_FOR_DALI_VSTD::forward<_T2>(__u); }
     typedef void is_transparent;
 };
 #endif
@@ -780,9 +780,9 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS greater_equal<void>
     template <class _T1, class _T2>
     _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX11 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     auto operator()(_T1&& __t, _T2&& __u) const
-    _NOEXCEPT_(noexcept(_CUDA_VSTD::forward<_T1>(__t) >= _CUDA_VSTD::forward<_T2>(__u)))
-    -> decltype        (_CUDA_VSTD::forward<_T1>(__t) >= _CUDA_VSTD::forward<_T2>(__u))
-        { return        _CUDA_VSTD::forward<_T1>(__t) >= _CUDA_VSTD::forward<_T2>(__u); }
+    _NOEXCEPT_(noexcept(_CUDA_FOR_DALI_VSTD::forward<_T1>(__t) >= _CUDA_FOR_DALI_VSTD::forward<_T2>(__u)))
+    -> decltype        (_CUDA_FOR_DALI_VSTD::forward<_T1>(__t) >= _CUDA_FOR_DALI_VSTD::forward<_T2>(__u))
+        { return        _CUDA_FOR_DALI_VSTD::forward<_T1>(__t) >= _CUDA_FOR_DALI_VSTD::forward<_T2>(__u); }
     typedef void is_transparent;
 };
 #endif
@@ -807,9 +807,9 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS less_equal<void>
     template <class _T1, class _T2>
     _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX11 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     auto operator()(_T1&& __t, _T2&& __u) const
-    _NOEXCEPT_(noexcept(_CUDA_VSTD::forward<_T1>(__t) <= _CUDA_VSTD::forward<_T2>(__u)))
-    -> decltype        (_CUDA_VSTD::forward<_T1>(__t) <= _CUDA_VSTD::forward<_T2>(__u))
-        { return        _CUDA_VSTD::forward<_T1>(__t) <= _CUDA_VSTD::forward<_T2>(__u); }
+    _NOEXCEPT_(noexcept(_CUDA_FOR_DALI_VSTD::forward<_T1>(__t) <= _CUDA_FOR_DALI_VSTD::forward<_T2>(__u)))
+    -> decltype        (_CUDA_FOR_DALI_VSTD::forward<_T1>(__t) <= _CUDA_FOR_DALI_VSTD::forward<_T2>(__u))
+        { return        _CUDA_FOR_DALI_VSTD::forward<_T1>(__t) <= _CUDA_FOR_DALI_VSTD::forward<_T2>(__u); }
     typedef void is_transparent;
 };
 #endif
@@ -834,9 +834,9 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS logical_and<void>
     template <class _T1, class _T2>
     _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX11 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     auto operator()(_T1&& __t, _T2&& __u) const
-    _NOEXCEPT_(noexcept(_CUDA_VSTD::forward<_T1>(__t) && _CUDA_VSTD::forward<_T2>(__u)))
-    -> decltype        (_CUDA_VSTD::forward<_T1>(__t) && _CUDA_VSTD::forward<_T2>(__u))
-        { return        _CUDA_VSTD::forward<_T1>(__t) && _CUDA_VSTD::forward<_T2>(__u); }
+    _NOEXCEPT_(noexcept(_CUDA_FOR_DALI_VSTD::forward<_T1>(__t) && _CUDA_FOR_DALI_VSTD::forward<_T2>(__u)))
+    -> decltype        (_CUDA_FOR_DALI_VSTD::forward<_T1>(__t) && _CUDA_FOR_DALI_VSTD::forward<_T2>(__u))
+        { return        _CUDA_FOR_DALI_VSTD::forward<_T1>(__t) && _CUDA_FOR_DALI_VSTD::forward<_T2>(__u); }
     typedef void is_transparent;
 };
 #endif
@@ -861,9 +861,9 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS logical_or<void>
     template <class _T1, class _T2>
     _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX11 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     auto operator()(_T1&& __t, _T2&& __u) const
-    _NOEXCEPT_(noexcept(_CUDA_VSTD::forward<_T1>(__t) || _CUDA_VSTD::forward<_T2>(__u)))
-    -> decltype        (_CUDA_VSTD::forward<_T1>(__t) || _CUDA_VSTD::forward<_T2>(__u))
-        { return        _CUDA_VSTD::forward<_T1>(__t) || _CUDA_VSTD::forward<_T2>(__u); }
+    _NOEXCEPT_(noexcept(_CUDA_FOR_DALI_VSTD::forward<_T1>(__t) || _CUDA_FOR_DALI_VSTD::forward<_T2>(__u)))
+    -> decltype        (_CUDA_FOR_DALI_VSTD::forward<_T1>(__t) || _CUDA_FOR_DALI_VSTD::forward<_T2>(__u))
+        { return        _CUDA_FOR_DALI_VSTD::forward<_T1>(__t) || _CUDA_FOR_DALI_VSTD::forward<_T2>(__u); }
     typedef void is_transparent;
 };
 #endif
@@ -888,9 +888,9 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS logical_not<void>
     template <class _Tp>
     _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX11 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     auto operator()(_Tp&& __x) const
-    _NOEXCEPT_(noexcept(!_CUDA_VSTD::forward<_Tp>(__x)))
-    -> decltype        (!_CUDA_VSTD::forward<_Tp>(__x))
-        { return        !_CUDA_VSTD::forward<_Tp>(__x); }
+    _NOEXCEPT_(noexcept(!_CUDA_FOR_DALI_VSTD::forward<_Tp>(__x)))
+    -> decltype        (!_CUDA_FOR_DALI_VSTD::forward<_Tp>(__x))
+        { return        !_CUDA_FOR_DALI_VSTD::forward<_Tp>(__x); }
     typedef void is_transparent;
 };
 #endif
@@ -915,9 +915,9 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS bit_and<void>
     template <class _T1, class _T2>
     _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX11 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     auto operator()(_T1&& __t, _T2&& __u) const
-    _NOEXCEPT_(noexcept(_CUDA_VSTD::forward<_T1>(__t) & _CUDA_VSTD::forward<_T2>(__u)))
-    -> decltype        (_CUDA_VSTD::forward<_T1>(__t) & _CUDA_VSTD::forward<_T2>(__u))
-        { return        _CUDA_VSTD::forward<_T1>(__t) & _CUDA_VSTD::forward<_T2>(__u); }
+    _NOEXCEPT_(noexcept(_CUDA_FOR_DALI_VSTD::forward<_T1>(__t) & _CUDA_FOR_DALI_VSTD::forward<_T2>(__u)))
+    -> decltype        (_CUDA_FOR_DALI_VSTD::forward<_T1>(__t) & _CUDA_FOR_DALI_VSTD::forward<_T2>(__u))
+        { return        _CUDA_FOR_DALI_VSTD::forward<_T1>(__t) & _CUDA_FOR_DALI_VSTD::forward<_T2>(__u); }
     typedef void is_transparent;
 };
 #endif
@@ -942,9 +942,9 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS bit_or<void>
     template <class _T1, class _T2>
     _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX11 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     auto operator()(_T1&& __t, _T2&& __u) const
-    _NOEXCEPT_(noexcept(_CUDA_VSTD::forward<_T1>(__t) | _CUDA_VSTD::forward<_T2>(__u)))
-    -> decltype        (_CUDA_VSTD::forward<_T1>(__t) | _CUDA_VSTD::forward<_T2>(__u))
-        { return        _CUDA_VSTD::forward<_T1>(__t) | _CUDA_VSTD::forward<_T2>(__u); }
+    _NOEXCEPT_(noexcept(_CUDA_FOR_DALI_VSTD::forward<_T1>(__t) | _CUDA_FOR_DALI_VSTD::forward<_T2>(__u)))
+    -> decltype        (_CUDA_FOR_DALI_VSTD::forward<_T1>(__t) | _CUDA_FOR_DALI_VSTD::forward<_T2>(__u))
+        { return        _CUDA_FOR_DALI_VSTD::forward<_T1>(__t) | _CUDA_FOR_DALI_VSTD::forward<_T2>(__u); }
     typedef void is_transparent;
 };
 #endif
@@ -969,9 +969,9 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS bit_xor<void>
     template <class _T1, class _T2>
     _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX11 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     auto operator()(_T1&& __t, _T2&& __u) const
-    _NOEXCEPT_(noexcept(_CUDA_VSTD::forward<_T1>(__t) ^ _CUDA_VSTD::forward<_T2>(__u)))
-    -> decltype        (_CUDA_VSTD::forward<_T1>(__t) ^ _CUDA_VSTD::forward<_T2>(__u))
-        { return        _CUDA_VSTD::forward<_T1>(__t) ^ _CUDA_VSTD::forward<_T2>(__u); }
+    _NOEXCEPT_(noexcept(_CUDA_FOR_DALI_VSTD::forward<_T1>(__t) ^ _CUDA_FOR_DALI_VSTD::forward<_T2>(__u)))
+    -> decltype        (_CUDA_FOR_DALI_VSTD::forward<_T1>(__t) ^ _CUDA_FOR_DALI_VSTD::forward<_T2>(__u))
+        { return        _CUDA_FOR_DALI_VSTD::forward<_T1>(__t) ^ _CUDA_FOR_DALI_VSTD::forward<_T2>(__u); }
     typedef void is_transparent;
 };
 #endif
@@ -992,9 +992,9 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS bit_not<void>
     template <class _Tp>
     _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX11 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     auto operator()(_Tp&& __x) const
-    _NOEXCEPT_(noexcept(~_CUDA_VSTD::forward<_Tp>(__x)))
-    -> decltype        (~_CUDA_VSTD::forward<_Tp>(__x))
-        { return        ~_CUDA_VSTD::forward<_Tp>(__x); }
+    _NOEXCEPT_(noexcept(~_CUDA_FOR_DALI_VSTD::forward<_Tp>(__x)))
+    -> decltype        (~_CUDA_FOR_DALI_VSTD::forward<_Tp>(__x))
+        { return        ~_CUDA_FOR_DALI_VSTD::forward<_Tp>(__x); }
     typedef void is_transparent;
 };
 #endif
@@ -1297,7 +1297,7 @@ public:
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     typename __invoke_return<type, _ArgTypes...>::type
     operator() (_ArgTypes&&... __args) const {
-        return __invoke(__f_, _CUDA_VSTD::forward<_ArgTypes>(__args)...);
+        return __invoke(__f_, _CUDA_FOR_DALI_VSTD::forward<_ArgTypes>(__args)...);
     }
 #else
 
@@ -1411,7 +1411,7 @@ mem_fn(_Rp _Tp::* __pm) _NOEXCEPT
 
 // `cuda_for_dali::std::function` is not supported at this time.
 
-#ifndef __cuda_std__
+#ifndef __cuda_for_dali_std__
 
 ////////////////////////////////////////////////////////////////////////////////
 //                                FUNCTION
@@ -1436,7 +1436,7 @@ void __throw_bad_function_call()
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
     throw bad_function_call();
 #else
-    _CUDA_VSTD::abort();
+    _CUDA_FOR_DALI_VSTD::abort();
 #endif
 }
 
@@ -1513,29 +1513,29 @@ class __alloc_func<_Fp, _Ap, _Rp(_ArgTypes...)>
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     explicit __alloc_func(_Target&& __f)
-        : __f_(piecewise_construct, _CUDA_VSTD::forward_as_tuple(_CUDA_VSTD::move(__f)),
-               _CUDA_VSTD::forward_as_tuple())
+        : __f_(piecewise_construct, _CUDA_FOR_DALI_VSTD::forward_as_tuple(_CUDA_FOR_DALI_VSTD::move(__f)),
+               _CUDA_FOR_DALI_VSTD::forward_as_tuple())
     {
     }
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     explicit __alloc_func(const _Target& __f, const _Alloc& __a)
-        : __f_(piecewise_construct, _CUDA_VSTD::forward_as_tuple(__f),
-               _CUDA_VSTD::forward_as_tuple(__a))
+        : __f_(piecewise_construct, _CUDA_FOR_DALI_VSTD::forward_as_tuple(__f),
+               _CUDA_FOR_DALI_VSTD::forward_as_tuple(__a))
     {
     }
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     explicit __alloc_func(const _Target& __f, _Alloc&& __a)
-        : __f_(piecewise_construct, _CUDA_VSTD::forward_as_tuple(__f),
-               _CUDA_VSTD::forward_as_tuple(_CUDA_VSTD::move(__a)))
+        : __f_(piecewise_construct, _CUDA_FOR_DALI_VSTD::forward_as_tuple(__f),
+               _CUDA_FOR_DALI_VSTD::forward_as_tuple(_CUDA_FOR_DALI_VSTD::move(__a)))
     {
     }
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     explicit __alloc_func(_Target&& __f, _Alloc&& __a)
-        : __f_(piecewise_construct, _CUDA_VSTD::forward_as_tuple(_CUDA_VSTD::move(__f)),
-               _CUDA_VSTD::forward_as_tuple(_CUDA_VSTD::move(__a)))
+        : __f_(piecewise_construct, _CUDA_FOR_DALI_VSTD::forward_as_tuple(_CUDA_FOR_DALI_VSTD::move(__f)),
+               _CUDA_FOR_DALI_VSTD::forward_as_tuple(_CUDA_FOR_DALI_VSTD::move(__a)))
     {
     }
 
@@ -1544,7 +1544,7 @@ class __alloc_func<_Fp, _Ap, _Rp(_ArgTypes...)>
     {
         typedef __invoke_void_return_wrapper<_Rp> _Invoker;
         return _Invoker::__call(__f_.first(),
-                                _CUDA_VSTD::forward<_ArgTypes>(__arg)...);
+                                _CUDA_FOR_DALI_VSTD::forward<_ArgTypes>(__arg)...);
     }
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -1593,7 +1593,7 @@ public:
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   _Rp operator()(_ArgTypes&&... __arg) {
     typedef __invoke_void_return_wrapper<_Rp> _Invoker;
-    return _Invoker::__call(__f_, _CUDA_VSTD::forward<_ArgTypes>(__arg)...);
+    return _Invoker::__call(__f_, _CUDA_FOR_DALI_VSTD::forward<_ArgTypes>(__arg)...);
   }
 
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -1650,7 +1650,7 @@ class __func<_Fp, _Alloc, _Rp(_ArgTypes...)>
 public:
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     explicit __func(_Fp&& __f)
-        : __f_(_CUDA_VSTD::move(__f)) {}
+        : __f_(_CUDA_FOR_DALI_VSTD::move(__f)) {}
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     explicit __func(const _Fp& __f, const _Alloc& __a)
@@ -1658,11 +1658,11 @@ public:
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     explicit __func(const _Fp& __f, _Alloc&& __a)
-        : __f_(__f, _CUDA_VSTD::move(__a)) {}
+        : __f_(__f, _CUDA_FOR_DALI_VSTD::move(__a)) {}
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     explicit __func(_Fp&& __f, _Alloc&& __a)
-        : __f_(_CUDA_VSTD::move(__f), _CUDA_VSTD::move(__a)) {}
+        : __f_(_CUDA_FOR_DALI_VSTD::move(__f), _CUDA_FOR_DALI_VSTD::move(__a)) {}
 
     virtual __base<_Rp(_ArgTypes...)>* __clone() const;
     virtual void __clone(__base<_Rp(_ArgTypes...)>*) const;
@@ -1717,7 +1717,7 @@ template<class _Fp, class _Alloc, class _Rp, class ..._ArgTypes>
 _Rp
 __func<_Fp, _Alloc, _Rp(_ArgTypes...)>::operator()(_ArgTypes&& ... __arg)
 {
-    return __f_(_CUDA_VSTD::forward<_ArgTypes>(__arg)...);
+    return __f_(_CUDA_FOR_DALI_VSTD::forward<_ArgTypes>(__arg)...);
 }
 
 #ifndef _LIBCUDAFORDALICXX_NO_RTTI
@@ -1777,13 +1777,13 @@ template <class _Rp, class... _ArgTypes> class __value_func<_Rp(_ArgTypes...)>
                 is_nothrow_copy_constructible<_FunAlloc>::value)
             {
                 __f_ =
-                    ::new ((void*)&__buf_) _Fun(_CUDA_VSTD::move(__f), _Alloc(__af));
+                    ::new ((void*)&__buf_) _Fun(_CUDA_FOR_DALI_VSTD::move(__f), _Alloc(__af));
             }
             else
             {
                 typedef __allocator_destructor<_FunAlloc> _Dp;
                 unique_ptr<__func, _Dp> __hold(__af.allocate(1), _Dp(__af, 1));
-                ::new ((void*)__hold.get()) _Fun(_CUDA_VSTD::move(__f), _Alloc(__a));
+                ::new ((void*)__hold.get()) _Fun(_CUDA_FOR_DALI_VSTD::move(__f), _Alloc(__a));
                 __f_ = __hold.release();
             }
         }
@@ -1870,7 +1870,7 @@ template <class _Rp, class... _ArgTypes> class __value_func<_Rp(_ArgTypes...)>
     {
         if (__f_ == 0)
             __throw_bad_function_call();
-        return (*__f_)(_CUDA_VSTD::forward<_ArgTypes>(__args)...);
+        return (*__f_)(_CUDA_FOR_DALI_VSTD::forward<_ArgTypes>(__args)...);
     }
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -1908,7 +1908,7 @@ template <class _Rp, class... _ArgTypes> class __value_func<_Rp(_ArgTypes...)>
             __f_ = __as_base(&__buf_);
         }
         else
-            _CUDA_VSTD::swap(__f_, __f.__f_);
+            _CUDA_FOR_DALI_VSTD::swap(__f_, __f.__f_);
     }
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -1944,11 +1944,11 @@ union __policy_storage
 // True if _Fun can safely be held in __policy_storage.__small.
 template <typename _Fun>
 struct __use_small_storage
-    : public _CUDA_VSTD::integral_constant<
+    : public _CUDA_FOR_DALI_VSTD::integral_constant<
           bool, sizeof(_Fun) <= sizeof(__policy_storage) &&
                     _LIBCUDAFORDALICXX_ALIGNOF(_Fun) <= _LIBCUDAFORDALICXX_ALIGNOF(__policy_storage) &&
-                    _CUDA_VSTD::is_trivially_copy_constructible<_Fun>::value &&
-                    _CUDA_VSTD::is_trivially_destructible<_Fun>::value> {};
+                    _CUDA_FOR_DALI_VSTD::is_trivially_copy_constructible<_Fun>::value &&
+                    _CUDA_FOR_DALI_VSTD::is_trivially_destructible<_Fun>::value> {};
 
 // Policy contains information about how to copy, destroy, and move the
 // underlying functor. You can think of it as a vtable of sorts.
@@ -2032,7 +2032,7 @@ struct __policy
 // faster for types that can be passed in registers.
 template <typename _Tp>
 using __fast_forward =
-    typename _CUDA_VSTD::conditional<_CUDA_VSTD::is_scalar<_Tp>::value, _Tp, _Tp&&>::type;
+    typename _CUDA_FOR_DALI_VSTD::conditional<_CUDA_FOR_DALI_VSTD::is_scalar<_Tp>::value, _Tp, _Tp&&>::type;
 
 // __policy_invoker calls an instance of __alloc_func held in __policy_storage.
 
@@ -2074,7 +2074,7 @@ struct __policy_invoker<_Rp(_ArgTypes...)>
         _Fun* __f = reinterpret_cast<_Fun*>(__use_small_storage<_Fun>::value
                                                 ? &__buf->__small
                                                 : __buf->__large);
-        return (*__f)(_CUDA_VSTD::forward<_ArgTypes>(__args)...);
+        return (*__f)(_CUDA_FOR_DALI_VSTD::forward<_ArgTypes>(__args)...);
     }
 };
 
@@ -2120,14 +2120,14 @@ template <class _Rp, class... _ArgTypes> class __policy_func<_Rp(_ArgTypes...)>
             if (__use_small_storage<_Fun>())
             {
                 ::new ((void*)&__buf_.__small)
-                    _Fun(_CUDA_VSTD::move(__f), _Alloc(__af));
+                    _Fun(_CUDA_FOR_DALI_VSTD::move(__f), _Alloc(__af));
             }
             else
             {
                 typedef __allocator_destructor<_FunAlloc> _Dp;
                 unique_ptr<_Fun, _Dp> __hold(__af.allocate(1), _Dp(__af, 1));
                 ::new ((void*)__hold.get())
-                    _Fun(_CUDA_VSTD::move(__f), _Alloc(__af));
+                    _Fun(_CUDA_FOR_DALI_VSTD::move(__f), _Alloc(__af));
                 __buf_.__large = __hold.release();
             }
         }
@@ -2142,11 +2142,11 @@ template <class _Rp, class... _ArgTypes> class __policy_func<_Rp(_ArgTypes...)>
         __invoker_ = __invoker::template __create<_Fun>();
         __policy_ = __policy::__create<_Fun>();
         if (__use_small_storage<_Fun>()) {
-          ::new ((void*)&__buf_.__small) _Fun(_CUDA_VSTD::move(__f));
+          ::new ((void*)&__buf_.__small) _Fun(_CUDA_FOR_DALI_VSTD::move(__f));
         } else {
           __builtin_new_allocator::__holder_t __hold =
               __builtin_new_allocator::__allocate_type<_Fun>(1);
-          __buf_.__large = ::new (__hold.get()) _Fun(_CUDA_VSTD::move(__f));
+          __buf_.__large = ::new (__hold.get()) _Fun(_CUDA_FOR_DALI_VSTD::move(__f));
           (void)__hold.release();
         }
       }
@@ -2206,16 +2206,16 @@ template <class _Rp, class... _ArgTypes> class __policy_func<_Rp(_ArgTypes...)>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     _Rp operator()(_ArgTypes&&... __args) const
     {
-        return __invoker_.__call_(_CUDA_VSTD::addressof(__buf_),
-                                  _CUDA_VSTD::forward<_ArgTypes>(__args)...);
+        return __invoker_.__call_(_CUDA_FOR_DALI_VSTD::addressof(__buf_),
+                                  _CUDA_FOR_DALI_VSTD::forward<_ArgTypes>(__args)...);
     }
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     void swap(__policy_func& __f)
     {
-        _CUDA_VSTD::swap(__invoker_, __f.__invoker_);
-        _CUDA_VSTD::swap(__policy_, __f.__policy_);
-        _CUDA_VSTD::swap(__buf_, __f.__buf_);
+        _CUDA_FOR_DALI_VSTD::swap(__invoker_, __f.__invoker_);
+        _CUDA_FOR_DALI_VSTD::swap(__policy_, __f.__policy_);
+        _CUDA_FOR_DALI_VSTD::swap(__buf_, __f.__buf_);
     }
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -2322,7 +2322,7 @@ public:
     template<class _Fp, class _Alloc>
       _LIBCUDAFORDALICXX_INLINE_VISIBILITY
       void assign(_Fp&& __f, const _Alloc& __a)
-        {function(allocator_arg, __a, _CUDA_VSTD::forward<_Fp>(__f)).swap(*this);}
+        {function(allocator_arg, __a, _CUDA_FOR_DALI_VSTD::forward<_Fp>(__f)).swap(*this);}
 #endif
 
     // function capacity:
@@ -2407,26 +2407,26 @@ function<_Rp(_ArgTypes...)>::function(allocator_arg_t, const _Alloc&,
 
 template <class _Rp, class... _ArgTypes>
 function<_Rp(_ArgTypes...)>::function(function&& __f) _NOEXCEPT
-    : __f_(_CUDA_VSTD::move(__f.__f_)) {}
+    : __f_(_CUDA_FOR_DALI_VSTD::move(__f.__f_)) {}
 
 #if _LIBCUDAFORDALICXX_STD_VER <= 14
 template<class _Rp, class ..._ArgTypes>
 template <class _Alloc>
 function<_Rp(_ArgTypes...)>::function(allocator_arg_t, const _Alloc&,
                                       function&& __f)
-    : __f_(_CUDA_VSTD::move(__f.__f_)) {}
+    : __f_(_CUDA_FOR_DALI_VSTD::move(__f.__f_)) {}
 #endif
 
 template <class _Rp, class... _ArgTypes>
 template <class _Fp, class>
-function<_Rp(_ArgTypes...)>::function(_Fp __f) : __f_(_CUDA_VSTD::move(__f)) {}
+function<_Rp(_ArgTypes...)>::function(_Fp __f) : __f_(_CUDA_FOR_DALI_VSTD::move(__f)) {}
 
 #if _LIBCUDAFORDALICXX_STD_VER <= 14
 template <class _Rp, class... _ArgTypes>
 template <class _Fp, class _Alloc, class>
 function<_Rp(_ArgTypes...)>::function(allocator_arg_t, const _Alloc& __a,
                                       _Fp __f)
-    : __f_(_CUDA_VSTD::move(__f), __a) {}
+    : __f_(_CUDA_FOR_DALI_VSTD::move(__f), __a) {}
 #endif
 
 template<class _Rp, class ..._ArgTypes>
@@ -2458,7 +2458,7 @@ template <class _Fp, class>
 function<_Rp(_ArgTypes...)>&
 function<_Rp(_ArgTypes...)>::operator=(_Fp&& __f)
 {
-    function(_CUDA_VSTD::forward<_Fp>(__f)).swap(*this);
+    function(_CUDA_FOR_DALI_VSTD::forward<_Fp>(__f)).swap(*this);
     return *this;
 }
 
@@ -2476,7 +2476,7 @@ template<class _Rp, class ..._ArgTypes>
 _Rp
 function<_Rp(_ArgTypes...)>::operator()(_ArgTypes... __arg) const
 {
-    return __f_(_CUDA_VSTD::forward<_ArgTypes>(__arg)...);
+    return __f_(_CUDA_FOR_DALI_VSTD::forward<_ArgTypes>(__arg)...);
 }
 
 #ifndef _LIBCUDAFORDALICXX_NO_RTTI
@@ -2538,7 +2538,7 @@ swap(function<_Rp(_ArgTypes...)>& __x, function<_Rp(_ArgTypes...)>& __y) _NOEXCE
 
 #endif
 
-#endif // __cuda_std__
+#endif // __cuda_for_dali_std__
 
 ////////////////////////////////////////////////////////////////////////////////
 //                                  BIND
@@ -2546,7 +2546,7 @@ swap(function<_Rp(_ArgTypes...)>& __x, function<_Rp(_ArgTypes...)>& __y) _NOEXCE
 
 // `cuda_for_dali::std::bind` is not currently supported.
 
-#ifndef __cuda_std__
+#ifndef __cuda_for_dali_std__
 
 template<class _Tp> struct __is_bind_expression : public false_type {};
 template<class _Tp> struct _LIBCUDAFORDALICXX_TEMPLATE_VIS is_bind_expression
@@ -2617,7 +2617,7 @@ inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 typename __invoke_of<_Ti&, _Uj...>::type
 __mu_expand(_Ti& __ti, tuple<_Uj...>& __uj, __tuple_indices<_Indx...>)
 {
-    return __ti(_CUDA_VSTD::forward<_Uj>(_CUDA_VSTD::get<_Indx>(__uj))...);
+    return __ti(_CUDA_FOR_DALI_VSTD::forward<_Uj>(_CUDA_FOR_DALI_VSTD::get<_Indx>(__uj))...);
 }
 
 template <class _Ti, class ..._Uj>
@@ -2652,7 +2652,7 @@ typename enable_if
 __mu(_Ti&, _Uj& __uj)
 {
     const size_t _Indx = is_placeholder<_Ti>::value - 1;
-    return _CUDA_VSTD::forward<typename tuple_element<_Indx, _Uj>::type>(_CUDA_VSTD::get<_Indx>(__uj));
+    return _CUDA_FOR_DALI_VSTD::forward<typename tuple_element<_Indx, _Uj>::type>(_CUDA_FOR_DALI_VSTD::get<_Indx>(__uj));
 }
 
 template <class _Ti, class _Uj>
@@ -2779,7 +2779,7 @@ typename __bind_return<_Fp, _BoundArgs, _Args>::type
 __apply_functor(_Fp& __f, _BoundArgs& __bound_args, __tuple_indices<_Indx...>,
                 _Args&& __args)
 {
-    return _CUDA_VSTD::__invoke(__f, _CUDA_VSTD::__mu(_CUDA_VSTD::get<_Indx>(__bound_args), __args)...);
+    return _CUDA_FOR_DALI_VSTD::__invoke(__f, _CUDA_FOR_DALI_VSTD::__mu(_CUDA_FOR_DALI_VSTD::get<_Indx>(__bound_args), __args)...);
 }
 
 template<class _Fp, class ..._BoundArgs>
@@ -2804,16 +2804,16 @@ public:
                                >::type>
       _LIBCUDAFORDALICXX_INLINE_VISIBILITY
       explicit __bind(_Gp&& __f, _BA&& ...__bound_args)
-        : __f_(_CUDA_VSTD::forward<_Gp>(__f)),
-          __bound_args_(_CUDA_VSTD::forward<_BA>(__bound_args)...) {}
+        : __f_(_CUDA_FOR_DALI_VSTD::forward<_Gp>(__f)),
+          __bound_args_(_CUDA_FOR_DALI_VSTD::forward<_BA>(__bound_args)...) {}
 
     template <class ..._Args>
         _LIBCUDAFORDALICXX_INLINE_VISIBILITY
         typename __bind_return<_Fd, _Td, tuple<_Args&&...> >::type
         operator()(_Args&& ...__args)
         {
-            return _CUDA_VSTD::__apply_functor(__f_, __bound_args_, __indices(),
-                                  tuple<_Args&&...>(_CUDA_VSTD::forward<_Args>(__args)...));
+            return _CUDA_FOR_DALI_VSTD::__apply_functor(__f_, __bound_args_, __indices(),
+                                  tuple<_Args&&...>(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...));
         }
 
     template <class ..._Args>
@@ -2821,8 +2821,8 @@ public:
         typename __bind_return<const _Fd, const _Td, tuple<_Args&&...> >::type
         operator()(_Args&& ...__args) const
         {
-            return _CUDA_VSTD::__apply_functor(__f_, __bound_args_, __indices(),
-                                   tuple<_Args&&...>(_CUDA_VSTD::forward<_Args>(__args)...));
+            return _CUDA_FOR_DALI_VSTD::__apply_functor(__f_, __bound_args_, __indices(),
+                                   tuple<_Args&&...>(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...));
         }
 };
 
@@ -2849,8 +2849,8 @@ public:
                                >::type>
       _LIBCUDAFORDALICXX_INLINE_VISIBILITY
       explicit __bind_r(_Gp&& __f, _BA&& ...__bound_args)
-        : base(_CUDA_VSTD::forward<_Gp>(__f),
-               _CUDA_VSTD::forward<_BA>(__bound_args)...) {}
+        : base(_CUDA_FOR_DALI_VSTD::forward<_Gp>(__f),
+               _CUDA_FOR_DALI_VSTD::forward<_BA>(__bound_args)...) {}
 
     template <class ..._Args>
         _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -2863,7 +2863,7 @@ public:
         operator()(_Args&& ...__args)
         {
             typedef __invoke_void_return_wrapper<_Rp> _Invoker;
-            return _Invoker::__call(static_cast<base&>(*this), _CUDA_VSTD::forward<_Args>(__args)...);
+            return _Invoker::__call(static_cast<base&>(*this), _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
         }
 
     template <class ..._Args>
@@ -2877,7 +2877,7 @@ public:
         operator()(_Args&& ...__args) const
         {
             typedef __invoke_void_return_wrapper<_Rp> _Invoker;
-            return _Invoker::__call(static_cast<base const&>(*this), _CUDA_VSTD::forward<_Args>(__args)...);
+            return _Invoker::__call(static_cast<base const&>(*this), _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
         }
 };
 
@@ -2890,7 +2890,7 @@ __bind<_Fp, _BoundArgs...>
 bind(_Fp&& __f, _BoundArgs&&... __bound_args)
 {
     typedef __bind<_Fp, _BoundArgs...> type;
-    return type(_CUDA_VSTD::forward<_Fp>(__f), _CUDA_VSTD::forward<_BoundArgs>(__bound_args)...);
+    return type(_CUDA_FOR_DALI_VSTD::forward<_Fp>(__f), _CUDA_FOR_DALI_VSTD::forward<_BoundArgs>(__bound_args)...);
 }
 
 template<class _Rp, class _Fp, class ..._BoundArgs>
@@ -2899,12 +2899,12 @@ __bind_r<_Rp, _Fp, _BoundArgs...>
 bind(_Fp&& __f, _BoundArgs&&... __bound_args)
 {
     typedef __bind_r<_Rp, _Fp, _BoundArgs...> type;
-    return type(_CUDA_VSTD::forward<_Fp>(__f), _CUDA_VSTD::forward<_BoundArgs>(__bound_args)...);
+    return type(_CUDA_FOR_DALI_VSTD::forward<_Fp>(__f), _CUDA_FOR_DALI_VSTD::forward<_BoundArgs>(__bound_args)...);
 }
 
 #endif  // _LIBCUDAFORDALICXX_CXX03_LANG
 
-#endif // __cuda_std__
+#endif // __cuda_for_dali_std__
 
 #if _LIBCUDAFORDALICXX_STD_VER > 14
 
@@ -2914,7 +2914,7 @@ invoke_result_t<_Fn, _Args...>
 invoke(_Fn&& __f, _Args&&... __args)
     noexcept(is_nothrow_invocable_v<_Fn, _Args...>)
 {
-    return _CUDA_VSTD::__invoke(_CUDA_VSTD::forward<_Fn>(__f), _CUDA_VSTD::forward<_Args>(__args)...);
+    return _CUDA_FOR_DALI_VSTD::__invoke(_CUDA_FOR_DALI_VSTD::forward<_Fn>(__f), _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
 }
 
 template <class _DecayFunc>
@@ -2927,38 +2927,38 @@ public:
     template <class ..._Args>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     auto operator()(_Args&& ...__args) &
-            noexcept(noexcept(!_CUDA_VSTD::invoke(__fd, _CUDA_VSTD::forward<_Args>(__args)...)))
-        -> decltype(          !_CUDA_VSTD::invoke(__fd, _CUDA_VSTD::forward<_Args>(__args)...))
-        { return              !_CUDA_VSTD::invoke(__fd, _CUDA_VSTD::forward<_Args>(__args)...); }
+            noexcept(noexcept(!_CUDA_FOR_DALI_VSTD::invoke(__fd, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...)))
+        -> decltype(          !_CUDA_FOR_DALI_VSTD::invoke(__fd, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...))
+        { return              !_CUDA_FOR_DALI_VSTD::invoke(__fd, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...); }
 
     template <class ..._Args>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     auto operator()(_Args&& ...__args) &&
-            noexcept(noexcept(!_CUDA_VSTD::invoke(_CUDA_VSTD::move(__fd), _CUDA_VSTD::forward<_Args>(__args)...)))
-        -> decltype(          !_CUDA_VSTD::invoke(_CUDA_VSTD::move(__fd), _CUDA_VSTD::forward<_Args>(__args)...))
-        { return              !_CUDA_VSTD::invoke(_CUDA_VSTD::move(__fd), _CUDA_VSTD::forward<_Args>(__args)...); }
+            noexcept(noexcept(!_CUDA_FOR_DALI_VSTD::invoke(_CUDA_FOR_DALI_VSTD::move(__fd), _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...)))
+        -> decltype(          !_CUDA_FOR_DALI_VSTD::invoke(_CUDA_FOR_DALI_VSTD::move(__fd), _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...))
+        { return              !_CUDA_FOR_DALI_VSTD::invoke(_CUDA_FOR_DALI_VSTD::move(__fd), _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...); }
 
     template <class ..._Args>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     auto operator()(_Args&& ...__args) const&
-            noexcept(noexcept(!_CUDA_VSTD::invoke(__fd, _CUDA_VSTD::forward<_Args>(__args)...)))
-        -> decltype(          !_CUDA_VSTD::invoke(__fd, _CUDA_VSTD::forward<_Args>(__args)...))
-        { return              !_CUDA_VSTD::invoke(__fd, _CUDA_VSTD::forward<_Args>(__args)...); }
+            noexcept(noexcept(!_CUDA_FOR_DALI_VSTD::invoke(__fd, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...)))
+        -> decltype(          !_CUDA_FOR_DALI_VSTD::invoke(__fd, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...))
+        { return              !_CUDA_FOR_DALI_VSTD::invoke(__fd, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...); }
 
 
     template <class ..._Args>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     auto operator()(_Args&& ...__args) const&&
-            noexcept(noexcept(!_CUDA_VSTD::invoke(_CUDA_VSTD::move(__fd), _CUDA_VSTD::forward<_Args>(__args)...)))
-        -> decltype(          !_CUDA_VSTD::invoke(_CUDA_VSTD::move(__fd), _CUDA_VSTD::forward<_Args>(__args)...))
-        { return              !_CUDA_VSTD::invoke(_CUDA_VSTD::move(__fd), _CUDA_VSTD::forward<_Args>(__args)...); }
+            noexcept(noexcept(!_CUDA_FOR_DALI_VSTD::invoke(_CUDA_FOR_DALI_VSTD::move(__fd), _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...)))
+        -> decltype(          !_CUDA_FOR_DALI_VSTD::invoke(_CUDA_FOR_DALI_VSTD::move(__fd), _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...))
+        { return              !_CUDA_FOR_DALI_VSTD::invoke(_CUDA_FOR_DALI_VSTD::move(__fd), _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...); }
 
 private:
     template <class _RawFunc,
               class = enable_if_t<!is_same<decay_t<_RawFunc>, __not_fn_imp>::value>>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     explicit __not_fn_imp(_RawFunc&& __rf)
-        : __fd(_CUDA_VSTD::forward<_RawFunc>(__rf)) {}
+        : __fd(_CUDA_FOR_DALI_VSTD::forward<_RawFunc>(__rf)) {}
 
     template <class _RawFunc>
     friend inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -2968,7 +2968,7 @@ private:
 template <class _RawFunc>
 inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 __not_fn_imp<decay_t<_RawFunc>> not_fn(_RawFunc&& __fn) {
-    return __not_fn_imp<decay_t<_RawFunc>>(_CUDA_VSTD::forward<_RawFunc>(__fn));
+    return __not_fn_imp<decay_t<_RawFunc>>(_CUDA_FOR_DALI_VSTD::forward<_RawFunc>(__fn));
 }
 
 #endif
@@ -2977,7 +2977,7 @@ __not_fn_imp<decay_t<_RawFunc>> not_fn(_RawFunc&& __fn) {
 
 // Searchers are not currently supported.
 
-#ifndef __cuda_std__
+#ifndef __cuda_for_dali_std__
 
 template <class _BinaryPredicate, class _ForwardIterator1, class _ForwardIterator2>
 pair<_ForwardIterator1, _ForwardIterator1> _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX11
@@ -3077,9 +3077,9 @@ public:
     pair<_ForwardIterator2, _ForwardIterator2>
     operator () (_ForwardIterator2 __f, _ForwardIterator2 __l) const
     {
-        return _CUDA_VSTD::__search(__f, __l, __first_, __last_, __pred_,
-            typename _CUDA_VSTD::iterator_traits<_ForwardIterator>::iterator_category(),
-            typename _CUDA_VSTD::iterator_traits<_ForwardIterator2>::iterator_category());
+        return _CUDA_FOR_DALI_VSTD::__search(__f, __l, __first_, __last_, __pred_,
+            typename _CUDA_FOR_DALI_VSTD::iterator_traits<_ForwardIterator>::iterator_category(),
+            typename _CUDA_FOR_DALI_VSTD::iterator_traits<_ForwardIterator2>::iterator_category());
     }
 
 private:
@@ -3090,7 +3090,7 @@ private:
 
 #endif // _LIBCUDAFORDALICXX_STD_VER > 14
 
-#endif // __cuda_std__
+#endif // __cuda_for_dali_std__
 
 #if _LIBCUDAFORDALICXX_STD_VER > 17
 template <class _Tp>
@@ -3100,7 +3100,7 @@ template <class _Tp>
 using unwrap_ref_decay_t = typename unwrap_ref_decay<_Tp>::type;
 #endif // > C++17
 
-#ifndef __cuda_std__
+#ifndef __cuda_for_dali_std__
 
 template <class _Container, class _Predicate>
 inline void __libcpp_erase_if_container( _Container& __c, _Predicate __pred)
@@ -3118,8 +3118,8 @@ inline void __libcpp_erase_if_container( _Container& __c, _Predicate __pred)
 
 _LIBCUDAFORDALICXX_END_NAMESPACE_STD
 
-#ifndef __cuda_std__
+#ifndef __cuda_for_dali_std__
 #include <__pragma_pop>
-#endif //__cuda_std__
+#endif //__cuda_for_dali_std__
 
 #endif  // _LIBCUDAFORDALICXX_FUNCTIONAL

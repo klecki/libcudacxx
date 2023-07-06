@@ -38,7 +38,7 @@ void throw_helper( const string& msg )
     throw T( msg );
 #else
     fprintf(stderr, "%s\n", msg.c_str());
-    _CUDA_VSTD::abort();
+    _CUDA_FOR_DALI_VSTD::abort();
 #endif
 }
 

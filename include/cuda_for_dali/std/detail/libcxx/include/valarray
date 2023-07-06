@@ -2752,7 +2752,7 @@ __val_expr<_ValExpr>::operator valarray<__val_expr::result_type>() const
         __r.__begin_ =
             __r.__end_ =
                 static_cast<result_type*>(
-                    _CUDA_VSTD::__libcpp_allocate(__n * sizeof(result_type), _LIBCUDAFORDALICXX_ALIGNOF(result_type)));
+                    _CUDA_FOR_DALI_VSTD::__libcpp_allocate(__n * sizeof(result_type), _LIBCUDAFORDALICXX_ALIGNOF(result_type)));
         for (size_t __i = 0; __i != __n; ++__r.__end_, ++__i)
             ::new (__r.__end_) result_type(__expr_[__i]);
     }
@@ -2770,7 +2770,7 @@ valarray<_Tp>::valarray(size_t __n)
     if (__n)
     {
         __begin_ = __end_ = static_cast<value_type*>(
-            _CUDA_VSTD::__libcpp_allocate(__n * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
+            _CUDA_FOR_DALI_VSTD::__libcpp_allocate(__n * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
         try
         {
@@ -2805,7 +2805,7 @@ valarray<_Tp>::valarray(const value_type* __p, size_t __n)
     if (__n)
     {
         __begin_ = __end_ = static_cast<value_type*>(
-            _CUDA_VSTD::__libcpp_allocate(__n * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
+            _CUDA_FOR_DALI_VSTD::__libcpp_allocate(__n * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
         try
         {
@@ -2831,7 +2831,7 @@ valarray<_Tp>::valarray(const valarray& __v)
     if (__v.size())
     {
         __begin_ = __end_ = static_cast<value_type*>(
-            _CUDA_VSTD::__libcpp_allocate(__v.size() * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
+            _CUDA_FOR_DALI_VSTD::__libcpp_allocate(__v.size() * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
         try
         {
@@ -2869,7 +2869,7 @@ valarray<_Tp>::valarray(initializer_list<value_type> __il)
     if (__n)
     {
         __begin_ = __end_ = static_cast<value_type*>(
-_CUDA_VSTD::__libcpp_allocate(__n * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
+_CUDA_FOR_DALI_VSTD::__libcpp_allocate(__n * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
         try
         {
@@ -2899,7 +2899,7 @@ valarray<_Tp>::valarray(const slice_array<value_type>& __sa)
     if (__n)
     {
         __begin_ = __end_ = static_cast<value_type*>(
-          _CUDA_VSTD::__libcpp_allocate(__n * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
+          _CUDA_FOR_DALI_VSTD::__libcpp_allocate(__n * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
         try
         {
@@ -2927,7 +2927,7 @@ valarray<_Tp>::valarray(const gslice_array<value_type>& __ga)
     if (__n)
     {
         __begin_ = __end_ = static_cast<value_type*>(
-           _CUDA_VSTD::__libcpp_allocate(__n * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
+           _CUDA_FOR_DALI_VSTD::__libcpp_allocate(__n * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
         try
         {
@@ -2957,7 +2957,7 @@ valarray<_Tp>::valarray(const mask_array<value_type>& __ma)
     if (__n)
     {
         __begin_ = __end_ = static_cast<value_type*>(
-           _CUDA_VSTD::__libcpp_allocate(__n * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
+           _CUDA_FOR_DALI_VSTD::__libcpp_allocate(__n * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
         try
         {
@@ -2987,7 +2987,7 @@ valarray<_Tp>::valarray(const indirect_array<value_type>& __ia)
     if (__n)
     {
         __begin_ = __end_ = static_cast<value_type*>(
-           _CUDA_VSTD::__libcpp_allocate(__n * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
+           _CUDA_FOR_DALI_VSTD::__libcpp_allocate(__n * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
         try
         {
@@ -3024,11 +3024,11 @@ valarray<_Tp>::__assign_range(const value_type* __f, const value_type* __l)
     {
         __clear(size());
         __begin_ = static_cast<value_type*>(
-           _CUDA_VSTD::__libcpp_allocate(__n * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
+           _CUDA_FOR_DALI_VSTD::__libcpp_allocate(__n * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
         __end_ = __begin_ + __n;
-        _CUDA_VSTD::uninitialized_copy(__f, __l, __begin_);
+        _CUDA_FOR_DALI_VSTD::uninitialized_copy(__f, __l, __begin_);
     } else {
-        _CUDA_VSTD::copy(__f, __l, __begin_);
+        _CUDA_FOR_DALI_VSTD::copy(__f, __l, __begin_);
     }
     return *this;
 }
@@ -3072,7 +3072,7 @@ inline
 valarray<_Tp>&
 valarray<_Tp>::operator=(const value_type& __x)
 {
-    _CUDA_VSTD::fill(__begin_, __end_, __x);
+    _CUDA_FOR_DALI_VSTD::fill(__begin_, __end_, __x);
     return *this;
 }
 
@@ -3280,7 +3280,7 @@ valarray<_Tp>::operator+() const
         __r.__begin_ =
             __r.__end_ =
                 static_cast<value_type*>(
-           _CUDA_VSTD::__libcpp_allocate(__n * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
+           _CUDA_FOR_DALI_VSTD::__libcpp_allocate(__n * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
         for (const value_type* __p = __begin_; __n; ++__r.__end_, ++__p, --__n)
             ::new (__r.__end_) value_type(+*__p);
     }
@@ -3298,7 +3298,7 @@ valarray<_Tp>::operator-() const
         __r.__begin_ =
             __r.__end_ =
                 static_cast<value_type*>(
-           _CUDA_VSTD::__libcpp_allocate(__n * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
+           _CUDA_FOR_DALI_VSTD::__libcpp_allocate(__n * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
         for (const value_type* __p = __begin_; __n; ++__r.__end_, ++__p, --__n)
             ::new (__r.__end_) value_type(-*__p);
     }
@@ -3316,7 +3316,7 @@ valarray<_Tp>::operator~() const
         __r.__begin_ =
             __r.__end_ =
                 static_cast<value_type*>(
-           _CUDA_VSTD::__libcpp_allocate(__n * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
+           _CUDA_FOR_DALI_VSTD::__libcpp_allocate(__n * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
         for (const value_type* __p = __begin_; __n; ++__r.__end_, ++__p, --__n)
             ::new (__r.__end_) value_type(~*__p);
     }
@@ -3333,7 +3333,7 @@ valarray<_Tp>::operator!() const
     {
         __r.__begin_ =
             __r.__end_ =
-                static_cast<bool*>(_CUDA_VSTD::__libcpp_allocate(__n * sizeof(bool), _LIBCUDAFORDALICXX_ALIGNOF(bool)));
+                static_cast<bool*>(_CUDA_FOR_DALI_VSTD::__libcpp_allocate(__n * sizeof(bool), _LIBCUDAFORDALICXX_ALIGNOF(bool)));
         for (const value_type* __p = __begin_; __n; ++__r.__end_, ++__p, --__n)
             ::new (__r.__end_) bool(!*__p);
     }
@@ -3605,8 +3605,8 @@ inline
 void
 valarray<_Tp>::swap(valarray& __v) _NOEXCEPT
 {
-    _CUDA_VSTD::swap(__begin_, __v.__begin_);
-    _CUDA_VSTD::swap(__end_, __v.__end_);
+    _CUDA_FOR_DALI_VSTD::swap(__begin_, __v.__begin_);
+    _CUDA_FOR_DALI_VSTD::swap(__end_, __v.__end_);
 }
 
 template <class _Tp>
@@ -3630,7 +3630,7 @@ valarray<_Tp>::min() const
 {
     if (__begin_ == __end_)
         return value_type();
-    return *_CUDA_VSTD::min_element(__begin_, __end_);
+    return *_CUDA_FOR_DALI_VSTD::min_element(__begin_, __end_);
 }
 
 template <class _Tp>
@@ -3640,7 +3640,7 @@ valarray<_Tp>::max() const
 {
     if (__begin_ == __end_)
         return value_type();
-    return *_CUDA_VSTD::max_element(__begin_, __end_);
+    return *_CUDA_FOR_DALI_VSTD::max_element(__begin_, __end_);
 }
 
 template <class _Tp>
@@ -3654,20 +3654,20 @@ valarray<_Tp>::shift(int __i) const
         __r.__begin_ =
             __r.__end_ =
                 static_cast<value_type*>(
-           _CUDA_VSTD::__libcpp_allocate(__n * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
+           _CUDA_FOR_DALI_VSTD::__libcpp_allocate(__n * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
         const value_type* __sb;
         value_type* __tb;
         value_type* __te;
         if (__i >= 0)
         {
-            __i = _CUDA_VSTD::min(__i, static_cast<int>(__n));
+            __i = _CUDA_FOR_DALI_VSTD::min(__i, static_cast<int>(__n));
             __sb = __begin_ + __i;
             __tb = __r.__begin_;
             __te = __r.__begin_ + (__n - __i);
         }
         else
         {
-            __i = _CUDA_VSTD::min(-__i, static_cast<int>(__n));
+            __i = _CUDA_FOR_DALI_VSTD::min(-__i, static_cast<int>(__n));
             __sb = __begin_;
             __tb = __r.__begin_ + __i;
             __te = __r.__begin_ + __n;
@@ -3693,7 +3693,7 @@ valarray<_Tp>::cshift(int __i) const
         __r.__begin_ =
             __r.__end_ =
                 static_cast<value_type*>(
-           _CUDA_VSTD::__libcpp_allocate(__n * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
+           _CUDA_FOR_DALI_VSTD::__libcpp_allocate(__n * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
         __i %= static_cast<int>(__n);
         const value_type* __m = __i >= 0 ? __begin_ + __i : __end_ + __i;
         for (const value_type* __s = __m; __s != __end_; ++__r.__end_, ++__s)
@@ -3715,7 +3715,7 @@ valarray<_Tp>::apply(value_type __f(value_type)) const
         __r.__begin_ =
             __r.__end_ =
                 static_cast<value_type*>(
-           _CUDA_VSTD::__libcpp_allocate(__n * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
+           _CUDA_FOR_DALI_VSTD::__libcpp_allocate(__n * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
         for (const value_type* __p = __begin_; __n; ++__r.__end_, ++__p, --__n)
             ::new (__r.__end_) value_type(__f(*__p));
     }
@@ -3733,7 +3733,7 @@ valarray<_Tp>::apply(value_type __f(const value_type&)) const
         __r.__begin_ =
             __r.__end_ =
                 static_cast<value_type*>(
-           _CUDA_VSTD::__libcpp_allocate(__n * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
+           _CUDA_FOR_DALI_VSTD::__libcpp_allocate(__n * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
         for (const value_type* __p = __begin_; __n; ++__r.__end_, ++__p, --__n)
             ::new (__r.__end_) value_type(__f(*__p));
     }
@@ -3748,7 +3748,7 @@ void valarray<_Tp>::__clear(size_t __capacity)
   {
     while (__end_ != __begin_)
       (--__end_)->~value_type();
-    _CUDA_VSTD::__libcpp_deallocate(__begin_, __capacity * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type));
+    _CUDA_FOR_DALI_VSTD::__libcpp_deallocate(__begin_, __capacity * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type));
     __begin_ = __end_ = nullptr;
   }
 }
@@ -3761,7 +3761,7 @@ valarray<_Tp>::resize(size_t __n, value_type __x)
     if (__n)
     {
         __begin_ = __end_ = static_cast<value_type*>(
-           _CUDA_VSTD::__libcpp_allocate(__n * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
+           _CUDA_FOR_DALI_VSTD::__libcpp_allocate(__n * sizeof(value_type), _LIBCUDAFORDALICXX_ALIGNOF(value_type)));
 #ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
         try
         {

@@ -33,11 +33,11 @@ class _LIBCUDAFORDALICXX_TYPE_VIS __new_delete_memory_resource_imp
         if (__is_overaligned_for_new(align))
             __throw_bad_alloc();
 #endif
-        return _CUDA_VSTD::__libcpp_allocate(size, align);
+        return _CUDA_FOR_DALI_VSTD::__libcpp_allocate(size, align);
     }
 
     void do_deallocate(void *p, size_t n, size_t align) override {
-      _CUDA_VSTD::__libcpp_deallocate(p, n, align);
+      _CUDA_FOR_DALI_VSTD::__libcpp_deallocate(p, n, align);
     }
 
     bool do_is_equal(memory_resource const & other) const _NOEXCEPT override
@@ -115,11 +115,11 @@ __default_memory_resource(bool set = false, memory_resource * new_res = nullptr)
     if (set) {
         new_res = new_res ? new_res : new_delete_resource();
         // TODO: Can a weaker ordering be used?
-        return _CUDA_VSTD::atomic_exchange_explicit(
+        return _CUDA_FOR_DALI_VSTD::atomic_exchange_explicit(
             &__res, new_res, memory_order_acq_rel);
     }
     else {
-        return _CUDA_VSTD::atomic_load_explicit(
+        return _CUDA_FOR_DALI_VSTD::atomic_load_explicit(
             &__res, memory_order_acquire);
     }
 #elif !defined(_LIBCUDAFORDALICXX_HAS_NO_THREADS)

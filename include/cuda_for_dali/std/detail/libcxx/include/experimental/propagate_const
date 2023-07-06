@@ -18,8 +18,8 @@
     template <class T> class propagate_const;
 
     // [propagate_const.underlying], underlying pointer access
-    constexpr const _Tp& _CUDA_VSTD_LFTS_V2::get_underlying(const propagate_const<T>& pt) noexcept;
-    constexpr T& _CUDA_VSTD_LFTS_V2::get_underlying(propagate_const<T>& pt) noexcept;
+    constexpr const _Tp& _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(const propagate_const<T>& pt) noexcept;
+    constexpr T& _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(propagate_const<T>& pt) noexcept;
 
     // [propagate_const.relational], relational operators
     template <class T> constexpr bool operator==(const propagate_const<T>& pt, nullptr_t);
@@ -135,7 +135,7 @@ template <class _Tp>
 class propagate_const
 {
 public:
-  typedef remove_reference_t<decltype(*_CUDA_VSTD::declval<_Tp&>())> element_type;
+  typedef remove_reference_t<decltype(*_CUDA_FOR_DALI_VSTD::declval<_Tp&>())> element_type;
 
   static_assert(!is_array<_Tp>::value,
       "Instantiation of propagate_const with an array type is ill-formed.");
@@ -185,8 +185,8 @@ private:
 
 public:
 
-  template <class _Up> friend _LIBCUDAFORDALICXX_CONSTEXPR const _Up& ::_CUDA_VSTD_LFTS_V2::get_underlying(const propagate_const<_Up>& __pu) _NOEXCEPT;
-  template <class _Up> friend _LIBCUDAFORDALICXX_CONSTEXPR _Up& ::_CUDA_VSTD_LFTS_V2::get_underlying(propagate_const<_Up>& __pu) _NOEXCEPT;
+  template <class _Up> friend _LIBCUDAFORDALICXX_CONSTEXPR const _Up& ::_CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(const propagate_const<_Up>& __pu) _NOEXCEPT;
+  template <class _Up> friend _LIBCUDAFORDALICXX_CONSTEXPR _Up& ::_CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(propagate_const<_Up>& __pu) _NOEXCEPT;
 
   _LIBCUDAFORDALICXX_CONSTEXPR propagate_const() = default;
 
@@ -197,14 +197,14 @@ public:
   template <class _Up, enable_if_t<!is_convertible<_Up, _Tp>::value &&
                                  is_constructible<_Tp, _Up&&>::value,bool> = true>
   explicit _LIBCUDAFORDALICXX_CONSTEXPR propagate_const(propagate_const<_Up>&& __pu)
-      : __t_(std::move(_CUDA_VSTD_LFTS_V2::get_underlying(__pu)))
+      : __t_(std::move(_CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pu)))
   {
   }
 
   template <class _Up, enable_if_t<is_convertible<_Up&&, _Tp>::value &&
                                  is_constructible<_Tp, _Up&&>::value,bool> = false>
   _LIBCUDAFORDALICXX_CONSTEXPR propagate_const(propagate_const<_Up>&& __pu)
-      : __t_(std::move(_CUDA_VSTD_LFTS_V2::get_underlying(__pu)))
+      : __t_(std::move(_CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pu)))
   {
   }
 
@@ -231,7 +231,7 @@ public:
   template <class _Up>
   _LIBCUDAFORDALICXX_CONSTEXPR propagate_const& operator=(propagate_const<_Up>&& __pu)
   {
-    __t_ = std::move(_CUDA_VSTD_LFTS_V2::get_underlying(__pu));
+    __t_ = std::move(_CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pu));
     return *this;
   }
 
@@ -291,7 +291,7 @@ public:
 
   _LIBCUDAFORDALICXX_CONSTEXPR void swap(propagate_const& __pt) _NOEXCEPT_(__is_nothrow_swappable<_Tp>::value)
   {
-    using _CUDA_VSTD::swap;
+    using _CUDA_FOR_DALI_VSTD::swap;
     swap(__t_, __pt.__t_);
   }
 };
@@ -301,28 +301,28 @@ template <class _Tp>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 _LIBCUDAFORDALICXX_CONSTEXPR bool operator==(const propagate_const<_Tp>& __pt, nullptr_t)
 {
-  return _CUDA_VSTD_LFTS_V2::get_underlying(__pt) == nullptr;
+  return _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pt) == nullptr;
 }
 
 template <class _Tp>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 _LIBCUDAFORDALICXX_CONSTEXPR bool operator==(nullptr_t, const propagate_const<_Tp>& __pt)
 {
-  return nullptr == _CUDA_VSTD_LFTS_V2::get_underlying(__pt);
+  return nullptr == _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pt);
 }
 
 template <class _Tp>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 _LIBCUDAFORDALICXX_CONSTEXPR bool operator!=(const propagate_const<_Tp>& __pt, nullptr_t)
 {
-  return _CUDA_VSTD_LFTS_V2::get_underlying(__pt) != nullptr;
+  return _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pt) != nullptr;
 }
 
 template <class _Tp>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 _LIBCUDAFORDALICXX_CONSTEXPR bool operator!=(nullptr_t, const propagate_const<_Tp>& __pt)
 {
-  return nullptr != _CUDA_VSTD_LFTS_V2::get_underlying(__pt);
+  return nullptr != _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pt);
 }
 
 template <class _Tp, class _Up>
@@ -330,7 +330,7 @@ _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 _LIBCUDAFORDALICXX_CONSTEXPR bool operator==(const propagate_const<_Tp>& __pt,
                           const propagate_const<_Up>& __pu)
 {
-  return _CUDA_VSTD_LFTS_V2::get_underlying(__pt) == _CUDA_VSTD_LFTS_V2::get_underlying(__pu);
+  return _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pt) == _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pu);
 }
 
 template <class _Tp, class _Up>
@@ -338,7 +338,7 @@ _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 _LIBCUDAFORDALICXX_CONSTEXPR bool operator!=(const propagate_const<_Tp>& __pt,
                           const propagate_const<_Up>& __pu)
 {
-  return _CUDA_VSTD_LFTS_V2::get_underlying(__pt) != _CUDA_VSTD_LFTS_V2::get_underlying(__pu);
+  return _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pt) != _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pu);
 }
 
 template <class _Tp, class _Up>
@@ -346,7 +346,7 @@ _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 _LIBCUDAFORDALICXX_CONSTEXPR bool operator<(const propagate_const<_Tp>& __pt,
                          const propagate_const<_Up>& __pu)
 {
-  return _CUDA_VSTD_LFTS_V2::get_underlying(__pt) < _CUDA_VSTD_LFTS_V2::get_underlying(__pu);
+  return _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pt) < _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pu);
 }
 
 template <class _Tp, class _Up>
@@ -354,7 +354,7 @@ _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 _LIBCUDAFORDALICXX_CONSTEXPR bool operator>(const propagate_const<_Tp>& __pt,
                          const propagate_const<_Up>& __pu)
 {
-  return _CUDA_VSTD_LFTS_V2::get_underlying(__pt) > _CUDA_VSTD_LFTS_V2::get_underlying(__pu);
+  return _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pt) > _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pu);
 }
 
 template <class _Tp, class _Up>
@@ -362,7 +362,7 @@ _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 _LIBCUDAFORDALICXX_CONSTEXPR bool operator<=(const propagate_const<_Tp>& __pt,
                           const propagate_const<_Up>& __pu)
 {
-  return _CUDA_VSTD_LFTS_V2::get_underlying(__pt) <= _CUDA_VSTD_LFTS_V2::get_underlying(__pu);
+  return _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pt) <= _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pu);
 }
 
 template <class _Tp, class _Up>
@@ -370,49 +370,49 @@ _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 _LIBCUDAFORDALICXX_CONSTEXPR bool operator>=(const propagate_const<_Tp>& __pt,
                           const propagate_const<_Up>& __pu)
 {
-  return _CUDA_VSTD_LFTS_V2::get_underlying(__pt) >= _CUDA_VSTD_LFTS_V2::get_underlying(__pu);
+  return _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pt) >= _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pu);
 }
 
 template <class _Tp, class _Up>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 _LIBCUDAFORDALICXX_CONSTEXPR bool operator==(const propagate_const<_Tp>& __pt, const _Up& __u)
 {
-  return _CUDA_VSTD_LFTS_V2::get_underlying(__pt) == __u;
+  return _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pt) == __u;
 }
 
 template <class _Tp, class _Up>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 _LIBCUDAFORDALICXX_CONSTEXPR bool operator!=(const propagate_const<_Tp>& __pt, const _Up& __u)
 {
-  return _CUDA_VSTD_LFTS_V2::get_underlying(__pt) != __u;
+  return _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pt) != __u;
 }
 
 template <class _Tp, class _Up>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 _LIBCUDAFORDALICXX_CONSTEXPR bool operator<(const propagate_const<_Tp>& __pt, const _Up& __u)
 {
-  return _CUDA_VSTD_LFTS_V2::get_underlying(__pt) < __u;
+  return _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pt) < __u;
 }
 
 template <class _Tp, class _Up>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 _LIBCUDAFORDALICXX_CONSTEXPR bool operator>(const propagate_const<_Tp>& __pt, const _Up& __u)
 {
-  return _CUDA_VSTD_LFTS_V2::get_underlying(__pt) > __u;
+  return _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pt) > __u;
 }
 
 template <class _Tp, class _Up>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 _LIBCUDAFORDALICXX_CONSTEXPR bool operator<=(const propagate_const<_Tp>& __pt, const _Up& __u)
 {
-  return _CUDA_VSTD_LFTS_V2::get_underlying(__pt) <= __u;
+  return _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pt) <= __u;
 }
 
 template <class _Tp, class _Up>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 _LIBCUDAFORDALICXX_CONSTEXPR bool operator>=(const propagate_const<_Tp>& __pt, const _Up& __u)
 {
-  return _CUDA_VSTD_LFTS_V2::get_underlying(__pt) >= __u;
+  return _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pt) >= __u;
 }
 
 
@@ -420,42 +420,42 @@ template <class _Tp, class _Up>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 _LIBCUDAFORDALICXX_CONSTEXPR bool operator==(const _Tp& __t, const propagate_const<_Up>& __pu)
 {
-  return __t == _CUDA_VSTD_LFTS_V2::get_underlying(__pu);
+  return __t == _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pu);
 }
 
 template <class _Tp, class _Up>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 _LIBCUDAFORDALICXX_CONSTEXPR bool operator!=(const _Tp& __t, const propagate_const<_Up>& __pu)
 {
-  return __t != _CUDA_VSTD_LFTS_V2::get_underlying(__pu);
+  return __t != _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pu);
 }
 
 template <class _Tp, class _Up>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 _LIBCUDAFORDALICXX_CONSTEXPR bool operator<(const _Tp& __t, const propagate_const<_Up>& __pu)
 {
-  return __t < _CUDA_VSTD_LFTS_V2::get_underlying(__pu);
+  return __t < _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pu);
 }
 
 template <class _Tp, class _Up>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 _LIBCUDAFORDALICXX_CONSTEXPR bool operator>(const _Tp& __t, const propagate_const<_Up>& __pu)
 {
-  return __t > _CUDA_VSTD_LFTS_V2::get_underlying(__pu);
+  return __t > _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pu);
 }
 
 template <class _Tp, class _Up>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 _LIBCUDAFORDALICXX_CONSTEXPR bool operator<=(const _Tp& __t, const propagate_const<_Up>& __pu)
 {
-  return __t <= _CUDA_VSTD_LFTS_V2::get_underlying(__pu);
+  return __t <= _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pu);
 }
 
 template <class _Tp, class _Up>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 _LIBCUDAFORDALICXX_CONSTEXPR bool operator>=(const _Tp& __t, const propagate_const<_Up>& __pu)
 {
-  return __t >= _CUDA_VSTD_LFTS_V2::get_underlying(__pu);
+  return __t >= _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pu);
 }
 
 template <class _Tp>
@@ -489,7 +489,7 @@ struct hash<experimental::fundamentals_v2::propagate_const<_Tp>>
 
   size_t operator()(const experimental::fundamentals_v2::propagate_const<_Tp>& __pc1) const
   {
-    return std::hash<_Tp>()(_CUDA_VSTD_LFTS_V2::get_underlying(__pc1));
+    return std::hash<_Tp>()(_CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pc1));
   }
 };
 
@@ -502,7 +502,7 @@ struct equal_to<experimental::fundamentals_v2::propagate_const<_Tp>>
   bool operator()(const experimental::fundamentals_v2::propagate_const<_Tp>& __pc1,
       const experimental::fundamentals_v2::propagate_const<_Tp>& __pc2) const
   {
-    return std::equal_to<_Tp>()(_CUDA_VSTD_LFTS_V2::get_underlying(__pc1), _CUDA_VSTD_LFTS_V2::get_underlying(__pc2));
+    return std::equal_to<_Tp>()(_CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pc1), _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pc2));
   }
 };
 
@@ -515,7 +515,7 @@ struct not_equal_to<experimental::fundamentals_v2::propagate_const<_Tp>>
   bool operator()(const experimental::fundamentals_v2::propagate_const<_Tp>& __pc1,
       const experimental::fundamentals_v2::propagate_const<_Tp>& __pc2) const
   {
-    return std::not_equal_to<_Tp>()(_CUDA_VSTD_LFTS_V2::get_underlying(__pc1), _CUDA_VSTD_LFTS_V2::get_underlying(__pc2));
+    return std::not_equal_to<_Tp>()(_CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pc1), _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pc2));
   }
 };
 
@@ -528,7 +528,7 @@ struct less<experimental::fundamentals_v2::propagate_const<_Tp>>
   bool operator()(const experimental::fundamentals_v2::propagate_const<_Tp>& __pc1,
       const experimental::fundamentals_v2::propagate_const<_Tp>& __pc2) const
   {
-    return std::less<_Tp>()(_CUDA_VSTD_LFTS_V2::get_underlying(__pc1), _CUDA_VSTD_LFTS_V2::get_underlying(__pc2));
+    return std::less<_Tp>()(_CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pc1), _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pc2));
   }
 };
 
@@ -541,7 +541,7 @@ struct greater<experimental::fundamentals_v2::propagate_const<_Tp>>
   bool operator()(const experimental::fundamentals_v2::propagate_const<_Tp>& __pc1,
       const experimental::fundamentals_v2::propagate_const<_Tp>& __pc2) const
   {
-    return std::greater<_Tp>()(_CUDA_VSTD_LFTS_V2::get_underlying(__pc1), _CUDA_VSTD_LFTS_V2::get_underlying(__pc2));
+    return std::greater<_Tp>()(_CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pc1), _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pc2));
   }
 };
 
@@ -554,7 +554,7 @@ struct less_equal<experimental::fundamentals_v2::propagate_const<_Tp>>
   bool operator()(const experimental::fundamentals_v2::propagate_const<_Tp>& __pc1,
       const experimental::fundamentals_v2::propagate_const<_Tp>& __pc2) const
   {
-    return std::less_equal<_Tp>()(_CUDA_VSTD_LFTS_V2::get_underlying(__pc1), _CUDA_VSTD_LFTS_V2::get_underlying(__pc2));
+    return std::less_equal<_Tp>()(_CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pc1), _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pc2));
   }
 };
 
@@ -567,7 +567,7 @@ struct greater_equal<experimental::fundamentals_v2::propagate_const<_Tp>>
   bool operator()(const experimental::fundamentals_v2::propagate_const<_Tp>& __pc1,
       const experimental::fundamentals_v2::propagate_const<_Tp>& __pc2) const
   {
-    return std::greater_equal<_Tp>()(_CUDA_VSTD_LFTS_V2::get_underlying(__pc1), _CUDA_VSTD_LFTS_V2::get_underlying(__pc2));
+    return std::greater_equal<_Tp>()(_CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pc1), _CUDA_FOR_DALI_VSTD_LFTS_V2::get_underlying(__pc2));
   }
 };
 

@@ -39,7 +39,7 @@ namespace pmr {
 _LIBCUDAFORDALICXX_BEGIN_NAMESPACE_LFTS_PMR
 
 template <class _ValueT>
-using deque = _CUDA_VSTD::deque<_ValueT, polymorphic_allocator<_ValueT>>;
+using deque = _CUDA_FOR_DALI_VSTD::deque<_ValueT, polymorphic_allocator<_ValueT>>;
 
 _LIBCUDAFORDALICXX_END_NAMESPACE_LFTS_PMR
 

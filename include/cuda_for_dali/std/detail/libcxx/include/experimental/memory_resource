@@ -161,7 +161,7 @@ public:
     // 8.6.2, memory.polymorphic.allocator.ctor
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     polymorphic_allocator() _NOEXCEPT
-      : __res_(_CUDA_VSTD_LFTS_PMR::get_default_resource())
+      : __res_(_CUDA_FOR_DALI_VSTD_LFTS_PMR::get_default_resource())
     {}
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -204,8 +204,8 @@ public:
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     void construct(_Tp* __p, _Ts &&... __args)
     {
-        _CUDA_VSTD_LFTS::__lfts_user_alloc_construct(
-            __p, *this, _CUDA_VSTD::forward<_Ts>(__args)...
+        _CUDA_FOR_DALI_VSTD_LFTS::__lfts_user_alloc_construct(
+            __p, *this, _CUDA_FOR_DALI_VSTD::forward<_Ts>(__args)...
           );
     }
 
@@ -219,14 +219,14 @@ public:
               typename __lfts_uses_alloc_ctor<
                   _T1, polymorphic_allocator&, _Args1...
               >::type()
-            , _CUDA_VSTD::move(__x)
+            , _CUDA_FOR_DALI_VSTD::move(__x)
             , typename __make_tuple_indices<sizeof...(_Args1)>::type{}
           )
           , __transform_tuple(
               typename __lfts_uses_alloc_ctor<
                   _T2, polymorphic_allocator&, _Args2...
               >::type()
-            , _CUDA_VSTD::move(__y)
+            , _CUDA_FOR_DALI_VSTD::move(__y)
             , typename __make_tuple_indices<sizeof...(_Args2)>::type{}
           )
         );
@@ -242,24 +242,24 @@ public:
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     void construct(pair<_T1, _T2> * __p, _Up && __u, _Vp && __v) {
         construct(__p, piecewise_construct
-          , _CUDA_VSTD::forward_as_tuple(_CUDA_VSTD::forward<_Up>(__u))
-          , _CUDA_VSTD::forward_as_tuple(_CUDA_VSTD::forward<_Vp>(__v)));
+          , _CUDA_FOR_DALI_VSTD::forward_as_tuple(_CUDA_FOR_DALI_VSTD::forward<_Up>(__u))
+          , _CUDA_FOR_DALI_VSTD::forward_as_tuple(_CUDA_FOR_DALI_VSTD::forward<_Vp>(__v)));
     }
 
     template <class _T1, class _T2, class _U1, class _U2>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     void construct(pair<_T1, _T2> * __p, pair<_U1, _U2> const & __pr) {
         construct(__p, piecewise_construct
-            , _CUDA_VSTD::forward_as_tuple(__pr.first)
-            , _CUDA_VSTD::forward_as_tuple(__pr.second));
+            , _CUDA_FOR_DALI_VSTD::forward_as_tuple(__pr.first)
+            , _CUDA_FOR_DALI_VSTD::forward_as_tuple(__pr.second));
     }
 
     template <class _T1, class _T2, class _U1, class _U2>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     void construct(pair<_T1, _T2> * __p, pair<_U1, _U2> && __pr){
         construct(__p, piecewise_construct
-            , _CUDA_VSTD::forward_as_tuple(_CUDA_VSTD::forward<_U1>(__pr.first))
-            , _CUDA_VSTD::forward_as_tuple(_CUDA_VSTD::forward<_U2>(__pr.second)));
+            , _CUDA_FOR_DALI_VSTD::forward_as_tuple(_CUDA_FOR_DALI_VSTD::forward<_U1>(__pr.first))
+            , _CUDA_FOR_DALI_VSTD::forward_as_tuple(_CUDA_FOR_DALI_VSTD::forward<_U2>(__pr.second)));
     }
 
     template <class _Tp>
@@ -283,7 +283,7 @@ private:
     __transform_tuple(integral_constant<int, 0>, tuple<_Args...>&& __t,
                       __tuple_indices<_Idx...>) const
     {
-        return _CUDA_VSTD::forward_as_tuple(_CUDA_VSTD::get<_Idx>(_CUDA_VSTD::move(__t))...);
+        return _CUDA_FOR_DALI_VSTD::forward_as_tuple(_CUDA_FOR_DALI_VSTD::get<_Idx>(_CUDA_FOR_DALI_VSTD::move(__t))...);
     }
 
     template <class ..._Args, size_t ..._Idx>
@@ -294,7 +294,7 @@ private:
     {
         using _Tup = tuple<allocator_arg_t const&, polymorphic_allocator&, _Args&&...>;
         return _Tup(allocator_arg, *this,
-                    _CUDA_VSTD::get<_Idx>(_CUDA_VSTD::move(__t))...);
+                    _CUDA_FOR_DALI_VSTD::get<_Idx>(_CUDA_FOR_DALI_VSTD::move(__t))...);
     }
 
     template <class ..._Args, size_t ..._Idx>
@@ -304,7 +304,7 @@ private:
                       __tuple_indices<_Idx...>)
     {
         using _Tup = tuple<_Args&&..., polymorphic_allocator&>;
-        return _Tup(_CUDA_VSTD::get<_Idx>(_CUDA_VSTD::move(__t))..., *this);
+        return _Tup(_CUDA_FOR_DALI_VSTD::get<_Idx>(_CUDA_FOR_DALI_VSTD::move(__t))..., *this);
     }
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -370,7 +370,7 @@ public:
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     explicit __resource_adaptor_imp(allocator_type && __a)
-      : __alloc_(_CUDA_VSTD::move(__a))
+      : __alloc_(_CUDA_FOR_DALI_VSTD::move(__a))
     {}
 
     __resource_adaptor_imp &

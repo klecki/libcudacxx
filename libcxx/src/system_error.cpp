@@ -288,7 +288,7 @@ __throw_system_error(int ev, const char* what_arg)
 #else
     (void)ev;
     (void)what_arg;
-    _CUDA_VSTD::abort();
+    _CUDA_FOR_DALI_VSTD::abort();
 #endif
 }
 

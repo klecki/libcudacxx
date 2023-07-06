@@ -177,7 +177,7 @@ make_exception_ptr(_Ep __e) _NOEXCEPT
     }
 #else
     ((void)__e);
-    _CUDA_VSTD::abort();
+    _CUDA_FOR_DALI_VSTD::abort();
 #endif
 }
 
@@ -225,7 +225,7 @@ template<class _Ep>
 _LIBCUDAFORDALICXX_INLINE_VISIBILITY exception_ptr
 make_exception_ptr(_Ep __e) _NOEXCEPT
 {
-  return __copy_exception_ptr(_CUDA_VSTD::addressof(__e), __GetExceptionInfo(__e));
+  return __copy_exception_ptr(_CUDA_FOR_DALI_VSTD::addressof(__e), __GetExceptionInfo(__e));
 }
 
 #endif // _LIBCUDAFORDALICXX_ABI_MICROSOFT
@@ -262,7 +262,7 @@ struct __throw_with_nested<_Tp, _Up, true> {
     _LIBCUDAFORDALICXX_NORETURN static inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY void
     __do_throw(_Tp&& __t)
     {
-        throw __nested<_Up>(_CUDA_VSTD::forward<_Tp>(__t));
+        throw __nested<_Up>(_CUDA_FOR_DALI_VSTD::forward<_Tp>(__t));
     }
 };
 
@@ -275,7 +275,7 @@ struct __throw_with_nested<_Tp, _Up, false> {
     __do_throw (_Tp& __t)
 #endif  // _LIBCUDAFORDALICXX_CXX03_LANG
     {
-        throw _CUDA_VSTD::forward<_Tp>(__t);
+        throw _CUDA_FOR_DALI_VSTD::forward<_Tp>(__t);
     }
 };
 #endif
@@ -292,7 +292,7 @@ throw_with_nested(_Tp&& __t)
         is_class<_Up>::value &&
         !is_base_of<nested_exception, _Up>::value &&
         !__libcpp_is_final<_Up>::value>::
-            __do_throw(_CUDA_VSTD::forward<_Tp>(__t));
+            __do_throw(_CUDA_FOR_DALI_VSTD::forward<_Tp>(__t));
 #else
     ((void)__t);
     // FIXME: Make this abort
@@ -311,7 +311,7 @@ void
 rethrow_if_nested(const _Ep& __e,
                   typename enable_if< __can_dynamic_cast<_Ep, nested_exception>::value>::type* = 0)
 {
-    const nested_exception* __nep = dynamic_cast<const nested_exception*>(_CUDA_VSTD::addressof(__e));
+    const nested_exception* __nep = dynamic_cast<const nested_exception*>(_CUDA_FOR_DALI_VSTD::addressof(__e));
     if (__nep)
         __nep->rethrow_nested();
 }

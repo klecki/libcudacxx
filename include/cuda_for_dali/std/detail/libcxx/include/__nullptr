@@ -45,7 +45,7 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS nullptr_t
 
 inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY _LIBCUDAFORDALICXX_CONSTEXPR nullptr_t __get_nullptr_t() {return nullptr_t(0);}
 
-#define nullptr _CUDA_VSTD::__get_nullptr_t()
+#define nullptr _CUDA_FOR_DALI_VSTD::__get_nullptr_t()
 
 _LIBCUDAFORDALICXX_END_NAMESPACE_STD
 

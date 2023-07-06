@@ -255,7 +255,7 @@ __scan_keyword(_InputIterator& __b, _InputIterator __e,
                bool __case_sensitive = true)
 {
     typedef typename iterator_traits<_InputIterator>::value_type _CharT;
-    size_t __nkw = static_cast<size_t>(_CUDA_VSTD::distance(__kb, __ke));
+    size_t __nkw = static_cast<size_t>(_CUDA_FOR_DALI_VSTD::distance(__kb, __ke));
     const unsigned char __doesnt_match = '\0';
     const unsigned char __might_match = '\1';
     const unsigned char __does_match = '\2';
@@ -1429,7 +1429,7 @@ num_put<_CharT, _OutputIterator>::do_put(iter_type __s, ios_base& __iob,
     typedef typename numpunct<char_type>::string_type string_type;
 #if _LIBCUDAFORDALICXX_DEBUG_LEVEL >= 2
     string_type __tmp(__v ? __np.truename() : __np.falsename());
-    string_type __nm = _CUDA_VSTD::move(__tmp);
+    string_type __nm = _CUDA_FOR_DALI_VSTD::move(__tmp);
 #else
     string_type __nm = __v ? __np.truename() : __np.falsename();
 #endif
@@ -2572,7 +2572,7 @@ time_put<_CharT, _OutputIterator>::do_put(iter_type __s, ios_base&,
     char_type* __nb = __nar;
     char_type* __ne = __nb + 100;
     __do_put(__nb, __ne, __tm, __fmt, __mod);
-    return _CUDA_VSTD::copy(__nb, __ne, __s);
+    return _CUDA_FOR_DALI_VSTD::copy(__nb, __ne, __s);
 }
 
 _LIBCUDAFORDALICXX_EXTERN_TEMPLATE2(class _LIBCUDAFORDALICXX_EXTERN_TEMPLATE_TYPE_VIS time_put<char>)
@@ -3119,7 +3119,7 @@ money_get<_CharT, _InputIterator>::do_get(iter_type __b, iter_type __e,
         if (__neg)
             *__nc++ = '-';
         for (const char_type* __w = __wb.get(); __w < __wn; ++__w, ++__nc)
-            *__nc = __src[find(__atoms, _CUDA_VSTD::end(__atoms), *__w) - __atoms];
+            *__nc = __src[find(__atoms, _CUDA_FOR_DALI_VSTD::end(__atoms), *__w) - __atoms];
         *__nc = char();
         if (sscanf(__nbuf, "%Lf", &__v) != 1)
             __throw_runtime_error("money_get error");
@@ -3270,7 +3270,7 @@ __money_put<_CharT>::__format(char_type* __mb, char_type*& __mi, char_type*& __m
             break;
         case money_base::symbol:
             if (!__sym.empty() && (__flags & ios_base::showbase))
-                __me = _CUDA_VSTD::copy(__sym.begin(), __sym.end(), __me);
+                __me = _CUDA_FOR_DALI_VSTD::copy(__sym.begin(), __sym.end(), __me);
             break;
         case money_base::value:
             {
@@ -3329,7 +3329,7 @@ __money_put<_CharT>::__format(char_type* __mb, char_type*& __mi, char_type*& __m
     }
     // print rest of sign, if any
     if (__sn.size() > 1)
-        __me = _CUDA_VSTD::copy(__sn.begin()+1, __sn.end(), __me);
+        __me = _CUDA_FOR_DALI_VSTD::copy(__sn.begin()+1, __sn.end(), __me);
     // set alignment
     if ((__flags & ios_base::adjustfield) == ios_base::left)
         __mi = __me;
@@ -3725,8 +3725,8 @@ template<class _Codecvt, class _Elem, class _Wide_alloc, class _Byte_alloc>
 inline
 wstring_convert<_Codecvt, _Elem, _Wide_alloc, _Byte_alloc>::
     wstring_convert(wstring_convert&& __wc)
-        : __byte_err_string_(_CUDA_VSTD::move(__wc.__byte_err_string_)),
-          __wide_err_string_(_CUDA_VSTD::move(__wc.__wide_err_string_)),
+        : __byte_err_string_(_CUDA_FOR_DALI_VSTD::move(__wc.__byte_err_string_)),
+          __wide_err_string_(_CUDA_FOR_DALI_VSTD::move(__wc.__wide_err_string_)),
           __cvtptr_(__wc.__cvtptr_),
           __cvtstate_(__wc.__cvtstate_), __cvtcount_(__wc.__cvtcount_)
 {
@@ -4023,7 +4023,7 @@ wbuffer_convert<_Codecvt, _Elem, _Tr>::underflow()
                 memmove(__extbuf_, __extbufnext_, __extbufend_ - __extbufnext_);
             __extbufnext_ = __extbuf_ + (__extbufend_ - __extbufnext_);
             __extbufend_ = __extbuf_ + (__extbuf_ == __extbuf_min_ ? sizeof(__extbuf_min_) : __ebs_);
-            streamsize __nmemb = _CUDA_VSTD::min(static_cast<streamsize>(this->egptr() - this->eback() - __unget_sz),
+            streamsize __nmemb = _CUDA_FOR_DALI_VSTD::min(static_cast<streamsize>(this->egptr() - this->eback() - __unget_sz),
                                  static_cast<streamsize>(__extbufend_ - __extbufnext_));
             codecvt_base::result __r;
             // FIXME: Do we ever need to restore the state here?

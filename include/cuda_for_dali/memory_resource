@@ -159,7 +159,7 @@ namespace detail {
 
 class memory_resource_base {
 public:
-  static constexpr _CUDA_VSTD::size_t default_alignment = alignof(_CUDA_VSTD::max_align_t);
+  static constexpr _CUDA_FOR_DALI_VSTD::size_t default_alignment = alignof(_CUDA_FOR_DALI_VSTD::max_align_t);
 
   /*!
    * \brief Allocates storage of size at least `__bytes` bytes.
@@ -495,7 +495,7 @@ class stream_ordered_memory_resource : public virtual memory_resource<_MemoryKin
                                        private virtual detail::stream_ordered_memory_resource_base {
 public:
   using memory_kind = _MemoryKind;
-  static constexpr _CUDA_VSTD::size_t default_alignment = memory_resource<_MemoryKind>::default_alignment;
+  static constexpr _CUDA_FOR_DALI_VSTD::size_t default_alignment = memory_resource<_MemoryKind>::default_alignment;
 
   /*!
    * \brief Allocates storage of size at least `__bytes` bytes in stream order
@@ -657,10 +657,10 @@ template <typename _MemoryKind>
 struct is_kind;
 
 template <typename _MemoryKind>
-struct kind_has_property<_MemoryKind, is_kind<_MemoryKind>> : _CUDA_VSTD::true_type {};
+struct kind_has_property<_MemoryKind, is_kind<_MemoryKind>> : _CUDA_FOR_DALI_VSTD::true_type {};
 
 #define _LIBCUDAFORDALICXX_MEMORY_KIND_PROPERTY(__kind, __property)\
-template <> struct kind_has_property<__kind, __property> : _CUDA_VSTD::true_type {};
+template <> struct kind_has_property<__kind, __property> : _CUDA_FOR_DALI_VSTD::true_type {};
 
 _LIBCUDAFORDALICXX_MEMORY_KIND_PROPERTY(memory_kind::host, memory_access::host);
 _LIBCUDAFORDALICXX_MEMORY_KIND_PROPERTY(memory_kind::host, oversubscribable);
@@ -683,7 +683,7 @@ _LIBCUDAFORDALICXX_MEMORY_KIND_PROPERTY(memory_kind::managed, memory_location::d
 
 namespace detail {
     template <typename _Property>
-    _CUDA_VSTD::false_type Has_Property(...);
+    _CUDA_FOR_DALI_VSTD::false_type Has_Property(...);
     template <typename _Property, typename _MemoryKind>
     kind_has_property<_MemoryKind, _Property> Has_Property(const memory_resource<_MemoryKind> *);
     template <typename _Property, typename _MemoryKind>
@@ -691,38 +691,38 @@ namespace detail {
 }  // namespace detail
 
 template <typename _Target, typename _Property>
-struct has_property : decltype(detail::Has_Property<_Property>(_CUDA_VSTD::declval<_CUDA_VSTD::remove_reference_t<_Target>*>())) {};
+struct has_property : decltype(detail::Has_Property<_Property>(_CUDA_FOR_DALI_VSTD::declval<_CUDA_FOR_DALI_VSTD::remove_reference_t<_Target>*>())) {};
 
 namespace detail {
 template <typename _Property, typename... _Properties>
-struct is_property_in : _CUDA_VSTD::false_type {};
+struct is_property_in : _CUDA_FOR_DALI_VSTD::false_type {};
 
 template <typename _Property, typename _Mismatch, typename... _Tail>
 struct is_property_in<_Property, _Mismatch, _Tail...> : is_property_in<_Property, _Tail...> {};
 
 template <typename _Property, typename... _Tail>
-struct is_property_in<_Property, _Property, _Tail...> : _CUDA_VSTD::true_type {};
+struct is_property_in<_Property, _Property, _Tail...> : _CUDA_FOR_DALI_VSTD::true_type {};
 
 template <typename _Property, typename _MemoryKind, typename... Tail>
 struct is_property_in<_Property, is_kind<_MemoryKind>, Tail...> : kind_has_property<_MemoryKind, _Property> {};
 
 template <typename _MemoryKind, typename... Tail>
-struct is_property_in<is_kind<_MemoryKind>, is_kind<_MemoryKind>, Tail...> : _CUDA_VSTD::true_type {};
+struct is_property_in<is_kind<_MemoryKind>, is_kind<_MemoryKind>, Tail...> : _CUDA_FOR_DALI_VSTD::true_type {};
 
 template <typename _FromPointer, typename _ToPointer>
-struct is_resource_pointer_convertible : _CUDA_VSTD::is_convertible<_FromPointer, _ToPointer> {};
+struct is_resource_pointer_convertible : _CUDA_FOR_DALI_VSTD::is_convertible<_FromPointer, _ToPointer> {};
 // Private inheritance from (stream_ordered_)memory_resource_base* requires explicit partial specializations as `is_convertible` will return false
 
 template <typename _FromPointer>
 struct is_resource_pointer_convertible<_FromPointer, detail::memory_resource_base*>
-   : _CUDA_VSTD::conjunction<_CUDA_VSTD::is_pointer<_FromPointer>,
-                             _CUDA_VSTD::is_base_of<detail::memory_resource_base,
+   : _CUDA_FOR_DALI_VSTD::conjunction<_CUDA_FOR_DALI_VSTD::is_pointer<_FromPointer>,
+                             _CUDA_FOR_DALI_VSTD::is_base_of<detail::memory_resource_base,
                                                     typename ::std::pointer_traits<_FromPointer>::element_type>> {};
 
 template <typename _FromPointer>
 struct is_resource_pointer_convertible<_FromPointer, detail::stream_ordered_memory_resource_base*>
-   : _CUDA_VSTD::conjunction<_CUDA_VSTD::is_pointer<_FromPointer>,
-                              _CUDA_VSTD::is_base_of<detail::stream_ordered_memory_resource_base,
+   : _CUDA_FOR_DALI_VSTD::conjunction<_CUDA_FOR_DALI_VSTD::is_pointer<_FromPointer>,
+                              _CUDA_FOR_DALI_VSTD::is_base_of<detail::stream_ordered_memory_resource_base,
                                                     typename ::std::pointer_traits<_FromPointer>::element_type>> {};
 
 }  // namespace detail
@@ -737,7 +737,7 @@ template <typename _FromPointer, typename... _FromProperties, typename _ToPointe
 struct is_view_convertible<
     basic_resource_view<_FromPointer, _FromProperties...>,
     basic_resource_view<_ToPointer, _ToProperties...>>
- : _CUDA_VSTD::conjunction<detail::is_resource_pointer_convertible<_FromPointer, _ToPointer>,
+ : _CUDA_FOR_DALI_VSTD::conjunction<detail::is_resource_pointer_convertible<_FromPointer, _ToPointer>,
     has_property<basic_resource_view<_FromPointer, _FromProperties...>, _ToProperties>...> {};
 
 /*!
@@ -766,8 +766,8 @@ template <typename _ResourcePointer, typename... _Properties>
 class basic_resource_view {
 public:
     static_assert(
-        _CUDA_VSTD::is_base_of<detail::memory_resource_base, typename ::std::pointer_traits<_ResourcePointer>::element_type>::value ||
-        _CUDA_VSTD::is_base_of<detail::stream_ordered_memory_resource_base, typename ::std::pointer_traits<_ResourcePointer>::element_type>::value,
+        _CUDA_FOR_DALI_VSTD::is_base_of<detail::memory_resource_base, typename ::std::pointer_traits<_ResourcePointer>::element_type>::value ||
+        _CUDA_FOR_DALI_VSTD::is_base_of<detail::stream_ordered_memory_resource_base, typename ::std::pointer_traits<_ResourcePointer>::element_type>::value,
         "ResourcePointer must be a pointer to a memory_resource_base, stream_ordered_memory_resource_base or a derived class");
 
     basic_resource_view() = default;
@@ -786,9 +786,9 @@ public:
      * \tparam _Resource Type of a mmeory resource object.
      * \param __p pointer to a memory resource object.
      */
-    template <typename _Resource, typename = _CUDA_VSTD::enable_if_t<
+    template <typename _Resource, typename = _CUDA_FOR_DALI_VSTD::enable_if_t<
         detail::is_resource_pointer_convertible<_Resource*, _ResourcePointer>::value &&
-        _CUDA_VSTD::conjunction<has_property<_Resource, _Properties>...>::value
+        _CUDA_FOR_DALI_VSTD::conjunction<has_property<_Resource, _Properties>...>::value
     >>
     basic_resource_view(_Resource *__p) : __pointer(__p) {}
 
@@ -801,7 +801,7 @@ public:
      * \tparam _OtherPointer The resource pointer type of the source resource view
      * \tparam _OtherProperties The properties defined byt the source resource view
      */
-    template <typename _OtherPointer, typename... _OtherProperties, typename = _CUDA_VSTD::enable_if_t<
+    template <typename _OtherPointer, typename... _OtherProperties, typename = _CUDA_FOR_DALI_VSTD::enable_if_t<
         is_view_convertible<basic_resource_view<_OtherPointer, _OtherProperties...>, basic_resource_view>::value
     >>
     basic_resource_view(basic_resource_view<_OtherPointer, _OtherProperties...> v) : __pointer(v.__pointer) {}
@@ -895,7 +895,7 @@ public:
 template <typename _Pointer>
 class pmr_adaptor final : public detail::__pmr_adaptor_base {
 
-  using resource_type = _CUDA_VSTD::remove_reference_t<decltype(*_CUDA_VSTD::declval<_Pointer>())>;
+  using resource_type = _CUDA_FOR_DALI_VSTD::remove_reference_t<decltype(*_CUDA_FOR_DALI_VSTD::declval<_Pointer>())>;
 
   static constexpr bool __is_host_accessible_resource = has_property<resource_type, memory_access::host>::value;
   static_assert(
@@ -905,7 +905,7 @@ class pmr_adaptor final : public detail::__pmr_adaptor_base {
 public:
   pmr_adaptor(_Pointer __mr) : __mr_{std::move(__mr)} {}
 
-  using raw_pointer = _CUDA_VSTD::remove_reference_t<decltype(&*_CUDA_VSTD::declval<_Pointer>())>;
+  using raw_pointer = _CUDA_FOR_DALI_VSTD::remove_reference_t<decltype(&*_CUDA_FOR_DALI_VSTD::declval<_Pointer>())>;
 
   raw_pointer resource() const noexcept override { return &*__mr_; }
 

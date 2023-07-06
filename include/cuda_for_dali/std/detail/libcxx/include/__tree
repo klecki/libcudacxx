@@ -564,12 +564,12 @@ struct __tree_key_value_types {
   }
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   static __container_value_type* __get_ptr(__node_value_type& __n) {
-    return _CUDA_VSTD::addressof(__n);
+    return _CUDA_FOR_DALI_VSTD::addressof(__n);
   }
 #ifndef _LIBCUDAFORDALICXX_CXX03_LANG
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   static __container_value_type&& __move(__node_value_type& __v) {
-    return _CUDA_VSTD::move(__v);
+    return _CUDA_FOR_DALI_VSTD::move(__v);
   }
 #endif
 };
@@ -613,7 +613,7 @@ struct __tree_key_value_types<__value_type<_Key, _Tp> > {
 
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   static __container_value_type* __get_ptr(__node_value_type& __n) {
-    return _CUDA_VSTD::addressof(__n.__get_value());
+    return _CUDA_FOR_DALI_VSTD::addressof(__n.__get_value());
   }
 
 #ifndef _LIBCUDAFORDALICXX_CXX03_LANG
@@ -1082,7 +1082,7 @@ public:
         {return static_cast<__node_pointer>(__end_node()->__left_);}
 
     __node_base_pointer* __root_ptr() const _NOEXCEPT {
-        return _CUDA_VSTD::addressof(__end_node()->__left_);
+        return _CUDA_FOR_DALI_VSTD::addressof(__end_node()->__left_);
     }
 
     typedef __tree_iterator<value_type, __node_pointer, difference_type>             iterator;
@@ -1166,7 +1166,7 @@ public:
     template <class _Pp>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     pair<iterator, bool> __emplace_unique(_Pp&& __x) {
-        return __emplace_unique_extract_key(_CUDA_VSTD::forward<_Pp>(__x),
+        return __emplace_unique_extract_key(_CUDA_FOR_DALI_VSTD::forward<_Pp>(__x),
                                             __can_extract_key<_Pp, key_type>());
     }
 
@@ -1176,41 +1176,41 @@ public:
         __can_extract_map_key<_First, key_type, __container_value_type>::value,
         pair<iterator, bool>
     >::type __emplace_unique(_First&& __f, _Second&& __s) {
-        return __emplace_unique_key_args(__f, _CUDA_VSTD::forward<_First>(__f),
-                                              _CUDA_VSTD::forward<_Second>(__s));
+        return __emplace_unique_key_args(__f, _CUDA_FOR_DALI_VSTD::forward<_First>(__f),
+                                              _CUDA_FOR_DALI_VSTD::forward<_Second>(__s));
     }
 
     template <class... _Args>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     pair<iterator, bool> __emplace_unique(_Args&&... __args) {
-        return __emplace_unique_impl(_CUDA_VSTD::forward<_Args>(__args)...);
+        return __emplace_unique_impl(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
     }
 
     template <class _Pp>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     pair<iterator, bool>
     __emplace_unique_extract_key(_Pp&& __x, __extract_key_fail_tag) {
-      return __emplace_unique_impl(_CUDA_VSTD::forward<_Pp>(__x));
+      return __emplace_unique_impl(_CUDA_FOR_DALI_VSTD::forward<_Pp>(__x));
     }
 
     template <class _Pp>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     pair<iterator, bool>
     __emplace_unique_extract_key(_Pp&& __x, __extract_key_self_tag) {
-      return __emplace_unique_key_args(__x, _CUDA_VSTD::forward<_Pp>(__x));
+      return __emplace_unique_key_args(__x, _CUDA_FOR_DALI_VSTD::forward<_Pp>(__x));
     }
 
     template <class _Pp>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     pair<iterator, bool>
     __emplace_unique_extract_key(_Pp&& __x, __extract_key_first_tag) {
-      return __emplace_unique_key_args(__x.first, _CUDA_VSTD::forward<_Pp>(__x));
+      return __emplace_unique_key_args(__x.first, _CUDA_FOR_DALI_VSTD::forward<_Pp>(__x));
     }
 
     template <class _Pp>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     iterator __emplace_hint_unique(const_iterator __p, _Pp&& __x) {
-        return __emplace_hint_unique_extract_key(__p, _CUDA_VSTD::forward<_Pp>(__x),
+        return __emplace_hint_unique_extract_key(__p, _CUDA_FOR_DALI_VSTD::forward<_Pp>(__x),
                                             __can_extract_key<_Pp, key_type>());
     }
 
@@ -1221,35 +1221,35 @@ public:
         iterator
     >::type __emplace_hint_unique(const_iterator __p, _First&& __f, _Second&& __s) {
         return __emplace_hint_unique_key_args(__p, __f,
-                                              _CUDA_VSTD::forward<_First>(__f),
-                                              _CUDA_VSTD::forward<_Second>(__s));
+                                              _CUDA_FOR_DALI_VSTD::forward<_First>(__f),
+                                              _CUDA_FOR_DALI_VSTD::forward<_Second>(__s));
     }
 
     template <class... _Args>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     iterator __emplace_hint_unique(const_iterator __p, _Args&&... __args) {
-        return __emplace_hint_unique_impl(__p, _CUDA_VSTD::forward<_Args>(__args)...);
+        return __emplace_hint_unique_impl(__p, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
     }
 
     template <class _Pp>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     iterator
     __emplace_hint_unique_extract_key(const_iterator __p, _Pp&& __x, __extract_key_fail_tag) {
-      return __emplace_hint_unique_impl(__p, _CUDA_VSTD::forward<_Pp>(__x));
+      return __emplace_hint_unique_impl(__p, _CUDA_FOR_DALI_VSTD::forward<_Pp>(__x));
     }
 
     template <class _Pp>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     iterator
     __emplace_hint_unique_extract_key(const_iterator __p, _Pp&& __x, __extract_key_self_tag) {
-      return __emplace_hint_unique_key_args(__p, __x, _CUDA_VSTD::forward<_Pp>(__x));
+      return __emplace_hint_unique_key_args(__p, __x, _CUDA_FOR_DALI_VSTD::forward<_Pp>(__x));
     }
 
     template <class _Pp>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     iterator
     __emplace_hint_unique_extract_key(const_iterator __p, _Pp&& __x, __extract_key_first_tag) {
-      return __emplace_hint_unique_key_args(__p, __x.first, _CUDA_VSTD::forward<_Pp>(__x));
+      return __emplace_hint_unique_key_args(__p, __x.first, _CUDA_FOR_DALI_VSTD::forward<_Pp>(__x));
     }
 
 #else
@@ -1279,12 +1279,12 @@ public:
 #else
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     pair<iterator, bool> __insert_unique(__container_value_type&& __v) {
-        return __emplace_unique_key_args(_NodeTypes::__get_key(__v), _CUDA_VSTD::move(__v));
+        return __emplace_unique_key_args(_NodeTypes::__get_key(__v), _CUDA_FOR_DALI_VSTD::move(__v));
     }
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     iterator __insert_unique(const_iterator __p, __container_value_type&& __v) {
-        return __emplace_hint_unique_key_args(__p, _NodeTypes::__get_key(__v), _CUDA_VSTD::move(__v));
+        return __emplace_hint_unique_key_args(__p, _NodeTypes::__get_key(__v), _CUDA_FOR_DALI_VSTD::move(__v));
     }
 
     template <class _Vp, class = typename enable_if<
@@ -1294,7 +1294,7 @@ public:
         >::type>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     pair<iterator, bool> __insert_unique(_Vp&& __v) {
-        return __emplace_unique(_CUDA_VSTD::forward<_Vp>(__v));
+        return __emplace_unique(_CUDA_FOR_DALI_VSTD::forward<_Vp>(__v));
     }
 
     template <class _Vp, class = typename enable_if<
@@ -1304,29 +1304,29 @@ public:
         >::type>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     iterator __insert_unique(const_iterator __p, _Vp&& __v) {
-        return __emplace_hint_unique(__p, _CUDA_VSTD::forward<_Vp>(__v));
+        return __emplace_hint_unique(__p, _CUDA_FOR_DALI_VSTD::forward<_Vp>(__v));
     }
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     iterator __insert_multi(__container_value_type&& __v) {
-        return __emplace_multi(_CUDA_VSTD::move(__v));
+        return __emplace_multi(_CUDA_FOR_DALI_VSTD::move(__v));
     }
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     iterator __insert_multi(const_iterator __p, __container_value_type&& __v) {
-        return __emplace_hint_multi(__p, _CUDA_VSTD::move(__v));
+        return __emplace_hint_multi(__p, _CUDA_FOR_DALI_VSTD::move(__v));
     }
 
     template <class _Vp>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     iterator __insert_multi(_Vp&& __v) {
-        return __emplace_multi(_CUDA_VSTD::forward<_Vp>(__v));
+        return __emplace_multi(_CUDA_FOR_DALI_VSTD::forward<_Vp>(__v));
     }
 
     template <class _Vp>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     iterator __insert_multi(const_iterator __p, _Vp&& __v) {
-        return __emplace_hint_multi(__p, _CUDA_VSTD::forward<_Vp>(__v));
+        return __emplace_hint_multi(__p, _CUDA_FOR_DALI_VSTD::forward<_Vp>(__v));
     }
 
 #endif // !_LIBCUDAFORDALICXX_CXX03_LANG
@@ -1508,7 +1508,7 @@ private:
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     void __move_assign_alloc(__tree& __t, true_type)
         _NOEXCEPT_(is_nothrow_move_assignable<__node_allocator>::value)
-        {__node_alloc() = _CUDA_VSTD::move(__t.__node_alloc());}
+        {__node_alloc() = _CUDA_FOR_DALI_VSTD::move(__t.__node_alloc());}
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     void __move_assign_alloc(__tree&, false_type) _NOEXCEPT {}
 
@@ -1710,9 +1710,9 @@ __tree<_Tp, _Compare, _Allocator>::__tree(__tree&& __t)
     _NOEXCEPT_(
         is_nothrow_move_constructible<__node_allocator>::value &&
         is_nothrow_move_constructible<value_compare>::value)
-    : __begin_node_(_CUDA_VSTD::move(__t.__begin_node_)),
-      __pair1_(_CUDA_VSTD::move(__t.__pair1_)),
-      __pair3_(_CUDA_VSTD::move(__t.__pair3_))
+    : __begin_node_(_CUDA_FOR_DALI_VSTD::move(__t.__begin_node_)),
+      __pair1_(_CUDA_FOR_DALI_VSTD::move(__t.__pair1_)),
+      __pair3_(_CUDA_FOR_DALI_VSTD::move(__t.__pair3_))
 {
     if (size() == 0)
         __begin_node() = __end_node();
@@ -1728,7 +1728,7 @@ __tree<_Tp, _Compare, _Allocator>::__tree(__tree&& __t)
 template <class _Tp, class _Compare, class _Allocator>
 __tree<_Tp, _Compare, _Allocator>::__tree(__tree&& __t, const allocator_type& __a)
     : __pair1_(__second_tag(), __node_allocator(__a)),
-      __pair3_(0, _CUDA_VSTD::move(__t.value_comp()))
+      __pair3_(0, _CUDA_FOR_DALI_VSTD::move(__t.value_comp()))
 {
     if (__a == __t.__alloc())
     {
@@ -1761,7 +1761,7 @@ __tree<_Tp, _Compare, _Allocator>::__move_assign(__tree& __t, true_type)
     __begin_node_ = __t.__begin_node_;
     __pair1_.first() = __t.__pair1_.first();
     __move_assign_alloc(__t);
-    __pair3_ = _CUDA_VSTD::move(__t.__pair3_);
+    __pair3_ = _CUDA_FOR_DALI_VSTD::move(__t.__pair3_);
     if (size() == 0)
         __begin_node() = __end_node();
     else
@@ -1781,13 +1781,13 @@ __tree<_Tp, _Compare, _Allocator>::__move_assign(__tree& __t, false_type)
         __move_assign(__t, true_type());
     else
     {
-        value_comp() = _CUDA_VSTD::move(__t.value_comp());
+        value_comp() = _CUDA_FOR_DALI_VSTD::move(__t.value_comp());
         const_iterator __e = end();
         if (size() != 0)
         {
             _DetachedTreeCache __cache(this);
             while (__cache.__get() != nullptr && __t.size() != 0) {
-              __cache.__get()->__value_ = _CUDA_VSTD::move(__t.remove(__t.begin())->__value_);
+              __cache.__get()->__value_ = _CUDA_FOR_DALI_VSTD::move(__t.remove(__t.begin())->__value_);
               __node_insert_multi(__cache.__get());
               __cache.__advance();
             }
@@ -1848,7 +1848,7 @@ __tree<_Tp, _Compare, _Allocator>::swap(__tree& __t)
         _NOEXCEPT_(__is_nothrow_swappable<value_compare>::value)
 #endif
 {
-    using _CUDA_VSTD::swap;
+    using _CUDA_FOR_DALI_VSTD::swap;
     swap(__begin_node_, __t.__begin_node_);
     swap(__pair1_.first(), __t.__pair1_.first());
     __swap_allocator(__node_alloc(), __t.__node_alloc());
@@ -2007,7 +2007,7 @@ __tree<_Tp, _Compare, _Allocator>::__find_equal(__parent_pointer& __parent,
             if (value_comp()(__v, __nd->__value_))
             {
                 if (__nd->__left_ != nullptr) {
-                    __nd_ptr = _CUDA_VSTD::addressof(__nd->__left_);
+                    __nd_ptr = _CUDA_FOR_DALI_VSTD::addressof(__nd->__left_);
                     __nd = static_cast<__node_pointer>(__nd->__left_);
                 } else {
                     __parent = static_cast<__parent_pointer>(__nd);
@@ -2017,7 +2017,7 @@ __tree<_Tp, _Compare, _Allocator>::__find_equal(__parent_pointer& __parent,
             else if (value_comp()(__nd->__value_, __v))
             {
                 if (__nd->__right_ != nullptr) {
-                    __nd_ptr = _CUDA_VSTD::addressof(__nd->__right_);
+                    __nd_ptr = _CUDA_FOR_DALI_VSTD::addressof(__nd->__right_);
                     __nd = static_cast<__node_pointer>(__nd->__right_);
                 } else {
                     __parent = static_cast<__parent_pointer>(__nd);
@@ -2074,10 +2074,10 @@ __tree<_Tp, _Compare, _Allocator>::__find_equal(const_iterator __hint,
     else if (value_comp()(*__hint, __v))  // check after
     {
         // *__hint < __v
-        const_iterator __next = _CUDA_VSTD::next(__hint);
+        const_iterator __next = _CUDA_FOR_DALI_VSTD::next(__hint);
         if (__next == end() || value_comp()(__v, *__next))
         {
-            // *__hint < __v < *_CUDA_VSTD::next(__hint)
+            // *__hint < __v < *_CUDA_FOR_DALI_VSTD::next(__hint)
             if (__hint.__get_np()->__right_ == nullptr)
             {
                 __parent = static_cast<__parent_pointer>(__hint.__ptr_);
@@ -2133,7 +2133,7 @@ __tree<_Tp, _Compare, _Allocator>::__emplace_unique_key_args(_Key const& __k, _A
     if (__child == nullptr)
     {
 #ifndef _LIBCUDAFORDALICXX_CXX03_LANG
-        __node_holder __h = __construct_node(_CUDA_VSTD::forward<_Args>(__args)...);
+        __node_holder __h = __construct_node(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
 #else
         __node_holder __h = __construct_node(__args);
 #endif
@@ -2166,7 +2166,7 @@ __tree<_Tp, _Compare, _Allocator>::__emplace_hint_unique_key_args(
     if (__child == nullptr)
     {
 #ifndef _LIBCUDAFORDALICXX_CXX03_LANG
-        __node_holder __h = __construct_node(_CUDA_VSTD::forward<_Args>(__args)...);
+        __node_holder __h = __construct_node(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
 #else
         __node_holder __h = __construct_node(__args);
 #endif
@@ -2188,7 +2188,7 @@ __tree<_Tp, _Compare, _Allocator>::__construct_node(_Args&& ...__args)
                   "Cannot construct from __value_type");
     __node_allocator& __na = __node_alloc();
     __node_holder __h(__node_traits::allocate(__na, 1), _Dp(__na));
-    __node_traits::construct(__na, _NodeTypes::__get_ptr(__h->__value_), _CUDA_VSTD::forward<_Args>(__args)...);
+    __node_traits::construct(__na, _NodeTypes::__get_ptr(__h->__value_), _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
     __h.get_deleter().__value_constructed = true;
     return __h;
 }
@@ -2199,7 +2199,7 @@ template <class... _Args>
 pair<typename __tree<_Tp, _Compare, _Allocator>::iterator, bool>
 __tree<_Tp, _Compare, _Allocator>::__emplace_unique_impl(_Args&&... __args)
 {
-    __node_holder __h = __construct_node(_CUDA_VSTD::forward<_Args>(__args)...);
+    __node_holder __h = __construct_node(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
     __parent_pointer __parent;
     __node_base_pointer& __child = __find_equal(__parent, __h->__value_);
     __node_pointer __r = static_cast<__node_pointer>(__child);
@@ -2218,7 +2218,7 @@ template <class... _Args>
 typename __tree<_Tp, _Compare, _Allocator>::iterator
 __tree<_Tp, _Compare, _Allocator>::__emplace_hint_unique_impl(const_iterator __p, _Args&&... __args)
 {
-    __node_holder __h = __construct_node(_CUDA_VSTD::forward<_Args>(__args)...);
+    __node_holder __h = __construct_node(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
     __parent_pointer __parent;
     __node_base_pointer __dummy;
     __node_base_pointer& __child = __find_equal(__p, __parent, __dummy, __h->__value_);
@@ -2236,7 +2236,7 @@ template <class... _Args>
 typename __tree<_Tp, _Compare, _Allocator>::iterator
 __tree<_Tp, _Compare, _Allocator>::__emplace_multi(_Args&&... __args)
 {
-    __node_holder __h = __construct_node(_CUDA_VSTD::forward<_Args>(__args)...);
+    __node_holder __h = __construct_node(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
     __parent_pointer __parent;
     __node_base_pointer& __child = __find_leaf_high(__parent, _NodeTypes::__get_key(__h->__value_));
     __insert_node_at(__parent, __child, static_cast<__node_base_pointer>(__h.get()));
@@ -2249,7 +2249,7 @@ typename __tree<_Tp, _Compare, _Allocator>::iterator
 __tree<_Tp, _Compare, _Allocator>::__emplace_hint_multi(const_iterator __p,
                                                         _Args&&... __args)
 {
-    __node_holder __h = __construct_node(_CUDA_VSTD::forward<_Args>(__args)...);
+    __node_holder __h = __construct_node(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
     __parent_pointer __parent;
     __node_base_pointer& __child = __find_leaf(__p, __parent, _NodeTypes::__get_key(__h->__value_));
     __insert_node_at(__parent, __child, static_cast<__node_base_pointer>(__h.get()));
@@ -2368,7 +2368,7 @@ __tree<_Tp, _Compare, _Allocator>::__node_handle_insert_unique(
     if (__child != nullptr)
         return _InsertReturnType{
             iterator(static_cast<__node_pointer>(__child)),
-            false, _CUDA_VSTD::move(__nh)};
+            false, _CUDA_FOR_DALI_VSTD::move(__nh)};
 
     __insert_node_at(__parent, __child,
                      static_cast<__node_base_pointer>(__ptr));
@@ -2614,7 +2614,7 @@ __tree<_Tp, _Compare, _Allocator>::__count_multi(const _Key& __k) const
         else if (value_comp()(__rt->__value_, __k))
             __rt = static_cast<__node_pointer>(__rt->__right_);
         else
-            return _CUDA_VSTD::distance(
+            return _CUDA_FOR_DALI_VSTD::distance(
                 __lower_bound(__k, static_cast<__node_pointer>(__rt->__left_), static_cast<__iter_pointer>(__rt)),
                 __upper_bound(__k, static_cast<__node_pointer>(__rt->__right_), __result)
             );

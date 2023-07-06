@@ -446,7 +446,7 @@ public:
     void swap(__unordered_map_hasher&__y)
         _NOEXCEPT_(__is_nothrow_swappable<_Hash>::value)
     {
-        using _CUDA_VSTD::swap;
+        using _CUDA_FOR_DALI_VSTD::swap;
         swap(static_cast<_Hash&>(*this), static_cast<_Hash&>(__y));
     }
 };
@@ -475,7 +475,7 @@ public:
     void swap(__unordered_map_hasher&__y)
         _NOEXCEPT_(__is_nothrow_swappable<_Hash>::value)
     {
-        using _CUDA_VSTD::swap;
+        using _CUDA_FOR_DALI_VSTD::swap;
         swap(__hash_, __y.__hash_);
     }
 };
@@ -518,7 +518,7 @@ public:
     void swap(__unordered_map_equal&__y)
         _NOEXCEPT_(__is_nothrow_swappable<_Pred>::value)
     {
-        using _CUDA_VSTD::swap;
+        using _CUDA_FOR_DALI_VSTD::swap;
         swap(static_cast<_Pred&>(*this), static_cast<_Pred&>(__y));
     }
 };
@@ -550,7 +550,7 @@ public:
     void swap(__unordered_map_equal&__y)
         _NOEXCEPT_(__is_nothrow_swappable<_Pred>::value)
     {
-        using _CUDA_VSTD::swap;
+        using _CUDA_FOR_DALI_VSTD::swap;
         swap(__pred_, __y.__pred_);
     }
 };
@@ -616,9 +616,9 @@ public:
     void operator()(pointer __p) _NOEXCEPT
     {
         if (__second_constructed)
-            __alloc_traits::destroy(__na_, _CUDA_VSTD::addressof(__p->__value_.__get_value().second));
+            __alloc_traits::destroy(__na_, _CUDA_FOR_DALI_VSTD::addressof(__p->__value_.__get_value().second));
         if (__first_constructed)
-            __alloc_traits::destroy(__na_, _CUDA_VSTD::addressof(__p->__value_.__get_value().first));
+            __alloc_traits::destroy(__na_, _CUDA_FOR_DALI_VSTD::addressof(__p->__value_.__get_value().first));
         if (__p)
             __alloc_traits::deallocate(__na_, __p, 1);
     }
@@ -642,7 +642,7 @@ public:
     value_type& __get_value()
     {
 #if _LIBCUDAFORDALICXX_STD_VER > 14
-        return *_CUDA_VSTD::launder(_CUDA_VSTD::addressof(__cc));
+        return *_CUDA_FOR_DALI_VSTD::launder(_CUDA_FOR_DALI_VSTD::addressof(__cc));
 #else
         return __cc;
 #endif
@@ -652,7 +652,7 @@ public:
     const value_type& __get_value() const
     {
 #if _LIBCUDAFORDALICXX_STD_VER > 14
-        return *_CUDA_VSTD::launder(_CUDA_VSTD::addressof(__cc));
+        return *_CUDA_FOR_DALI_VSTD::launder(_CUDA_FOR_DALI_VSTD::addressof(__cc));
 #else
         return __cc;
 #endif
@@ -670,8 +670,8 @@ public:
     {
         value_type& __v = __get_value();
         return __nc_rref_pair_type(
-            _CUDA_VSTD::move(const_cast<key_type&>(__v.first)),
-            _CUDA_VSTD::move(__v.second));
+            _CUDA_FOR_DALI_VSTD::move(const_cast<key_type&>(__v.first)),
+            _CUDA_FOR_DALI_VSTD::move(__v.second));
     }
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -696,7 +696,7 @@ public:
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     __hash_value_type& operator=(_ValueTp&& __v)
     {
-        __ref() = _CUDA_VSTD::forward<_ValueTp>(__v);
+        __ref() = _CUDA_FOR_DALI_VSTD::forward<_ValueTp>(__v);
         return *this;
     }
 
@@ -1044,7 +1044,7 @@ public:
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     pair<iterator, bool> insert(value_type&& __x)
-        {return __table_.__insert_unique(_CUDA_VSTD::move(__x));}
+        {return __table_.__insert_unique(_CUDA_FOR_DALI_VSTD::move(__x));}
 
     iterator insert(const_iterator __p, value_type&& __x) {
 #if _LIBCUDAFORDALICXX_DEBUG_LEVEL >= 2
@@ -1054,14 +1054,14 @@ public:
 #else
         ((void)__p);
 #endif
-        return __table_.__insert_unique(_CUDA_VSTD::move(__x)).first;
+        return __table_.__insert_unique(_CUDA_FOR_DALI_VSTD::move(__x)).first;
     }
 
     template <class _Pp,
               class = typename enable_if<is_constructible<value_type, _Pp>::value>::type>
         _LIBCUDAFORDALICXX_INLINE_VISIBILITY
         pair<iterator, bool> insert(_Pp&& __x)
-            {return __table_.__insert_unique(_CUDA_VSTD::forward<_Pp>(__x));}
+            {return __table_.__insert_unique(_CUDA_FOR_DALI_VSTD::forward<_Pp>(__x));}
 
     template <class _Pp,
               class = typename enable_if<is_constructible<value_type, _Pp>::value>::type>
@@ -1075,13 +1075,13 @@ public:
 #else
           ((void)__p);
 #endif
-            return insert(_CUDA_VSTD::forward<_Pp>(__x)).first;
+            return insert(_CUDA_FOR_DALI_VSTD::forward<_Pp>(__x)).first;
         }
 
     template <class... _Args>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     pair<iterator, bool> emplace(_Args&&... __args) {
-        return __table_.__emplace_unique(_CUDA_VSTD::forward<_Args>(__args)...);
+        return __table_.__emplace_unique(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
     }
 
     template <class... _Args>
@@ -1094,7 +1094,7 @@ public:
 #else
           ((void)__p);
 #endif
-        return __table_.__emplace_unique(_CUDA_VSTD::forward<_Args>(__args)...).first;
+        return __table_.__emplace_unique(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...).first;
     }
 
 #endif  // _LIBCUDAFORDALICXX_CXX03_LANG
@@ -1104,18 +1104,18 @@ public:
         _LIBCUDAFORDALICXX_INLINE_VISIBILITY
         pair<iterator, bool> try_emplace(const key_type& __k, _Args&&... __args)
     {
-        return __table_.__emplace_unique_key_args(__k, _CUDA_VSTD::piecewise_construct,
-            _CUDA_VSTD::forward_as_tuple(__k),
-            _CUDA_VSTD::forward_as_tuple(_CUDA_VSTD::forward<_Args>(__args)...));
+        return __table_.__emplace_unique_key_args(__k, _CUDA_FOR_DALI_VSTD::piecewise_construct,
+            _CUDA_FOR_DALI_VSTD::forward_as_tuple(__k),
+            _CUDA_FOR_DALI_VSTD::forward_as_tuple(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...));
     }
 
     template <class... _Args>
         _LIBCUDAFORDALICXX_INLINE_VISIBILITY
         pair<iterator, bool> try_emplace(key_type&& __k, _Args&&... __args)
     {
-        return __table_.__emplace_unique_key_args(__k, _CUDA_VSTD::piecewise_construct,
-            _CUDA_VSTD::forward_as_tuple(_CUDA_VSTD::move(__k)),
-            _CUDA_VSTD::forward_as_tuple(_CUDA_VSTD::forward<_Args>(__args)...));
+        return __table_.__emplace_unique_key_args(__k, _CUDA_FOR_DALI_VSTD::piecewise_construct,
+            _CUDA_FOR_DALI_VSTD::forward_as_tuple(_CUDA_FOR_DALI_VSTD::move(__k)),
+            _CUDA_FOR_DALI_VSTD::forward_as_tuple(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...));
     }
 
     template <class... _Args>
@@ -1129,7 +1129,7 @@ public:
 #else
         ((void)__h);
 #endif
-        return try_emplace(__k, _CUDA_VSTD::forward<_Args>(__args)...).first;
+        return try_emplace(__k, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...).first;
     }
 
     template <class... _Args>
@@ -1143,7 +1143,7 @@ public:
 #else
         ((void)__h);
 #endif
-        return try_emplace(_CUDA_VSTD::move(__k), _CUDA_VSTD::forward<_Args>(__args)...).first;
+        return try_emplace(_CUDA_FOR_DALI_VSTD::move(__k), _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...).first;
     }
 
     template <class _Vp>
@@ -1151,9 +1151,9 @@ public:
         pair<iterator, bool> insert_or_assign(const key_type& __k, _Vp&& __v)
     {
         pair<iterator, bool> __res = __table_.__emplace_unique_key_args(__k,
-            __k, _CUDA_VSTD::forward<_Vp>(__v));
+            __k, _CUDA_FOR_DALI_VSTD::forward<_Vp>(__v));
         if (!__res.second) {
-            __res.first->second = _CUDA_VSTD::forward<_Vp>(__v);
+            __res.first->second = _CUDA_FOR_DALI_VSTD::forward<_Vp>(__v);
         }
         return __res;
     }
@@ -1163,9 +1163,9 @@ public:
         pair<iterator, bool> insert_or_assign(key_type&& __k, _Vp&& __v)
     {
         pair<iterator, bool> __res = __table_.__emplace_unique_key_args(__k,
-            _CUDA_VSTD::move(__k), _CUDA_VSTD::forward<_Vp>(__v));
+            _CUDA_FOR_DALI_VSTD::move(__k), _CUDA_FOR_DALI_VSTD::forward<_Vp>(__v));
         if (!__res.second) {
-            __res.first->second = _CUDA_VSTD::forward<_Vp>(__v);
+            __res.first->second = _CUDA_FOR_DALI_VSTD::forward<_Vp>(__v);
         }
         return __res;
     }
@@ -1175,7 +1175,7 @@ public:
         iterator insert_or_assign(const_iterator, const key_type& __k, _Vp&& __v)
      {
           // FIXME: Add debug mode checking for the iterator input
-          return insert_or_assign(__k, _CUDA_VSTD::forward<_Vp>(__v)).first;
+          return insert_or_assign(__k, _CUDA_FOR_DALI_VSTD::forward<_Vp>(__v)).first;
      }
 
     template <class _Vp>
@@ -1183,7 +1183,7 @@ public:
         iterator insert_or_assign(const_iterator, key_type&& __k, _Vp&& __v)
      {
         // FIXME: Add debug mode checking for the iterator input
-        return insert_or_assign(_CUDA_VSTD::move(__k), _CUDA_VSTD::forward<_Vp>(__v)).first;
+        return insert_or_assign(_CUDA_FOR_DALI_VSTD::move(__k), _CUDA_FOR_DALI_VSTD::forward<_Vp>(__v)).first;
      }
 #endif // _LIBCUDAFORDALICXX_STD_VER > 14
 
@@ -1206,7 +1206,7 @@ public:
         _LIBCUDAFORDALICXX_ASSERT(__nh.empty() || __nh.get_allocator() == get_allocator(),
             "node_type with incompatible allocator passed to unordered_map::insert()");
         return __table_.template __node_handle_insert_unique<
-            node_type, insert_return_type>(_CUDA_VSTD::move(__nh));
+            node_type, insert_return_type>(_CUDA_FOR_DALI_VSTD::move(__nh));
     }
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     iterator insert(const_iterator __hint, node_type&& __nh)
@@ -1214,7 +1214,7 @@ public:
         _LIBCUDAFORDALICXX_ASSERT(__nh.empty() || __nh.get_allocator() == get_allocator(),
             "node_type with incompatible allocator passed to unordered_map::insert()");
         return __table_.template __node_handle_insert_unique<node_type>(
-            __hint.__i_, _CUDA_VSTD::move(__nh));
+            __hint.__i_, _CUDA_FOR_DALI_VSTD::move(__nh));
     }
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     node_type extract(key_type const& __key)
@@ -1525,7 +1525,7 @@ inline
 unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::unordered_map(
         unordered_map&& __u)
     _NOEXCEPT_(is_nothrow_move_constructible<__table>::value)
-    : __table_(_CUDA_VSTD::move(__u.__table_))
+    : __table_(_CUDA_FOR_DALI_VSTD::move(__u.__table_))
 {
 #if _LIBCUDAFORDALICXX_DEBUG_LEVEL >= 2
     __get_db()->__insert_c(this);
@@ -1536,7 +1536,7 @@ unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::unordered_map(
 template <class _Key, class _Tp, class _Hash, class _Pred, class _Alloc>
 unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::unordered_map(
         unordered_map&& __u, const allocator_type& __a)
-    : __table_(_CUDA_VSTD::move(__u.__table_), typename __table::allocator_type(__a))
+    : __table_(_CUDA_FOR_DALI_VSTD::move(__u.__table_), typename __table::allocator_type(__a))
 {
 #if _LIBCUDAFORDALICXX_DEBUG_LEVEL >= 2
     __get_db()->__insert_c(this);
@@ -1597,7 +1597,7 @@ unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>&
 unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::operator=(unordered_map&& __u)
     _NOEXCEPT_(is_nothrow_move_assignable<__table>::value)
 {
-    __table_ = _CUDA_VSTD::move(__u.__table_);
+    __table_ = _CUDA_FOR_DALI_VSTD::move(__u.__table_);
     return *this;
 }
 
@@ -1651,9 +1651,9 @@ unordered_map<_Key, _Tp, _Hash, _Pred, _Alloc>::__construct_node_with_key(const 
 {
     __node_allocator& __na = __table_.__node_alloc();
     __node_holder __h(__node_traits::allocate(__na, 1), _Dp(__na));
-    __node_traits::construct(__na, _CUDA_VSTD::addressof(__h->__value_.__get_value().first), __k);
+    __node_traits::construct(__na, _CUDA_FOR_DALI_VSTD::addressof(__h->__value_.__get_value().first), __k);
     __h.get_deleter().__first_constructed = true;
-    __node_traits::construct(__na, _CUDA_VSTD::addressof(__h->__value_.__get_value().second));
+    __node_traits::construct(__na, _CUDA_FOR_DALI_VSTD::addressof(__h->__value_.__get_value().second));
     __h.get_deleter().__second_constructed = true;
     return _LIBCUDAFORDALICXX_EXPLICIT_MOVE(__h);  // explicitly moved for C++03
 }
@@ -1932,32 +1932,32 @@ public:
     void insert(initializer_list<value_type> __il)
         {insert(__il.begin(), __il.end());}
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
-    iterator insert(value_type&& __x) {return __table_.__insert_multi(_CUDA_VSTD::move(__x));}
+    iterator insert(value_type&& __x) {return __table_.__insert_multi(_CUDA_FOR_DALI_VSTD::move(__x));}
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     iterator insert(const_iterator __p, value_type&& __x)
-        {return __table_.__insert_multi(__p.__i_, _CUDA_VSTD::move(__x));}
+        {return __table_.__insert_multi(__p.__i_, _CUDA_FOR_DALI_VSTD::move(__x));}
 
     template <class _Pp,
               class = typename enable_if<is_constructible<value_type, _Pp>::value>::type>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     iterator insert(_Pp&& __x)
-        {return __table_.__insert_multi(_CUDA_VSTD::forward<_Pp>(__x));}
+        {return __table_.__insert_multi(_CUDA_FOR_DALI_VSTD::forward<_Pp>(__x));}
 
     template <class _Pp,
               class = typename enable_if<is_constructible<value_type, _Pp>::value>::type>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     iterator insert(const_iterator __p, _Pp&& __x)
-        {return __table_.__insert_multi(__p.__i_, _CUDA_VSTD::forward<_Pp>(__x));}
+        {return __table_.__insert_multi(__p.__i_, _CUDA_FOR_DALI_VSTD::forward<_Pp>(__x));}
 
     template <class... _Args>
     iterator emplace(_Args&&... __args) {
-        return __table_.__emplace_multi(_CUDA_VSTD::forward<_Args>(__args)...);
+        return __table_.__emplace_multi(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
     }
 
     template <class... _Args>
     iterator emplace_hint(const_iterator __p, _Args&&... __args) {
-        return __table_.__emplace_hint_multi(__p.__i_, _CUDA_VSTD::forward<_Args>(__args)...);
+        return __table_.__emplace_hint_multi(__p.__i_, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
     }
 #endif  // _LIBCUDAFORDALICXX_CXX03_LANG
 
@@ -1981,7 +1981,7 @@ public:
         _LIBCUDAFORDALICXX_ASSERT(__nh.empty() || __nh.get_allocator() == get_allocator(),
             "node_type with incompatible allocator passed to unordered_multimap::insert()");
         return __table_.template __node_handle_insert_multi<node_type>(
-            _CUDA_VSTD::move(__nh));
+            _CUDA_FOR_DALI_VSTD::move(__nh));
     }
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     iterator insert(const_iterator __hint, node_type&& __nh)
@@ -1989,7 +1989,7 @@ public:
         _LIBCUDAFORDALICXX_ASSERT(__nh.empty() || __nh.get_allocator() == get_allocator(),
             "node_type with incompatible allocator passed to unordered_multimap::insert()");
         return __table_.template __node_handle_insert_multi<node_type>(
-            __hint.__i_, _CUDA_VSTD::move(__nh));
+            __hint.__i_, _CUDA_FOR_DALI_VSTD::move(__nh));
     }
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     node_type extract(key_type const& __key)
@@ -2289,7 +2289,7 @@ inline
 unordered_multimap<_Key, _Tp, _Hash, _Pred, _Alloc>::unordered_multimap(
         unordered_multimap&& __u)
     _NOEXCEPT_(is_nothrow_move_constructible<__table>::value)
-    : __table_(_CUDA_VSTD::move(__u.__table_))
+    : __table_(_CUDA_FOR_DALI_VSTD::move(__u.__table_))
 {
 #if _LIBCUDAFORDALICXX_DEBUG_LEVEL >= 2
     __get_db()->__insert_c(this);
@@ -2300,7 +2300,7 @@ unordered_multimap<_Key, _Tp, _Hash, _Pred, _Alloc>::unordered_multimap(
 template <class _Key, class _Tp, class _Hash, class _Pred, class _Alloc>
 unordered_multimap<_Key, _Tp, _Hash, _Pred, _Alloc>::unordered_multimap(
         unordered_multimap&& __u, const allocator_type& __a)
-    : __table_(_CUDA_VSTD::move(__u.__table_), typename __table::allocator_type(__a))
+    : __table_(_CUDA_FOR_DALI_VSTD::move(__u.__table_), typename __table::allocator_type(__a))
 {
 #if _LIBCUDAFORDALICXX_DEBUG_LEVEL >= 2
     __get_db()->__insert_c(this);
@@ -2362,7 +2362,7 @@ unordered_multimap<_Key, _Tp, _Hash, _Pred, _Alloc>&
 unordered_multimap<_Key, _Tp, _Hash, _Pred, _Alloc>::operator=(unordered_multimap&& __u)
     _NOEXCEPT_(is_nothrow_move_assignable<__table>::value)
 {
-    __table_ = _CUDA_VSTD::move(__u.__table_);
+    __table_ = _CUDA_FOR_DALI_VSTD::move(__u.__table_);
     return *this;
 }
 
@@ -2422,9 +2422,9 @@ operator==(const unordered_multimap<_Key, _Tp, _Hash, _Pred, _Alloc>& __x,
     {
         _EqRng __xeq = __x.equal_range(__i->first);
         _EqRng __yeq = __y.equal_range(__i->first);
-        if (_CUDA_VSTD::distance(__xeq.first, __xeq.second) !=
-            _CUDA_VSTD::distance(__yeq.first, __yeq.second) ||
-                  !_CUDA_VSTD::is_permutation(__xeq.first, __xeq.second, __yeq.first))
+        if (_CUDA_FOR_DALI_VSTD::distance(__xeq.first, __xeq.second) !=
+            _CUDA_FOR_DALI_VSTD::distance(__yeq.first, __yeq.second) ||
+                  !_CUDA_FOR_DALI_VSTD::is_permutation(__xeq.first, __xeq.second, __yeq.first))
             return false;
         __i = __xeq.second;
     }

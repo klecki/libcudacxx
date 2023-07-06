@@ -106,8 +106,8 @@ class __func<_Fp, _Alloc, _Rp()>
 {
     __compressed_pair<_Fp, _Alloc> __f_;
 public:
-    explicit __func(_Fp __f) : __f_(_CUDA_VSTD::move(__f)) {}
-    explicit __func(_Fp __f, _Alloc __a) : __f_(_CUDA_VSTD::move(__f), _CUDA_VSTD::move(__a)) {}
+    explicit __func(_Fp __f) : __f_(_CUDA_FOR_DALI_VSTD::move(__f)) {}
+    explicit __func(_Fp __f, _Alloc __a) : __f_(_CUDA_FOR_DALI_VSTD::move(__f), _CUDA_FOR_DALI_VSTD::move(__a)) {}
     virtual __base<_Rp()>* __clone() const;
     virtual void __clone(__base<_Rp()>*) const;
     virtual void destroy();
@@ -191,9 +191,9 @@ class __func<_Fp, _Alloc, _Rp(_A0)>
 {
     __compressed_pair<_Fp, _Alloc> __f_;
 public:
-    _LIBCUDAFORDALICXX_INLINE_VISIBILITY explicit __func(_Fp __f) : __f_(_CUDA_VSTD::move(__f)) {}
+    _LIBCUDAFORDALICXX_INLINE_VISIBILITY explicit __func(_Fp __f) : __f_(_CUDA_FOR_DALI_VSTD::move(__f)) {}
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY explicit __func(_Fp __f, _Alloc __a)
-        : __f_(_CUDA_VSTD::move(__f), _CUDA_VSTD::move(__a)) {}
+        : __f_(_CUDA_FOR_DALI_VSTD::move(__f), _CUDA_FOR_DALI_VSTD::move(__a)) {}
     virtual __base<_Rp(_A0)>* __clone() const;
     virtual void __clone(__base<_Rp(_A0)>*) const;
     virtual void destroy();
@@ -277,9 +277,9 @@ class __func<_Fp, _Alloc, _Rp(_A0, _A1)>
 {
     __compressed_pair<_Fp, _Alloc> __f_;
 public:
-    _LIBCUDAFORDALICXX_INLINE_VISIBILITY explicit __func(_Fp __f) : __f_(_CUDA_VSTD::move(__f)) {}
+    _LIBCUDAFORDALICXX_INLINE_VISIBILITY explicit __func(_Fp __f) : __f_(_CUDA_FOR_DALI_VSTD::move(__f)) {}
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY explicit __func(_Fp __f, _Alloc __a)
-        : __f_(_CUDA_VSTD::move(__f), _CUDA_VSTD::move(__a)) {}
+        : __f_(_CUDA_FOR_DALI_VSTD::move(__f), _CUDA_FOR_DALI_VSTD::move(__a)) {}
     virtual __base<_Rp(_A0, _A1)>* __clone() const;
     virtual void __clone(__base<_Rp(_A0, _A1)>*) const;
     virtual void destroy();
@@ -363,9 +363,9 @@ class __func<_Fp, _Alloc, _Rp(_A0, _A1, _A2)>
 {
     __compressed_pair<_Fp, _Alloc> __f_;
 public:
-    _LIBCUDAFORDALICXX_INLINE_VISIBILITY explicit __func(_Fp __f) : __f_(_CUDA_VSTD::move(__f)) {}
+    _LIBCUDAFORDALICXX_INLINE_VISIBILITY explicit __func(_Fp __f) : __f_(_CUDA_FOR_DALI_VSTD::move(__f)) {}
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY explicit __func(_Fp __f, _Alloc __a)
-        : __f_(_CUDA_VSTD::move(__f), _CUDA_VSTD::move(__a)) {}
+        : __f_(_CUDA_FOR_DALI_VSTD::move(__f), _CUDA_FOR_DALI_VSTD::move(__a)) {}
     virtual __base<_Rp(_A0, _A1, _A2)>* __clone() const;
     virtual void __clone(__base<_Rp(_A0, _A1, _A2)>*) const;
     virtual void destroy();
@@ -630,7 +630,7 @@ typename enable_if
 >::type
 function<_Rp()>::operator=(_Fp __f)
 {
-    function(_CUDA_VSTD::move(__f)).swap(*this);
+    function(_CUDA_FOR_DALI_VSTD::move(__f)).swap(*this);
     return *this;
 }
 
@@ -647,7 +647,7 @@ template<class _Rp>
 void
 function<_Rp()>::swap(function& __f)
 {
-    if (_CUDA_VSTD::addressof(__f) == this)
+    if (_CUDA_FOR_DALI_VSTD::addressof(__f) == this)
       return;
     if (__f_ == (__base*)&__buf_ && __f.__f_ == (__base*)&__f.__buf_)
     {
@@ -679,7 +679,7 @@ function<_Rp()>::swap(function& __f)
         __f_ = (__base*)&__buf_;
     }
     else
-        _CUDA_VSTD::swap(__f_, __f.__f_);
+        _CUDA_FOR_DALI_VSTD::swap(__f_, __f.__f_);
 }
 
 template<class _Rp>
@@ -910,7 +910,7 @@ typename enable_if
 >::type
 function<_Rp(_A0)>::operator=(_Fp __f)
 {
-    function(_CUDA_VSTD::move(__f)).swap(*this);
+    function(_CUDA_FOR_DALI_VSTD::move(__f)).swap(*this);
     return *this;
 }
 
@@ -927,7 +927,7 @@ template<class _Rp, class _A0>
 void
 function<_Rp(_A0)>::swap(function& __f)
 {
-    if (_CUDA_VSTD::addressof(__f) == this)
+    if (_CUDA_FOR_DALI_VSTD::addressof(__f) == this)
       return;
     if (__f_ == (__base*)&__buf_ && __f.__f_ == (__base*)&__f.__buf_)
     {
@@ -959,7 +959,7 @@ function<_Rp(_A0)>::swap(function& __f)
         __f_ = (__base*)&__buf_;
     }
     else
-        _CUDA_VSTD::swap(__f_, __f.__f_);
+        _CUDA_FOR_DALI_VSTD::swap(__f_, __f.__f_);
 }
 
 template<class _Rp, class _A0>
@@ -1190,7 +1190,7 @@ typename enable_if
 >::type
 function<_Rp(_A0, _A1)>::operator=(_Fp __f)
 {
-    function(_CUDA_VSTD::move(__f)).swap(*this);
+    function(_CUDA_FOR_DALI_VSTD::move(__f)).swap(*this);
     return *this;
 }
 
@@ -1207,7 +1207,7 @@ template<class _Rp, class _A0, class _A1>
 void
 function<_Rp(_A0, _A1)>::swap(function& __f)
 {
-    if (_CUDA_VSTD::addressof(__f) == this)
+    if (_CUDA_FOR_DALI_VSTD::addressof(__f) == this)
       return;
     if (__f_ == (__base*)&__buf_ && __f.__f_ == (__base*)&__f.__buf_)
     {
@@ -1239,7 +1239,7 @@ function<_Rp(_A0, _A1)>::swap(function& __f)
         __f_ = (__base*)&__buf_;
     }
     else
-        _CUDA_VSTD::swap(__f_, __f.__f_);
+        _CUDA_FOR_DALI_VSTD::swap(__f_, __f.__f_);
 }
 
 template<class _Rp, class _A0, class _A1>
@@ -1470,7 +1470,7 @@ typename enable_if
 >::type
 function<_Rp(_A0, _A1, _A2)>::operator=(_Fp __f)
 {
-    function(_CUDA_VSTD::move(__f)).swap(*this);
+    function(_CUDA_FOR_DALI_VSTD::move(__f)).swap(*this);
     return *this;
 }
 
@@ -1487,7 +1487,7 @@ template<class _Rp, class _A0, class _A1, class _A2>
 void
 function<_Rp(_A0, _A1, _A2)>::swap(function& __f)
 {
-    if (_CUDA_VSTD::addressof(__f) == this)
+    if (_CUDA_FOR_DALI_VSTD::addressof(__f) == this)
       return;
     if (__f_ == (__base*)&__buf_ && __f.__f_ == (__base*)&__f.__buf_)
     {
@@ -1519,7 +1519,7 @@ function<_Rp(_A0, _A1, _A2)>::swap(function& __f)
         __f_ = (__base*)&__buf_;
     }
     else
-        _CUDA_VSTD::swap(__f_, __f.__f_);
+        _CUDA_FOR_DALI_VSTD::swap(__f_, __f.__f_);
 }
 
 template<class _Rp, class _A0, class _A1, class _A2>

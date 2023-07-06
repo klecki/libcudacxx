@@ -130,7 +130,7 @@ int main() {
                 out << " : \"memory\"); }\n";
             }
             for(auto& cv: cv_qualifier) {
-                out << "template<class _Type, typename _CUDA_VSTD::enable_if<sizeof(_Type)==" << sz/8 << ", int>::type = 0>\n";
+                out << "template<class _Type, typename _CUDA_FOR_DALI_VSTD::enable_if<sizeof(_Type)==" << sz/8 << ", int>::type = 0>\n";
                 out << "__device__ void __atomic_load_cuda(const " << cv << "_Type *__ptr, _Type *__ret, int __memorder, " << scopenametag(s.first) << ") {\n";
                 out << "    uint" << (registers[sz] == "r" ? 32 : sz) << "_t __tmp = 0;\n";
                 out << "    NV_DISPATCH_TARGET(\n";

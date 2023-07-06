@@ -144,7 +144,7 @@ struct _LIBCUDAFORDALICXX_TEMPLATE_VIS array
 
     // No explicit construct/copy/destroy for aggregate type
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY void fill(const value_type& __u) {
-      _CUDA_VSTD::fill_n(__elems_, _Size, __u);
+      _CUDA_FOR_DALI_VSTD::fill_n(__elems_, _Size, __u);
     }
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -370,7 +370,7 @@ inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX17 bool
 operator==(const array<_Tp, _Size>& __x, const array<_Tp, _Size>& __y)
 {
-    return _CUDA_VSTD::equal(__x.begin(), __x.end(), __y.begin());
+    return _CUDA_FOR_DALI_VSTD::equal(__x.begin(), __x.end(), __y.begin());
 }
 
 template <class _Tp, size_t _Size>
@@ -386,7 +386,7 @@ inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_CXX17 bool
 operator<(const array<_Tp, _Size>& __x, const array<_Tp, _Size>& __y)
 {
-    return _CUDA_VSTD::lexicographical_compare(__x.begin(), __x.end(),
+    return _CUDA_FOR_DALI_VSTD::lexicographical_compare(__x.begin(), __x.end(),
                                           __y.begin(), __y.end());
 }
 
@@ -465,7 +465,7 @@ _Tp&&
 get(array<_Tp, _Size>&& __a) _NOEXCEPT
 {
     static_assert(_Ip < _Size, "Index out of bounds in std::get<> (std::array &&)");
-    return _CUDA_VSTD::move(__a.__elems_[_Ip]);
+    return _CUDA_FOR_DALI_VSTD::move(__a.__elems_[_Ip]);
 }
 
 template <size_t _Ip, class _Tp, size_t _Size>
@@ -474,7 +474,7 @@ const _Tp&&
 get(const array<_Tp, _Size>&& __a) _NOEXCEPT
 {
     static_assert(_Ip < _Size, "Index out of bounds in std::get<> (const std::array &&)");
-    return _CUDA_VSTD::move(__a.__elems_[_Ip]);
+    return _CUDA_FOR_DALI_VSTD::move(__a.__elems_[_Ip]);
 }
 
 #endif  // !_LIBCUDAFORDALICXX_CXX03_LANG

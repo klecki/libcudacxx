@@ -247,8 +247,8 @@ public:
 #ifndef _LIBCUDAFORDALICXX_CXX03_LANG
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     istrstream(istrstream&& __rhs)
-        : istream(_CUDA_VSTD::move(__rhs)),
-          __sb_(_CUDA_VSTD::move(__rhs.__sb_))
+        : istream(_CUDA_FOR_DALI_VSTD::move(__rhs)),
+          __sb_(_CUDA_FOR_DALI_VSTD::move(__rhs.__sb_))
     {
         istream::set_rdbuf(&__sb_);
     }
@@ -256,8 +256,8 @@ public:
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     istrstream& operator=(istrstream&& __rhs)
     {
-        istream::operator=(_CUDA_VSTD::move(__rhs));
-        __sb_ = _CUDA_VSTD::move(__rhs.__sb_);
+        istream::operator=(_CUDA_FOR_DALI_VSTD::move(__rhs));
+        __sb_ = _CUDA_FOR_DALI_VSTD::move(__rhs.__sb_);
         return *this;
     }
 #endif  // _LIBCUDAFORDALICXX_CXX03_LANG
@@ -296,8 +296,8 @@ public:
 #ifndef _LIBCUDAFORDALICXX_CXX03_LANG
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     ostrstream(ostrstream&& __rhs)
-        : ostream(_CUDA_VSTD::move(__rhs)),
-          __sb_(_CUDA_VSTD::move(__rhs.__sb_))
+        : ostream(_CUDA_FOR_DALI_VSTD::move(__rhs)),
+          __sb_(_CUDA_FOR_DALI_VSTD::move(__rhs.__sb_))
     {
         ostream::set_rdbuf(&__sb_);
     }
@@ -305,8 +305,8 @@ public:
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     ostrstream& operator=(ostrstream&& __rhs)
     {
-        ostream::operator=(_CUDA_VSTD::move(__rhs));
-        __sb_ = _CUDA_VSTD::move(__rhs.__sb_);
+        ostream::operator=(_CUDA_FOR_DALI_VSTD::move(__rhs));
+        __sb_ = _CUDA_FOR_DALI_VSTD::move(__rhs.__sb_);
         return *this;
     }
 #endif  // _LIBCUDAFORDALICXX_CXX03_LANG
@@ -356,8 +356,8 @@ public:
 #ifndef _LIBCUDAFORDALICXX_CXX03_LANG
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     strstream(strstream&& __rhs)
-        : iostream(_CUDA_VSTD::move(__rhs)),
-          __sb_(_CUDA_VSTD::move(__rhs.__sb_))
+        : iostream(_CUDA_FOR_DALI_VSTD::move(__rhs)),
+          __sb_(_CUDA_FOR_DALI_VSTD::move(__rhs.__sb_))
     {
         iostream::set_rdbuf(&__sb_);
     }
@@ -365,8 +365,8 @@ public:
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     strstream& operator=(strstream&& __rhs)
     {
-        iostream::operator=(_CUDA_VSTD::move(__rhs));
-        __sb_ = _CUDA_VSTD::move(__rhs.__sb_);
+        iostream::operator=(_CUDA_FOR_DALI_VSTD::move(__rhs));
+        __sb_ = _CUDA_FOR_DALI_VSTD::move(__rhs.__sb_);
         return *this;
     }
 #endif  // _LIBCUDAFORDALICXX_CXX03_LANG

@@ -823,7 +823,7 @@ constexpr chrono::year                                  operator ""y(unsigned lo
 }  // std
 */
 
-#ifndef __cuda_std__
+#ifndef __cuda_for_dali_std__
 #include <__config>
 #include <ctime>
 #include <type_traits>
@@ -1097,7 +1097,7 @@ public:
                 (__no_overflow<_Period2, period>::type::den == 1 &&
                  !treat_as_floating_point<_Rep2>::value))
             >::type* = 0)
-                : __rep_(_CUDA_VSTD::chrono::duration_cast<duration>(__d).count()) {}
+                : __rep_(_CUDA_FOR_DALI_VSTD::chrono::duration_cast<duration>(__d).count()) {}
 
     // observer
 
@@ -1416,7 +1416,7 @@ inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY _LIBCUDAFORDALICXX_CONSTEXPR_AFTER_C
 time_point<_Clock, _ToDuration>
 time_point_cast(const time_point<_Clock, _Duration>& __t)
 {
-    return time_point<_Clock, _ToDuration>(_CUDA_VSTD::chrono::duration_cast<_ToDuration>(__t.time_since_epoch()));
+    return time_point<_Clock, _ToDuration>(_CUDA_FOR_DALI_VSTD::chrono::duration_cast<_ToDuration>(__t.time_since_epoch()));
 }
 
 #if _LIBCUDAFORDALICXX_STD_VER > 11
@@ -1575,7 +1575,7 @@ operator-(const time_point<_Clock, _Duration1>& __lhs, const time_point<_Clock, 
 /////////////////////// clocks ///////////////////////////
 //////////////////////////////////////////////////////////
 
-#ifdef __cuda_std__
+#ifdef __cuda_for_dali_std__
 #define _LIBCUDAFORDALICXX_CLOCK_API __host__ __device__
 #else
 #define _LIBCUDAFORDALICXX_CLOCK_API
@@ -1621,7 +1621,7 @@ typedef system_clock high_resolution_clock;
 #if _LIBCUDAFORDALICXX_STD_VER > 11
 
 // [time.clock.file], type file_clock
-using file_clock = _CUDA_VSTD_FS::_FilesystemClock;
+using file_clock = _CUDA_FOR_DALI_VSTD_FS::_FilesystemClock;
 
 template<class _Duration>
 using file_time = time_point<file_clock, _Duration>;
@@ -2040,15 +2040,15 @@ inline constexpr weekday& weekday::operator-=(const days& __dd) noexcept
 
 class weekday_indexed {
 private:
-    _CUDA_VSTD::chrono::weekday __wd;
+    _CUDA_FOR_DALI_VSTD::chrono::weekday __wd;
     unsigned char          __idx;
 public:
     weekday_indexed() = default;
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
-    inline constexpr weekday_indexed(const _CUDA_VSTD::chrono::weekday& __wdval, unsigned __idxval) noexcept
+    inline constexpr weekday_indexed(const _CUDA_FOR_DALI_VSTD::chrono::weekday& __wdval, unsigned __idxval) noexcept
         : __wd{__wdval}, __idx(static_cast<unsigned char>(__idxval)) {}
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
-    inline constexpr _CUDA_VSTD::chrono::weekday weekday() const noexcept { return __wd; }
+    inline constexpr _CUDA_FOR_DALI_VSTD::chrono::weekday weekday() const noexcept { return __wd; }
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     inline constexpr unsigned                 index() const noexcept { return __idx; }
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -2068,13 +2068,13 @@ bool operator!=(const weekday_indexed& __lhs, const weekday_indexed& __rhs) noex
 
 class weekday_last {
 private:
-    _CUDA_VSTD::chrono::weekday __wd;
+    _CUDA_FOR_DALI_VSTD::chrono::weekday __wd;
 public:
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
-    explicit constexpr weekday_last(const _CUDA_VSTD::chrono::weekday& __val) noexcept
+    explicit constexpr weekday_last(const _CUDA_FOR_DALI_VSTD::chrono::weekday& __val) noexcept
         : __wd{__val} {}
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
-    constexpr _CUDA_VSTD::chrono::weekday weekday() const noexcept { return __wd; }
+    constexpr _CUDA_FOR_DALI_VSTD::chrono::weekday weekday() const noexcept { return __wd; }
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     constexpr bool ok() const noexcept { return __wd.ok(); }
 };
@@ -3301,7 +3301,7 @@ namespace chrono { // hoist the literals into namespace std::chrono
 
 _LIBCUDAFORDALICXX_END_NAMESPACE_STD
 
-#ifndef __cuda_std__
+#ifndef __cuda_for_dali_std__
 
 #ifndef _LIBCUDAFORDALICXX_CXX03_LANG
 _LIBCUDAFORDALICXX_BEGIN_NAMESPACE_FILESYSTEM
@@ -3340,7 +3340,7 @@ _LIBCUDAFORDALICXX_END_NAMESPACE_FILESYSTEM
 
 #endif
 
-#ifndef __cuda_std__
+#ifndef __cuda_for_dali_std__
 #include <__pragma_pop>
 #endif
 

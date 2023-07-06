@@ -40,7 +40,7 @@ static inline __device__ void __atomic_thread_fence_cuda(int __memorder, __threa
 template<class _CUDA_A, class _CUDA_B> static inline __device__ void __cuda_load_acquire_32_block(_CUDA_A __ptr, _CUDA_B& __dst) {asm volatile("ld.acquire.cta.b32 %0,[%1];" : "=r"(__dst) : "l"(__ptr) : "memory"); }
 template<class _CUDA_A, class _CUDA_B> static inline __device__ void __cuda_load_relaxed_32_block(_CUDA_A __ptr, _CUDA_B& __dst) {asm volatile("ld.relaxed.cta.b32 %0,[%1];" : "=r"(__dst) : "l"(__ptr) : "memory"); }
 template<class _CUDA_A, class _CUDA_B> static inline __device__ void __cuda_load_volatile_32_block(_CUDA_A __ptr, _CUDA_B& __dst) {asm volatile("ld.volatile.b32 %0,[%1];" : "=r"(__dst) : "l"(__ptr) : "memory"); }
-template<class _Type, typename _CUDA_VSTD::enable_if<sizeof(_Type)==4, int>::type = 0>
+template<class _Type, typename _CUDA_FOR_DALI_VSTD::enable_if<sizeof(_Type)==4, int>::type = 0>
 __device__ void __atomic_load_cuda(const volatile _Type *__ptr, _Type *__ret, int __memorder, __thread_scope_block_tag) {
     uint32_t __tmp = 0;
     NV_DISPATCH_TARGET(
@@ -68,7 +68,7 @@ __device__ void __atomic_load_cuda(const volatile _Type *__ptr, _Type *__ret, in
 template<class _CUDA_A, class _CUDA_B> static inline __device__ void __cuda_load_acquire_64_block(_CUDA_A __ptr, _CUDA_B& __dst) {asm volatile("ld.acquire.cta.b64 %0,[%1];" : "=l"(__dst) : "l"(__ptr) : "memory"); }
 template<class _CUDA_A, class _CUDA_B> static inline __device__ void __cuda_load_relaxed_64_block(_CUDA_A __ptr, _CUDA_B& __dst) {asm volatile("ld.relaxed.cta.b64 %0,[%1];" : "=l"(__dst) : "l"(__ptr) : "memory"); }
 template<class _CUDA_A, class _CUDA_B> static inline __device__ void __cuda_load_volatile_64_block(_CUDA_A __ptr, _CUDA_B& __dst) {asm volatile("ld.volatile.b64 %0,[%1];" : "=l"(__dst) : "l"(__ptr) : "memory"); }
-template<class _Type, typename _CUDA_VSTD::enable_if<sizeof(_Type)==8, int>::type = 0>
+template<class _Type, typename _CUDA_FOR_DALI_VSTD::enable_if<sizeof(_Type)==8, int>::type = 0>
 __device__ void __atomic_load_cuda(const volatile _Type *__ptr, _Type *__ret, int __memorder, __thread_scope_block_tag) {
     uint64_t __tmp = 0;
     NV_DISPATCH_TARGET(
@@ -918,7 +918,7 @@ static inline __device__ void __atomic_thread_fence_cuda(int __memorder, __threa
 template<class _CUDA_A, class _CUDA_B> static inline __device__ void __cuda_load_acquire_32_device(_CUDA_A __ptr, _CUDA_B& __dst) {asm volatile("ld.acquire.gpu.b32 %0,[%1];" : "=r"(__dst) : "l"(__ptr) : "memory"); }
 template<class _CUDA_A, class _CUDA_B> static inline __device__ void __cuda_load_relaxed_32_device(_CUDA_A __ptr, _CUDA_B& __dst) {asm volatile("ld.relaxed.gpu.b32 %0,[%1];" : "=r"(__dst) : "l"(__ptr) : "memory"); }
 template<class _CUDA_A, class _CUDA_B> static inline __device__ void __cuda_load_volatile_32_device(_CUDA_A __ptr, _CUDA_B& __dst) {asm volatile("ld.volatile.b32 %0,[%1];" : "=r"(__dst) : "l"(__ptr) : "memory"); }
-template<class _Type, typename _CUDA_VSTD::enable_if<sizeof(_Type)==4, int>::type = 0>
+template<class _Type, typename _CUDA_FOR_DALI_VSTD::enable_if<sizeof(_Type)==4, int>::type = 0>
 __device__ void __atomic_load_cuda(const volatile _Type *__ptr, _Type *__ret, int __memorder, __thread_scope_device_tag) {
     uint32_t __tmp = 0;
     NV_DISPATCH_TARGET(
@@ -946,7 +946,7 @@ __device__ void __atomic_load_cuda(const volatile _Type *__ptr, _Type *__ret, in
 template<class _CUDA_A, class _CUDA_B> static inline __device__ void __cuda_load_acquire_64_device(_CUDA_A __ptr, _CUDA_B& __dst) {asm volatile("ld.acquire.gpu.b64 %0,[%1];" : "=l"(__dst) : "l"(__ptr) : "memory"); }
 template<class _CUDA_A, class _CUDA_B> static inline __device__ void __cuda_load_relaxed_64_device(_CUDA_A __ptr, _CUDA_B& __dst) {asm volatile("ld.relaxed.gpu.b64 %0,[%1];" : "=l"(__dst) : "l"(__ptr) : "memory"); }
 template<class _CUDA_A, class _CUDA_B> static inline __device__ void __cuda_load_volatile_64_device(_CUDA_A __ptr, _CUDA_B& __dst) {asm volatile("ld.volatile.b64 %0,[%1];" : "=l"(__dst) : "l"(__ptr) : "memory"); }
-template<class _Type, typename _CUDA_VSTD::enable_if<sizeof(_Type)==8, int>::type = 0>
+template<class _Type, typename _CUDA_FOR_DALI_VSTD::enable_if<sizeof(_Type)==8, int>::type = 0>
 __device__ void __atomic_load_cuda(const volatile _Type *__ptr, _Type *__ret, int __memorder, __thread_scope_device_tag) {
     uint64_t __tmp = 0;
     NV_DISPATCH_TARGET(
@@ -1796,7 +1796,7 @@ static inline __device__ void __atomic_thread_fence_cuda(int __memorder, __threa
 template<class _CUDA_A, class _CUDA_B> static inline __device__ void __cuda_load_acquire_32_system(_CUDA_A __ptr, _CUDA_B& __dst) {asm volatile("ld.acquire.sys.b32 %0,[%1];" : "=r"(__dst) : "l"(__ptr) : "memory"); }
 template<class _CUDA_A, class _CUDA_B> static inline __device__ void __cuda_load_relaxed_32_system(_CUDA_A __ptr, _CUDA_B& __dst) {asm volatile("ld.relaxed.sys.b32 %0,[%1];" : "=r"(__dst) : "l"(__ptr) : "memory"); }
 template<class _CUDA_A, class _CUDA_B> static inline __device__ void __cuda_load_volatile_32_system(_CUDA_A __ptr, _CUDA_B& __dst) {asm volatile("ld.volatile.b32 %0,[%1];" : "=r"(__dst) : "l"(__ptr) : "memory"); }
-template<class _Type, typename _CUDA_VSTD::enable_if<sizeof(_Type)==4, int>::type = 0>
+template<class _Type, typename _CUDA_FOR_DALI_VSTD::enable_if<sizeof(_Type)==4, int>::type = 0>
 __device__ void __atomic_load_cuda(const volatile _Type *__ptr, _Type *__ret, int __memorder, __thread_scope_system_tag) {
     uint32_t __tmp = 0;
     NV_DISPATCH_TARGET(
@@ -1824,7 +1824,7 @@ __device__ void __atomic_load_cuda(const volatile _Type *__ptr, _Type *__ret, in
 template<class _CUDA_A, class _CUDA_B> static inline __device__ void __cuda_load_acquire_64_system(_CUDA_A __ptr, _CUDA_B& __dst) {asm volatile("ld.acquire.sys.b64 %0,[%1];" : "=l"(__dst) : "l"(__ptr) : "memory"); }
 template<class _CUDA_A, class _CUDA_B> static inline __device__ void __cuda_load_relaxed_64_system(_CUDA_A __ptr, _CUDA_B& __dst) {asm volatile("ld.relaxed.sys.b64 %0,[%1];" : "=l"(__dst) : "l"(__ptr) : "memory"); }
 template<class _CUDA_A, class _CUDA_B> static inline __device__ void __cuda_load_volatile_64_system(_CUDA_A __ptr, _CUDA_B& __dst) {asm volatile("ld.volatile.b64 %0,[%1];" : "=l"(__dst) : "l"(__ptr) : "memory"); }
-template<class _Type, typename _CUDA_VSTD::enable_if<sizeof(_Type)==8, int>::type = 0>
+template<class _Type, typename _CUDA_FOR_DALI_VSTD::enable_if<sizeof(_Type)==8, int>::type = 0>
 __device__ void __atomic_load_cuda(const volatile _Type *__ptr, _Type *__ret, int __memorder, __thread_scope_system_tag) {
     uint64_t __tmp = 0;
     NV_DISPATCH_TARGET(

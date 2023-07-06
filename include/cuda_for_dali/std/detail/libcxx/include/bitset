@@ -223,7 +223,7 @@ __bitset<_N_words, _Size>::__bitset() _NOEXCEPT
 #endif
 {
 #ifdef _LIBCUDAFORDALICXX_CXX03_LANG
-    _CUDA_VSTD::fill_n(__first_, _N_words, __storage_type(0));
+    _CUDA_FOR_DALI_VSTD::fill_n(__first_, _N_words, __storage_type(0));
 #endif
 }
 
@@ -241,8 +241,8 @@ __bitset<_N_words, _Size>::__init(unsigned long long __v, false_type) _NOEXCEPT
         else
             __t[__i] = static_cast<__storage_type>(__v);
 
-    _CUDA_VSTD::copy(__t, __t + sizeof(__t)/sizeof(__t[0]), __first_);
-    _CUDA_VSTD::fill(__first_ + sizeof(__t)/sizeof(__t[0]), __first_ + sizeof(__first_)/sizeof(__first_[0]),
+    _CUDA_FOR_DALI_VSTD::copy(__t, __t + sizeof(__t)/sizeof(__t[0]), __first_);
+    _CUDA_FOR_DALI_VSTD::fill(__first_ + sizeof(__t)/sizeof(__t[0]), __first_ + sizeof(__first_)/sizeof(__first_[0]),
                __storage_type(0));
 }
 
@@ -255,7 +255,7 @@ __bitset<_N_words, _Size>::__init(unsigned long long __v, true_type) _NOEXCEPT
     if (_Size < __bits_per_word)
         __first_[0] &= ( 1ULL << _Size ) - 1;
 
-    _CUDA_VSTD::fill(__first_ + 1, __first_ + sizeof(__first_)/sizeof(__first_[0]), __storage_type(0));
+    _CUDA_FOR_DALI_VSTD::fill(__first_ + 1, __first_ + sizeof(__first_)/sizeof(__first_[0]), __storage_type(0));
 }
 
 #endif  // _LIBCUDAFORDALICXX_CXX03_LANG
@@ -332,7 +332,7 @@ unsigned long
 __bitset<_N_words, _Size>::to_ulong(false_type) const
 {
     const_iterator __e = __make_iter(_Size);
-    const_iterator __i = _CUDA_VSTD::find(__make_iter(sizeof(unsigned long) * CHAR_BIT), __e, true);
+    const_iterator __i = _CUDA_FOR_DALI_VSTD::find(__make_iter(sizeof(unsigned long) * CHAR_BIT), __e, true);
     if (__i != __e)
         __throw_overflow_error("bitset to_ulong overflow error");
 
@@ -352,7 +352,7 @@ unsigned long long
 __bitset<_N_words, _Size>::to_ullong(false_type) const
 {
     const_iterator __e = __make_iter(_Size);
-    const_iterator __i = _CUDA_VSTD::find(__make_iter(sizeof(unsigned long long) * CHAR_BIT), __e, true);
+    const_iterator __i = _CUDA_FOR_DALI_VSTD::find(__make_iter(sizeof(unsigned long long) * CHAR_BIT), __e, true);
     if (__i != __e)
         __throw_overflow_error("bitset to_ullong overflow error");
 
@@ -765,12 +765,12 @@ bitset<_Size>::bitset(const _CharT* __str,
                       typename basic_string<_CharT>::size_type __n,
                       _CharT __zero, _CharT __one)
 {
-    size_t __rlen = _CUDA_VSTD::min(__n, char_traits<_CharT>::length(__str));
+    size_t __rlen = _CUDA_FOR_DALI_VSTD::min(__n, char_traits<_CharT>::length(__str));
     for (size_t __i = 0; __i < __rlen; ++__i)
         if (__str[__i] != __zero && __str[__i] != __one)
             __throw_invalid_argument("bitset string ctor has invalid argument");
 
-    size_t _Mp = _CUDA_VSTD::min(__rlen, _Size);
+    size_t _Mp = _CUDA_FOR_DALI_VSTD::min(__rlen, _Size);
     size_t __i = 0;
     for (; __i < _Mp; ++__i)
     {
@@ -780,7 +780,7 @@ bitset<_Size>::bitset(const _CharT* __str,
         else
             (*this)[__i] = true;
     }
-    _CUDA_VSTD::fill(base::__make_iter(__i), base::__make_iter(_Size), false);
+    _CUDA_FOR_DALI_VSTD::fill(base::__make_iter(__i), base::__make_iter(_Size), false);
 }
 
 template <size_t _Size>
@@ -793,12 +793,12 @@ bitset<_Size>::bitset(const basic_string<_CharT,_Traits,_Allocator>& __str,
     if (__pos > __str.size())
         __throw_out_of_range("bitset string pos out of range");
 
-    size_t __rlen = _CUDA_VSTD::min(__n, __str.size() - __pos);
+    size_t __rlen = _CUDA_FOR_DALI_VSTD::min(__n, __str.size() - __pos);
     for (size_t __i = __pos; __i < __pos + __rlen; ++__i)
         if (!_Traits::eq(__str[__i], __zero) && !_Traits::eq(__str[__i], __one))
             __throw_invalid_argument("bitset string ctor has invalid argument");
 
-    size_t _Mp = _CUDA_VSTD::min(__rlen, _Size);
+    size_t _Mp = _CUDA_FOR_DALI_VSTD::min(__rlen, _Size);
     size_t __i = 0;
     for (; __i < _Mp; ++__i)
     {
@@ -808,7 +808,7 @@ bitset<_Size>::bitset(const basic_string<_CharT,_Traits,_Allocator>& __str,
         else
             (*this)[__i] = true;
     }
-    _CUDA_VSTD::fill(base::__make_iter(__i), base::__make_iter(_Size), false);
+    _CUDA_FOR_DALI_VSTD::fill(base::__make_iter(__i), base::__make_iter(_Size), false);
 }
 
 template <size_t _Size>
@@ -842,9 +842,9 @@ template <size_t _Size>
 bitset<_Size>&
 bitset<_Size>::operator<<=(size_t __pos) _NOEXCEPT
 {
-    __pos = _CUDA_VSTD::min(__pos, _Size);
-    _CUDA_VSTD::copy_backward(base::__make_iter(0), base::__make_iter(_Size - __pos), base::__make_iter(_Size));
-    _CUDA_VSTD::fill_n(base::__make_iter(0), __pos, false);
+    __pos = _CUDA_FOR_DALI_VSTD::min(__pos, _Size);
+    _CUDA_FOR_DALI_VSTD::copy_backward(base::__make_iter(0), base::__make_iter(_Size - __pos), base::__make_iter(_Size));
+    _CUDA_FOR_DALI_VSTD::fill_n(base::__make_iter(0), __pos, false);
     return *this;
 }
 
@@ -852,9 +852,9 @@ template <size_t _Size>
 bitset<_Size>&
 bitset<_Size>::operator>>=(size_t __pos) _NOEXCEPT
 {
-    __pos = _CUDA_VSTD::min(__pos, _Size);
-    _CUDA_VSTD::copy(base::__make_iter(__pos), base::__make_iter(_Size), base::__make_iter(0));
-    _CUDA_VSTD::fill_n(base::__make_iter(_Size - __pos), __pos, false);
+    __pos = _CUDA_FOR_DALI_VSTD::min(__pos, _Size);
+    _CUDA_FOR_DALI_VSTD::copy(base::__make_iter(__pos), base::__make_iter(_Size), base::__make_iter(0));
+    _CUDA_FOR_DALI_VSTD::fill_n(base::__make_iter(_Size - __pos), __pos, false);
     return *this;
 }
 
@@ -863,7 +863,7 @@ inline
 bitset<_Size>&
 bitset<_Size>::set() _NOEXCEPT
 {
-    _CUDA_VSTD::fill_n(base::__make_iter(0), _Size, true);
+    _CUDA_FOR_DALI_VSTD::fill_n(base::__make_iter(0), _Size, true);
     return *this;
 }
 
@@ -883,7 +883,7 @@ inline
 bitset<_Size>&
 bitset<_Size>::reset() _NOEXCEPT
 {
-    _CUDA_VSTD::fill_n(base::__make_iter(0), _Size, false);
+    _CUDA_FOR_DALI_VSTD::fill_n(base::__make_iter(0), _Size, false);
     return *this;
 }
 
@@ -998,7 +998,7 @@ inline
 bool
 bitset<_Size>::operator==(const bitset& __rhs) const _NOEXCEPT
 {
-    return _CUDA_VSTD::equal(base::__make_iter(0), base::__make_iter(_Size), __rhs.__make_iter(0));
+    return _CUDA_FOR_DALI_VSTD::equal(base::__make_iter(0), base::__make_iter(_Size), __rhs.__make_iter(0));
 }
 
 template <size_t _Size>

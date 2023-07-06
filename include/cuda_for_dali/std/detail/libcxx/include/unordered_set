@@ -534,7 +534,7 @@ public:
     template <class... _Args>
         _LIBCUDAFORDALICXX_INLINE_VISIBILITY
         pair<iterator, bool> emplace(_Args&&... __args)
-            {return __table_.__emplace_unique(_CUDA_VSTD::forward<_Args>(__args)...);}
+            {return __table_.__emplace_unique(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);}
     template <class... _Args>
         _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 #if _LIBCUDAFORDALICXX_DEBUG_LEVEL >= 2
@@ -543,16 +543,16 @@ public:
             _LIBCUDAFORDALICXX_ASSERT(__get_const_db()->__find_c_from_i(&__p) == this,
                 "unordered_set::emplace_hint(const_iterator, args...) called with an iterator not"
                 " referring to this unordered_set");
-            return __table_.__emplace_unique(_CUDA_VSTD::forward<_Args>(__args)...).first;
+            return __table_.__emplace_unique(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...).first;
         }
 #else
         iterator emplace_hint(const_iterator, _Args&&... __args)
-            {return __table_.__emplace_unique(_CUDA_VSTD::forward<_Args>(__args)...).first;}
+            {return __table_.__emplace_unique(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...).first;}
 #endif
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     pair<iterator, bool> insert(value_type&& __x)
-        {return __table_.__insert_unique(_CUDA_VSTD::move(__x));}
+        {return __table_.__insert_unique(_CUDA_FOR_DALI_VSTD::move(__x));}
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 #if _LIBCUDAFORDALICXX_DEBUG_LEVEL >= 2
     iterator insert(const_iterator __p, value_type&& __x)
@@ -560,11 +560,11 @@ public:
             _LIBCUDAFORDALICXX_ASSERT(__get_const_db()->__find_c_from_i(&__p) == this,
                 "unordered_set::insert(const_iterator, value_type&&) called with an iterator not"
                 " referring to this unordered_set");
-            return insert(_CUDA_VSTD::move(__x)).first;
+            return insert(_CUDA_FOR_DALI_VSTD::move(__x)).first;
         }
 #else
     iterator insert(const_iterator, value_type&& __x)
-        {return insert(_CUDA_VSTD::move(__x)).first;}
+        {return insert(_CUDA_FOR_DALI_VSTD::move(__x)).first;}
 #endif
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     void insert(initializer_list<value_type> __il)
@@ -608,7 +608,7 @@ public:
         _LIBCUDAFORDALICXX_ASSERT(__nh.empty() || __nh.get_allocator() == get_allocator(),
             "node_type with incompatible allocator passed to unordered_set::insert()");
         return __table_.template __node_handle_insert_unique<
-            node_type, insert_return_type>(_CUDA_VSTD::move(__nh));
+            node_type, insert_return_type>(_CUDA_FOR_DALI_VSTD::move(__nh));
     }
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     iterator insert(const_iterator __h, node_type&& __nh)
@@ -616,7 +616,7 @@ public:
         _LIBCUDAFORDALICXX_ASSERT(__nh.empty() || __nh.get_allocator() == get_allocator(),
             "node_type with incompatible allocator passed to unordered_set::insert()");
         return __table_.template __node_handle_insert_unique<node_type>(
-            __h, _CUDA_VSTD::move(__nh));
+            __h, _CUDA_FOR_DALI_VSTD::move(__nh));
     }
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     node_type extract(key_type const& __key)
@@ -898,7 +898,7 @@ inline
 unordered_set<_Value, _Hash, _Pred, _Alloc>::unordered_set(
         unordered_set&& __u)
     _NOEXCEPT_(is_nothrow_move_constructible<__table>::value)
-    : __table_(_CUDA_VSTD::move(__u.__table_))
+    : __table_(_CUDA_FOR_DALI_VSTD::move(__u.__table_))
 {
 #if _LIBCUDAFORDALICXX_DEBUG_LEVEL >= 2
     __get_db()->__insert_c(this);
@@ -909,7 +909,7 @@ unordered_set<_Value, _Hash, _Pred, _Alloc>::unordered_set(
 template <class _Value, class _Hash, class _Pred, class _Alloc>
 unordered_set<_Value, _Hash, _Pred, _Alloc>::unordered_set(
         unordered_set&& __u, const allocator_type& __a)
-    : __table_(_CUDA_VSTD::move(__u.__table_), __a)
+    : __table_(_CUDA_FOR_DALI_VSTD::move(__u.__table_), __a)
 {
 #if _LIBCUDAFORDALICXX_DEBUG_LEVEL >= 2
     __get_db()->__insert_c(this);
@@ -918,7 +918,7 @@ unordered_set<_Value, _Hash, _Pred, _Alloc>::unordered_set(
     {
         iterator __i = __u.begin();
         while (__u.size() != 0)
-            __table_.__insert_unique(_CUDA_VSTD::move(__u.__table_.remove(__i++)->__value_));
+            __table_.__insert_unique(_CUDA_FOR_DALI_VSTD::move(__u.__table_.remove(__i++)->__value_));
     }
 #if _LIBCUDAFORDALICXX_DEBUG_LEVEL >= 2
     else
@@ -968,7 +968,7 @@ unordered_set<_Value, _Hash, _Pred, _Alloc>&
 unordered_set<_Value, _Hash, _Pred, _Alloc>::operator=(unordered_set&& __u)
     _NOEXCEPT_(is_nothrow_move_assignable<__table>::value)
 {
-    __table_ = _CUDA_VSTD::move(__u.__table_);
+    __table_ = _CUDA_FOR_DALI_VSTD::move(__u.__table_);
     return *this;
 }
 
@@ -1194,17 +1194,17 @@ public:
     template <class... _Args>
         _LIBCUDAFORDALICXX_INLINE_VISIBILITY
         iterator emplace(_Args&&... __args)
-            {return __table_.__emplace_multi(_CUDA_VSTD::forward<_Args>(__args)...);}
+            {return __table_.__emplace_multi(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);}
     template <class... _Args>
         _LIBCUDAFORDALICXX_INLINE_VISIBILITY
         iterator emplace_hint(const_iterator __p, _Args&&... __args)
-            {return __table_.__emplace_hint_multi(__p, _CUDA_VSTD::forward<_Args>(__args)...);}
+            {return __table_.__emplace_hint_multi(__p, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);}
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
-    iterator insert(value_type&& __x) {return __table_.__insert_multi(_CUDA_VSTD::move(__x));}
+    iterator insert(value_type&& __x) {return __table_.__insert_multi(_CUDA_FOR_DALI_VSTD::move(__x));}
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     iterator insert(const_iterator __p, value_type&& __x)
-        {return __table_.__insert_multi(__p, _CUDA_VSTD::move(__x));}
+        {return __table_.__insert_multi(__p, _CUDA_FOR_DALI_VSTD::move(__x));}
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     void insert(initializer_list<value_type> __il)
         {insert(__il.begin(), __il.end());}
@@ -1228,7 +1228,7 @@ public:
         _LIBCUDAFORDALICXX_ASSERT(__nh.empty() || __nh.get_allocator() == get_allocator(),
             "node_type with incompatible allocator passed to unordered_multiset::insert()");
         return __table_.template __node_handle_insert_multi<node_type>(
-            _CUDA_VSTD::move(__nh));
+            _CUDA_FOR_DALI_VSTD::move(__nh));
     }
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     iterator insert(const_iterator __hint, node_type&& __nh)
@@ -1236,7 +1236,7 @@ public:
         _LIBCUDAFORDALICXX_ASSERT(__nh.empty() || __nh.get_allocator() == get_allocator(),
             "node_type with incompatible allocator passed to unordered_multiset::insert()");
         return __table_.template __node_handle_insert_multi<node_type>(
-            __hint, _CUDA_VSTD::move(__nh));
+            __hint, _CUDA_FOR_DALI_VSTD::move(__nh));
     }
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     node_type extract(const_iterator __position)
@@ -1528,7 +1528,7 @@ inline
 unordered_multiset<_Value, _Hash, _Pred, _Alloc>::unordered_multiset(
         unordered_multiset&& __u)
     _NOEXCEPT_(is_nothrow_move_constructible<__table>::value)
-    : __table_(_CUDA_VSTD::move(__u.__table_))
+    : __table_(_CUDA_FOR_DALI_VSTD::move(__u.__table_))
 {
 #if _LIBCUDAFORDALICXX_DEBUG_LEVEL >= 2
     __get_db()->__insert_c(this);
@@ -1539,7 +1539,7 @@ unordered_multiset<_Value, _Hash, _Pred, _Alloc>::unordered_multiset(
 template <class _Value, class _Hash, class _Pred, class _Alloc>
 unordered_multiset<_Value, _Hash, _Pred, _Alloc>::unordered_multiset(
         unordered_multiset&& __u, const allocator_type& __a)
-    : __table_(_CUDA_VSTD::move(__u.__table_), __a)
+    : __table_(_CUDA_FOR_DALI_VSTD::move(__u.__table_), __a)
 {
 #if _LIBCUDAFORDALICXX_DEBUG_LEVEL >= 2
     __get_db()->__insert_c(this);
@@ -1548,7 +1548,7 @@ unordered_multiset<_Value, _Hash, _Pred, _Alloc>::unordered_multiset(
     {
         iterator __i = __u.begin();
         while (__u.size() != 0)
-            __table_.__insert_multi(_CUDA_VSTD::move(__u.__table_.remove(__i++)->__value_));
+            __table_.__insert_multi(_CUDA_FOR_DALI_VSTD::move(__u.__table_.remove(__i++)->__value_));
     }
 #if _LIBCUDAFORDALICXX_DEBUG_LEVEL >= 2
     else
@@ -1599,7 +1599,7 @@ unordered_multiset<_Value, _Hash, _Pred, _Alloc>::operator=(
         unordered_multiset&& __u)
     _NOEXCEPT_(is_nothrow_move_assignable<__table>::value)
 {
-    __table_ = _CUDA_VSTD::move(__u.__table_);
+    __table_ = _CUDA_FOR_DALI_VSTD::move(__u.__table_);
     return *this;
 }
 
@@ -1657,9 +1657,9 @@ operator==(const unordered_multiset<_Value, _Hash, _Pred, _Alloc>& __x,
     {
         _EqRng __xeq = __x.equal_range(*__i);
         _EqRng __yeq = __y.equal_range(*__i);
-        if (_CUDA_VSTD::distance(__xeq.first, __xeq.second) !=
-            _CUDA_VSTD::distance(__yeq.first, __yeq.second) ||
-                  !_CUDA_VSTD::is_permutation(__xeq.first, __xeq.second, __yeq.first))
+        if (_CUDA_FOR_DALI_VSTD::distance(__xeq.first, __xeq.second) !=
+            _CUDA_FOR_DALI_VSTD::distance(__yeq.first, __yeq.second) ||
+                  !_CUDA_FOR_DALI_VSTD::is_permutation(__xeq.first, __xeq.second, __yeq.first))
             return false;
         __i = __xeq.second;
     }

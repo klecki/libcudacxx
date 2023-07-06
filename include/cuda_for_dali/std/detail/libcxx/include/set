@@ -469,8 +469,8 @@ public:
     typedef typename __base::difference_type       difference_type;
     typedef typename __base::const_iterator        iterator;
     typedef typename __base::const_iterator        const_iterator;
-    typedef _CUDA_VSTD::reverse_iterator<iterator>       reverse_iterator;
-    typedef _CUDA_VSTD::reverse_iterator<const_iterator> const_reverse_iterator;
+    typedef _CUDA_FOR_DALI_VSTD::reverse_iterator<iterator>       reverse_iterator;
+    typedef _CUDA_FOR_DALI_VSTD::reverse_iterator<const_iterator> const_reverse_iterator;
 
 #if _LIBCUDAFORDALICXX_STD_VER > 14
     typedef __set_node_handle<typename __base::__node, allocator_type> node_type;
@@ -543,7 +543,7 @@ public:
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     set(set&& __s)
         _NOEXCEPT_(is_nothrow_move_constructible<__base>::value)
-        : __tree_(_CUDA_VSTD::move(__s.__tree_)) {}
+        : __tree_(_CUDA_FOR_DALI_VSTD::move(__s.__tree_)) {}
 #endif  // _LIBCUDAFORDALICXX_CXX03_LANG
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -592,7 +592,7 @@ public:
     set& operator=(set&& __s)
         _NOEXCEPT_(is_nothrow_move_assignable<__base>::value)
         {
-            __tree_ = _CUDA_VSTD::move(__s.__tree_);
+            __tree_ = _CUDA_FOR_DALI_VSTD::move(__s.__tree_);
             return *this;
         }
 #endif  // _LIBCUDAFORDALICXX_CXX03_LANG
@@ -645,11 +645,11 @@ public:
     template <class... _Args>
         _LIBCUDAFORDALICXX_INLINE_VISIBILITY
         pair<iterator, bool> emplace(_Args&&... __args)
-            {return __tree_.__emplace_unique(_CUDA_VSTD::forward<_Args>(__args)...);}
+            {return __tree_.__emplace_unique(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);}
     template <class... _Args>
         _LIBCUDAFORDALICXX_INLINE_VISIBILITY
         iterator emplace_hint(const_iterator __p, _Args&&... __args)
-            {return __tree_.__emplace_hint_unique(__p, _CUDA_VSTD::forward<_Args>(__args)...);}
+            {return __tree_.__emplace_hint_unique(__p, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);}
 #endif  // _LIBCUDAFORDALICXX_CXX03_LANG
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -670,11 +670,11 @@ public:
 #ifndef _LIBCUDAFORDALICXX_CXX03_LANG
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     pair<iterator,bool> insert(value_type&& __v)
-        {return __tree_.__insert_unique(_CUDA_VSTD::move(__v));}
+        {return __tree_.__insert_unique(_CUDA_FOR_DALI_VSTD::move(__v));}
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     iterator insert(const_iterator __p, value_type&& __v)
-        {return __tree_.__insert_unique(__p, _CUDA_VSTD::move(__v));}
+        {return __tree_.__insert_unique(__p, _CUDA_FOR_DALI_VSTD::move(__v));}
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     void insert(initializer_list<value_type> __il)
@@ -699,7 +699,7 @@ public:
         _LIBCUDAFORDALICXX_ASSERT(__nh.empty() || __nh.get_allocator() == get_allocator(),
             "node_type with incompatible allocator passed to set::insert()");
         return __tree_.template __node_handle_insert_unique<
-            node_type, insert_return_type>(_CUDA_VSTD::move(__nh));
+            node_type, insert_return_type>(_CUDA_FOR_DALI_VSTD::move(__nh));
     }
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     iterator insert(const_iterator __hint, node_type&& __nh)
@@ -707,7 +707,7 @@ public:
         _LIBCUDAFORDALICXX_ASSERT(__nh.empty() || __nh.get_allocator() == get_allocator(),
             "node_type with incompatible allocator passed to set::insert()");
         return __tree_.template __node_handle_insert_unique<node_type>(
-            __hint, _CUDA_VSTD::move(__nh));
+            __hint, _CUDA_FOR_DALI_VSTD::move(__nh));
     }
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     node_type extract(key_type const& __key)
@@ -880,13 +880,13 @@ set(initializer_list<_Key>, _Allocator)
 
 template <class _Key, class _Compare, class _Allocator>
 set<_Key, _Compare, _Allocator>::set(set&& __s, const allocator_type& __a)
-    : __tree_(_CUDA_VSTD::move(__s.__tree_), __a)
+    : __tree_(_CUDA_FOR_DALI_VSTD::move(__s.__tree_), __a)
 {
     if (__a != __s.get_allocator())
     {
         const_iterator __e = cend();
         while (!__s.empty())
-            insert(__e, _CUDA_VSTD::move(__s.__tree_.remove(__s.begin())->__value_));
+            insert(__e, _CUDA_FOR_DALI_VSTD::move(__s.__tree_.remove(__s.begin())->__value_));
     }
 }
 
@@ -898,7 +898,7 @@ bool
 operator==(const set<_Key, _Compare, _Allocator>& __x,
            const set<_Key, _Compare, _Allocator>& __y)
 {
-    return __x.size() == __y.size() && _CUDA_VSTD::equal(__x.begin(), __x.end(), __y.begin());
+    return __x.size() == __y.size() && _CUDA_FOR_DALI_VSTD::equal(__x.begin(), __x.end(), __y.begin());
 }
 
 template <class _Key, class _Compare, class _Allocator>
@@ -907,7 +907,7 @@ bool
 operator< (const set<_Key, _Compare, _Allocator>& __x,
            const set<_Key, _Compare, _Allocator>& __y)
 {
-    return _CUDA_VSTD::lexicographical_compare(__x.begin(), __x.end(), __y.begin(), __y.end());
+    return _CUDA_FOR_DALI_VSTD::lexicographical_compare(__x.begin(), __x.end(), __y.begin(), __y.end());
 }
 
 template <class _Key, class _Compare, class _Allocator>
@@ -995,8 +995,8 @@ public:
     typedef typename __base::difference_type       difference_type;
     typedef typename __base::const_iterator        iterator;
     typedef typename __base::const_iterator        const_iterator;
-    typedef _CUDA_VSTD::reverse_iterator<iterator>       reverse_iterator;
-    typedef _CUDA_VSTD::reverse_iterator<const_iterator> const_reverse_iterator;
+    typedef _CUDA_FOR_DALI_VSTD::reverse_iterator<iterator>       reverse_iterator;
+    typedef _CUDA_FOR_DALI_VSTD::reverse_iterator<const_iterator> const_reverse_iterator;
 
 #if _LIBCUDAFORDALICXX_STD_VER > 14
     typedef __set_node_handle<typename __base::__node, allocator_type> node_type;
@@ -1070,7 +1070,7 @@ public:
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     multiset(multiset&& __s)
         _NOEXCEPT_(is_nothrow_move_constructible<__base>::value)
-        : __tree_(_CUDA_VSTD::move(__s.__tree_)) {}
+        : __tree_(_CUDA_FOR_DALI_VSTD::move(__s.__tree_)) {}
 
     multiset(multiset&& __s, const allocator_type& __a);
 #endif  // _LIBCUDAFORDALICXX_CXX03_LANG
@@ -1117,7 +1117,7 @@ public:
     multiset& operator=(multiset&& __s)
         _NOEXCEPT_(is_nothrow_move_assignable<__base>::value)
         {
-            __tree_ = _CUDA_VSTD::move(__s.__tree_);
+            __tree_ = _CUDA_FOR_DALI_VSTD::move(__s.__tree_);
             return *this;
         }
 #endif  // _LIBCUDAFORDALICXX_CXX03_LANG
@@ -1170,11 +1170,11 @@ public:
     template <class... _Args>
         _LIBCUDAFORDALICXX_INLINE_VISIBILITY
         iterator emplace(_Args&&... __args)
-            {return __tree_.__emplace_multi(_CUDA_VSTD::forward<_Args>(__args)...);}
+            {return __tree_.__emplace_multi(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);}
     template <class... _Args>
         _LIBCUDAFORDALICXX_INLINE_VISIBILITY
         iterator emplace_hint(const_iterator __p, _Args&&... __args)
-            {return __tree_.__emplace_hint_multi(__p, _CUDA_VSTD::forward<_Args>(__args)...);}
+            {return __tree_.__emplace_hint_multi(__p, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);}
 #endif  // _LIBCUDAFORDALICXX_CXX03_LANG
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -1195,11 +1195,11 @@ public:
 #ifndef _LIBCUDAFORDALICXX_CXX03_LANG
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     iterator insert(value_type&& __v)
-        {return __tree_.__insert_multi(_CUDA_VSTD::move(__v));}
+        {return __tree_.__insert_multi(_CUDA_FOR_DALI_VSTD::move(__v));}
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     iterator insert(const_iterator __p, value_type&& __v)
-        {return __tree_.__insert_multi(__p, _CUDA_VSTD::move(__v));}
+        {return __tree_.__insert_multi(__p, _CUDA_FOR_DALI_VSTD::move(__v));}
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     void insert(initializer_list<value_type> __il)
@@ -1223,7 +1223,7 @@ public:
         _LIBCUDAFORDALICXX_ASSERT(__nh.empty() || __nh.get_allocator() == get_allocator(),
             "node_type with incompatible allocator passed to multiset::insert()");
         return __tree_.template __node_handle_insert_multi<node_type>(
-            _CUDA_VSTD::move(__nh));
+            _CUDA_FOR_DALI_VSTD::move(__nh));
     }
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     iterator insert(const_iterator __hint, node_type&& __nh)
@@ -1231,7 +1231,7 @@ public:
         _LIBCUDAFORDALICXX_ASSERT(__nh.empty() || __nh.get_allocator() == get_allocator(),
             "node_type with incompatible allocator passed to multiset::insert()");
         return __tree_.template __node_handle_insert_multi<node_type>(
-            __hint, _CUDA_VSTD::move(__nh));
+            __hint, _CUDA_FOR_DALI_VSTD::move(__nh));
     }
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     node_type extract(key_type const& __key)
@@ -1297,11 +1297,11 @@ public:
 #if _LIBCUDAFORDALICXX_STD_VER > 11
     template <typename _K2>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
-    typename _CUDA_VSTD::enable_if<_CUDA_VSTD::__is_transparent<_Compare, _K2>::value,iterator>::type
+    typename _CUDA_FOR_DALI_VSTD::enable_if<_CUDA_FOR_DALI_VSTD::__is_transparent<_Compare, _K2>::value,iterator>::type
     find(const _K2& __k)                           {return __tree_.find(__k);}
     template <typename _K2>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
-    typename _CUDA_VSTD::enable_if<_CUDA_VSTD::__is_transparent<_Compare, _K2>::value,const_iterator>::type
+    typename _CUDA_FOR_DALI_VSTD::enable_if<_CUDA_FOR_DALI_VSTD::__is_transparent<_Compare, _K2>::value,const_iterator>::type
     find(const _K2& __k) const                     {return __tree_.find(__k);}
 #endif
 
@@ -1329,12 +1329,12 @@ public:
 #if _LIBCUDAFORDALICXX_STD_VER > 11
     template <typename _K2>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
-    typename _CUDA_VSTD::enable_if<_CUDA_VSTD::__is_transparent<_Compare, _K2>::value,iterator>::type
+    typename _CUDA_FOR_DALI_VSTD::enable_if<_CUDA_FOR_DALI_VSTD::__is_transparent<_Compare, _K2>::value,iterator>::type
     lower_bound(const _K2& __k)       {return __tree_.lower_bound(__k);}
 
     template <typename _K2>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
-    typename _CUDA_VSTD::enable_if<_CUDA_VSTD::__is_transparent<_Compare, _K2>::value,const_iterator>::type
+    typename _CUDA_FOR_DALI_VSTD::enable_if<_CUDA_FOR_DALI_VSTD::__is_transparent<_Compare, _K2>::value,const_iterator>::type
     lower_bound(const _K2& __k) const {return __tree_.lower_bound(__k);}
 #endif
 
@@ -1347,11 +1347,11 @@ public:
 #if _LIBCUDAFORDALICXX_STD_VER > 11
     template <typename _K2>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
-    typename _CUDA_VSTD::enable_if<_CUDA_VSTD::__is_transparent<_Compare, _K2>::value,iterator>::type
+    typename _CUDA_FOR_DALI_VSTD::enable_if<_CUDA_FOR_DALI_VSTD::__is_transparent<_Compare, _K2>::value,iterator>::type
     upper_bound(const _K2& __k)       {return __tree_.upper_bound(__k);}
     template <typename _K2>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
-    typename _CUDA_VSTD::enable_if<_CUDA_VSTD::__is_transparent<_Compare, _K2>::value,const_iterator>::type
+    typename _CUDA_FOR_DALI_VSTD::enable_if<_CUDA_FOR_DALI_VSTD::__is_transparent<_Compare, _K2>::value,const_iterator>::type
     upper_bound(const _K2& __k) const {return __tree_.upper_bound(__k);}
 #endif
 
@@ -1364,11 +1364,11 @@ public:
 #if _LIBCUDAFORDALICXX_STD_VER > 11
     template <typename _K2>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
-    typename _CUDA_VSTD::enable_if<_CUDA_VSTD::__is_transparent<_Compare, _K2>::value,pair<iterator,iterator>>::type
+    typename _CUDA_FOR_DALI_VSTD::enable_if<_CUDA_FOR_DALI_VSTD::__is_transparent<_Compare, _K2>::value,pair<iterator,iterator>>::type
     equal_range(const _K2& __k)       {return __tree_.__equal_range_multi(__k);}
     template <typename _K2>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
-    typename _CUDA_VSTD::enable_if<_CUDA_VSTD::__is_transparent<_Compare, _K2>::value,pair<const_iterator,const_iterator>>::type
+    typename _CUDA_FOR_DALI_VSTD::enable_if<_CUDA_FOR_DALI_VSTD::__is_transparent<_Compare, _K2>::value,pair<const_iterator,const_iterator>>::type
     equal_range(const _K2& __k) const {return __tree_.__equal_range_multi(__k);}
 #endif
 };
@@ -1405,13 +1405,13 @@ multiset(initializer_list<_Key>, _Allocator)
 
 template <class _Key, class _Compare, class _Allocator>
 multiset<_Key, _Compare, _Allocator>::multiset(multiset&& __s, const allocator_type& __a)
-    : __tree_(_CUDA_VSTD::move(__s.__tree_), __a)
+    : __tree_(_CUDA_FOR_DALI_VSTD::move(__s.__tree_), __a)
 {
     if (__a != __s.get_allocator())
     {
         const_iterator __e = cend();
         while (!__s.empty())
-            insert(__e, _CUDA_VSTD::move(__s.__tree_.remove(__s.begin())->__value_));
+            insert(__e, _CUDA_FOR_DALI_VSTD::move(__s.__tree_.remove(__s.begin())->__value_));
     }
 }
 
@@ -1423,7 +1423,7 @@ bool
 operator==(const multiset<_Key, _Compare, _Allocator>& __x,
            const multiset<_Key, _Compare, _Allocator>& __y)
 {
-    return __x.size() == __y.size() && _CUDA_VSTD::equal(__x.begin(), __x.end(), __y.begin());
+    return __x.size() == __y.size() && _CUDA_FOR_DALI_VSTD::equal(__x.begin(), __x.end(), __y.begin());
 }
 
 template <class _Key, class _Compare, class _Allocator>
@@ -1432,7 +1432,7 @@ bool
 operator< (const multiset<_Key, _Compare, _Allocator>& __x,
            const multiset<_Key, _Compare, _Allocator>& __y)
 {
-    return _CUDA_VSTD::lexicographical_compare(__x.begin(), __x.end(), __y.begin(), __y.end());
+    return _CUDA_FOR_DALI_VSTD::lexicographical_compare(__x.begin(), __x.end(), __y.begin(), __y.end());
 }
 
 template <class _Key, class _Compare, class _Allocator>

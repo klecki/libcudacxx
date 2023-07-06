@@ -193,7 +193,7 @@ inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 _Tp
 reduce(_InputIterator __first, _InputIterator __last, _Tp __init)
 {
-    return _CUDA_VSTD::reduce(__first, __last, __init, _CUDA_VSTD::plus<>());
+    return _CUDA_FOR_DALI_VSTD::reduce(__first, __last, __init, _CUDA_FOR_DALI_VSTD::plus<>());
 }
 
 template <class _InputIterator>
@@ -201,7 +201,7 @@ inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 typename iterator_traits<_InputIterator>::value_type
 reduce(_InputIterator __first, _InputIterator __last)
 {
-    return _CUDA_VSTD::reduce(__first, __last,
+    return _CUDA_FOR_DALI_VSTD::reduce(__first, __last,
        typename iterator_traits<_InputIterator>::value_type{});
 }
 #endif
@@ -257,8 +257,8 @@ _Tp
 transform_reduce(_InputIterator1 __first1, _InputIterator1 __last1,
                  _InputIterator2 __first2, _Tp __init)
 {
-    return _CUDA_VSTD::transform_reduce(__first1, __last1, __first2, _CUDA_VSTD::move(__init),
-                                   _CUDA_VSTD::plus<>(), _CUDA_VSTD::multiplies<>());
+    return _CUDA_FOR_DALI_VSTD::transform_reduce(__first1, __last1, __first2, _CUDA_FOR_DALI_VSTD::move(__init),
+                                   _CUDA_FOR_DALI_VSTD::plus<>(), _CUDA_FOR_DALI_VSTD::multiplies<>());
 }
 #endif
 
@@ -326,7 +326,7 @@ _OutputIterator
 exclusive_scan(_InputIterator __first, _InputIterator __last,
                _OutputIterator __result, _Tp __init)
 {
-    return _CUDA_VSTD::exclusive_scan(__first, __last, __result, __init, _CUDA_VSTD::plus<>());
+    return _CUDA_FOR_DALI_VSTD::exclusive_scan(__first, __last, __result, __init, _CUDA_FOR_DALI_VSTD::plus<>());
 }
 
 template <class _InputIterator, class _OutputIterator, class _BinaryOp, class _Tp>
@@ -348,7 +348,7 @@ _OutputIterator inclusive_scan(_InputIterator __first, _InputIterator __last,
         typename std::iterator_traits<_InputIterator>::value_type __init = *__first;
         *__result++ = __init;
         if (++__first != __last)
-            return _CUDA_VSTD::inclusive_scan(__first, __last, __result, __b, __init);
+            return _CUDA_FOR_DALI_VSTD::inclusive_scan(__first, __last, __result, __b, __init);
         }
 
     return __result;
@@ -358,7 +358,7 @@ template <class _InputIterator, class _OutputIterator>
 _OutputIterator inclusive_scan(_InputIterator __first, _InputIterator __last,
                                _OutputIterator __result)
 {
-    return _CUDA_VSTD::inclusive_scan(__first, __last, __result, std::plus<>());
+    return _CUDA_FOR_DALI_VSTD::inclusive_scan(__first, __last, __result, std::plus<>());
 }
 
 template <class _InputIterator, class _OutputIterator, class _Tp,
@@ -403,7 +403,7 @@ _OutputIterator transform_inclusive_scan(_InputIterator __first, _InputIterator 
         typename std::iterator_traits<_InputIterator>::value_type __init = __u(*__first);
         *__result++ = __init;
         if (++__first != __last)
-            return _CUDA_VSTD::transform_inclusive_scan(__first, __last, __result, __b, __u, __init);
+            return _CUDA_FOR_DALI_VSTD::transform_inclusive_scan(__first, __last, __result, __b, __u, __init);
         }
 
     return __result;
@@ -423,7 +423,7 @@ adjacent_difference(_InputIterator __first, _InputIterator __last, _OutputIterat
         {
             typename iterator_traits<_InputIterator>::value_type __t2(*__first);
             *__result = __t2 - __t1;
-            __t1 = _CUDA_VSTD::move(__t2);
+            __t1 = _CUDA_FOR_DALI_VSTD::move(__t2);
         }
     }
     return __result;
@@ -443,7 +443,7 @@ adjacent_difference(_InputIterator __first, _InputIterator __last, _OutputIterat
         {
             typename iterator_traits<_InputIterator>::value_type __t2(*__first);
             *__result = __binary_op(__t2, __t1);
-            __t1 = _CUDA_VSTD::move(__t2);
+            __t1 = _CUDA_FOR_DALI_VSTD::move(__t2);
         }
     }
     return __result;
@@ -485,7 +485,7 @@ _LIBCUDAFORDALICXX_CONSTEXPR _LIBCUDAFORDALICXX_HIDDEN
 _Tp __gcd(_Tp __m, _Tp __n)
 {
     static_assert((!is_signed<_Tp>::value), "");
-    return __n == 0 ? __m : _CUDA_VSTD::__gcd<_Tp>(__n, __m % __n);
+    return __n == 0 ? __m : _CUDA_FOR_DALI_VSTD::__gcd<_Tp>(__n, __m % __n);
 }
 
 
@@ -499,7 +499,7 @@ gcd(_Tp __m, _Up __n)
     static_assert((!is_same<typename remove_cv<_Up>::type, bool>::value), "Second argument to gcd cannot be bool" );
     using _Rp = common_type_t<_Tp,_Up>;
     using _Wp = make_unsigned_t<_Rp>;
-    return static_cast<_Rp>(_CUDA_VSTD::__gcd(
+    return static_cast<_Rp>(_CUDA_FOR_DALI_VSTD::__gcd(
         static_cast<_Wp>(__ct_abs<_Rp, _Tp>()(__m)),
         static_cast<_Wp>(__ct_abs<_Rp, _Up>()(__n))));
 }
@@ -516,7 +516,7 @@ lcm(_Tp __m, _Up __n)
         return 0;
 
     using _Rp = common_type_t<_Tp,_Up>;
-    _Rp __val1 = __ct_abs<_Rp, _Tp>()(__m) / _CUDA_VSTD::gcd(__m, __n);
+    _Rp __val1 = __ct_abs<_Rp, _Tp>()(__m) / _CUDA_FOR_DALI_VSTD::gcd(__m, __n);
     _Rp __val2 = __ct_abs<_Rp, _Up>()(__n);
     _LIBCUDAFORDALICXX_ASSERT((numeric_limits<_Rp>::max() / __val1 > __val2), "Overflow in lcm");
     return __val1 * __val2;
@@ -554,7 +554,7 @@ enable_if_t<is_pointer_v<_TPtr>
              && (sizeof(remove_pointer_t<_TPtr>) > 0), _TPtr>
 midpoint(_TPtr __a, _TPtr __b) noexcept
 {
-    return __a + _CUDA_VSTD::midpoint(ptrdiff_t(0), __b - __a);
+    return __a + _CUDA_FOR_DALI_VSTD::midpoint(ptrdiff_t(0), __b - __a);
 }
 
 

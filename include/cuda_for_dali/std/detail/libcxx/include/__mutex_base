@@ -125,24 +125,24 @@ public:
     unique_lock() _NOEXCEPT : __m_(nullptr), __owns_(false) {}
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     explicit unique_lock(mutex_type& __m)
-        : __m_(_CUDA_VSTD::addressof(__m)), __owns_(true) {__m_->lock();}
+        : __m_(_CUDA_FOR_DALI_VSTD::addressof(__m)), __owns_(true) {__m_->lock();}
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     unique_lock(mutex_type& __m, defer_lock_t) _NOEXCEPT
-        : __m_(_CUDA_VSTD::addressof(__m)), __owns_(false) {}
+        : __m_(_CUDA_FOR_DALI_VSTD::addressof(__m)), __owns_(false) {}
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     unique_lock(mutex_type& __m, try_to_lock_t)
-        : __m_(_CUDA_VSTD::addressof(__m)), __owns_(__m.try_lock()) {}
+        : __m_(_CUDA_FOR_DALI_VSTD::addressof(__m)), __owns_(__m.try_lock()) {}
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     unique_lock(mutex_type& __m, adopt_lock_t)
-        : __m_(_CUDA_VSTD::addressof(__m)), __owns_(true) {}
+        : __m_(_CUDA_FOR_DALI_VSTD::addressof(__m)), __owns_(true) {}
     template <class _Clock, class _Duration>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
         unique_lock(mutex_type& __m, const chrono::time_point<_Clock, _Duration>& __t)
-            : __m_(_CUDA_VSTD::addressof(__m)), __owns_(__m.try_lock_until(__t)) {}
+            : __m_(_CUDA_FOR_DALI_VSTD::addressof(__m)), __owns_(__m.try_lock_until(__t)) {}
     template <class _Rep, class _Period>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
         unique_lock(mutex_type& __m, const chrono::duration<_Rep, _Period>& __d)
-            : __m_(_CUDA_VSTD::addressof(__m)), __owns_(__m.try_lock_for(__d)) {}
+            : __m_(_CUDA_FOR_DALI_VSTD::addressof(__m)), __owns_(__m.try_lock_for(__d)) {}
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     ~unique_lock()
     {
@@ -187,8 +187,8 @@ public:
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     void swap(unique_lock& __u) _NOEXCEPT
     {
-        _CUDA_VSTD::swap(__m_, __u.__m_);
-        _CUDA_VSTD::swap(__owns_, __u.__owns_);
+        _CUDA_FOR_DALI_VSTD::swap(__m_, __u.__m_);
+        _CUDA_FOR_DALI_VSTD::swap(__owns_, __u.__owns_);
     }
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     mutex_type* release() _NOEXCEPT
@@ -489,7 +489,7 @@ condition_variable::wait_for(unique_lock<mutex>& __lk,
                              _Predicate __pred)
 {
     return wait_until(__lk, chrono::steady_clock::now() + __d,
-                      _CUDA_VSTD::move(__pred));
+                      _CUDA_FOR_DALI_VSTD::move(__pred));
 }
 
 #if defined(_LIBCUDAFORDALICXX_HAS_COND_CLOCKWAIT)

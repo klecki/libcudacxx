@@ -153,12 +153,12 @@ struct __hash_key_value_types {
   }
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   static __container_value_type* __get_ptr(__node_value_type& __n) {
-    return _CUDA_VSTD::addressof(__n);
+    return _CUDA_FOR_DALI_VSTD::addressof(__n);
   }
 #ifndef _LIBCUDAFORDALICXX_CXX03_LANG
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   static __container_value_type&& __move(__node_value_type& __v) {
-    return _CUDA_VSTD::move(__v);
+    return _CUDA_FOR_DALI_VSTD::move(__v);
   }
 #endif
 };
@@ -195,7 +195,7 @@ struct __hash_key_value_types<__hash_value_type<_Key, _Tp> > {
 
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY
   static __container_value_type* __get_ptr(__node_value_type& __n) {
-    return _CUDA_VSTD::addressof(__n.__get_value());
+    return _CUDA_FOR_DALI_VSTD::addressof(__n.__get_value());
   }
 #ifndef _LIBCUDAFORDALICXX_CXX03_LANG
   _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -787,7 +787,7 @@ public:
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     __bucket_list_deallocator(__bucket_list_deallocator&& __x)
         _NOEXCEPT_(is_nothrow_move_constructible<allocator_type>::value)
-        : __data_(_CUDA_VSTD::move(__x.__data_))
+        : __data_(_CUDA_FOR_DALI_VSTD::move(__x.__data_))
     {
         __x.size() = 0;
     }
@@ -1076,7 +1076,7 @@ public:
     template <class _Pp>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     pair<iterator, bool> __emplace_unique(_Pp&& __x) {
-      return __emplace_unique_extract_key(_CUDA_VSTD::forward<_Pp>(__x),
+      return __emplace_unique_extract_key(_CUDA_FOR_DALI_VSTD::forward<_Pp>(__x),
                                           __can_extract_key<_Pp, key_type>());
     }
 
@@ -1086,33 +1086,33 @@ public:
         __can_extract_map_key<_First, key_type, __container_value_type>::value,
         pair<iterator, bool>
     >::type __emplace_unique(_First&& __f, _Second&& __s) {
-        return __emplace_unique_key_args(__f, _CUDA_VSTD::forward<_First>(__f),
-                                              _CUDA_VSTD::forward<_Second>(__s));
+        return __emplace_unique_key_args(__f, _CUDA_FOR_DALI_VSTD::forward<_First>(__f),
+                                              _CUDA_FOR_DALI_VSTD::forward<_Second>(__s));
     }
 
     template <class... _Args>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     pair<iterator, bool> __emplace_unique(_Args&&... __args) {
-      return __emplace_unique_impl(_CUDA_VSTD::forward<_Args>(__args)...);
+      return __emplace_unique_impl(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
     }
 
     template <class _Pp>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     pair<iterator, bool>
     __emplace_unique_extract_key(_Pp&& __x, __extract_key_fail_tag) {
-      return __emplace_unique_impl(_CUDA_VSTD::forward<_Pp>(__x));
+      return __emplace_unique_impl(_CUDA_FOR_DALI_VSTD::forward<_Pp>(__x));
     }
     template <class _Pp>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     pair<iterator, bool>
     __emplace_unique_extract_key(_Pp&& __x, __extract_key_self_tag) {
-      return __emplace_unique_key_args(__x, _CUDA_VSTD::forward<_Pp>(__x));
+      return __emplace_unique_key_args(__x, _CUDA_FOR_DALI_VSTD::forward<_Pp>(__x));
     }
     template <class _Pp>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     pair<iterator, bool>
     __emplace_unique_extract_key(_Pp&& __x, __extract_key_first_tag) {
-      return __emplace_unique_key_args(__x.first, _CUDA_VSTD::forward<_Pp>(__x));
+      return __emplace_unique_key_args(__x.first, _CUDA_FOR_DALI_VSTD::forward<_Pp>(__x));
     }
 
     template <class... _Args>
@@ -1126,7 +1126,7 @@ public:
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     pair<iterator, bool>
     __insert_unique(__container_value_type&& __x) {
-      return __emplace_unique_key_args(_NodeTypes::__get_key(__x), _CUDA_VSTD::move(__x));
+      return __emplace_unique_key_args(_NodeTypes::__get_key(__x), _CUDA_FOR_DALI_VSTD::move(__x));
     }
 
     template <class _Pp, class = typename enable_if<
@@ -1134,19 +1134,19 @@ public:
         >::type>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     pair<iterator, bool> __insert_unique(_Pp&& __x) {
-      return __emplace_unique(_CUDA_VSTD::forward<_Pp>(__x));
+      return __emplace_unique(_CUDA_FOR_DALI_VSTD::forward<_Pp>(__x));
     }
 
     template <class _Pp>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     iterator __insert_multi(_Pp&& __x) {
-      return __emplace_multi(_CUDA_VSTD::forward<_Pp>(__x));
+      return __emplace_multi(_CUDA_FOR_DALI_VSTD::forward<_Pp>(__x));
     }
 
     template <class _Pp>
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
     iterator __insert_multi(const_iterator __p, _Pp&& __x) {
-        return __emplace_hint_multi(__p, _CUDA_VSTD::forward<_Pp>(__x));
+        return __emplace_hint_multi(__p, _CUDA_FOR_DALI_VSTD::forward<_Pp>(__x));
     }
 
 #else  // !defined(_LIBCUDAFORDALICXX_CXX03_LANG)
@@ -1284,7 +1284,7 @@ public:
     {
         _LIBCUDAFORDALICXX_ASSERT(__mlf > 0,
             "unordered container::max_load_factor(lf) called with lf <= 0");
-        max_load_factor() = _CUDA_VSTD::max(__mlf, load_factor());
+        max_load_factor() = _CUDA_FOR_DALI_VSTD::max(__mlf, load_factor());
     }
 
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
@@ -1393,8 +1393,8 @@ private:
             is_nothrow_move_assignable<__node_allocator>::value)
     {
         __bucket_list_.get_deleter().__alloc() =
-                _CUDA_VSTD::move(__u.__bucket_list_.get_deleter().__alloc());
-        __node_alloc() = _CUDA_VSTD::move(__u.__node_alloc());
+                _CUDA_FOR_DALI_VSTD::move(__u.__bucket_list_.get_deleter().__alloc());
+        __node_alloc() = _CUDA_FOR_DALI_VSTD::move(__u.__node_alloc());
     }
     _LIBCUDAFORDALICXX_INLINE_VISIBILITY
         void __move_assign_alloc(__hash_table&, false_type) _NOEXCEPT {}
@@ -1485,10 +1485,10 @@ __hash_table<_Tp, _Hash, _Equal, _Alloc>::__hash_table(__hash_table&& __u)
             is_nothrow_move_constructible<__node_allocator>::value &&
             is_nothrow_move_constructible<hasher>::value &&
             is_nothrow_move_constructible<key_equal>::value)
-    : __bucket_list_(_CUDA_VSTD::move(__u.__bucket_list_)),
-      __p1_(_CUDA_VSTD::move(__u.__p1_)),
-      __p2_(_CUDA_VSTD::move(__u.__p2_)),
-      __p3_(_CUDA_VSTD::move(__u.__p3_))
+    : __bucket_list_(_CUDA_FOR_DALI_VSTD::move(__u.__bucket_list_)),
+      __p1_(_CUDA_FOR_DALI_VSTD::move(__u.__p1_)),
+      __p2_(_CUDA_FOR_DALI_VSTD::move(__u.__p2_)),
+      __p3_(_CUDA_FOR_DALI_VSTD::move(__u.__p3_))
 {
     if (size() > 0)
     {
@@ -1504,8 +1504,8 @@ __hash_table<_Tp, _Hash, _Equal, _Alloc>::__hash_table(__hash_table&& __u,
                                                        const allocator_type& __a)
     : __bucket_list_(nullptr, __bucket_list_deleter(__pointer_allocator(__a), 0)),
       __p1_(__second_tag(), __node_allocator(__a)),
-      __p2_(0, _CUDA_VSTD::move(__u.hash_function())),
-      __p3_(_CUDA_VSTD::move(__u.__p3_))
+      __p2_(0, _CUDA_FOR_DALI_VSTD::move(__u.hash_function())),
+      __p3_(_CUDA_FOR_DALI_VSTD::move(__u.__p3_))
 {
     if (__a == allocator_type(__u.__node_alloc()))
     {
@@ -1633,9 +1633,9 @@ __hash_table<_Tp, _Hash, _Equal, _Alloc>::__move_assign(
     __u.__bucket_list_.get_deleter().size() = 0;
     __move_assign_alloc(__u);
     size() = __u.size();
-    hash_function() = _CUDA_VSTD::move(__u.hash_function());
+    hash_function() = _CUDA_FOR_DALI_VSTD::move(__u.hash_function());
     max_load_factor() = __u.max_load_factor();
-    key_eq() = _CUDA_VSTD::move(__u.key_eq());
+    key_eq() = _CUDA_FOR_DALI_VSTD::move(__u.key_eq());
     __p1_.first().__next_ = __u.__p1_.first().__next_;
     if (size() > 0)
     {
@@ -1658,8 +1658,8 @@ __hash_table<_Tp, _Hash, _Equal, _Alloc>::__move_assign(
         __move_assign(__u, true_type());
     else
     {
-        hash_function() = _CUDA_VSTD::move(__u.hash_function());
-        key_eq() = _CUDA_VSTD::move(__u.key_eq());
+        hash_function() = _CUDA_FOR_DALI_VSTD::move(__u.hash_function());
+        key_eq() = _CUDA_FOR_DALI_VSTD::move(__u.key_eq());
         max_load_factor() = __u.max_load_factor();
         if (bucket_count() != 0)
         {
@@ -1672,7 +1672,7 @@ __hash_table<_Tp, _Hash, _Equal, _Alloc>::__move_assign(
                 while (__cache != nullptr && __u.size() != 0)
                 {
                     __cache->__upcast()->__value_ =
-                        _CUDA_VSTD::move(__u.remove(__i++)->__value_);
+                        _CUDA_FOR_DALI_VSTD::move(__u.remove(__i++)->__value_);
                     __next_pointer __next = __cache->__next_;
                     __node_insert_multi(__cache->__upcast());
                     __cache = __next;
@@ -1889,7 +1889,7 @@ __hash_table<_Tp, _Hash, _Equal, _Alloc>::__node_insert_unique_prepare(
     }
     if (size()+1 > __bc * max_load_factor() || __bc == 0)
     {
-        rehash(_CUDA_VSTD::max<size_type>(2 * __bc + !__is_hash_power2(__bc),
+        rehash(_CUDA_FOR_DALI_VSTD::max<size_type>(2 * __bc + !__is_hash_power2(__bc),
                                      size_type(ceil(float(size() + 1) / max_load_factor()))));
     }
     return nullptr;
@@ -1965,7 +1965,7 @@ __hash_table<_Tp, _Hash, _Equal, _Alloc>::__node_insert_multi_prepare(
     size_type __bc = bucket_count();
     if (size()+1 > __bc * max_load_factor() || __bc == 0)
     {
-        rehash(_CUDA_VSTD::max<size_type>(2 * __bc + !__is_hash_power2(__bc),
+        rehash(_CUDA_FOR_DALI_VSTD::max<size_type>(2 * __bc + !__is_hash_power2(__bc),
                        size_type(ceil(float(size() + 1) / max_load_factor()))));
         __bc = bucket_count();
     }
@@ -2065,7 +2065,7 @@ __hash_table<_Tp, _Hash, _Equal, _Alloc>::__node_insert_multi(
         size_type __bc = bucket_count();
         if (size()+1 > __bc * max_load_factor() || __bc == 0)
         {
-            rehash(_CUDA_VSTD::max<size_type>(2 * __bc + !__is_hash_power2(__bc),
+            rehash(_CUDA_FOR_DALI_VSTD::max<size_type>(2 * __bc + !__is_hash_power2(__bc),
                            size_type(ceil(float(size() + 1) / max_load_factor()))));
             __bc = bucket_count();
         }
@@ -2122,13 +2122,13 @@ __hash_table<_Tp, _Hash, _Equal, _Alloc>::__emplace_unique_key_args(_Key const& 
     }
     {
 #ifndef _LIBCUDAFORDALICXX_CXX03_LANG
-        __node_holder __h = __construct_node_hash(__hash, _CUDA_VSTD::forward<_Args>(__args)...);
+        __node_holder __h = __construct_node_hash(__hash, _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
 #else
         __node_holder __h = __construct_node_hash(__hash, __args);
 #endif
         if (size()+1 > __bc * max_load_factor() || __bc == 0)
         {
-            rehash(_CUDA_VSTD::max<size_type>(2 * __bc + !__is_hash_power2(__bc),
+            rehash(_CUDA_FOR_DALI_VSTD::max<size_type>(2 * __bc + !__is_hash_power2(__bc),
                            size_type(ceil(float(size() + 1) / max_load_factor()))));
             __bc = bucket_count();
             __chash = __constrain_hash(__hash, __bc);
@@ -2171,7 +2171,7 @@ template <class... _Args>
 pair<typename __hash_table<_Tp, _Hash, _Equal, _Alloc>::iterator, bool>
 __hash_table<_Tp, _Hash, _Equal, _Alloc>::__emplace_unique_impl(_Args&&... __args)
 {
-    __node_holder __h = __construct_node(_CUDA_VSTD::forward<_Args>(__args)...);
+    __node_holder __h = __construct_node(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
     pair<iterator, bool> __r = __node_insert_unique(__h.get());
     if (__r.second)
         __h.release();
@@ -2183,7 +2183,7 @@ template <class... _Args>
 typename __hash_table<_Tp, _Hash, _Equal, _Alloc>::iterator
 __hash_table<_Tp, _Hash, _Equal, _Alloc>::__emplace_multi(_Args&&... __args)
 {
-    __node_holder __h = __construct_node(_CUDA_VSTD::forward<_Args>(__args)...);
+    __node_holder __h = __construct_node(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
     iterator __r = __node_insert_multi(__h.get());
     __h.release();
     return __r;
@@ -2200,7 +2200,7 @@ __hash_table<_Tp, _Hash, _Equal, _Alloc>::__emplace_hint_multi(
         "unordered container::emplace_hint(const_iterator, args...) called with an iterator not"
         " referring to this unordered container");
 #endif
-    __node_holder __h = __construct_node(_CUDA_VSTD::forward<_Args>(__args)...);
+    __node_holder __h = __construct_node(_CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
     iterator __r = __node_insert_multi(__p, __h.get());
     __h.release();
     return __r;
@@ -2249,7 +2249,7 @@ __hash_table<_Tp, _Hash, _Equal, _Alloc>::__node_handle_insert_unique(
     pair<iterator, bool> __result = __node_insert_unique(__nh.__ptr_);
     if (__result.second)
         __nh.__release_ptr();
-    return _InsertReturnType{__result.first, __result.second, _CUDA_VSTD::move(__nh)};
+    return _InsertReturnType{__result.first, __result.second, _CUDA_FOR_DALI_VSTD::move(__nh)};
 }
 
 template <class _Tp, class _Hash, class _Equal, class _Alloc>
@@ -2382,7 +2382,7 @@ _LIBCUDAFORDALICXX_DISABLE_UBSAN_UNSIGNED_INTEGER_CHECK
         __rehash(__n);
     else if (__n < __bc)
     {
-        __n = _CUDA_VSTD::max<size_type>
+        __n = _CUDA_FOR_DALI_VSTD::max<size_type>
               (
                   __n,
                   __is_hash_power2(__bc) ? __next_hash_pow2(size_t(ceil(float(size()) / max_load_factor()))) :
@@ -2522,7 +2522,7 @@ __hash_table<_Tp, _Hash, _Equal, _Alloc>::__construct_node(_Args&& ...__args)
                   "Construct cannot be called with a hash value type");
     __node_allocator& __na = __node_alloc();
     __node_holder __h(__node_traits::allocate(__na, 1), _Dp(__na));
-    __node_traits::construct(__na, _NodeTypes::__get_ptr(__h->__value_), _CUDA_VSTD::forward<_Args>(__args)...);
+    __node_traits::construct(__na, _NodeTypes::__get_ptr(__h->__value_), _CUDA_FOR_DALI_VSTD::forward<_Args>(__args)...);
     __h.get_deleter().__value_constructed = true;
     __h->__hash_ = hash_function()(__h->__value_);
     __h->__next_ = nullptr;
@@ -2540,8 +2540,8 @@ __hash_table<_Tp, _Hash, _Equal, _Alloc>::__construct_node_hash(
     __node_allocator& __na = __node_alloc();
     __node_holder __h(__node_traits::allocate(__na, 1), _Dp(__na));
     __node_traits::construct(__na, _NodeTypes::__get_ptr(__h->__value_),
-                             _CUDA_VSTD::forward<_First>(__f),
-                             _CUDA_VSTD::forward<_Rest>(__rest)...);
+                             _CUDA_FOR_DALI_VSTD::forward<_First>(__f),
+                             _CUDA_FOR_DALI_VSTD::forward<_Rest>(__rest)...);
     __h.get_deleter().__value_constructed = true;
     __h->__hash_ = __hash;
     __h->__next_ = nullptr;
@@ -2827,11 +2827,11 @@ __hash_table<_Tp, _Hash, _Equal, _Alloc>::swap(__hash_table& __u)
     __bucket_list_.reset(__u.__bucket_list_.release());
     __u.__bucket_list_.reset(__npp);
     }
-    _CUDA_VSTD::swap(__bucket_list_.get_deleter().size(), __u.__bucket_list_.get_deleter().size());
+    _CUDA_FOR_DALI_VSTD::swap(__bucket_list_.get_deleter().size(), __u.__bucket_list_.get_deleter().size());
     __swap_allocator(__bucket_list_.get_deleter().__alloc(),
              __u.__bucket_list_.get_deleter().__alloc());
     __swap_allocator(__node_alloc(), __u.__node_alloc());
-    _CUDA_VSTD::swap(__p1_.first().__next_, __u.__p1_.first().__next_);
+    _CUDA_FOR_DALI_VSTD::swap(__p1_.first().__next_, __u.__p1_.first().__next_);
     __p2_.swap(__u.__p2_);
     __p3_.swap(__u.__p3_);
     if (size() > 0)

@@ -124,8 +124,8 @@ DoIOSInit::DoIOSInit()
     cin_ptr->tie(cout_ptr);
     wcin_ptr->tie(wcout_ptr);
 #endif
-    _CUDA_VSTD::unitbuf(*cerr_ptr);
-    _CUDA_VSTD::unitbuf(*wcerr_ptr);
+    _CUDA_FOR_DALI_VSTD::unitbuf(*cerr_ptr);
+    _CUDA_FOR_DALI_VSTD::unitbuf(*wcerr_ptr);
 #ifndef _LIBCUDAFORDALICXX_HAS_NO_STDOUT
     cerr_ptr->tie(cout_ptr);
     wcerr_ptr->tie(wcout_ptr);
