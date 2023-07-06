@@ -40,14 +40,14 @@
 
 #elif TEST_STD_VER > 17
 
-# if !defined(_LIBCUDACXX_VERSION)
+# if !defined(_LIBCUDAFORDALICXX_VERSION)
 #   ifndef __cpp_lib_bit_cast
 #     error "__cpp_lib_bit_cast should be defined in c++2a"
 #   endif
 #   if __cpp_lib_bit_cast != 201806L
 #     error "__cpp_lib_bit_cast should have the value 201806L in c++2a"
 #   endif
-# else // _LIBCUDACXX_VERSION
+# else // _LIBCUDAFORDALICXX_VERSION
 #   ifdef __cpp_lib_bit_cast
 #     error "__cpp_lib_bit_cast should not be defined because it is unimplemented in libc++!"
 #   endif

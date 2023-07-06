@@ -174,9 +174,9 @@ void test_for_all_types()
     test<Atomic<unsigned long, Scope>, unsigned long, Selector>();
     test<Atomic<long long, Scope>, long long, Selector>();
     test<Atomic<unsigned long long, Scope>, unsigned long long, Selector>();
-#ifndef _LIBCUDACXX_HAS_NO_UNICODE_CHARS
+#ifndef _LIBCUDAFORDALICXX_HAS_NO_UNICODE_CHARS
     test<Atomic<char32_t, Scope>, char32_t, Selector>();
-#endif  // _LIBCUDACXX_HAS_NO_UNICODE_CHARS
+#endif  // _LIBCUDAFORDALICXX_HAS_NO_UNICODE_CHARS
     test<Atomic<int32_t, Scope>,   int32_t, Selector>();
     test<Atomic<uint32_t, Scope>, uint32_t, Selector>();
     test<Atomic<int64_t, Scope>,   int64_t, Selector>();

@@ -54,7 +54,7 @@ int main(int, char**)
         assert(cuda_for_dali::std::get<0>(t) == 1);
     }
 // testing extensions
-#ifdef _LIBCUDACXX_VERSION
+#ifdef _LIBCUDAFORDALICXX_VERSION
     {
         typedef cuda_for_dali::std::tuple<MoveOnly, alloc_first> T;
         T t0(0 ,1);

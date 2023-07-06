@@ -10,9 +10,9 @@
 
 // Increment iterator past end.
 
-#if _LIBCUDACXX_DEBUG >= 1
+#if _LIBCUDAFORDALICXX_DEBUG >= 1
 
-#define _LIBCUDACXX_ASSERT(x, m) ((x) ? (void)0 : std::exit(0))
+#define _LIBCUDAFORDALICXX_ASSERT(x, m) ((x) ? (void)0 : std::exit(0))
 
 #include <vector>
 #include <cassert>

@@ -310,11 +310,11 @@ void constructor_tests()
         assert(ret() == false);
         auto ret2 = std::not_fn(value2);
         assert(ret2() == true);
-#if defined(_LIBCUDACXX_VERSION)
+#if defined(_LIBCUDAFORDALICXX_VERSION)
         ret = ret2;
         assert(ret() == true);
         assert(ret2() == true);
-#endif // _LIBCUDACXX_VERSION
+#endif // _LIBCUDAFORDALICXX_VERSION
     }
     {
         using T = MoveAssignableWrapper;
@@ -329,10 +329,10 @@ void constructor_tests()
         assert(ret() == false);
         auto ret2 = std::not_fn(std::move(value2));
         assert(ret2() == true);
-#if defined(_LIBCUDACXX_VERSION)
+#if defined(_LIBCUDAFORDALICXX_VERSION)
         ret = std::move(ret2);
         assert(ret() == true);
-#endif // _LIBCUDACXX_VERSION
+#endif // _LIBCUDAFORDALICXX_VERSION
     }
 }
 

@@ -16,7 +16,7 @@
 //   ...
 // };
 
-#define _LIBCUDACXX_CUDA_ABI_VERSION 3
+#define _LIBCUDAFORDALICXX_CUDA_ABI_VERSION 3
 
 #include <cuda_for_dali/std/complex>
 #include <cuda_for_dali/std/type_traits>

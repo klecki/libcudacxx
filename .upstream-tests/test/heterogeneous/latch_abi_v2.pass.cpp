@@ -11,7 +11,7 @@
 // uncomment for a really verbose output detailing what test steps are being launched
 // #define DEBUG_TESTERS
 
-#define _LIBCUDACXX_CUDA_ABI_VERSION 2
+#define _LIBCUDAFORDALICXX_CUDA_ABI_VERSION 2
 
 #include "helpers.h"
 

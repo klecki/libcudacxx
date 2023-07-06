@@ -102,7 +102,7 @@ void test_adaptor(Pointer mr){
 int main(int argc, char **argv) {
 
 #ifndef __CUDA_ARCH__
-#if defined(_LIBCUDACXX_STD_PMR_NS)
+#if defined(_LIBCUDAFORDALICXX_STD_PMR_NS)
    derived_resource mr_raw;
    test_adaptor(&mr_raw);
    test_adaptor(std::make_unique<derived_resource>());

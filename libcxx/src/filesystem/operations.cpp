@@ -29,32 +29,32 @@
 #include <linux/version.h>
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 33)
 #include <sys/sendfile.h>
-#define _LIBCUDACXX_USE_SENDFILE
+#define _LIBCUDAFORDALICXX_USE_SENDFILE
 #endif
 #elif defined(__APPLE__) || __has_include(<copyfile.h>)
 #include <copyfile.h>
-#define _LIBCUDACXX_USE_COPYFILE
+#define _LIBCUDAFORDALICXX_USE_COPYFILE
 #endif
 
 #if !defined(__APPLE__)
-#define _LIBCUDACXX_USE_CLOCK_GETTIME
+#define _LIBCUDAFORDALICXX_USE_CLOCK_GETTIME
 #endif
 
-#if !defined(CLOCK_REALTIME) || !defined(_LIBCUDACXX_USE_CLOCK_GETTIME)
+#if !defined(CLOCK_REALTIME) || !defined(_LIBCUDAFORDALICXX_USE_CLOCK_GETTIME)
 #include <sys/time.h> // for gettimeofday and timeval
 #endif                // !defined(CLOCK_REALTIME)
 
-#if defined(__unix__) && defined(__ELF__) && defined(_LIBCUDACXX_HAS_COMMENT_LIB_PRAGMA)
+#if defined(__unix__) && defined(__ELF__) && defined(_LIBCUDAFORDALICXX_HAS_COMMENT_LIB_PRAGMA)
 #pragma comment(lib, "rt")
 #endif
 
-#if defined(_LIBCUDACXX_COMPILER_GCC)
+#if defined(_LIBCUDAFORDALICXX_COMPILER_GCC)
 #if _GNUC_VER < 500
 #pragma GCC diagnostic ignored "-Wmissing-field-initializers"
 #endif
 #endif
 
-_LIBCUDACXX_BEGIN_NAMESPACE_FILESYSTEM
+_LIBCUDAFORDALICXX_BEGIN_NAMESPACE_FILESYSTEM
 
 namespace {
 namespace parser {
@@ -137,7 +137,7 @@ public:
 
     case PS_InRootName:
     case PS_AtEnd:
-      _LIBCUDACXX_UNREACHABLE();
+      _LIBCUDAFORDALICXX_UNREACHABLE();
     }
   }
 
@@ -173,7 +173,7 @@ public:
       // return makeState(PS_InRootName, Path.data(), RStart + 1);
     case PS_InRootName:
     case PS_BeforeBegin:
-      _LIBCUDACXX_UNREACHABLE();
+      _LIBCUDAFORDALICXX_UNREACHABLE();
     }
   }
 
@@ -192,7 +192,7 @@ public:
     case PS_InFilenames:
       return RawEntry;
     }
-    _LIBCUDACXX_UNREACHABLE();
+    _LIBCUDAFORDALICXX_UNREACHABLE();
   }
 
   explicit operator bool() const noexcept {
@@ -253,7 +253,7 @@ private:
     case PS_AtEnd:
       return getAfterBack();
     }
-    _LIBCUDACXX_UNREACHABLE();
+    _LIBCUDAFORDALICXX_UNREACHABLE();
   }
 
   /// \brief Return a pointer to the first character in the currently lexed
@@ -270,7 +270,7 @@ private:
     case PS_AtEnd:
       return &Path.back() + 1;
     }
-    _LIBCUDACXX_UNREACHABLE();
+    _LIBCUDAFORDALICXX_UNREACHABLE();
   }
 
   PosPtr consumeSeparator(PosPtr P, PosPtr End) const noexcept {
@@ -490,7 +490,7 @@ const bool _FilesystemClock::is_steady;
 
 _FilesystemClock::time_point _FilesystemClock::now() noexcept {
   typedef chrono::duration<rep> __secs;
-#if defined(_LIBCUDACXX_USE_CLOCK_GETTIME) && defined(CLOCK_REALTIME)
+#if defined(_LIBCUDAFORDALICXX_USE_CLOCK_GETTIME) && defined(CLOCK_REALTIME)
   typedef chrono::duration<rep, nano> __nsecs;
   struct timespec tp;
   if (0 != clock_gettime(CLOCK_REALTIME, &tp))
@@ -502,7 +502,7 @@ _FilesystemClock::time_point _FilesystemClock::now() noexcept {
   timeval tv;
   gettimeofday(&tv, 0);
   return time_point(__secs(tv.tv_sec) + __microsecs(tv.tv_usec));
-#endif // _LIBCUDACXX_USE_CLOCK_GETTIME && CLOCK_REALTIME
+#endif // _LIBCUDAFORDALICXX_USE_CLOCK_GETTIME && CLOCK_REALTIME
 }
 
 filesystem_error::~filesystem_error() {}
@@ -650,7 +650,7 @@ void __copy(const path& from, const path& to, copy_options options,
 namespace detail {
 namespace {
 
-#ifdef _LIBCUDACXX_USE_SENDFILE
+#ifdef _LIBCUDAFORDALICXX_USE_SENDFILE
 bool copy_file_impl_sendfile(FileDescriptor& read_fd, FileDescriptor& write_fd,
                              error_code& ec) {
 
@@ -668,7 +668,7 @@ bool copy_file_impl_sendfile(FileDescriptor& read_fd, FileDescriptor& write_fd,
 
   return true;
 }
-#elif defined(_LIBCUDACXX_USE_COPYFILE)
+#elif defined(_LIBCUDAFORDALICXX_USE_COPYFILE)
 bool copy_file_impl_copyfile(FileDescriptor& read_fd, FileDescriptor& write_fd,
                              error_code& ec) {
   struct CopyFileState {
@@ -729,9 +729,9 @@ __attribute__((unused)) bool copy_file_impl_default(FileDescriptor& read_fd,
 }
 
 bool copy_file_impl(FileDescriptor& from, FileDescriptor& to, error_code& ec) {
-#if defined(_LIBCUDACXX_USE_SENDFILE)
+#if defined(_LIBCUDAFORDALICXX_USE_SENDFILE)
   return copy_file_impl_sendfile(from, to, ec);
-#elif defined(_LIBCUDACXX_USE_COPYFILE)
+#elif defined(_LIBCUDAFORDALICXX_USE_COPYFILE)
   return copy_file_impl_copyfile(from, to, ec);
 #else
   return copy_file_impl_default(from, to, ec);
@@ -921,7 +921,7 @@ path __current_path(error_code* ec) {
   ErrorHandler<path> err("current_path", ec);
 
   auto size = ::pathconf(".", _PC_PATH_MAX);
-  _LIBCUDACXX_ASSERT(size >= 0, "pathconf returned a 0 as max size");
+  _LIBCUDAFORDALICXX_ASSERT(size >= 0, "pathconf returned a 0 as max size");
 
   auto buff = unique_ptr<char[]>(new char[size + 1]);
   char* ret;
@@ -998,7 +998,7 @@ bool __fs_is_empty(const path& p, error_code* ec) {
   } else if (is_regular_file(st))
     return static_cast<uintmax_t>(pst.st_size) == 0;
 
-  _LIBCUDACXX_UNREACHABLE();
+  _LIBCUDAFORDALICXX_UNREACHABLE();
 }
 
 static file_time_type __extract_last_write_time(const path& p, const StatT& st,
@@ -1031,7 +1031,7 @@ void __last_write_time(const path& p, file_time_type new_time, error_code* ec) {
 
   error_code m_ec;
   array<TimeSpec, 2> tbuf;
-#if !defined(_LIBCUDACXX_USE_UTIMENSAT)
+#if !defined(_LIBCUDAFORDALICXX_USE_UTIMENSAT)
   // This implementation has a race condition between determining the
   // last access time and attempting to set it to the same value using
   // ::utimes
@@ -1060,7 +1060,7 @@ void __permissions(const path& p, perms prms, perm_options opts,
   const bool resolve_symlinks = !has_opt(perm_options::nofollow);
   const bool add_perms = has_opt(perm_options::add);
   const bool remove_perms = has_opt(perm_options::remove);
-  _LIBCUDACXX_ASSERT(
+  _LIBCUDAFORDALICXX_ASSERT(
       (add_perms + remove_perms + has_opt(perm_options::replace)) == 1,
       "One and only one of the perm_options constants replace, add, or remove "
       "is present in opts");
@@ -1074,7 +1074,7 @@ void __permissions(const path& p, perms prms, perm_options opts,
     set_sym_perms = is_symlink(st);
     if (m_ec)
       return err.report(m_ec);
-    _LIBCUDACXX_ASSERT(st.permissions() != perms::unknown,
+    _LIBCUDAFORDALICXX_ASSERT(st.permissions() != perms::unknown,
                    "Permissions unexpectedly unknown");
     if (add_perms)
       prms |= st.permissions();
@@ -1116,7 +1116,7 @@ path __read_symlink(const path& p, error_code* ec) {
   ::ssize_t ret;
   if ((ret = ::readlink(p.c_str(), buff.get(), size)) == -1)
     return err.report(capture_errno());
-  _LIBCUDACXX_ASSERT(ret > 0, "TODO");
+  _LIBCUDAFORDALICXX_ASSERT(ret > 0, "TODO");
   if (static_cast<size_t>(ret) >= size)
     return err.report(errc::value_too_large);
   buff[ret] = 0;
@@ -1473,7 +1473,7 @@ path path::lexically_normal() const {
       break;
     }
     case PK_None:
-      _LIBCUDACXX_UNREACHABLE();
+      _LIBCUDAFORDALICXX_UNREACHABLE();
     }
   }
   // [fs.path.generic]p6.8: If the path is empty, add a dot.
@@ -1592,7 +1592,7 @@ static int CompareRootDir(PathParser *LHS, PathParser *RHS) {
 static int CompareRelative(PathParser *LHSPtr, PathParser *RHSPtr) {
   auto &LHS = *LHSPtr;
   auto &RHS = *RHSPtr;
-  
+
   int res;
   while (LHS && RHS) {
     if ((res = (*LHS).compare(*RHS)) != 0)
@@ -1682,7 +1682,7 @@ path::iterator& path::iterator::__decrement() {
 //                           directory entry definitions
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifndef _LIBCUDACXX_WIN32API
+#ifndef _LIBCUDAFORDALICXX_WIN32API
 error_code directory_entry::__do_refresh() noexcept {
   __data_.__reset();
   error_code failure_ec;
@@ -1779,4 +1779,4 @@ error_code directory_entry::__do_refresh() noexcept {
 }
 #endif
 
-_LIBCUDACXX_END_NAMESPACE_FILESYSTEM
+_LIBCUDAFORDALICXX_END_NAMESPACE_FILESYSTEM

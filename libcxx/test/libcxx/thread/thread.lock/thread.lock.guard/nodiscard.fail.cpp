@@ -26,8 +26,8 @@
 // Test that we properly apply [[nodiscard]] to lock_guard's constructors,
 // which is a libc++ extension.
 
-// MODULES_DEFINES: _LIBCUDACXX_ENABLE_NODISCARD
-#define _LIBCUDACXX_ENABLE_NODISCARD
+// MODULES_DEFINES: _LIBCUDAFORDALICXX_ENABLE_NODISCARD
+#define _LIBCUDAFORDALICXX_ENABLE_NODISCARD
 #include <mutex>
 
 int main(int, char**) {

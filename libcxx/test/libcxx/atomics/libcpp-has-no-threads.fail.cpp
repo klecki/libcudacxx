@@ -8,12 +8,12 @@
 
 // <atomic>
 
-// Test that including <atomic> fails to compile when _LIBCUDACXX_HAS_NO_THREADS
+// Test that including <atomic> fails to compile when _LIBCUDAFORDALICXX_HAS_NO_THREADS
 // is defined.
 
-// MODULES_DEFINES: _LIBCUDACXX_HAS_NO_THREADS
-#ifndef _LIBCUDACXX_HAS_NO_THREADS
-#define _LIBCUDACXX_HAS_NO_THREADS
+// MODULES_DEFINES: _LIBCUDAFORDALICXX_HAS_NO_THREADS
+#ifndef _LIBCUDAFORDALICXX_HAS_NO_THREADS
+#define _LIBCUDAFORDALICXX_HAS_NO_THREADS
 #endif
 
 #include <atomic>

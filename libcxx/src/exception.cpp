@@ -16,10 +16,10 @@
   #define HAVE_DEPENDENT_EH_ABI 1
 #endif
 
-#if defined(_LIBCUDACXX_ABI_MICROSOFT)
+#if defined(_LIBCUDAFORDALICXX_ABI_MICROSOFT)
 #include "support/runtime/exception_msvc.ipp"
 #include "support/runtime/exception_pointer_msvc.ipp"
-#elif defined(_LIBCUDACXXABI_VERSION)
+#elif defined(_LIBCUDAFORDALICXXABI_VERSION)
 #include "support/runtime/exception_libcxxabi.ipp"
 #include "support/runtime/exception_pointer_cxxabi.ipp"
 #elif defined(LIBCXXRT)

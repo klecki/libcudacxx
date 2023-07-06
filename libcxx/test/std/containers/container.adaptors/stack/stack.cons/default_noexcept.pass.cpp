@@ -24,7 +24,7 @@
 
 int main(int, char**)
 {
-#if defined(_LIBCUDACXX_VERSION)
+#if defined(_LIBCUDAFORDALICXX_VERSION)
     {
         typedef std::stack<MoveOnly> C;
         static_assert(std::is_nothrow_default_constructible<C>::value, "");

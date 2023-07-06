@@ -37,7 +37,7 @@
 
 
 bool is_valid_random_device(const std::string &token) {
-#if defined(_LIBCUDACXX_USING_DEV_RANDOM)
+#if defined(_LIBCUDAFORDALICXX_USING_DEV_RANDOM)
   // Not an exhaustive list: they're the only tokens that are tested below.
   return token == "/dev/urandom" || token == "/dev/random";
 #else

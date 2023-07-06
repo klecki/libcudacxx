@@ -14,8 +14,8 @@
 
 #include "test_macros.h"
 
-#ifndef _LIBCUDACXX_VERSION
-#error header must provide _LIBCUDACXX_VERSION
+#ifndef _LIBCUDAFORDALICXX_VERSION
+#error header must provide _LIBCUDAFORDALICXX_VERSION
 #endif
 
 int main(int, char**)

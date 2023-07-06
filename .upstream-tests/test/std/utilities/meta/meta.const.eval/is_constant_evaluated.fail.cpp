@@ -19,7 +19,7 @@
 
 int main(int, char**)
 {
-#ifndef _LIBCUDACXX_IS_CONSTANT_EVALUATED
+#ifndef _LIBCUDAFORDALICXX_IS_CONSTANT_EVALUATED
   // expected-error@+1 {{no member named 'is_constant_evaluated' in namespace 'std'}}
   bool b = cuda_for_dali::std::is_constant_evaluated();
 #else

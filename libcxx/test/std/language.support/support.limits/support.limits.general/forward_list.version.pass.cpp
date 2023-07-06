@@ -122,14 +122,14 @@
 #   error "__cpp_lib_incomplete_container_elements should have the value 201505L in c++2a"
 # endif
 
-# if !defined(_LIBCUDACXX_VERSION)
+# if !defined(_LIBCUDAFORDALICXX_VERSION)
 #   ifndef __cpp_lib_list_remove_return_type
 #     error "__cpp_lib_list_remove_return_type should be defined in c++2a"
 #   endif
 #   if __cpp_lib_list_remove_return_type != 201806L
 #     error "__cpp_lib_list_remove_return_type should have the value 201806L in c++2a"
 #   endif
-# else // _LIBCUDACXX_VERSION
+# else // _LIBCUDAFORDALICXX_VERSION
 #   ifdef __cpp_lib_list_remove_return_type
 #     error "__cpp_lib_list_remove_return_type should not be defined because it is unimplemented in libc++!"
 #   endif

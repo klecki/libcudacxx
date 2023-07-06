@@ -10,7 +10,7 @@
 #include "algorithm"
 #include "iterator"
 
-_LIBCUDACXX_BEGIN_NAMESPACE_STD
+_LIBCUDAFORDALICXX_BEGIN_NAMESPACE_STD
 
 static
 const char*
@@ -311,4 +311,4 @@ __match_any_but_newline<wchar_t>::__exec(__state& __s) const
     }
 }
 
-_LIBCUDACXX_END_NAMESPACE_STD
+_LIBCUDAFORDALICXX_END_NAMESPACE_STD

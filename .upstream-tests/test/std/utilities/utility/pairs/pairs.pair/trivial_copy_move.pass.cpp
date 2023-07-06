@@ -30,14 +30,14 @@ int main(int, char**)
     typedef cuda_for_dali::std::pair<int, short> P;
     {
         static_assert(cuda_for_dali::std::is_copy_constructible<P>::value, "");
-#if !defined(_LIBCUDACXX_DEPRECATED_ABI_DISABLE_PAIR_TRIVIAL_COPY_CTOR)
+#if !defined(_LIBCUDAFORDALICXX_DEPRECATED_ABI_DISABLE_PAIR_TRIVIAL_COPY_CTOR)
         static_assert(cuda_for_dali::std::is_trivially_copy_constructible<P>::value, "");
 #endif
     }
 #if TEST_STD_VER >= 11
     {
         static_assert(cuda_for_dali::std::is_move_constructible<P>::value, "");
-#if !defined(_LIBCUDACXX_DEPRECATED_ABI_DISABLE_PAIR_TRIVIAL_COPY_CTOR)
+#if !defined(_LIBCUDAFORDALICXX_DEPRECATED_ABI_DISABLE_PAIR_TRIVIAL_COPY_CTOR)
         static_assert(cuda_for_dali::std::is_trivially_move_constructible<P>::value, "");
 #endif
     }
@@ -46,7 +46,7 @@ int main(int, char**)
         static_assert(!cuda_for_dali::std::is_copy_constructible<P1>::value, "");
         static_assert(!cuda_for_dali::std::is_trivially_copy_constructible<P1>::value, "");
         static_assert(cuda_for_dali::std::is_move_constructible<P1>::value, "");
-#if !defined(_LIBCUDACXX_DEPRECATED_ABI_DISABLE_PAIR_TRIVIAL_COPY_CTOR)
+#if !defined(_LIBCUDAFORDALICXX_DEPRECATED_ABI_DISABLE_PAIR_TRIVIAL_COPY_CTOR)
         static_assert(cuda_for_dali::std::is_trivially_move_constructible<P1>::value, "");
 #endif
     }

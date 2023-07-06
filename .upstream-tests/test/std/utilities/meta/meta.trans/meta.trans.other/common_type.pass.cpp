@@ -24,7 +24,7 @@ struct X { __host__ __device__ explicit X(T const&){} };
 template <class T>
 struct S { __host__ __device__ explicit S(T const&){} };
 
-_LIBCUDACXX_BEGIN_NAMESPACE_STD
+_LIBCUDAFORDALICXX_BEGIN_NAMESPACE_STD
 
     template <typename T>
     struct common_type<T, ::S<T> >
@@ -47,7 +47,7 @@ _LIBCUDACXX_BEGIN_NAMESPACE_STD
     template <> struct common_type<long, ::S<long> > {};
     template <> struct common_type< ::X<double>, ::X<double> > {};
 
-_LIBCUDACXX_END_NAMESPACE_STD
+_LIBCUDAFORDALICXX_END_NAMESPACE_STD
 
 template <class> struct VoidT { typedef void type; };
 

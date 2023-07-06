@@ -10,7 +10,7 @@
 
 // not1
 
-#define _LIBCUDACXX_DISABLE_DEPRECATION_WARNINGS
+#define _LIBCUDAFORDALICXX_DISABLE_DEPRECATION_WARNINGS
 
 #include <cuda_for_dali/std/functional>
 #include <cuda_for_dali/std/cassert>

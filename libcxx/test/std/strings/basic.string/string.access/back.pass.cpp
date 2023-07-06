@@ -11,8 +11,8 @@
 // const charT& back() const;
 //       charT& back();
 
-#ifdef _LIBCUDACXX_DEBUG
-#define _LIBCUDACXX_ASSERT(x, m) ((x) ? (void)0 : std::exit(0))
+#ifdef _LIBCUDAFORDALICXX_DEBUG
+#define _LIBCUDAFORDALICXX_ASSERT(x, m) ((x) ? (void)0 : std::exit(0))
 #endif
 
 #include <string>
@@ -50,7 +50,7 @@ int main(int, char**)
     test(S("1234567890123456789012345678901234567890"));
     }
 #endif
-#ifdef _LIBCUDACXX_DEBUG
+#ifdef _LIBCUDAFORDALICXX_DEBUG
     {
         std::string s;
         (void) s.back();

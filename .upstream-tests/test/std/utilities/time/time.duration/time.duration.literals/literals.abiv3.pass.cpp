@@ -12,7 +12,7 @@
 #pragma nv_diag_suppress declared_but_not_referenced
 #pragma nv_diag_suppress set_but_not_used
 
-#define _LIBCUDACXX_CUDA_ABI_VERSION 3
+#define _LIBCUDAFORDALICXX_CUDA_ABI_VERSION 3
 
 #include <cuda_for_dali/std/chrono>
 #include <cuda_for_dali/std/type_traits>

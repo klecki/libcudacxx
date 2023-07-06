@@ -6,12 +6,12 @@
 // Source Licenses. See LICENSE.TXT for details.
 //
 //===----------------------------------------------------------------------===//
-// UNSUPPORTED: c++98, c++03, c++11, c++14, c++17 
+// UNSUPPORTED: c++98, c++03, c++11, c++14, c++17
 
 // template <class T>
 //   constexpr bool ispow2(T x) noexcept;
 
-// Remarks: This function shall not participate in overload resolution unless 
+// Remarks: This function shall not participate in overload resolution unless
 //	T is an unsigned integer type
 
 #include <bit>
@@ -46,7 +46,7 @@ void runtime_test()
 {
 	ASSERT_SAME_TYPE(bool, decltype(std::ispow2(T(0))));
 	ASSERT_NOEXCEPT(                std::ispow2(T(0)));
-	
+
 	assert(!std::ispow2(T(121)));
 	assert(!std::ispow2(T(122)));
 	assert(!std::ispow2(T(123)));
@@ -61,11 +61,11 @@ void runtime_test()
 
 int main()
 {
-	
+
     {
     auto lambda = [](auto x) -> decltype(std::ispow2(x)) {};
     using L = decltype(lambda);
-    
+
     static_assert( std::is_invocable_v<L, unsigned char>, "");
     static_assert( std::is_invocable_v<L, unsigned int>, "");
     static_assert( std::is_invocable_v<L, unsigned long>, "");
@@ -97,11 +97,11 @@ int main()
     static_assert(!std::is_invocable_v<L, char16_t>, "");
     static_assert(!std::is_invocable_v<L, char32_t>, "");
 
-#ifndef _LIBCUDACXX_HAS_NO_INT128
+#ifndef _LIBCUDAFORDALICXX_HAS_NO_INT128
     static_assert( std::is_invocable_v<L, __uint128_t>, "");
     static_assert(!std::is_invocable_v<L, __int128_t>, "");
 #endif
- 
+
     static_assert(!std::is_invocable_v<L, A>, "");
     static_assert(!std::is_invocable_v<L, E1>, "");
     static_assert(!std::is_invocable_v<L, E2>, "");
@@ -121,7 +121,7 @@ int main()
 	static_assert(constexpr_test<uintmax_t>(), "");
 	static_assert(constexpr_test<uintptr_t>(), "");
 
-#ifndef _LIBCUDACXX_HAS_NO_INT128
+#ifndef _LIBCUDAFORDALICXX_HAS_NO_INT128
 	static_assert(constexpr_test<__uint128_t>(),        "");
 #endif
 
@@ -139,7 +139,7 @@ int main()
 	runtime_test<uintmax_t>();
 	runtime_test<uintptr_t>();
 
-#ifndef _LIBCUDACXX_HAS_NO_INT128
+#ifndef _LIBCUDAFORDALICXX_HAS_NO_INT128
 	runtime_test<__uint128_t>();
 
 	{
@@ -158,5 +158,5 @@ int main()
 	assert(!std::ispow2(val+1));
 	}
 #endif
-	
+
 }

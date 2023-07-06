@@ -14,8 +14,8 @@
 
 // size_type bucket(const key_type& __k) const;
 
-#ifdef _LIBCUDACXX_DEBUG
-#define _LIBCUDACXX_ASSERT(x, m) ((x) ? (void)0 : std::exit(0))
+#ifdef _LIBCUDAFORDALICXX_DEBUG
+#define _LIBCUDAFORDALICXX_ASSERT(x, m) ((x) ? (void)0 : std::exit(0))
 #endif
 
 #include <unordered_map>
@@ -66,7 +66,7 @@ int main(int, char**)
             LIBCPP_ASSERT(c.bucket(i) == i % bc);
     }
 #endif
-#if _LIBCUDACXX_DEBUG_LEVEL >= 1
+#if _LIBCUDAFORDALICXX_DEBUG_LEVEL >= 1
     {
         typedef std::unordered_multimap<int, std::string> C;
         C c;

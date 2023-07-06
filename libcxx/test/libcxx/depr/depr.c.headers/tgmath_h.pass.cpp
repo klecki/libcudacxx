@@ -10,8 +10,8 @@
 
 #include <tgmath.h>
 
-#ifndef _LIBCUDACXX_VERSION
-#error _LIBCUDACXX_VERSION not defined
+#ifndef _LIBCUDAFORDALICXX_VERSION
+#error _LIBCUDAFORDALICXX_VERSION not defined
 #endif
 
 int main(int, char**)

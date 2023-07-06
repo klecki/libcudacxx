@@ -36,10 +36,10 @@ int main(int, char**)
 #if TEST_STD_VER > 17 && defined(__cpp_char8_t)
     test<char8_t, 8>();
 #endif
-#ifndef _LIBCUDACXX_HAS_NO_UNICODE_CHARS
+#ifndef _LIBCUDAFORDALICXX_HAS_NO_UNICODE_CHARS
     test<char16_t, 16>();
     test<char32_t, 32>();
-#endif  // _LIBCUDACXX_HAS_NO_UNICODE_CHARS
+#endif  // _LIBCUDAFORDALICXX_HAS_NO_UNICODE_CHARS
     test<short, 15>();
     test<unsigned short, 16>();
     test<int, 31>();
@@ -48,13 +48,13 @@ int main(int, char**)
     test<unsigned long, sizeof(long) == 4 ? 32 : 64>();
     test<long long, 63>();
     test<unsigned long long, 64>();
-#ifndef _LIBCUDACXX_HAS_NO_INT128
+#ifndef _LIBCUDAFORDALICXX_HAS_NO_INT128
     test<__int128_t, 127>();
     test<__uint128_t, 128>();
 #endif
     test<float, FLT_MANT_DIG>();
     test<double, DBL_MANT_DIG>();
-#ifndef _LIBCUDACXX_HAS_NO_LONG_DOUBLE
+#ifndef _LIBCUDAFORDALICXX_HAS_NO_LONG_DOUBLE
     test<long double, LDBL_MANT_DIG>();
 #endif
 

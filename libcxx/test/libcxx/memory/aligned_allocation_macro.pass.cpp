@@ -25,10 +25,10 @@
 #include "test_macros.h"
 
 
-#ifdef _LIBCUDACXX_HAS_NO_ALIGNED_ALLOCATION
+#ifdef _LIBCUDAFORDALICXX_HAS_NO_ALIGNED_ALLOCATION
 #   error "libc++ should have aligned allocation in C++17 and up when targeting a platform that supports it"
 #endif
 
-int main(int, char**) { 
+int main(int, char**) {
   return 0;
 }

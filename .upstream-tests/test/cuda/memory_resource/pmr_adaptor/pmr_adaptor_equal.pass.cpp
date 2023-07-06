@@ -111,7 +111,7 @@ void test_pmr_adaptor_equality(){
 int main(int argc, char **argv) {
 
 #ifndef __CUDA_ARCH__
-#if defined(_LIBCUDACXX_STD_PMR_NS)
+#if defined(_LIBCUDAFORDALICXX_STD_PMR_NS)
   test_pmr_adaptor_equality<cuda_for_dali::memory_kind::host>();
 #endif
 #endif

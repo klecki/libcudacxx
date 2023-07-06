@@ -41,12 +41,12 @@ int main(int, char**)
         typedef std::vector<MoveOnly, other_allocator<MoveOnly>> C;
         static_assert(std::is_nothrow_destructible<C>::value, "");
     }
-#if defined(_LIBCUDACXX_VERSION)
+#if defined(_LIBCUDAFORDALICXX_VERSION)
     {
         typedef std::vector<MoveOnly, some_alloc<MoveOnly>> C;
         static_assert(!std::is_nothrow_destructible<C>::value, "");
     }
-#endif // _LIBCUDACXX_VERSION
+#endif // _LIBCUDAFORDALICXX_VERSION
 
   return 0;
 }

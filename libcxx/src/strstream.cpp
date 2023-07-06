@@ -14,7 +14,7 @@
 #include "__debug"
 #include "__undef_macros"
 
-_LIBCUDACXX_BEGIN_NAMESPACE_STD
+_LIBCUDAFORDALICXX_BEGIN_NAMESPACE_STD
 
 strstreambuf::strstreambuf(streamsize __alsize)
     : __strmode_(__dynamic),
@@ -170,7 +170,7 @@ strstreambuf::overflow(int_type __c)
         if (buf == nullptr)
             return int_type(EOF);
         if (old_size != 0) {
-            _LIBCUDACXX_ASSERT(eback(), "overflow copying from NULL");
+            _LIBCUDAFORDALICXX_ASSERT(eback(), "overflow copying from NULL");
             memcpy(buf, eback(), static_cast<size_t>(old_size));
         }
         ptrdiff_t ninp = gptr()  - eback();
@@ -268,7 +268,7 @@ strstreambuf::seekoff(off_type __off, ios_base::seekdir __way, ios_base::openmod
             newoff = seekhigh - eback();
             break;
         default:
-            _LIBCUDACXX_UNREACHABLE();
+            _LIBCUDAFORDALICXX_UNREACHABLE();
         }
         newoff += __off;
         if (0 <= newoff && newoff <= seekhigh - eback())
@@ -332,4 +332,4 @@ strstream::~strstream()
 {
 }
 
-_LIBCUDACXX_END_NAMESPACE_STD
+_LIBCUDAFORDALICXX_END_NAMESPACE_STD

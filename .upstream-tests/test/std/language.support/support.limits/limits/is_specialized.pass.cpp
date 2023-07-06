@@ -47,10 +47,10 @@ int main(int, char**)
     test<bool>();
     test<char>();
     test<wchar_t>();
-#ifndef _LIBCUDACXX_HAS_NO_UNICODE_CHARS
+#ifndef _LIBCUDAFORDALICXX_HAS_NO_UNICODE_CHARS
     test<char16_t>();
     test<char32_t>();
-#endif  // _LIBCUDACXX_HAS_NO_UNICODE_CHARS
+#endif  // _LIBCUDAFORDALICXX_HAS_NO_UNICODE_CHARS
     test<signed char>();
     test<unsigned char>();
     test<signed short>();
@@ -61,13 +61,13 @@ int main(int, char**)
     test<unsigned long>();
     test<signed long long>();
     test<unsigned long long>();
-#ifndef _LIBCUDACXX_HAS_NO_INT128
+#ifndef _LIBCUDAFORDALICXX_HAS_NO_INT128
     test<__int128_t>();
     test<__uint128_t>();
 #endif
     test<float>();
     test<double>();
-#ifndef _LIBCUDACXX_HAS_NO_LONG_DOUBLE
+#ifndef _LIBCUDAFORDALICXX_HAS_NO_LONG_DOUBLE
     test<long double>();
 #endif
     static_assert(!cuda_for_dali::std::numeric_limits<cuda_for_dali::std::complex<double> >::is_specialized,

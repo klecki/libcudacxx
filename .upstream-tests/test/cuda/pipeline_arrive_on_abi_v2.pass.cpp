@@ -9,7 +9,7 @@
 
 // UNSUPPORTED: pre-sm-70
 
-#define _LIBCUDACXX_CUDA_ABI_VERSION 2
+#define _LIBCUDAFORDALICXX_CUDA_ABI_VERSION 2
 
 // TODO: Remove pointless comparison suppression when compiler fixes short-circuiting
 #pragma nv_diag_suppress 186

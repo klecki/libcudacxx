@@ -8,7 +8,7 @@
 
 #include "typeinfo"
 
-#if defined(_LIBCUDACXX_ABI_MICROSOFT) && !defined(_LIBCUDACXX_ABI_VCRUNTIME)
+#if defined(_LIBCUDAFORDALICXX_ABI_MICROSOFT) && !defined(_LIBCUDAFORDALICXX_ABI_VCRUNTIME)
 #include <string.h>
 
 int std::type_info::__compare(const type_info &__rhs) const _NOEXCEPT {
@@ -43,14 +43,14 @@ size_t std::type_info::hash_code() const _NOEXCEPT {
 
   return value;
 }
-#endif // _LIBCUDACXX_ABI_MICROSOFT
+#endif // _LIBCUDAFORDALICXX_ABI_MICROSOFT
 
-// FIXME: Remove the _LIBCUDACXX_BUILDING_HAS_NO_ABI_LIBRARY configuration.
+// FIXME: Remove the _LIBCUDAFORDALICXX_BUILDING_HAS_NO_ABI_LIBRARY configuration.
 #if (!defined(LIBCXX_BUILDING_LIBCXXABI) &&               \
      !defined(LIBCXXRT) &&                                \
      !defined(__GLIBCXX__) &&                             \
-     !defined(_LIBCUDACXX_ABI_VCRUNTIME)) ||                  \
-    defined(_LIBCUDACXX_BUILDING_HAS_NO_ABI_LIBRARY)
+     !defined(_LIBCUDAFORDALICXX_ABI_VCRUNTIME)) ||                  \
+    defined(_LIBCUDAFORDALICXX_BUILDING_HAS_NO_ABI_LIBRARY)
 std::type_info::~type_info()
 {
 }

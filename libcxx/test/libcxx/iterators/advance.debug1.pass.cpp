@@ -7,7 +7,7 @@
 //===----------------------------------------------------------------------===//
 
 // Can't test the system lib because this test enables debug mode
-// MODULES_DEFINES: _LIBCUDACXX_DEBUG=1
+// MODULES_DEFINES: _LIBCUDAFORDALICXX_DEBUG=1
 // UNSUPPORTED: c++98, c++03
 // UNSUPPORTED: windows
 // UNSUPPORTED: with_system_cxx_lib
@@ -16,7 +16,7 @@
 
 // Call advance(non-bidi iterator, -1)
 
-#define _LIBCUDACXX_DEBUG 0
+#define _LIBCUDAFORDALICXX_DEBUG 0
 
 #include <iterator>
 #include "test_macros.h"
@@ -27,7 +27,7 @@
 int main(int, char**)
 {
     int a[] = {1, 2, 3};
-    
+
     bidirectional_iterator<int *> bidi(a+1);
 	std::advance(bidi,  1);  // should work fine
 	std::advance(bidi,  0);  // should work fine

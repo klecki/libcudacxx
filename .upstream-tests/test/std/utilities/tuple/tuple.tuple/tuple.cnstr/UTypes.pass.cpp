@@ -85,7 +85,7 @@ __host__ __device__ void test_default_constructible_extension_sfinae()
         >::value, "");
     }
     // testing extensions
-#ifdef _LIBCUDACXX_VERSION
+#ifdef _LIBCUDAFORDALICXX_VERSION
     {
         typedef cuda_for_dali::std::tuple<MoveOnly, int> Tuple;
         typedef cuda_for_dali::std::tuple<MoveOnly, Tuple, MoveOnly, MoveOnly> NestedTuple;
@@ -123,7 +123,7 @@ int main(int, char**)
         assert(cuda_for_dali::std::get<2>(t) == 2);
     }
     // extensions, MSVC issues
-#if defined(_LIBCUDACXX_VERSION) && !defined(_MSC_VER)
+#if defined(_LIBCUDAFORDALICXX_VERSION) && !defined(_MSC_VER)
     {
         using E = MoveOnly;
         using Tup = cuda_for_dali::std::tuple<E, E, E>;

@@ -17,9 +17,9 @@ int main(int argc, char** argv){
   cudaStream_t s;
   cudaStreamCreate(&s);
   cuda_for_dali::stream_view sv{s};
-  _LIBCUDACXX_TEST_TRY {
+  _LIBCUDAFORDALICXX_TEST_TRY {
     assert(sv.ready());
-  } _LIBCUDACXX_TEST_CATCH(...) {
+  } _LIBCUDAFORDALICXX_TEST_CATCH(...) {
     assert(false && "Should not have thrown");
   }
   cudaStreamDestroy(s);

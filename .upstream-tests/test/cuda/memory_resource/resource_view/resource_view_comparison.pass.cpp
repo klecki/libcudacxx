@@ -36,7 +36,7 @@ private:
   void do_deallocate_async(void *, size_t, size_t, cuda_for_dali::stream_view) override {
   }
 
-#ifdef _LIBCUDACXX_EXT_RTTI_ENABLED
+#ifdef _LIBCUDAFORDALICXX_EXT_RTTI_ENABLED
   bool do_is_equal(const cuda_for_dali::memory_resource<cuda_for_dali::memory_kind::managed> &other) const noexcept override {
     fprintf(stderr, "Comparison start: %p %p\n", this, &other);
     if (auto *other_ptr = dynamic_cast<const resource *>(&other)) {
@@ -55,7 +55,7 @@ struct tag2;
 
 
 int main(int argc, char **argv) {
-#if !defined(__CUDA_ARCH__) && defined(_LIBCUDACXX_EXT_RTTI_ENABLED)
+#if !defined(__CUDA_ARCH__) && defined(_LIBCUDAFORDALICXX_EXT_RTTI_ENABLED)
   resource<tag1> r1, r2, r3;
   resource<tag2> r4;
   cuda_for_dali::basic_resource_view<resource<tag1>*, cuda_for_dali::is_kind<cuda_for_dali::memory_kind::managed>> v1_null;

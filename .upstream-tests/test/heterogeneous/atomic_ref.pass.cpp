@@ -176,7 +176,7 @@ using bitwise_atomic_testers = extend_tester_list<
 void kernel_invoker()
 {
   // todo
-  #ifdef _LIBCUDACXX_ATOMIC_REF_SUPPORTS_SMALL_INTEGRAL
+  #ifdef _LIBCUDAFORDALICXX_ATOMIC_REF_SUPPORTS_SMALL_INTEGRAL
     validate_not_movable<signed char, arithmetic_atomic_testers>();
     validate_not_movable<signed short, arithmetic_atomic_testers>();
   #endif
@@ -184,7 +184,7 @@ void kernel_invoker()
     validate_not_movable<signed long, arithmetic_atomic_testers>();
     validate_not_movable<signed long long, arithmetic_atomic_testers>();
 
-  #ifdef _LIBCUDACXX_ATOMIC_REF_SUPPORTS_SMALL_INTEGRAL
+  #ifdef _LIBCUDAFORDALICXX_ATOMIC_REF_SUPPORTS_SMALL_INTEGRAL
     validate_not_movable<unsigned char, bitwise_atomic_testers>();
     validate_not_movable<unsigned short, bitwise_atomic_testers>();
   #endif
@@ -192,7 +192,7 @@ void kernel_invoker()
     validate_not_movable<unsigned long, bitwise_atomic_testers>();
     validate_not_movable<unsigned long long, bitwise_atomic_testers>();
 
-  #ifdef _LIBCUDACXX_ATOMIC_REF_SUPPORTS_SMALL_INTEGRAL
+  #ifdef _LIBCUDAFORDALICXX_ATOMIC_REF_SUPPORTS_SMALL_INTEGRAL
     validate_not_movable<signed char, arithmetic_atomic_testers>();
     validate_not_movable<signed short, arithmetic_atomic_testers>();
   #endif
@@ -200,7 +200,7 @@ void kernel_invoker()
     validate_not_movable<signed long, arithmetic_atomic_testers>();
     validate_not_movable<signed long long, arithmetic_atomic_testers>();
 
-  #ifdef _LIBCUDACXX_ATOMIC_REF_SUPPORTS_SMALL_INTEGRAL
+  #ifdef _LIBCUDAFORDALICXX_ATOMIC_REF_SUPPORTS_SMALL_INTEGRAL
     validate_not_movable<unsigned char, bitwise_atomic_testers>();
     validate_not_movable<unsigned short, bitwise_atomic_testers>();
   #endif

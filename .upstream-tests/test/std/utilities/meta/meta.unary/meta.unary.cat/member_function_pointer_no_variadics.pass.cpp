@@ -10,7 +10,7 @@
 
 // member_function_pointer
 
-#define _LIBCUDACXX_HAS_NO_VARIADICS
+#define _LIBCUDAFORDALICXX_HAS_NO_VARIADICS
 #include <cuda_for_dali/std/type_traits>
 
 #include "test_macros.h"

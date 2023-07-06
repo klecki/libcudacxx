@@ -57,10 +57,10 @@ int main(int, char**)
     static_assert((cuda_for_dali::std::is_same<cuda_for_dali::std::atomic<long long>, cuda_for_dali::std::atomic_llong>::value), "");
     static_assert((cuda_for_dali::std::is_same<cuda_for_dali::std::atomic<unsigned long long>, cuda_for_dali::std::atomic_ullong>::value), "");
     static_assert((cuda_for_dali::std::is_same<cuda_for_dali::std::atomic<wchar_t>, cuda_for_dali::std::atomic_wchar_t>::value), "");
-#ifndef _LIBCUDACXX_HAS_NO_UNICODE_CHARS
+#ifndef _LIBCUDAFORDALICXX_HAS_NO_UNICODE_CHARS
     static_assert((cuda_for_dali::std::is_same<cuda_for_dali::std::atomic<char16_t>, cuda_for_dali::std::atomic_char16_t>::value), "");
     static_assert((cuda_for_dali::std::is_same<cuda_for_dali::std::atomic<char32_t>, cuda_for_dali::std::atomic_char32_t>::value), "");
-#endif  // _LIBCUDACXX_HAS_NO_UNICODE_CHARS
+#endif  // _LIBCUDAFORDALICXX_HAS_NO_UNICODE_CHARS
 
 //  Added by LWG 2441
     static_assert((cuda_for_dali::std::is_same<cuda_for_dali::std::atomic<intptr_t>,  cuda_for_dali::std::atomic_intptr_t>::value), "");

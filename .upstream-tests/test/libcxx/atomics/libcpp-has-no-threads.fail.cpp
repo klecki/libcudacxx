@@ -8,7 +8,7 @@
 
 // <cuda/std/atomic>
 
-// Test that including <cuda/std/atomic> fails to compile when _LIBCUDACXX_HAS_NO_THREADS
+// Test that including <cuda/std/atomic> fails to compile when _LIBCUDAFORDALICXX_HAS_NO_THREADS
 // is defined.
 
 // .fail. expects compilation to fail, but this would only fail at runtime with NVRTC
@@ -17,9 +17,9 @@
 // nvcc doesn't propagate pgi's or icc's preprocessor failures
 // UNSUPPORTED: pgi, icc
 
-// MODULES_DEFINES: _LIBCUDACXX_HAS_NO_THREADS
-#ifndef _LIBCUDACXX_HAS_NO_THREADS
-#define _LIBCUDACXX_HAS_NO_THREADS
+// MODULES_DEFINES: _LIBCUDAFORDALICXX_HAS_NO_THREADS
+#ifndef _LIBCUDAFORDALICXX_HAS_NO_THREADS
+#define _LIBCUDAFORDALICXX_HAS_NO_THREADS
 #endif
 
 #include <cuda_for_dali/std/atomic>

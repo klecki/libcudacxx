@@ -35,10 +35,10 @@ int main(int, char**)
 #if TEST_STD_VER > 17 && defined(__cpp_char8_t)
     test<char8_t, cuda_for_dali::std::denorm_absent>();
 #endif
-#ifndef _LIBCUDACXX_HAS_NO_UNICODE_CHARS
+#ifndef _LIBCUDAFORDALICXX_HAS_NO_UNICODE_CHARS
     test<char16_t, cuda_for_dali::std::denorm_absent>();
     test<char32_t, cuda_for_dali::std::denorm_absent>();
-#endif  // _LIBCUDACXX_HAS_NO_UNICODE_CHARS
+#endif  // _LIBCUDAFORDALICXX_HAS_NO_UNICODE_CHARS
     test<short, cuda_for_dali::std::denorm_absent>();
     test<unsigned short, cuda_for_dali::std::denorm_absent>();
     test<int, cuda_for_dali::std::denorm_absent>();
@@ -47,13 +47,13 @@ int main(int, char**)
     test<unsigned long, cuda_for_dali::std::denorm_absent>();
     test<long long, cuda_for_dali::std::denorm_absent>();
     test<unsigned long long, cuda_for_dali::std::denorm_absent>();
-#ifndef _LIBCUDACXX_HAS_NO_INT128
+#ifndef _LIBCUDAFORDALICXX_HAS_NO_INT128
     test<__int128_t, cuda_for_dali::std::denorm_absent>();
     test<__uint128_t, cuda_for_dali::std::denorm_absent>();
 #endif
     test<float, cuda_for_dali::std::denorm_present>();
     test<double, cuda_for_dali::std::denorm_present>();
-#ifndef _LIBCUDACXX_HAS_NO_LONG_DOUBLE
+#ifndef _LIBCUDAFORDALICXX_HAS_NO_LONG_DOUBLE
     test<long double, cuda_for_dali::std::denorm_present>();
 #endif
 

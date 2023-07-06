@@ -170,10 +170,10 @@ int main(int, char**)
     test<std::atomic_ref, unsigned long>();
     test<std::atomic_ref, long long>();
     test<std::atomic_ref, unsigned long long>();
-#ifndef _LIBCUDACXX_HAS_NO_UNICODE_CHARS
+#ifndef _LIBCUDAFORDALICXX_HAS_NO_UNICODE_CHARS
     test<std::atomic_ref, char16_t>();
     test<std::atomic_ref, char32_t>();
-#endif  // _LIBCUDACXX_HAS_NO_UNICODE_CHARS
+#endif  // _LIBCUDAFORDALICXX_HAS_NO_UNICODE_CHARS
     test<std::atomic_ref, wchar_t>();
 
     test<std::atomic_ref,    int8_t>();

@@ -144,7 +144,7 @@ int main(int, char**)
     // extensions
     // cuda_for_dali::std::string not supported
     /*
-#ifdef _LIBCUDACXX_VERSION
+#ifdef _LIBCUDAFORDALICXX_VERSION
     {
         cuda_for_dali::std::tuple<int, char*, cuda_for_dali::std::string> t(2);
         assert(cuda_for_dali::std::get<0>(t) == 2);

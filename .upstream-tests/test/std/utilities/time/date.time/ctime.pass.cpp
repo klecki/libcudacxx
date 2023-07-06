@@ -58,7 +58,7 @@ int main(int, char**)
 #if TEST_STD_VER > 14 && defined(TEST_HAS_TIMESPEC_GET)
     static_assert((cuda_for_dali::std::is_same<decltype(cuda_for_dali::std::timespec_get(&tmspec, 0)), int>::value), "");
 #endif
-#ifndef _LIBCUDACXX_HAS_NO_THREAD_UNSAFE_C_FUNCTIONS
+#ifndef _LIBCUDAFORDALICXX_HAS_NO_THREAD_UNSAFE_C_FUNCTIONS
     static_assert((cuda_for_dali::std::is_same<decltype(cuda_for_dali::std::asctime(&tm)), char*>::value), "");
     static_assert((cuda_for_dali::std::is_same<decltype(cuda_for_dali::std::ctime(&t)), char*>::value), "");
     static_assert((cuda_for_dali::std::is_same<decltype(cuda_for_dali::std::gmtime(&t)), cuda_for_dali::std::tm*>::value), "");

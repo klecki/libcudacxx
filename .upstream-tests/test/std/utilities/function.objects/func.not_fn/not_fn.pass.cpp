@@ -361,11 +361,11 @@ void constructor_tests()
         assert(ret() == false);
         auto ret2 = cuda_for_dali::std::not_fn(value2);
         assert(ret2() == true);
-#if defined(_LIBCUDACXX_VERSION)
+#if defined(_LIBCUDAFORDALICXX_VERSION)
         ret = ret2;
         assert(ret() == true);
         assert(ret2() == true);
-#endif // _LIBCUDACXX_VERSION
+#endif // _LIBCUDAFORDALICXX_VERSION
     }
     {
         using T = MoveAssignableWrapper;
@@ -380,10 +380,10 @@ void constructor_tests()
         assert(ret() == false);
         auto ret2 = cuda_for_dali::std::not_fn(cuda_for_dali::std::move(value2));
         assert(ret2() == true);
-#if defined(_LIBCUDACXX_VERSION)
+#if defined(_LIBCUDAFORDALICXX_VERSION)
         ret = cuda_for_dali::std::move(ret2);
         assert(ret() == true);
-#endif // _LIBCUDACXX_VERSION
+#endif // _LIBCUDAFORDALICXX_VERSION
     }
 }
 

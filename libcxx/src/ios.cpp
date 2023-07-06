@@ -23,23 +23,23 @@
 #include "string"
 #include "__undef_macros"
 
-_LIBCUDACXX_BEGIN_NAMESPACE_STD
+_LIBCUDAFORDALICXX_BEGIN_NAMESPACE_STD
 
-template class _LIBCUDACXX_CLASS_TEMPLATE_INSTANTIATION_VIS basic_ios<char>;
-template class _LIBCUDACXX_CLASS_TEMPLATE_INSTANTIATION_VIS basic_ios<wchar_t>;
+template class _LIBCUDAFORDALICXX_CLASS_TEMPLATE_INSTANTIATION_VIS basic_ios<char>;
+template class _LIBCUDAFORDALICXX_CLASS_TEMPLATE_INSTANTIATION_VIS basic_ios<wchar_t>;
 
-template class _LIBCUDACXX_CLASS_TEMPLATE_INSTANTIATION_VIS basic_streambuf<char>;
-template class _LIBCUDACXX_CLASS_TEMPLATE_INSTANTIATION_VIS basic_streambuf<wchar_t>;
+template class _LIBCUDAFORDALICXX_CLASS_TEMPLATE_INSTANTIATION_VIS basic_streambuf<char>;
+template class _LIBCUDAFORDALICXX_CLASS_TEMPLATE_INSTANTIATION_VIS basic_streambuf<wchar_t>;
 
-template class _LIBCUDACXX_CLASS_TEMPLATE_INSTANTIATION_VIS basic_istream<char>;
-template class _LIBCUDACXX_CLASS_TEMPLATE_INSTANTIATION_VIS basic_istream<wchar_t>;
+template class _LIBCUDAFORDALICXX_CLASS_TEMPLATE_INSTANTIATION_VIS basic_istream<char>;
+template class _LIBCUDAFORDALICXX_CLASS_TEMPLATE_INSTANTIATION_VIS basic_istream<wchar_t>;
 
-template class _LIBCUDACXX_CLASS_TEMPLATE_INSTANTIATION_VIS basic_ostream<char>;
-template class _LIBCUDACXX_CLASS_TEMPLATE_INSTANTIATION_VIS basic_ostream<wchar_t>;
+template class _LIBCUDAFORDALICXX_CLASS_TEMPLATE_INSTANTIATION_VIS basic_ostream<char>;
+template class _LIBCUDAFORDALICXX_CLASS_TEMPLATE_INSTANTIATION_VIS basic_ostream<wchar_t>;
 
-template class _LIBCUDACXX_CLASS_TEMPLATE_INSTANTIATION_VIS basic_iostream<char>;
+template class _LIBCUDAFORDALICXX_CLASS_TEMPLATE_INSTANTIATION_VIS basic_iostream<char>;
 
-class _LIBCUDACXX_HIDDEN __iostream_category
+class _LIBCUDAFORDALICXX_HIDDEN __iostream_category
     : public __do_message
 {
 public:
@@ -57,9 +57,9 @@ string
 __iostream_category::message(int ev) const
 {
     if (ev != static_cast<int>(io_errc::stream)
-#ifdef _LIBCUDACXX_ELAST
-        && ev <= _LIBCUDACXX_ELAST
-#endif  // _LIBCUDACXX_ELAST
+#ifdef _LIBCUDAFORDALICXX_ELAST
+        && ev <= _LIBCUDAFORDALICXX_ELAST
+#endif  // _LIBCUDAFORDALICXX_ELAST
         )
         return __do_message::message(ev);
     return string("unspecified iostream_category error");
@@ -152,7 +152,7 @@ ios_base::getloc() const
 }
 
 // xalloc
-#if defined(_LIBCUDACXX_HAS_C_ATOMIC_IMP) && !defined(_LIBCUDACXX_HAS_NO_THREADS)
+#if defined(_LIBCUDAFORDALICXX_HAS_C_ATOMIC_IMP) && !defined(_LIBCUDAFORDALICXX_HAS_NO_THREADS)
 atomic<int> ios_base::__xindex_ = ATOMIC_VAR_INIT(0);
 #else
 int ios_base::__xindex_ = 0;
@@ -429,20 +429,20 @@ void
 ios_base::__set_badbit_and_consider_rethrow()
 {
     __rdstate_ |= badbit;
-#ifndef _LIBCUDACXX_NO_EXCEPTIONS
+#ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
     if (__exceptions_ & badbit)
         throw;
-#endif  // _LIBCUDACXX_NO_EXCEPTIONS
+#endif  // _LIBCUDAFORDALICXX_NO_EXCEPTIONS
 }
 
 void
 ios_base::__set_failbit_and_consider_rethrow()
 {
     __rdstate_ |= failbit;
-#ifndef _LIBCUDACXX_NO_EXCEPTIONS
+#ifndef _LIBCUDAFORDALICXX_NO_EXCEPTIONS
     if (__exceptions_ & failbit)
         throw;
-#endif  // _LIBCUDACXX_NO_EXCEPTIONS
+#endif  // _LIBCUDAFORDALICXX_NO_EXCEPTIONS
 }
 
 bool
@@ -454,4 +454,4 @@ ios_base::sync_with_stdio(bool sync)
     return r;
 }
 
-_LIBCUDACXX_END_NAMESPACE_STD
+_LIBCUDAFORDALICXX_END_NAMESPACE_STD

@@ -12,7 +12,7 @@
 #include "system_error"
 
 
-#ifdef _LIBCUDACXX_ABI_VCRUNTIME
+#ifdef _LIBCUDAFORDALICXX_ABI_VCRUNTIME
 #include "support/runtime/stdexcept_vcruntime.ipp"
 #else
 #include "support/runtime/stdexcept_default.ipp"

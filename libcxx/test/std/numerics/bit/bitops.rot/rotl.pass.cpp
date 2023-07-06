@@ -6,12 +6,12 @@
 // Source Licenses. See LICENSE.TXT for details.
 //
 //===----------------------------------------------------------------------===//
-// UNSUPPORTED: c++98, c++03, c++11, c++14, c++17 
+// UNSUPPORTED: c++98, c++03, c++11, c++14, c++17
 
 // template <class T>
 //   constexpr int rotl(T x, unsigned int s) noexcept;
 
-// Remarks: This function shall not participate in overload resolution unless 
+// Remarks: This function shall not participate in overload resolution unless
 //  T is an unsigned integer type
 
 #include <bit>
@@ -55,7 +55,7 @@ void runtime_test()
     ASSERT_SAME_TYPE(T, decltype(std::rotl(T(0), 0)));
     ASSERT_NOEXCEPT(             std::rotl(T(0), 0));
     const T val = std::numeric_limits<T>::max() - 1;
-    
+
     assert( std::rotl(val, 0) == val);
     assert( std::rotl(val, 1) == T((val << 1) +   1));
     assert( std::rotl(val, 2) == T((val << 2) +   3));
@@ -72,7 +72,7 @@ int main()
     {
     auto lambda = [](auto x) -> decltype(std::rotl(x, 1U)) {};
     using L = decltype(lambda);
-    
+
     static_assert( std::is_invocable_v<L, unsigned char>, "");
     static_assert( std::is_invocable_v<L, unsigned int>, "");
     static_assert( std::is_invocable_v<L, unsigned long>, "");
@@ -104,16 +104,16 @@ int main()
     static_assert(!std::is_invocable_v<L, char16_t>, "");
     static_assert(!std::is_invocable_v<L, char32_t>, "");
 
-#ifndef _LIBCUDACXX_HAS_NO_INT128
+#ifndef _LIBCUDAFORDALICXX_HAS_NO_INT128
     static_assert( std::is_invocable_v<L, __uint128_t>, "");
     static_assert(!std::is_invocable_v<L,  __int128_t>, "");
 #endif
- 
+
     static_assert(!std::is_invocable_v<L, A>, "");
     static_assert(!std::is_invocable_v<L, E1>, "");
     static_assert(!std::is_invocable_v<L, E2>, "");
     }
-    
+
     static_assert(constexpr_test<unsigned char>(),      "");
     static_assert(constexpr_test<unsigned short>(),     "");
     static_assert(constexpr_test<unsigned>(),           "");
@@ -128,7 +128,7 @@ int main()
     static_assert(constexpr_test<uintmax_t>(), "");
     static_assert(constexpr_test<uintptr_t>(), "");
 
-#ifndef _LIBCUDACXX_HAS_NO_INT128
+#ifndef _LIBCUDAFORDALICXX_HAS_NO_INT128
     static_assert(constexpr_test<__uint128_t>(),        "");
 #endif
 
@@ -147,7 +147,7 @@ int main()
     runtime_test<uintmax_t>();
     runtime_test<uintptr_t>();
 
-#ifndef _LIBCUDACXX_HAS_NO_INT128
+#ifndef _LIBCUDAFORDALICXX_HAS_NO_INT128
     runtime_test<__uint128_t>();
 
     {

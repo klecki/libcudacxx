@@ -16,8 +16,8 @@
 // void max_load_factor(float mlf);
 
 
-#ifdef _LIBCUDACXX_DEBUG
-#define _LIBCUDACXX_ASSERT(x, m) ((x) ? (void)0 : std::exit(0))
+#ifdef _LIBCUDAFORDALICXX_DEBUG
+#define _LIBCUDAFORDALICXX_ASSERT(x, m) ((x) ? (void)0 : std::exit(0))
 #endif
 
 #include <unordered_map>
@@ -57,7 +57,7 @@ int main(int, char**)
         assert(c.max_load_factor() == 2.5);
     }
 #endif
-#if _LIBCUDACXX_DEBUG_LEVEL >= 1
+#if _LIBCUDAFORDALICXX_DEBUG_LEVEL >= 1
     {
         typedef std::unordered_map<int, std::string> C;
         C c;

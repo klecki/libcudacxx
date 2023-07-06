@@ -11,8 +11,8 @@
 
 // constexpr T&& optional<T>::operator*() &&;
 
-#ifdef _LIBCUDACXX_DEBUG
-#define _LIBCUDACXX_ASSERT(x, m) ((x) ? (void)0 : std::exit(0))
+#ifdef _LIBCUDAFORDALICXX_DEBUG
+#define _LIBCUDAFORDALICXX_ASSERT(x, m) ((x) ? (void)0 : std::exit(0))
 #endif
 
 #include <optional>
@@ -62,13 +62,13 @@ int main(int, char**)
         assert((*std::move(opt)).test() == 6);
     }
     static_assert(test() == 7, "");
-#ifdef _LIBCUDACXX_DEBUG
+#ifdef _LIBCUDAFORDALICXX_DEBUG
     {
         optional<X> opt;
         assert((*std::move(opt)).test() == 3);
         assert(false);
     }
-#endif  // _LIBCUDACXX_DEBUG
+#endif  // _LIBCUDAFORDALICXX_DEBUG
 
   return 0;
 }

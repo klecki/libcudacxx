@@ -17,7 +17,7 @@
 #include <cassert>
 #include "test_macros.h"
 
-//  Users are not supposed to provide template argument lists for 
+//  Users are not supposed to provide template argument lists for
 //  functions in the standard library (there's an exception for min and max)
 //  However, libc++ protects against this for pointers, so we check to make
 //  sure that our protection is working here.
@@ -53,7 +53,7 @@ int main(int, char**)
     test<uint32_t>();
     test<uint64_t>();
 
-#ifndef _LIBCUDACXX_HAS_NO_INT128
+#ifndef _LIBCUDAFORDALICXX_HAS_NO_INT128
     test<__int128_t>();
     test<__uint128_t>();
 #endif

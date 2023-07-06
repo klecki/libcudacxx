@@ -15,8 +15,8 @@
 
 #include <experimental/coroutine>
 
-#ifndef _LIBCUDACXX_VERSION
-#error _LIBCUDACXX_VERSION must be defined
+#ifndef _LIBCUDAFORDALICXX_VERSION
+#error _LIBCUDAFORDALICXX_VERSION must be defined
 #endif
 
 int main(int, char**)

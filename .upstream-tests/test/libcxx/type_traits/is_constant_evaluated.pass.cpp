@@ -23,7 +23,7 @@ int main (int, char**) {
     ASSERT_SAME_TYPE(decltype(cuda_for_dali::std::__libcpp_is_constant_evaluated()), bool);
     ASSERT_NOEXCEPT(cuda_for_dali::std::__libcpp_is_constant_evaluated());
 
-#if defined(_LIBCUDACXX_IS_CONSTANT_EVALUATED) && !defined(_LIBCUDACXX_CXX03_LANG)
+#if defined(_LIBCUDAFORDALICXX_IS_CONSTANT_EVALUATED) && !defined(_LIBCUDAFORDALICXX_CXX03_LANG)
     static_assert(cuda_for_dali::std::__libcpp_is_constant_evaluated(), "");
 #endif
 
