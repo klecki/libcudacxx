@@ -15,9 +15,9 @@
 //
 // result_of<Fn(ArgTypes...)>
 
-#include <cuda/std/type_traits>
-// #include <cuda/std/memory>
-// #include <cuda/std/utility>
+#include <cuda_for_dali/std/type_traits>
+// #include <cuda_for_dali/std/memory>
+// #include <cuda_for_dali/std/utility>
 #include "test_macros.h"
 
 struct wat
@@ -41,10 +41,10 @@ struct test_invoke_result<Fn(Args...), Ret>
     __host__ __device__
     static void call()
     {
-        static_assert(cuda::std::is_invocable<Fn, Args...>::value, "");
-        static_assert(cuda::std::is_invocable_r<Ret, Fn, Args...>::value, "");
-        ASSERT_SAME_TYPE(Ret, typename cuda::std::invoke_result<Fn, Args...>::type);
-        ASSERT_SAME_TYPE(Ret,        cuda::std::invoke_result_t<Fn, Args...>);
+        static_assert(cuda_for_dali::std::is_invocable<Fn, Args...>::value, "");
+        static_assert(cuda_for_dali::std::is_invocable_r<Ret, Fn, Args...>::value, "");
+        ASSERT_SAME_TYPE(Ret, typename cuda_for_dali::std::invoke_result<Fn, Args...>::type);
+        ASSERT_SAME_TYPE(Ret,        cuda_for_dali::std::invoke_result_t<Fn, Args...>);
     }
 };
 #endif
@@ -53,9 +53,9 @@ template <class T, class U>
 __host__ __device__
 void test_result_of_imp()
 {
-    ASSERT_SAME_TYPE(U, typename cuda::std::result_of<T>::type);
+    ASSERT_SAME_TYPE(U, typename cuda_for_dali::std::result_of<T>::type);
 #if TEST_STD_VER > 11
-    ASSERT_SAME_TYPE(U,        cuda::std::result_of_t<T>);
+    ASSERT_SAME_TYPE(U,        cuda_for_dali::std::result_of_t<T>);
 #endif
 #if TEST_STD_VER > 11
     test_invoke_result<T, U>::call();
@@ -97,15 +97,15 @@ int main(int, char**)
     test_result_of_imp<PMD(FD const volatile ), char &&>();
 
 #if !(defined(__NVCC__) || defined(__CUDACC_RTC__))
-    test_result_of_imp<PMD(cuda::std::unique_ptr<F>),        char &>();
-    test_result_of_imp<PMD(cuda::std::unique_ptr<F const>),  const char &>();
-    test_result_of_imp<PMD(cuda::std::unique_ptr<FD>),       char &>();
-    test_result_of_imp<PMD(cuda::std::unique_ptr<FD const>), const char &>();
+    test_result_of_imp<PMD(cuda_for_dali::std::unique_ptr<F>),        char &>();
+    test_result_of_imp<PMD(cuda_for_dali::std::unique_ptr<F const>),  const char &>();
+    test_result_of_imp<PMD(cuda_for_dali::std::unique_ptr<FD>),       char &>();
+    test_result_of_imp<PMD(cuda_for_dali::std::unique_ptr<FD const>), const char &>();
 
-    test_result_of_imp<PMD(cuda::std::reference_wrapper<F>),        char &>();
-    test_result_of_imp<PMD(cuda::std::reference_wrapper<F const>),  const char &>();
-    test_result_of_imp<PMD(cuda::std::reference_wrapper<FD>),       char &>();
-    test_result_of_imp<PMD(cuda::std::reference_wrapper<FD const>), const char &>();
+    test_result_of_imp<PMD(cuda_for_dali::std::reference_wrapper<F>),        char &>();
+    test_result_of_imp<PMD(cuda_for_dali::std::reference_wrapper<F const>),  const char &>();
+    test_result_of_imp<PMD(cuda_for_dali::std::reference_wrapper<FD>),       char &>();
+    test_result_of_imp<PMD(cuda_for_dali::std::reference_wrapper<FD const>), const char &>();
 #endif
     }
     {
@@ -172,10 +172,10 @@ int main(int, char**)
     }
     {
 #if !(defined(__NVCC__) || defined(__CUDACC_RTC__))
-    test_result_of_imp<int (F::* (cuda::std::reference_wrapper<F>))       (),       int>();
-    test_result_of_imp<int (F::* (cuda::std::reference_wrapper<const F>)) () const, int>();
-    test_result_of_imp<int (F::* (cuda::std::unique_ptr<F>       ))       (),       int>();
-    test_result_of_imp<int (F::* (cuda::std::unique_ptr<const F> ))       () const, int>();
+    test_result_of_imp<int (F::* (cuda_for_dali::std::reference_wrapper<F>))       (),       int>();
+    test_result_of_imp<int (F::* (cuda_for_dali::std::reference_wrapper<const F>)) () const, int>();
+    test_result_of_imp<int (F::* (cuda_for_dali::std::unique_ptr<F>       ))       (),       int>();
+    test_result_of_imp<int (F::* (cuda_for_dali::std::unique_ptr<const F> ))       () const, int>();
 #endif
     }
     test_result_of_imp<decltype(&wat::foo)(wat), void>();

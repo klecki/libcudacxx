@@ -10,23 +10,23 @@
 
 // is_void
 
-#include <cuda/std/type_traits>
-#include <cuda/std/cstddef>        // for cuda::std::nullptr_t
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cstddef>        // for cuda_for_dali::std::nullptr_t
 #include "test_macros.h"
 
 template <class T>
 __host__ __device__
 void test_is_void()
 {
-    static_assert( cuda::std::is_void<T>::value, "");
-    static_assert( cuda::std::is_void<const T>::value, "");
-    static_assert( cuda::std::is_void<volatile T>::value, "");
-    static_assert( cuda::std::is_void<const volatile T>::value, "");
+    static_assert( cuda_for_dali::std::is_void<T>::value, "");
+    static_assert( cuda_for_dali::std::is_void<const T>::value, "");
+    static_assert( cuda_for_dali::std::is_void<volatile T>::value, "");
+    static_assert( cuda_for_dali::std::is_void<const volatile T>::value, "");
 #if TEST_STD_VER > 11
-    static_assert( cuda::std::is_void_v<T>, "");
-    static_assert( cuda::std::is_void_v<const T>, "");
-    static_assert( cuda::std::is_void_v<volatile T>, "");
-    static_assert( cuda::std::is_void_v<const volatile T>, "");
+    static_assert( cuda_for_dali::std::is_void_v<T>, "");
+    static_assert( cuda_for_dali::std::is_void_v<const T>, "");
+    static_assert( cuda_for_dali::std::is_void_v<volatile T>, "");
+    static_assert( cuda_for_dali::std::is_void_v<const volatile T>, "");
 #endif
 }
 
@@ -34,15 +34,15 @@ template <class T>
 __host__ __device__
 void test_is_not_void()
 {
-    static_assert(!cuda::std::is_void<T>::value, "");
-    static_assert(!cuda::std::is_void<const T>::value, "");
-    static_assert(!cuda::std::is_void<volatile T>::value, "");
-    static_assert(!cuda::std::is_void<const volatile T>::value, "");
+    static_assert(!cuda_for_dali::std::is_void<T>::value, "");
+    static_assert(!cuda_for_dali::std::is_void<const T>::value, "");
+    static_assert(!cuda_for_dali::std::is_void<volatile T>::value, "");
+    static_assert(!cuda_for_dali::std::is_void<const volatile T>::value, "");
 #if TEST_STD_VER > 11
-    static_assert(!cuda::std::is_void_v<T>, "");
-    static_assert(!cuda::std::is_void_v<const T>, "");
-    static_assert(!cuda::std::is_void_v<volatile T>, "");
-    static_assert(!cuda::std::is_void_v<const volatile T>, "");
+    static_assert(!cuda_for_dali::std::is_void_v<T>, "");
+    static_assert(!cuda_for_dali::std::is_void_v<const T>, "");
+    static_assert(!cuda_for_dali::std::is_void_v<volatile T>, "");
+    static_assert(!cuda_for_dali::std::is_void_v<const volatile T>, "");
 #endif
 }
 

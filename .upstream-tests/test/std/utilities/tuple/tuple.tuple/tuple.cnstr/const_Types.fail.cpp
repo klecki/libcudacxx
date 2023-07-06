@@ -12,11 +12,11 @@
 
 // explicit tuple(const T&...);
 
-// UNSUPPORTED: c++98, c++03 
+// UNSUPPORTED: c++98, c++03
 // UNSUPPORTED: nvrtc
 
-#include <cuda/std/tuple>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/tuple>
+#include <cuda_for_dali/std/cassert>
 
 struct ExplicitCopy {
   __host__ __device__ ExplicitCopy(int) {}

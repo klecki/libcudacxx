@@ -17,8 +17,8 @@
 //
 //   Returns: os << wdl.weekday() << "[last]".
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 #include <iostream>
 
@@ -26,8 +26,8 @@
 
 int main(int, char**)
 {
-   using weekday_last = cuda::std::chrono::weekday_last;
-   using weekday      = cuda::std::chrono::weekday;
+   using weekday_last = cuda_for_dali::std::chrono::weekday_last;
+   using weekday      = cuda_for_dali::std::chrono::weekday;
 
    std::cout << weekday_last{weekday{3}};
 

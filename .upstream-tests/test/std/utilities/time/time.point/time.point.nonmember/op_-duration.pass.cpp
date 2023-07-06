@@ -14,8 +14,8 @@
 //   time_point<Clock, typename common_type<Duration1, duration<Rep2, Period2>>::type>
 //   operator-(const time_point<Clock, Duration1>& lhs, const duration<Rep2, Period2>& rhs);
 
-#include <cuda/std/chrono>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
@@ -23,28 +23,28 @@ template <class D>
 __host__ __device__
 void test2739()  // LWG2739
 {
-    typedef cuda::std::chrono::time_point<cuda::std::chrono::system_clock> TimePoint;
-    typedef cuda::std::chrono::duration<D> Dur;
+    typedef cuda_for_dali::std::chrono::time_point<cuda_for_dali::std::chrono::system_clock> TimePoint;
+    typedef cuda_for_dali::std::chrono::duration<D> Dur;
     const Dur d(5);
-    TimePoint t0 = cuda::std::chrono::system_clock::from_time_t(200);
+    TimePoint t0 = cuda_for_dali::std::chrono::system_clock::from_time_t(200);
     TimePoint t1 = t0 - d;
     assert(t1 < t0);
 }
 
 int main(int, char**)
 {
-    typedef cuda::std::chrono::system_clock Clock;
-    typedef cuda::std::chrono::milliseconds Duration1;
-    typedef cuda::std::chrono::microseconds Duration2;
+    typedef cuda_for_dali::std::chrono::system_clock Clock;
+    typedef cuda_for_dali::std::chrono::milliseconds Duration1;
+    typedef cuda_for_dali::std::chrono::microseconds Duration2;
     {
-    cuda::std::chrono::time_point<Clock, Duration1> t1(Duration1(3));
-    cuda::std::chrono::time_point<Clock, Duration2> t2 = t1 - Duration2(5);
+    cuda_for_dali::std::chrono::time_point<Clock, Duration1> t1(Duration1(3));
+    cuda_for_dali::std::chrono::time_point<Clock, Duration2> t2 = t1 - Duration2(5);
     assert(t2.time_since_epoch() == Duration2(2995));
     }
 #if TEST_STD_VER > 11
     {
-    constexpr cuda::std::chrono::time_point<Clock, Duration1> t1(Duration1(3));
-    constexpr cuda::std::chrono::time_point<Clock, Duration2> t2 = t1 - Duration2(5);
+    constexpr cuda_for_dali::std::chrono::time_point<Clock, Duration1> t1(Duration1(3));
+    constexpr cuda_for_dali::std::chrono::time_point<Clock, Duration2> t2 = t1 - Duration2(5);
     static_assert(t2.time_since_epoch() == Duration2(2995), "");
     }
 #endif

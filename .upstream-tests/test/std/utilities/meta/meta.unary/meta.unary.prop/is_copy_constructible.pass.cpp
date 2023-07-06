@@ -10,16 +10,16 @@
 
 // is_copy_constructible
 
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/type_traits>
 #include "test_macros.h"
 
 template <class T>
 __host__ __device__
 void test_is_copy_constructible()
 {
-    static_assert( cuda::std::is_copy_constructible<T>::value, "");
+    static_assert( cuda_for_dali::std::is_copy_constructible<T>::value, "");
 #if TEST_STD_VER > 11
-    static_assert( cuda::std::is_copy_constructible_v<T>, "");
+    static_assert( cuda_for_dali::std::is_copy_constructible_v<T>, "");
 #endif
 }
 
@@ -27,9 +27,9 @@ template <class T>
 __host__ __device__
 void test_is_not_copy_constructible()
 {
-    static_assert(!cuda::std::is_copy_constructible<T>::value, "");
+    static_assert(!cuda_for_dali::std::is_copy_constructible<T>::value, "");
 #if TEST_STD_VER > 11
-    static_assert(!cuda::std::is_copy_constructible_v<T>, "");
+    static_assert(!cuda_for_dali::std::is_copy_constructible_v<T>, "");
 #endif
 }
 

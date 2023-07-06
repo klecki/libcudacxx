@@ -16,18 +16,18 @@
 //     typedef Ti type;
 // };
 
-// UNSUPPORTED: c++98, c++03 
+// UNSUPPORTED: c++98, c++03
 // UNSUPPORTED: nvrtc
 
-#include <cuda/std/tuple>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/tuple>
+#include <cuda_for_dali/std/type_traits>
 
 int main(int, char**)
 {
-    using T =  cuda::std::tuple<int, long, void*>;
-    using E1 = typename cuda::std::tuple_element<1, T &>::type; // expected-error{{undefined template}}
-    using E2 = typename cuda::std::tuple_element<3, T>::type;
-    using E3 = typename cuda::std::tuple_element<4, T const>::type;
+    using T =  cuda_for_dali::std::tuple<int, long, void*>;
+    using E1 = typename cuda_for_dali::std::tuple_element<1, T &>::type; // expected-error{{undefined template}}
+    using E2 = typename cuda_for_dali::std::tuple_element<3, T>::type;
+    using E3 = typename cuda_for_dali::std::tuple_element<4, T const>::type;
         // expected-error@__tuple:* 2 {{static_assert failed}}
 
 

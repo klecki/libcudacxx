@@ -21,7 +21,7 @@ It has the same semantics as [`cuda::std::atomic_thread_fence`].
 ## Example
 
 ```cuda
-#include <cuda/atomic>
+#include <cuda_for_dali/atomic>
 
 __global__ void example_kernel(int* data) {
   *data = 42;

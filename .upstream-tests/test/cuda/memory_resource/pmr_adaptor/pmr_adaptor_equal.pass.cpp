@@ -10,10 +10,10 @@
 // UNSUPPORTED: c++98, c++03, c++11, c++14
 
 #include <cassert>
-#include <cuda/memory_resource>
-#include <cuda/std/cstddef>
-#include <cuda/std/type_traits>
-#include <cuda/stream_view>
+#include <cuda_for_dali/memory_resource>
+#include <cuda_for_dali/std/cstddef>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/stream_view>
 #include <iostream>
 #include <memory>
 #include <vector>
@@ -27,17 +27,17 @@ namespace pmr = ::std::experimental::pmr;
 #endif
 
 template <typename Kind>
-class derived_resource : public cuda::memory_resource<Kind> {
+class derived_resource : public cuda_for_dali::memory_resource<Kind> {
 public:
 private:
-  void *do_allocate(cuda::std::size_t, cuda::std::size_t) override {
+  void *do_allocate(cuda_for_dali::std::size_t, cuda_for_dali::std::size_t) override {
     return nullptr;
   }
 
-  void do_deallocate(void *, cuda::std::size_t, cuda::std::size_t) override {}
+  void do_deallocate(void *, cuda_for_dali::std::size_t, cuda_for_dali::std::size_t) override {}
 
   bool
-  do_is_equal(cuda::memory_resource<cuda::memory_kind::host> const &other) const
+  do_is_equal(cuda_for_dali::memory_resource<cuda_for_dali::memory_kind::host> const &other) const
       noexcept override {
     return dynamic_cast<derived_resource const *>(&other) != nullptr;
   }
@@ -47,10 +47,10 @@ template <typename Kind>
 class more_derived : public derived_resource<Kind> {
 public:
 private:
-  void *do_allocate(cuda::std::size_t, cuda::std::size_t) override {
+  void *do_allocate(cuda_for_dali::std::size_t, cuda_for_dali::std::size_t) override {
     return nullptr;
   }
-  void do_deallocate(void *, cuda::std::size_t, cuda::std::size_t) override {}
+  void do_deallocate(void *, cuda_for_dali::std::size_t, cuda_for_dali::std::size_t) override {}
 };
 
 template <typename T1, typename T2>
@@ -62,8 +62,8 @@ void assert_equal(T1 const &lhs, T2 const &rhs) {
 }
 
 template <typename P1, typename P2>
-void test_equal(cuda::pmr_adaptor<P1> const &lhs,
-                cuda::pmr_adaptor<P2> const &rhs) {
+void test_equal(cuda_for_dali::pmr_adaptor<P1> const &lhs,
+                cuda_for_dali::pmr_adaptor<P2> const &rhs) {
   assert_equal(lhs, rhs);
 
   pmr::memory_resource const *pmr_lhs{&lhs};
@@ -80,9 +80,9 @@ void test_equal(cuda::pmr_adaptor<P1> const &lhs,
 template <typename Kind>
 void test_pmr_adaptor_equality(){
   derived_resource<Kind> d;
-  cuda::pmr_adaptor a_raw{&d};
-  cuda::pmr_adaptor a_unique{std::make_unique<derived_resource<Kind>>()};
-  cuda::pmr_adaptor a_shared{std::make_shared<derived_resource<Kind>>()};
+  cuda_for_dali::pmr_adaptor a_raw{&d};
+  cuda_for_dali::pmr_adaptor a_unique{std::make_unique<derived_resource<Kind>>()};
+  cuda_for_dali::pmr_adaptor a_shared{std::make_shared<derived_resource<Kind>>()};
 
   test_equal(a_raw, a_unique);
   test_equal(a_raw, a_shared);
@@ -92,17 +92,17 @@ void test_pmr_adaptor_equality(){
   assert(d.is_equal(m));
   assert(m.is_equal(d));
 
-  cuda::pmr_adaptor m_raw{&m};
+  cuda_for_dali::pmr_adaptor m_raw{&m};
   test_equal(a_raw, m_raw);
   test_equal(a_unique, m_raw);
   test_equal(a_shared, m_raw);
 
-  cuda::pmr_adaptor m_unique{std::make_unique<more_derived<Kind>>()};
+  cuda_for_dali::pmr_adaptor m_unique{std::make_unique<more_derived<Kind>>()};
   test_equal(a_raw, m_unique);
   test_equal(a_unique, m_unique);
   test_equal(a_shared, m_unique);
 
-  cuda::pmr_adaptor m_shared{std::make_shared<more_derived<Kind>>()};
+  cuda_for_dali::pmr_adaptor m_shared{std::make_shared<more_derived<Kind>>()};
   test_equal(a_raw, m_shared);
   test_equal(a_unique, m_shared);
   test_equal(a_shared, m_shared);
@@ -112,7 +112,7 @@ int main(int argc, char **argv) {
 
 #ifndef __CUDA_ARCH__
 #if defined(_LIBCUDACXX_STD_PMR_NS)
-  test_pmr_adaptor_equality<cuda::memory_kind::host>();
+  test_pmr_adaptor_equality<cuda_for_dali::memory_kind::host>();
 #endif
 #endif
 

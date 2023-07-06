@@ -1,0 +1,61 @@
+// -*- C++ -*-
+//===--------------------------- __nullptr --------------------------------===//
+//
+// Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+// See https://llvm.org/LICENSE.txt for license information.
+// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+//
+//===----------------------------------------------------------------------===//
+
+#ifndef _LIBCUDAFORDALICXX_NULLPTR
+#define _LIBCUDAFORDALICXX_NULLPTR
+
+#include <__config>
+
+#if defined(_LIBCUDAFORDALICXX_USE_PRAGMA_GCC_SYSTEM_HEADER)
+#pragma GCC system_header
+#endif
+
+#ifdef _LIBCUDAFORDALICXX_HAS_NO_NULLPTR
+
+_LIBCUDAFORDALICXX_BEGIN_NAMESPACE_STD
+
+struct _LIBCUDAFORDALICXX_TEMPLATE_VIS nullptr_t
+{
+    void* __lx;
+
+    struct __nat {int __for_bool_;};
+
+    _LIBCUDAFORDALICXX_INLINE_VISIBILITY _LIBCUDAFORDALICXX_CONSTEXPR nullptr_t() : __lx(0) {}
+    _LIBCUDAFORDALICXX_INLINE_VISIBILITY _LIBCUDAFORDALICXX_CONSTEXPR nullptr_t(int __nat::*) : __lx(0) {}
+
+    _LIBCUDAFORDALICXX_INLINE_VISIBILITY _LIBCUDAFORDALICXX_CONSTEXPR operator int __nat::*() const {return 0;}
+
+    template <class _Tp>
+        _LIBCUDAFORDALICXX_INLINE_VISIBILITY _LIBCUDAFORDALICXX_CONSTEXPR
+        operator _Tp* () const {return 0;}
+
+    template <class _Tp, class _Up>
+        _LIBCUDAFORDALICXX_INLINE_VISIBILITY
+        operator _Tp _Up::* () const {return 0;}
+
+    friend _LIBCUDAFORDALICXX_INLINE_VISIBILITY _LIBCUDAFORDALICXX_CONSTEXPR bool operator==(nullptr_t, nullptr_t) {return true;}
+    friend _LIBCUDAFORDALICXX_INLINE_VISIBILITY _LIBCUDAFORDALICXX_CONSTEXPR bool operator!=(nullptr_t, nullptr_t) {return false;}
+};
+
+inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY _LIBCUDAFORDALICXX_CONSTEXPR nullptr_t __get_nullptr_t() {return nullptr_t(0);}
+
+#define nullptr _CUDA_VSTD::__get_nullptr_t()
+
+_LIBCUDAFORDALICXX_END_NAMESPACE_STD
+
+#else  // _LIBCUDAFORDALICXX_HAS_NO_NULLPTR
+
+namespace std
+{
+    typedef decltype(nullptr) nullptr_t;
+}
+
+#endif  // _LIBCUDAFORDALICXX_HAS_NO_NULLPTR
+
+#endif  // _LIBCUDAFORDALICXX_NULLPTR

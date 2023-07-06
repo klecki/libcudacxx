@@ -42,7 +42,7 @@ For each [`cuda::thread_scope`] `S`, the value of `cuda::latch<S>::max()` is as
 ## Example
 
 ```cuda
-#include <cuda/latch>
+#include <cuda_for_dali/latch>
 
 __global__ void example_kernel() {
   // This latch is suitable for all threads in the system.

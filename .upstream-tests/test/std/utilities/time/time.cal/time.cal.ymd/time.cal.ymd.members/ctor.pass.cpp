@@ -22,23 +22,23 @@
 //  constexpr chrono::day     day() const noexcept;
 //  constexpr bool             ok() const noexcept;
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using year           = cuda::std::chrono::year;
-    using month          = cuda::std::chrono::month;
-    using day            = cuda::std::chrono::day;
-    using year_month_day = cuda::std::chrono::year_month_day;
+    using year           = cuda_for_dali::std::chrono::year;
+    using month          = cuda_for_dali::std::chrono::month;
+    using day            = cuda_for_dali::std::chrono::day;
+    using year_month_day = cuda_for_dali::std::chrono::year_month_day;
 
     ASSERT_NOEXCEPT(year_month_day{});
     ASSERT_NOEXCEPT(year_month_day{year{1}, month{1}, day{1}});
 
-    constexpr month January = cuda::std::chrono::January;
+    constexpr month January = cuda_for_dali::std::chrono::January;
 
     constexpr year_month_day ym0{};
     static_assert( ym0.year()  == year{},  "");

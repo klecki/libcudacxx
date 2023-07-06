@@ -14,10 +14,10 @@
 
 // tuple& operator=(const tuple& u);
 
-// UNSUPPORTED: c++98, c++03 
+// UNSUPPORTED: c++98, c++03
 
-#include <cuda/std/tuple>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/tuple>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
@@ -33,7 +33,7 @@ struct CopyAssignable {
   CopyAssignable& operator=(CopyAssignable const&) = default;
   CopyAssignable& operator=(CopyAssignable &&) = delete;
 };
-static_assert(cuda::std::is_copy_assignable<CopyAssignable>::value, "");
+static_assert(cuda_for_dali::std::is_copy_assignable<CopyAssignable>::value, "");
 struct MoveAssignable {
   MoveAssignable& operator=(MoveAssignable const&) = delete;
   MoveAssignable& operator=(MoveAssignable&&) = default;
@@ -42,74 +42,74 @@ struct MoveAssignable {
 int main(int, char**)
 {
     {
-        typedef cuda::std::tuple<> T;
+        typedef cuda_for_dali::std::tuple<> T;
         T t0;
         T t;
         t = t0;
         unused(t);
     }
     {
-        typedef cuda::std::tuple<int> T;
+        typedef cuda_for_dali::std::tuple<int> T;
         T t0(2);
         T t;
         t = t0;
-        assert(cuda::std::get<0>(t) == 2);
+        assert(cuda_for_dali::std::get<0>(t) == 2);
     }
     {
-        typedef cuda::std::tuple<int, char> T;
+        typedef cuda_for_dali::std::tuple<int, char> T;
         T t0(2, 'a');
         T t;
         t = t0;
-        assert(cuda::std::get<0>(t) == 2);
-        assert(cuda::std::get<1>(t) == 'a');
+        assert(cuda_for_dali::std::get<0>(t) == 2);
+        assert(cuda_for_dali::std::get<1>(t) == 'a');
     }
-    // cuda::std::string not supported
+    // cuda_for_dali::std::string not supported
     /*
     {
-        typedef cuda::std::tuple<int, char, cuda::std::string> T;
+        typedef cuda_for_dali::std::tuple<int, char, cuda_for_dali::std::string> T;
         const T t0(2, 'a', "some text");
         T t;
         t = t0;
-        assert(cuda::std::get<0>(t) == 2);
-        assert(cuda::std::get<1>(t) == 'a');
-        assert(cuda::std::get<2>(t) == "some text");
+        assert(cuda_for_dali::std::get<0>(t) == 2);
+        assert(cuda_for_dali::std::get<1>(t) == 'a');
+        assert(cuda_for_dali::std::get<2>(t) == "some text");
     }
     */
     {
         // test reference assignment.
-        using T = cuda::std::tuple<int&, int&&>;
+        using T = cuda_for_dali::std::tuple<int&, int&&>;
         int x = 42;
         int y = 100;
         int x2 = -1;
         int y2 = 500;
-        T t(x, cuda::std::move(y));
-        T t2(x2, cuda::std::move(y2));
+        T t(x, cuda_for_dali::std::move(y));
+        T t2(x2, cuda_for_dali::std::move(y2));
         t = t2;
-        assert(cuda::std::get<0>(t) == x2);
-        assert(&cuda::std::get<0>(t) == &x);
-        assert(cuda::std::get<1>(t) == y2);
-        assert(&cuda::std::get<1>(t) == &y);
+        assert(cuda_for_dali::std::get<0>(t) == x2);
+        assert(&cuda_for_dali::std::get<0>(t) == &x);
+        assert(cuda_for_dali::std::get<1>(t) == y2);
+        assert(&cuda_for_dali::std::get<1>(t) == &y);
     }
-    // cuda::std::unique_ptr not supported
+    // cuda_for_dali::std::unique_ptr not supported
     /*
     {
         // test that the implicitly generated copy assignment operator
         // is properly deleted
-        using T = cuda::std::tuple<cuda::std::unique_ptr<int>>;
-        static_assert(!cuda::std::is_copy_assignable<T>::value, "");
+        using T = cuda_for_dali::std::tuple<cuda_for_dali::std::unique_ptr<int>>;
+        static_assert(!cuda_for_dali::std::is_copy_assignable<T>::value, "");
     }
     */
     {
-        using T = cuda::std::tuple<int, NonAssignable>;
-        static_assert(!cuda::std::is_copy_assignable<T>::value, "");
+        using T = cuda_for_dali::std::tuple<int, NonAssignable>;
+        static_assert(!cuda_for_dali::std::is_copy_assignable<T>::value, "");
     }
     {
-        using T = cuda::std::tuple<int, CopyAssignable>;
-        static_assert(cuda::std::is_copy_assignable<T>::value, "");
+        using T = cuda_for_dali::std::tuple<int, CopyAssignable>;
+        static_assert(cuda_for_dali::std::is_copy_assignable<T>::value, "");
     }
     {
-        using T = cuda::std::tuple<int, MoveAssignable>;
-        static_assert(!cuda::std::is_copy_assignable<T>::value, "");
+        using T = cuda_for_dali::std::tuple<int, MoveAssignable>;
+        static_assert(!cuda_for_dali::std::is_copy_assignable<T>::value, "");
     }
 
   return 0;

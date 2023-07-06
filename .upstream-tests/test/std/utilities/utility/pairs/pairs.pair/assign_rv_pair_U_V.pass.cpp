@@ -16,10 +16,10 @@
 
 // template<class U, class V> pair& operator=(pair<U, V>&& p);
 
-#include <cuda/std/utility>
+#include <cuda_for_dali/std/utility>
 // cuda/std/memory not supported
-// #include <cuda/std/memory>
-#include <cuda/std/cassert>
+// #include <cuda_for_dali/std/memory>
+#include <cuda_for_dali/std/cassert>
 
 #include "archetypes.h"
 #include "test_macros.h"
@@ -39,23 +39,23 @@ int main(int, char**)
     // cuda/std/memory not supported
     /*
     {
-        typedef cuda::std::pair<cuda::std::unique_ptr<Derived>, short> P1;
-        typedef cuda::std::pair<cuda::std::unique_ptr<Base>, long> P2;
-        P1 p1(cuda::std::unique_ptr<Derived>(), static_cast<short>(4));
+        typedef cuda_for_dali::std::pair<cuda_for_dali::std::unique_ptr<Derived>, short> P1;
+        typedef cuda_for_dali::std::pair<cuda_for_dali::std::unique_ptr<Base>, long> P2;
+        P1 p1(cuda_for_dali::std::unique_ptr<Derived>(), static_cast<short>(4));
         P2 p2;
-        p2 = cuda::std::move(p1);
+        p2 = cuda_for_dali::std::move(p1);
         assert(p2.first == nullptr);
         assert(p2.second == 4);
     }
     */
     {
        using C = TestTypes::TestType;
-       using P = cuda::std::pair<int, C>;
-       using T = cuda::std::pair<long, C>;
+       using P = cuda_for_dali::std::pair<int, C>;
+       using T = cuda_for_dali::std::pair<long, C>;
        T t(42, -42);
        P p(101, 101);
        C::reset_constructors();
-       p = cuda::std::move(t);
+       p = cuda_for_dali::std::move(t);
        assert(C::constructed() == 0);
        assert(C::assigned() == 1);
        assert(C::copy_assigned() == 0);

@@ -10,8 +10,8 @@
 
 // template <class Duration> class hh_mm_ss;
 
-#include <cuda/std/chrono>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 

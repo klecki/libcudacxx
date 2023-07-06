@@ -13,22 +13,22 @@
 // constexpr unsigned index() const noexcept;
 //  Returns: wdi_.index()
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using year               = cuda::std::chrono::year;
-    using month              = cuda::std::chrono::month;
-    using weekday            = cuda::std::chrono::weekday;
-    using weekday_indexed    = cuda::std::chrono::weekday_indexed;
-    using year_month_weekday = cuda::std::chrono::year_month_weekday;
+    using year               = cuda_for_dali::std::chrono::year;
+    using month              = cuda_for_dali::std::chrono::month;
+    using weekday            = cuda_for_dali::std::chrono::weekday;
+    using weekday_indexed    = cuda_for_dali::std::chrono::weekday_indexed;
+    using year_month_weekday = cuda_for_dali::std::chrono::year_month_weekday;
 
     ASSERT_NOEXCEPT(                    std::declval<const year_month_weekday>().index());
-    ASSERT_SAME_TYPE(unsigned, decltype(cuda::std::declval<const year_month_weekday>().index()));
+    ASSERT_SAME_TYPE(unsigned, decltype(cuda_for_dali::std::declval<const year_month_weekday>().index()));
 
     static_assert( year_month_weekday{}.index() == 0, "");
 

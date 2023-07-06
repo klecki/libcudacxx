@@ -10,13 +10,13 @@
 // UNSUPPORTED: pre-sm-70
 
 #include <cooperative_groups.h>
-#include <cuda/pipeline>
+#include <cuda_for_dali/pipeline>
 
 #include "cuda_space_selector.h"
 #include "large_type.h"
 
 template <
-    cuda::thread_scope Scope,
+    cuda_for_dali::thread_scope Scope,
     class T,
     template<typename, typename> class SourceSelector,
     template<typename, typename> class DestSelector,
@@ -29,16 +29,16 @@ void test_fully_specialized()
     SourceSelector<T, constructor_initializer> source_sel;
     typename DestSelector<T, constructor_initializer>
         ::template offsetted<decltype(source_sel)::shared_offset> dest_sel;
-    PipelineSelector<cuda::pipeline_shared_state<Scope, PipelineStages>, constructor_initializer> pipe_state_sel;
+    PipelineSelector<cuda_for_dali::pipeline_shared_state<Scope, PipelineStages>, constructor_initializer> pipe_state_sel;
 
     T * source = source_sel.construct(static_cast<T>(12));
     T * dest = dest_sel.construct(static_cast<T>(0));
-    cuda::pipeline_shared_state<Scope, PipelineStages> * pipe_state = pipe_state_sel.construct();
+    cuda_for_dali::pipeline_shared_state<Scope, PipelineStages> * pipe_state = pipe_state_sel.construct();
 
 #ifdef __CUDA_ARCH__
     auto group = cooperative_groups::this_thread_block();
 #else
-    auto group = cuda::__single_thread_group{};
+    auto group = cuda_for_dali::__single_thread_group{};
 #endif
 
     auto pipe = make_pipeline(group, pipe_state);
@@ -47,7 +47,7 @@ void test_fully_specialized()
     assert(*dest == 0);
 
     pipe.producer_acquire();
-    cuda::memcpy_async(dest, source, sizeof(T), pipe);
+    cuda_for_dali::memcpy_async(dest, source, sizeof(T), pipe);
     pipe.producer_commit();
     pipe.consumer_wait();
 
@@ -59,9 +59,9 @@ void test_fully_specialized()
     *source = 24;
 
     pipe.producer_acquire();
-    cuda::memcpy_async(static_cast<void *>(dest), static_cast<void *>(source), sizeof(T), pipe);
+    cuda_for_dali::memcpy_async(static_cast<void *>(dest), static_cast<void *>(source), sizeof(T), pipe);
     pipe.producer_commit();
-    pipe.consumer_wait_for(cuda::std::chrono::seconds(30));
+    pipe.consumer_wait_for(cuda_for_dali::std::chrono::seconds(30));
 
     assert(*source == 24);
     assert(*dest == 24);
@@ -71,9 +71,9 @@ void test_fully_specialized()
     *source = 42;
 
     pipe.producer_acquire();
-    cuda::memcpy_async(static_cast<void *>(dest), static_cast<void *>(source), sizeof(T), pipe);
+    cuda_for_dali::memcpy_async(static_cast<void *>(dest), static_cast<void *>(source), sizeof(T), pipe);
     pipe.producer_commit();
-    pipe.consumer_wait_until(cuda::std::chrono::system_clock::now() + cuda::std::chrono::seconds(30));
+    pipe.consumer_wait_until(cuda_for_dali::std::chrono::system_clock::now() + cuda_for_dali::std::chrono::seconds(30));
 
     assert(*source == 42);
     assert(*dest == 42);
@@ -82,7 +82,7 @@ void test_fully_specialized()
 }
 
 template <
-    cuda::thread_scope Scope,
+    cuda_for_dali::thread_scope Scope,
     class T,
     template<typename, typename> class SourceSelector,
     template<typename, typename> class DestSelector
@@ -99,7 +99,7 @@ void test_select_pipeline()
 }
 
 template <
-    cuda::thread_scope Scope,
+    cuda_for_dali::thread_scope Scope,
     class T,
     template<typename, typename> class SourceSelector
 >
@@ -113,7 +113,7 @@ void test_select_destination()
 #endif
 }
 
-template <cuda::thread_scope Scope, class T>
+template <cuda_for_dali::thread_scope Scope, class T>
 __host__ __device__ __noinline__
 void test_select_source()
 {

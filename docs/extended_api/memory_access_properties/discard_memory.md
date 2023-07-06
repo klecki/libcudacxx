@@ -14,7 +14,7 @@ __device__ void discard_memory(void volatile* ptr, size_t nbytes);
 
 **Effects**: equivalent to `memset(ptr, _indeterminate_, nbytes)`.
 
-**Hint**: to discard modified cache lines without writing back the cached data to memory. 
+**Hint**: to discard modified cache lines without writing back the cached data to memory.
 Enables using global memory as temporary scratch space.
 Does **not** generate any HW store operations.
 
@@ -23,7 +23,7 @@ Does **not** generate any HW store operations.
 This kernel needs a scratch pad that does not fit in shared memory, so it uses an allocation in global memory instead:
 
 ```cuda
-#include <cuda/annotated_ptr>
+#include <cuda_for_dali/annotated_ptr>
 __device__ int compute(int* scratch, size_t N);
 
 __global__ void kernel(int const* in, int* out, int* scratch, size_t N) {

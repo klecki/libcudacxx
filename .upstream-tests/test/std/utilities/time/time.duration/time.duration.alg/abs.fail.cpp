@@ -19,13 +19,13 @@
 // .fail. expects compilation to fail, but this would only fail at runtime with NVRTC
 // UNSUPPORTED: nvrtc
 
-#include <cuda/std/chrono>
+#include <cuda_for_dali/std/chrono>
 
-typedef cuda::std::chrono::duration<unsigned> unsigned_secs;
+typedef cuda_for_dali::std::chrono::duration<unsigned> unsigned_secs;
 
 int main(int, char**)
 {
-    cuda::std::chrono::abs(unsigned_secs(0));
+    cuda_for_dali::std::chrono::abs(unsigned_secs(0));
 
   return 0;
 }

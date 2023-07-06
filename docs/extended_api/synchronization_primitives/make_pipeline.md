@@ -84,7 +84,7 @@ A `cuda::pipeline` object.
 ## Example
 
 ```cuda
-#include <cuda/pipeline>
+#include <cuda_for_dali/pipeline>
 #include <cooperative_groups.h>
 
 // Disables `pipeline_shared_state` initialization warning.

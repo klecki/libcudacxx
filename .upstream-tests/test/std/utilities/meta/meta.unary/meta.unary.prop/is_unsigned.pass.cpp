@@ -10,22 +10,22 @@
 
 // is_unsigned
 
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/type_traits>
 #include "test_macros.h"
 
 template <class T>
 __host__ __device__
 void test_is_unsigned()
 {
-    static_assert( cuda::std::is_unsigned<T>::value, "");
-    static_assert( cuda::std::is_unsigned<const T>::value, "");
-    static_assert( cuda::std::is_unsigned<volatile T>::value, "");
-    static_assert( cuda::std::is_unsigned<const volatile T>::value, "");
+    static_assert( cuda_for_dali::std::is_unsigned<T>::value, "");
+    static_assert( cuda_for_dali::std::is_unsigned<const T>::value, "");
+    static_assert( cuda_for_dali::std::is_unsigned<volatile T>::value, "");
+    static_assert( cuda_for_dali::std::is_unsigned<const volatile T>::value, "");
 #if TEST_STD_VER > 11
-    static_assert( cuda::std::is_unsigned_v<T>, "");
-    static_assert( cuda::std::is_unsigned_v<const T>, "");
-    static_assert( cuda::std::is_unsigned_v<volatile T>, "");
-    static_assert( cuda::std::is_unsigned_v<const volatile T>, "");
+    static_assert( cuda_for_dali::std::is_unsigned_v<T>, "");
+    static_assert( cuda_for_dali::std::is_unsigned_v<const T>, "");
+    static_assert( cuda_for_dali::std::is_unsigned_v<volatile T>, "");
+    static_assert( cuda_for_dali::std::is_unsigned_v<const volatile T>, "");
 #endif
 }
 
@@ -33,15 +33,15 @@ template <class T>
 __host__ __device__
 void test_is_not_unsigned()
 {
-    static_assert(!cuda::std::is_unsigned<T>::value, "");
-    static_assert(!cuda::std::is_unsigned<const T>::value, "");
-    static_assert(!cuda::std::is_unsigned<volatile T>::value, "");
-    static_assert(!cuda::std::is_unsigned<const volatile T>::value, "");
+    static_assert(!cuda_for_dali::std::is_unsigned<T>::value, "");
+    static_assert(!cuda_for_dali::std::is_unsigned<const T>::value, "");
+    static_assert(!cuda_for_dali::std::is_unsigned<volatile T>::value, "");
+    static_assert(!cuda_for_dali::std::is_unsigned<const volatile T>::value, "");
 #if TEST_STD_VER > 11
-    static_assert(!cuda::std::is_unsigned_v<T>, "");
-    static_assert(!cuda::std::is_unsigned_v<const T>, "");
-    static_assert(!cuda::std::is_unsigned_v<volatile T>, "");
-    static_assert(!cuda::std::is_unsigned_v<const volatile T>, "");
+    static_assert(!cuda_for_dali::std::is_unsigned_v<T>, "");
+    static_assert(!cuda_for_dali::std::is_unsigned_v<const T>, "");
+    static_assert(!cuda_for_dali::std::is_unsigned_v<volatile T>, "");
+    static_assert(!cuda_for_dali::std::is_unsigned_v<const volatile T>, "");
 #endif
 }
 

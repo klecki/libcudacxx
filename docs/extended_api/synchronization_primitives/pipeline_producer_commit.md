@@ -32,7 +32,7 @@ If the pipeline is in a _quitted state_ (see [`cuda::pipeline::quit`]), the
 ## Example
 
 ```cuda
-#include <cuda/pipeline>
+#include <cuda_for_dali/pipeline>
 
 // Disables `barrier` initialization warning.
 #pragma diag_suppress static_var_with_dynamic_init

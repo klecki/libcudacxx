@@ -11,11 +11,11 @@
 
 // typedef decltype(nullptr) nullptr_t;
 
-#include <cuda/std/cstddef>
+#include <cuda_for_dali/std/cstddef>
 
 int main(int, char**)
 {
-    cuda::std::ptrdiff_t i = static_cast<cuda::std::ptrdiff_t>(nullptr);
+    cuda_for_dali::std::ptrdiff_t i = static_cast<cuda_for_dali::std::ptrdiff_t>(nullptr);
 
   return 0;
 }

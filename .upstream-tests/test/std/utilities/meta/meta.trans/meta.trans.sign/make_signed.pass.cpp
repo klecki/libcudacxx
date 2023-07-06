@@ -10,7 +10,7 @@
 
 // make_signed
 
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/type_traits>
 
 #include "test_macros.h"
 
@@ -37,9 +37,9 @@ template <class T, class U>
 __host__ __device__
 void test_make_signed()
 {
-    ASSERT_SAME_TYPE(U, typename cuda::std::make_signed<T>::type);
+    ASSERT_SAME_TYPE(U, typename cuda_for_dali::std::make_signed<T>::type);
 #if TEST_STD_VER > 11
-    ASSERT_SAME_TYPE(U, cuda::std::make_signed_t<T>);
+    ASSERT_SAME_TYPE(U, cuda_for_dali::std::make_signed_t<T>);
 #endif
 }
 
@@ -56,10 +56,10 @@ int main(int, char**)
     test_make_signed< unsigned long, long >();
     test_make_signed< long long, signed long long >();
     test_make_signed< unsigned long long, signed long long >();
-    test_make_signed< wchar_t, cuda::std::conditional<sizeof(wchar_t) == 4, int, short>::type >();
-    test_make_signed< const wchar_t, cuda::std::conditional<sizeof(wchar_t) == 4, const int, const short>::type >();
-    test_make_signed< const Enum, cuda::std::conditional<sizeof(Enum) == sizeof(int), const int, const signed char>::type >();
-    test_make_signed< BigEnum, cuda::std::conditional<sizeof(long) == 4, long long, long>::type >();
+    test_make_signed< wchar_t, cuda_for_dali::std::conditional<sizeof(wchar_t) == 4, int, short>::type >();
+    test_make_signed< const wchar_t, cuda_for_dali::std::conditional<sizeof(wchar_t) == 4, const int, const short>::type >();
+    test_make_signed< const Enum, cuda_for_dali::std::conditional<sizeof(Enum) == sizeof(int), const int, const signed char>::type >();
+    test_make_signed< BigEnum, cuda_for_dali::std::conditional<sizeof(long) == 4, long long, long>::type >();
 #ifndef _LIBCUDACXX_HAS_NO_INT128
     test_make_signed< __int128_t, __int128_t >();
     test_make_signed< __uint128_t, __int128_t >();

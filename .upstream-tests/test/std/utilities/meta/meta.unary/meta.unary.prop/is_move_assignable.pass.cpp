@@ -10,16 +10,16 @@
 
 // is_move_assignable
 
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/type_traits>
 #include "test_macros.h"
 
 template <class T>
 __host__ __device__
 void test_is_move_assignable()
 {
-    static_assert(( cuda::std::is_move_assignable<T>::value), "");
+    static_assert(( cuda_for_dali::std::is_move_assignable<T>::value), "");
 #if TEST_STD_VER > 11
-    static_assert(( cuda::std::is_move_assignable_v<T>), "");
+    static_assert(( cuda_for_dali::std::is_move_assignable_v<T>), "");
 #endif
 }
 
@@ -27,9 +27,9 @@ template <class T>
 __host__ __device__
 void test_is_not_move_assignable()
 {
-    static_assert((!cuda::std::is_move_assignable<T>::value), "");
+    static_assert((!cuda_for_dali::std::is_move_assignable<T>::value), "");
 #if TEST_STD_VER > 11
-    static_assert((!cuda::std::is_move_assignable_v<T>), "");
+    static_assert((!cuda_for_dali::std::is_move_assignable_v<T>), "");
 #endif
 }
 

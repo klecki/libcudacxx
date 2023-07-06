@@ -10,7 +10,7 @@
 
 // tinyness_before
 
-#include <cuda/std/limits>
+#include <cuda_for_dali/std/limits>
 
 #include "test_macros.h"
 
@@ -19,10 +19,10 @@ __host__ __device__
 void
 test()
 {
-    static_assert(cuda::std::numeric_limits<T>::tinyness_before == expected, "tinyness_before test 1");
-    static_assert(cuda::std::numeric_limits<const T>::tinyness_before == expected, "tinyness_before test 2");
-    static_assert(cuda::std::numeric_limits<volatile T>::tinyness_before == expected, "tinyness_before test 3");
-    static_assert(cuda::std::numeric_limits<const volatile T>::tinyness_before == expected, "tinyness_before test 4");
+    static_assert(cuda_for_dali::std::numeric_limits<T>::tinyness_before == expected, "tinyness_before test 1");
+    static_assert(cuda_for_dali::std::numeric_limits<const T>::tinyness_before == expected, "tinyness_before test 2");
+    static_assert(cuda_for_dali::std::numeric_limits<volatile T>::tinyness_before == expected, "tinyness_before test 3");
+    static_assert(cuda_for_dali::std::numeric_limits<const volatile T>::tinyness_before == expected, "tinyness_before test 4");
 }
 
 int main(int, char**)

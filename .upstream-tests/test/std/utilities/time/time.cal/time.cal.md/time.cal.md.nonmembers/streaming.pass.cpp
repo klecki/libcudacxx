@@ -25,17 +25,17 @@
 //          fmt encoding follows the rules specified in 25.11.
 
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 #include <iostream>
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using month_day = cuda::std::chrono::month_day;
-    using month     = cuda::std::chrono::month;
-    using day       = cuda::std::chrono::day;
+    using month_day = cuda_for_dali::std::chrono::month_day;
+    using month     = cuda_for_dali::std::chrono::month;
+    using day       = cuda_for_dali::std::chrono::day;
     std::cout << month_day{month{1}, day{1}};
 
   return 0;

@@ -17,15 +17,15 @@
 //  Effects: Constructs an object of type month by initializing m_ with m.
 //    The value held is unspecified if d is not in the range [0, 255].
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using month = cuda::std::chrono::month;
+    using month = cuda_for_dali::std::chrono::month;
 
     ASSERT_NOEXCEPT(month{});
     ASSERT_NOEXCEPT(month(1));

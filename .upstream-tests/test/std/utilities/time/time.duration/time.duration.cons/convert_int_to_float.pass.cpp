@@ -15,22 +15,22 @@
 
 //  conversions from integral to floating point durations allowed
 
-#include <cuda/std/chrono>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
     {
-    cuda::std::chrono::duration<int> i(3);
-    cuda::std::chrono::duration<double, cuda::std::milli> d = i;
+    cuda_for_dali::std::chrono::duration<int> i(3);
+    cuda_for_dali::std::chrono::duration<double, cuda_for_dali::std::milli> d = i;
     assert(d.count() == 3000);
     }
 #if TEST_STD_VER >= 11
     {
-    constexpr cuda::std::chrono::duration<int> i(3);
-    constexpr cuda::std::chrono::duration<double, cuda::std::milli> d = i;
+    constexpr cuda_for_dali::std::chrono::duration<int> i(3);
+    constexpr cuda_for_dali::std::chrono::duration<double, cuda_for_dali::std::milli> d = i;
     static_assert(d.count() == 3000, "");
     }
 #endif

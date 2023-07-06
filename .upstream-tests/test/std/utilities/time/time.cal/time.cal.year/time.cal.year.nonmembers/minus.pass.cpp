@@ -21,8 +21,8 @@
 
 extern "C" int printf(const char *, ...);
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
@@ -40,14 +40,14 @@ constexpr bool testConstexpr()
 
 int main(int, char**)
 {
-    using year  = cuda::std::chrono::year;
-    using years = cuda::std::chrono::years;
+    using year  = cuda_for_dali::std::chrono::year;
+    using years = cuda_for_dali::std::chrono::years;
 
     ASSERT_NOEXCEPT(                 std::declval<year>() - std::declval<years>());
-    ASSERT_SAME_TYPE(year , decltype(cuda::std::declval<year>() - std::declval<years>()));
+    ASSERT_SAME_TYPE(year , decltype(cuda_for_dali::std::declval<year>() - std::declval<years>()));
 
     ASSERT_NOEXCEPT(                 std::declval<year>() - std::declval<year>());
-    ASSERT_SAME_TYPE(years, decltype(cuda::std::declval<year>() - std::declval<year>()));
+    ASSERT_SAME_TYPE(years, decltype(cuda_for_dali::std::declval<year>() - std::declval<year>()));
 
     static_assert(testConstexpr<year, years>(), "");
 

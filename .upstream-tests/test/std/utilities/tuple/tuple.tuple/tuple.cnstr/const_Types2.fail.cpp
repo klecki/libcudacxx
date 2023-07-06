@@ -12,17 +12,17 @@
 
 // explicit tuple(const T&...);
 
-// UNSUPPORTED: c++98, c++03 
+// UNSUPPORTED: c++98, c++03
 // UNSUPPORTED: nvrtc
 
-#include <cuda/std/tuple>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/tuple>
+#include <cuda_for_dali/std/cassert>
 
 int main(int, char**)
 {
-    // cuda::std::string not supported
+    // cuda_for_dali::std::string not supported
     {
-        cuda::std::tuple<int, char*, cuda::std::string, double&> t(2, nullptr, "text");
+        cuda_for_dali::std::tuple<int, char*, cuda_for_dali::std::string, double&> t(2, nullptr, "text");
     }
 
   return 0;

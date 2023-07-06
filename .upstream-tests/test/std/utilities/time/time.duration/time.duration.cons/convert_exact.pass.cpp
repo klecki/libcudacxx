@@ -15,22 +15,22 @@
 
 // exact conversions allowed for integral reps
 
-#include <cuda/std/chrono>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
     {
-    cuda::std::chrono::milliseconds ms(1);
-    cuda::std::chrono::microseconds us = ms;
+    cuda_for_dali::std::chrono::milliseconds ms(1);
+    cuda_for_dali::std::chrono::microseconds us = ms;
     assert(us.count() == 1000);
     }
 #if TEST_STD_VER >= 11
     {
-    constexpr cuda::std::chrono::milliseconds ms(1);
-    constexpr cuda::std::chrono::microseconds us = ms;
+    constexpr cuda_for_dali::std::chrono::milliseconds ms(1);
+    constexpr cuda_for_dali::std::chrono::microseconds us = ms;
     static_assert(us.count() == 1000, "");
     }
 #endif

@@ -15,8 +15,8 @@
 
 // template<class U, class V> pair& operator=(const pair<U, V>& p);
 
-#include <cuda/std/utility>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/utility>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #if TEST_STD_VER >= 11
@@ -26,8 +26,8 @@
 int main(int, char**)
 {
     {
-        typedef cuda::std::pair<int, short> P1;
-        typedef cuda::std::pair<double, long> P2;
+        typedef cuda_for_dali::std::pair<int, short> P1;
+        typedef cuda_for_dali::std::pair<double, long> P2;
         P1 p1(3, static_cast<short>(4));
         P2 p2;
         p2 = p1;
@@ -37,8 +37,8 @@ int main(int, char**)
 #if TEST_STD_VER >= 11
     {
        using C = TestTypes::TestType;
-       using P = cuda::std::pair<int, C>;
-       using T = cuda::std::pair<long, C>;
+       using P = cuda_for_dali::std::pair<int, C>;
+       using T = cuda_for_dali::std::pair<long, C>;
        const T t(42, -42);
        P p(101, 101);
        C::reset_constructors();

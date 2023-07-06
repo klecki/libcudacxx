@@ -12,8 +12,8 @@
 
 // constexpr bool is_constant_evaluated() noexcept; // C++20
 
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
@@ -33,19 +33,19 @@ int main(int, char**)
 #if defined(_LIBCUDACXX_IS_CONSTANT_EVALUATED)
   // Test the signature
   {
-    ASSERT_SAME_TYPE(decltype(cuda::std::is_constant_evaluated()), bool);
-    ASSERT_NOEXCEPT(cuda::std::is_constant_evaluated());
-    constexpr bool p = cuda::std::is_constant_evaluated();
+    ASSERT_SAME_TYPE(decltype(cuda_for_dali::std::is_constant_evaluated()), bool);
+    ASSERT_NOEXCEPT(cuda_for_dali::std::is_constant_evaluated());
+    constexpr bool p = cuda_for_dali::std::is_constant_evaluated();
     assert(p);
   }
   // Test the return value of the builtin for basic sanity only. It's the
   // compilers job to test tho builtin for correctness.
   {
-    static_assert(cuda::std::is_constant_evaluated(), "");
-    bool p = cuda::std::is_constant_evaluated();
+    static_assert(cuda_for_dali::std::is_constant_evaluated(), "");
+    bool p = cuda_for_dali::std::is_constant_evaluated();
     assert(!p);
-    ASSERT_SAME_TYPE(InTemplate<cuda::std::is_constant_evaluated()>, InTemplate<true>);
-    static int local_static = cuda::std::is_constant_evaluated() ? 42 : -1;
+    ASSERT_SAME_TYPE(InTemplate<cuda_for_dali::std::is_constant_evaluated()>, InTemplate<true>);
+    static int local_static = cuda_for_dali::std::is_constant_evaluated() ? 42 : -1;
     assert(local_static == 42);
   }
 #endif

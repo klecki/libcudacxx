@@ -13,23 +13,23 @@
 // class strong_equality
 
 
-#include <cuda/std/compare>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/compare>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 const volatile void* volatile sink;
 
 void test_static_members() {
-  DoNotOptimize(&cuda::std::strong_equality::equal);
-  DoNotOptimize(&cuda::std::strong_equality::nonequal);
-  DoNotOptimize(&cuda::std::strong_equality::equivalent);
-  DoNotOptimize(&cuda::std::strong_equality::nonequivalent);
+  DoNotOptimize(&cuda_for_dali::std::strong_equality::equal);
+  DoNotOptimize(&cuda_for_dali::std::strong_equality::nonequal);
+  DoNotOptimize(&cuda_for_dali::std::strong_equality::equivalent);
+  DoNotOptimize(&cuda_for_dali::std::strong_equality::nonequivalent);
 }
 
 void test_signatures() {
-  auto& Eq = cuda::std::strong_equality::equivalent;
+  auto& Eq = cuda_for_dali::std::strong_equality::equivalent;
 
   ASSERT_NOEXCEPT(Eq == 0);
   ASSERT_NOEXCEPT(0 == Eq);
@@ -38,27 +38,27 @@ void test_signatures() {
 #ifndef TEST_HAS_NO_SPACESHIP_OPERATOR
   ASSERT_NOEXCEPT(0 <=> Eq);
   ASSERT_NOEXCEPT(Eq <=> 0);
-  ASSERT_SAME_TYPE(decltype(Eq <=> 0), cuda::std::strong_equality);
-  ASSERT_SAME_TYPE(decltype(0 <=> Eq), cuda::std::strong_equality);
+  ASSERT_SAME_TYPE(decltype(Eq <=> 0), cuda_for_dali::std::strong_equality);
+  ASSERT_SAME_TYPE(decltype(0 <=> Eq), cuda_for_dali::std::strong_equality);
 #endif
 }
 
 void test_conversion() {
-  constexpr cuda::std::weak_equality res = cuda::std::strong_equality::equivalent;
+  constexpr cuda_for_dali::std::weak_equality res = cuda_for_dali::std::strong_equality::equivalent;
   static_assert(res == 0, "");
-  static_assert(cuda::std::is_convertible<const cuda::std::strong_equality&,
-      cuda::std::weak_equality>::value, "");
+  static_assert(cuda_for_dali::std::is_convertible<const cuda_for_dali::std::strong_equality&,
+      cuda_for_dali::std::weak_equality>::value, "");
   static_assert(res == 0, "expected equal");
 
-  constexpr cuda::std::weak_equality neq_res = cuda::std::strong_equality::nonequivalent;
+  constexpr cuda_for_dali::std::weak_equality neq_res = cuda_for_dali::std::strong_equality::nonequivalent;
   static_assert(neq_res != 0, "expected not equal");
 }
 
 constexpr bool test_constexpr() {
-  auto& Eq = cuda::std::strong_equality::equal;
-  auto& NEq = cuda::std::strong_equality::nonequal;
-  auto& Equiv = cuda::std::strong_equality::equivalent;
-  auto& NEquiv = cuda::std::strong_equality::nonequivalent;
+  auto& Eq = cuda_for_dali::std::strong_equality::equal;
+  auto& NEq = cuda_for_dali::std::strong_equality::nonequal;
+  auto& Equiv = cuda_for_dali::std::strong_equality::equivalent;
+  auto& NEquiv = cuda_for_dali::std::strong_equality::nonequivalent;
   assert((Eq == 0) == true);
   assert((0 == Eq) == true);
   assert((Equiv == 0) == true);
@@ -78,7 +78,7 @@ constexpr bool test_constexpr() {
   assert((0 != NEquiv) == true);
 
 #ifndef TEST_HAS_NO_SPACESHIP_OPERATOR
-  cuda::std::strong_equality res = (Eq <=> 0);
+  cuda_for_dali::std::strong_equality res = (Eq <=> 0);
   ((void)res);
   res = (0 <=> Eq);
   ((void)res);

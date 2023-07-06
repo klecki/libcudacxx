@@ -7,8 +7,8 @@
 //===----------------------------------------------------------------------===//
 
 // UNSUPPORTED: c++98, c++03, c++11
-#include <cuda/std/functional>
-// #include <cuda/std/string>
+#include <cuda_for_dali/std/functional>
+// #include <cuda_for_dali/std/string>
 
 template <class T>
 struct is_transparent
@@ -24,20 +24,20 @@ public:
 
 int main(int, char**)
 {
-    static_assert ( !is_transparent<cuda::std::logical_and<int>>::value, "" );
-    // static_assert ( !is_transparent<cuda::std::logical_and<cuda::std::string>>::value, "" );
-    static_assert (  is_transparent<cuda::std::logical_and<void>>::value, "" );
-    static_assert (  is_transparent<cuda::std::logical_and<>>::value, "" );
+    static_assert ( !is_transparent<cuda_for_dali::std::logical_and<int>>::value, "" );
+    // static_assert ( !is_transparent<cuda_for_dali::std::logical_and<cuda_for_dali::std::string>>::value, "" );
+    static_assert (  is_transparent<cuda_for_dali::std::logical_and<void>>::value, "" );
+    static_assert (  is_transparent<cuda_for_dali::std::logical_and<>>::value, "" );
 
-    static_assert ( !is_transparent<cuda::std::logical_or<int>>::value, "" );
-    // static_assert ( !is_transparent<cuda::std::logical_or<cuda::std::string>>::value, "" );
-    static_assert (  is_transparent<cuda::std::logical_or<void>>::value, "" );
-    static_assert (  is_transparent<cuda::std::logical_or<>>::value, "" );
+    static_assert ( !is_transparent<cuda_for_dali::std::logical_or<int>>::value, "" );
+    // static_assert ( !is_transparent<cuda_for_dali::std::logical_or<cuda_for_dali::std::string>>::value, "" );
+    static_assert (  is_transparent<cuda_for_dali::std::logical_or<void>>::value, "" );
+    static_assert (  is_transparent<cuda_for_dali::std::logical_or<>>::value, "" );
 
-    static_assert ( !is_transparent<cuda::std::logical_not<int>>::value, "" );
-    // static_assert ( !is_transparent<cuda::std::logical_not<cuda::std::string>>::value, "" );
-    static_assert (  is_transparent<cuda::std::logical_not<void>>::value, "" );
-    static_assert (  is_transparent<cuda::std::logical_not<>>::value, "" );
+    static_assert ( !is_transparent<cuda_for_dali::std::logical_not<int>>::value, "" );
+    // static_assert ( !is_transparent<cuda_for_dali::std::logical_not<cuda_for_dali::std::string>>::value, "" );
+    static_assert (  is_transparent<cuda_for_dali::std::logical_not<void>>::value, "" );
+    static_assert (  is_transparent<cuda_for_dali::std::logical_not<>>::value, "" );
 
     return 0;
 }

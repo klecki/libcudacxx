@@ -15,8 +15,8 @@
 
 // TESTING EXTENSION atomic_flag(bool)
 
-#include <cuda/std/atomic>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/atomic>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "cuda_space_selector.h"
@@ -26,13 +26,13 @@ __host__ __device__
 void test()
 {
     {
-        Selector<cuda::std::atomic_flag, constructor_initializer> sel;
-        cuda::std::atomic_flag & f = *sel.construct(false);
+        Selector<cuda_for_dali::std::atomic_flag, constructor_initializer> sel;
+        cuda_for_dali::std::atomic_flag & f = *sel.construct(false);
         assert(f.test_and_set() == 0);
     }
     {
-        Selector<cuda::std::atomic_flag, constructor_initializer> sel;
-        cuda::std::atomic_flag & f = *sel.construct(true);
+        Selector<cuda_for_dali::std::atomic_flag, constructor_initializer> sel;
+        cuda_for_dali::std::atomic_flag & f = *sel.construct(true);
         assert(f.test_and_set() == 1);
     }
 }

@@ -13,7 +13,7 @@
 //		_LIBCUDACXX_HAS_C11_FEATURES - which is defined in <__config>
 //	They should always be the same
 
-#include <cuda/std/detail/__config>
+#include <cuda_for_dali/std/detail/__config>
 #include "test_macros.h"
 
 #ifdef TEST_HAS_C11_FEATURES

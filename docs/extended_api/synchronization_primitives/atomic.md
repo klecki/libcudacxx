@@ -58,7 +58,7 @@ For each type `T` and [`cuda::thread_scope`] `S`, the value of
 ## Example
 
 ```cuda
-#include <cuda/atomic>
+#include <cuda_for_dali/atomic>
 
 __global__ void example_kernel() {
   // This atomic is suitable for all threads in the system.

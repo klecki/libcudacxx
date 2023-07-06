@@ -8,10 +8,10 @@
 //===----------------------------------------------------------------------===//
 
 #include <cassert>
-#include <cuda/memory_resource>
-#include <cuda/std/cstddef>
-#include <cuda/std/type_traits>
-#include <cuda/stream_view>
+#include <cuda_for_dali/memory_resource>
+#include <cuda_for_dali/std/cstddef>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/stream_view>
 #include <memory>
 #include <tuple>
 #include <vector>

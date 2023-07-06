@@ -14,13 +14,13 @@
 
 // aligned_union<size_t Len, class ...Types>
 
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/type_traits>
 
 class A; // Incomplete
 
 int main(int, char**)
 {
-    typedef cuda::std::aligned_union<10, A>::type T1;
+    typedef cuda_for_dali::std::aligned_union<10, A>::type T1;
 
   return 0;
 }

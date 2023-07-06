@@ -14,15 +14,15 @@
 
 // constexpr day operator""d(unsigned long long d) noexcept;
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using day = cuda::std::chrono::day;
+    using day = cuda_for_dali::std::chrono::day;
     day d1 = 4d; // expected-error-re {{no matching literal operator for call to 'operator""d' {{.*}}}}
 
   return 0;

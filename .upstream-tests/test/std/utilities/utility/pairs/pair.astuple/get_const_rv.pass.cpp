@@ -11,18 +11,18 @@
 // template <class T1, class T2> struct pair
 
 // template<size_t I, class T1, class T2>
-//     const typename tuple_element<I, cuda::std::pair<T1, T2> >::type&&
+//     const typename tuple_element<I, cuda_for_dali::std::pair<T1, T2> >::type&&
 //     get(const pair<T1, T2>&&);
 
 // UNSUPPORTED: c++98, c++03
 // UNSUPPORTED: msvc
 
-#include <cuda/std/tuple>
-#include <cuda/std/utility>
+#include <cuda_for_dali/std/tuple>
+#include <cuda_for_dali/std/utility>
 // cuda/std/memory not supported
-// #include <cuda/std/memory>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+// #include <cuda_for_dali/std/memory>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
@@ -31,19 +31,19 @@ int main(int, char**)
     // cuda/std/memory not supported
     /*
     {
-    typedef cuda::std::pair<cuda::std::unique_ptr<int>, short> P;
-    const P p(cuda::std::unique_ptr<int>(new int(3)), static_cast<short>(4));
-    static_assert(cuda::std::is_same<const cuda::std::unique_ptr<int>&&, decltype(cuda::std::get<0>(cuda::std::move(p)))>::value, "");
-    static_assert(noexcept(cuda::std::get<0>(cuda::std::move(p))), "");
-    const cuda::std::unique_ptr<int>&& ptr = cuda::std::get<0>(cuda::std::move(p));
+    typedef cuda_for_dali::std::pair<cuda_for_dali::std::unique_ptr<int>, short> P;
+    const P p(cuda_for_dali::std::unique_ptr<int>(new int(3)), static_cast<short>(4));
+    static_assert(cuda_for_dali::std::is_same<const cuda_for_dali::std::unique_ptr<int>&&, decltype(cuda_for_dali::std::get<0>(cuda_for_dali::std::move(p)))>::value, "");
+    static_assert(noexcept(cuda_for_dali::std::get<0>(cuda_for_dali::std::move(p))), "");
+    const cuda_for_dali::std::unique_ptr<int>&& ptr = cuda_for_dali::std::get<0>(cuda_for_dali::std::move(p));
     assert(*ptr == 3);
     }
     */
     {
     int x = 42;
     int const y = 43;
-    cuda::std::pair<int&, int const&> const p(x, y);
-    static_assert(cuda::std::is_same<int&, decltype(cuda::std::get<0>(cuda::std::move(p)))>::value, "");
+    cuda_for_dali::std::pair<int&, int const&> const p(x, y);
+    static_assert(cuda_for_dali::std::is_same<int&, decltype(cuda_for_dali::std::get<0>(cuda::std::move(p)))>::value, "");
     static_assert(noexcept(cuda::std::get<0>(cuda::std::move(p))), "");
     static_assert(cuda::std::is_same<int const&, decltype(cuda::std::get<1>(cuda::std::move(p)))>::value, "");
     static_assert(noexcept(cuda::std::get<1>(cuda::std::move(p))), "");

@@ -53,10 +53,10 @@
 //     T operator=(T) noexcept;
 // };
 
-#include <cuda/std/atomic>
-#include <cuda/std/cassert>
-// #include <cuda/std/thread> // for thread_id
-// #include <cuda/std/chrono> // for nanoseconds
+#include <cuda_for_dali/std/atomic>
+#include <cuda_for_dali/std/cassert>
+// #include <cuda_for_dali/std/thread> // for thread_id
+// #include <cuda_for_dali/std/chrono> // for nanoseconds
 
 #include "test_macros.h"
 
@@ -69,15 +69,15 @@ struct TriviallyCopyable {
 template <class T>
 __host__ __device__
 void test ( T t ) {
-    cuda::std::atomic<T> t0(t);
-    cuda::std::atomic_ref<T> t1(t);
+    cuda_for_dali::std::atomic<T> t0(t);
+    cuda_for_dali::std::atomic_ref<T> t1(t);
 }
 
 int main(int, char**)
 {
     test(TriviallyCopyable(42));
-    // test(cuda::std::this_thread::get_id());
-    // test(cuda::std::chrono::nanoseconds(2));
+    // test(cuda_for_dali::std::this_thread::get_id());
+    // test(cuda_for_dali::std::chrono::nanoseconds(2));
 
   return 0;
 }

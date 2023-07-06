@@ -13,8 +13,8 @@
 // constexpr year_month& operator+=(const months& d) noexcept;
 // constexpr year_month& operator-=(const months& d) noexcept;
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
@@ -35,16 +35,16 @@ constexpr bool testConstexpr(D d1)
 
 int main(int, char**)
 {
-    using month      = cuda::std::chrono::month;
-    using months     = cuda::std::chrono::months;
-    using year       = cuda::std::chrono::year;
-    using year_month = cuda::std::chrono::year_month;
+    using month      = cuda_for_dali::std::chrono::month;
+    using months     = cuda_for_dali::std::chrono::months;
+    using year       = cuda_for_dali::std::chrono::year;
+    using year_month = cuda_for_dali::std::chrono::year_month;
 
     ASSERT_NOEXCEPT(                       std::declval<year_month&>() += std::declval<months>());
-    ASSERT_SAME_TYPE(year_month&, decltype(cuda::std::declval<year_month&>() += std::declval<months>()));
+    ASSERT_SAME_TYPE(year_month&, decltype(cuda_for_dali::std::declval<year_month&>() += std::declval<months>()));
 
     ASSERT_NOEXCEPT(                       std::declval<year_month&>() -= std::declval<months>());
-    ASSERT_SAME_TYPE(year_month&, decltype(cuda::std::declval<year_month&>() -= std::declval<months>()));
+    ASSERT_SAME_TYPE(year_month&, decltype(cuda_for_dali::std::declval<year_month&>() -= std::declval<months>()));
 
     static_assert(testConstexpr<year_month, months>(year_month{year{1234}, month{1}}), "");
 

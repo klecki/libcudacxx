@@ -3,8 +3,8 @@
 // Released under the Apache License v2.0 with LLVM Exceptions.
 // See https://llvm.org/LICENSE.txt for license information.
 
-#include <cuda/std/cstdint>
-#include <cuda/std/atomic>
+#include <cuda_for_dali/std/cstdint>
+#include <cuda_for_dali/std/atomic>
 
 // TODO: It would be great if this example could NOT depend on Thrust.
 #include <thrust/pair.h>

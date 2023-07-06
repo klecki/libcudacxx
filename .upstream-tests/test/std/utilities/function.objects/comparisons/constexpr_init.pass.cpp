@@ -23,23 +23,23 @@
 // Test that these types can be constructed w/o an initializer in a constexpr
 // context. This is specifically testing gcc.gnu.org/PR83921
 
-#include <cuda/std/functional>
+#include <cuda_for_dali/std/functional>
 #include "test_macros.h"
 
 template <class T>
 __host__ __device__
 constexpr bool test_constexpr_context() {
-  cuda::std::equal_to<T> eq;
+  cuda_for_dali::std::equal_to<T> eq;
   ((void)eq);
-  cuda::std::not_equal_to<T> neq;
+  cuda_for_dali::std::not_equal_to<T> neq;
   ((void)neq);
-  cuda::std::less<T> l;
+  cuda_for_dali::std::less<T> l;
   ((void)l);
-  cuda::std::less_equal<T> le;
+  cuda_for_dali::std::less_equal<T> le;
   ((void)le);
-  cuda::std::greater<T> g;
+  cuda_for_dali::std::greater<T> g;
   ((void)g);
-  cuda::std::greater_equal<T> ge;
+  cuda_for_dali::std::greater_equal<T> ge;
   ((void)ge);
   return true;
 }

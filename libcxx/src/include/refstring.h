@@ -6,8 +6,8 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef _LIBCUDACXX_REFSTRING_H
-#define _LIBCUDACXX_REFSTRING_H
+#ifndef _LIBCUDAFORDALICXX_REFSTRING_H
+#define _LIBCUDAFORDALICXX_REFSTRING_H
 
 #include <__config>
 #include <stdexcept>
@@ -19,7 +19,7 @@
 #endif
 #include "atomic_support.h"
 
-_LIBCUDACXX_BEGIN_NAMESPACE_STD
+_LIBCUDAFORDALICXX_BEGIN_NAMESPACE_STD
 
 namespace __refstring_imp { namespace {
 typedef int count_t;
@@ -122,6 +122,6 @@ bool __libcpp_refstring::__uses_refcount() const {
 #endif
 }
 
-_LIBCUDACXX_END_NAMESPACE_STD
+_LIBCUDAFORDALICXX_END_NAMESPACE_STD
 
-#endif //_LIBCUDACXX_REFSTRING_H
+#endif //_LIBCUDAFORDALICXX_REFSTRING_H

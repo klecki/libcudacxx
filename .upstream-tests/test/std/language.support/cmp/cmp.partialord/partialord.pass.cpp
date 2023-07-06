@@ -13,23 +13,23 @@
 // class partial_ordering
 
 
-#include <cuda/std/compare>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/compare>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 const volatile void* volatile sink;
 
 void test_static_members() {
-  DoNotOptimize(&cuda::std::partial_ordering::less);
-  DoNotOptimize(&cuda::std::partial_ordering::equivalent);
-  DoNotOptimize(&cuda::std::partial_ordering::greater);
-  DoNotOptimize(&cuda::std::partial_ordering::unordered);
+  DoNotOptimize(&cuda_for_dali::std::partial_ordering::less);
+  DoNotOptimize(&cuda_for_dali::std::partial_ordering::equivalent);
+  DoNotOptimize(&cuda_for_dali::std::partial_ordering::greater);
+  DoNotOptimize(&cuda_for_dali::std::partial_ordering::unordered);
 }
 
 void test_signatures() {
-  auto& Eq = cuda::std::partial_ordering::equivalent;
+  auto& Eq = cuda_for_dali::std::partial_ordering::equivalent;
 
   ASSERT_NOEXCEPT(Eq == 0);
   ASSERT_NOEXCEPT(0 == Eq);
@@ -46,38 +46,38 @@ void test_signatures() {
 #ifndef TEST_HAS_NO_SPACESHIP_OPERATOR
   ASSERT_NOEXCEPT(0 <=> Eq);
   ASSERT_NOEXCEPT(Eq <=> 0);
-  ASSERT_SAME_TYPE(decltype(Eq <=> 0), cuda::std::partial_ordering);
-  ASSERT_SAME_TYPE(decltype(0 <=> Eq), cuda::std::partial_ordering);
+  ASSERT_SAME_TYPE(decltype(Eq <=> 0), cuda_for_dali::std::partial_ordering);
+  ASSERT_SAME_TYPE(decltype(0 <=> Eq), cuda_for_dali::std::partial_ordering);
 #endif
 }
 
 constexpr bool test_conversion() {
-  static_assert(cuda::std::is_convertible<const cuda::std::partial_ordering, cuda::std::weak_equality>::value, "");
+  static_assert(cuda_for_dali::std::is_convertible<const cuda_for_dali::std::partial_ordering, cuda_for_dali::std::weak_equality>::value, "");
   { // value == 0
-    auto V = cuda::std::partial_ordering::equivalent;
-    cuda::std::weak_equality WV = V;
+    auto V = cuda_for_dali::std::partial_ordering::equivalent;
+    cuda_for_dali::std::weak_equality WV = V;
     assert(WV == 0);
   }
-  cuda::std::partial_ordering TestCases[] = {
-      cuda::std::partial_ordering::less,
-      cuda::std::partial_ordering::greater,
-      cuda::std::partial_ordering::unordered
+  cuda_for_dali::std::partial_ordering TestCases[] = {
+      cuda_for_dali::std::partial_ordering::less,
+      cuda_for_dali::std::partial_ordering::greater,
+      cuda_for_dali::std::partial_ordering::unordered
   };
   for (auto V : TestCases)
   { // value != 0
-    cuda::std::weak_equality WV = V;
+    cuda_for_dali::std::weak_equality WV = V;
     assert(WV != 0);
   }
   return true;
 }
 
 constexpr bool test_constexpr() {
-  auto& Eq = cuda::std::partial_ordering::equivalent;
-  auto& Less = cuda::std::partial_ordering::less;
-  auto& Greater = cuda::std::partial_ordering::greater;
-  auto& Unord = cuda::std::partial_ordering::unordered;
+  auto& Eq = cuda_for_dali::std::partial_ordering::equivalent;
+  auto& Less = cuda_for_dali::std::partial_ordering::less;
+  auto& Greater = cuda_for_dali::std::partial_ordering::greater;
+  auto& Unord = cuda_for_dali::std::partial_ordering::unordered;
   struct {
-    cuda::std::partial_ordering Value;
+    cuda_for_dali::std::partial_ordering Value;
     bool ExpectEq;
     bool ExpectNeq;
     bool ExpectLess;
@@ -107,7 +107,7 @@ constexpr bool test_constexpr() {
   }
 #ifndef TEST_HAS_NO_SPACESHIP_OPERATOR
   {
-    cuda::std::partial_ordering res = (Eq <=> 0);
+    cuda_for_dali::std::partial_ordering res = (Eq <=> 0);
     ((void)res);
     res = (0 <=> Eq);
     ((void)res);
@@ -119,17 +119,17 @@ constexpr bool test_constexpr() {
     ER_Unord
   };
   struct {
-    cuda::std::partial_ordering Value;
+    cuda_for_dali::std::partial_ordering Value;
     ExpectRes Expect;
   } SpaceshipTestCases[] = {
-      {cuda::std::partial_ordering::equivalent, ER_Equiv},
-      {cuda::std::partial_ordering::less, ER_Less},
-      {cuda::std::partial_ordering::greater, ER_Greater},
-      {cuda::std::partial_ordering::unordered, ER_Unord}
+      {cuda_for_dali::std::partial_ordering::equivalent, ER_Equiv},
+      {cuda_for_dali::std::partial_ordering::less, ER_Less},
+      {cuda_for_dali::std::partial_ordering::greater, ER_Greater},
+      {cuda_for_dali::std::partial_ordering::unordered, ER_Unord}
   };
   for (auto TC : SpaceshipTestCases)
   {
-    cuda::std::partial_ordering Res = (TC.Value <=> 0);
+    cuda_for_dali::std::partial_ordering Res = (TC.Value <=> 0);
     switch (TC.Expect) {
     case ER_Equiv:
       assert(Res == 0);

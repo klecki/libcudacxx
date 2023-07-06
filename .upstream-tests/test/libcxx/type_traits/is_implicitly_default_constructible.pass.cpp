@@ -15,7 +15,7 @@
 
 // __is_implicitly_default_constructible<Tp>
 
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/type_traits>
 
 #include "test_macros.h"
 
@@ -72,17 +72,17 @@ private:
     PrivateDefaultConstructibleWithBase() = default;
 };
 
-static_assert(!cuda::std::__is_implicitly_default_constructible<ExplicitlyDefaultConstructible1>::value, "");
-static_assert(!cuda::std::__is_implicitly_default_constructible<ExplicitlyDefaultConstructible2>::value, "");
-static_assert(cuda::std::__is_implicitly_default_constructible<ImplicitlyDefaultConstructible1>::value, "");
-static_assert(cuda::std::__is_implicitly_default_constructible<ImplicitlyDefaultConstructible2>::value, "");
-static_assert(!cuda::std::__is_implicitly_default_constructible<NonDefaultConstructible1>::value, "");
-static_assert(!cuda::std::__is_implicitly_default_constructible<NonDefaultConstructible2>::value, "");
-static_assert(!cuda::std::__is_implicitly_default_constructible<NonDefaultConstructible3>::value, "");
-static_assert(!cuda::std::__is_implicitly_default_constructible<ProtectedDefaultConstructible>::value, "");
-static_assert(!cuda::std::__is_implicitly_default_constructible<PrivateDefaultConstructible>::value, "");
-static_assert(!cuda::std::__is_implicitly_default_constructible<ProtectedDefaultConstructibleWithBase>::value, "");
-static_assert(!cuda::std::__is_implicitly_default_constructible<PrivateDefaultConstructibleWithBase>::value, "");
+static_assert(!cuda_for_dali::std::__is_implicitly_default_constructible<ExplicitlyDefaultConstructible1>::value, "");
+static_assert(!cuda_for_dali::std::__is_implicitly_default_constructible<ExplicitlyDefaultConstructible2>::value, "");
+static_assert(cuda_for_dali::std::__is_implicitly_default_constructible<ImplicitlyDefaultConstructible1>::value, "");
+static_assert(cuda_for_dali::std::__is_implicitly_default_constructible<ImplicitlyDefaultConstructible2>::value, "");
+static_assert(!cuda_for_dali::std::__is_implicitly_default_constructible<NonDefaultConstructible1>::value, "");
+static_assert(!cuda_for_dali::std::__is_implicitly_default_constructible<NonDefaultConstructible2>::value, "");
+static_assert(!cuda_for_dali::std::__is_implicitly_default_constructible<NonDefaultConstructible3>::value, "");
+static_assert(!cuda_for_dali::std::__is_implicitly_default_constructible<ProtectedDefaultConstructible>::value, "");
+static_assert(!cuda_for_dali::std::__is_implicitly_default_constructible<PrivateDefaultConstructible>::value, "");
+static_assert(!cuda_for_dali::std::__is_implicitly_default_constructible<ProtectedDefaultConstructibleWithBase>::value, "");
+static_assert(!cuda_for_dali::std::__is_implicitly_default_constructible<PrivateDefaultConstructibleWithBase>::value, "");
 
 int main(int, char**) {
     return 0;

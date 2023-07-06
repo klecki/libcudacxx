@@ -13,13 +13,13 @@
 
 // void atomic_thread_fence(memory_order m);
 
-#include <cuda/std/atomic>
+#include <cuda_for_dali/std/atomic>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-  cuda::std::atomic_thread_fence(cuda::std::memory_order_seq_cst);
+  cuda_for_dali::std::atomic_thread_fence(cuda_for_dali::std::memory_order_seq_cst);
 
   return 0;
 }

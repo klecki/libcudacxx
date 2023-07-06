@@ -13,10 +13,10 @@
 // template <class Alloc, class... UTypes>
 //   tuple(allocator_arg_t, const Alloc& a, tuple<UTypes...>&&);
 
-// UNSUPPORTED: c++98, c++03 
+// UNSUPPORTED: c++98, c++03
 
-#include <cuda/std/tuple>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/tuple>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "allocators.h"
@@ -51,56 +51,56 @@ struct Implicit {
 int main(int, char**)
 {
     {
-        typedef cuda::std::tuple<int> T0;
-        typedef cuda::std::tuple<alloc_first> T1;
+        typedef cuda_for_dali::std::tuple<int> T0;
+        typedef cuda_for_dali::std::tuple<alloc_first> T1;
         T0 t0(2);
         alloc_first::allocator_constructed() = false;
-        T1 t1(cuda::std::allocator_arg, A1<int>(5), cuda::std::move(t0));
+        T1 t1(cuda_for_dali::std::allocator_arg, A1<int>(5), cuda_for_dali::std::move(t0));
         assert(alloc_first::allocator_constructed());
-        assert(cuda::std::get<0>(t1) == 2);
+        assert(cuda_for_dali::std::get<0>(t1) == 2);
     }
-    // cuda::std::unique_ptr not supported
-    // cuda::std::allocator not supported
+    // cuda_for_dali::std::unique_ptr not supported
+    // cuda_for_dali::std::allocator not supported
     /*
     {
-        typedef cuda::std::tuple<cuda::std::unique_ptr<D>> T0;
-        typedef cuda::std::tuple<cuda::std::unique_ptr<B>> T1;
-        T0 t0(cuda::std::unique_ptr<D>(new D(3)));
-        T1 t1(cuda::std::allocator_arg, A1<int>(5), cuda::std::move(t0));
-        assert(cuda::std::get<0>(t1)->id_ == 3);
+        typedef cuda_for_dali::std::tuple<cuda_for_dali::std::unique_ptr<D>> T0;
+        typedef cuda_for_dali::std::tuple<cuda_for_dali::std::unique_ptr<B>> T1;
+        T0 t0(cuda_for_dali::std::unique_ptr<D>(new D(3)));
+        T1 t1(cuda_for_dali::std::allocator_arg, A1<int>(5), cuda_for_dali::std::move(t0));
+        assert(cuda_for_dali::std::get<0>(t1)->id_ == 3);
     }
     {
-        typedef cuda::std::tuple<int, cuda::std::unique_ptr<D>> T0;
-        typedef cuda::std::tuple<alloc_first, cuda::std::unique_ptr<B>> T1;
-        T0 t0(2, cuda::std::unique_ptr<D>(new D(3)));
+        typedef cuda_for_dali::std::tuple<int, cuda_for_dali::std::unique_ptr<D>> T0;
+        typedef cuda_for_dali::std::tuple<alloc_first, cuda_for_dali::std::unique_ptr<B>> T1;
+        T0 t0(2, cuda_for_dali::std::unique_ptr<D>(new D(3)));
         alloc_first::allocator_constructed() = false;
-        T1 t1(cuda::std::allocator_arg, A1<int>(5), cuda::std::move(t0));
+        T1 t1(cuda_for_dali::std::allocator_arg, A1<int>(5), cuda_for_dali::std::move(t0));
         assert(alloc_first::allocator_constructed());
-        assert(cuda::std::get<0>(t1) == 2);
-        assert(cuda::std::get<1>(t1)->id_ == 3);
+        assert(cuda_for_dali::std::get<0>(t1) == 2);
+        assert(cuda_for_dali::std::get<1>(t1)->id_ == 3);
     }
     {
-        typedef cuda::std::tuple<int, int, cuda::std::unique_ptr<D>> T0;
-        typedef cuda::std::tuple<alloc_last, alloc_first, cuda::std::unique_ptr<B>> T1;
-        T0 t0(1, 2, cuda::std::unique_ptr<D>(new D(3)));
+        typedef cuda_for_dali::std::tuple<int, int, cuda_for_dali::std::unique_ptr<D>> T0;
+        typedef cuda_for_dali::std::tuple<alloc_last, alloc_first, cuda_for_dali::std::unique_ptr<B>> T1;
+        T0 t0(1, 2, cuda_for_dali::std::unique_ptr<D>(new D(3)));
         alloc_first::allocator_constructed() = false;
         alloc_last::allocator_constructed() = false;
-        T1 t1(cuda::std::allocator_arg, A1<int>(5), cuda::std::move(t0));
+        T1 t1(cuda_for_dali::std::allocator_arg, A1<int>(5), cuda_for_dali::std::move(t0));
         assert(alloc_first::allocator_constructed());
         assert(alloc_last::allocator_constructed());
-        assert(cuda::std::get<0>(t1) == 1);
-        assert(cuda::std::get<1>(t1) == 2);
-        assert(cuda::std::get<2>(t1)->id_ == 3);
+        assert(cuda_for_dali::std::get<0>(t1) == 1);
+        assert(cuda_for_dali::std::get<1>(t1) == 2);
+        assert(cuda_for_dali::std::get<2>(t1)->id_ == 3);
     }
     {
-        cuda::std::tuple<int> t1(42);
-        cuda::std::tuple<Explicit> t2{cuda::std::allocator_arg, cuda::std::allocator<void>{}, cuda::std::move(t1)};
-        assert(cuda::std::get<0>(t2).value == 42);
+        cuda_for_dali::std::tuple<int> t1(42);
+        cuda_for_dali::std::tuple<Explicit> t2{cuda_for_dali::std::allocator_arg, cuda_for_dali::std::allocator<void>{}, cuda_for_dali::std::move(t1)};
+        assert(cuda_for_dali::std::get<0>(t2).value == 42);
     }
     {
-        cuda::std::tuple<int> t1(42);
-        cuda::std::tuple<Implicit> t2 = {cuda::std::allocator_arg, cuda::std::allocator<void>{}, cuda::std::move(t1)};
-        assert(cuda::std::get<0>(t2).value == 42);
+        cuda_for_dali::std::tuple<int> t1(42);
+        cuda_for_dali::std::tuple<Implicit> t2 = {cuda_for_dali::std::allocator_arg, cuda_for_dali::std::allocator<void>{}, cuda_for_dali::std::move(t1)};
+        assert(cuda_for_dali::std::get<0>(t2).value == 42);
     }
     */
 

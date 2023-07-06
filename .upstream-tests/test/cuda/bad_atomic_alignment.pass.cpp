@@ -11,12 +11,12 @@
 
 // <cuda/atomic>
 
-// cuda::atomic<key>
+// cuda_for_dali::atomic<key>
 
 // Original test issue:
 // https://github.com/NVIDIA/libcudacxx/issues/160
 
-#include <cuda/atomic>
+#include <cuda_for_dali/atomic>
 
 template <typename T>
 __host__ __device__
@@ -31,7 +31,7 @@ int main(int argc, char ** argv)
       int32_t b;
     };
     static_assert(alignof(key) == 4, "");
-    cuda::atomic<key> k(key{});
+    cuda_for_dali::atomic<key> k(key{});
     auto r = k.load();
     k.store(r);
     (void)k.exchange(r);
@@ -44,7 +44,7 @@ int main(int argc, char ** argv)
       int32_t b;
     };
     static_assert(alignof(key) == 8, "");
-    cuda::atomic<key> k(key{});
+    cuda_for_dali::atomic<key> k(key{});
     auto r = k.load();
     k.store(r);
     (void)k.exchange(r);

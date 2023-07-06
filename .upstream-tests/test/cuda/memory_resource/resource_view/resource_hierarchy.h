@@ -1,15 +1,15 @@
 #pragma once
 
-#include <cuda/memory_resource>
+#include <cuda_for_dali/memory_resource>
 
-class derived1 : public cuda::memory_resource<cuda::memory_kind::managed> {
+class derived1 : public cuda_for_dali::memory_resource<cuda_for_dali::memory_kind::managed> {
 };
 
 class derived2 : public derived1 {
 };
 
 
-class derived_async1 : public cuda::stream_ordered_memory_resource<cuda::memory_kind::managed> {
+class derived_async1 : public cuda_for_dali::stream_ordered_memory_resource<cuda_for_dali::memory_kind::managed> {
 };
 
 class derived_async2 : public derived_async1 {
@@ -40,40 +40,40 @@ to--v
 */
 
 
-using view_D2 = cuda::basic_resource_view<
+using view_D2 = cuda_for_dali::basic_resource_view<
     derived2*,
-    cuda::memory_access::host,
-    cuda::oversubscribable,
-    cuda::memory_location::host>;
+    cuda_for_dali::memory_access::host,
+    cuda_for_dali::oversubscribable,
+    cuda_for_dali::memory_location::host>;
 
-using view_D1 = cuda::basic_resource_view<
+using view_D1 = cuda_for_dali::basic_resource_view<
     derived1*,
-    cuda::memory_access::host,
-    cuda::memory_location::host>;
+    cuda_for_dali::memory_access::host,
+    cuda_for_dali::memory_location::host>;
 
-using view_DA2 = cuda::basic_resource_view<
+using view_DA2 = cuda_for_dali::basic_resource_view<
     derived_async2*,
-    cuda::memory_access::host,
-    cuda::oversubscribable,
-    cuda::memory_location::host>;
+    cuda_for_dali::memory_access::host,
+    cuda_for_dali::oversubscribable,
+    cuda_for_dali::memory_location::host>;
 
-using view_DA1 = cuda::basic_resource_view<
+using view_DA1 = cuda_for_dali::basic_resource_view<
     derived_async1*,
-    cuda::memory_access::host,
-    cuda::memory_location::host>;
+    cuda_for_dali::memory_access::host,
+    cuda_for_dali::memory_location::host>;
 
-using view_M = cuda::basic_resource_view<
-    cuda::memory_resource<cuda::memory_kind::managed>*,
-    cuda::memory_access::host,
-    cuda::memory_location::host>;
+using view_M = cuda_for_dali::basic_resource_view<
+    cuda_for_dali::memory_resource<cuda_for_dali::memory_kind::managed>*,
+    cuda_for_dali::memory_access::host,
+    cuda_for_dali::memory_location::host>;
 
-using view_MA = cuda::basic_resource_view<
-    cuda::stream_ordered_memory_resource<cuda::memory_kind::managed>*,
-    cuda::memory_access::host,
-    cuda::memory_location::host>;
+using view_MA = cuda_for_dali::basic_resource_view<
+    cuda_for_dali::stream_ordered_memory_resource<cuda_for_dali::memory_kind::managed>*,
+    cuda_for_dali::memory_access::host,
+    cuda_for_dali::memory_location::host>;
 
-using view_B = cuda::resource_view<
-    cuda::memory_location::host>;
+using view_B = cuda_for_dali::resource_view<
+    cuda_for_dali::memory_location::host>;
 
-using view_BA = cuda::stream_ordered_resource_view<
-    cuda::memory_location::host>;
+using view_BA = cuda_for_dali::stream_ordered_resource_view<
+    cuda_for_dali::memory_location::host>;

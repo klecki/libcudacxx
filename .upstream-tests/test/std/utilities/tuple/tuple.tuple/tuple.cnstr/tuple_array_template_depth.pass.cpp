@@ -6,7 +6,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-// UNSUPPORTED: c++98, c++03 
+// UNSUPPORTED: c++98, c++03
 
 // <cuda/std/tuple>
 
@@ -21,17 +21,17 @@
 // This test checks that we do not evaluate __make_tuple_types
 // on the array.
 
-// cuda::std::array not supported
-// #include <cuda/std/array>
-#include <cuda/std/tuple>
+// cuda_for_dali::std::array not supported
+// #include <cuda_for_dali/std/array>
+#include <cuda_for_dali/std/tuple>
 
 #include "test_macros.h"
 
-// cuda::std::array not supported
+// cuda_for_dali::std::array not supported
 /*
 // Use 1256 to try and blow the template instantiation depth for all compilers.
-typedef cuda::std::array<char, 1256> array_t;
-typedef cuda::std::tuple<array_t> tuple_t;
+typedef cuda_for_dali::std::array<char, 1256> array_t;
+typedef cuda_for_dali::std::tuple<array_t> tuple_t;
 */
 
 int main(int, char**)

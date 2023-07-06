@@ -15,17 +15,17 @@
 
 // overflow should SFINAE instead of error out, LWG 2094
 
-#include <cuda/std/chrono>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/cassert>
 
 __host__ __device__
-bool f(cuda::std::chrono::milliseconds)
+bool f(cuda_for_dali::std::chrono::milliseconds)
 {
     return false;
 }
 
 __host__ __device__
-bool f(cuda::std::chrono::seconds)
+bool f(cuda_for_dali::std::chrono::seconds)
 {
     return true;
 }
@@ -33,7 +33,7 @@ bool f(cuda::std::chrono::seconds)
 int main(int, char**)
 {
     {
-    cuda::std::chrono::duration<int, cuda::std::exa> r(1);
+    cuda_for_dali::std::chrono::duration<int, cuda_for_dali::std::exa> r(1);
     assert(f(r));
     }
 

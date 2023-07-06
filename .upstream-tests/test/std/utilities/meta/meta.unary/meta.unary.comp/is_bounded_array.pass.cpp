@@ -12,7 +12,7 @@
 // is_bounded_array<T>
 // T is an array type of known bound ([dcl.array])
 
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/type_traits>
 
 #include "test_macros.h"
 
@@ -20,8 +20,8 @@ template <class T, bool B>
 __host__ __device__
 void test_array_imp()
 {
-	static_assert( B == cuda::std::is_bounded_array<T>::value, "" );
-	static_assert( B == cuda::std::is_bounded_array_v<T>, "" );
+	static_assert( B == cuda_for_dali::std::is_bounded_array<T>::value, "" );
+	static_assert( B == cuda_for_dali::std::is_bounded_array_v<T>, "" );
 }
 
 template <class T, bool B>
@@ -54,7 +54,7 @@ int main(int, char**)
 {
 //	Non-array types
 	test_array<void,           false>();
-	test_array<cuda::std::nullptr_t, false>();
+	test_array<cuda_for_dali::std::nullptr_t, false>();
 	test_array<int,            false>();
 	test_array<double,         false>();
 	test_array<void *,         false>();

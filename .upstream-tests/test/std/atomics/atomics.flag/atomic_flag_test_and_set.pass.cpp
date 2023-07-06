@@ -16,8 +16,8 @@
 // bool atomic_flag_test_and_set(volatile atomic_flag*);
 // bool atomic_flag_test_and_set(atomic_flag*);
 
-#include <cuda/std/atomic>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/atomic>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "cuda_space_selector.h"
@@ -27,15 +27,15 @@ __host__ __device__
 void test()
 {
     {
-        Selector<cuda::std::atomic_flag, default_initializer> sel;
-        cuda::std::atomic_flag & f = *sel.construct();
+        Selector<cuda_for_dali::std::atomic_flag, default_initializer> sel;
+        cuda_for_dali::std::atomic_flag & f = *sel.construct();
         f.clear();
         assert(atomic_flag_test_and_set(&f) == 0);
         assert(f.test_and_set() == 1);
     }
     {
-        Selector<volatile cuda::std::atomic_flag, default_initializer> sel;
-        volatile cuda::std::atomic_flag & f = *sel.construct();
+        Selector<volatile cuda_for_dali::std::atomic_flag, default_initializer> sel;
+        volatile cuda_for_dali::std::atomic_flag & f = *sel.construct();
         f.clear();
         assert(atomic_flag_test_and_set(&f) == 0);
         assert(f.test_and_set() == 1);

@@ -13,42 +13,42 @@
 
 #include "helpers.h"
 
-#include <cuda/std/tuple>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/tuple>
+#include <cuda_for_dali/std/cassert>
 
 struct pod {
     char val[10];
 };
 
-using tuple_t = cuda::std::tuple<int, pod, unsigned long long>;
+using tuple_t = cuda_for_dali::std::tuple<int, pod, unsigned long long>;
 
 template<int N>
 struct write
 {
-    using async = cuda::std::false_type;
+    using async = cuda_for_dali::std::false_type;
 
     template <typename Tuple>
     __host__ __device__
     static void perform(Tuple &t)
     {
-        cuda::std::get<0>(t) = N;
-        cuda::std::get<1>(t).val[0] = N;
-        cuda::std::get<2>(t) = N;
+        cuda_for_dali::std::get<0>(t) = N;
+        cuda_for_dali::std::get<1>(t).val[0] = N;
+        cuda_for_dali::std::get<2>(t) = N;
     }
 };
 
 template<int N>
 struct read
 {
-    using async = cuda::std::false_type;
+    using async = cuda_for_dali::std::false_type;
 
     template <typename Tuple>
     __host__ __device__
     static void perform(Tuple &t)
     {
-        assert(cuda::std::get<0>(t) == N);
-        assert(cuda::std::get<1>(t).val[0] == N);
-        assert(cuda::std::get<2>(t) == N);
+        assert(cuda_for_dali::std::get<0>(t) == N);
+        assert(cuda_for_dali::std::get<1>(t).val[0] == N);
+        assert(cuda_for_dali::std::get<2>(t) == N);
     }
 };
 

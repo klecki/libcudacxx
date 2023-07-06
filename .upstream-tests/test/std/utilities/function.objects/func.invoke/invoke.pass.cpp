@@ -37,10 +37,10 @@
 ///   described in the previous item;
 ///   (1.5) - f(t1, t2, ..., tN) in all other cases.
 
-#include <cuda/std/functional>
-#include <cuda/std/type_traits>
-#include <cuda/std/utility> // for cuda::std::move
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/functional>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/utility> // for cuda_for_dali::std::move
+#include <cuda_for_dali/std/cassert>
 
 #pragma nv_diag_suppress set_but_not_used
 
@@ -66,13 +66,13 @@ struct TestClass {
     int const volatile& operator()(NonCopyable&&) const volatile & { return data; }
 
     __host__ __device__
-    int&& operator()(NonCopyable&&) && { return cuda::std::move(data); }
+    int&& operator()(NonCopyable&&) && { return cuda_for_dali::std::move(data); }
     __host__ __device__
-    int const&& operator()(NonCopyable&&) const && { return cuda::std::move(data); }
+    int const&& operator()(NonCopyable&&) const && { return cuda_for_dali::std::move(data); }
     __host__ __device__
-    int volatile&& operator()(NonCopyable&&) volatile && { return cuda::std::move(data); }
+    int volatile&& operator()(NonCopyable&&) volatile && { return cuda_for_dali::std::move(data); }
     __host__ __device__
-    int const volatile&& operator()(NonCopyable&&) const volatile && { return cuda::std::move(data); }
+    int const volatile&& operator()(NonCopyable&&) const volatile && { return cuda_for_dali::std::move(data); }
 
     int data;
 private:
@@ -103,18 +103,18 @@ void test_b12(Functor&& f) {
 
     // Check that the deduced return type of invoke is what is expected.
     typedef decltype(
-        cuda::std::invoke(func_ptr, cuda::std::forward<Functor>(f), cuda::std::move(arg))
+        cuda_for_dali::std::invoke(func_ptr, cuda_for_dali::std::forward<Functor>(f), cuda_for_dali::std::move(arg))
     ) DeducedReturnType;
-    static_assert((cuda::std::is_same<DeducedReturnType, Expect>::value), "");
+    static_assert((cuda_for_dali::std::is_same<DeducedReturnType, Expect>::value), "");
 
     // Check that result_of_t matches Expect.
-    typedef typename cuda::std::result_of<ClassFunc&&(Functor&&, NonCopyable&&)>::type
+    typedef typename cuda_for_dali::std::result_of<ClassFunc&&(Functor&&, NonCopyable&&)>::type
       ResultOfReturnType;
-    static_assert((cuda::std::is_same<ResultOfReturnType, Expect>::value), "");
+    static_assert((cuda_for_dali::std::is_same<ResultOfReturnType, Expect>::value), "");
 
     // Run invoke and check the return value.
     DeducedReturnType ret =
-            cuda::std::invoke(func_ptr, cuda::std::forward<Functor>(f), cuda::std::move(arg));
+            cuda_for_dali::std::invoke(func_ptr, cuda_for_dali::std::forward<Functor>(f), cuda_for_dali::std::move(arg));
     assert(ret == 42);
 }
 
@@ -127,18 +127,18 @@ void test_b34(Functor&& f) {
 
     // Check that the deduced return type of invoke is what is expected.
     typedef decltype(
-        cuda::std::invoke(func_ptr, cuda::std::forward<Functor>(f))
+        cuda_for_dali::std::invoke(func_ptr, cuda_for_dali::std::forward<Functor>(f))
     ) DeducedReturnType;
-    static_assert((cuda::std::is_same<DeducedReturnType, Expect>::value), "");
+    static_assert((cuda_for_dali::std::is_same<DeducedReturnType, Expect>::value), "");
 
     // Check that result_of_t matches Expect.
-    typedef typename cuda::std::result_of<ClassFunc&&(Functor&&)>::type
+    typedef typename cuda_for_dali::std::result_of<ClassFunc&&(Functor&&)>::type
             ResultOfReturnType;
-    static_assert((cuda::std::is_same<ResultOfReturnType, Expect>::value), "");
+    static_assert((cuda_for_dali::std::is_same<ResultOfReturnType, Expect>::value), "");
 
     // Run invoke and check the return value.
     DeducedReturnType ret =
-            cuda::std::invoke(func_ptr, cuda::std::forward<Functor>(f));
+            cuda_for_dali::std::invoke(func_ptr, cuda_for_dali::std::forward<Functor>(f));
     assert(ret == 42);
 }
 
@@ -149,17 +149,17 @@ void test_b5(Functor&& f) {
 
     // Check that the deduced return type of invoke is what is expected.
     typedef decltype(
-        cuda::std::invoke(cuda::std::forward<Functor>(f), cuda::std::move(arg))
+        cuda_for_dali::std::invoke(cuda_for_dali::std::forward<Functor>(f), cuda_for_dali::std::move(arg))
     ) DeducedReturnType;
-    static_assert((cuda::std::is_same<DeducedReturnType, Expect>::value), "");
+    static_assert((cuda_for_dali::std::is_same<DeducedReturnType, Expect>::value), "");
 
     // Check that result_of_t matches Expect.
-    typedef typename cuda::std::result_of<Functor&&(NonCopyable&&)>::type
+    typedef typename cuda_for_dali::std::result_of<Functor&&(NonCopyable&&)>::type
             ResultOfReturnType;
-    static_assert((cuda::std::is_same<ResultOfReturnType, Expect>::value), "");
+    static_assert((cuda_for_dali::std::is_same<ResultOfReturnType, Expect>::value), "");
 
     // Run invoke and check the return value.
-    DeducedReturnType ret = cuda::std::invoke(cuda::std::forward<Functor>(f), cuda::std::move(arg));
+    DeducedReturnType ret = cuda_for_dali::std::invoke(cuda_for_dali::std::forward<Functor>(f), cuda_for_dali::std::move(arg));
     assert(ret == 42);
 }
 
@@ -172,10 +172,10 @@ void bullet_one_two_tests() {
         test_b12<int volatile&(NonCopyable&&) volatile &, int volatile&>(cl);
         test_b12<int const volatile&(NonCopyable&&) const volatile &, int const volatile&>(cl);
 
-        test_b12<int&&(NonCopyable&&) &&, int&&>(cuda::std::move(cl));
-        test_b12<int const&&(NonCopyable&&) const &&, int const&&>(cuda::std::move(cl));
-        test_b12<int volatile&&(NonCopyable&&) volatile &&, int volatile&&>(cuda::std::move(cl));
-        test_b12<int const volatile&&(NonCopyable&&) const volatile &&, int const volatile&&>(cuda::std::move(cl));
+        test_b12<int&&(NonCopyable&&) &&, int&&>(cuda_for_dali::std::move(cl));
+        test_b12<int const&&(NonCopyable&&) const &&, int const&&>(cuda_for_dali::std::move(cl));
+        test_b12<int volatile&&(NonCopyable&&) volatile &&, int volatile&&>(cuda_for_dali::std::move(cl));
+        test_b12<int const volatile&&(NonCopyable&&) const volatile &&, int const volatile&&>(cuda_for_dali::std::move(cl));
     }
     {
         DerivedFromTestClass cl(42);
@@ -184,38 +184,38 @@ void bullet_one_two_tests() {
         test_b12<int volatile&(NonCopyable&&) volatile &, int volatile&>(cl);
         test_b12<int const volatile&(NonCopyable&&) const volatile &, int const volatile&>(cl);
 
-        test_b12<int&&(NonCopyable&&) &&, int&&>(cuda::std::move(cl));
-        test_b12<int const&&(NonCopyable&&) const &&, int const&&>(cuda::std::move(cl));
-        test_b12<int volatile&&(NonCopyable&&) volatile &&, int volatile&&>(cuda::std::move(cl));
-        test_b12<int const volatile&&(NonCopyable&&) const volatile &&, int const volatile&&>(cuda::std::move(cl));
+        test_b12<int&&(NonCopyable&&) &&, int&&>(cuda_for_dali::std::move(cl));
+        test_b12<int const&&(NonCopyable&&) const &&, int const&&>(cuda_for_dali::std::move(cl));
+        test_b12<int volatile&&(NonCopyable&&) volatile &&, int volatile&&>(cuda_for_dali::std::move(cl));
+        test_b12<int const volatile&&(NonCopyable&&) const volatile &&, int const volatile&&>(cuda_for_dali::std::move(cl));
     }
 #ifndef __cuda_std__
     // uncomment when reenabling reference_wrapper
     {
         TestClass cl_obj(42);
-        cuda::std::reference_wrapper<TestClass> cl(cl_obj);
+        cuda_for_dali::std::reference_wrapper<TestClass> cl(cl_obj);
         test_b12<int&(NonCopyable&&) &, int&>(cl);
         test_b12<int const&(NonCopyable&&) const &, int const&>(cl);
         test_b12<int volatile&(NonCopyable&&) volatile &, int volatile&>(cl);
         test_b12<int const volatile&(NonCopyable&&) const volatile &, int const volatile&>(cl);
 
-        test_b12<int&(NonCopyable&&) &, int&>(cuda::std::move(cl));
-        test_b12<int const&(NonCopyable&&) const &, int const&>(cuda::std::move(cl));
-        test_b12<int volatile&(NonCopyable&&) volatile &, int volatile&>(cuda::std::move(cl));
-        test_b12<int const volatile&(NonCopyable&&) const volatile &, int const volatile&>(cuda::std::move(cl));
+        test_b12<int&(NonCopyable&&) &, int&>(cuda_for_dali::std::move(cl));
+        test_b12<int const&(NonCopyable&&) const &, int const&>(cuda_for_dali::std::move(cl));
+        test_b12<int volatile&(NonCopyable&&) volatile &, int volatile&>(cuda_for_dali::std::move(cl));
+        test_b12<int const volatile&(NonCopyable&&) const volatile &, int const volatile&>(cuda_for_dali::std::move(cl));
     }
     {
         DerivedFromTestClass cl_obj(42);
-        cuda::std::reference_wrapper<DerivedFromTestClass> cl(cl_obj);
+        cuda_for_dali::std::reference_wrapper<DerivedFromTestClass> cl(cl_obj);
         test_b12<int&(NonCopyable&&) &, int&>(cl);
         test_b12<int const&(NonCopyable&&) const &, int const&>(cl);
         test_b12<int volatile&(NonCopyable&&) volatile &, int volatile&>(cl);
         test_b12<int const volatile&(NonCopyable&&) const volatile &, int const volatile&>(cl);
 
-        test_b12<int&(NonCopyable&&) &, int&>(cuda::std::move(cl));
-        test_b12<int const&(NonCopyable&&) const &, int const&>(cuda::std::move(cl));
-        test_b12<int volatile&(NonCopyable&&) volatile &, int volatile&>(cuda::std::move(cl));
-        test_b12<int const volatile&(NonCopyable&&) const volatile &, int const volatile&>(cuda::std::move(cl));
+        test_b12<int&(NonCopyable&&) &, int&>(cuda_for_dali::std::move(cl));
+        test_b12<int const&(NonCopyable&&) const &, int const&>(cuda_for_dali::std::move(cl));
+        test_b12<int volatile&(NonCopyable&&) volatile &, int volatile&>(cuda_for_dali::std::move(cl));
+        test_b12<int const volatile&(NonCopyable&&) const volatile &, int const volatile&>(cuda_for_dali::std::move(cl));
     }
 #endif
     {
@@ -269,18 +269,18 @@ void bullet_three_four_tests() {
     {
         typedef TestClass Fn;
         Fn cl(42);
-        test_b34<int&>(cuda::std::reference_wrapper<Fn>(cl));
-        test_b34<int const&>(cuda::std::reference_wrapper<Fn const>(cl));
-        test_b34<int volatile&>(cuda::std::reference_wrapper<Fn volatile>(cl));
-        test_b34<int const volatile&>(cuda::std::reference_wrapper<Fn const volatile>(cl));
+        test_b34<int&>(cuda_for_dali::std::reference_wrapper<Fn>(cl));
+        test_b34<int const&>(cuda_for_dali::std::reference_wrapper<Fn const>(cl));
+        test_b34<int volatile&>(cuda_for_dali::std::reference_wrapper<Fn volatile>(cl));
+        test_b34<int const volatile&>(cuda_for_dali::std::reference_wrapper<Fn const volatile>(cl));
     }
     {
         typedef DerivedFromTestClass Fn;
         Fn cl(42);
-        test_b34<int&>(cuda::std::reference_wrapper<Fn>(cl));
-        test_b34<int const&>(cuda::std::reference_wrapper<Fn const>(cl));
-        test_b34<int volatile&>(cuda::std::reference_wrapper<Fn volatile>(cl));
-        test_b34<int const volatile&>(cuda::std::reference_wrapper<Fn const volatile>(cl));
+        test_b34<int&>(cuda_for_dali::std::reference_wrapper<Fn>(cl));
+        test_b34<int const&>(cuda_for_dali::std::reference_wrapper<Fn const>(cl));
+        test_b34<int volatile&>(cuda_for_dali::std::reference_wrapper<Fn volatile>(cl));
+        test_b34<int const volatile&>(cuda_for_dali::std::reference_wrapper<Fn const volatile>(cl));
     }
 #endif
     {
@@ -359,17 +359,17 @@ void noexcept_test() {
     {
         NoThrowCallable obj; ((void)obj); // suppress unused warning
         CopyThrows arg; ((void)arg); // suppress unused warning
-        static_assert(noexcept(cuda::std::invoke(obj)), "");
-        static_assert(!noexcept(cuda::std::invoke(obj, arg)), "");
-        static_assert(noexcept(cuda::std::invoke(obj, cuda::std::move(arg))), "");
+        static_assert(noexcept(cuda_for_dali::std::invoke(obj)), "");
+        static_assert(!noexcept(cuda_for_dali::std::invoke(obj, arg)), "");
+        static_assert(noexcept(cuda_for_dali::std::invoke(obj, cuda_for_dali::std::move(arg))), "");
     }
     {
         ThrowsCallable obj; ((void)obj); // suppress unused warning
-        static_assert(!noexcept(cuda::std::invoke(obj)), "");
+        static_assert(!noexcept(cuda_for_dali::std::invoke(obj)), "");
     }
     {
         MemberObj obj{42}; ((void)obj); // suppress unused warning.
-        static_assert(noexcept(cuda::std::invoke(&MemberObj::x, obj)), "");
+        static_assert(noexcept(cuda_for_dali::std::invoke(&MemberObj::x, obj)), "");
     }
 }
 

@@ -12,8 +12,8 @@
 //   complex<T>
 //   operator+(const complex<T>&);
 
-#include <cuda/std/complex>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/complex>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
@@ -21,10 +21,10 @@ template <class T>
 __host__ __device__ void
 test()
 {
-    cuda::std::complex<T> z(1.5, 2.5);
+    cuda_for_dali::std::complex<T> z(1.5, 2.5);
     assert(z.real() == 1.5);
     assert(z.imag() == 2.5);
-    cuda::std::complex<T> c = +z;
+    cuda_for_dali::std::complex<T> c = +z;
     assert(c.real() == 1.5);
     assert(c.imag() == 2.5);
 }

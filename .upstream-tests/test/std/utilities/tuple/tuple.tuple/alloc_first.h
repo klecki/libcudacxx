@@ -9,7 +9,7 @@
 #ifndef ALLOC_FIRST_H
 #define ALLOC_FIRST_H
 
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/cassert>
 
 #include "allocators.h"
 
@@ -23,21 +23,21 @@ struct alloc_first
 
     __host__ __device__ alloc_first() : data_(0) {}
     __host__ __device__ alloc_first(int d) : data_(d) {}
-    __host__ __device__ alloc_first(cuda::std::allocator_arg_t, const A1<int>& a)
+    __host__ __device__ alloc_first(cuda_for_dali::std::allocator_arg_t, const A1<int>& a)
         : data_(0)
     {
         assert(a.id() == 5);
         allocator_constructed() = true;
     }
 
-    __host__ __device__ alloc_first(cuda::std::allocator_arg_t, const A1<int>& a, int d)
+    __host__ __device__ alloc_first(cuda_for_dali::std::allocator_arg_t, const A1<int>& a, int d)
         : data_(d)
     {
         assert(a.id() == 5);
         allocator_constructed() = true;
     }
 
-    __host__ __device__ alloc_first(cuda::std::allocator_arg_t, const A1<int>& a, const alloc_first& d)
+    __host__ __device__ alloc_first(cuda_for_dali::std::allocator_arg_t, const A1<int>& a, const alloc_first& d)
         : data_(d.data_)
     {
         assert(a.id() == 5);

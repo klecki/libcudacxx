@@ -15,8 +15,8 @@
 // constexpr year_month_weekday& operator+=(const months& m) noexcept;
 // constexpr year_month_weekday& operator-=(const months& m) noexcept;
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
@@ -37,21 +37,21 @@ constexpr bool testConstexpr(D d1)
 
 int main(int, char**)
 {
-    using year               = cuda::std::chrono::year;
-    using month              = cuda::std::chrono::month;
-    using weekday            = cuda::std::chrono::weekday;
-    using weekday_indexed    = cuda::std::chrono::weekday_indexed;
-    using year_month_weekday = cuda::std::chrono::year_month_weekday;
-    using months             = cuda::std::chrono::months;
+    using year               = cuda_for_dali::std::chrono::year;
+    using month              = cuda_for_dali::std::chrono::month;
+    using weekday            = cuda_for_dali::std::chrono::weekday;
+    using weekday_indexed    = cuda_for_dali::std::chrono::weekday_indexed;
+    using year_month_weekday = cuda_for_dali::std::chrono::year_month_weekday;
+    using months             = cuda_for_dali::std::chrono::months;
 
 
     ASSERT_NOEXCEPT(                               std::declval<year_month_weekday&>() += std::declval<months>());
-    ASSERT_SAME_TYPE(year_month_weekday&, decltype(cuda::std::declval<year_month_weekday&>() += std::declval<months>()));
+    ASSERT_SAME_TYPE(year_month_weekday&, decltype(cuda_for_dali::std::declval<year_month_weekday&>() += std::declval<months>()));
 
     ASSERT_NOEXCEPT(                               std::declval<year_month_weekday&>() -= std::declval<months>());
-    ASSERT_SAME_TYPE(year_month_weekday&, decltype(cuda::std::declval<year_month_weekday&>() -= std::declval<months>()));
+    ASSERT_SAME_TYPE(year_month_weekday&, decltype(cuda_for_dali::std::declval<year_month_weekday&>() -= std::declval<months>()));
 
-    auto constexpr Tuesday = cuda::std::chrono::Tuesday;
+    auto constexpr Tuesday = cuda_for_dali::std::chrono::Tuesday;
     static_assert(testConstexpr<year_month_weekday, months>(year_month_weekday{year{1234}, month{1}, weekday_indexed{Tuesday, 2}}), "");
 
     for (unsigned i = 0; i <= 10; ++i)

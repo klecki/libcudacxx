@@ -19,17 +19,17 @@
 //  constexpr chrono::day     day() const noexcept;
 //  constexpr bool             ok() const noexcept;
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using day       = cuda::std::chrono::day;
-    using month     = cuda::std::chrono::month;
-    using month_day = cuda::std::chrono::month_day;
+    using day       = cuda_for_dali::std::chrono::day;
+    using month     = cuda_for_dali::std::chrono::month;
+    using month_day = cuda_for_dali::std::chrono::month_day;
 
     ASSERT_NOEXCEPT(month_day{});
     ASSERT_NOEXCEPT(month_day{month{1}, day{1}});
@@ -39,8 +39,8 @@ int main(int, char**)
     static_assert( md0.day()   == day{},   "");
     static_assert(!md0.ok(),               "");
 
-    constexpr month_day md1{cuda::std::chrono::January, day{4}};
-    static_assert( md1.month() == cuda::std::chrono::January, "");
+    constexpr month_day md1{cuda_for_dali::std::chrono::January, day{4}};
+    static_assert( md1.month() == cuda_for_dali::std::chrono::January, "");
     static_assert( md1.day()   == day{4},               "");
     static_assert( md1.ok(),                            "");
 

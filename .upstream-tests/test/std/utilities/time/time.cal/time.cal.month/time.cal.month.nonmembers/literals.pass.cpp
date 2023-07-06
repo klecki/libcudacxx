@@ -23,8 +23,8 @@
 // inline constexpr month December{12};
 
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
@@ -32,57 +32,57 @@
 int main(int, char**)
 {
 
-    ASSERT_SAME_TYPE(const cuda::std::chrono::month, decltype(cuda::std::chrono::January));
-    ASSERT_SAME_TYPE(const cuda::std::chrono::month, decltype(cuda::std::chrono::February));
-    ASSERT_SAME_TYPE(const cuda::std::chrono::month, decltype(cuda::std::chrono::March));
-    ASSERT_SAME_TYPE(const cuda::std::chrono::month, decltype(cuda::std::chrono::April));
-    ASSERT_SAME_TYPE(const cuda::std::chrono::month, decltype(cuda::std::chrono::May));
-    ASSERT_SAME_TYPE(const cuda::std::chrono::month, decltype(cuda::std::chrono::June));
-    ASSERT_SAME_TYPE(const cuda::std::chrono::month, decltype(cuda::std::chrono::July));
-    ASSERT_SAME_TYPE(const cuda::std::chrono::month, decltype(cuda::std::chrono::August));
-    ASSERT_SAME_TYPE(const cuda::std::chrono::month, decltype(cuda::std::chrono::September));
-    ASSERT_SAME_TYPE(const cuda::std::chrono::month, decltype(cuda::std::chrono::October));
-    ASSERT_SAME_TYPE(const cuda::std::chrono::month, decltype(cuda::std::chrono::November));
-    ASSERT_SAME_TYPE(const cuda::std::chrono::month, decltype(cuda::std::chrono::December));
+    ASSERT_SAME_TYPE(const cuda_for_dali::std::chrono::month, decltype(cuda_for_dali::std::chrono::January));
+    ASSERT_SAME_TYPE(const cuda_for_dali::std::chrono::month, decltype(cuda_for_dali::std::chrono::February));
+    ASSERT_SAME_TYPE(const cuda_for_dali::std::chrono::month, decltype(cuda_for_dali::std::chrono::March));
+    ASSERT_SAME_TYPE(const cuda_for_dali::std::chrono::month, decltype(cuda_for_dali::std::chrono::April));
+    ASSERT_SAME_TYPE(const cuda_for_dali::std::chrono::month, decltype(cuda_for_dali::std::chrono::May));
+    ASSERT_SAME_TYPE(const cuda_for_dali::std::chrono::month, decltype(cuda_for_dali::std::chrono::June));
+    ASSERT_SAME_TYPE(const cuda_for_dali::std::chrono::month, decltype(cuda_for_dali::std::chrono::July));
+    ASSERT_SAME_TYPE(const cuda_for_dali::std::chrono::month, decltype(cuda_for_dali::std::chrono::August));
+    ASSERT_SAME_TYPE(const cuda_for_dali::std::chrono::month, decltype(cuda_for_dali::std::chrono::September));
+    ASSERT_SAME_TYPE(const cuda_for_dali::std::chrono::month, decltype(cuda_for_dali::std::chrono::October));
+    ASSERT_SAME_TYPE(const cuda_for_dali::std::chrono::month, decltype(cuda_for_dali::std::chrono::November));
+    ASSERT_SAME_TYPE(const cuda_for_dali::std::chrono::month, decltype(cuda_for_dali::std::chrono::December));
 
-    static_assert( cuda::std::chrono::January   == cuda::std::chrono::month(1),  "");
-    static_assert( cuda::std::chrono::February  == cuda::std::chrono::month(2),  "");
-    static_assert( cuda::std::chrono::March     == cuda::std::chrono::month(3),  "");
-    static_assert( cuda::std::chrono::April     == cuda::std::chrono::month(4),  "");
-    static_assert( cuda::std::chrono::May       == cuda::std::chrono::month(5),  "");
-    static_assert( cuda::std::chrono::June      == cuda::std::chrono::month(6),  "");
-    static_assert( cuda::std::chrono::July      == cuda::std::chrono::month(7),  "");
-    static_assert( cuda::std::chrono::August    == cuda::std::chrono::month(8),  "");
-    static_assert( cuda::std::chrono::September == cuda::std::chrono::month(9),  "");
-    static_assert( cuda::std::chrono::October   == cuda::std::chrono::month(10), "");
-    static_assert( cuda::std::chrono::November  == cuda::std::chrono::month(11), "");
-    static_assert( cuda::std::chrono::December  == cuda::std::chrono::month(12), "");
+    static_assert( cuda_for_dali::std::chrono::January   == cuda_for_dali::std::chrono::month(1),  "");
+    static_assert( cuda_for_dali::std::chrono::February  == cuda_for_dali::std::chrono::month(2),  "");
+    static_assert( cuda_for_dali::std::chrono::March     == cuda_for_dali::std::chrono::month(3),  "");
+    static_assert( cuda_for_dali::std::chrono::April     == cuda_for_dali::std::chrono::month(4),  "");
+    static_assert( cuda_for_dali::std::chrono::May       == cuda_for_dali::std::chrono::month(5),  "");
+    static_assert( cuda_for_dali::std::chrono::June      == cuda_for_dali::std::chrono::month(6),  "");
+    static_assert( cuda_for_dali::std::chrono::July      == cuda_for_dali::std::chrono::month(7),  "");
+    static_assert( cuda_for_dali::std::chrono::August    == cuda_for_dali::std::chrono::month(8),  "");
+    static_assert( cuda_for_dali::std::chrono::September == cuda_for_dali::std::chrono::month(9),  "");
+    static_assert( cuda_for_dali::std::chrono::October   == cuda_for_dali::std::chrono::month(10), "");
+    static_assert( cuda_for_dali::std::chrono::November  == cuda_for_dali::std::chrono::month(11), "");
+    static_assert( cuda_for_dali::std::chrono::December  == cuda_for_dali::std::chrono::month(12), "");
 
-    assert(cuda::std::chrono::January   == cuda::std::chrono::month(1));
-    assert(cuda::std::chrono::February  == cuda::std::chrono::month(2));
-    assert(cuda::std::chrono::March     == cuda::std::chrono::month(3));
-    assert(cuda::std::chrono::April     == cuda::std::chrono::month(4));
-    assert(cuda::std::chrono::May       == cuda::std::chrono::month(5));
-    assert(cuda::std::chrono::June      == cuda::std::chrono::month(6));
-    assert(cuda::std::chrono::July      == cuda::std::chrono::month(7));
-    assert(cuda::std::chrono::August    == cuda::std::chrono::month(8));
-    assert(cuda::std::chrono::September == cuda::std::chrono::month(9));
-    assert(cuda::std::chrono::October   == cuda::std::chrono::month(10));
-    assert(cuda::std::chrono::November  == cuda::std::chrono::month(11));
-    assert(cuda::std::chrono::December  == cuda::std::chrono::month(12));
+    assert(cuda_for_dali::std::chrono::January   == cuda_for_dali::std::chrono::month(1));
+    assert(cuda_for_dali::std::chrono::February  == cuda_for_dali::std::chrono::month(2));
+    assert(cuda_for_dali::std::chrono::March     == cuda_for_dali::std::chrono::month(3));
+    assert(cuda_for_dali::std::chrono::April     == cuda_for_dali::std::chrono::month(4));
+    assert(cuda_for_dali::std::chrono::May       == cuda_for_dali::std::chrono::month(5));
+    assert(cuda_for_dali::std::chrono::June      == cuda_for_dali::std::chrono::month(6));
+    assert(cuda_for_dali::std::chrono::July      == cuda_for_dali::std::chrono::month(7));
+    assert(cuda_for_dali::std::chrono::August    == cuda_for_dali::std::chrono::month(8));
+    assert(cuda_for_dali::std::chrono::September == cuda_for_dali::std::chrono::month(9));
+    assert(cuda_for_dali::std::chrono::October   == cuda_for_dali::std::chrono::month(10));
+    assert(cuda_for_dali::std::chrono::November  == cuda_for_dali::std::chrono::month(11));
+    assert(cuda_for_dali::std::chrono::December  == cuda_for_dali::std::chrono::month(12));
 
-    assert(static_cast<unsigned>(cuda::std::chrono::January)   ==  1);
-    assert(static_cast<unsigned>(cuda::std::chrono::February)  ==  2);
-    assert(static_cast<unsigned>(cuda::std::chrono::March)     ==  3);
-    assert(static_cast<unsigned>(cuda::std::chrono::April)     ==  4);
-    assert(static_cast<unsigned>(cuda::std::chrono::May)       ==  5);
-    assert(static_cast<unsigned>(cuda::std::chrono::June)      ==  6);
-    assert(static_cast<unsigned>(cuda::std::chrono::July)      ==  7);
-    assert(static_cast<unsigned>(cuda::std::chrono::August)    ==  8);
-    assert(static_cast<unsigned>(cuda::std::chrono::September) ==  9);
-    assert(static_cast<unsigned>(cuda::std::chrono::October)   == 10);
-    assert(static_cast<unsigned>(cuda::std::chrono::November)  == 11);
-    assert(static_cast<unsigned>(cuda::std::chrono::December)  == 12);
+    assert(static_cast<unsigned>(cuda_for_dali::std::chrono::January)   ==  1);
+    assert(static_cast<unsigned>(cuda_for_dali::std::chrono::February)  ==  2);
+    assert(static_cast<unsigned>(cuda_for_dali::std::chrono::March)     ==  3);
+    assert(static_cast<unsigned>(cuda_for_dali::std::chrono::April)     ==  4);
+    assert(static_cast<unsigned>(cuda_for_dali::std::chrono::May)       ==  5);
+    assert(static_cast<unsigned>(cuda_for_dali::std::chrono::June)      ==  6);
+    assert(static_cast<unsigned>(cuda_for_dali::std::chrono::July)      ==  7);
+    assert(static_cast<unsigned>(cuda_for_dali::std::chrono::August)    ==  8);
+    assert(static_cast<unsigned>(cuda_for_dali::std::chrono::September) ==  9);
+    assert(static_cast<unsigned>(cuda_for_dali::std::chrono::October)   == 10);
+    assert(static_cast<unsigned>(cuda_for_dali::std::chrono::November)  == 11);
+    assert(static_cast<unsigned>(cuda_for_dali::std::chrono::December)  == 12);
 
   return 0;
 }

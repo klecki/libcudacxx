@@ -19,22 +19,22 @@
 //     bool
 //     atomic_is_lock_free(const atomic<T>* obj);
 
-#include <cuda/std/atomic>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/atomic>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "atomic_helpers.h"
 #include "cuda_space_selector.h"
 
-template <class T, template<typename, typename> typename, cuda::thread_scope>
+template <class T, template<typename, typename> typename, cuda_for_dali::thread_scope>
 struct TestFn {
   __host__ __device__
   void operator()() const {
-    typedef cuda::std::atomic<T> A;
+    typedef cuda_for_dali::std::atomic<T> A;
     A t{};
-    bool b1 = cuda::std::atomic_is_lock_free(static_cast<const A*>(&t));
+    bool b1 = cuda_for_dali::std::atomic_is_lock_free(static_cast<const A*>(&t));
     volatile A vt{};
-    bool b2 = cuda::std::atomic_is_lock_free(static_cast<const volatile A*>(&vt));
+    bool b2 = cuda_for_dali::std::atomic_is_lock_free(static_cast<const volatile A*>(&vt));
     assert(b1 == b2);
   }
 };
@@ -46,7 +46,7 @@ struct A
 
 int main(int, char**)
 {
-    TestFn<A, local_memory_selector, cuda::thread_scope_system>()();
+    TestFn<A, local_memory_selector, cuda_for_dali::thread_scope_system>()();
     TestEachAtomicType<TestFn, local_memory_selector>()();
 
   return 0;

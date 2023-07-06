@@ -10,8 +10,8 @@
 
 // digits10
 
-#include <cuda/std/limits>
-#include <cuda/std/cfloat>
+#include <cuda_for_dali/std/limits>
+#include <cuda_for_dali/std/cfloat>
 
 #include "test_macros.h"
 
@@ -20,14 +20,14 @@ __host__ __device__
 void
 test()
 {
-    static_assert(cuda::std::numeric_limits<T>::digits10 == expected, "digits10 test 1");
-    static_assert(cuda::std::numeric_limits<T>::is_bounded, "digits10 test 5");
-    static_assert(cuda::std::numeric_limits<const T>::digits10 == expected, "digits10 test 2");
-    static_assert(cuda::std::numeric_limits<const T>::is_bounded, "digits10 test 6");
-    static_assert(cuda::std::numeric_limits<volatile T>::digits10 == expected, "digits10 test 3");
-    static_assert(cuda::std::numeric_limits<volatile T>::is_bounded, "digits10 test 7");
-    static_assert(cuda::std::numeric_limits<const volatile T>::digits10 == expected, "digits10 test 4");
-    static_assert(cuda::std::numeric_limits<const volatile T>::is_bounded, "digits10 test 8");
+    static_assert(cuda_for_dali::std::numeric_limits<T>::digits10 == expected, "digits10 test 1");
+    static_assert(cuda_for_dali::std::numeric_limits<T>::is_bounded, "digits10 test 5");
+    static_assert(cuda_for_dali::std::numeric_limits<const T>::digits10 == expected, "digits10 test 2");
+    static_assert(cuda_for_dali::std::numeric_limits<const T>::is_bounded, "digits10 test 6");
+    static_assert(cuda_for_dali::std::numeric_limits<volatile T>::digits10 == expected, "digits10 test 3");
+    static_assert(cuda_for_dali::std::numeric_limits<volatile T>::is_bounded, "digits10 test 7");
+    static_assert(cuda_for_dali::std::numeric_limits<const volatile T>::digits10 == expected, "digits10 test 4");
+    static_assert(cuda_for_dali::std::numeric_limits<const volatile T>::is_bounded, "digits10 test 8");
 }
 
 int main(int, char**)

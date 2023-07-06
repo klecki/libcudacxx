@@ -7,7 +7,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <cuda/stream_view>
+#include <cuda_for_dali/stream_view>
 #include <cassert>
 #include <type_traits>
 
@@ -15,8 +15,8 @@ int main(int argc, char** argv){
 
 #ifndef __CUDA_ARCH__
   static_assert(
-      std::is_same<cuda::stream_view::value_type, cudaStream_t>::value, "");
-  cuda::stream_view s;
+      std::is_same<cuda_for_dali::stream_view::value_type, cudaStream_t>::value, "");
+  cuda_for_dali::stream_view s;
   assert(s.get() == cudaStream_t{0});
 #endif
 

@@ -11,7 +11,7 @@
 
 // <cuda/std/latch>
 
-#include <cuda/std/latch>
+#include <cuda_for_dali/std/latch>
 
 #include "test_macros.h"
 #include "concurrent_agents.h"
@@ -39,20 +39,20 @@ int main(int, char**)
 #ifndef __CUDA_ARCH__
   cuda_thread_count = 2;
 
-  test<cuda::std::latch, local_memory_selector>();
-  test<cuda::latch<cuda::thread_scope_block>, local_memory_selector>();
-  test<cuda::latch<cuda::thread_scope_device>, local_memory_selector>();
-  test<cuda::latch<cuda::thread_scope_system>, local_memory_selector>();
+  test<cuda_for_dali::std::latch, local_memory_selector>();
+  test<cuda_for_dali::latch<cuda_for_dali::thread_scope_block>, local_memory_selector>();
+  test<cuda_for_dali::latch<cuda_for_dali::thread_scope_device>, local_memory_selector>();
+  test<cuda_for_dali::latch<cuda_for_dali::thread_scope_system>, local_memory_selector>();
 #else
-  test<cuda::std::latch, shared_memory_selector>();
-  test<cuda::latch<cuda::thread_scope_block>, shared_memory_selector>();
-  test<cuda::latch<cuda::thread_scope_device>, shared_memory_selector>();
-  test<cuda::latch<cuda::thread_scope_system>, shared_memory_selector>();
+  test<cuda_for_dali::std::latch, shared_memory_selector>();
+  test<cuda_for_dali::latch<cuda_for_dali::thread_scope_block>, shared_memory_selector>();
+  test<cuda_for_dali::latch<cuda_for_dali::thread_scope_device>, shared_memory_selector>();
+  test<cuda_for_dali::latch<cuda_for_dali::thread_scope_system>, shared_memory_selector>();
 
-  test<cuda::std::latch, global_memory_selector>();
-  test<cuda::latch<cuda::thread_scope_block>, global_memory_selector>();
-  test<cuda::latch<cuda::thread_scope_device>, global_memory_selector>();
-  test<cuda::latch<cuda::thread_scope_system>, global_memory_selector>();
+  test<cuda_for_dali::std::latch, global_memory_selector>();
+  test<cuda_for_dali::latch<cuda_for_dali::thread_scope_block>, global_memory_selector>();
+  test<cuda_for_dali::latch<cuda_for_dali::thread_scope_device>, global_memory_selector>();
+  test<cuda_for_dali::latch<cuda_for_dali::thread_scope_system>, global_memory_selector>();
 #endif
 
   return 0;

@@ -6,18 +6,18 @@
 //
 //===----------------------------------------------------------------------===//
 
-// UNSUPPORTED: c++98, c++03, c++11, c++14 
+// UNSUPPORTED: c++98, c++03, c++11, c++14
 // UNSUPPORTED: nvrtc
 
 // <cuda/std/tuple>
 
 // template <class T, class Tuple> constexpr T make_from_tuple(Tuple&&);
 
-#include <cuda/std/tuple>
-#include <cuda/std/array>
-#include <cuda/std/utility>
-#include <cuda/std/string>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/tuple>
+#include <cuda_for_dali/std/array>
+#include <cuda_for_dali/std/utility>
+#include <cuda_for_dali/std/string>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "type_id.h"

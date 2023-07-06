@@ -15,17 +15,17 @@
 
 // construct double with int
 
-#include <cuda/std/chrono>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    cuda::std::chrono::duration<double> d(5);
+    cuda_for_dali::std::chrono::duration<double> d(5);
     assert(d.count() == 5);
 #if TEST_STD_VER >= 11
-    constexpr cuda::std::chrono::duration<double> d2(5);
+    constexpr cuda_for_dali::std::chrono::duration<double> d2(5);
     static_assert(d2.count() == 5, "");
 #endif
 

@@ -10,8 +10,8 @@
 
 // is_fundamental
 
-#include <cuda/std/type_traits>
-#include <cuda/std/cstddef>         // for cuda::std::nullptr_t
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cstddef>         // for cuda_for_dali::std::nullptr_t
 #include "test_macros.h"
 
 #pragma nv_diag_suppress cuda_demote_unsupported_floating_point
@@ -20,15 +20,15 @@ template <class T>
 __host__ __device__
 void test_is_fundamental()
 {
-    static_assert( cuda::std::is_fundamental<T>::value, "");
-    static_assert( cuda::std::is_fundamental<const T>::value, "");
-    static_assert( cuda::std::is_fundamental<volatile T>::value, "");
-    static_assert( cuda::std::is_fundamental<const volatile T>::value, "");
+    static_assert( cuda_for_dali::std::is_fundamental<T>::value, "");
+    static_assert( cuda_for_dali::std::is_fundamental<const T>::value, "");
+    static_assert( cuda_for_dali::std::is_fundamental<volatile T>::value, "");
+    static_assert( cuda_for_dali::std::is_fundamental<const volatile T>::value, "");
 #if TEST_STD_VER > 11
-    static_assert( cuda::std::is_fundamental_v<T>, "");
-    static_assert( cuda::std::is_fundamental_v<const T>, "");
-    static_assert( cuda::std::is_fundamental_v<volatile T>, "");
-    static_assert( cuda::std::is_fundamental_v<const volatile T>, "");
+    static_assert( cuda_for_dali::std::is_fundamental_v<T>, "");
+    static_assert( cuda_for_dali::std::is_fundamental_v<const T>, "");
+    static_assert( cuda_for_dali::std::is_fundamental_v<volatile T>, "");
+    static_assert( cuda_for_dali::std::is_fundamental_v<const volatile T>, "");
 #endif
 }
 
@@ -36,15 +36,15 @@ template <class T>
 __host__ __device__
 void test_is_not_fundamental()
 {
-    static_assert(!cuda::std::is_fundamental<T>::value, "");
-    static_assert(!cuda::std::is_fundamental<const T>::value, "");
-    static_assert(!cuda::std::is_fundamental<volatile T>::value, "");
-    static_assert(!cuda::std::is_fundamental<const volatile T>::value, "");
+    static_assert(!cuda_for_dali::std::is_fundamental<T>::value, "");
+    static_assert(!cuda_for_dali::std::is_fundamental<const T>::value, "");
+    static_assert(!cuda_for_dali::std::is_fundamental<volatile T>::value, "");
+    static_assert(!cuda_for_dali::std::is_fundamental<const volatile T>::value, "");
 #if TEST_STD_VER > 11
-    static_assert(!cuda::std::is_fundamental_v<T>, "");
-    static_assert(!cuda::std::is_fundamental_v<const T>, "");
-    static_assert(!cuda::std::is_fundamental_v<volatile T>, "");
-    static_assert(!cuda::std::is_fundamental_v<const volatile T>, "");
+    static_assert(!cuda_for_dali::std::is_fundamental_v<T>, "");
+    static_assert(!cuda_for_dali::std::is_fundamental_v<const T>, "");
+    static_assert(!cuda_for_dali::std::is_fundamental_v<volatile T>, "");
+    static_assert(!cuda_for_dali::std::is_fundamental_v<const volatile T>, "");
 #endif
 }
 
@@ -80,7 +80,7 @@ typedef void (*FunctionPtr)();
 
 int main(int, char**)
 {
-    test_is_fundamental<cuda::std::nullptr_t>();
+    test_is_fundamental<cuda_for_dali::std::nullptr_t>();
     test_is_fundamental<void>();
     test_is_fundamental<short>();
     test_is_fundamental<unsigned short>();

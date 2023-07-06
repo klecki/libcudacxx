@@ -10,8 +10,8 @@
 
 // treat_as_floating_point
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 
 #include "test_macros.h"
 
@@ -20,11 +20,11 @@ __host__ __device__
 void
 test()
 {
-    static_assert((cuda::std::is_base_of<cuda::std::is_floating_point<T>,
-                                   cuda::std::chrono::treat_as_floating_point<T> >::value), "");
+    static_assert((cuda_for_dali::std::is_base_of<cuda_for_dali::std::is_floating_point<T>,
+                                   cuda_for_dali::std::chrono::treat_as_floating_point<T> >::value), "");
 #if TEST_STD_VER > 14
-    static_assert(cuda::std::is_floating_point<T>::value ==
-                                  cuda::std::chrono::treat_as_floating_point_v<T>, "");
+    static_assert(cuda_for_dali::std::is_floating_point<T>::value ==
+                                  cuda_for_dali::std::chrono::treat_as_floating_point_v<T>, "");
 #endif
 }
 

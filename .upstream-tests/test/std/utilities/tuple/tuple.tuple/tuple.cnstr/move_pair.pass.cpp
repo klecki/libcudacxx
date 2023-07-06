@@ -12,10 +12,10 @@
 
 // template <class U1, class U2> tuple(pair<U1, U2>&& u);
 
-// UNSUPPORTED: c++98, c++03 
+// UNSUPPORTED: c++98, c++03
 
-#include <cuda/std/tuple>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/tuple>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
@@ -36,15 +36,15 @@ struct D
 
 int main(int, char**)
 {
-    // cuda::std::unique_ptr not supported
+    // cuda_for_dali::std::unique_ptr not supported
     /*
     {
-        typedef cuda::std::pair<long, cuda::std::unique_ptr<D>> T0;
-        typedef cuda::std::tuple<long long, cuda::std::unique_ptr<B>> T1;
-        T0 t0(2, cuda::std::unique_ptr<D>(new D(3)));
-        T1 t1 = cuda::std::move(t0);
-        assert(cuda::std::get<0>(t1) == 2);
-        assert(cuda::std::get<1>(t1)->id_ == 3);
+        typedef cuda_for_dali::std::pair<long, cuda_for_dali::std::unique_ptr<D>> T0;
+        typedef cuda_for_dali::std::tuple<long long, cuda_for_dali::std::unique_ptr<B>> T1;
+        T0 t0(2, cuda_for_dali::std::unique_ptr<D>(new D(3)));
+        T1 t1 = cuda_for_dali::std::move(t0);
+        assert(cuda_for_dali::std::get<0>(t1) == 2);
+        assert(cuda_for_dali::std::get<1>(t1)->id_ == 3);
     }
     */
 

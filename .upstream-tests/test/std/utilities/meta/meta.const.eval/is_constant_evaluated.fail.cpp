@@ -12,8 +12,8 @@
 // <cuda/std/type_traits>
 
 
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
@@ -21,10 +21,10 @@ int main(int, char**)
 {
 #ifndef _LIBCUDACXX_IS_CONSTANT_EVALUATED
   // expected-error@+1 {{no member named 'is_constant_evaluated' in namespace 'std'}}
-  bool b = cuda::std::is_constant_evaluated();
+  bool b = cuda_for_dali::std::is_constant_evaluated();
 #else
   // expected-error@+1 {{static_assert failed}}
-  static_assert(!cuda::std::is_constant_evaluated(), "");
+  static_assert(!cuda_for_dali::std::is_constant_evaluated(), "");
 #endif
   return 0;
 }

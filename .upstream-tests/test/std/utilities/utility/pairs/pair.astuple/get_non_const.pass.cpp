@@ -11,44 +11,44 @@
 // template <class T1, class T2> struct pair
 
 // template<size_t I, class T1, class T2>
-//     typename tuple_element<I, cuda::std::pair<T1, T2> >::type&
+//     typename tuple_element<I, cuda_for_dali::std::pair<T1, T2> >::type&
 //     get(pair<T1, T2>&);
 
 // UNSUPPORTED: msvc
 
-#include <cuda/std/utility>
-#include <cuda/std/tuple>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/utility>
+#include <cuda_for_dali/std/tuple>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 #if TEST_STD_VER > 11
 struct S {
-   cuda::std::pair<int, int> a;
+   cuda_for_dali::std::pair<int, int> a;
    int k;
-   __device__ __host__ constexpr S() : a{1,2}, k(cuda::std::get<0>(a)) {}
+   __device__ __host__ constexpr S() : a{1,2}, k(cuda_for_dali::std::get<0>(a)) {}
    };
 
-__device__ __host__ constexpr cuda::std::pair<int, int> getP () { return { 3, 4 }; }
+__device__ __host__ constexpr cuda_for_dali::std::pair<int, int> getP () { return { 3, 4 }; }
 #endif
 
 int main(int, char**)
 {
     {
-        typedef cuda::std::pair<int, short> P;
+        typedef cuda_for_dali::std::pair<int, short> P;
         P p(3, static_cast<short>(4));
-        assert(cuda::std::get<0>(p) == 3);
-        assert(cuda::std::get<1>(p) == 4);
-        cuda::std::get<0>(p) = 5;
-        cuda::std::get<1>(p) = 6;
-        assert(cuda::std::get<0>(p) == 5);
-        assert(cuda::std::get<1>(p) == 6);
+        assert(cuda_for_dali::std::get<0>(p) == 3);
+        assert(cuda_for_dali::std::get<1>(p) == 4);
+        cuda_for_dali::std::get<0>(p) = 5;
+        cuda_for_dali::std::get<1>(p) = 6;
+        assert(cuda_for_dali::std::get<0>(p) == 5);
+        assert(cuda_for_dali::std::get<1>(p) == 6);
     }
 
 #if TEST_STD_VER > 11
     {
         static_assert(S().k == 1, "");
-        static_assert(cuda::std::get<1>(getP()) == 4, "");
+        static_assert(cuda_for_dali::std::get<1>(getP()) == 4, "");
     }
 #endif
 

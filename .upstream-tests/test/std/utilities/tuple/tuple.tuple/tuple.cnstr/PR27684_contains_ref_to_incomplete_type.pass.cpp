@@ -23,8 +23,8 @@
 // However this breaks whenever a 2-tuple contains a reference to an incomplete
 // type as its first parameter. See PR27684.
 
-#include <cuda/std/tuple>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/tuple>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
@@ -44,16 +44,16 @@ IncompleteType const& cinc2 = inc2;
 int main(int, char**) {
     using IT = IncompleteType;
     { // try calling tuple(Tp const&...)
-        using Tup = cuda::std::tuple<const IT&, const IT&>;
+        using Tup = cuda_for_dali::std::tuple<const IT&, const IT&>;
         Tup t(cinc1, cinc2);
-        assert(&cuda::std::get<0>(t) == &inc1);
-        assert(&cuda::std::get<1>(t) == &inc2);
+        assert(&cuda_for_dali::std::get<0>(t) == &inc1);
+        assert(&cuda_for_dali::std::get<1>(t) == &inc2);
     }
     { // try calling tuple(Up&&...)
-        using Tup = cuda::std::tuple<const IT&, const IT&>;
+        using Tup = cuda_for_dali::std::tuple<const IT&, const IT&>;
         Tup t(inc1, inc2);
-        assert(&cuda::std::get<0>(t) == &inc1);
-        assert(&cuda::std::get<1>(t) == &inc2);
+        assert(&cuda_for_dali::std::get<0>(t) == &inc1);
+        assert(&cuda_for_dali::std::get<1>(t) == &inc2);
     }
 
   return 0;

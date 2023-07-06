@@ -13,29 +13,29 @@
 // constexpr chrono::weekday_indexed weekday_indexed() const noexcept;
 //  Returns: wdi_
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using month_weekday   = cuda::std::chrono::month_weekday;
-    using month           = cuda::std::chrono::month;
-    using weekday         = cuda::std::chrono::weekday;
-    using weekday_indexed = cuda::std::chrono::weekday_indexed;
+    using month_weekday   = cuda_for_dali::std::chrono::month_weekday;
+    using month           = cuda_for_dali::std::chrono::month;
+    using weekday         = cuda_for_dali::std::chrono::weekday;
+    using weekday_indexed = cuda_for_dali::std::chrono::weekday_indexed;
 
-    constexpr weekday Sunday = cuda::std::chrono::Sunday;
+    constexpr weekday Sunday = cuda_for_dali::std::chrono::Sunday;
 
     ASSERT_NOEXCEPT(                           std::declval<const month_weekday>().weekday_indexed());
-    ASSERT_SAME_TYPE(weekday_indexed, decltype(cuda::std::declval<const month_weekday>().weekday_indexed()));
+    ASSERT_SAME_TYPE(weekday_indexed, decltype(cuda_for_dali::std::declval<const month_weekday>().weekday_indexed()));
 
     static_assert( month_weekday{month{}, weekday_indexed{}}.weekday_indexed() == weekday_indexed{}, "");
 
     for (unsigned i = 1; i <= 10; ++i)
     {
-        constexpr month March = cuda::std::chrono::March;
+        constexpr month March = cuda_for_dali::std::chrono::March;
         month_weekday md(March, weekday_indexed{Sunday, i});
         assert( static_cast<unsigned>(md.weekday_indexed().weekday() == Sunday));
         assert( static_cast<unsigned>(md.weekday_indexed().index() == i));

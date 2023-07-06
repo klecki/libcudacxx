@@ -6,7 +6,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef _LIBCUDACXX_ABI_VCRUNTIME
+#ifndef _LIBCUDAFORDALICXX_ABI_VCRUNTIME
 #error This file may only be used when defering to vcruntime
 #endif
 

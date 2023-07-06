@@ -12,8 +12,8 @@
 
 // static constexpr duration zero(); // noexcept after C++17
 
-#include <cuda/std/chrono>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "../../rep.h"
@@ -22,19 +22,19 @@ template <class D>
 __host__ __device__
 void test()
 {
-    LIBCPP_ASSERT_NOEXCEPT(cuda::std::chrono::duration_values<typename D::rep>::zero());
+    LIBCPP_ASSERT_NOEXCEPT(cuda_for_dali::std::chrono::duration_values<typename D::rep>::zero());
 #if TEST_STD_VER > 17
-    ASSERT_NOEXCEPT(       cuda::std::chrono::duration_values<typename D::rep>::zero());
+    ASSERT_NOEXCEPT(       cuda_for_dali::std::chrono::duration_values<typename D::rep>::zero());
 #endif
     {
     typedef typename D::rep Rep;
-    Rep zero_rep = cuda::std::chrono::duration_values<Rep>::zero();
+    Rep zero_rep = cuda_for_dali::std::chrono::duration_values<Rep>::zero();
     assert(D::zero().count() == zero_rep);
     }
 #if TEST_STD_VER >= 11
     {
     typedef typename D::rep Rep;
-    constexpr Rep zero_rep = cuda::std::chrono::duration_values<Rep>::zero();
+    constexpr Rep zero_rep = cuda_for_dali::std::chrono::duration_values<Rep>::zero();
     static_assert(D::zero().count() == zero_rep, "");
     }
 #endif
@@ -42,8 +42,8 @@ void test()
 
 int main(int, char**)
 {
-    test<cuda::std::chrono::duration<int> >();
-    test<cuda::std::chrono::duration<Rep> >();
+    test<cuda_for_dali::std::chrono::duration<int> >();
+    test<cuda_for_dali::std::chrono::duration<Rep> >();
 
   return 0;
 }

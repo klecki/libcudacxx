@@ -38,8 +38,8 @@ This concept is defined for documentation purposes but is not materialized in
 ## Example
 
 ```cuda
-#include <cuda/atomic>
-#include <cuda/std/cstddef>
+#include <cuda_for_dali/atomic>
+#include <cuda_for_dali/std/cstddef>
 
 struct single_thread_group {
   static constexpr cuda::thread_scope thread_scope = cuda::thread_scope::thread_scope_thread;

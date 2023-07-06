@@ -13,22 +13,22 @@
 // constexpr chrono::day day() const noexcept;
 //  Returns: wd_
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using year                = cuda::std::chrono::year;
-    using month               = cuda::std::chrono::month;
-    using day                 = cuda::std::chrono::day;
-    using month_day_last      = cuda::std::chrono::month_day_last;
-    using year_month_day_last = cuda::std::chrono::year_month_day_last;
+    using year                = cuda_for_dali::std::chrono::year;
+    using month               = cuda_for_dali::std::chrono::month;
+    using day                 = cuda_for_dali::std::chrono::day;
+    using month_day_last      = cuda_for_dali::std::chrono::month_day_last;
+    using year_month_day_last = cuda_for_dali::std::chrono::year_month_day_last;
 
     ASSERT_NOEXCEPT(               std::declval<const year_month_day_last>().day());
-    ASSERT_SAME_TYPE(day, decltype(cuda::std::declval<const year_month_day_last>().day()));
+    ASSERT_SAME_TYPE(day, decltype(cuda_for_dali::std::declval<const year_month_day_last>().day()));
 
 //  Some months have a 31st
     static_assert( year_month_day_last{year{2020}, month_day_last{month{ 1}}}.day() == day{31}, "");

@@ -11,7 +11,7 @@
 
 #include "helpers.h"
 
-#include <cuda/std/atomic>
+#include <cuda_for_dali/std/atomic>
 
 struct clear
 {
@@ -60,7 +60,7 @@ using atomic_flag_testers = tester_list<
 
 void kernel_invoker()
 {
-    validate_not_movable<cuda::std::atomic_flag, atomic_flag_testers>();
+    validate_not_movable<cuda_for_dali::std::atomic_flag, atomic_flag_testers>();
 }
 
 int main(int argc, char ** argv)

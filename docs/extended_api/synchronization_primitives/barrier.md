@@ -74,7 +74,7 @@ For each [`cuda::thread_scope`] `S` and `CompletionFunction` `F`, the value of
 ## Example
 
 ```cuda
-#include <cuda/barrier>
+#include <cuda_for_dali/barrier>
 
 __global__ void example_kernel() {
   // This barrier is suitable for all threads in the system.

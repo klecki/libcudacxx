@@ -17,8 +17,8 @@
 //   Returns: x.month() < y.month()
 
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
@@ -26,8 +26,8 @@
 
 int main(int, char**)
 {
-    using month          = cuda::std::chrono::month;
-    using month_day_last = cuda::std::chrono::month_day_last;
+    using month          = cuda_for_dali::std::chrono::month;
+    using month_day_last = cuda_for_dali::std::chrono::month_day_last;
 
     AssertComparisons6AreNoexcept<month_day_last>();
     AssertComparisons6ReturnBool<month_day_last>();

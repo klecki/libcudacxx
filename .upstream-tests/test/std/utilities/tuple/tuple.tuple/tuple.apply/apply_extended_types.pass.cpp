@@ -8,7 +8,7 @@
 
 
 
-// UNSUPPORTED: c++98, c++03, c++11, c++14 
+// UNSUPPORTED: c++98, c++03, c++11, c++14
 
 // <cuda/std/tuple>
 
@@ -18,13 +18,13 @@
 // named by INVOKE but that are not actual callable objects. These include
 // bullets 1-4 of invoke.
 
-#include <cuda/std/tuple>
+#include <cuda_for_dali/std/tuple>
 
 // Array tests are disabled
-// #include <cuda/std/array>
+// #include <cuda_for_dali/std/array>
 
-#include <cuda/std/utility>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/utility>
+#include <cuda_for_dali/std/cassert>
 
 // std::array is explicitly allowed to be initialized with A a = { init-list };.
 // Disable the missing braces warning for this reason.
@@ -116,7 +116,7 @@ void test_ext_int_0()
     {
         T a;
         Tuple t{a};
-        assert(1 == cuda::std::apply(mem1, t));
+        assert(1 == cuda_for_dali::std::apply(mem1, t));
         assert(count == 1);
     }
     count = 0;
@@ -124,7 +124,7 @@ void test_ext_int_0()
     {
         T a;
         TuplePtr t{&a};
-        assert(1 == cuda::std::apply(mem1, t));
+        assert(1 == cuda_for_dali::std::apply(mem1, t));
         assert(count == 1);
     }
     count = 0;
@@ -132,7 +132,7 @@ void test_ext_int_0()
     {
         Base a;
         TupleBase t{a};
-        assert(1 == cuda::std::apply(mem1, t));
+        assert(1 == cuda_for_dali::std::apply(mem1, t));
         assert(count == 1);
     }
     count = 0;
@@ -140,7 +140,7 @@ void test_ext_int_0()
     {
         Wrap a;
         TupleWrap t{a};
-        assert(1 == cuda::std::apply(mem1, t));
+        assert(1 == cuda_for_dali::std::apply(mem1, t));
         assert(count == 1);
     }
     count = 0;
@@ -148,7 +148,7 @@ void test_ext_int_0()
     {
         T const a;
         ConstTuple t{a};
-        assert(1 == cuda::std::apply(mem2, t));
+        assert(1 == cuda_for_dali::std::apply(mem2, t));
         assert(count == 1);
     }
     count = 0;
@@ -156,7 +156,7 @@ void test_ext_int_0()
     {
         T const a;
         ConstTuplePtr t{&a};
-        assert(1 == cuda::std::apply(mem2, t));
+        assert(1 == cuda_for_dali::std::apply(mem2, t));
         assert(count == 1);
     }
     count = 0;
@@ -164,7 +164,7 @@ void test_ext_int_0()
     {
         Base const a;
         ConstTupleBase t{a};
-        assert(1 == cuda::std::apply(mem2, t));
+        assert(1 == cuda_for_dali::std::apply(mem2, t));
         assert(count == 1);
     }
     count = 0;
@@ -172,32 +172,32 @@ void test_ext_int_0()
     {
         Wrap const a;
         ConstTupleWrap t{a};
-        assert(1 == cuda::std::apply(mem2, t));
+        assert(1 == cuda_for_dali::std::apply(mem2, t));
         assert(1 == count);
     }
     // member object w/ref
     {
         T a{42};
         Tuple t{a};
-        assert(42 == cuda::std::apply(obj1, t));
+        assert(42 == cuda_for_dali::std::apply(obj1, t));
     }
     // member object w/pointer
     {
         T a{42};
         TuplePtr t{&a};
-        assert(42 == cuda::std::apply(obj1, t));
+        assert(42 == cuda_for_dali::std::apply(obj1, t));
     }
     // member object w/base
     {
         Base a{42};
         TupleBase t{a};
-        assert(42 == cuda::std::apply(obj1, t));
+        assert(42 == cuda_for_dali::std::apply(obj1, t));
     }
     // member object w/wrapper
     {
         Wrap a{42};
         TupleWrap t{a};
-        assert(42 == cuda::std::apply(obj1, t));
+        assert(42 == cuda_for_dali::std::apply(obj1, t));
     }
 }
 
@@ -226,7 +226,7 @@ void test_ext_int_1()
     {
         T a;
         Tuple t{a, 2};
-        assert(2 == cuda::std::apply(mem1, t));
+        assert(2 == cuda_for_dali::std::apply(mem1, t));
         assert(count == 2);
     }
     count = 0;
@@ -234,7 +234,7 @@ void test_ext_int_1()
     {
         T a;
         TuplePtr t{&a, 3};
-        assert(3 == cuda::std::apply(mem1, t));
+        assert(3 == cuda_for_dali::std::apply(mem1, t));
         assert(count == 3);
     }
     count = 0;
@@ -242,7 +242,7 @@ void test_ext_int_1()
     {
         Base a;
         TupleBase t{a, 4};
-        assert(4 == cuda::std::apply(mem1, t));
+        assert(4 == cuda_for_dali::std::apply(mem1, t));
         assert(count == 4);
     }
     count = 0;
@@ -250,7 +250,7 @@ void test_ext_int_1()
     {
         Wrap a;
         TupleWrap t{a, 5};
-        assert(5 == cuda::std::apply(mem1, t));
+        assert(5 == cuda_for_dali::std::apply(mem1, t));
         assert(count == 5);
     }
     count = 0;
@@ -258,7 +258,7 @@ void test_ext_int_1()
     {
         T const a;
         ConstTuple t{a, 6};
-        assert(6 == cuda::std::apply(mem2, t));
+        assert(6 == cuda_for_dali::std::apply(mem2, t));
         assert(count == 6);
     }
     count = 0;
@@ -266,7 +266,7 @@ void test_ext_int_1()
     {
         T const a;
         ConstTuplePtr t{&a, 7};
-        assert(7 == cuda::std::apply(mem2, t));
+        assert(7 == cuda_for_dali::std::apply(mem2, t));
         assert(count == 7);
     }
     count = 0;
@@ -274,7 +274,7 @@ void test_ext_int_1()
     {
         Base const a;
         ConstTupleBase t{a, 8};
-        assert(8 == cuda::std::apply(mem2, t));
+        assert(8 == cuda_for_dali::std::apply(mem2, t));
         assert(count == 8);
     }
     count = 0;
@@ -282,7 +282,7 @@ void test_ext_int_1()
     {
         Wrap const a;
         ConstTupleWrap t{a, 9};
-        assert(9 == cuda::std::apply(mem2, t));
+        assert(9 == cuda_for_dali::std::apply(mem2, t));
         assert(9 == count);
     }
 }
@@ -312,7 +312,7 @@ void test_ext_int_2()
     {
         T a;
         Tuple t{a, 1, 1};
-        assert(2 == cuda::std::apply(mem1, t));
+        assert(2 == cuda_for_dali::std::apply(mem1, t));
         assert(count == 2);
     }
     count = 0;
@@ -320,7 +320,7 @@ void test_ext_int_2()
     {
         T a;
         TuplePtr t{&a, 1, 2};
-        assert(3 == cuda::std::apply(mem1, t));
+        assert(3 == cuda_for_dali::std::apply(mem1, t));
         assert(count == 3);
     }
     count = 0;
@@ -328,7 +328,7 @@ void test_ext_int_2()
     {
         Base a;
         TupleBase t{a, 2, 2};
-        assert(4 == cuda::std::apply(mem1, t));
+        assert(4 == cuda_for_dali::std::apply(mem1, t));
         assert(count == 4);
     }
     count = 0;
@@ -336,7 +336,7 @@ void test_ext_int_2()
     {
         Wrap a;
         TupleWrap t{a, 2, 3};
-        assert(5 == cuda::std::apply(mem1, t));
+        assert(5 == cuda_for_dali::std::apply(mem1, t));
         assert(count == 5);
     }
     count = 0;
@@ -344,7 +344,7 @@ void test_ext_int_2()
     {
         T const a;
         ConstTuple t{a, 3, 3};
-        assert(6 == cuda::std::apply(mem2, t));
+        assert(6 == cuda_for_dali::std::apply(mem2, t));
         assert(count == 6);
     }
     count = 0;
@@ -352,7 +352,7 @@ void test_ext_int_2()
     {
         T const a;
         ConstTuplePtr t{&a, 3, 4};
-        assert(7 == cuda::std::apply(mem2, t));
+        assert(7 == cuda_for_dali::std::apply(mem2, t));
         assert(count == 7);
     }
     count = 0;
@@ -360,7 +360,7 @@ void test_ext_int_2()
     {
         Base const a;
         ConstTupleBase t{a, 4, 4};
-        assert(8 == cuda::std::apply(mem2, t));
+        assert(8 == cuda_for_dali::std::apply(mem2, t));
         assert(count == 8);
     }
     count = 0;
@@ -368,7 +368,7 @@ void test_ext_int_2()
     {
         Wrap const a;
         ConstTupleWrap t{a, 4, 5};
-        assert(9 == cuda::std::apply(mem2, t));
+        assert(9 == cuda_for_dali::std::apply(mem2, t));
         assert(9 == count);
     }
 }
@@ -377,64 +377,64 @@ int main(int, char**)
 {
     {
         test_ext_int_0<
-            cuda::std::tuple<A_int_0 &>, cuda::std::tuple<A_int_0 const &>
-          , cuda::std::tuple<A_int_0 *>, cuda::std::tuple<A_int_0 const *>
-          , cuda::std::tuple<A_wrap_0 &>, cuda::std::tuple<A_wrap_0 const &>
-          , cuda::std::tuple<A_base_0 &>, cuda::std::tuple<A_base_0 const &>
+            cuda_for_dali::std::tuple<A_int_0 &>, cuda_for_dali::std::tuple<A_int_0 const &>
+          , cuda_for_dali::std::tuple<A_int_0 *>, cuda_for_dali::std::tuple<A_int_0 const *>
+          , cuda_for_dali::std::tuple<A_wrap_0 &>, cuda_for_dali::std::tuple<A_wrap_0 const &>
+          , cuda_for_dali::std::tuple<A_base_0 &>, cuda_for_dali::std::tuple<A_base_0 const &>
           >();
         test_ext_int_0<
-            cuda::std::tuple<A_int_0>, cuda::std::tuple<A_int_0 const>
-          , cuda::std::tuple<A_int_0 *>, cuda::std::tuple<A_int_0 const *>
-          , cuda::std::tuple<A_wrap_0>, cuda::std::tuple<A_wrap_0 const>
-          , cuda::std::tuple<A_base_0>, cuda::std::tuple<A_base_0 const>
+            cuda_for_dali::std::tuple<A_int_0>, cuda_for_dali::std::tuple<A_int_0 const>
+          , cuda_for_dali::std::tuple<A_int_0 *>, cuda_for_dali::std::tuple<A_int_0 const *>
+          , cuda_for_dali::std::tuple<A_wrap_0>, cuda_for_dali::std::tuple<A_wrap_0 const>
+          , cuda_for_dali::std::tuple<A_base_0>, cuda_for_dali::std::tuple<A_base_0 const>
           >();
 /*
         test_ext_int_0<
-            cuda::std::array<A_int_0, 1>, cuda::std::array<A_int_0 const, 1>
-          , cuda::std::array<A_int_0*, 1>, cuda::std::array<A_int_0 const*, 1>
-          , cuda::std::array<A_wrap_0, 1>, cuda::std::array<A_wrap_0 const, 1>
-          , cuda::std::array<A_base_0, 1>, cuda::std::array<A_base_0 const, 1>
+            cuda_for_dali::std::array<A_int_0, 1>, cuda_for_dali::std::array<A_int_0 const, 1>
+          , cuda_for_dali::std::array<A_int_0*, 1>, cuda_for_dali::std::array<A_int_0 const*, 1>
+          , cuda_for_dali::std::array<A_wrap_0, 1>, cuda_for_dali::std::array<A_wrap_0 const, 1>
+          , cuda_for_dali::std::array<A_base_0, 1>, cuda_for_dali::std::array<A_base_0 const, 1>
           >();
 */
     }
     {
         test_ext_int_1<
-            cuda::std::tuple<A_int_1 &, int>, cuda::std::tuple<A_int_1 const &, int>
-          , cuda::std::tuple<A_int_1 *, int>, cuda::std::tuple<A_int_1 const *, int>
-          , cuda::std::tuple<A_wrap_1 &, int>, cuda::std::tuple<A_wrap_1 const &, int>
-          , cuda::std::tuple<A_base_1 &, int>, cuda::std::tuple<A_base_1 const &, int>
+            cuda_for_dali::std::tuple<A_int_1 &, int>, cuda_for_dali::std::tuple<A_int_1 const &, int>
+          , cuda_for_dali::std::tuple<A_int_1 *, int>, cuda_for_dali::std::tuple<A_int_1 const *, int>
+          , cuda_for_dali::std::tuple<A_wrap_1 &, int>, cuda_for_dali::std::tuple<A_wrap_1 const &, int>
+          , cuda_for_dali::std::tuple<A_base_1 &, int>, cuda_for_dali::std::tuple<A_base_1 const &, int>
           >();
         test_ext_int_1<
-            cuda::std::tuple<A_int_1, int>, cuda::std::tuple<A_int_1 const, int>
-          , cuda::std::tuple<A_int_1 *, int>, cuda::std::tuple<A_int_1 const *, int>
-          , cuda::std::tuple<A_wrap_1, int>, cuda::std::tuple<A_wrap_1 const, int>
-          , cuda::std::tuple<A_base_1, int>, cuda::std::tuple<A_base_1 const, int>
+            cuda_for_dali::std::tuple<A_int_1, int>, cuda_for_dali::std::tuple<A_int_1 const, int>
+          , cuda_for_dali::std::tuple<A_int_1 *, int>, cuda_for_dali::std::tuple<A_int_1 const *, int>
+          , cuda_for_dali::std::tuple<A_wrap_1, int>, cuda_for_dali::std::tuple<A_wrap_1 const, int>
+          , cuda_for_dali::std::tuple<A_base_1, int>, cuda_for_dali::std::tuple<A_base_1 const, int>
           >();
         test_ext_int_1<
-            cuda::std::pair<A_int_1 &, int>, cuda::std::pair<A_int_1 const &, int>
-          , cuda::std::pair<A_int_1 *, int>, cuda::std::pair<A_int_1 const *, int>
-          , cuda::std::pair<A_wrap_1 &, int>, cuda::std::pair<A_wrap_1 const &, int>
-          , cuda::std::pair<A_base_1 &, int>, cuda::std::pair<A_base_1 const &, int>
+            cuda_for_dali::std::pair<A_int_1 &, int>, cuda_for_dali::std::pair<A_int_1 const &, int>
+          , cuda_for_dali::std::pair<A_int_1 *, int>, cuda_for_dali::std::pair<A_int_1 const *, int>
+          , cuda_for_dali::std::pair<A_wrap_1 &, int>, cuda_for_dali::std::pair<A_wrap_1 const &, int>
+          , cuda_for_dali::std::pair<A_base_1 &, int>, cuda_for_dali::std::pair<A_base_1 const &, int>
           >();
         test_ext_int_1<
-            cuda::std::pair<A_int_1, int>, cuda::std::pair<A_int_1 const, int>
-          , cuda::std::pair<A_int_1 *, int>, cuda::std::pair<A_int_1 const *, int>
-          , cuda::std::pair<A_wrap_1, int>, cuda::std::pair<A_wrap_1 const, int>
-          , cuda::std::pair<A_base_1, int>, cuda::std::pair<A_base_1 const, int>
+            cuda_for_dali::std::pair<A_int_1, int>, cuda_for_dali::std::pair<A_int_1 const, int>
+          , cuda_for_dali::std::pair<A_int_1 *, int>, cuda_for_dali::std::pair<A_int_1 const *, int>
+          , cuda_for_dali::std::pair<A_wrap_1, int>, cuda_for_dali::std::pair<A_wrap_1 const, int>
+          , cuda_for_dali::std::pair<A_base_1, int>, cuda_for_dali::std::pair<A_base_1 const, int>
           >();
     }
     {
         test_ext_int_2<
-            cuda::std::tuple<A_int_2 &, int, int>, cuda::std::tuple<A_int_2 const &, int, int>
-          , cuda::std::tuple<A_int_2 *, int, int>, cuda::std::tuple<A_int_2 const *, int, int>
-          , cuda::std::tuple<A_wrap_2 &, int, int>, cuda::std::tuple<A_wrap_2 const &, int, int>
-          , cuda::std::tuple<A_base_2 &, int, int>, cuda::std::tuple<A_base_2 const &, int, int>
+            cuda_for_dali::std::tuple<A_int_2 &, int, int>, cuda_for_dali::std::tuple<A_int_2 const &, int, int>
+          , cuda_for_dali::std::tuple<A_int_2 *, int, int>, cuda_for_dali::std::tuple<A_int_2 const *, int, int>
+          , cuda_for_dali::std::tuple<A_wrap_2 &, int, int>, cuda_for_dali::std::tuple<A_wrap_2 const &, int, int>
+          , cuda_for_dali::std::tuple<A_base_2 &, int, int>, cuda_for_dali::std::tuple<A_base_2 const &, int, int>
           >();
         test_ext_int_2<
-            cuda::std::tuple<A_int_2, int, int>, cuda::std::tuple<A_int_2 const, int, int>
-          , cuda::std::tuple<A_int_2 *, int, int>, cuda::std::tuple<A_int_2 const *, int, int>
-          , cuda::std::tuple<A_wrap_2, int, int>, cuda::std::tuple<A_wrap_2 const, int, int>
-          , cuda::std::tuple<A_base_2, int, int>, cuda::std::tuple<A_base_2 const, int, int>
+            cuda_for_dali::std::tuple<A_int_2, int, int>, cuda_for_dali::std::tuple<A_int_2 const, int, int>
+          , cuda_for_dali::std::tuple<A_int_2 *, int, int>, cuda_for_dali::std::tuple<A_int_2 const *, int, int>
+          , cuda_for_dali::std::tuple<A_wrap_2, int, int>, cuda_for_dali::std::tuple<A_wrap_2 const, int, int>
+          , cuda_for_dali::std::tuple<A_base_2, int, int>, cuda_for_dali::std::tuple<A_base_2 const, int, int>
           >();
     }
 

@@ -11,8 +11,8 @@
 // template<Returnable R, class T, CopyConstructible... Args>
 //   unspecified mem_fn(R (T::* pm)(Args...));
 
-#include <cuda/std/functional>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/functional>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
@@ -73,11 +73,11 @@ test2(F f)
 
 int main(int, char**)
 {
-    test0(cuda::std::mem_fn(&A::test0));
-    test1(cuda::std::mem_fn(&A::test1));
-    test2(cuda::std::mem_fn(&A::test2));
+    test0(cuda_for_dali::std::mem_fn(&A::test0));
+    test1(cuda_for_dali::std::mem_fn(&A::test1));
+    test2(cuda_for_dali::std::mem_fn(&A::test2));
 #if TEST_STD_VER >= 11
-    static_assert((noexcept(cuda::std::mem_fn(&A::test0))), ""); // LWG#2489
+    static_assert((noexcept(cuda_for_dali::std::mem_fn(&A::test0))), ""); // LWG#2489
 #endif
 
   return 0;

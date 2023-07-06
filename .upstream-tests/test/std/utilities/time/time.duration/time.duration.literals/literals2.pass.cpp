@@ -9,41 +9,41 @@
 // UNSUPPORTED: c++98, c++03, c++11
 // <cuda/std/chrono>
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 int main(int, char**)
 {
-    using namespace cuda::std::literals;
+    using namespace cuda_for_dali::std::literals;
 
-    cuda::std::chrono::hours h = 4h;
-    assert ( h == cuda::std::chrono::hours(4));
+    cuda_for_dali::std::chrono::hours h = 4h;
+    assert ( h == cuda_for_dali::std::chrono::hours(4));
     auto h2 = 4.0h;
     assert ( h == h2 );
 
-    cuda::std::chrono::minutes min = 36min;
-    assert ( min == cuda::std::chrono::minutes(36));
+    cuda_for_dali::std::chrono::minutes min = 36min;
+    assert ( min == cuda_for_dali::std::chrono::minutes(36));
     auto min2 = 36.0min;
     assert ( min == min2 );
 
-    cuda::std::chrono::seconds s = 24s;
-    assert ( s == cuda::std::chrono::seconds(24));
+    cuda_for_dali::std::chrono::seconds s = 24s;
+    assert ( s == cuda_for_dali::std::chrono::seconds(24));
     auto s2 = 24.0s;
     assert ( s == s2 );
 
-    cuda::std::chrono::milliseconds ms = 247ms;
-    assert ( ms == cuda::std::chrono::milliseconds(247));
+    cuda_for_dali::std::chrono::milliseconds ms = 247ms;
+    assert ( ms == cuda_for_dali::std::chrono::milliseconds(247));
     auto ms2 = 247.0ms;
     assert ( ms == ms2 );
 
-    cuda::std::chrono::microseconds us = 867us;
-    assert ( us == cuda::std::chrono::microseconds(867));
+    cuda_for_dali::std::chrono::microseconds us = 867us;
+    assert ( us == cuda_for_dali::std::chrono::microseconds(867));
     auto us2 = 867.0us;
     assert ( us == us2 );
 
-    cuda::std::chrono::nanoseconds ns = 645ns;
-    assert ( ns == cuda::std::chrono::nanoseconds(645));
+    cuda_for_dali::std::chrono::nanoseconds ns = 645ns;
+    assert ( ns == cuda_for_dali::std::chrono::nanoseconds(645));
     auto ns2 = 645.ns;
     assert ( ns == ns2 );
 

@@ -6,45 +6,45 @@
 //
 //===----------------------------------------------------------------------===//
 
-// UNSUPPORTED: c++98, c++03, c++11, c++14 
+// UNSUPPORTED: c++98, c++03, c++11, c++14
 
 // <cuda/std/tuple>
 
 // template <class T> constexpr size_t tuple_size_v = tuple_size<T>::value;
 
-#include <cuda/std/tuple>
-#include <cuda/std/utility>
-// cuda::std::array not supported
-//#include <cuda/std/array>
+#include <cuda_for_dali/std/tuple>
+#include <cuda_for_dali/std/utility>
+// cuda_for_dali::std::array not supported
+//#include <cuda_for_dali/std/array>
 
 #include "test_macros.h"
 
 template <class Tuple, int Expect>
 __host__ __device__ void test()
 {
-    static_assert(cuda::std::tuple_size_v<Tuple> == Expect, "");
-    static_assert(cuda::std::tuple_size_v<Tuple> == cuda::std::tuple_size<Tuple>::value, "");
-    static_assert(cuda::std::tuple_size_v<Tuple const> == cuda::std::tuple_size<Tuple>::value, "");
-    static_assert(cuda::std::tuple_size_v<Tuple volatile> == cuda::std::tuple_size<Tuple>::value, "");
-    static_assert(cuda::std::tuple_size_v<Tuple const volatile> == cuda::std::tuple_size<Tuple>::value, "");
+    static_assert(cuda_for_dali::std::tuple_size_v<Tuple> == Expect, "");
+    static_assert(cuda_for_dali::std::tuple_size_v<Tuple> == cuda_for_dali::std::tuple_size<Tuple>::value, "");
+    static_assert(cuda_for_dali::std::tuple_size_v<Tuple const> == cuda_for_dali::std::tuple_size<Tuple>::value, "");
+    static_assert(cuda_for_dali::std::tuple_size_v<Tuple volatile> == cuda_for_dali::std::tuple_size<Tuple>::value, "");
+    static_assert(cuda_for_dali::std::tuple_size_v<Tuple const volatile> == cuda_for_dali::std::tuple_size<Tuple>::value, "");
 }
 
 int main(int, char**)
 {
-    test<cuda::std::tuple<>, 0>();
+    test<cuda_for_dali::std::tuple<>, 0>();
 
-    test<cuda::std::tuple<int>, 1>();
-    // cuda::std::array not supported
-    //test<cuda::std::array<int, 1>, 1>();
+    test<cuda_for_dali::std::tuple<int>, 1>();
+    // cuda_for_dali::std::array not supported
+    //test<cuda_for_dali::std::array<int, 1>, 1>();
 
-    test<cuda::std::tuple<int, int>, 2>();
-    test<cuda::std::pair<int, int>, 2>();
-    // cuda::std::array not supported
-    //test<cuda::std::array<int, 2>, 2>();
+    test<cuda_for_dali::std::tuple<int, int>, 2>();
+    test<cuda_for_dali::std::pair<int, int>, 2>();
+    // cuda_for_dali::std::array not supported
+    //test<cuda_for_dali::std::array<int, 2>, 2>();
 
-    test<cuda::std::tuple<int, int, int>, 3>();
-    // cuda::std::array not supported
-    //test<cuda::std::array<int, 3>, 3>();
+    test<cuda_for_dali::std::tuple<int, int, int>, 3>();
+    // cuda_for_dali::std::array not supported
+    //test<cuda_for_dali::std::array<int, 3>, 3>();
 
   return 0;
 }

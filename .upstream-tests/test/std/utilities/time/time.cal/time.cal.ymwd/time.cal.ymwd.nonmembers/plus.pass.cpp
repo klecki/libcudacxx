@@ -25,16 +25,16 @@
 
 
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
 
 __host__ __device__
-constexpr bool testConstexprYears(cuda::std::chrono::year_month_weekday ym)
+constexpr bool testConstexprYears(cuda_for_dali::std::chrono::year_month_weekday ym)
 {
-    cuda::std::chrono::years offset{23};
+    cuda_for_dali::std::chrono::years offset{23};
     if (static_cast<int>((ym         ).year()) !=  1) return false;
     if (static_cast<int>((ym + offset).year()) != 24) return false;
     if (static_cast<int>((offset + ym).year()) != 24) return false;
@@ -43,9 +43,9 @@ constexpr bool testConstexprYears(cuda::std::chrono::year_month_weekday ym)
 
 
 __host__ __device__
-constexpr bool testConstexprMonths(cuda::std::chrono::year_month_weekday ym)
+constexpr bool testConstexprMonths(cuda_for_dali::std::chrono::year_month_weekday ym)
 {
-    cuda::std::chrono::months offset{6};
+    cuda_for_dali::std::chrono::months offset{6};
     if (static_cast<unsigned>((ym         ).month()) !=  1) return false;
     if (static_cast<unsigned>((ym + offset).month()) !=  7) return false;
     if (static_cast<unsigned>((offset + ym).month()) !=  7) return false;
@@ -55,23 +55,23 @@ constexpr bool testConstexprMonths(cuda::std::chrono::year_month_weekday ym)
 
 int main(int, char**)
 {
-    using year               = cuda::std::chrono::year;
-    using month              = cuda::std::chrono::month;
-    using weekday            = cuda::std::chrono::weekday;
-    using weekday_indexed    = cuda::std::chrono::weekday_indexed;
-    using year_month_weekday = cuda::std::chrono::year_month_weekday;
-    using years              = cuda::std::chrono::years;
-    using months             = cuda::std::chrono::months;
+    using year               = cuda_for_dali::std::chrono::year;
+    using month              = cuda_for_dali::std::chrono::month;
+    using weekday            = cuda_for_dali::std::chrono::weekday;
+    using weekday_indexed    = cuda_for_dali::std::chrono::weekday_indexed;
+    using year_month_weekday = cuda_for_dali::std::chrono::year_month_weekday;
+    using years              = cuda_for_dali::std::chrono::years;
+    using months             = cuda_for_dali::std::chrono::months;
 
-    constexpr weekday Tuesday = cuda::std::chrono::Tuesday;
-    constexpr month January = cuda::std::chrono::January;
+    constexpr weekday Tuesday = cuda_for_dali::std::chrono::Tuesday;
+    constexpr month January = cuda_for_dali::std::chrono::January;
 
     {   // year_month_weekday + months (and switched)
-    ASSERT_NOEXCEPT(cuda::std::declval<year_month_weekday>() + std::declval<months>());
-    ASSERT_NOEXCEPT(cuda::std::declval<months>() + std::declval<year_month_weekday>());
+    ASSERT_NOEXCEPT(cuda_for_dali::std::declval<year_month_weekday>() + std::declval<months>());
+    ASSERT_NOEXCEPT(cuda_for_dali::std::declval<months>() + std::declval<year_month_weekday>());
 
-    ASSERT_SAME_TYPE(year_month_weekday, decltype(cuda::std::declval<year_month_weekday>() + std::declval<months>()));
-    ASSERT_SAME_TYPE(year_month_weekday, decltype(cuda::std::declval<months>() + std::declval<year_month_weekday>()));
+    ASSERT_SAME_TYPE(year_month_weekday, decltype(cuda_for_dali::std::declval<year_month_weekday>() + std::declval<months>()));
+    ASSERT_SAME_TYPE(year_month_weekday, decltype(cuda_for_dali::std::declval<months>() + std::declval<year_month_weekday>()));
 
     static_assert(testConstexprMonths(year_month_weekday{year{1}, January, weekday_indexed{Tuesday, 1}}), "");
 
@@ -93,15 +93,15 @@ int main(int, char**)
     }
 
     {   // year_month_weekday + years (and switched)
-    ASSERT_NOEXCEPT(cuda::std::declval<year_month_weekday>() + std::declval<years>());
-    ASSERT_NOEXCEPT(cuda::std::declval<years>() + std::declval<year_month_weekday>());
+    ASSERT_NOEXCEPT(cuda_for_dali::std::declval<year_month_weekday>() + std::declval<years>());
+    ASSERT_NOEXCEPT(cuda_for_dali::std::declval<years>() + std::declval<year_month_weekday>());
 
-    ASSERT_SAME_TYPE(year_month_weekday, decltype(cuda::std::declval<year_month_weekday>() + std::declval<years>()));
-    ASSERT_SAME_TYPE(year_month_weekday, decltype(cuda::std::declval<years>() + std::declval<year_month_weekday>()));
+    ASSERT_SAME_TYPE(year_month_weekday, decltype(cuda_for_dali::std::declval<year_month_weekday>() + std::declval<years>()));
+    ASSERT_SAME_TYPE(year_month_weekday, decltype(cuda_for_dali::std::declval<years>() + std::declval<year_month_weekday>()));
 
     static_assert(testConstexprYears (year_month_weekday{year{1}, January, weekday_indexed{Tuesday, 1}}), "");
 
-    year_month_weekday ym{year{1234}, cuda::std::chrono::January, weekday_indexed{Tuesday, 3}};
+    year_month_weekday ym{year{1234}, cuda_for_dali::std::chrono::January, weekday_indexed{Tuesday, 3}};
     for (int i = 0; i <= 10; ++i)
     {
         year_month_weekday ym1 = ym + years{i};

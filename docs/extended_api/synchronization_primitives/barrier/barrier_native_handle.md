@@ -27,7 +27,7 @@ A pointer to the PTX "mbarrier" subobject of the `cuda::barrier` object.
 ## Example
 
 ```cuda
-#include <cuda/barrier>
+#include <cuda_for_dali/barrier>
 
 __global__ void example_kernel(cuda::barrier<cuda::thread_scope_block>& bar) {
   auto ptr = cuda::device::barrier_native_handle(bar);

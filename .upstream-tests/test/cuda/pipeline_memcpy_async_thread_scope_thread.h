@@ -9,7 +9,7 @@
 
 // UNSUPPORTED: pre-sm-70
 
-#include <cuda/pipeline>
+#include <cuda_for_dali/pipeline>
 
 #include "cuda_space_selector.h"
 #include "large_type.h"
@@ -28,13 +28,13 @@ void test_fully_specialized()
     T * source = source_sel.construct(static_cast<T>(12));
     T * dest = dest_sel.construct(static_cast<T>(0));
 
-    auto pipe = cuda::make_pipeline();
+    auto pipe = cuda_for_dali::make_pipeline();
 
     assert(*source == 12);
     assert(*dest == 0);
 
     pipe.producer_acquire();
-    cuda::memcpy_async(dest, source, sizeof(T), pipe);
+    cuda_for_dali::memcpy_async(dest, source, sizeof(T), pipe);
     pipe.producer_commit();
     pipe.consumer_wait();
 
@@ -46,7 +46,7 @@ void test_fully_specialized()
     *source = 24;
 
     pipe.producer_acquire();
-    cuda::memcpy_async(static_cast<void *>(dest), static_cast<void *>(source), sizeof(T), pipe);
+    cuda_for_dali::memcpy_async(static_cast<void *>(dest), static_cast<void *>(source), sizeof(T), pipe);
     pipe.producer_commit();
     pipe.consumer_wait();
 

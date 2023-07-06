@@ -17,10 +17,10 @@
 int main(int argc, char ** argv)
 {
 #ifndef __CUDA_ARCH__
-    cuda::access_property ap(cuda::access_property::persisting{});
+    cuda_for_dali::access_property ap(cuda_for_dali::access_property::persisting{});
     int* array0 = new int[9];
-    cuda::annotated_ptr<int, cuda::access_property> array_anno_ptr{array0, ap};
-    cuda::annotated_ptr<int, cuda::access_property::shared> shared_ptr;
+    cuda_for_dali::annotated_ptr<int, cuda_for_dali::access_property> array_anno_ptr{array0, ap};
+    cuda_for_dali::annotated_ptr<int, cuda_for_dali::access_property::shared> shared_ptr;
 
     array_anno_ptr = shared_ptr;  //  fail to compile, as expected
 #endif

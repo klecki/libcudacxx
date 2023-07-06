@@ -13,7 +13,7 @@
 //
 // See llvm.org/PR39713
 
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/type_traits>
 #include "test_macros.h"
 
 #pragma nv_diag_suppress cuda_demote_unsupported_floating_point
@@ -21,7 +21,7 @@
 template <class T>
 __host__ __device__
 void test() {
-  static_assert(_LIBCUDACXX_ALIGNOF(T) == cuda::std::alignment_of<T>::value, "");
+  static_assert(_LIBCUDACXX_ALIGNOF(T) == cuda_for_dali::std::alignment_of<T>::value, "");
   static_assert(_LIBCUDACXX_ALIGNOF(T) == TEST_ALIGNOF(T), "");
 #if TEST_STD_VER >= 11
   static_assert(_LIBCUDACXX_ALIGNOF(T) == alignof(T), "");

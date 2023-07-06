@@ -15,7 +15,7 @@
 
 // MODULES_DEFINES: _LIBCUDACXX_TESTING_FALLBACK_IS_CONSTRUCTIBLE
 #define _LIBCUDACXX_TESTING_FALLBACK_IS_CONSTRUCTIBLE
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/type_traits>
 #include "test_macros.h"
 
 #if TEST_STD_VER >= 11 && defined(_LIBCUDACXX_VERSION)
@@ -92,14 +92,14 @@ template <class T>
 __host__ __device__
 void test_is_constructible()
 {
-    static_assert( (cuda::std::is_constructible<T>::value), "");
+    static_assert( (cuda_for_dali::std::is_constructible<T>::value), "");
 #ifndef TEST_COMPILER_C1XX
     // The fallback SFINAE version doesn't work reliable with MSVC, and we don't
     // use it, so waive it.
-    LIBCPP11_STATIC_ASSERT((cuda::std::__libcpp_is_constructible<T>::type::value), "");
+    LIBCPP11_STATIC_ASSERT((cuda_for_dali::std::__libcpp_is_constructible<T>::type::value), "");
 #endif
 #if TEST_STD_VER > 11
-    static_assert( cuda::std::is_constructible_v<T>, "");
+    static_assert( cuda_for_dali::std::is_constructible_v<T>, "");
 #endif
 }
 
@@ -107,14 +107,14 @@ template <class T, class A0>
 __host__ __device__
 void test_is_constructible()
 {
-    static_assert(( cuda::std::is_constructible<T, A0>::value), "");
+    static_assert(( cuda_for_dali::std::is_constructible<T, A0>::value), "");
 #ifndef TEST_COMPILER_C1XX
     // The fallback SFINAE version doesn't work reliable with MSVC, and we don't
     // use it, so waive it.
-    LIBCPP11_STATIC_ASSERT((cuda::std::__libcpp_is_constructible<T, A0>::type::value), "");
+    LIBCPP11_STATIC_ASSERT((cuda_for_dali::std::__libcpp_is_constructible<T, A0>::type::value), "");
 #endif
 #if TEST_STD_VER > 11
-    static_assert(( cuda::std::is_constructible_v<T, A0>), "");
+    static_assert(( cuda_for_dali::std::is_constructible_v<T, A0>), "");
 #endif
 }
 
@@ -122,14 +122,14 @@ template <class T, class A0, class A1>
 __host__ __device__
 void test_is_constructible()
 {
-    static_assert(( cuda::std::is_constructible<T, A0, A1>::value), "");
+    static_assert(( cuda_for_dali::std::is_constructible<T, A0, A1>::value), "");
 #ifndef TEST_COMPILER_C1XX
     // The fallback SFINAE version doesn't work reliable with MSVC, and we don't
     // use it, so waive it.
-    LIBCPP11_STATIC_ASSERT((cuda::std::__libcpp_is_constructible<T, A0, A1>::type::value), "");
+    LIBCPP11_STATIC_ASSERT((cuda_for_dali::std::__libcpp_is_constructible<T, A0, A1>::type::value), "");
 #endif
 #if TEST_STD_VER > 11
-    static_assert(( cuda::std::is_constructible_v<T, A0, A1>), "");
+    static_assert(( cuda_for_dali::std::is_constructible_v<T, A0, A1>), "");
 #endif
 }
 
@@ -137,14 +137,14 @@ template <class T, class A0, class A1, class A2>
 __host__ __device__
 void test_is_constructible()
 {
-    static_assert(( cuda::std::is_constructible<T, A0, A1, A2>::value), "");
+    static_assert(( cuda_for_dali::std::is_constructible<T, A0, A1, A2>::value), "");
 #ifndef TEST_COMPILER_C1XX
     // The fallback SFINAE version doesn't work reliable with MSVC, and we don't
     // use it, so waive it.
-    LIBCPP11_STATIC_ASSERT((cuda::std::__libcpp_is_constructible<T, A0, A1, A2>::type::value), "");
+    LIBCPP11_STATIC_ASSERT((cuda_for_dali::std::__libcpp_is_constructible<T, A0, A1, A2>::type::value), "");
 #endif
 #if TEST_STD_VER > 11
-    static_assert(( cuda::std::is_constructible_v<T, A0, A1, A2>), "");
+    static_assert(( cuda_for_dali::std::is_constructible_v<T, A0, A1, A2>), "");
 #endif
 }
 
@@ -152,14 +152,14 @@ template <class T>
 __host__ __device__
 void test_is_not_constructible()
 {
-    static_assert((!cuda::std::is_constructible<T>::value), "");
+    static_assert((!cuda_for_dali::std::is_constructible<T>::value), "");
 #ifndef TEST_COMPILER_C1XX
     // The fallback SFINAE version doesn't work reliable with MSVC, and we don't
     // use it, so waive it.
-    LIBCPP11_STATIC_ASSERT((!cuda::std::__libcpp_is_constructible<T>::type::value), "");
+    LIBCPP11_STATIC_ASSERT((!cuda_for_dali::std::__libcpp_is_constructible<T>::type::value), "");
 #endif
 #if TEST_STD_VER > 11
-    static_assert((!cuda::std::is_constructible_v<T>), "");
+    static_assert((!cuda_for_dali::std::is_constructible_v<T>), "");
 #endif
 }
 
@@ -167,19 +167,19 @@ template <class T, class A0>
 __host__ __device__
 void test_is_not_constructible()
 {
-    static_assert((!cuda::std::is_constructible<T, A0>::value), "");
+    static_assert((!cuda_for_dali::std::is_constructible<T, A0>::value), "");
 #ifndef TEST_COMPILER_C1XX
     // The fallback SFINAE version doesn't work reliable with MSVC, and we don't
     // use it, so waive it.
-    LIBCPP11_STATIC_ASSERT((!cuda::std::__libcpp_is_constructible<T, A0>::type::value), "");
+    LIBCPP11_STATIC_ASSERT((!cuda_for_dali::std::__libcpp_is_constructible<T, A0>::type::value), "");
 #endif
 #if TEST_STD_VER > 11
-    static_assert((!cuda::std::is_constructible_v<T, A0>), "");
+    static_assert((!cuda_for_dali::std::is_constructible_v<T, A0>), "");
 #endif
 }
 
 #if defined(TEST_CLANG_VER) && TEST_STD_VER >= 11
-template <class T = int, class = decltype(static_cast<T&&>(cuda::std::declval<double&>()))>
+template <class T = int, class = decltype(static_cast<T&&>(cuda_for_dali::std::declval<double&>()))>
 __host__ __device__
 constexpr bool  clang_disallows_valid_static_cast_test(int) { return false; };
 
@@ -309,7 +309,7 @@ int main(int, char**)
 
     // TODO add nvbug tracking
 #if !defined(TEST_COMPILER_NVCC) && !defined(TEST_COMPILER_NVRTC)
-    static_assert(cuda::std::is_constructible<int&&, ExplicitTo<int&&>>::value, "");
+    static_assert(cuda_for_dali::std::is_constructible<int&&, ExplicitTo<int&&>>::value, "");
 #endif
 
 #if defined(TEST_CLANG_VER) && !defined(TEST_COMPILER_NVCC)
@@ -319,11 +319,11 @@ int main(int, char**)
         // 'static_cast<int&&>(declval<ExplicitTo<int&&>>())' is ill-formed.
         LIBCPP_STATIC_ASSERT(
             clang_disallows_valid_static_cast_bug !=
-            cuda::std::__libcpp_is_constructible<int&&, ExplicitTo<int&&>>::value, "");
+            cuda_for_dali::std::__libcpp_is_constructible<int&&, ExplicitTo<int&&>>::value, "");
         ((void)clang_disallows_valid_static_cast_bug); // Prevent unused warning
     #else
         static_assert(clang_disallows_valid_static_cast_bug == false, "");
-        LIBCPP_STATIC_ASSERT(cuda::std::__libcpp_is_constructible<
+        LIBCPP_STATIC_ASSERT(cuda_for_dali::std::__libcpp_is_constructible<
             int&&, ExplicitTo<int&&>>::value, "");
     #endif
 #endif
@@ -333,8 +333,8 @@ int main(int, char**)
     test_is_constructible<const int&, ExplicitTo<int>>();
     LIBCPP_STATIC_ASSERT(
         clang_disallows_valid_static_cast_bug !=
-        cuda::std::__libcpp_is_constructible<int&&, ExplicitTo<int>>::value, "");
-    static_assert(cuda::std::is_constructible<int&&, ExplicitTo<int>>::value, "");
+        cuda_for_dali::std::__libcpp_is_constructible<int&&, ExplicitTo<int>>::value, "");
+    static_assert(cuda_for_dali::std::is_constructible<int&&, ExplicitTo<int>>::value, "");
 #elif defined(TEST_COMPILER_C1XX) && defined(TEST_COMPILER_NVCC)
     // FIXME NVCC and MSVC disagree about the validity of these tests, and give
     //       different answers in host and device code, which is just wonderful.

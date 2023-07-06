@@ -11,32 +11,32 @@
 // template <class T1, class T2> struct pair
 
 // template<size_t I, class T1, class T2>
-//     const typename tuple_element<I, cuda::std::pair<T1, T2> >::type&
+//     const typename tuple_element<I, cuda_for_dali::std::pair<T1, T2> >::type&
 //     get(const pair<T1, T2>&);
 
 // UNSUPPORTED: msvc
 
-#include <cuda/std/utility>
-#include <cuda/std/tuple>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/utility>
+#include <cuda_for_dali/std/tuple>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
     {
-        typedef cuda::std::pair<int, short> P;
+        typedef cuda_for_dali::std::pair<int, short> P;
         const P p(3, static_cast<short>(4));
-        assert(cuda::std::get<0>(p) == 3);
-        assert(cuda::std::get<1>(p) == 4);
+        assert(cuda_for_dali::std::get<0>(p) == 3);
+        assert(cuda_for_dali::std::get<1>(p) == 4);
     }
 
 #if TEST_STD_VER > 11
     {
-        typedef cuda::std::pair<int, short> P;
+        typedef cuda_for_dali::std::pair<int, short> P;
         constexpr P p1(3, static_cast<short>(4));
-        static_assert(cuda::std::get<0>(p1) == 3, "");
-        static_assert(cuda::std::get<1>(p1) == 4, "");
+        static_assert(cuda_for_dali::std::get<0>(p1) == 3, "");
+        static_assert(cuda_for_dali::std::get<1>(p1) == 4, "");
     }
 #endif
 

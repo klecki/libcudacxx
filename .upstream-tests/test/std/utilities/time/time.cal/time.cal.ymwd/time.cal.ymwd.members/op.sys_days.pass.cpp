@@ -19,25 +19,25 @@
 //    year()/month(). Otherwise the returned value is unspecified.
 //
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using year               = cuda::std::chrono::year;
-    using month              = cuda::std::chrono::month;
-    using weekday_indexed    = cuda::std::chrono::weekday_indexed;
-    using sys_days           = cuda::std::chrono::sys_days;
-    using days               = cuda::std::chrono::days;
-    using year_month_weekday = cuda::std::chrono::year_month_weekday;
+    using year               = cuda_for_dali::std::chrono::year;
+    using month              = cuda_for_dali::std::chrono::month;
+    using weekday_indexed    = cuda_for_dali::std::chrono::weekday_indexed;
+    using sys_days           = cuda_for_dali::std::chrono::sys_days;
+    using days               = cuda_for_dali::std::chrono::days;
+    using year_month_weekday = cuda_for_dali::std::chrono::year_month_weekday;
 
-    ASSERT_NOEXCEPT(sys_days(cuda::std::declval<year_month_weekday>()));
+    ASSERT_NOEXCEPT(sys_days(cuda_for_dali::std::declval<year_month_weekday>()));
 
     {
-    constexpr year_month_weekday ymwd{year{1970}, month{1}, weekday_indexed{cuda::std::chrono::Thursday, 1}};
+    constexpr year_month_weekday ymwd{year{1970}, month{1}, weekday_indexed{cuda_for_dali::std::chrono::Thursday, 1}};
     constexpr sys_days sd{ymwd};
 
     static_assert( sd.time_since_epoch() == days{0}, "");
@@ -45,7 +45,7 @@ int main(int, char**)
     }
 
     {
-    constexpr year_month_weekday ymwd{year{2000}, month{2}, weekday_indexed{cuda::std::chrono::Wednesday, 1}};
+    constexpr year_month_weekday ymwd{year{2000}, month{2}, weekday_indexed{cuda_for_dali::std::chrono::Wednesday, 1}};
     constexpr sys_days sd{ymwd};
 
     static_assert( sd.time_since_epoch() == days{10957+32}, "");
@@ -55,7 +55,7 @@ int main(int, char**)
 //  There's one more leap day between 1/1/40 and 1/1/70
 //  when compared to 1/1/70 -> 1/1/2000
     {
-    constexpr year_month_weekday ymwd{year{1940}, month{1},weekday_indexed{cuda::std::chrono::Tuesday, 1}};
+    constexpr year_month_weekday ymwd{year{1940}, month{1},weekday_indexed{cuda_for_dali::std::chrono::Tuesday, 1}};
     constexpr sys_days sd{ymwd};
 
     static_assert( sd.time_since_epoch() == days{-10957}, "");
@@ -63,7 +63,7 @@ int main(int, char**)
     }
 
     {
-    year_month_weekday ymwd{year{1939}, month{11}, weekday_indexed{cuda::std::chrono::Wednesday, 5}};
+    year_month_weekday ymwd{year{1939}, month{11}, weekday_indexed{cuda_for_dali::std::chrono::Wednesday, 5}};
     sys_days sd{ymwd};
 
     assert( sd.time_since_epoch() == days{-(10957+34)});

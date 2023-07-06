@@ -14,16 +14,16 @@
 
 // template <class U, class V> pair(const pair<U, V>& p);
 
-#include <cuda/std/utility>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/utility>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
     {
-        typedef cuda::std::pair<int, short> P1;
-        typedef cuda::std::pair<double, long> P2;
+        typedef cuda_for_dali::std::pair<int, short> P1;
+        typedef cuda_for_dali::std::pair<double, long> P2;
         const P1 p1(3, static_cast<short>(4));
         const P2 p2 = p1;
         assert(p2.first == 3);

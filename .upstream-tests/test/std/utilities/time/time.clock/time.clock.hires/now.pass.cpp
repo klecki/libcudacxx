@@ -12,12 +12,12 @@
 
 // static time_point now();
 
-#include <cuda/std/chrono>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/cassert>
 
 int main(int, char**)
 {
-    typedef cuda::std::chrono::high_resolution_clock C;
+    typedef cuda_for_dali::std::chrono::high_resolution_clock C;
     C::time_point t1 = C::now();
     assert(t1.time_since_epoch().count() != 0);
     assert(C::time_point::min() < t1);

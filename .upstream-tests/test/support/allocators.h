@@ -9,8 +9,8 @@
 #ifndef ALLOCATORS_H
 #define ALLOCATORS_H
 
-#include <cuda/std/type_traits>
-#include <cuda/std/utility>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/utility>
 
 #include "test_macros.h"
 
@@ -31,11 +31,11 @@ public:
     STATIC_MEMBER_VAR(move_called, bool);
     STATIC_MEMBER_VAR(allocate_called, bool);
 
-    __device__ __host__ static cuda::std::pair<T*, cuda::std::size_t>& deallocate_called() {
+    __device__ __host__ static cuda_for_dali::std::pair<T*, cuda_for_dali::std::size_t>& deallocate_called() {
         #ifdef __CUDA_ARCH__
-        __shared__ cuda::std::pair<T*, cuda::std::size_t> v;
+        __shared__ cuda_for_dali::std::pair<T*, cuda_for_dali::std::size_t> v;
         #else
-        static cuda::std::pair<T*, cuda::std::size_t> v = 0;
+        static cuda_for_dali::std::pair<T*, cuda_for_dali::std::size_t> v = 0;
         #endif
         return v;
     }
@@ -50,18 +50,18 @@ public:
     template <class U>
         __device__ __host__ A1(A1<U>&& a) TEST_NOEXCEPT : id_(a.id()) {move_called() = true;}
 
-    __device__ __host__ T* allocate(cuda::std::size_t n)
+    __device__ __host__ T* allocate(cuda_for_dali::std::size_t n)
     {
         allocate_called() = true;
         return (T*)n;
     }
 
-    __device__ __host__ void deallocate(T* p, cuda::std::size_t n)
+    __device__ __host__ void deallocate(T* p, cuda_for_dali::std::size_t n)
     {
-        deallocate_called() = cuda::std::pair<T*, cuda::std::size_t>(p, n);
+        deallocate_called() = cuda_for_dali::std::pair<T*, cuda_for_dali::std::size_t>(p, n);
     }
 
-    __device__ __host__ cuda::std::size_t max_size() const {return id_;}
+    __device__ __host__ cuda_for_dali::std::size_t max_size() const {return id_;}
 };
 
 template <class T, class U>
@@ -90,7 +90,7 @@ public:
     typedef unsigned size_type;
     typedef int difference_type;
 
-    typedef cuda::std::true_type propagate_on_container_move_assignment;
+    typedef cuda_for_dali::std::true_type propagate_on_container_move_assignment;
 
     __device__ __host__ int id() const {return id_;}
 
@@ -103,7 +103,7 @@ public:
     __device__ __host__ A2& operator=(const A2& a) TEST_NOEXCEPT { id_ = a.id(); copy_called() = true; return *this;}
     __device__ __host__ A2& operator=(A2&& a)      TEST_NOEXCEPT { id_ = a.id(); move_called() = true; return *this;}
 
-    __device__ __host__ T* allocate(cuda::std::size_t, const void* hint)
+    __device__ __host__ T* allocate(cuda_for_dali::std::size_t, const void* hint)
     {
         allocate_called() = true;
         return (T*) const_cast<void *>(hint);
@@ -133,8 +133,8 @@ public:
 
     typedef T value_type;
 
-    typedef cuda::std::true_type propagate_on_container_copy_assignment;
-    typedef cuda::std::true_type propagate_on_container_swap;
+    typedef cuda_for_dali::std::true_type propagate_on_container_copy_assignment;
+    typedef cuda_for_dali::std::true_type propagate_on_container_swap;
 
     __device__ __host__ int id() const {return id_;}
 
@@ -151,7 +151,7 @@ public:
     template <class U, class ...Args>
     __device__ __host__ void construct(U* p, Args&& ...args)
     {
-        ::new (p) U(cuda::std::forward<Args>(args)...);
+        ::new (p) U(cuda_for_dali::std::forward<Args>(args)...);
         constructed() = true;
     }
 

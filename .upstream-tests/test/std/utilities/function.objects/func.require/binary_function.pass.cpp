@@ -12,15 +12,15 @@
 
 // binary_function
 
-#include <cuda/std/functional>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/functional>
+#include <cuda_for_dali/std/type_traits>
 
 int main(int, char**)
 {
-    typedef cuda::std::binary_function<int, short, bool> bf;
-    static_assert((cuda::std::is_same<bf::first_argument_type, int>::value), "");
-    static_assert((cuda::std::is_same<bf::second_argument_type, short>::value), "");
-    static_assert((cuda::std::is_same<bf::result_type, bool>::value), "");
+    typedef cuda_for_dali::std::binary_function<int, short, bool> bf;
+    static_assert((cuda_for_dali::std::is_same<bf::first_argument_type, int>::value), "");
+    static_assert((cuda_for_dali::std::is_same<bf::second_argument_type, short>::value), "");
+    static_assert((cuda_for_dali::std::is_same<bf::result_type, bool>::value), "");
 
   return 0;
 }

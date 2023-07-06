@@ -7,8 +7,8 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <cuda/exception>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/exception>
+#include <cuda_for_dali/std/type_traits>
 
 #include <cassert>
 #include <iostream>
@@ -16,28 +16,28 @@
 #include <cuda_runtime_api.h>
 
 #ifndef _LIBCUDACXX_NO_EXCEPTIONS
-void test_throw() { throw cuda::cuda_error{cudaErrorInvalidKernelImage}; }
+void test_throw() { throw cuda_for_dali::cuda_error{cudaErrorInvalidKernelImage}; }
 #endif
 
 int main(int argc, char **argv) {
 
 #ifndef __CUDA_ARCH__
-  static_assert(std::is_base_of<::std::runtime_error, cuda::cuda_error>::value,
+  static_assert(std::is_base_of<::std::runtime_error, cuda_for_dali::cuda_error>::value,
                 "");
 
-  cuda::cuda_error e{cudaErrorMemoryAllocation};
+  cuda_for_dali::cuda_error e{cudaErrorMemoryAllocation};
   assert(e.what() == std::string{"cudaErrorMemoryAllocation: out of memory"});
   assert(e.code() == cudaErrorMemoryAllocation);
 
   std::string msg = "test message";
-  cuda::cuda_error e2{cudaErrorMemoryAllocation, msg};
+  cuda_for_dali::cuda_error e2{cudaErrorMemoryAllocation, msg};
   assert(e2.what() == msg + ": cudaErrorMemoryAllocation: out of memory");
   assert(e2.code() == cudaErrorMemoryAllocation);
 
 #ifndef _LIBCUDACXX_NO_EXCEPTIONS
   try {
     test_throw();
-  } catch (cuda::cuda_error const &e) {
+  } catch (cuda_for_dali::cuda_error const &e) {
     assert(e.what() ==
            std::string{
                "cudaErrorInvalidKernelImage: device kernel image is invalid"});

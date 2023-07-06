@@ -12,9 +12,9 @@
 
 // static constexpr duration max(); // noexcept after C++17
 
-#include <cuda/std/chrono>
-#include <cuda/std/limits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/limits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "../../rep.h"
@@ -23,19 +23,19 @@ template <class D>
 __host__ __device__
 void test()
 {
-    LIBCPP_ASSERT_NOEXCEPT(cuda::std::chrono::duration_values<typename D::rep>::max());
+    LIBCPP_ASSERT_NOEXCEPT(cuda_for_dali::std::chrono::duration_values<typename D::rep>::max());
 #if TEST_STD_VER > 17
-    ASSERT_NOEXCEPT(       cuda::std::chrono::duration_values<typename D::rep>::max());
+    ASSERT_NOEXCEPT(       cuda_for_dali::std::chrono::duration_values<typename D::rep>::max());
 #endif
     {
     typedef typename D::rep Rep;
-    Rep max_rep = cuda::std::chrono::duration_values<Rep>::max();
+    Rep max_rep = cuda_for_dali::std::chrono::duration_values<Rep>::max();
     assert(D::max().count() == max_rep);
     }
 #if TEST_STD_VER >= 11
     {
     typedef typename D::rep Rep;
-    constexpr Rep max_rep = cuda::std::chrono::duration_values<Rep>::max();
+    constexpr Rep max_rep = cuda_for_dali::std::chrono::duration_values<Rep>::max();
     static_assert(D::max().count() == max_rep, "");
     }
 #endif
@@ -43,8 +43,8 @@ void test()
 
 int main(int, char**)
 {
-    test<cuda::std::chrono::duration<int> >();
-    test<cuda::std::chrono::duration<Rep> >();
+    test<cuda_for_dali::std::chrono::duration<int> >();
+    test<cuda_for_dali::std::chrono::duration<Rep> >();
 
   return 0;
 }

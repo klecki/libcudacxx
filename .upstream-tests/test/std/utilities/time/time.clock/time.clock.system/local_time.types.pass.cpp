@@ -15,40 +15,40 @@
 // using local_seconds = sys_time<seconds>;
 // using local_days    = sys_time<days>;
 
-// [Example: 
-//   sys_seconds{sys_days{1970y/January/1}}.time_since_epoch() is 0s. 
+// [Example:
+//   sys_seconds{sys_days{1970y/January/1}}.time_since_epoch() is 0s.
 //   sys_seconds{sys_days{2000y/January/1}}.time_since_epoch() is 946’684’800s, which is 10’957 * 86’400s.
 // —end example]
 
 
-#include <cuda/std/chrono>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using local_t = cuda::std::chrono::local_t;
-    using year    = cuda::std::chrono::year;
+    using local_t = cuda_for_dali::std::chrono::local_t;
+    using year    = cuda_for_dali::std::chrono::year;
 
-    using seconds = cuda::std::chrono::seconds;
-    using minutes = cuda::std::chrono::minutes;
-    using days    = cuda::std::chrono::days;
-    
-    using local_seconds = cuda::std::chrono::local_seconds;
-    using local_minutes = cuda::std::chrono::local_time<minutes>;
-    using local_days    = cuda::std::chrono::local_days;
+    using seconds = cuda_for_dali::std::chrono::seconds;
+    using minutes = cuda_for_dali::std::chrono::minutes;
+    using days    = cuda_for_dali::std::chrono::days;
 
-    constexpr cuda::std::chrono::month January = cuda::std::chrono::January;
+    using local_seconds = cuda_for_dali::std::chrono::local_seconds;
+    using local_minutes = cuda_for_dali::std::chrono::local_time<minutes>;
+    using local_days    = cuda_for_dali::std::chrono::local_days;
 
-    ASSERT_SAME_TYPE(cuda::std::chrono::local_time<seconds>, local_seconds);
-    ASSERT_SAME_TYPE(cuda::std::chrono::local_time<days>,    local_days);
+    constexpr cuda_for_dali::std::chrono::month January = cuda_for_dali::std::chrono::January;
+
+    ASSERT_SAME_TYPE(cuda_for_dali::std::chrono::local_time<seconds>, local_seconds);
+    ASSERT_SAME_TYPE(cuda_for_dali::std::chrono::local_time<days>,    local_days);
 
 //  Test the long form, too
-    ASSERT_SAME_TYPE(cuda::std::chrono::time_point<local_t, seconds>, local_seconds);
-    ASSERT_SAME_TYPE(cuda::std::chrono::time_point<local_t, minutes>, local_minutes);
-    ASSERT_SAME_TYPE(cuda::std::chrono::time_point<local_t, days>,    local_days);
-    
+    ASSERT_SAME_TYPE(cuda_for_dali::std::chrono::time_point<local_t, seconds>, local_seconds);
+    ASSERT_SAME_TYPE(cuda_for_dali::std::chrono::time_point<local_t, minutes>, local_minutes);
+    ASSERT_SAME_TYPE(cuda_for_dali::std::chrono::time_point<local_t, days>,    local_days);
+
 //  Test some well known values
     local_days d0 = local_days{year{1970}/January/1};
     local_days d1 = local_days{year{2000}/January/1};

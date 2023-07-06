@@ -45,7 +45,7 @@ For each [`cuda::thread_scope`] `S` and least maximum value `V`,
 ## Example
 
 ```cuda
-#include <cuda/semaphore>
+#include <cuda_for_dali/semaphore>
 
 __global__ void example_kernel() {
   // This semaphore is suitable for all threads in the system.

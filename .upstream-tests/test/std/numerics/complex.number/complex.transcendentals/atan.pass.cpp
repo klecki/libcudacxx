@@ -12,15 +12,15 @@
 //   complex<T>
 //   atan(const complex<T>& x);
 
-#include <cuda/std/complex>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/complex>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "../cases.h"
 
 template <class T>
 __host__ __device__ void
-test(const cuda::std::complex<T>& c, cuda::std::complex<T> x)
+test(const cuda_for_dali::std::complex<T>& c, cuda_for_dali::std::complex<T> x)
 {
     assert(atan(c) == x);
 }
@@ -29,7 +29,7 @@ template <class T>
 __host__ __device__ void
 test()
 {
-    test(cuda::std::complex<T>(0, 0), cuda::std::complex<T>(0, 0));
+    test(cuda_for_dali::std::complex<T>(0, 0), cuda_for_dali::std::complex<T>(0, 0));
 }
 
 __host__ __device__ void test_edges()
@@ -38,23 +38,23 @@ __host__ __device__ void test_edges()
     const unsigned N = sizeof(testcases) / sizeof(testcases[0]);
     for (unsigned i = 0; i < N; ++i)
     {
-        cuda::std::complex<double> r = atan(testcases[i]);
-        cuda::std::complex<double> t1(-imag(testcases[i]), real(testcases[i]));
-        cuda::std::complex<double> t2 = atanh(t1);
-        cuda::std::complex<double> z(imag(t2), -real(t2));
-        if (cuda::std::isnan(real(r)))
-            assert(cuda::std::isnan(real(z)));
+        cuda_for_dali::std::complex<double> r = atan(testcases[i]);
+        cuda_for_dali::std::complex<double> t1(-imag(testcases[i]), real(testcases[i]));
+        cuda_for_dali::std::complex<double> t2 = atanh(t1);
+        cuda_for_dali::std::complex<double> z(imag(t2), -real(t2));
+        if (cuda_for_dali::std::isnan(real(r)))
+            assert(cuda_for_dali::std::isnan(real(z)));
         else
         {
             assert(real(r) == real(z));
-            assert(cuda::std::signbit(real(r)) == cuda::std::signbit(real(z)));
+            assert(cuda_for_dali::std::signbit(real(r)) == cuda_for_dali::std::signbit(real(z)));
         }
-        if (cuda::std::isnan(imag(r)))
-            assert(cuda::std::isnan(imag(z)));
+        if (cuda_for_dali::std::isnan(imag(r)))
+            assert(cuda_for_dali::std::isnan(imag(z)));
         else
         {
             assert(imag(r) == imag(z));
-            assert(cuda::std::signbit(imag(r)) == cuda::std::signbit(imag(z)));
+            assert(cuda_for_dali::std::signbit(imag(r)) == cuda_for_dali::std::signbit(imag(z)));
         }
     }
 }

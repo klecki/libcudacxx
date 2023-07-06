@@ -6,7 +6,7 @@ nav_order: 0
 # Thread Scopes
 
 ```cuda
-namespace cuda {
+namespace cuda_for_dali {
 
 // Header `<cuda/atomic>`.
 

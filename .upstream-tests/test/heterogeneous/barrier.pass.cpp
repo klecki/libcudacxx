@@ -13,7 +13,7 @@
 
 #include "helpers.h"
 
-#include <cuda/barrier>
+#include <cuda_for_dali/barrier>
 
 __managed__ bool completed_from_host = false;
 __managed__ bool completed_from_device = false;
@@ -25,12 +25,12 @@ struct barrier_and_token
     using token_t = typename barrier_t::arrival_token;
 
     barrier_t barrier;
-    cuda::std::atomic<token_t> token{token_t{}};
-    cuda::std::atomic<bool> token_set{false};
+    cuda_for_dali::std::atomic<token_t> token{token_t{}};
+    cuda_for_dali::std::atomic<bool> token_set{false};
 
     template<typename ...Args>
     __host__ __device__
-    barrier_and_token(Args && ...args) : barrier{ cuda::std::forward<Args>(args)... }
+    barrier_and_token(Args && ...args) : barrier{ cuda_for_dali::std::forward<Args>(args)... }
     {
     }
 };
@@ -40,7 +40,7 @@ struct barrier_and_token_with_completion
 {
     struct completion_t
     {
-        cuda::std::atomic<bool> & completed;
+        cuda_for_dali::std::atomic<bool> & completed;
 
         __host__ __device__
         void operator()() const
@@ -60,9 +60,9 @@ struct barrier_and_token_with_completion
     using token_t = typename barrier_t::arrival_token;
 
     barrier_t barrier;
-    cuda::std::atomic<token_t> token{token_t{}};
-    cuda::std::atomic<bool> token_set{false};
-    cuda::std::atomic<bool> completed{false};
+    cuda_for_dali::std::atomic<token_t> token{token_t{}};
+    cuda_for_dali::std::atomic<bool> token_set{false};
+    cuda_for_dali::std::atomic<bool> completed{false};
 
     template<typename Arg>
     __host__ __device__
@@ -74,27 +74,27 @@ struct barrier_and_token_with_completion
 
 struct barrier_arrive
 {
-    using async = cuda::std::true_type;
+    using async = cuda_for_dali::std::true_type;
 
     template<typename Data>
     __host__ __device__
     static void perform(Data & data)
     {
-        data.token.store(data.barrier.arrive(), cuda::std::memory_order_release);
-        data.token_set.store(true, cuda::std::memory_order_release);
+        data.token.store(data.barrier.arrive(), cuda_for_dali::std::memory_order_release);
+        data.token_set.store(true, cuda_for_dali::std::memory_order_release);
         data.token_set.notify_all();
     }
 };
 
 struct barrier_wait
 {
-    using async = cuda::std::true_type;
+    using async = cuda_for_dali::std::true_type;
 
     template<typename Data>
     __host__ __device__
     static void perform(Data & data)
     {
-        while (data.token_set.load(cuda::std::memory_order_acquire) == false)
+        while (data.token_set.load(cuda_for_dali::std::memory_order_acquire) == false)
         {
             data.token_set.wait(false);
         }
@@ -104,7 +104,7 @@ struct barrier_wait
 
 struct barrier_arrive_and_wait
 {
-    using async = cuda::std::true_type;
+    using async = cuda_for_dali::std::true_type;
 
     template<typename Data>
     __host__ __device__
@@ -120,8 +120,8 @@ struct validate_completion_result
     __host__ __device__
     static void perform(Data & data)
     {
-        assert(data.completed.load(cuda::std::memory_order_acquire) == true);
-        data.completed.store(false, cuda::std::memory_order_release);
+        assert(data.completed.load(cuda_for_dali::std::memory_order_acquire) == true);
+        data.completed.store(false, cuda_for_dali::std::memory_order_release);
     }
 };
 
@@ -131,7 +131,7 @@ struct clear_token
     __host__ __device__
     static void perform(Data & data)
     {
-        data.token_set.store(false, cuda::std::memory_order_release);
+        data.token_set.store(false, cuda_for_dali::std::memory_order_release);
     }
 };
 
@@ -183,47 +183,47 @@ using completion_performers_b = performer_list<
 >;
 
 template<typename Completion>
-using cuda_barrier_system = cuda::barrier<cuda::thread_scope_system, Completion>;
+using cuda_barrier_system = cuda_for_dali::barrier<cuda_for_dali::thread_scope_system, Completion>;
 
 void kernel_invoker()
 {
     validate_not_movable<
-        barrier_and_token<cuda::std::barrier<>>,
+        barrier_and_token<cuda_for_dali::std::barrier<>>,
         a_aw_w>(2);
     validate_not_movable<
-        barrier_and_token<cuda::barrier<cuda::thread_scope_system>>,
+        barrier_and_token<cuda_for_dali::barrier<cuda_for_dali::thread_scope_system>>,
         a_aw_w>(2);
 
     validate_not_movable<
-        barrier_and_token<cuda::std::barrier<>>,
+        barrier_and_token<cuda_for_dali::std::barrier<>>,
         aw_aw>(2);
     validate_not_movable<
-        barrier_and_token<cuda::barrier<cuda::thread_scope_system>>,
+        barrier_and_token<cuda_for_dali::barrier<cuda_for_dali::thread_scope_system>>,
         aw_aw>(2);
 
     validate_not_movable<
-        barrier_and_token<cuda::std::barrier<>>,
+        barrier_and_token<cuda_for_dali::std::barrier<>>,
         a_w_aw>(2);
     validate_not_movable<
-        barrier_and_token<cuda::barrier<cuda::thread_scope_system>>,
+        barrier_and_token<cuda_for_dali::barrier<cuda_for_dali::thread_scope_system>>,
         a_w_aw>(2);
 
     validate_not_movable<
-        barrier_and_token<cuda::std::barrier<>>,
+        barrier_and_token<cuda_for_dali::std::barrier<>>,
         a_w_a_w>(2);
     validate_not_movable<
-        barrier_and_token<cuda::barrier<cuda::thread_scope_system>>,
+        barrier_and_token<cuda_for_dali::barrier<cuda_for_dali::thread_scope_system>>,
         a_w_a_w>(2);
 
     validate_not_movable<
-        barrier_and_token_with_completion<cuda::std::barrier>,
+        barrier_and_token_with_completion<cuda_for_dali::std::barrier>,
         completion_performers_a>(2);
     validate_not_movable<
         barrier_and_token_with_completion<cuda_barrier_system>,
         completion_performers_a>(2);
 
     validate_not_movable<
-        barrier_and_token_with_completion<cuda::std::barrier>,
+        barrier_and_token_with_completion<cuda_for_dali::std::barrier>,
         completion_performers_b>(2);
     validate_not_movable<
         barrier_and_token_with_completion<cuda_barrier_system>,

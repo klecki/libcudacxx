@@ -11,21 +11,21 @@
 
 // <cuda/std/atomic>
 
-#include <cuda/std/atomic>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/atomic>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "atomic_helpers.h"
 #include "cuda_space_selector.h"
 
-template <class T, template<typename, typename> typename Selector, cuda::thread_scope>
+template <class T, template<typename, typename> typename Selector, cuda_for_dali::thread_scope>
 struct TestFn {
   __host__ __device__
   void operator()() const {
     // Test lesser
     {
-        typedef cuda::atomic<T> A;
+        typedef cuda_for_dali::atomic<T> A;
         Selector<A, constructor_initializer> sel;
         A & t = *sel.construct();
         t = T(5);
@@ -33,7 +33,7 @@ struct TestFn {
         assert(t.load() == T(4));
     }
     {
-        typedef cuda::atomic<T> A;
+        typedef cuda_for_dali::atomic<T> A;
         Selector<volatile A, constructor_initializer> sel;
         volatile A & t = *sel.construct();
         t = T(5);
@@ -42,7 +42,7 @@ struct TestFn {
     }
     // Test not lesser
     {
-        typedef cuda::atomic<T> A;
+        typedef cuda_for_dali::atomic<T> A;
         Selector<A, constructor_initializer> sel;
         A & t = *sel.construct();
         t = T(3);
@@ -50,7 +50,7 @@ struct TestFn {
         assert(t.load() == T(3));
     }
     {
-        typedef cuda::atomic<T> A;
+        typedef cuda_for_dali::atomic<T> A;
         Selector<volatile A, constructor_initializer> sel;
         volatile A & t = *sel.construct();
         t = T(3);

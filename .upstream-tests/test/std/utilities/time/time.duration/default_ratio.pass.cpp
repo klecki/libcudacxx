@@ -15,13 +15,13 @@
 // template <class Rep, class Period = ratio<1>>
 // class duration;
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 
 int main(int, char**)
 {
-    static_assert((cuda::std::is_same<cuda::std::chrono::duration<int, cuda::std::ratio<1> >,
-                   cuda::std::chrono::duration<int> >::value), "");
+    static_assert((cuda_for_dali::std::is_same<cuda_for_dali::std::chrono::duration<int, cuda_for_dali::std::ratio<1> >,
+                   cuda_for_dali::std::chrono::duration<int> >::value), "");
 
   return 0;
 }

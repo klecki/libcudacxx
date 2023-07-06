@@ -13,15 +13,15 @@
 
 // template <class T> T kill_dependency(T y);
 
-#include <cuda/std/atomic>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/atomic>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    assert(cuda::std::kill_dependency(5) == 5);
-    assert(cuda::std::kill_dependency(-5.5) == -5.5);
+    assert(cuda_for_dali::std::kill_dependency(5) == 5);
+    assert(cuda_for_dali::std::kill_dependency(-5.5) == -5.5);
 
   return 0;
 }

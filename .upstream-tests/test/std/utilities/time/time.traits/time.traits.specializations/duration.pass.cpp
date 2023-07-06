@@ -14,31 +14,31 @@
 //     typedef chrono::duration<typename common_type<Rep1, Rep2>::type, see below }> type;
 // };
 
-#include <cuda/std/chrono>
+#include <cuda_for_dali/std/chrono>
 
 template <class D1, class D2, class De>
 __host__ __device__
 void
 test()
 {
-    typedef typename cuda::std::common_type<D1, D2>::type Dc;
-    static_assert((cuda::std::is_same<Dc, De>::value), "");
+    typedef typename cuda_for_dali::std::common_type<D1, D2>::type Dc;
+    static_assert((cuda_for_dali::std::is_same<Dc, De>::value), "");
 }
 
 int main(int, char**)
 {
-    test<cuda::std::chrono::duration<int, cuda::std::ratio<1, 100> >,
-         cuda::std::chrono::duration<long, cuda::std::ratio<1, 1000> >,
-         cuda::std::chrono::duration<long, cuda::std::ratio<1, 1000> > >();
-    test<cuda::std::chrono::duration<long, cuda::std::ratio<1, 100> >,
-         cuda::std::chrono::duration<int, cuda::std::ratio<1, 1000> >,
-         cuda::std::chrono::duration<long, cuda::std::ratio<1, 1000> > >();
-    test<cuda::std::chrono::duration<char, cuda::std::ratio<1, 30> >,
-         cuda::std::chrono::duration<short, cuda::std::ratio<1, 1000> >,
-         cuda::std::chrono::duration<int, cuda::std::ratio<1, 3000> > >();
-    test<cuda::std::chrono::duration<double, cuda::std::ratio<21, 1> >,
-         cuda::std::chrono::duration<short, cuda::std::ratio<15, 1> >,
-         cuda::std::chrono::duration<double, cuda::std::ratio<3, 1> > >();
+    test<cuda_for_dali::std::chrono::duration<int, cuda_for_dali::std::ratio<1, 100> >,
+         cuda_for_dali::std::chrono::duration<long, cuda_for_dali::std::ratio<1, 1000> >,
+         cuda_for_dali::std::chrono::duration<long, cuda_for_dali::std::ratio<1, 1000> > >();
+    test<cuda_for_dali::std::chrono::duration<long, cuda_for_dali::std::ratio<1, 100> >,
+         cuda_for_dali::std::chrono::duration<int, cuda_for_dali::std::ratio<1, 1000> >,
+         cuda_for_dali::std::chrono::duration<long, cuda_for_dali::std::ratio<1, 1000> > >();
+    test<cuda_for_dali::std::chrono::duration<char, cuda_for_dali::std::ratio<1, 30> >,
+         cuda_for_dali::std::chrono::duration<short, cuda_for_dali::std::ratio<1, 1000> >,
+         cuda_for_dali::std::chrono::duration<int, cuda_for_dali::std::ratio<1, 3000> > >();
+    test<cuda_for_dali::std::chrono::duration<double, cuda_for_dali::std::ratio<21, 1> >,
+         cuda_for_dali::std::chrono::duration<short, cuda_for_dali::std::ratio<15, 1> >,
+         cuda_for_dali::std::chrono::duration<double, cuda_for_dali::std::ratio<3, 1> > >();
 
   return 0;
 }

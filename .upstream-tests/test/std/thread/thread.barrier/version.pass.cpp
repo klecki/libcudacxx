@@ -11,7 +11,7 @@
 
 // <cuda/std/barrier>
 
-#include <cuda/std/barrier>
+#include <cuda_for_dali/std/barrier>
 
 #include "test_macros.h"
 

@@ -9,16 +9,16 @@ nav_order: 2
 Defined in header `<cuda/annotated_ptr>`:
 
 ```cuda
-namespace cuda {
+namespace cuda_for_dali {
 class access_property;
-} // namespace cuda
+} // namespace cuda_for_dali
 ```
 
 The class [`cuda::access_property`] is a [`LiteralType`] that provides an opaque encoding for properties of memory operations.
 It is used in combination with [`cuda::annotated_ptr`], [`cuda::associate_access_property`] and [`cuda::apply_access_property`] to _request_ the application of properties to memory operations.
 
 ```cuda
-namespace cuda {
+namespace cuda_for_dali {
 
 class access_property {
   public:
@@ -67,12 +67,12 @@ class access_property {
     __host__ __device__ constexpr access_property(void* ptr, size_t partition_bytes, size_t total_bytes, persisting, streaming);
 };
 
-} // namespace cuda
+} // namespace cuda_for_dali
 ```
 
 ## Kinds of access properties
 
-Access properties are either _static_ compile-time values or _dynamic_ runtime values. 
+Access properties are either _static_ compile-time values or _dynamic_ runtime values.
 The following properties of a memory access are provided:
 
 * Static memory space properties:
@@ -87,7 +87,7 @@ The following properties of a memory access are provided:
   * `interleaved`: choose a `probability` of memory addresses to be accessed with one property and the remaining `1 - probability` addresses with another,
   * `range`: choose a partitioned memory range with memory accesses to the "middle" sub-partition using the _primary_ property, and memory accesess to the head and tail sub-partitions using the _secondary_ property.
 
-**Note**: the difference between [`cuda::access_property::global`] and [`cuda::access_property::normal`] is subtle. 
+**Note**: the difference between [`cuda::access_property::global`] and [`cuda::access_property::normal`] is subtle.
 The [`cuda::access_property::normal`] hints that the pointer points to the global address space _and_ the memory will be accessed with "normal frequency", while [`cuda::access_property::global`] only hints that the pointer points to the global address-space, it does not hint about how frequent the accesses will be.
 
 > **WARNING**: the behavior of _requesting_ the application of `cuda::access_property` to memory accesses, or their association with memory addresses, outside of the corresponding address space is _undefined_ (note: even if that address is not "used").
@@ -105,10 +105,10 @@ __host__ __device__ constexpr access_property() noexcept;
 ## Static global memory residence control property constructors
 
 ```cuda
-__host__ __device__ constexpr access_property::access_property(global) noexcept; 
-__host__ __device__ constexpr access_property::access_property(normal) noexcept; 
-__host__ __device__ constexpr access_property::access_property(streaming) noexcept; 
-__host__ __device__ constexpr access_property::access_property(persisting) noexcept; 
+__host__ __device__ constexpr access_property::access_property(global) noexcept;
+__host__ __device__ constexpr access_property::access_property(normal) noexcept;
+__host__ __device__ constexpr access_property::access_property(streaming) noexcept;
+__host__ __device__ constexpr access_property::access_property(persisting) noexcept;
 ```
 
 **Effects**: as-if `access_property(PROPERTY, 1.0)` where `PROPERTY` is one of `global`, `normal`, `streaming`, or `persisting`.
@@ -117,25 +117,25 @@ __host__ __device__ constexpr access_property::access_property(persisting) noexc
 ## Dynamic interleaved global memory residence control property constructors
 
 ```cuda
-__host__ __device__ constexpr access_property::access_property(normal,     float probability); 
-__host__ __device__ constexpr access_property::access_property(streaming,  float probability); 
-__host__ __device__ constexpr access_property::access_property(persisting, float probability); 
-__host__ __device__ constexpr access_property::access_property(normal,     float probability, streaming); 
-__host__ __device__ constexpr access_property::access_property(persisting, float probability, streaming); 
+__host__ __device__ constexpr access_property::access_property(normal,     float probability);
+__host__ __device__ constexpr access_property::access_property(streaming,  float probability);
+__host__ __device__ constexpr access_property::access_property(persisting, float probability);
+__host__ __device__ constexpr access_property::access_property(normal,     float probability, streaming);
+__host__ __device__ constexpr access_property::access_property(persisting, float probability, streaming);
 ```
 
 **Preconditions**: `0 < probability <= 1.0`.
 
-**Effects**: constructs an _interleaved_ access property that _requests_ the first and third arguments - access properties - to be applied with `probability` and `1 - probability` to memory accesses. 
+**Effects**: constructs an _interleaved_ access property that _requests_ the first and third arguments - access properties - to be applied with `probability` and `1 - probability` to memory accesses.
 The overloads without a third argument request applying `global` with `1 - probability`.
 
 ## Dynamic range global memory residence control property constructors
 
 ```cuda
-__host__ __device__ constexpr access_property::access_property(void* ptr, size_t leading_bytes, size_t total_bytes, normal); 
-__host__ __device__ constexpr access_property::access_property(void* ptr, size_t leading_bytes, size_t total_bytes, streaming); 
-__host__ __device__ constexpr access_property::access_property(void* ptr, size_t leading_bytes, size_t total_bytes, persisting); 
-__host__ __device__ constexpr access_property::access_property(void* ptr, size_t leading_bytes, size_t total_bytes, normal,     streaming); 
+__host__ __device__ constexpr access_property::access_property(void* ptr, size_t leading_bytes, size_t total_bytes, normal);
+__host__ __device__ constexpr access_property::access_property(void* ptr, size_t leading_bytes, size_t total_bytes, streaming);
+__host__ __device__ constexpr access_property::access_property(void* ptr, size_t leading_bytes, size_t total_bytes, persisting);
+__host__ __device__ constexpr access_property::access_property(void* ptr, size_t leading_bytes, size_t total_bytes, normal,     streaming);
 __host__ __device__ constexpr access_property::access_property(void* ptr, size_t leading_bytes, size_t total_bytes, persisting, streaming);
 ```
 
@@ -147,7 +147,7 @@ __host__ __device__ constexpr access_property::access_property(void* ptr, size_t
 
 **Postconditions**: memory accesses requesting the application of this property must be in range `[max(0, ptr + leading_bytes - total_bytes), ptr + total_bytes)`.
 
-**Effects**: the fourth and fifth arguments, access properties, are called _primary_ and _secondary_ properties. 
+**Effects**: the fourth and fifth arguments, access properties, are called _primary_ and _secondary_ properties.
 The overloads without a fifth argument use `global` as the _secondary_ property.
 Constructs a _range_ access property _requesting_ the properties to be **approximately** applied to memory accesses as follows:
 
@@ -175,12 +175,12 @@ Constructs a _range_ access property _requesting_ the properties to be **approxi
 ## Conversion operators
 
 ```cuda
-__host__ __device__ constexpr access_property::normal::operator cudaAccessProperty() const noexcept; 
-__host__ __device__ constexpr access_property::streaming::operator cudaAccessProperty() const noexcept; 
-__host__ __device__ constexpr access_property::persisting::operator cudaAccessProperty() const noexcept; 
+__host__ __device__ constexpr access_property::normal::operator cudaAccessProperty() const noexcept;
+__host__ __device__ constexpr access_property::streaming::operator cudaAccessProperty() const noexcept;
+__host__ __device__ constexpr access_property::persisting::operator cudaAccessProperty() const noexcept;
 ```
 
-**Returns**: corresponding CUDA Runtime [`cudaAccessProperty`] value. 
+**Returns**: corresponding CUDA Runtime [`cudaAccessProperty`] value.
 
 **Note**: Allows `constexpr cuda::access_property::normal{}`,
 `cuda::access_property::streaming{}`, and `cuda::access_property::persisting{}`
@@ -203,10 +203,10 @@ Version 7.4]. See [Cache Eviction Priority Hints]
 When using `shared` and `global`, the pointer being accessed can be assumed to point to memory in the `shared` and `global` address spaces.
 This is exploited for optimization purposes in NVVM-IR.
 
-## Example 
+## Example
 
 ```cuda
-#include <cuda/annotated_ptr>
+#include <cuda_for_dali/annotated_ptr>
 
 __global__ void undefined_behavior(int* global) {
     // Associating pointers with mismatching address spaces is undefined:

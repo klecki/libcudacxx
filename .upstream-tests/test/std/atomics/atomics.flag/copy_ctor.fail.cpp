@@ -18,13 +18,13 @@
 
 // atomic_flag(const atomic_flag&) = delete;
 
-#include <cuda/std/atomic>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/atomic>
+#include <cuda_for_dali/std/cassert>
 
 int main(int, char**)
 {
-    cuda::std::atomic_flag f0;
-    cuda::std::atomic_flag f(f0);
+    cuda_for_dali::std::atomic_flag f0;
+    cuda_for_dali::std::atomic_flag f(f0);
 
   return 0;
 }

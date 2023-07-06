@@ -10,13 +10,13 @@
 
 // template <class Duration>
 // class hh_mm_ss
-// 
+//
 // constexpr precision subseconds() const noexcept;
 //
 // See the table in hours.pass.cpp for correspondence between the magic values used below
 
-#include <cuda/std/chrono>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
@@ -24,32 +24,32 @@ template <typename Duration>
 __host__ __device__
 constexpr auto check_subseconds(Duration d)
 {
-    using HMS = cuda::std::chrono::hh_mm_ss<Duration>;
-    ASSERT_SAME_TYPE(typename HMS::precision, decltype(cuda::std::declval<HMS>().subseconds()));
-    ASSERT_NOEXCEPT(                                   cuda::std::declval<HMS>().subseconds());
+    using HMS = cuda_for_dali::std::chrono::hh_mm_ss<Duration>;
+    ASSERT_SAME_TYPE(typename HMS::precision, decltype(cuda_for_dali::std::declval<HMS>().subseconds()));
+    ASSERT_NOEXCEPT(                                   cuda_for_dali::std::declval<HMS>().subseconds());
     return HMS(d).subseconds().count();
 }
 
 int main(int, char**)
 {
-    using microfortnights = cuda::std::chrono::duration<int, cuda::std::ratio<756, 625>>;
-    
-    static_assert( check_subseconds(cuda::std::chrono::seconds( 1)) == 0, "");
-    static_assert( check_subseconds(cuda::std::chrono::seconds(-1)) == 0, "");
-    
-    assert( check_subseconds(cuda::std::chrono::seconds( 5000)) == 0);
-    assert( check_subseconds(cuda::std::chrono::seconds(-5000)) == 0);
-    assert( check_subseconds(cuda::std::chrono::minutes( 5000)) == 0);
-    assert( check_subseconds(cuda::std::chrono::minutes(-5000)) == 0);
-    assert( check_subseconds(cuda::std::chrono::hours( 11))     == 0);
-    assert( check_subseconds(cuda::std::chrono::hours(-11))     == 0);
+    using microfortnights = cuda_for_dali::std::chrono::duration<int, cuda_for_dali::std::ratio<756, 625>>;
 
-    assert( check_subseconds(cuda::std::chrono::milliseconds( 123456789LL)) == 789);
-    assert( check_subseconds(cuda::std::chrono::milliseconds(-123456789LL)) == 789);
-    assert( check_subseconds(cuda::std::chrono::microseconds( 123456789LL)) == 456789LL);
-    assert( check_subseconds(cuda::std::chrono::microseconds(-123456789LL)) == 456789LL);
-    assert( check_subseconds(cuda::std::chrono::nanoseconds( 123456789LL))  == 123456789LL);
-    assert( check_subseconds(cuda::std::chrono::nanoseconds(-123456789LL))  == 123456789LL);
+    static_assert( check_subseconds(cuda_for_dali::std::chrono::seconds( 1)) == 0, "");
+    static_assert( check_subseconds(cuda_for_dali::std::chrono::seconds(-1)) == 0, "");
+
+    assert( check_subseconds(cuda_for_dali::std::chrono::seconds( 5000)) == 0);
+    assert( check_subseconds(cuda_for_dali::std::chrono::seconds(-5000)) == 0);
+    assert( check_subseconds(cuda_for_dali::std::chrono::minutes( 5000)) == 0);
+    assert( check_subseconds(cuda_for_dali::std::chrono::minutes(-5000)) == 0);
+    assert( check_subseconds(cuda_for_dali::std::chrono::hours( 11))     == 0);
+    assert( check_subseconds(cuda_for_dali::std::chrono::hours(-11))     == 0);
+
+    assert( check_subseconds(cuda_for_dali::std::chrono::milliseconds( 123456789LL)) == 789);
+    assert( check_subseconds(cuda_for_dali::std::chrono::milliseconds(-123456789LL)) == 789);
+    assert( check_subseconds(cuda_for_dali::std::chrono::microseconds( 123456789LL)) == 456789LL);
+    assert( check_subseconds(cuda_for_dali::std::chrono::microseconds(-123456789LL)) == 456789LL);
+    assert( check_subseconds(cuda_for_dali::std::chrono::nanoseconds( 123456789LL))  == 123456789LL);
+    assert( check_subseconds(cuda_for_dali::std::chrono::nanoseconds(-123456789LL))  == 123456789LL);
 
     assert( check_subseconds(microfortnights(  1000)) == 6000);
     assert( check_subseconds(microfortnights( -1000)) == 6000);

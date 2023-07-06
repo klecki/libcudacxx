@@ -12,14 +12,14 @@
 //   complex<T>
 //   operator*(const T& lhs, const complex<T>& rhs);
 
-#include <cuda/std/complex>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/complex>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 template <class T>
 __host__ __device__ void
-test(const T& lhs, const cuda::std::complex<T>& rhs, cuda::std::complex<T> x)
+test(const T& lhs, const cuda_for_dali::std::complex<T>& rhs, cuda_for_dali::std::complex<T> x)
 {
     assert(lhs * rhs == x);
 }
@@ -29,8 +29,8 @@ __host__ __device__ void
 test()
 {
     T lhs(1.5);
-    cuda::std::complex<T> rhs(1.5, 2.5);
-    cuda::std::complex<T>   x(2.25, 3.75);
+    cuda_for_dali::std::complex<T> rhs(1.5, 2.5);
+    cuda_for_dali::std::complex<T>   x(2.25, 3.75);
     test(lhs, rhs, x);
 }
 

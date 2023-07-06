@@ -20,16 +20,16 @@
 //       otherwise appends with " is not a valid index]".
 
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using weekday_indexed = cuda::std::chrono::weekday_indexed;
-    using weekday         = cuda::std::chrono::weekday;
+    using weekday_indexed = cuda_for_dali::std::chrono::weekday_indexed;
+    using weekday         = cuda_for_dali::std::chrono::weekday;
 
     std::cout << weekday_indexed{weekday{3}};
 

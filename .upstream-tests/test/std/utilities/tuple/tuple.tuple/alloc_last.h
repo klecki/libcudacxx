@@ -9,7 +9,7 @@
 #ifndef ALLOC_LAST_H
 #define ALLOC_LAST_H
 
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/cassert>
 
 #include "allocators.h"
 

@@ -38,8 +38,8 @@
 //   abbrev is non-null. If %z (or a modified variant) is used and successfully parsed,
 //   that value will be assigned to *offset if offset is non-null.
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 #include <iostream>
 
@@ -47,7 +47,7 @@
 
 int main(int, char**)
 {
-   using month = cuda::std::chrono::month;
+   using month = cuda_for_dali::std::chrono::month;
    std::cout << month{1};
 
   return 0;

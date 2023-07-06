@@ -14,28 +14,28 @@
 //
 //  Effects:  Constructs an object of type weekday by computing what day
 //              of the week  corresponds to the sys_days dp, and representing
-//              that day of the week in wd_ 
+//              that day of the week in wd_
 //
 //  Remarks: For any value ymd of type year_month_day for which ymd.ok() is true,
 //                ymd == year_month_day{sys_days{ymd}} is true.
-// 
-// [Example: 
+//
+// [Example:
 //  If dp represents 1970-01-01, the constructed weekday represents Thursday by storing 4 in wd_.
 // —end example]
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using sys_days  = cuda::std::chrono::sys_days;
-    using days      = cuda::std::chrono::days;
-    using weekday   = cuda::std::chrono::weekday;
+    using sys_days  = cuda_for_dali::std::chrono::sys_days;
+    using days      = cuda_for_dali::std::chrono::days;
+    using weekday   = cuda_for_dali::std::chrono::weekday;
 
-    ASSERT_NOEXCEPT(weekday{cuda::std::declval<sys_days>()});
+    ASSERT_NOEXCEPT(weekday{cuda_for_dali::std::declval<sys_days>()});
 
     {
     constexpr sys_days sd{}; // 1-Jan-1970 was a Thursday

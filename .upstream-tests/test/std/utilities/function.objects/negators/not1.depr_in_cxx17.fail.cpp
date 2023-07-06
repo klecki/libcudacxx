@@ -15,7 +15,7 @@
 // UNSUPPORTED: c++98, c++03, c++11, c++14
 // REQUIRES: verify-support
 
-#include <cuda/std/functional>
+#include <cuda_for_dali/std/functional>
 
 #include "test_macros.h"
 
@@ -25,7 +25,7 @@ struct Predicate {
 };
 
 int main(int, char**) {
-    cuda::std::not1(Predicate()); // expected-error{{'not1<Predicate>' is deprecated}}
+    cuda_for_dali::std::not1(Predicate()); // expected-error{{'not1<Predicate>' is deprecated}}
 
   return 0;
 }

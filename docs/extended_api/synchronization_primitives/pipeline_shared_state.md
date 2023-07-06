@@ -52,7 +52,7 @@ It can be silenced using `#pragma diag_suppress static_var_with_dynamic_init`.
 ## Example
 
 ```cuda
-#include <cuda/pipeline>
+#include <cuda_for_dali/pipeline>
 
 // Disables `pipeline_shared_state` initialization warning.
 #pragma diag_suppress static_var_with_dynamic_init

@@ -10,7 +10,7 @@
 
 // void
 
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/type_traits>
 
 #include "test_macros.h"
 
@@ -18,13 +18,13 @@ template <class T>
 __host__ __device__
 void test_void_imp()
 {
-    static_assert(!cuda::std::is_reference<T>::value, "");
-    static_assert(!cuda::std::is_arithmetic<T>::value, "");
-    static_assert( cuda::std::is_fundamental<T>::value, "");
-    static_assert(!cuda::std::is_object<T>::value, "");
-    static_assert(!cuda::std::is_scalar<T>::value, "");
-    static_assert(!cuda::std::is_compound<T>::value, "");
-    static_assert(!cuda::std::is_member_pointer<T>::value, "");
+    static_assert(!cuda_for_dali::std::is_reference<T>::value, "");
+    static_assert(!cuda_for_dali::std::is_arithmetic<T>::value, "");
+    static_assert( cuda_for_dali::std::is_fundamental<T>::value, "");
+    static_assert(!cuda_for_dali::std::is_object<T>::value, "");
+    static_assert(!cuda_for_dali::std::is_scalar<T>::value, "");
+    static_assert(!cuda_for_dali::std::is_compound<T>::value, "");
+    static_assert(!cuda_for_dali::std::is_member_pointer<T>::value, "");
 }
 
 template <class T>

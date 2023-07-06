@@ -10,23 +10,23 @@
 
 // is_lvalue_reference
 
-#include <cuda/std/type_traits>
-#include <cuda/std/cstddef>        // for cuda::std::nullptr_t
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cstddef>        // for cuda_for_dali::std::nullptr_t
 #include "test_macros.h"
 
 template <class T>
 __host__ __device__
 void test_is_lvalue_reference()
 {
-    static_assert( cuda::std::is_lvalue_reference<T>::value, "");
-    static_assert( cuda::std::is_lvalue_reference<const T>::value, "");
-    static_assert( cuda::std::is_lvalue_reference<volatile T>::value, "");
-    static_assert( cuda::std::is_lvalue_reference<const volatile T>::value, "");
+    static_assert( cuda_for_dali::std::is_lvalue_reference<T>::value, "");
+    static_assert( cuda_for_dali::std::is_lvalue_reference<const T>::value, "");
+    static_assert( cuda_for_dali::std::is_lvalue_reference<volatile T>::value, "");
+    static_assert( cuda_for_dali::std::is_lvalue_reference<const volatile T>::value, "");
 #if TEST_STD_VER > 11
-    static_assert( cuda::std::is_lvalue_reference_v<T>, "");
-    static_assert( cuda::std::is_lvalue_reference_v<const T>, "");
-    static_assert( cuda::std::is_lvalue_reference_v<volatile T>, "");
-    static_assert( cuda::std::is_lvalue_reference_v<const volatile T>, "");
+    static_assert( cuda_for_dali::std::is_lvalue_reference_v<T>, "");
+    static_assert( cuda_for_dali::std::is_lvalue_reference_v<const T>, "");
+    static_assert( cuda_for_dali::std::is_lvalue_reference_v<volatile T>, "");
+    static_assert( cuda_for_dali::std::is_lvalue_reference_v<const volatile T>, "");
 #endif
 }
 
@@ -34,15 +34,15 @@ template <class T>
 __host__ __device__
 void test_is_not_lvalue_reference()
 {
-    static_assert(!cuda::std::is_lvalue_reference<T>::value, "");
-    static_assert(!cuda::std::is_lvalue_reference<const T>::value, "");
-    static_assert(!cuda::std::is_lvalue_reference<volatile T>::value, "");
-    static_assert(!cuda::std::is_lvalue_reference<const volatile T>::value, "");
+    static_assert(!cuda_for_dali::std::is_lvalue_reference<T>::value, "");
+    static_assert(!cuda_for_dali::std::is_lvalue_reference<const T>::value, "");
+    static_assert(!cuda_for_dali::std::is_lvalue_reference<volatile T>::value, "");
+    static_assert(!cuda_for_dali::std::is_lvalue_reference<const volatile T>::value, "");
 #if TEST_STD_VER > 11
-    static_assert(!cuda::std::is_lvalue_reference_v<T>, "");
-    static_assert(!cuda::std::is_lvalue_reference_v<const T>, "");
-    static_assert(!cuda::std::is_lvalue_reference_v<volatile T>, "");
-    static_assert(!cuda::std::is_lvalue_reference_v<const volatile T>, "");
+    static_assert(!cuda_for_dali::std::is_lvalue_reference_v<T>, "");
+    static_assert(!cuda_for_dali::std::is_lvalue_reference_v<const T>, "");
+    static_assert(!cuda_for_dali::std::is_lvalue_reference_v<volatile T>, "");
+    static_assert(!cuda_for_dali::std::is_lvalue_reference_v<const volatile T>, "");
 #endif
 }
 
@@ -78,7 +78,7 @@ int main(int, char**)
 {
     test_is_lvalue_reference<int&>();
 
-    test_is_not_lvalue_reference<cuda::std::nullptr_t>();
+    test_is_not_lvalue_reference<cuda_for_dali::std::nullptr_t>();
     test_is_not_lvalue_reference<void>();
     test_is_not_lvalue_reference<int>();
     test_is_not_lvalue_reference<int*>();

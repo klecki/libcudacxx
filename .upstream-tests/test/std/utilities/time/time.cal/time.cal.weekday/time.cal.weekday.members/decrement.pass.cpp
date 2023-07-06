@@ -14,9 +14,9 @@
 //  constexpr weekday operator--(int) noexcept;
 
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "../../euclidian.h"
@@ -34,12 +34,12 @@ constexpr bool testConstexpr()
 
 int main(int, char**)
 {
-    using weekday = cuda::std::chrono::weekday;
-    ASSERT_NOEXCEPT(--(cuda::std::declval<weekday&>())  );
-    ASSERT_NOEXCEPT(  (cuda::std::declval<weekday&>())--);
+    using weekday = cuda_for_dali::std::chrono::weekday;
+    ASSERT_NOEXCEPT(--(cuda_for_dali::std::declval<weekday&>())  );
+    ASSERT_NOEXCEPT(  (cuda_for_dali::std::declval<weekday&>())--);
 
-    ASSERT_SAME_TYPE(weekday , decltype(  cuda::std::declval<weekday&>()--));
-    ASSERT_SAME_TYPE(weekday&, decltype(--cuda::std::declval<weekday&>()  ));
+    ASSERT_SAME_TYPE(weekday , decltype(  cuda_for_dali::std::declval<weekday&>()--));
+    ASSERT_SAME_TYPE(weekday&, decltype(--cuda_for_dali::std::declval<weekday&>()  ));
 
     static_assert(testConstexpr<weekday>(), "");
 

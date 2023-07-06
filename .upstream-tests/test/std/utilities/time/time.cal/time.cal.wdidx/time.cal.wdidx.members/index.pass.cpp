@@ -13,19 +13,19 @@
 // constexpr unsigned index() const noexcept;
 //  Returns: index_
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using weekday         = cuda::std::chrono::weekday;
-    using weekday_indexed = cuda::std::chrono::weekday_indexed;
+    using weekday         = cuda_for_dali::std::chrono::weekday;
+    using weekday_indexed = cuda_for_dali::std::chrono::weekday_indexed;
 
     ASSERT_NOEXCEPT(                    std::declval<const weekday_indexed>().index());
-    ASSERT_SAME_TYPE(unsigned, decltype(cuda::std::declval<const weekday_indexed>().index()));
+    ASSERT_SAME_TYPE(unsigned, decltype(cuda_for_dali::std::declval<const weekday_indexed>().index()));
 
     static_assert( weekday_indexed{}.index() == 0, "");
 

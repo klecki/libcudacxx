@@ -13,8 +13,8 @@
 // template <class Rep2>
 //   explicit duration(const Rep2& r);
 
-#include <cuda/std/chrono>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "../../rep.h"
@@ -34,10 +34,10 @@ test(R r)
 
 int main(int, char**)
 {
-    test<cuda::std::chrono::duration<int> >(5);
-    test<cuda::std::chrono::duration<int, cuda::std::ratio<3, 2> > >(5);
-    test<cuda::std::chrono::duration<Rep, cuda::std::ratio<3, 2> > >(Rep(3));
-    test<cuda::std::chrono::duration<double, cuda::std::ratio<2, 3> > >(5.5);
+    test<cuda_for_dali::std::chrono::duration<int> >(5);
+    test<cuda_for_dali::std::chrono::duration<int, cuda_for_dali::std::ratio<3, 2> > >(5);
+    test<cuda_for_dali::std::chrono::duration<Rep, cuda_for_dali::std::ratio<3, 2> > >(Rep(3));
+    test<cuda_for_dali::std::chrono::duration<double, cuda_for_dali::std::ratio<2, 3> > >(5.5);
 
   return 0;
 }

@@ -18,7 +18,7 @@
 #pragma nv_diag_suppress declared_but_not_referenced
 
 #include <cuda_pipeline.h>
-#include <cuda/barrier>
+#include <cuda_for_dali/barrier>
 
 using nvcuda::experimental::pipeline;
 
@@ -34,7 +34,7 @@ bool operator==(int4 a, int4 b) {
 
 template <typename T>
 __device__ void arrive_on_device_copy(T* global_array, T* shared_array, unsigned copy_count,
-    cuda::barrier<cuda::thread_scope_block>& barrier)
+    cuda_for_dali::barrier<cuda_for_dali::thread_scope_block>& barrier)
 {
     pipeline pipe;
 
@@ -61,7 +61,7 @@ __device__ bool arrive_on_test(char* global_buffer, size_t buffer_size)
     assert(blockDim.y == 1 && blockDim.z == 1);
 
     extern __shared__ char shared_buffer[];
-    __shared__ cuda::barrier<cuda::thread_scope_block> barrier;
+    __shared__ cuda_for_dali::barrier<cuda_for_dali::thread_scope_block> barrier;
 
     if (threadIdx.x == 0) {
         init(&barrier, blockDim.x);
@@ -215,7 +215,7 @@ int main(int argc, char ** argv)
     int cuda_thread_count = 64;
     int cuda_block_shmem_size = 40000;
 
-    arrive_on_nvrtc(cuda_block_shmem_size - sizeof(cuda::barrier<cuda::thread_scope_block>) - sizeof(char *));
+    arrive_on_nvrtc(cuda_block_shmem_size - sizeof(cuda_for_dali::barrier<cuda_for_dali::thread_scope_block>) - sizeof(char *));
 #endif
 
     return 0;

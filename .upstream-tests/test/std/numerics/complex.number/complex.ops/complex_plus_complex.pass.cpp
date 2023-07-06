@@ -12,14 +12,14 @@
 //   complex<T>
 //   operator+(const complex<T>& lhs, const complex<T>& rhs);
 
-#include <cuda/std/complex>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/complex>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 template <class T>
 __host__ __device__ void
-test(const cuda::std::complex<T>& lhs, const cuda::std::complex<T>& rhs, cuda::std::complex<T> x)
+test(const cuda_for_dali::std::complex<T>& lhs, const cuda_for_dali::std::complex<T>& rhs, cuda_for_dali::std::complex<T> x)
 {
     assert(lhs + rhs == x);
 }
@@ -29,15 +29,15 @@ __host__ __device__ void
 test()
 {
     {
-    cuda::std::complex<T> lhs(1.5, 2.5);
-    cuda::std::complex<T> rhs(3.5, 4.5);
-    cuda::std::complex<T>   x(5.0, 7.0);
+    cuda_for_dali::std::complex<T> lhs(1.5, 2.5);
+    cuda_for_dali::std::complex<T> rhs(3.5, 4.5);
+    cuda_for_dali::std::complex<T>   x(5.0, 7.0);
     test(lhs, rhs, x);
     }
     {
-    cuda::std::complex<T> lhs(1.5, -2.5);
-    cuda::std::complex<T> rhs(-3.5, 4.5);
-    cuda::std::complex<T>   x(-2.0, 2.0);
+    cuda_for_dali::std::complex<T> lhs(1.5, -2.5);
+    cuda_for_dali::std::complex<T> rhs(-3.5, 4.5);
+    cuda_for_dali::std::complex<T>   x(-2.0, 2.0);
     test(lhs, rhs, x);
     }
 }

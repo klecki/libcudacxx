@@ -6,9 +6,9 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <cuda/std/cstddef>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/cstddef>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
@@ -17,7 +17,7 @@
 struct A
 {
     __host__ __device__
-    A(cuda::std::nullptr_t) {}
+    A(cuda_for_dali::std::nullptr_t) {}
 };
 
 template <class T>
@@ -40,10 +40,10 @@ void test_conversions()
 }
 
 template <class T> struct Voider { typedef void type; };
-template <class T, class = void> struct has_less : cuda::std::false_type {};
+template <class T, class = void> struct has_less : cuda_for_dali::std::false_type {};
 
 template <class T> struct has_less<T,
-    typename Voider<decltype(cuda::std::declval<T>() < nullptr)>::type> : cuda::std::true_type {};
+    typename Voider<decltype(cuda_for_dali::std::declval<T>() < nullptr)>::type> : cuda_for_dali::std::true_type {};
 
 template <class T>
 __host__ __device__
@@ -83,11 +83,11 @@ void test_nullptr_conversions() {
 
 int main(int, char**)
 {
-    static_assert(sizeof(cuda::std::nullptr_t) == sizeof(void*),
-                  "sizeof(cuda::std::nullptr_t) == sizeof(void*)");
+    static_assert(sizeof(cuda_for_dali::std::nullptr_t) == sizeof(void*),
+                  "sizeof(cuda_for_dali::std::nullptr_t) == sizeof(void*)");
 
     {
-        test_conversions<cuda::std::nullptr_t>();
+        test_conversions<cuda_for_dali::std::nullptr_t>();
         test_conversions<void*>();
         test_conversions<A*>();
         test_conversions<void(*)()>();
@@ -96,15 +96,15 @@ int main(int, char**)
     }
     {
 #ifdef _LIBCUDACXX_HAS_NO_NULLPTR
-        static_assert(!has_less<cuda::std::nullptr_t>::value, "");
+        static_assert(!has_less<cuda_for_dali::std::nullptr_t>::value, "");
         // FIXME: our C++03 nullptr emulation still allows for comparisons
         // with other pointer types by way of the conversion operator.
         //static_assert(!has_less<void*>::value, "");
 #else
         // TODO Enable this assertion when all compilers implement core DR 583.
-        // static_assert(!has_less<cuda::std::nullptr_t>::value, "");
+        // static_assert(!has_less<cuda_for_dali::std::nullptr_t>::value, "");
 #endif
-        test_comparisons<cuda::std::nullptr_t>();
+        test_comparisons<cuda_for_dali::std::nullptr_t>();
         test_comparisons<void*>();
         test_comparisons<A*>();
         test_comparisons<void(*)()>();

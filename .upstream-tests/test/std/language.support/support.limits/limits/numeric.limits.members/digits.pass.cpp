@@ -10,8 +10,8 @@
 
 // digits
 
-#include <cuda/std/limits>
-#include <cuda/std/cfloat>
+#include <cuda_for_dali/std/limits>
+#include <cuda_for_dali/std/cfloat>
 
 #include "test_macros.h"
 
@@ -20,19 +20,19 @@ __host__ __device__
 void
 test()
 {
-    static_assert(cuda::std::numeric_limits<T>::digits == expected, "digits test 1");
-    static_assert(cuda::std::numeric_limits<const T>::digits == expected, "digits test 2");
-    static_assert(cuda::std::numeric_limits<volatile T>::digits == expected, "digits test 3");
-    static_assert(cuda::std::numeric_limits<const volatile T>::digits == expected, "digits test 4");
+    static_assert(cuda_for_dali::std::numeric_limits<T>::digits == expected, "digits test 1");
+    static_assert(cuda_for_dali::std::numeric_limits<const T>::digits == expected, "digits test 2");
+    static_assert(cuda_for_dali::std::numeric_limits<volatile T>::digits == expected, "digits test 3");
+    static_assert(cuda_for_dali::std::numeric_limits<const volatile T>::digits == expected, "digits test 4");
 }
 
 int main(int, char**)
 {
     test<bool, 1>();
-    test<char, cuda::std::numeric_limits<char>::is_signed ? 7 : 8>();
+    test<char, cuda_for_dali::std::numeric_limits<char>::is_signed ? 7 : 8>();
     test<signed char, 7>();
     test<unsigned char, 8>();
-    test<wchar_t, cuda::std::numeric_limits<wchar_t>::is_signed ? sizeof(wchar_t)*8-1 : sizeof(wchar_t)*8>();
+    test<wchar_t, cuda_for_dali::std::numeric_limits<wchar_t>::is_signed ? sizeof(wchar_t)*8-1 : sizeof(wchar_t)*8>();
 #if TEST_STD_VER > 17 && defined(__cpp_char8_t)
     test<char8_t, 8>();
 #endif

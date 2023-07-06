@@ -166,7 +166,7 @@ int main() {
                 out << " : \"memory\"); }\n";
             }
             for(auto& cv: cv_qualifier) {
-                out << "template<class _Type, typename cuda::std::enable_if<sizeof(_Type)==" << sz/8 << ", int>::type = 0>\n";
+                out << "template<class _Type, typename cuda_for_dali::std::enable_if<sizeof(_Type)==" << sz/8 << ", int>::type = 0>\n";
                 out << "__device__ void __atomic_store_cuda(" << cv << "_Type *__ptr, _Type *__val, int __memorder, " << scopenametag(s.first) << ") {\n";
                 out << "    uint" << (registers[sz] == "r" ? 32 : sz) << "_t __tmp = 0;\n";
                 out << "    memcpy(&__tmp, __val, " << sz/8 << ");\n";
@@ -223,7 +223,7 @@ int main() {
                 }
                 for(auto& cv: cv_qualifier) {
                     if(rmw.first == "compare_exchange") {
-                        out << "template<class _Type, typename cuda::std::enable_if<sizeof(_Type)==" << sz/8 << ", int>::type = 0>\n";
+                        out << "template<class _Type, typename cuda_for_dali::std::enable_if<sizeof(_Type)==" << sz/8 << ", int>::type = 0>\n";
                         out << "__device__ bool __atomic_compare_exchange_cuda(" << cv << "_Type *__ptr, _Type *__expected, const _Type *__desired, bool, int __success_memorder, int __failure_memorder, " << scopenametag(s.first) << ") {\n";
                         out << "    uint" << sz << "_t __tmp = 0, __old = 0, __old_tmp;\n";
                         out << "    memcpy(&__tmp, __desired, " << sz/8 << ");\n";
@@ -259,7 +259,7 @@ int main() {
                         out << "}\n";
                     }
                     else {
-                        out << "template<class _Type, typename cuda::std::enable_if<sizeof(_Type)==" << sz/8 << ", int>::type = 0>\n";
+                        out << "template<class _Type, typename cuda_for_dali::std::enable_if<sizeof(_Type)==" << sz/8 << ", int>::type = 0>\n";
                         if(rmw.first == "exchange") {
                             out << "__device__ void __atomic_exchange_cuda(" << cv << "_Type *__ptr, _Type *__val, _Type *__ret, int __memorder, " << scopenametag(s.first) << ") {\n";
                             out << "    uint" << sz << "_t __tmp = 0;\n";

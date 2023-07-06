@@ -17,10 +17,10 @@
 
 // template <class U, class V> pair(pair<U, V>&& p);
 
-#include <cuda/std/utility>
+#include <cuda_for_dali/std/utility>
 // cuda/std/memory not supported
-// #include <cuda/std/memory>
-#include <cuda/std/cassert>
+// #include <cuda_for_dali/std/memory>
+#include <cuda_for_dali/std/cassert>
 
 #include "archetypes.h"
 #include "test_convertible.h"
@@ -32,13 +32,13 @@ template <class T1, class U1,
           bool CanCopy = true, bool CanConvert = CanCopy>
 __host__ __device__ void test_pair_rv()
 {
-    using P1 = cuda::std::pair<T1, int>;
-    using P2 = cuda::std::pair<int, T1>;
-    using UP1 = cuda::std::pair<U1, int>&&;
-    using UP2 = cuda::std::pair<int, U1>&&;
-    static_assert(cuda::std::is_constructible<P1, UP1>::value == CanCopy, "");
+    using P1 = cuda_for_dali::std::pair<T1, int>;
+    using P2 = cuda_for_dali::std::pair<int, T1>;
+    using UP1 = cuda_for_dali::std::pair<U1, int>&&;
+    using UP2 = cuda_for_dali::std::pair<int, U1>&&;
+    static_assert(cuda_for_dali::std::is_constructible<P1, UP1>::value == CanCopy, "");
     static_assert(test_convertible<P1, UP1>() == CanConvert, "");
-    static_assert(cuda::std::is_constructible<P2, UP2>::value == CanCopy, "");
+    static_assert(cuda_for_dali::std::is_constructible<P2, UP2>::value == CanCopy, "");
     static_assert(test_convertible<P2,  UP2>() == CanConvert, "");
 }
 
@@ -54,8 +54,8 @@ struct Derived
 
 
 template <class T, class U>
-struct DPair : public cuda::std::pair<T, U> {
-  using Base = cuda::std::pair<T, U>;
+struct DPair : public cuda_for_dali::std::pair<T, U> {
+  using Base = cuda_for_dali::std::pair<T, U>;
   using Base::Base;
 };
 
@@ -74,10 +74,10 @@ int main(int, char**)
     // cuda/std/memory not supported
     /*
     {
-        typedef cuda::std::pair<cuda::std::unique_ptr<Derived>, int> P1;
-        typedef cuda::std::pair<cuda::std::unique_ptr<Base>, long> P2;
-        P1 p1(cuda::std::unique_ptr<Derived>(), 4);
-        P2 p2 = cuda::std::move(p1);
+        typedef cuda_for_dali::std::pair<cuda_for_dali::std::unique_ptr<Derived>, int> P1;
+        typedef cuda_for_dali::std::pair<cuda_for_dali::std::unique_ptr<Base>, long> P2;
+        P1 p1(cuda_for_dali::std::unique_ptr<Derived>(), 4);
+        P2 p2 = cuda_for_dali::std::move(p1);
         assert(p2.first == nullptr);
         assert(p2.second == 4);
     }
@@ -85,9 +85,9 @@ int main(int, char**)
     {
         // We allow derived types to use this constructor
         using P1 = DPair<long, long>;
-        using P2 = cuda::std::pair<int, int>;
+        using P2 = cuda_for_dali::std::pair<int, int>;
         P1 p1(42, 101);
-        P2 p2(cuda::std::move(p1));
+        P2 p2(cuda_for_dali::std::move(p1));
         assert(p2.first == 42);
         assert(p2.second == 101);
     }
@@ -170,14 +170,14 @@ int main(int, char**)
     }
 #if TEST_STD_VER > 11
     { // explicit constexpr test
-        constexpr cuda::std::pair<int, int> p1(42, 43);
-        constexpr cuda::std::pair<ExplicitT, ExplicitT> p2(cuda::std::move(p1));
+        constexpr cuda_for_dali::std::pair<int, int> p1(42, 43);
+        constexpr cuda_for_dali::std::pair<ExplicitT, ExplicitT> p2(cuda_for_dali::std::move(p1));
         static_assert(p2.first.value == 42, "");
         static_assert(p2.second.value == 43, "");
     }
     { // implicit constexpr test
-        constexpr cuda::std::pair<int, int> p1(42, 43);
-        constexpr cuda::std::pair<ImplicitT, ImplicitT> p2 = cuda::std::move(p1);
+        constexpr cuda_for_dali::std::pair<int, int> p1(42, 43);
+        constexpr cuda_for_dali::std::pair<ImplicitT, ImplicitT> p2 = cuda_for_dali::std::move(p1);
         static_assert(p2.first.value == 42, "");
         static_assert(p2.second.value == 43, "");
     }

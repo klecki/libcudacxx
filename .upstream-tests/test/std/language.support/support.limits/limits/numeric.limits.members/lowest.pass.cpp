@@ -10,10 +10,10 @@
 
 // lowest()
 
-#include <cuda/std/limits>
-#include <cuda/std/climits>
-#include <cuda/std/cfloat>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/limits>
+#include <cuda_for_dali/std/climits>
+#include <cuda_for_dali/std/cfloat>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
@@ -22,14 +22,14 @@ __host__ __device__
 void
 test(T expected)
 {
-    assert(cuda::std::numeric_limits<T>::lowest() == expected);
-    assert(cuda::std::numeric_limits<T>::is_bounded);
-    assert(cuda::std::numeric_limits<const T>::lowest() == expected);
-    assert(cuda::std::numeric_limits<const T>::is_bounded);
-    assert(cuda::std::numeric_limits<volatile T>::lowest() == expected);
-    assert(cuda::std::numeric_limits<volatile T>::is_bounded);
-    assert(cuda::std::numeric_limits<const volatile T>::lowest() == expected);
-    assert(cuda::std::numeric_limits<const volatile T>::is_bounded);
+    assert(cuda_for_dali::std::numeric_limits<T>::lowest() == expected);
+    assert(cuda_for_dali::std::numeric_limits<T>::is_bounded);
+    assert(cuda_for_dali::std::numeric_limits<const T>::lowest() == expected);
+    assert(cuda_for_dali::std::numeric_limits<const T>::is_bounded);
+    assert(cuda_for_dali::std::numeric_limits<volatile T>::lowest() == expected);
+    assert(cuda_for_dali::std::numeric_limits<volatile T>::is_bounded);
+    assert(cuda_for_dali::std::numeric_limits<const volatile T>::lowest() == expected);
+    assert(cuda_for_dali::std::numeric_limits<const volatile T>::is_bounded);
 }
 
 int main(int, char**)

@@ -7,16 +7,16 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <cuda/stream_view>
+#include <cuda_for_dali/stream_view>
 #include <cassert>
 
 int main(int argc, char** argv){
 
 #ifndef __CUDA_ARCH__
   cudaStream_t s = reinterpret_cast<cudaStream_t>(42);
-  cuda::stream_view sv0{s};
-  cuda::stream_view sv1{s};
-  cuda::stream_view sv2{};
+  cuda_for_dali::stream_view sv0{s};
+  cuda_for_dali::stream_view sv1{s};
+  cuda_for_dali::stream_view sv2{};
   assert(sv0 == sv0);
   assert(sv0 == sv1);
   assert(sv0 != sv2);

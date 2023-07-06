@@ -13,20 +13,20 @@
 // template <class T1, class T2> struct pair
 
 // template<size_t I, class T1, class T2>
-//     const typename tuple_element<I, cuda::std::pair<T1, T2> >::type&
+//     const typename tuple_element<I, cuda_for_dali::std::pair<T1, T2> >::type&
 //     get(const pair<T1, T2>&);
 
-#include <cuda/std/utility>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/utility>
+#include <cuda_for_dali/std/cassert>
 
 int main(int, char**)
 {
     {
-        typedef cuda::std::pair<int, short> P;
+        typedef cuda_for_dali::std::pair<int, short> P;
         const P p(3, 4);
-        assert(cuda::std::get<0>(p) == 3);
-        assert(cuda::std::get<1>(p) == 4);
-        cuda::std::get<0>(p) = 5;
+        assert(cuda_for_dali::std::get<0>(p) == 3);
+        assert(cuda_for_dali::std::get<1>(p) == 4);
+        cuda_for_dali::std::get<0>(p) = 5;
     }
 
   return 0;

@@ -10,7 +10,7 @@
 
 // Verify TEST_WORKAROUND_C1XX_BROKEN_ZA_CTOR_CHECK.
 
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/type_traits>
 
 #include "test_macros.h"
 #include "test_workarounds.h"
@@ -32,9 +32,9 @@ void PushFront(X&&) {}
 
 template<class T = int>
 __host__ __device__
-auto test(int) -> decltype(PushFront(cuda::std::declval<T>()), cuda::std::true_type{});
+auto test(int) -> decltype(PushFront(cuda_for_dali::std::declval<T>()), cuda_for_dali::std::true_type{});
 __host__ __device__
-auto test(long) -> cuda::std::false_type;
+auto test(long) -> cuda_for_dali::std::false_type;
 
 int main(int, char**) {
 #if defined(TEST_WORKAROUND_C1XX_BROKEN_ZA_CTOR_CHECK)

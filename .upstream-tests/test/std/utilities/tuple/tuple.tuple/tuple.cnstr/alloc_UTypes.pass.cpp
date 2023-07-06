@@ -13,10 +13,10 @@
 // template <class Alloc, class... UTypes>
 //   tuple(allocator_arg_t, const Alloc& a, UTypes&&...);
 
-// UNSUPPORTED: c++98, c++03 
+// UNSUPPORTED: c++98, c++03
 
-#include <cuda/std/tuple>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/tuple>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "MoveOnly.h"
@@ -27,7 +27,7 @@
 template <class T = void>
 struct DefaultCtorBlowsUp {
   __host__ __device__ constexpr DefaultCtorBlowsUp() {
-      static_assert(!cuda::std::is_same<T, T>::value, "Default Ctor instantiated");
+      static_assert(!cuda_for_dali::std::is_same<T, T>::value, "Default Ctor instantiated");
   }
 
   __host__ __device__ explicit constexpr DefaultCtorBlowsUp(int x) : value(x) {}
@@ -36,7 +36,7 @@ struct DefaultCtorBlowsUp {
 };
 
 
-struct DerivedFromAllocArgT : cuda::std::allocator_arg_t {};
+struct DerivedFromAllocArgT : cuda_for_dali::std::allocator_arg_t {};
 
 
 // Make sure the _Up... constructor SFINAEs out when the number of initializers
@@ -46,29 +46,29 @@ __host__ __device__ void test_uses_allocator_sfinae_evaluation()
 {
     using BadDefault = DefaultCtorBlowsUp<>;
     {
-        typedef cuda::std::tuple<MoveOnly, MoveOnly, BadDefault> Tuple;
+        typedef cuda_for_dali::std::tuple<MoveOnly, MoveOnly, BadDefault> Tuple;
 
-        static_assert(!cuda::std::is_constructible<
+        static_assert(!cuda_for_dali::std::is_constructible<
             Tuple,
-            cuda::std::allocator_arg_t, A1<int>, MoveOnly
+            cuda_for_dali::std::allocator_arg_t, A1<int>, MoveOnly
         >::value, "");
 
-        static_assert(cuda::std::is_constructible<
+        static_assert(cuda_for_dali::std::is_constructible<
             Tuple,
-            cuda::std::allocator_arg_t, A1<int>, MoveOnly, MoveOnly, BadDefault
+            cuda_for_dali::std::allocator_arg_t, A1<int>, MoveOnly, MoveOnly, BadDefault
         >::value, "");
     }
     {
-        typedef cuda::std::tuple<MoveOnly, MoveOnly, BadDefault, BadDefault> Tuple;
+        typedef cuda_for_dali::std::tuple<MoveOnly, MoveOnly, BadDefault, BadDefault> Tuple;
 
-        static_assert(!cuda::std::is_constructible<
+        static_assert(!cuda_for_dali::std::is_constructible<
             Tuple,
-            cuda::std::allocator_arg_t, A1<int>, MoveOnly, MoveOnly
+            cuda_for_dali::std::allocator_arg_t, A1<int>, MoveOnly, MoveOnly
         >::value, "");
 
-        static_assert(cuda::std::is_constructible<
+        static_assert(cuda_for_dali::std::is_constructible<
             Tuple,
-            cuda::std::allocator_arg_t, A1<int>, MoveOnly, MoveOnly, BadDefault, BadDefault
+            cuda_for_dali::std::allocator_arg_t, A1<int>, MoveOnly, MoveOnly, BadDefault, BadDefault
         >::value, "");
     }
 }
@@ -80,59 +80,59 @@ struct Explicit {
 
 int main(int, char**)
 {
-    // cuda::std::allocator not supported
+    // cuda_for_dali::std::allocator not supported
     /*
     {
-        cuda::std::tuple<Explicit> t{cuda::std::allocator_arg, cuda::std::allocator<void>{}, 42};
-        assert(cuda::std::get<0>(t).value == 42);
+        cuda_for_dali::std::tuple<Explicit> t{cuda_for_dali::std::allocator_arg, cuda_for_dali::std::allocator<void>{}, 42};
+        assert(cuda_for_dali::std::get<0>(t).value == 42);
     }
     */
     {
-        cuda::std::tuple<MoveOnly> t(cuda::std::allocator_arg, A1<int>(), MoveOnly(0));
-        assert(cuda::std::get<0>(t) == 0);
+        cuda_for_dali::std::tuple<MoveOnly> t(cuda_for_dali::std::allocator_arg, A1<int>(), MoveOnly(0));
+        assert(cuda_for_dali::std::get<0>(t) == 0);
     }
     {
         using T = DefaultCtorBlowsUp<>;
-        cuda::std::tuple<T> t(cuda::std::allocator_arg, A1<int>(), T(42));
-        assert(cuda::std::get<0>(t).value == 42);
+        cuda_for_dali::std::tuple<T> t(cuda_for_dali::std::allocator_arg, A1<int>(), T(42));
+        assert(cuda_for_dali::std::get<0>(t).value == 42);
     }
     {
-        cuda::std::tuple<MoveOnly, MoveOnly> t(cuda::std::allocator_arg, A1<int>(),
+        cuda_for_dali::std::tuple<MoveOnly, MoveOnly> t(cuda_for_dali::std::allocator_arg, A1<int>(),
                                          MoveOnly(0), MoveOnly(1));
-        assert(cuda::std::get<0>(t) == 0);
-        assert(cuda::std::get<1>(t) == 1);
+        assert(cuda_for_dali::std::get<0>(t) == 0);
+        assert(cuda_for_dali::std::get<1>(t) == 1);
     }
     {
         using T = DefaultCtorBlowsUp<>;
-        cuda::std::tuple<T, T> t(cuda::std::allocator_arg, A1<int>(), T(42), T(43));
-        assert(cuda::std::get<0>(t).value == 42);
-        assert(cuda::std::get<1>(t).value == 43);
+        cuda_for_dali::std::tuple<T, T> t(cuda_for_dali::std::allocator_arg, A1<int>(), T(42), T(43));
+        assert(cuda_for_dali::std::get<0>(t).value == 42);
+        assert(cuda_for_dali::std::get<1>(t).value == 43);
     }
     {
-        cuda::std::tuple<MoveOnly, MoveOnly, MoveOnly> t(cuda::std::allocator_arg, A1<int>(),
+        cuda_for_dali::std::tuple<MoveOnly, MoveOnly, MoveOnly> t(cuda_for_dali::std::allocator_arg, A1<int>(),
                                                    MoveOnly(0),
                                                    1, 2);
-        assert(cuda::std::get<0>(t) == 0);
-        assert(cuda::std::get<1>(t) == 1);
-        assert(cuda::std::get<2>(t) == 2);
+        assert(cuda_for_dali::std::get<0>(t) == 0);
+        assert(cuda_for_dali::std::get<1>(t) == 1);
+        assert(cuda_for_dali::std::get<2>(t) == 2);
     }
     {
         using T = DefaultCtorBlowsUp<>;
-        cuda::std::tuple<T, T, T> t(cuda::std::allocator_arg, A1<int>(), T(1), T(2), T(3));
-        assert(cuda::std::get<0>(t).value == 1);
-        assert(cuda::std::get<1>(t).value == 2);
-        assert(cuda::std::get<2>(t).value == 3);
+        cuda_for_dali::std::tuple<T, T, T> t(cuda_for_dali::std::allocator_arg, A1<int>(), T(1), T(2), T(3));
+        assert(cuda_for_dali::std::get<0>(t).value == 1);
+        assert(cuda_for_dali::std::get<1>(t).value == 2);
+        assert(cuda_for_dali::std::get<2>(t).value == 3);
     }
     {
         alloc_first::allocator_constructed() = false;
         alloc_last::allocator_constructed() = false;
-        cuda::std::tuple<int, alloc_first, alloc_last> t(cuda::std::allocator_arg,
+        cuda_for_dali::std::tuple<int, alloc_first, alloc_last> t(cuda_for_dali::std::allocator_arg,
                                                    A1<int>(5), 1, 2, 3);
-        assert(cuda::std::get<0>(t) == 1);
+        assert(cuda_for_dali::std::get<0>(t) == 1);
         assert(alloc_first::allocator_constructed());
-        assert(cuda::std::get<1>(t) == alloc_first(2));
+        assert(cuda_for_dali::std::get<1>(t) == alloc_first(2));
         assert(alloc_last::allocator_constructed());
-        assert(cuda::std::get<2>(t) == alloc_last(3));
+        assert(cuda_for_dali::std::get<2>(t) == alloc_last(3));
     }
     {
         // Check that uses-allocator construction is still selected when
@@ -140,13 +140,13 @@ int main(int, char**)
         DerivedFromAllocArgT tag;
         alloc_first::allocator_constructed() = false;
         alloc_last::allocator_constructed() = false;
-        cuda::std::tuple<int, alloc_first, alloc_last> t(tag,
+        cuda_for_dali::std::tuple<int, alloc_first, alloc_last> t(tag,
                                                    A1<int>(5), 1, 2, 3);
-        assert(cuda::std::get<0>(t) == 1);
+        assert(cuda_for_dali::std::get<0>(t) == 1);
         assert(alloc_first::allocator_constructed());
-        assert(cuda::std::get<1>(t) == alloc_first(2));
+        assert(cuda_for_dali::std::get<1>(t) == alloc_first(2));
         assert(alloc_last::allocator_constructed());
-        assert(cuda::std::get<2>(t) == alloc_last(3));
+        assert(cuda_for_dali::std::get<2>(t) == alloc_last(3));
     }
     // Stress test the SFINAE on the uses-allocator constructors and
     // ensure that the "reduced-arity-initialization" extension is not offered

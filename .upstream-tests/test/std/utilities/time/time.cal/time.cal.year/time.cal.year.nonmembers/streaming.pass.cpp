@@ -39,8 +39,8 @@
 //     assigned to *offset if offset is non-null.
 
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 #include <iostream>
 
@@ -48,7 +48,7 @@
 
 int main(int, char**)
 {
-   using year = cuda::std::chrono::year;
+   using year = cuda_for_dali::std::chrono::year;
 
    std::cout << year{2018};
 

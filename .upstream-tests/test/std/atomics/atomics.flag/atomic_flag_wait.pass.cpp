@@ -12,9 +12,9 @@
 
 // <cuda/std/atomic>
 
-#include <cuda/std/atomic>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/atomic>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "concurrent_agents.h"
@@ -27,25 +27,25 @@ void test()
 #ifdef __CUDA_ARCH__
     __shared__
 #endif
-    cuda::std::atomic_flag * t;
+    cuda_for_dali::std::atomic_flag * t;
 #ifdef __CUDA_ARCH__
     if (threadIdx.x == 0) {
 #endif
-    t = new cuda::std::atomic_flag();
-    cuda::std::atomic_flag_clear(t);
-    cuda::std::atomic_flag_wait(t, true);
+    t = new cuda_for_dali::std::atomic_flag();
+    cuda_for_dali::std::atomic_flag_clear(t);
+    cuda_for_dali::std::atomic_flag_wait(t, true);
 #ifdef __CUDA_ARCH__
     }
     __syncthreads();
 #endif
 
     auto agent_notify = LAMBDA (){
-        assert(cuda::std::atomic_flag_test_and_set(t) == false);
-        cuda::std::atomic_flag_notify_one(t);
+        assert(cuda_for_dali::std::atomic_flag_test_and_set(t) == false);
+        cuda_for_dali::std::atomic_flag_notify_one(t);
     };
 
     auto agent_wait = LAMBDA (){
-        cuda::std::atomic_flag_wait(t, false);
+        cuda_for_dali::std::atomic_flag_wait(t, false);
     };
 
     concurrent_agents_launch(agent_notify, agent_wait);
@@ -53,25 +53,25 @@ void test()
 #ifdef __CUDA_ARCH__
     __shared__
 #endif
-    volatile cuda::std::atomic_flag * vt;
+    volatile cuda_for_dali::std::atomic_flag * vt;
 #ifdef __CUDA_ARCH__
     if (threadIdx.x == 0) {
 #endif
-    vt = new cuda::std::atomic_flag();
-    cuda::std::atomic_flag_clear(vt);
-    cuda::std::atomic_flag_wait(vt, true);
+    vt = new cuda_for_dali::std::atomic_flag();
+    cuda_for_dali::std::atomic_flag_clear(vt);
+    cuda_for_dali::std::atomic_flag_wait(vt, true);
 #ifdef __CUDA_ARCH__
     }
     __syncthreads();
 #endif
 
     auto agent_notify_v = LAMBDA (){
-        assert(cuda::std::atomic_flag_test_and_set(vt) == false);
-        cuda::std::atomic_flag_notify_one(vt);
+        assert(cuda_for_dali::std::atomic_flag_test_and_set(vt) == false);
+        cuda_for_dali::std::atomic_flag_notify_one(vt);
     };
 
     auto agent_wait_v = LAMBDA (){
-        cuda::std::atomic_flag_wait(vt, false);
+        cuda_for_dali::std::atomic_flag_wait(vt, false);
     };
 
     concurrent_agents_launch(agent_notify_v, agent_wait_v);

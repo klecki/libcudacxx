@@ -15,16 +15,16 @@
 
 // constexpr day operator""d(unsigned long long d) noexcept;
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
     {
-    using namespace cuda::std::chrono;
+    using namespace cuda_for_dali::std::chrono;
     ASSERT_NOEXCEPT(               4d);
     ASSERT_SAME_TYPE(day, decltype(4d));
 
@@ -34,14 +34,14 @@ int main(int, char**)
 }
 
     {
-    using namespace cuda::std::literals;
+    using namespace cuda_for_dali::std::literals;
     ASSERT_NOEXCEPT(                            4d);
-    ASSERT_SAME_TYPE(cuda::std::chrono::day, decltype(4d));
+    ASSERT_SAME_TYPE(cuda_for_dali::std::chrono::day, decltype(4d));
 
-    static_assert( 7d == cuda::std::chrono::day(7), "");
+    static_assert( 7d == cuda_for_dali::std::chrono::day(7), "");
 
-    cuda::std::chrono::day d1 = 4d;
-    assert (d1 == cuda::std::chrono::day(4));
+    cuda_for_dali::std::chrono::day d1 = 4d;
+    assert (d1 == cuda_for_dali::std::chrono::day(4));
     }
 
 

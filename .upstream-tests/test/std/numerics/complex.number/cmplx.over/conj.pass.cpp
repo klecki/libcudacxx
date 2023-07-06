@@ -14,9 +14,9 @@
 // template<Integral T>   complex<double>      conj(T);
 //                        complex<float>       conj(float);
 
-#include <cuda/std/complex>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/complex>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "../cases.h"
@@ -27,27 +27,27 @@
 
 template <class T>
 __host__ __device__ void
-test(T x, typename cuda::std::enable_if<cuda::std::is_integral<T>::value>::type* = 0)
+test(T x, typename cuda_for_dali::std::enable_if<cuda_for_dali::std::is_integral<T>::value>::type* = 0)
 {
-    static_assert((cuda::std::is_same<decltype(cuda::std::conj(x)), cuda::std::complex<double> >::value), "");
-    assert(cuda::std::conj(x) == conj(cuda::std::complex<double>(x, 0)));
+    static_assert((cuda_for_dali::std::is_same<decltype(cuda_for_dali::std::conj(x)), cuda_for_dali::std::complex<double> >::value), "");
+    assert(cuda_for_dali::std::conj(x) == conj(cuda_for_dali::std::complex<double>(x, 0)));
 }
 
 template <class T>
 __host__ __device__ void
-test(T x, typename cuda::std::enable_if<cuda::std::is_floating_point<T>::value>::type* = 0)
+test(T x, typename cuda_for_dali::std::enable_if<cuda_for_dali::std::is_floating_point<T>::value>::type* = 0)
 {
-    static_assert((cuda::std::is_same<decltype(cuda::std::conj(x)), cuda::std::complex<T> >::value), "");
-    assert(cuda::std::conj(x) == conj(cuda::std::complex<T>(x, 0)));
+    static_assert((cuda_for_dali::std::is_same<decltype(cuda_for_dali::std::conj(x)), cuda_for_dali::std::complex<T> >::value), "");
+    assert(cuda_for_dali::std::conj(x) == conj(cuda_for_dali::std::complex<T>(x, 0)));
 }
 
 template <class T>
 __host__ __device__ void
-test(T x, typename cuda::std::enable_if<!cuda::std::is_integral<T>::value &&
-                                  !cuda::std::is_floating_point<T>::value>::type* = 0)
+test(T x, typename cuda_for_dali::std::enable_if<!cuda_for_dali::std::is_integral<T>::value &&
+                                  !cuda_for_dali::std::is_floating_point<T>::value>::type* = 0)
 {
-    static_assert((cuda::std::is_same<decltype(cuda::std::conj(x)), cuda::std::complex<T> >::value), "");
-    assert(cuda::std::conj(x) == conj(cuda::std::complex<T>(x, 0)));
+    static_assert((cuda_for_dali::std::is_same<decltype(cuda_for_dali::std::conj(x)), cuda_for_dali::std::complex<T> >::value), "");
+    assert(cuda_for_dali::std::conj(x) == conj(cuda_for_dali::std::complex<T>(x, 0)));
 }
 
 template <class T>

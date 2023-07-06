@@ -10,9 +10,9 @@
 
 // infinity()
 
-#include <cuda/std/limits>
-#include <cuda/std/cfloat>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/limits>
+#include <cuda_for_dali/std/cfloat>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
@@ -21,10 +21,10 @@ __host__ __device__
 void
 test(T expected)
 {
-    assert(cuda::std::numeric_limits<T>::infinity() == expected);
-    assert(cuda::std::numeric_limits<const T>::infinity() == expected);
-    assert(cuda::std::numeric_limits<volatile T>::infinity() == expected);
-    assert(cuda::std::numeric_limits<const volatile T>::infinity() == expected);
+    assert(cuda_for_dali::std::numeric_limits<T>::infinity() == expected);
+    assert(cuda_for_dali::std::numeric_limits<const T>::infinity() == expected);
+    assert(cuda_for_dali::std::numeric_limits<volatile T>::infinity() == expected);
+    assert(cuda_for_dali::std::numeric_limits<const volatile T>::infinity() == expected);
 }
 
 int main(int, char**)

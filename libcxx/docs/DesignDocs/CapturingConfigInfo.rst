@@ -62,15 +62,15 @@ configuration all together. An example "__config" header generated when
   //
   //===----------------------------------------------------------------------===//
 
-  #ifndef _LIBCUDACXX_CONFIG_SITE
-  #define _LIBCUDACXX_CONFIG_SITE
+  #ifndef _LIBCUDAFORDALICXX_CONFIG_SITE
+  #define _LIBCUDAFORDALICXX_CONFIG_SITE
 
-  /* #undef _LIBCUDACXX_HAS_NO_GLOBAL_FILESYSTEM_NAMESPACE */
-  /* #undef _LIBCUDACXX_HAS_NO_STDIN */
-  /* #undef _LIBCUDACXX_HAS_NO_STDOUT */
-  #define _LIBCUDACXX_HAS_NO_THREADS
-  /* #undef _LIBCUDACXX_HAS_NO_MONOTONIC_CLOCK */
-  /* #undef _LIBCUDACXX_HAS_NO_THREAD_UNSAFE_C_FUNCTIONS */
+  /* #undef _LIBCUDAFORDALICXX_HAS_NO_GLOBAL_FILESYSTEM_NAMESPACE */
+  /* #undef _LIBCUDAFORDALICXX_HAS_NO_STDIN */
+  /* #undef _LIBCUDAFORDALICXX_HAS_NO_STDOUT */
+  #define _LIBCUDAFORDALICXX_HAS_NO_THREADS
+  /* #undef _LIBCUDAFORDALICXX_HAS_NO_MONOTONIC_CLOCK */
+  /* #undef _LIBCUDAFORDALICXX_HAS_NO_THREAD_UNSAFE_C_FUNCTIONS */
 
   #endif
   // -*- C++ -*-
@@ -82,5 +82,5 @@ configuration all together. An example "__config" header generated when
   //
   //===----------------------------------------------------------------------===//
 
-  #ifndef _LIBCUDACXX_CONFIG
-  #define _LIBCUDACXX_CONFIG
+  #ifndef _LIBCUDAFORDALICXX_CONFIG
+  #define _LIBCUDAFORDALICXX_CONFIG

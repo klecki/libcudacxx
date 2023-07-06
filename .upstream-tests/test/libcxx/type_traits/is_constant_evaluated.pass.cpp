@@ -14,20 +14,20 @@
 // returns false when there's no constant evaluation support from the compiler.
 //  as well as when called not in a constexpr context
 
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 int main (int, char**) {
-    ASSERT_SAME_TYPE(decltype(cuda::std::__libcpp_is_constant_evaluated()), bool);
-    ASSERT_NOEXCEPT(cuda::std::__libcpp_is_constant_evaluated());
+    ASSERT_SAME_TYPE(decltype(cuda_for_dali::std::__libcpp_is_constant_evaluated()), bool);
+    ASSERT_NOEXCEPT(cuda_for_dali::std::__libcpp_is_constant_evaluated());
 
 #if defined(_LIBCUDACXX_IS_CONSTANT_EVALUATED) && !defined(_LIBCUDACXX_CXX03_LANG)
-    static_assert(cuda::std::__libcpp_is_constant_evaluated(), "");
+    static_assert(cuda_for_dali::std::__libcpp_is_constant_evaluated(), "");
 #endif
 
-    bool p = cuda::std::__libcpp_is_constant_evaluated();
+    bool p = cuda_for_dali::std::__libcpp_is_constant_evaluated();
     assert(!p);
 
     return 0;

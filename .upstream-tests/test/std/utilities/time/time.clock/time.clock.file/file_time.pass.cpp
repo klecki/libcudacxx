@@ -12,19 +12,19 @@
 
 // file_time
 
-#include <cuda/std/chrono>
+#include <cuda_for_dali/std/chrono>
 
 #include "test_macros.h"
 
 template <class Dur>
 void test() {
-  ASSERT_SAME_TYPE(cuda::std::chrono::file_time<Dur>, cuda::std::chrono::time_point<cuda::std::chrono::file_clock, Dur>);
+  ASSERT_SAME_TYPE(cuda_for_dali::std::chrono::file_time<Dur>, cuda_for_dali::std::chrono::time_point<cuda_for_dali::std::chrono::file_clock, Dur>);
 }
 
 int main(int, char**) {
-  test<cuda::std::chrono::nanoseconds>();
-  test<cuda::std::chrono::minutes>();
-  test<cuda::std::chrono::hours>();
+  test<cuda_for_dali::std::chrono::nanoseconds>();
+  test<cuda_for_dali::std::chrono::minutes>();
+  test<cuda_for_dali::std::chrono::hours>();
 
   return 0;
 }

@@ -10,8 +10,8 @@
 
 // min_exponent10
 
-#include <cuda/std/limits>
-#include <cuda/std/cfloat>
+#include <cuda_for_dali/std/limits>
+#include <cuda_for_dali/std/cfloat>
 
 #include "test_macros.h"
 
@@ -20,10 +20,10 @@ __host__ __device__
 void
 test()
 {
-    static_assert(cuda::std::numeric_limits<T>::min_exponent10 == expected, "min_exponent10 test 1");
-    static_assert(cuda::std::numeric_limits<const T>::min_exponent10 == expected, "min_exponent10 test 2");
-    static_assert(cuda::std::numeric_limits<volatile T>::min_exponent10 == expected, "min_exponent10 test 3");
-    static_assert(cuda::std::numeric_limits<const volatile T>::min_exponent10 == expected, "min_exponent10 test 4");
+    static_assert(cuda_for_dali::std::numeric_limits<T>::min_exponent10 == expected, "min_exponent10 test 1");
+    static_assert(cuda_for_dali::std::numeric_limits<const T>::min_exponent10 == expected, "min_exponent10 test 2");
+    static_assert(cuda_for_dali::std::numeric_limits<volatile T>::min_exponent10 == expected, "min_exponent10 test 3");
+    static_assert(cuda_for_dali::std::numeric_limits<const volatile T>::min_exponent10 == expected, "min_exponent10 test 4");
 }
 
 int main(int, char**)

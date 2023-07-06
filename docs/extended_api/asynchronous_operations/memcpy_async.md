@@ -77,7 +77,7 @@ Both objects are reinterpreted as arrays of `unsigned char`.
    in the current thread.
 4. Binds the asynchronous copy completion to `cuda::pipeline` and cooperatively
    issues the copy across all threads in `group`.
-5. 5-8: convenience wrappers using `cuda::annotated_ptr` where `Sync` is 
+5. 5-8: convenience wrappers using `cuda::annotated_ptr` where `Sync` is
    either `cuda::barrier` or `cuda::pipeline`.
 
 ## Notes
@@ -117,7 +117,7 @@ For cooperative variants, if the parameters are not the same across all threads
 ## Examples
 
 ```cuda
-#include <cuda/barrier>
+#include <cuda_for_dali/barrier>
 
 __global__ void example_kernel(char* dst, char* src) {
   cuda::barrier<cuda::thread_scope_system> bar;

@@ -15,10 +15,10 @@
 
 // pair& operator=(pair const& p);
 
-#include <cuda/std/utility>
+#include <cuda_for_dali/std/utility>
 // cuda/std/memory not supported
-// #include <cuda/std/memory>
-#include <cuda/std/cassert>
+// #include <cuda_for_dali/std/memory>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
@@ -61,32 +61,32 @@ extern Incomplete inc_obj;
 int main(int, char**)
 {
     {
-        typedef cuda::std::pair<CopyAssignable, short> P;
+        typedef cuda_for_dali::std::pair<CopyAssignable, short> P;
         const P p1(CopyAssignable(), 4);
         P p2;
         p2 = p1;
         assert(p2.second == 4);
     }
     {
-        using P = cuda::std::pair<int&, int&&>;
+        using P = cuda_for_dali::std::pair<int&, int&&>;
         int x = 42;
         int y = 101;
         int x2 = -1;
         int y2 = 300;
-        P p1(x, cuda::std::move(y));
-        P p2(x2, cuda::std::move(y2));
+        P p1(x, cuda_for_dali::std::move(y));
+        P p2(x2, cuda_for_dali::std::move(y2));
         p1 = p2;
         assert(p1.first == x2);
         assert(p1.second == y2);
     }
     {
-        using P = cuda::std::pair<int, NonAssignable>;
-        static_assert(!cuda::std::is_copy_assignable<P>::value, "");
+        using P = cuda_for_dali::std::pair<int, NonAssignable>;
+        static_assert(!cuda_for_dali::std::is_copy_assignable<P>::value, "");
     }
     {
         CountAssign::reset();
-        using P = cuda::std::pair<CountAssign, CopyAssignable>;
-        static_assert(cuda::std::is_copy_assignable<P>::value, "");
+        using P = cuda_for_dali::std::pair<CountAssign, CopyAssignable>;
+        static_assert(cuda_for_dali::std::is_copy_assignable<P>::value, "");
         P p;
         P p2;
         p = p2;
@@ -94,12 +94,12 @@ int main(int, char**)
         assert(CountAssign::moved() == 0);
     }
     {
-        using P = cuda::std::pair<int, MoveAssignable>;
-        static_assert(!cuda::std::is_copy_assignable<P>::value, "");
+        using P = cuda_for_dali::std::pair<int, MoveAssignable>;
+        static_assert(!cuda_for_dali::std::is_copy_assignable<P>::value, "");
     }
     {
-        using P = cuda::std::pair<int, Incomplete&>;
-        static_assert(!cuda::std::is_copy_assignable<P>::value, "");
+        using P = cuda_for_dali::std::pair<int, Incomplete&>;
+        static_assert(!cuda_for_dali::std::is_copy_assignable<P>::value, "");
         P p(42, inc_obj);
         unused(p);
         assert(&p.second == &inc_obj);

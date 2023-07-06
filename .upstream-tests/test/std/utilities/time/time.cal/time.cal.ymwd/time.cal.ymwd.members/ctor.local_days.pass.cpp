@@ -23,28 +23,28 @@
 //  constexpr chrono::day     day() const noexcept;
 //  constexpr bool             ok() const noexcept;
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using year               = cuda::std::chrono::year;
-    using days               = cuda::std::chrono::days;
-    using local_days         = cuda::std::chrono::local_days;
-    using weekday_indexed    = cuda::std::chrono::weekday_indexed;
-    using year_month_weekday = cuda::std::chrono::year_month_weekday;
+    using year               = cuda_for_dali::std::chrono::year;
+    using days               = cuda_for_dali::std::chrono::days;
+    using local_days         = cuda_for_dali::std::chrono::local_days;
+    using weekday_indexed    = cuda_for_dali::std::chrono::weekday_indexed;
+    using year_month_weekday = cuda_for_dali::std::chrono::year_month_weekday;
 
-    ASSERT_NOEXCEPT(year_month_weekday{cuda::std::declval<const local_days>()});
+    ASSERT_NOEXCEPT(year_month_weekday{cuda_for_dali::std::declval<const local_days>()});
 
-    auto constexpr January = cuda::std::chrono::January;
+    auto constexpr January = cuda_for_dali::std::chrono::January;
 
     {
     constexpr local_days sd{}; // 1-Jan-1970 was a Thursday
     constexpr year_month_weekday ymwd{sd};
-    auto constexpr Thursday = cuda::std::chrono::Thursday;
+    auto constexpr Thursday = cuda_for_dali::std::chrono::Thursday;
 
     static_assert( ymwd.ok(),                                                            "");
     static_assert( ymwd.year()            == year{1970},                                 "");
@@ -59,8 +59,8 @@ int main(int, char**)
     constexpr local_days sd{days{10957+32}}; // 2-Feb-2000 was a Wednesday
     constexpr year_month_weekday ymwd{sd};
 
-    auto constexpr February = cuda::std::chrono::February;
-    auto constexpr Wednesday = cuda::std::chrono::Wednesday;
+    auto constexpr February = cuda_for_dali::std::chrono::February;
+    auto constexpr Wednesday = cuda_for_dali::std::chrono::Wednesday;
 
     static_assert( ymwd.ok(),                                                            "");
     static_assert( ymwd.year()            == year{2000},                                 "");
@@ -76,7 +76,7 @@ int main(int, char**)
     constexpr local_days sd{days{-10957}}; // 2-Jan-1940 was a Tuesday
     constexpr year_month_weekday ymwd{sd};
 
-    auto constexpr Tuesday = cuda::std::chrono::Tuesday;
+    auto constexpr Tuesday = cuda_for_dali::std::chrono::Tuesday;
 
     static_assert( ymwd.ok(),                                                            "");
     static_assert( ymwd.year()            == year{1940},                                 "");
@@ -90,8 +90,8 @@ int main(int, char**)
     {
     local_days sd{days{-(10957+34)}}; // 29-Nov-1939 was a Wednesday
     year_month_weekday ymwd{sd};
-    auto constexpr November = cuda::std::chrono::November;
-    auto constexpr Wednesday = cuda::std::chrono::Wednesday;
+    auto constexpr November = cuda_for_dali::std::chrono::November;
+    auto constexpr Wednesday = cuda_for_dali::std::chrono::Wednesday;
 
     assert( ymwd.ok());
     assert( ymwd.year()            == year{1939});

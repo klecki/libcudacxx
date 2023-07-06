@@ -9,7 +9,7 @@
 #ifndef HETEROGENEOUS_HELPERS_H
 #define HETEROGENEOUS_HELPERS_H
 
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/type_traits>
 
 #include <new>
 #include <thread>
@@ -17,16 +17,16 @@
 #include <stdlib.h>
 
 #define DEFINE_ASYNC_TRAIT(...) \
-    template<typename T, typename = cuda::std::true_type> \
+    template<typename T, typename = cuda_for_dali::std::true_type> \
     struct async ## __VA_ARGS__ ## _trait_impl \
     { \
-        using type = cuda::std::false_type; \
+        using type = cuda_for_dali::std::false_type; \
     }; \
     \
     template<typename T> \
     struct async ## __VA_ARGS__ ## _trait_impl<T, typename T::async ## __VA_ARGS__> \
     { \
-        using type = cuda::std::true_type; \
+        using type = cuda_for_dali::std::true_type; \
     }; \
     \
     template<typename T> \
@@ -494,13 +494,13 @@ template<bool ...Values>
 struct any_of;
 
 template<bool ...Tail>
-struct any_of<true, Tail...> : cuda::std::true_type {};
+struct any_of<true, Tail...> : cuda_for_dali::std::true_type {};
 
 template<bool ...Tail>
 struct any_of<false, Tail...> : any_of<Tail...> {};
 
 template<>
-struct any_of<> : cuda::std::false_type {};
+struct any_of<> : cuda_for_dali::std::false_type {};
 
 template<typename TesterList>
 struct is_tester_list_async;

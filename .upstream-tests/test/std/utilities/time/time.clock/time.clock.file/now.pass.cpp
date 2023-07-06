@@ -15,14 +15,14 @@
 
 // static time_point now() noexcept;
 
-#include <cuda/std/chrono>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    typedef cuda::std::chrono::file_clock C;
+    typedef cuda_for_dali::std::chrono::file_clock C;
     ASSERT_NOEXCEPT(C::now());
 
     C::time_point t1 = C::now();

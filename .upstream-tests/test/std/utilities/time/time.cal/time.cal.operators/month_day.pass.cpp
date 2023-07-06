@@ -31,8 +31,8 @@
 // Returns: month(m) / d.
 
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
@@ -40,11 +40,11 @@
 
 int main(int, char**)
 {
-    using month_day = cuda::std::chrono::month_day;
-    using month     = cuda::std::chrono::month;
-    using day       = cuda::std::chrono::day;
+    using month_day = cuda_for_dali::std::chrono::month_day;
+    using month     = cuda_for_dali::std::chrono::month;
+    using day       = cuda_for_dali::std::chrono::day;
 
-    constexpr month February = cuda::std::chrono::February;
+    constexpr month February = cuda_for_dali::std::chrono::February;
 
     { // operator/(const month& m, const day& d) (and switched)
         ASSERT_NOEXCEPT (                    February/day{1});

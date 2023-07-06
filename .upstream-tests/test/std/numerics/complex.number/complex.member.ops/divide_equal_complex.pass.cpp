@@ -10,8 +10,8 @@
 
 // complex& operator/=(const complex& rhs);
 
-#include <cuda/std/complex>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/complex>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
@@ -23,8 +23,8 @@ template <class T>
 __host__ __device__ void
 test()
 {
-    cuda::std::complex<T> c(-4, 7.5);
-    const cuda::std::complex<T> c2(1.5, 2.5);
+    cuda_for_dali::std::complex<T> c(-4, 7.5);
+    const cuda_for_dali::std::complex<T> c2(1.5, 2.5);
     assert(c.real() == -4);
     assert(c.imag() == 7.5);
     c /= c2;
@@ -34,16 +34,16 @@ test()
     assert(c.real() == 1);
     assert(c.imag() == 0);
 
-    cuda::std::complex<T> c3;
+    cuda_for_dali::std::complex<T> c3;
 
     c3 = c;
-    cuda::std::complex<int> ic (1,1);
+    cuda_for_dali::std::complex<int> ic (1,1);
     c3 /= ic;
     assert(c3.real() ==  0.5);
     assert(c3.imag() == -0.5);
 
     c3 = c;
-    cuda::std::complex<float> fc (1,1);
+    cuda_for_dali::std::complex<float> fc (1,1);
     c3 /= fc;
     assert(c3.real() ==  0.5);
     assert(c3.imag() == -0.5);

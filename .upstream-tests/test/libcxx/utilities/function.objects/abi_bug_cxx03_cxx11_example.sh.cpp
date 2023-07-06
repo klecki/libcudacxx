@@ -11,17 +11,17 @@
 // XFAIL: *
 
 // This tests is meant to demonstrate an existing ABI bug between the
-// C++03 and C++11 implementations of cuda::std::function. It is not a real test.
+// C++03 and C++11 implementations of cuda_for_dali::std::function. It is not a real test.
 
 // RUN: %cxx -c %s -o %t.first.o %flags %compile_flags -std=c++03 -g
 // RUN: %cxx -c %s -o %t.second.o -DWITH_MAIN %flags %compile_flags -g -std=c++11
 // RUN: %cxx -o %t.exe %t.first.o %t.second.o %flags %link_flags -g
 // RUN: %run
 
-#include <cuda/std/functional>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/functional>
+#include <cuda_for_dali/std/cassert>
 
-typedef cuda::std::function<void(int)> Func;
+typedef cuda_for_dali::std::function<void(int)> Func;
 
 Func CreateFunc();
 

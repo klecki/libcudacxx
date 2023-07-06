@@ -11,12 +11,12 @@
 // .fail. expects compilation to fail, but this would only fail at runtime with NVRTC
 // UNSUPPORTED: nvrtc
 
-#include <cuda/std/ratio>
-#include <cuda/std/cstdint>
+#include <cuda_for_dali/std/ratio>
+#include <cuda_for_dali/std/cstdint>
 
 int main(int, char**)
 {
-    const cuda::std::intmax_t t1 = cuda::std::ratio<1, 0>::num;
+    const cuda_for_dali::std::intmax_t t1 = cuda_for_dali::std::ratio<1, 0>::num;
 
   return 0;
 }

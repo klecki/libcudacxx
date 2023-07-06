@@ -11,13 +11,13 @@
 // .fail. expects compilation to fail, but this would only fail at runtime with NVRTC
 // UNSUPPORTED: nvrtc
 
-#include <cuda/std/ratio>
+#include <cuda_for_dali/std/ratio>
 
 int main(int, char**)
 {
-    typedef cuda::std::ratio<0x7FFFFFFFFFFFFFFFLL, 1> R1;
-    typedef cuda::std::ratio<2, 1> R2;
-    typedef cuda::std::ratio_multiply<R1, R2>::type R;
+    typedef cuda_for_dali::std::ratio<0x7FFFFFFFFFFFFFFFLL, 1> R1;
+    typedef cuda_for_dali::std::ratio<2, 1> R2;
+    typedef cuda_for_dali::std::ratio_multiply<R1, R2>::type R;
 
   return 0;
 }

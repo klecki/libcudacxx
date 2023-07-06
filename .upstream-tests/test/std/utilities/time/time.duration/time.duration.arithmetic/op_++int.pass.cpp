@@ -12,8 +12,8 @@
 
 // constexpr duration operator++(int);  // constexpr in C++17
 
-#include <cuda/std/chrono>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
@@ -21,8 +21,8 @@
 __host__ __device__
 constexpr bool test_constexpr()
 {
-    cuda::std::chrono::hours h1(3);
-    cuda::std::chrono::hours h2 = h1++;
+    cuda_for_dali::std::chrono::hours h1(3);
+    cuda_for_dali::std::chrono::hours h2 = h1++;
     return h1.count() == 4 && h2.count() == 3;
 }
 #endif
@@ -30,8 +30,8 @@ constexpr bool test_constexpr()
 int main(int, char**)
 {
     {
-    cuda::std::chrono::hours h1(3);
-    cuda::std::chrono::hours h2 = h1++;
+    cuda_for_dali::std::chrono::hours h1(3);
+    cuda_for_dali::std::chrono::hours h2 = h1++;
     assert(h1.count() == 4);
     assert(h2.count() == 3);
     }

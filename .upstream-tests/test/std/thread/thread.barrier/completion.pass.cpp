@@ -11,7 +11,7 @@
 
 // <cuda/std/barrier>
 
-#include <cuda/std/barrier>
+#include <cuda_for_dali/std/barrier>
 
 #include "test_macros.h"
 #include "concurrent_agents.h"
@@ -45,13 +45,13 @@ void test()
 }
 
 template<typename Comp>
-using std_barrier = cuda::std::barrier<Comp>;
+using std_barrier = cuda_for_dali::std::barrier<Comp>;
 template<typename Comp>
-using block_barrier = cuda::barrier<cuda::thread_scope_block, Comp>;
+using block_barrier = cuda_for_dali::barrier<cuda_for_dali::thread_scope_block, Comp>;
 template<typename Comp>
-using device_barrier = cuda::barrier<cuda::thread_scope_device, Comp>;
+using device_barrier = cuda_for_dali::barrier<cuda_for_dali::thread_scope_device, Comp>;
 template<typename Comp>
-using system_barrier = cuda::barrier<cuda::thread_scope_system, Comp>;
+using system_barrier = cuda_for_dali::barrier<cuda_for_dali::thread_scope_system, Comp>;
 
 int main(int, char**)
 {

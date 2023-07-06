@@ -12,17 +12,17 @@
 
 #include "annotated_ptr.h"
 
-static_assert(sizeof(cuda::annotated_ptr<int, cuda::access_property::shared>) == sizeof(uintptr_t), "annotated_ptr<T, shared> must be pointer size");
-static_assert(sizeof(cuda::annotated_ptr<char, cuda::access_property::shared>) == sizeof(uintptr_t), "annotated_ptr<T, shared> must be pointer size");
-static_assert(sizeof(cuda::annotated_ptr<uintptr_t, cuda::access_property::shared>) == sizeof(uintptr_t), "annotated_ptr<T, shared> must be pointer size");
-static_assert(sizeof(cuda::annotated_ptr<int, cuda::access_property::global>) == sizeof(uintptr_t), "annotated_ptr<T, global> must be pointer size");
-static_assert(sizeof(cuda::annotated_ptr<char, cuda::access_property::global>) == sizeof(uintptr_t), "annotated_ptr<T, global> must be pointer size");
-static_assert(sizeof(cuda::annotated_ptr<uintptr_t, cuda::access_property::global>) == sizeof(uintptr_t), "annotated_ptr<T, global> must be pointer size");
-static_assert(sizeof(cuda::annotated_ptr<uintptr_t, cuda::access_property>) == 2*sizeof(uintptr_t), "annotated_ptr<T,access_property> must be 2 * pointer size");
+static_assert(sizeof(cuda_for_dali::annotated_ptr<int, cuda_for_dali::access_property::shared>) == sizeof(uintptr_t), "annotated_ptr<T, shared> must be pointer size");
+static_assert(sizeof(cuda_for_dali::annotated_ptr<char, cuda_for_dali::access_property::shared>) == sizeof(uintptr_t), "annotated_ptr<T, shared> must be pointer size");
+static_assert(sizeof(cuda_for_dali::annotated_ptr<uintptr_t, cuda_for_dali::access_property::shared>) == sizeof(uintptr_t), "annotated_ptr<T, shared> must be pointer size");
+static_assert(sizeof(cuda_for_dali::annotated_ptr<int, cuda_for_dali::access_property::global>) == sizeof(uintptr_t), "annotated_ptr<T, global> must be pointer size");
+static_assert(sizeof(cuda_for_dali::annotated_ptr<char, cuda_for_dali::access_property::global>) == sizeof(uintptr_t), "annotated_ptr<T, global> must be pointer size");
+static_assert(sizeof(cuda_for_dali::annotated_ptr<uintptr_t, cuda_for_dali::access_property::global>) == sizeof(uintptr_t), "annotated_ptr<T, global> must be pointer size");
+static_assert(sizeof(cuda_for_dali::annotated_ptr<uintptr_t, cuda_for_dali::access_property>) == 2*sizeof(uintptr_t), "annotated_ptr<T,access_property> must be 2 * pointer size");
 
-static_assert(alignof(cuda::annotated_ptr<int, cuda::access_property::shared>) == alignof(int*), "annotated_ptr must align with int*");
-static_assert(alignof(cuda::annotated_ptr<int, cuda::access_property::global>) == alignof(int*), "annotated_ptr must align with int*");
-static_assert(alignof(cuda::annotated_ptr<int, cuda::access_property>) == alignof(int*), "annotated_ptr must align with int*");
+static_assert(alignof(cuda_for_dali::annotated_ptr<int, cuda_for_dali::access_property::shared>) == alignof(int*), "annotated_ptr must align with int*");
+static_assert(alignof(cuda_for_dali::annotated_ptr<int, cuda_for_dali::access_property::global>) == alignof(int*), "annotated_ptr must align with int*");
+static_assert(alignof(cuda_for_dali::annotated_ptr<int, cuda_for_dali::access_property>) == alignof(int*), "annotated_ptr must align with int*");
 
 int main(int argc, char ** argv)
 {

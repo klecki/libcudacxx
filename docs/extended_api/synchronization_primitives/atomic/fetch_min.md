@@ -21,7 +21,7 @@ The minimum is found using [`cuda::std::min`].
 ## Example
 
 ```cuda
-#include <cuda/atomic>
+#include <cuda_for_dali/atomic>
 
 __global__ void example_kernel() {
   cuda::atomic<int> a(1);

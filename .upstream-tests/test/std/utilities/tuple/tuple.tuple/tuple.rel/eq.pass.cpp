@@ -14,132 +14,132 @@
 //   bool
 //   operator==(const tuple<TTypes...>& t, const tuple<UTypes...>& u);
 
-// UNSUPPORTED: c++98, c++03 
+// UNSUPPORTED: c++98, c++03
 
-#include <cuda/std/tuple>
-// cuda::std::string not supported
-//#include <cuda/std/string>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/tuple>
+// cuda_for_dali::std::string not supported
+//#include <cuda_for_dali/std/string>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
     {
-        typedef cuda::std::tuple<> T1;
-        typedef cuda::std::tuple<> T2;
+        typedef cuda_for_dali::std::tuple<> T1;
+        typedef cuda_for_dali::std::tuple<> T2;
         const T1 t1;
         const T2 t2;
         assert(t1 == t2);
         assert(!(t1 != t2));
     }
     {
-        typedef cuda::std::tuple<int> T1;
-        typedef cuda::std::tuple<double> T2;
+        typedef cuda_for_dali::std::tuple<int> T1;
+        typedef cuda_for_dali::std::tuple<double> T2;
         const T1 t1(1);
         const T2 t2(1.1);
         assert(!(t1 == t2));
         assert(t1 != t2);
     }
     {
-        typedef cuda::std::tuple<int> T1;
-        typedef cuda::std::tuple<double> T2;
+        typedef cuda_for_dali::std::tuple<int> T1;
+        typedef cuda_for_dali::std::tuple<double> T2;
         const T1 t1(1);
         const T2 t2(1);
         assert(t1 == t2);
         assert(!(t1 != t2));
     }
     {
-        typedef cuda::std::tuple<int, double> T1;
-        typedef cuda::std::tuple<double, long> T2;
+        typedef cuda_for_dali::std::tuple<int, double> T1;
+        typedef cuda_for_dali::std::tuple<double, long> T2;
         const T1 t1(1, 2);
         const T2 t2(1, 2);
         assert(t1 == t2);
         assert(!(t1 != t2));
     }
     {
-        typedef cuda::std::tuple<int, double> T1;
-        typedef cuda::std::tuple<double, long> T2;
+        typedef cuda_for_dali::std::tuple<int, double> T1;
+        typedef cuda_for_dali::std::tuple<double, long> T2;
         const T1 t1(1, 2);
         const T2 t2(1, 3);
         assert(!(t1 == t2));
         assert(t1 != t2);
     }
     {
-        typedef cuda::std::tuple<int, double> T1;
-        typedef cuda::std::tuple<double, long> T2;
+        typedef cuda_for_dali::std::tuple<int, double> T1;
+        typedef cuda_for_dali::std::tuple<double, long> T2;
         const T1 t1(1, 2);
         const T2 t2(1.1, 2);
         assert(!(t1 == t2));
         assert(t1 != t2);
     }
     {
-        typedef cuda::std::tuple<int, double> T1;
-        typedef cuda::std::tuple<double, long> T2;
+        typedef cuda_for_dali::std::tuple<int, double> T1;
+        typedef cuda_for_dali::std::tuple<double, long> T2;
         const T1 t1(1, 2);
         const T2 t2(1.1, 3);
         assert(!(t1 == t2));
         assert(t1 != t2);
     }
     {
-        typedef cuda::std::tuple<long, int, double> T1;
-        typedef cuda::std::tuple<double, long, int> T2;
+        typedef cuda_for_dali::std::tuple<long, int, double> T1;
+        typedef cuda_for_dali::std::tuple<double, long, int> T2;
         const T1 t1(1, 2, 3);
         const T2 t2(1, 2, 3);
         assert(t1 == t2);
         assert(!(t1 != t2));
     }
     {
-        typedef cuda::std::tuple<long, int, double> T1;
-        typedef cuda::std::tuple<double, long, int> T2;
+        typedef cuda_for_dali::std::tuple<long, int, double> T1;
+        typedef cuda_for_dali::std::tuple<double, long, int> T2;
         const T1 t1(1, 2, 3);
         const T2 t2(1.1, 2, 3);
         assert(!(t1 == t2));
         assert(t1 != t2);
     }
     {
-        typedef cuda::std::tuple<long, int, double> T1;
-        typedef cuda::std::tuple<double, long, int> T2;
+        typedef cuda_for_dali::std::tuple<long, int, double> T1;
+        typedef cuda_for_dali::std::tuple<double, long, int> T2;
         const T1 t1(1, 2, 3);
         const T2 t2(1, 3, 3);
         assert(!(t1 == t2));
         assert(t1 != t2);
     }
     {
-        typedef cuda::std::tuple<long, int, double> T1;
-        typedef cuda::std::tuple<double, long, int> T2;
+        typedef cuda_for_dali::std::tuple<long, int, double> T1;
+        typedef cuda_for_dali::std::tuple<double, long, int> T2;
         const T1 t1(1, 2, 3);
         const T2 t2(1, 2, 4);
         assert(!(t1 == t2));
         assert(t1 != t2);
     }
     {
-        typedef cuda::std::tuple<long, int, double> T1;
-        typedef cuda::std::tuple<double, long, int> T2;
+        typedef cuda_for_dali::std::tuple<long, int, double> T1;
+        typedef cuda_for_dali::std::tuple<double, long, int> T2;
         const T1 t1(1, 2, 3);
         const T2 t2(1, 3, 2);
         assert(!(t1 == t2));
         assert(t1 != t2);
     }
     {
-        typedef cuda::std::tuple<long, int, double> T1;
-        typedef cuda::std::tuple<double, long, int> T2;
+        typedef cuda_for_dali::std::tuple<long, int, double> T1;
+        typedef cuda_for_dali::std::tuple<double, long, int> T2;
         const T1 t1(1, 2, 3);
         const T2 t2(1.1, 2, 2);
         assert(!(t1 == t2));
         assert(t1 != t2);
     }
     {
-        typedef cuda::std::tuple<long, int, double> T1;
-        typedef cuda::std::tuple<double, long, int> T2;
+        typedef cuda_for_dali::std::tuple<long, int, double> T1;
+        typedef cuda_for_dali::std::tuple<double, long, int> T2;
         const T1 t1(1, 2, 3);
         const T2 t2(1.1, 3, 3);
         assert(!(t1 == t2));
         assert(t1 != t2);
     }
     {
-        typedef cuda::std::tuple<long, int, double> T1;
-        typedef cuda::std::tuple<double, long, int> T2;
+        typedef cuda_for_dali::std::tuple<long, int, double> T1;
+        typedef cuda_for_dali::std::tuple<double, long, int> T2;
         const T1 t1(1, 2, 3);
         const T2 t2(1.1, 3, 2);
         assert(!(t1 == t2));
@@ -147,8 +147,8 @@ int main(int, char**)
     }
 #if TEST_STD_VER > 11
     {
-        typedef cuda::std::tuple<long, int, double> T1;
-        typedef cuda::std::tuple<double, long, int> T2;
+        typedef cuda_for_dali::std::tuple<long, int, double> T1;
+        typedef cuda_for_dali::std::tuple<double, long, int> T2;
         constexpr T1 t1(1, 2, 3);
         constexpr T2 t2(1.1, 3, 2);
         static_assert(!(t1 == t2), "");

@@ -12,16 +12,16 @@
 
 #define _LIBCUDACXX_DISABLE_DEPRECATION_WARNINGS
 
-#include <cuda/std/functional>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/functional>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 int main(int, char**)
 {
-    typedef cuda::std::unary_negate<cuda::std::logical_not<int> > F;
-    const F f = F(cuda::std::logical_not<int>());
-    static_assert((cuda::std::is_same<F::argument_type, int>::value), "" );
-    static_assert((cuda::std::is_same<F::result_type, bool>::value), "" );
+    typedef cuda_for_dali::std::unary_negate<cuda_for_dali::std::logical_not<int> > F;
+    const F f = F(cuda_for_dali::std::logical_not<int>());
+    static_assert((cuda_for_dali::std::is_same<F::argument_type, int>::value), "" );
+    static_assert((cuda_for_dali::std::is_same<F::result_type, bool>::value), "" );
     assert(f(36));
     assert(!f(0));
 

@@ -13,8 +13,8 @@
 // constexpr day& operator+=(const days& d) noexcept;
 // constexpr day& operator-=(const days& d) noexcept;
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
@@ -35,14 +35,14 @@ constexpr bool testConstexpr()
 
 int main(int, char**)
 {
-    using day  = cuda::std::chrono::day;
-    using days = cuda::std::chrono::days;
+    using day  = cuda_for_dali::std::chrono::day;
+    using days = cuda_for_dali::std::chrono::days;
 
-    ASSERT_NOEXCEPT(cuda::std::declval<day&>() += std::declval<days>());
-    ASSERT_NOEXCEPT(cuda::std::declval<day&>() -= std::declval<days>());
+    ASSERT_NOEXCEPT(cuda_for_dali::std::declval<day&>() += std::declval<days>());
+    ASSERT_NOEXCEPT(cuda_for_dali::std::declval<day&>() -= std::declval<days>());
 
-    ASSERT_SAME_TYPE(day&, decltype(cuda::std::declval<day&>() += std::declval<days>()));
-    ASSERT_SAME_TYPE(day&, decltype(cuda::std::declval<day&>() -= std::declval<days>()));
+    ASSERT_SAME_TYPE(day&, decltype(cuda_for_dali::std::declval<day&>() += std::declval<days>()));
+    ASSERT_SAME_TYPE(day&, decltype(cuda_for_dali::std::declval<day&>() -= std::declval<days>()));
 
     static_assert(testConstexpr<day, days>(), "");
 

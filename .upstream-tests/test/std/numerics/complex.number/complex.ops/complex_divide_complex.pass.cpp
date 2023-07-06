@@ -12,15 +12,15 @@
 //   complex<T>
 //   operator/(const complex<T>& lhs, const complex<T>& rhs);
 
-#include <cuda/std/complex>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/complex>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "../cases.h"
 
 template <class T>
 __host__ __device__ void
-test(const cuda::std::complex<T>& lhs, const cuda::std::complex<T>& rhs, cuda::std::complex<T> x)
+test(const cuda_for_dali::std::complex<T>& lhs, const cuda_for_dali::std::complex<T>& rhs, cuda_for_dali::std::complex<T> x)
 {
     assert(lhs / rhs == x);
 }
@@ -29,9 +29,9 @@ template <class T>
 __host__ __device__ void
 test()
 {
-    cuda::std::complex<T> lhs(-4.0, 7.5);
-    cuda::std::complex<T> rhs(1.5, 2.5);
-    cuda::std::complex<T>   x(1.5, 2.5);
+    cuda_for_dali::std::complex<T> lhs(-4.0, 7.5);
+    cuda_for_dali::std::complex<T> rhs(1.5, 2.5);
+    cuda_for_dali::std::complex<T>   x(1.5, 2.5);
     test(lhs, rhs, x);
 }
 
@@ -43,7 +43,7 @@ __host__ __device__ void test_edges()
     {
         for (unsigned j = 0; j < N; ++j)
         {
-            cuda::std::complex<double> r = testcases[i] / testcases[j];
+            cuda_for_dali::std::complex<double> r = testcases[i] / testcases[j];
             switch (classify(testcases[i]))
             {
             case zero:

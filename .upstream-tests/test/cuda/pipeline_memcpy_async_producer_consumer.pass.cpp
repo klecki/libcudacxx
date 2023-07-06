@@ -10,30 +10,30 @@
 // UNSUPPORTED: pre-sm-70
 
 #include <cooperative_groups.h>
-#include <cuda/pipeline>
+#include <cuda_for_dali/pipeline>
 
 #include "cuda_space_selector.h"
 
-template <class T, cuda::thread_scope PipelineScope>
+template <class T, cuda_for_dali::thread_scope PipelineScope>
 __device__ __noinline__
-void test_producer(T * dest, T * source, cuda::pipeline<PipelineScope> & pipe)
+void test_producer(T * dest, T * source, cuda_for_dali::pipeline<PipelineScope> & pipe)
 {
     pipe.producer_acquire();
-    cuda::memcpy_async(static_cast<void*>(&dest[0]), static_cast<void*>(&source[0]), sizeof(T), pipe);
+    cuda_for_dali::memcpy_async(static_cast<void*>(&dest[0]), static_cast<void*>(&source[0]), sizeof(T), pipe);
     pipe.producer_commit();
 
     pipe.producer_acquire();
-    cuda::memcpy_async(static_cast<void*>(&dest[1]), static_cast<void*>(&source[1]), sizeof(T), pipe);
+    cuda_for_dali::memcpy_async(static_cast<void*>(&dest[1]), static_cast<void*>(&source[1]), sizeof(T), pipe);
     pipe.producer_commit();
 
     pipe.producer_acquire();
-    cuda::memcpy_async(static_cast<void*>(&dest[2]), static_cast<void*>(&source[2]), sizeof(T), pipe);
+    cuda_for_dali::memcpy_async(static_cast<void*>(&dest[2]), static_cast<void*>(&source[2]), sizeof(T), pipe);
     pipe.producer_commit();
 }
 
-template <class T, cuda::thread_scope PipelineScope>
+template <class T, cuda_for_dali::thread_scope PipelineScope>
 __device__ __noinline__
-void test_consumer(T * dest, T * source, cuda::pipeline<PipelineScope> & pipe)
+void test_consumer(T * dest, T * source, cuda_for_dali::pipeline<PipelineScope> & pipe)
 {
     pipe.consumer_wait();
     assert(source[0] == 12);
@@ -53,7 +53,7 @@ void test_consumer(T * dest, T * source, cuda::pipeline<PipelineScope> & pipe)
 
 template <class T,
     template<typename, typename> class PipelineSelector,
-    cuda::thread_scope PipelineScope,
+    cuda_for_dali::thread_scope PipelineScope,
     uint8_t PipelineStages
 >
 __device__ __noinline__
@@ -62,8 +62,8 @@ void test_fully_specialized()
     __shared__ T dest[3];
     __shared__ T * source;
 
-    PipelineSelector<cuda::pipeline_shared_state<PipelineScope, PipelineStages>, constructor_initializer> pipe_state_sel;
-    cuda::pipeline_shared_state<PipelineScope, PipelineStages> * pipe_state = pipe_state_sel.construct();
+    PipelineSelector<cuda_for_dali::pipeline_shared_state<PipelineScope, PipelineStages>, constructor_initializer> pipe_state_sel;
+    cuda_for_dali::pipeline_shared_state<PipelineScope, PipelineStages> * pipe_state = pipe_state_sel.construct();
 
     auto group = cooperative_groups::this_thread_block();
 
@@ -81,11 +81,11 @@ void test_fully_specialized()
         }
         group.sync();
 
-        const cuda::pipeline_role role = (group.thread_rank() % 2) ? cuda::pipeline_role::producer
-                                                                   : cuda::pipeline_role::consumer;
-        cuda::pipeline<PipelineScope> pipe = make_pipeline(group, pipe_state, role);
+        const cuda_for_dali::pipeline_role role = (group.thread_rank() % 2) ? cuda_for_dali::pipeline_role::producer
+                                                                   : cuda_for_dali::pipeline_role::consumer;
+        cuda_for_dali::pipeline<PipelineScope> pipe = make_pipeline(group, pipe_state, role);
 
-        if (role == cuda::pipeline_role::producer) {
+        if (role == cuda_for_dali::pipeline_role::producer) {
             test_producer(dest, source, pipe);
        } else {
            test_consumer(dest, source, pipe);
@@ -102,11 +102,11 @@ void test_fully_specialized()
         }
         group.sync();
 
-        const cuda::pipeline_role role = (group.thread_rank() < 32) ? cuda::pipeline_role::producer
-                                                                    : cuda::pipeline_role::consumer;
-        cuda::pipeline<PipelineScope> pipe = make_pipeline(group, pipe_state, group.size() / 2);
+        const cuda_for_dali::pipeline_role role = (group.thread_rank() < 32) ? cuda_for_dali::pipeline_role::producer
+                                                                    : cuda_for_dali::pipeline_role::consumer;
+        cuda_for_dali::pipeline<PipelineScope> pipe = make_pipeline(group, pipe_state, group.size() / 2);
 
-        if (role == cuda::pipeline_role::producer) {
+        if (role == cuda_for_dali::pipeline_role::producer) {
             test_producer(dest, source, pipe);
         } else {
             test_consumer(dest, source, pipe);
@@ -118,7 +118,7 @@ void test_fully_specialized()
 
 template <class T,
     template<typename, typename> class PipelineSelector,
-    cuda::thread_scope PipelineScope
+    cuda_for_dali::thread_scope PipelineScope
 >
 __host__ __device__ __noinline__
 void test_select_stages()
@@ -133,9 +133,9 @@ template <class T,
 __host__ __device__ __noinline__
 void test_select_scope()
 {
-    test_select_stages<T, PipelineSelector, cuda::thread_scope_block>();
-    test_select_stages<T, PipelineSelector, cuda::thread_scope_device>();
-    test_select_stages<T, PipelineSelector, cuda::thread_scope_system>();
+    test_select_stages<T, PipelineSelector, cuda_for_dali::thread_scope_block>();
+    test_select_stages<T, PipelineSelector, cuda_for_dali::thread_scope_device>();
+    test_select_stages<T, PipelineSelector, cuda_for_dali::thread_scope_system>();
 }
 
 template <class T>

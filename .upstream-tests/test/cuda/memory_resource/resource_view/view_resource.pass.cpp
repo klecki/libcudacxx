@@ -8,10 +8,10 @@
 //===----------------------------------------------------------------------===//
 
 #include <cassert>
-#include <cuda/memory_resource>
-#include <cuda/std/cstddef>
-#include <cuda/std/type_traits>
-#include <cuda/stream_view>
+#include <cuda_for_dali/memory_resource>
+#include <cuda_for_dali/std/cstddef>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/stream_view>
 #include <memory>
 #include <tuple>
 #include <vector>
@@ -20,8 +20,8 @@
 int main(int argc, char **argv) {
 #ifndef __CUDA_ARCH__
   derived_async2 *res = nullptr;
-  using expected_view_type = cuda::basic_resource_view<derived_async2*, cuda::is_kind<cuda::memory_kind::managed>>;
-  auto view = cuda::view_resource<cuda::is_kind<cuda::memory_kind::managed>>(res);
+  using expected_view_type = cuda_for_dali::basic_resource_view<derived_async2*, cuda_for_dali::is_kind<cuda_for_dali::memory_kind::managed>>;
+  auto view = cuda_for_dali::view_resource<cuda_for_dali::is_kind<cuda_for_dali::memory_kind::managed>>(res);
   static_assert(std::is_same<decltype(view), expected_view_type>::value,
                 "Unexpected return type of `view_resource` - expected a basic_resource_view with is_kind and concrete pointer type");
   view_DA2 vda2(res);

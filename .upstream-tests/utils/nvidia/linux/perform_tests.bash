@@ -16,7 +16,7 @@ function usage {
   echo "--skip-libcxx-tests              : Do not build (or run) any libc++ tests."
   echo "                                 : Overrides \${LIBCUDACXX_SKIP_LIBCXX_TESTS}."
   echo "--skip-libcudacxx-tests          : Do not build (or run) any libcu++ tests."
-  echo "                                 : Overrides \${LIBCUDACXX_SKIP_LIBCUDACXX_TESTS}."
+  echo "                                 : Overrides \${LIBCUDACXX_SKIP_LIBCUDAFORDALICXX_TESTS}."
   echo "--skip-arch-detection            : Do not automatically detect the SM architecture"
   echo "                                 : for tests runs."
   echo "                                 : Overrides \${LIBCUDACXX_SKIP_ARCH_DETECTION}."
@@ -43,7 +43,7 @@ function usage {
   echo "                                      : but do not run them."
   echo "\${LIBCUDACXX_SKIP_LIBCXX_TESTS}       : If set and non-zero, do not build"
   echo "                                      : (or run) any libc++ tests."
-  echo "\${LIBCUDACXX_SKIP_LIBCUDACXX_TESTS}   : If set and non-zero, do not build"
+  echo "\${LIBCUDACXX_SKIP_LIBCUDAFORDALICXX_TESTS}   : If set and non-zero, do not build"
   echo "                                      : (or run) any libcu++ tests."
   echo "\${LIBCUDACXX_SKIP_ARCH_DETECTION}     : If set, non-zero, and"
   echo "                                      : \${LIBCUDACXX_COMPUTE_ARCHS} is unset,"
@@ -153,7 +153,7 @@ do
   --skip-base-tests-build)    LIBCUDACXX_SKIP_BASE_TESTS_BUILD=1 ;;
   --skip-tests-runs)          LIBCUDACXX_SKIP_TESTS_RUN=1 ;;
   --skip-libcxx-tests)        LIBCUDACXX_SKIP_LIBCXX_TESTS=1 ;;
-  --skip-libcudacxx-tests)    LIBCUDACXX_SKIP_LIBCUDACXX_TESTS=1 ;;
+  --skip-libcudacxx-tests)    LIBCUDACXX_SKIP_LIBCUDAFORDALICXX_TESTS=1 ;;
   --skip-arch-detection)      LIBCUDACXX_SKIP_ARCH_DETECTION=1 ;;
   --compute-archs)
     shift # The next argument is the list of archs.
@@ -193,7 +193,7 @@ fi
 # Variable Processing
 
 if [ "${LIBCUDACXX_SKIP_BASE_TESTS_BUILD:-0}" != "0" ] || \
-   [[ "${LIBCUDACXX_SKIP_LIBCXX_TESTS:-0}" != "0" && "${LIBCUDACXX_SKIP_LIBCUDACXX_TESTS:-0}" != "0" ]]
+   [[ "${LIBCUDACXX_SKIP_LIBCXX_TESTS:-0}" != "0" && "${LIBCUDACXX_SKIP_LIBCUDAFORDALICXX_TESTS:-0}" != "0" ]]
 then
   echo "# TEST libc++  : Skipped"
   echo "# TEST libcu++ : Skipped"
@@ -266,7 +266,7 @@ VARIABLES="
   LIBCUDACXX_SKIP_BASE_TESTS_BUILD
   LIBCUDACXX_SKIP_TESTS_RUN
   LIBCUDACXX_SKIP_LIBCXX_TESTS
-  LIBCUDACXX_SKIP_LIBCUDACXX_TESTS
+  LIBCUDACXX_SKIP_LIBCUDAFORDALICXX_TESTS
   LIBCUDACXX_SKIP_ARCH_DETECTION
   LIBCXX_LIT_SITE_CONFIG
   LIBCUDACXX_LIT_SITE_CONFIG
@@ -309,7 +309,7 @@ fi
 
 section_separator
 
-if [ "${LIBCUDACXX_SKIP_LIBCUDACXX_TESTS:-0}" == "0" ]
+if [ "${LIBCUDACXX_SKIP_LIBCUDAFORDALICXX_TESTS:-0}" == "0" ]
 then
   par=$(nproc)
   if [[ $? -eq 0 ]]

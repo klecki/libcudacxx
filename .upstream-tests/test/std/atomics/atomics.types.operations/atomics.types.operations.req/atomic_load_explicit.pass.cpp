@@ -20,27 +20,27 @@
 //     T
 //     atomic_load_explicit(const atomic<T>* obj, memory_order m);
 
-#include <cuda/std/atomic>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/atomic>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "atomic_helpers.h"
 #include "cuda_space_selector.h"
 
-template <class T, template<typename, typename> typename Selector, cuda::thread_scope>
+template <class T, template<typename, typename> typename Selector, cuda_for_dali::thread_scope>
 struct TestFn {
   __host__ __device__
   void operator()() const {
-    typedef cuda::std::atomic<T> A;
+    typedef cuda_for_dali::std::atomic<T> A;
     Selector<A, constructor_initializer> sel;
     A & t = *sel.construct();
-    cuda::std::atomic_init(&t, T(1));
-    assert(cuda::std::atomic_load_explicit(&t, cuda::std::memory_order_seq_cst) == T(1));
+    cuda_for_dali::std::atomic_init(&t, T(1));
+    assert(cuda_for_dali::std::atomic_load_explicit(&t, cuda_for_dali::std::memory_order_seq_cst) == T(1));
     Selector<volatile A, constructor_initializer> vsel;
     volatile A & vt = *vsel.construct();
-    cuda::std::atomic_init(&vt, T(2));
-    assert(cuda::std::atomic_load_explicit(&vt, cuda::std::memory_order_seq_cst) == T(2));
+    cuda_for_dali::std::atomic_init(&vt, T(2));
+    assert(cuda_for_dali::std::atomic_load_explicit(&vt, cuda_for_dali::std::memory_order_seq_cst) == T(2));
   }
 };
 

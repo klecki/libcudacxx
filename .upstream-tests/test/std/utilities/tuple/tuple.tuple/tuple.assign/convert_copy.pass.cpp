@@ -15,10 +15,10 @@
 // template <class... UTypes>
 //   tuple& operator=(const tuple<UTypes...>& u);
 
-// UNSUPPORTED: c++98, c++03 
+// UNSUPPORTED: c++98, c++03
 
-#include <cuda/std/tuple>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/tuple>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
@@ -38,43 +38,43 @@ struct D
 int main(int, char**)
 {
     {
-        typedef cuda::std::tuple<long> T0;
-        typedef cuda::std::tuple<long long> T1;
+        typedef cuda_for_dali::std::tuple<long> T0;
+        typedef cuda_for_dali::std::tuple<long long> T1;
         T0 t0(2);
         T1 t1;
         t1 = t0;
-        assert(cuda::std::get<0>(t1) == 2);
+        assert(cuda_for_dali::std::get<0>(t1) == 2);
     }
     {
-        typedef cuda::std::tuple<long, char> T0;
-        typedef cuda::std::tuple<long long, int> T1;
+        typedef cuda_for_dali::std::tuple<long, char> T0;
+        typedef cuda_for_dali::std::tuple<long long, int> T1;
         T0 t0(2, 'a');
         T1 t1;
         t1 = t0;
-        assert(cuda::std::get<0>(t1) == 2);
-        assert(cuda::std::get<1>(t1) == int('a'));
+        assert(cuda_for_dali::std::get<0>(t1) == 2);
+        assert(cuda_for_dali::std::get<1>(t1) == int('a'));
     }
     {
-        typedef cuda::std::tuple<long, char, D> T0;
-        typedef cuda::std::tuple<long long, int, B> T1;
+        typedef cuda_for_dali::std::tuple<long, char, D> T0;
+        typedef cuda_for_dali::std::tuple<long long, int, B> T1;
         T0 t0(2, 'a', D(3));
         T1 t1;
         t1 = t0;
-        assert(cuda::std::get<0>(t1) == 2);
-        assert(cuda::std::get<1>(t1) == int('a'));
-        assert(cuda::std::get<2>(t1).id_ == 3);
+        assert(cuda_for_dali::std::get<0>(t1) == 2);
+        assert(cuda_for_dali::std::get<1>(t1) == int('a'));
+        assert(cuda_for_dali::std::get<2>(t1).id_ == 3);
     }
     {
         D d(3);
         D d2(2);
-        typedef cuda::std::tuple<long, char, D&> T0;
-        typedef cuda::std::tuple<long long, int, B&> T1;
+        typedef cuda_for_dali::std::tuple<long, char, D&> T0;
+        typedef cuda_for_dali::std::tuple<long long, int, B&> T1;
         T0 t0(2, 'a', d2);
         T1 t1(1, 'b', d);
         t1 = t0;
-        assert(cuda::std::get<0>(t1) == 2);
-        assert(cuda::std::get<1>(t1) == int('a'));
-        assert(cuda::std::get<2>(t1).id_ == 2);
+        assert(cuda_for_dali::std::get<0>(t1) == 2);
+        assert(cuda_for_dali::std::get<1>(t1) == int('a'));
+        assert(cuda_for_dali::std::get<2>(t1).id_ == 2);
     }
     {
         // Test that tuple evaluates correctly applies an lvalue reference
@@ -82,11 +82,11 @@ int main(int, char**)
         // instead of evaluating 'is_assignable<int&&, int&>' which is false.
         int x = 42;
         int y = 43;
-        cuda::std::tuple<int&&> t(cuda::std::move(x));
-        cuda::std::tuple<int&> t2(y);
+        cuda_for_dali::std::tuple<int&&> t(cuda_for_dali::std::move(x));
+        cuda_for_dali::std::tuple<int&> t2(y);
         t = t2;
-        assert(cuda::std::get<0>(t) == 43);
-        assert(&cuda::std::get<0>(t) == &x);
+        assert(cuda_for_dali::std::get<0>(t) == 43);
+        assert(&cuda_for_dali::std::get<0>(t) == &x);
     }
 
   return 0;

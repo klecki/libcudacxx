@@ -18,15 +18,15 @@
 // template <class T1, class T2> bool operator>=(const pair<T1,T2>&, const pair<T1,T2>&);
 // template <class T1, class T2> bool operator<=(const pair<T1,T2>&, const pair<T1,T2>&);
 
-#include <cuda/std/utility>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/utility>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
     {
-        typedef cuda::std::pair<int, short> P;
+        typedef cuda_for_dali::std::pair<int, short> P;
         P p1(3, static_cast<short>(4));
         P p2(3, static_cast<short>(4));
         assert( (p1 == p2));
@@ -37,7 +37,7 @@ int main(int, char**)
         assert( (p1 >= p2));
     }
     {
-        typedef cuda::std::pair<int, short> P;
+        typedef cuda_for_dali::std::pair<int, short> P;
         P p1(2, static_cast<short>(4));
         P p2(3, static_cast<short>(4));
         assert(!(p1 == p2));
@@ -48,7 +48,7 @@ int main(int, char**)
         assert(!(p1 >= p2));
     }
     {
-        typedef cuda::std::pair<int, short> P;
+        typedef cuda_for_dali::std::pair<int, short> P;
         P p1(3, static_cast<short>(2));
         P p2(3, static_cast<short>(4));
         assert(!(p1 == p2));
@@ -59,7 +59,7 @@ int main(int, char**)
         assert(!(p1 >= p2));
     }
     {
-        typedef cuda::std::pair<int, short> P;
+        typedef cuda_for_dali::std::pair<int, short> P;
         P p1(3, static_cast<short>(4));
         P p2(2, static_cast<short>(4));
         assert(!(p1 == p2));
@@ -70,7 +70,7 @@ int main(int, char**)
         assert( (p1 >= p2));
     }
     {
-        typedef cuda::std::pair<int, short> P;
+        typedef cuda_for_dali::std::pair<int, short> P;
         P p1(3, static_cast<short>(4));
         P p2(3, static_cast<short>(2));
         assert(!(p1 == p2));
@@ -83,7 +83,7 @@ int main(int, char**)
 
 #if TEST_STD_VER > 11
     {
-        typedef cuda::std::pair<int, short> P;
+        typedef cuda_for_dali::std::pair<int, short> P;
         constexpr P p1(3, static_cast<short>(4));
         constexpr P p2(3, static_cast<short>(2));
         static_assert(!(p1 == p2), "");

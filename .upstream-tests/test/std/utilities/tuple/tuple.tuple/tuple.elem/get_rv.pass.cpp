@@ -14,31 +14,31 @@
 //   typename tuple_element<I, tuple<Types...> >::type&&
 //   get(tuple<Types...>&& t);
 
-// UNSUPPORTED: c++98, c++03 
+// UNSUPPORTED: c++98, c++03
 
-#include <cuda/std/tuple>
-#include <cuda/std/utility>
-// cuda::std::unique_ptr not supported
-//#include <cuda/std/memory>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/tuple>
+#include <cuda_for_dali/std/utility>
+// cuda_for_dali::std::unique_ptr not supported
+//#include <cuda_for_dali/std/memory>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "MoveOnly.h"
 
 int main(int, char**)
 {
-    // cuda::std::unique_ptr not supported
+    // cuda_for_dali::std::unique_ptr not supported
     /*
     {
-        typedef cuda::std::tuple<cuda::std::unique_ptr<int> > T;
-        T t(cuda::std::unique_ptr<int>(new int(3)));
-        cuda::std::unique_ptr<int> p = cuda::std::get<0>(cuda::std::move(t));
+        typedef cuda_for_dali::std::tuple<cuda_for_dali::std::unique_ptr<int> > T;
+        T t(cuda_for_dali::std::unique_ptr<int>(new int(3)));
+        cuda_for_dali::std::unique_ptr<int> p = cuda_for_dali::std::get<0>(cuda_for_dali::std::move(t));
         assert(*p == 3);
     }
     */
     {
-        cuda::std::tuple<MoveOnly> t(3);
-        MoveOnly _m = cuda::std::get<0>(cuda::std::move(t));
+        cuda_for_dali::std::tuple<MoveOnly> t(3);
+        MoveOnly _m = cuda_for_dali::std::get<0>(cuda_for_dali::std::move(t));
         assert(_m.get() == 3);
     }
   return 0;

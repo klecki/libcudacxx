@@ -68,9 +68,9 @@
 //     T* operator-=(ptrdiff_t op);
 // };
 
-#include <cuda/std/atomic>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/atomic>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include <cmpxchg_loop.h>
 
@@ -85,7 +85,7 @@ __host__ __device__
 void
 do_test()
 {
-    typedef typename cuda::std::remove_pointer<T>::type X;
+    typedef typename cuda_for_dali::std::remove_pointer<T>::type X;
     Selector<A, constructor_initializer> sel;
     A & obj = *sel.construct(T(0));
     bool b0 = obj.is_lock_free();
@@ -93,13 +93,13 @@ do_test()
     assert(obj == T(0));
     obj.store(T(0));
     assert(obj == T(0));
-    obj.store(T(1), cuda::std::memory_order_release);
+    obj.store(T(1), cuda_for_dali::std::memory_order_release);
     assert(obj == T(1));
     assert(obj.load() == T(1));
-    assert(obj.load(cuda::std::memory_order_acquire) == T(1));
+    assert(obj.load(cuda_for_dali::std::memory_order_acquire) == T(1));
     assert(obj.exchange(T(2)) == T(1));
     assert(obj == T(2));
-    assert(obj.exchange(T(3), cuda::std::memory_order_relaxed) == T(2));
+    assert(obj.exchange(T(3), cuda_for_dali::std::memory_order_relaxed) == T(2));
     assert(obj == T(3));
     T x = obj;
     assert(cmpxchg_weak_loop(obj, x, T(2)) == true);
@@ -118,9 +118,9 @@ do_test()
     assert((obj = T(0)) == T(0));
     assert(obj == T(0));
     obj = T(2*sizeof(X));
-    assert((obj += cuda::std::ptrdiff_t(3)) == T(5*sizeof(X)));
+    assert((obj += cuda_for_dali::std::ptrdiff_t(3)) == T(5*sizeof(X)));
     assert(obj == T(5*sizeof(X)));
-    assert((obj -= cuda::std::ptrdiff_t(3)) == T(2*sizeof(X)));
+    assert((obj -= cuda_for_dali::std::ptrdiff_t(3)) == T(2*sizeof(X)));
     assert(obj == T(2*sizeof(X)));
 #if __cplusplus > 201703L
     {
@@ -140,9 +140,9 @@ void do_test_std()
 {
     Selector<A, constructor_initializer> sel;
     A & obj = *sel.construct(nullptr);
-    cuda::std::atomic_init(&obj, T(1));
+    cuda_for_dali::std::atomic_init(&obj, T(1));
     assert(obj == T(1));
-    cuda::std::atomic_init(&obj, T(2));
+    cuda_for_dali::std::atomic_init(&obj, T(2));
     assert(obj == T(2));
 
     do_test<A, T, Selector>();
@@ -167,26 +167,26 @@ void test_std()
 int main(int, char**)
 {
 #if !defined(__CUDA_ARCH__) || __CUDA_ARCH__ >= 700
-    test_std<cuda::std::atomic<int*>, int*, local_memory_selector>();
-    test<cuda::atomic<int*, cuda::thread_scope_system>, int*, local_memory_selector>();
-    test<cuda::atomic<int*, cuda::thread_scope_device>, int*, local_memory_selector>();
-    test<cuda::atomic<int*, cuda::thread_scope_block>, int*, local_memory_selector>();
+    test_std<cuda_for_dali::std::atomic<int*>, int*, local_memory_selector>();
+    test<cuda_for_dali::atomic<int*, cuda_for_dali::thread_scope_system>, int*, local_memory_selector>();
+    test<cuda_for_dali::atomic<int*, cuda_for_dali::thread_scope_device>, int*, local_memory_selector>();
+    test<cuda_for_dali::atomic<int*, cuda_for_dali::thread_scope_block>, int*, local_memory_selector>();
 #endif
 #ifdef __CUDA_ARCH__
-    test_std<cuda::std::atomic<int*>, int*, shared_memory_selector>();
-    test<cuda::atomic<int*, cuda::thread_scope_system>, int*, shared_memory_selector>();
-    test<cuda::atomic<int*, cuda::thread_scope_device>, int*, shared_memory_selector>();
-    test<cuda::atomic<int*, cuda::thread_scope_block>, int*, shared_memory_selector>();
+    test_std<cuda_for_dali::std::atomic<int*>, int*, shared_memory_selector>();
+    test<cuda_for_dali::atomic<int*, cuda_for_dali::thread_scope_system>, int*, shared_memory_selector>();
+    test<cuda_for_dali::atomic<int*, cuda_for_dali::thread_scope_device>, int*, shared_memory_selector>();
+    test<cuda_for_dali::atomic<int*, cuda_for_dali::thread_scope_block>, int*, shared_memory_selector>();
 
     // note: this _should_ be test_std, but for some reason that's resulting in an
     // unspecified launch failure, and I'm unsure what function is not __device__
     // and causes that to happen
     // the only difference is whether atomic_init is done or not, and that
-    // _seems_ to be appropriately tested by the atomic_init test for cuda::std::
-    test<cuda::std::atomic<int*>, int*, global_memory_selector>();
-    test<cuda::atomic<int*, cuda::thread_scope_system>, int*, global_memory_selector>();
-    test<cuda::atomic<int*, cuda::thread_scope_device>, int*, global_memory_selector>();
-    test<cuda::atomic<int*, cuda::thread_scope_block>, int*, global_memory_selector>();
+    // _seems_ to be appropriately tested by the atomic_init test for cuda_for_dali::std::
+    test<cuda_for_dali::std::atomic<int*>, int*, global_memory_selector>();
+    test<cuda_for_dali::atomic<int*, cuda_for_dali::thread_scope_system>, int*, global_memory_selector>();
+    test<cuda_for_dali::atomic<int*, cuda_for_dali::thread_scope_device>, int*, global_memory_selector>();
+    test<cuda_for_dali::atomic<int*, cuda_for_dali::thread_scope_block>, int*, global_memory_selector>();
 #endif
   return 0;
 }

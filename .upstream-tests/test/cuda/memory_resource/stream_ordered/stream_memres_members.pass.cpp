@@ -8,36 +8,36 @@
 //===----------------------------------------------------------------------===//
 
 #include <cassert>
-#include <cuda/memory_resource>
-#include <cuda/std/type_traits>
-#include <cuda/stream_view>
+#include <cuda_for_dali/memory_resource>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/stream_view>
 
 template <typename Kind> constexpr bool test_memory_kind() {
-  using mr = cuda::stream_ordered_memory_resource<Kind>;
+  using mr = cuda_for_dali::stream_ordered_memory_resource<Kind>;
   return std::is_same<typename mr::memory_kind, Kind>::value;
 }
 
 template <typename Kind, std::size_t Alignment>
 constexpr bool test_alignment() {
-  using mr = cuda::stream_ordered_memory_resource<Kind>;
+  using mr = cuda_for_dali::stream_ordered_memory_resource<Kind>;
   return mr::default_alignment == Alignment;
 }
 
 int main(int argc, char **argv) {
 
 #ifndef __CUDA_ARCH__
-  namespace memory_kind = cuda::memory_kind;
+  namespace memory_kind = cuda_for_dali::memory_kind;
   static_assert(test_memory_kind<memory_kind::host>(), "");
   static_assert(test_memory_kind<memory_kind::device>(), "");
   static_assert(test_memory_kind<memory_kind::managed>(), "");
   static_assert(test_memory_kind<memory_kind::pinned>(), "");
 
-  using mr = cuda::stream_ordered_memory_resource<memory_kind::host>;
+  using mr = cuda_for_dali::stream_ordered_memory_resource<memory_kind::host>;
 
-  static_assert(test_alignment<memory_kind::host, alignof(cuda::std::max_align_t)>(), "");
-  static_assert(test_alignment<memory_kind::device, alignof(cuda::std::max_align_t)>(), "");
-  static_assert(test_alignment<memory_kind::managed, alignof(cuda::std::max_align_t)>(), "");
-  static_assert(test_alignment<memory_kind::pinned, alignof(cuda::std::max_align_t)>(), "");
+  static_assert(test_alignment<memory_kind::host, alignof(cuda_for_dali::std::max_align_t)>(), "");
+  static_assert(test_alignment<memory_kind::device, alignof(cuda_for_dali::std::max_align_t)>(), "");
+  static_assert(test_alignment<memory_kind::managed, alignof(cuda_for_dali::std::max_align_t)>(), "");
+  static_assert(test_alignment<memory_kind::pinned, alignof(cuda_for_dali::std::max_align_t)>(), "");
 #endif
 
   return 0;

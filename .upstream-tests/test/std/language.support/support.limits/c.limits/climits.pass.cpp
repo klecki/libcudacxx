@@ -8,7 +8,7 @@
 
  // test climits
 
-#include <cuda/std/climits>
+#include <cuda_for_dali/std/climits>
 
 #include "test_macros.h"
 
@@ -91,8 +91,8 @@
 // test if __CHAR_UNSIGNED__ detection for NVRTC works correctly
 // if not, go take a look at cuda/std/climits
 #ifdef __CUDACC_RTC__
-#include <cuda/std/type_traits>
-static_assert(__CHAR_UNSIGNED__ == cuda::std::is_unsigned<char>::value, "");
+#include <cuda_for_dali/std/type_traits>
+static_assert(__CHAR_UNSIGNED__ == cuda_for_dali::std::is_unsigned<char>::value, "");
 #endif
 
 int main(int, char**)

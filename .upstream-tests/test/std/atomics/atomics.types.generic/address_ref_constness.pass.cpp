@@ -68,9 +68,9 @@
 //     T* operator-=(ptrdiff_t op);
 // };
 
-#include <cuda/std/atomic>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/atomic>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include <cmpxchg_loop.h>
 
@@ -85,7 +85,7 @@ __host__ __device__
 void
 do_test()
 {
-    typedef typename cuda::std::remove_pointer<T>::type X;
+    typedef typename cuda_for_dali::std::remove_pointer<T>::type X;
     Selector<T, constructor_initializer> sel;
     T & val = *sel.construct(T(0));
     A obj(val);
@@ -94,13 +94,13 @@ do_test()
     assert(obj == T(0));
     obj.store(T(0));
     assert(obj == T(0));
-    obj.store(T(1), cuda::std::memory_order_release);
+    obj.store(T(1), cuda_for_dali::std::memory_order_release);
     assert(obj == T(1));
     assert(obj.load() == T(1));
-    assert(obj.load(cuda::std::memory_order_acquire) == T(1));
+    assert(obj.load(cuda_for_dali::std::memory_order_acquire) == T(1));
     assert(obj.exchange(T(2)) == T(1));
     assert(obj == T(2));
-    assert(obj.exchange(T(3), cuda::std::memory_order_relaxed) == T(2));
+    assert(obj.exchange(T(3), cuda_for_dali::std::memory_order_relaxed) == T(2));
     assert(obj == T(3));
     T x = obj;
     assert(cmpxchg_weak_loop(obj, x, T(2)) == true);
@@ -119,9 +119,9 @@ do_test()
     assert((obj = T(0)) == T(0));
     assert(obj == T(0));
     obj = T(2*sizeof(X));
-    assert((obj += cuda::std::ptrdiff_t(3)) == T(5*sizeof(X)));
+    assert((obj += cuda_for_dali::std::ptrdiff_t(3)) == T(5*sizeof(X)));
     assert(obj == T(5*sizeof(X)));
-    assert((obj -= cuda::std::ptrdiff_t(3)) == T(2*sizeof(X)));
+    assert((obj -= cuda_for_dali::std::ptrdiff_t(3)) == T(2*sizeof(X)));
     assert(obj == T(2*sizeof(X)));
 }
 
@@ -136,21 +136,21 @@ void test()
 int main(int, char**)
 {
 #if !defined(__CUDA_ARCH__) || __CUDA_ARCH__ >= 700
-    test<const cuda::std::atomic_ref<int*>, int*, local_memory_selector>();
-    test<const cuda::atomic_ref<int*, cuda::thread_scope_system>, int*, local_memory_selector>();
-    test<const cuda::atomic_ref<int*, cuda::thread_scope_device>, int*, local_memory_selector>();
-    test<const cuda::atomic_ref<int*, cuda::thread_scope_block>, int*, local_memory_selector>();
+    test<const cuda_for_dali::std::atomic_ref<int*>, int*, local_memory_selector>();
+    test<const cuda_for_dali::atomic_ref<int*, cuda_for_dali::thread_scope_system>, int*, local_memory_selector>();
+    test<const cuda_for_dali::atomic_ref<int*, cuda_for_dali::thread_scope_device>, int*, local_memory_selector>();
+    test<const cuda_for_dali::atomic_ref<int*, cuda_for_dali::thread_scope_block>, int*, local_memory_selector>();
 #endif
 #ifdef __CUDA_ARCH__
-    test<const cuda::std::atomic_ref<int*>, int*, shared_memory_selector>();
-    test<const cuda::atomic_ref<int*, cuda::thread_scope_system>, int*, shared_memory_selector>();
-    test<const cuda::atomic_ref<int*, cuda::thread_scope_device>, int*, shared_memory_selector>();
-    test<const cuda::atomic_ref<int*, cuda::thread_scope_block>, int*, shared_memory_selector>();
+    test<const cuda_for_dali::std::atomic_ref<int*>, int*, shared_memory_selector>();
+    test<const cuda_for_dali::atomic_ref<int*, cuda_for_dali::thread_scope_system>, int*, shared_memory_selector>();
+    test<const cuda_for_dali::atomic_ref<int*, cuda_for_dali::thread_scope_device>, int*, shared_memory_selector>();
+    test<const cuda_for_dali::atomic_ref<int*, cuda_for_dali::thread_scope_block>, int*, shared_memory_selector>();
 
-    test<const cuda::std::atomic_ref<int*>, int*, global_memory_selector>();
-    test<const cuda::atomic_ref<int*, cuda::thread_scope_system>, int*, global_memory_selector>();
-    test<const cuda::atomic_ref<int*, cuda::thread_scope_device>, int*, global_memory_selector>();
-    test<const cuda::atomic_ref<int*, cuda::thread_scope_block>, int*, global_memory_selector>();
+    test<const cuda_for_dali::std::atomic_ref<int*>, int*, global_memory_selector>();
+    test<const cuda_for_dali::atomic_ref<int*, cuda_for_dali::thread_scope_system>, int*, global_memory_selector>();
+    test<const cuda_for_dali::atomic_ref<int*, cuda_for_dali::thread_scope_device>, int*, global_memory_selector>();
+    test<const cuda_for_dali::atomic_ref<int*, cuda_for_dali::thread_scope_block>, int*, global_memory_selector>();
 #endif
   return 0;
 }

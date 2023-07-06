@@ -6,7 +6,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-// UNSUPPORTED: c++98, c++03, c++11, c++14 
+// UNSUPPORTED: c++98, c++03, c++11, c++14
 // UNSUPPORTED: nvrtc
 
 // <cuda/std/tuple>
@@ -15,60 +15,60 @@
 
 // Stress testing large arities with tuple and array.
 
-#include <cuda/std/tuple>
-#include <cuda/std/array>
-#include <cuda/std/utility>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/tuple>
+#include <cuda_for_dali/std/array>
+#include <cuda_for_dali/std/utility>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 ////////////////////////////////////////////////////////////////////////////////
-template <class T, cuda::std::size_t Dummy = 0>
+template <class T, cuda_for_dali::std::size_t Dummy = 0>
 struct always_imp
 {
     typedef T type;
 };
 
-template <class T, cuda::std::size_t Dummy = 0>
+template <class T, cuda_for_dali::std::size_t Dummy = 0>
 using always_t = typename always_imp<T, Dummy>::type;
 
 ////////////////////////////////////////////////////////////////////////////////
 template <class Tuple, class Idx>
 struct make_function;
 
-template <class Tp, cuda::std::size_t ...Idx>
-struct make_function<Tp, cuda::std::integer_sequence<cuda::std::size_t, Idx...>>
+template <class Tp, cuda_for_dali::std::size_t ...Idx>
+struct make_function<Tp, cuda_for_dali::std::integer_sequence<cuda_for_dali::std::size_t, Idx...>>
 {
     using type = bool (*)(always_t<Tp, Idx>...);
 };
 
-template <class Tp, cuda::std::size_t Size>
-using make_function_t = typename make_function<Tp, cuda::std::make_index_sequence<Size>>::type;
+template <class Tp, cuda_for_dali::std::size_t Size>
+using make_function_t = typename make_function<Tp, cuda_for_dali::std::make_index_sequence<Size>>::type;
 
 ////////////////////////////////////////////////////////////////////////////////
 template <class Tp, class Idx>
 struct make_tuple_imp;
 
 ////////////////////////////////////////////////////////////////////////////////
-template <class Tp, cuda::std::size_t ...Idx>
-struct make_tuple_imp<Tp, cuda::std::integer_sequence<cuda::std::size_t, Idx...>>
+template <class Tp, cuda_for_dali::std::size_t ...Idx>
+struct make_tuple_imp<Tp, cuda_for_dali::std::integer_sequence<cuda_for_dali::std::size_t, Idx...>>
 {
-    using type = cuda::std::tuple<always_t<Tp, Idx>...>;
+    using type = cuda_for_dali::std::tuple<always_t<Tp, Idx>...>;
 };
 
-template <class Tp, cuda::std::size_t Size>
-using make_tuple_t = typename make_tuple_imp<Tp, cuda::std::make_index_sequence<Size>>::type;
+template <class Tp, cuda_for_dali::std::size_t Size>
+using make_tuple_t = typename make_tuple_imp<Tp, cuda_for_dali::std::make_index_sequence<Size>>::type;
 
 template <class ...Types>
 bool test_apply_fn(Types...) { return true; }
 
 
-template <cuda::std::size_t Size>
+template <cuda_for_dali::std::size_t Size>
 void test_all()
 {
 
-    using A = cuda::std::array<int, Size>;
-    using ConstA = cuda::std::array<int const, Size>;
+    using A = cuda_for_dali::std::array<int, Size>;
+    using ConstA = cuda_for_dali::std::array<int const, Size>;
 
     using Tuple = make_tuple_t<int, Size>;
     using CTuple = make_tuple_t<const int, Size>;
@@ -87,36 +87,36 @@ void test_all()
 
     {
         A a{};
-        assert(cuda::std::apply(val_fn, a));
-        assert(cuda::std::apply(ref_fn, a));
-        assert(cuda::std::apply(cref_fn, a));
-        assert(cuda::std::apply(rref_fn, cuda::std::move(a)));
+        assert(cuda_for_dali::std::apply(val_fn, a));
+        assert(cuda_for_dali::std::apply(ref_fn, a));
+        assert(cuda_for_dali::std::apply(cref_fn, a));
+        assert(cuda_for_dali::std::apply(rref_fn, cuda_for_dali::std::move(a)));
     }
     {
         ConstA a{};
-        assert(cuda::std::apply(val_fn, a));
-        assert(cuda::std::apply(cref_fn, a));
+        assert(cuda_for_dali::std::apply(val_fn, a));
+        assert(cuda_for_dali::std::apply(cref_fn, a));
     }
     {
         Tuple a{};
-        assert(cuda::std::apply(val_fn, a));
-        assert(cuda::std::apply(ref_fn, a));
-        assert(cuda::std::apply(cref_fn, a));
-        assert(cuda::std::apply(rref_fn, cuda::std::move(a)));
+        assert(cuda_for_dali::std::apply(val_fn, a));
+        assert(cuda_for_dali::std::apply(ref_fn, a));
+        assert(cuda_for_dali::std::apply(cref_fn, a));
+        assert(cuda_for_dali::std::apply(rref_fn, cuda_for_dali::std::move(a)));
     }
     {
         CTuple a{};
-        assert(cuda::std::apply(val_fn, a));
-        assert(cuda::std::apply(cref_fn, a));
+        assert(cuda_for_dali::std::apply(val_fn, a));
+        assert(cuda_for_dali::std::apply(cref_fn, a));
     }
 
 }
 
 
-template <cuda::std::size_t Size>
+template <cuda_for_dali::std::size_t Size>
 void test_one()
 {
-    using A = cuda::std::array<int, Size>;
+    using A = cuda_for_dali::std::array<int, Size>;
     using Tuple = make_tuple_t<int, Size>;
 
     using ValFn  = make_function_t<int, Size>;
@@ -124,11 +124,11 @@ void test_one()
 
     {
         A a{};
-        assert(cuda::std::apply(val_fn, a));
+        assert(cuda_for_dali::std::apply(val_fn, a));
     }
     {
         Tuple a{};
-        assert(cuda::std::apply(val_fn, a));
+        assert(cuda_for_dali::std::apply(val_fn, a));
     }
 }
 

@@ -6,36 +6,36 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef _LIBCUDACXX_CONFIG_ELAST
-#define _LIBCUDACXX_CONFIG_ELAST
+#ifndef _LIBCUDAFORDALICXX_CONFIG_ELAST
+#define _LIBCUDAFORDALICXX_CONFIG_ELAST
 
 #include <__config>
 
-#if defined(_LIBCUDACXX_MSVCRT_LIKE)
+#if defined(_LIBCUDAFORDALICXX_MSVCRT_LIKE)
 #include <stdlib.h>
 #else
 #include <errno.h>
 #endif
 
 #if defined(ELAST)
-#define _LIBCUDACXX_ELAST ELAST
+#define _LIBCUDAFORDALICXX_ELAST ELAST
 #elif defined(_NEWLIB_VERSION)
-#define _LIBCUDACXX_ELAST __ELASTERROR
+#define _LIBCUDAFORDALICXX_ELAST __ELASTERROR
 #elif defined(__Fuchsia__)
-// No _LIBCUDACXX_ELAST needed on Fuchsia
+// No _LIBCUDAFORDALICXX_ELAST needed on Fuchsia
 #elif defined(__wasi__)
-// No _LIBCUDACXX_ELAST needed on WASI
-#elif defined(__linux__) || defined(_LIBCUDACXX_HAS_MUSL_LIBC)
-#define _LIBCUDACXX_ELAST 4095
+// No _LIBCUDAFORDALICXX_ELAST needed on WASI
+#elif defined(__linux__) || defined(_LIBCUDAFORDALICXX_HAS_MUSL_LIBC)
+#define _LIBCUDAFORDALICXX_ELAST 4095
 #elif defined(__APPLE__)
-// No _LIBCUDACXX_ELAST needed on Apple
+// No _LIBCUDAFORDALICXX_ELAST needed on Apple
 #elif defined(__sun__)
-#define _LIBCUDACXX_ELAST ESTALE
-#elif defined(_LIBCUDACXX_MSVCRT_LIKE)
-#define _LIBCUDACXX_ELAST (_sys_nerr - 1)
+#define _LIBCUDAFORDALICXX_ELAST ESTALE
+#elif defined(_LIBCUDAFORDALICXX_MSVCRT_LIKE)
+#define _LIBCUDAFORDALICXX_ELAST (_sys_nerr - 1)
 #else
 // Warn here so that the person doing the libcxx port has an easier time:
 #warning ELAST for this platform not yet implemented
 #endif
 
-#endif // _LIBCUDACXX_CONFIG_ELAST
+#endif // _LIBCUDAFORDALICXX_CONFIG_ELAST

@@ -19,24 +19,24 @@
 //      Otherwise, if x.year() > y.year() returns false.
 //      Otherwise, returns x.month() < y.month().
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "test_comparisons.h"
 
 int main(int, char**)
 {
-    using year       = cuda::std::chrono::year;
-    using month      = cuda::std::chrono::month;
-    using year_month = cuda::std::chrono::year_month;
+    using year       = cuda_for_dali::std::chrono::year;
+    using month      = cuda_for_dali::std::chrono::month;
+    using year_month = cuda_for_dali::std::chrono::year_month;
 
     AssertComparisons6AreNoexcept<year_month>();
     AssertComparisons6ReturnBool<year_month>();
 
-    auto constexpr January = cuda::std::chrono::January;
-    auto constexpr February = cuda::std::chrono::February;
+    auto constexpr January = cuda_for_dali::std::chrono::January;
+    auto constexpr February = cuda_for_dali::std::chrono::February;
 
     static_assert( testComparisons6(
         year_month{year{1234}, January},

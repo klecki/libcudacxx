@@ -39,8 +39,8 @@
 
 
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
@@ -48,18 +48,18 @@
 
 int main(int, char**)
 {
-    using month          = cuda::std::chrono::month;
-    using month_day_last = cuda::std::chrono::month_day_last;
+    using month          = cuda_for_dali::std::chrono::month;
+    using month_day_last = cuda_for_dali::std::chrono::month_day_last;
 
-    constexpr month February = cuda::std::chrono::February;
-    constexpr cuda::std::chrono::last_spec last = cuda::std::chrono::last;
+    constexpr month February = cuda_for_dali::std::chrono::February;
+    constexpr cuda_for_dali::std::chrono::last_spec last = cuda_for_dali::std::chrono::last;
 
     ASSERT_SAME_TYPE(month_day_last, decltype(last/February));
     ASSERT_SAME_TYPE(month_day_last, decltype(February/last));
 
 //  Run the example
     {
-    constexpr auto mdl = February/cuda::std::chrono::last;
+    constexpr auto mdl = February/cuda_for_dali::std::chrono::last;
     static_assert(mdl.month() == February, "");
     }
 

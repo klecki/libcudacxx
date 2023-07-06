@@ -39,8 +39,8 @@
 
 
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 #include <iostream>
 
@@ -48,9 +48,9 @@
 
 int main(int, char**)
 {
-    using year_month = cuda::std::chrono::year_month;
-    using year       = cuda::std::chrono::year;
-    using month      = cuda::std::chrono::month;
+    using year_month = cuda_for_dali::std::chrono::year_month;
+    using year       = cuda_for_dali::std::chrono::year;
+    using month      = cuda_for_dali::std::chrono::month;
 
     std::cout << year_month{year{2018}, month{3}};
 

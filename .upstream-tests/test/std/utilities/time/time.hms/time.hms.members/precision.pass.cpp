@@ -15,11 +15,11 @@
 //     static unsigned constexpr fractional_width = see below;
 //     using precision                            = see below;
 //
-//   precision is duration<common_type_t<Duration::rep, seconds::rep>, 
+//   precision is duration<common_type_t<Duration::rep, seconds::rep>,
 //                                 ratio<1, 10^^fractional_width>>
-   
-#include <cuda/std/chrono>
-#include <cuda/std/cassert>
+
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
@@ -45,36 +45,36 @@ constexpr unsigned long long powers[] = {
 	1000000000000000000ULL,
 	10000000000000000000ULL
 	};
-	
+
 template <typename Duration, unsigned width>
 __host__ __device__
 constexpr bool check_precision()
 {
-	using HMS = cuda::std::chrono::hh_mm_ss<Duration>;
-	using CT  = cuda::std::common_type_t<typename Duration::rep, cuda::std::chrono::seconds::rep>;
-	using Pre = cuda::std::chrono::duration<CT, cuda::std::ratio<1, powers[width]>>;
-	return cuda::std::is_same_v<typename HMS::precision, Pre>;
+	using HMS = cuda_for_dali::std::chrono::hh_mm_ss<Duration>;
+	using CT  = cuda_for_dali::std::common_type_t<typename Duration::rep, cuda_for_dali::std::chrono::seconds::rep>;
+	using Pre = cuda_for_dali::std::chrono::duration<CT, cuda_for_dali::std::ratio<1, powers[width]>>;
+	return cuda_for_dali::std::is_same_v<typename HMS::precision, Pre>;
 }
 
 int main(int, char**)
 {
-	using microfortnights = cuda::std::chrono::duration<int, cuda::std::ratio<756, 625>>;
+	using microfortnights = cuda_for_dali::std::chrono::duration<int, cuda_for_dali::std::ratio<756, 625>>;
 
-	static_assert( check_precision<cuda::std::chrono::hours,                               0>(), "");
-	static_assert( check_precision<cuda::std::chrono::minutes,                             0>(), "");
-	static_assert( check_precision<cuda::std::chrono::seconds,                             0>(), "");
-	static_assert( check_precision<cuda::std::chrono::milliseconds,                        3>(), "");
-	static_assert( check_precision<cuda::std::chrono::microseconds,                        6>(), "");
-	static_assert( check_precision<cuda::std::chrono::nanoseconds,                         9>(), "");
-	static_assert( check_precision<cuda::std::chrono::duration<int, cuda::std::ratio<  1,   2>>, 1>(), "");
-	static_assert( check_precision<cuda::std::chrono::duration<int, cuda::std::ratio<  1,   3>>, 6>(), "");
-	static_assert( check_precision<cuda::std::chrono::duration<int, cuda::std::ratio<  1,   4>>, 2>(), "");
-	static_assert( check_precision<cuda::std::chrono::duration<int, cuda::std::ratio<  1,   5>>, 1>(), "");
-	static_assert( check_precision<cuda::std::chrono::duration<int, cuda::std::ratio<  1,   6>>, 6>(), "");
-	static_assert( check_precision<cuda::std::chrono::duration<int, cuda::std::ratio<  1,   7>>, 6>(), "");
-	static_assert( check_precision<cuda::std::chrono::duration<int, cuda::std::ratio<  1,   8>>, 3>(), "");
-	static_assert( check_precision<cuda::std::chrono::duration<int, cuda::std::ratio<  1,   9>>, 6>(), "");
-	static_assert( check_precision<cuda::std::chrono::duration<int, cuda::std::ratio<  1,  10>>, 1>(), "");
+	static_assert( check_precision<cuda_for_dali::std::chrono::hours,                               0>(), "");
+	static_assert( check_precision<cuda_for_dali::std::chrono::minutes,                             0>(), "");
+	static_assert( check_precision<cuda_for_dali::std::chrono::seconds,                             0>(), "");
+	static_assert( check_precision<cuda_for_dali::std::chrono::milliseconds,                        3>(), "");
+	static_assert( check_precision<cuda_for_dali::std::chrono::microseconds,                        6>(), "");
+	static_assert( check_precision<cuda_for_dali::std::chrono::nanoseconds,                         9>(), "");
+	static_assert( check_precision<cuda_for_dali::std::chrono::duration<int, cuda_for_dali::std::ratio<  1,   2>>, 1>(), "");
+	static_assert( check_precision<cuda_for_dali::std::chrono::duration<int, cuda_for_dali::std::ratio<  1,   3>>, 6>(), "");
+	static_assert( check_precision<cuda_for_dali::std::chrono::duration<int, cuda_for_dali::std::ratio<  1,   4>>, 2>(), "");
+	static_assert( check_precision<cuda_for_dali::std::chrono::duration<int, cuda_for_dali::std::ratio<  1,   5>>, 1>(), "");
+	static_assert( check_precision<cuda_for_dali::std::chrono::duration<int, cuda_for_dali::std::ratio<  1,   6>>, 6>(), "");
+	static_assert( check_precision<cuda_for_dali::std::chrono::duration<int, cuda_for_dali::std::ratio<  1,   7>>, 6>(), "");
+	static_assert( check_precision<cuda_for_dali::std::chrono::duration<int, cuda_for_dali::std::ratio<  1,   8>>, 3>(), "");
+	static_assert( check_precision<cuda_for_dali::std::chrono::duration<int, cuda_for_dali::std::ratio<  1,   9>>, 6>(), "");
+	static_assert( check_precision<cuda_for_dali::std::chrono::duration<int, cuda_for_dali::std::ratio<  1,  10>>, 1>(), "");
 	static_assert( check_precision<microfortnights,                                  4>(), "");
 
 	return 0;

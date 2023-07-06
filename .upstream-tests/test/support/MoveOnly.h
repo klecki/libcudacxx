@@ -13,7 +13,7 @@
 
 #if TEST_STD_VER >= 11
 
-#include <cuda/std/cstddef>
+#include <cuda_for_dali/std/cstddef>
 // #include <functional>
 
 class MoveOnly

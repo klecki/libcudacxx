@@ -13,15 +13,15 @@
 
 // template <class T1, class T2> void swap(pair<T1, T2>& x, pair<T1, T2>& y);
 
-#include <cuda/std/utility>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/utility>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
     {
-        typedef cuda::std::pair<int, short> P1;
+        typedef cuda_for_dali::std::pair<int, short> P1;
         P1 p1(3, static_cast<short>(4));
         P1 p2(5, static_cast<short>(6));
         swap(p1, p2);

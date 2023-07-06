@@ -787,8 +787,8 @@ class Configuration(object):
         for k in feature_macros_keys:
             feature_macros[k] = macros[k]
         # We expect the header guard to be one of the definitions
-        assert '_LIBCUDACXX_CONFIG_SITE' in feature_macros
-        del feature_macros['_LIBCUDACXX_CONFIG_SITE']
+        assert '_LIBCUDAFORDALICXX_CONFIG_SITE' in feature_macros
+        del feature_macros['_LIBCUDAFORDALICXX_CONFIG_SITE']
         # The __config_site header should be non-empty. Otherwise it should
         # have never been emitted by CMake.
         assert len(feature_macros) > 0
@@ -803,19 +803,19 @@ class Configuration(object):
         if self.cxx.hasCompileFlag('-Wno-macro-redefined'):
             self.cxx.compile_flags += ['-Wno-macro-redefined']
         # Transform each macro name into the feature name used in the tests.
-        # Ex. _LIBCUDACXX_HAS_NO_THREADS -> libcpp-has-no-threads
+        # Ex. _LIBCUDAFORDALICXX_HAS_NO_THREADS -> libcpp-has-no-threads
         for m in feature_macros:
-            if m == '_LIBCUDACXX_DISABLE_VISIBILITY_ANNOTATIONS' or \
-               m == '_LIBCUDACXX_HIDE_FROM_ABI_PER_TU_BY_DEFAULT':
+            if m == '_LIBCUDAFORDALICXX_DISABLE_VISIBILITY_ANNOTATIONS' or \
+               m == '_LIBCUDAFORDALICXX_HIDE_FROM_ABI_PER_TU_BY_DEFAULT':
                 continue
-            if m == '_LIBCUDACXX_ABI_VERSION':
+            if m == '_LIBCUDAFORDALICXX_ABI_VERSION':
                 self.config.available_features.add('libcpp-abi-version-v%s'
                     % feature_macros[m])
                 continue
-            if m == '_LIBCUDACXX_NO_VCRUNTIME':
+            if m == '_LIBCUDAFORDALICXX_NO_VCRUNTIME':
                 self.config.available_features.add('libcpp-no-vcruntime')
                 continue
-            assert m.startswith('_LIBCUDACXX_HAS_') or m.startswith('_LIBCUDACXX_ABI_')
+            assert m.startswith('_LIBCUDAFORDALICXX_HAS_') or m.startswith('_LIBCUDAFORDALICXX_ABI_')
             m = m.lower()[1:].replace('_', '-')
             self.config.available_features.add(m)
         return feature_macros
@@ -847,7 +847,7 @@ class Configuration(object):
                 self.cxx.compile_flags += ['/GR-']
             else:
                 self.cxx.compile_flags += ['-fno-rtti']
-            self.cxx.compile_flags += ['-D_LIBCUDACXX_NO_RTTI']
+            self.cxx.compile_flags += ['-D_LIBCUDAFORDALICXX_NO_RTTI']
 
     def configure_compile_flags_abi_version(self):
         abi_version = self.get_lit_conf('abi_version', '').strip()
@@ -855,10 +855,10 @@ class Configuration(object):
         # Only add the ABI version when it is non-default.
         # FIXME(EricWF): Get the ABI version from the "__config_site".
         if abi_version and abi_version != '1':
-          self.cxx.compile_flags += ['-D_LIBCUDACXX_ABI_VERSION=' + abi_version]
+          self.cxx.compile_flags += ['-D_LIBCUDAFORDALICXX_ABI_VERSION=' + abi_version]
         if abi_unstable:
           self.config.available_features.add('libcpp-abi-unstable')
-          self.cxx.compile_flags += ['-D_LIBCUDACXX_ABI_UNSTABLE']
+          self.cxx.compile_flags += ['-D_LIBCUDAFORDALICXX_ABI_UNSTABLE']
 
     def configure_filesystem_compile_flags(self):
         if not self.get_lit_bool('enable_filesystem', default=True):
@@ -1057,7 +1057,7 @@ class Configuration(object):
         if debug_level not in ['0', '1']:
             self.lit_config.fatal('Invalid value for debug_level "%s".'
                                   % debug_level)
-        self.cxx.compile_flags += ['-D_LIBCUDACXX_DEBUG=%s' % debug_level]
+        self.cxx.compile_flags += ['-D_LIBCUDAFORDALICXX_DEBUG=%s' % debug_level]
 
     def configure_warnings(self):
         default_enable_warnings = 'clang' in self.config.available_features or \
@@ -1083,7 +1083,7 @@ class Configuration(object):
                 pass
         else:
             self.cxx.warning_flags += [
-                '-D_LIBCUDACXX_DISABLE_PRAGMA_GCC_SYSTEM_HEADER',
+                '-D_LIBCUDAFORDALICXX_DISABLE_PRAGMA_GCC_SYSTEM_HEADER',
                 '-Wall', '-Wextra', '-Werror'
             ]
             if self.cxx.hasWarningFlag('-Wuser-defined-warnings'):
@@ -1372,7 +1372,7 @@ class Configuration(object):
                 self.config.available_features.add('dylib-has-no-filesystem')
                 self.lit_config.note("the deployment target does not support <filesystem>")
         else:
-            self.cxx.flags += ['-D_LIBCUDACXX_DISABLE_AVAILABILITY']
+            self.cxx.flags += ['-D_LIBCUDAFORDALICXX_DISABLE_AVAILABILITY']
 
     def configure_env(self):
         self.target_info.configure_env(self.exec_env)

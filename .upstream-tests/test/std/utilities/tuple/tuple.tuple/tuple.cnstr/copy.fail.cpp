@@ -12,18 +12,18 @@
 
 // tuple(const tuple& u) = default;
 
-// UNSUPPORTED: c++98, c++03 
+// UNSUPPORTED: c++98, c++03
 // UNSUPPORTED: nvrtc
 
-#include <cuda/std/tuple>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/tuple>
+#include <cuda_for_dali/std/cassert>
 
 #include "MoveOnly.h"
 
 int main(int, char**)
 {
     {
-        typedef cuda::std::tuple<MoveOnly> T;
+        typedef cuda_for_dali::std::tuple<MoveOnly> T;
         T t0(MoveOnly(2));
         T t = t0;
     }

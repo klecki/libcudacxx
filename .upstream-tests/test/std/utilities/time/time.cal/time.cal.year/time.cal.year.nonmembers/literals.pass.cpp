@@ -15,16 +15,16 @@
 
 // constexpr year operator""y(unsigned long long y) noexcept;
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
     {
-    using namespace cuda::std::chrono;
+    using namespace cuda_for_dali::std::chrono;
     ASSERT_NOEXCEPT(4y);
 
     static_assert( 2017y == year(2017), "");
@@ -33,13 +33,13 @@ int main(int, char**)
     }
 
     {
-    using namespace cuda::std::literals;
+    using namespace cuda_for_dali::std::literals;
     ASSERT_NOEXCEPT(4d);
 
-    static_assert( 2017y == cuda::std::chrono::year(2017), "");
+    static_assert( 2017y == cuda_for_dali::std::chrono::year(2017), "");
 
-    cuda::std::chrono::year y1 = 2020y;
-    assert (y1 == cuda::std::chrono::year(2020));
+    cuda_for_dali::std::chrono::year y1 = 2020y;
+    assert (y1 == cuda_for_dali::std::chrono::year(2020));
     }
 
   return 0;

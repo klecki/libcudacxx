@@ -8,7 +8,7 @@
 
 // <cuda/std/ccomplex>
 
-#include <cuda/std/ccomplex>
+#include <cuda_for_dali/std/ccomplex>
 
 #include "test_macros.h"
 
@@ -18,7 +18,7 @@ constexpr bool unused(T &&) {return true;}
 
 int main(int, char**)
 {
-    cuda::std::complex<double> d;
+    cuda_for_dali::std::complex<double> d;
     unused(d);
 
   return 0;

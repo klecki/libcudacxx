@@ -8,7 +8,7 @@
 
 
 
-// UNSUPPORTED: c++98, c++03 
+// UNSUPPORTED: c++98, c++03
 
 // <cuda/std/tuple>
 
@@ -22,8 +22,8 @@
 // instead. This happens 'sizeof...(UTypes) == 1' and the first element of
 // 'UTypes...' is an instance of the tuple itself. See PR23256.
 
-#include <cuda/std/tuple>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/tuple>
+#include <cuda_for_dali/std/type_traits>
 
 #include "test_macros.h"
 
@@ -41,7 +41,7 @@ struct UnconstrainedCtor {
   __host__ __device__ constexpr UnconstrainedCtor(T value) noexcept(noexcept(value_ = value))
       : value_(static_cast<int>(value))
   {
-      static_assert(cuda::std::is_same<int, T>::value, "");
+      static_assert(cuda_for_dali::std::is_same<int, T>::value, "");
   }
 };
 
@@ -55,7 +55,7 @@ struct ExplicitUnconstrainedCtor {
     noexcept(noexcept(value_ = value))
       : value_(static_cast<int>(value))
   {
-      static_assert(cuda::std::is_same<int, T>::value, "");
+      static_assert(cuda_for_dali::std::is_same<int, T>::value, "");
   }
 
 };
@@ -64,40 +64,40 @@ int main(int, char**) {
     typedef UnconstrainedCtor A;
     typedef ExplicitUnconstrainedCtor ExplicitA;
     {
-        static_assert(cuda::std::is_copy_constructible<cuda::std::tuple<A>>::value, "");
-        static_assert(cuda::std::is_move_constructible<cuda::std::tuple<A>>::value, "");
-        static_assert(cuda::std::is_copy_constructible<cuda::std::tuple<ExplicitA>>::value, "");
-        static_assert(cuda::std::is_move_constructible<cuda::std::tuple<ExplicitA>>::value, "");
+        static_assert(cuda_for_dali::std::is_copy_constructible<cuda_for_dali::std::tuple<A>>::value, "");
+        static_assert(cuda_for_dali::std::is_move_constructible<cuda_for_dali::std::tuple<A>>::value, "");
+        static_assert(cuda_for_dali::std::is_copy_constructible<cuda_for_dali::std::tuple<ExplicitA>>::value, "");
+        static_assert(cuda_for_dali::std::is_move_constructible<cuda_for_dali::std::tuple<ExplicitA>>::value, "");
     }
-    // cuda::std::allocator not supported
+    // cuda_for_dali::std::allocator not supported
     /*
     {
-        static_assert(cuda::std::is_constructible<
-            cuda::std::tuple<A>,
-            cuda::std::allocator_arg_t, cuda::std::allocator<void>,
-            cuda::std::tuple<A> const&
+        static_assert(cuda_for_dali::std::is_constructible<
+            cuda_for_dali::std::tuple<A>,
+            cuda_for_dali::std::allocator_arg_t, cuda_for_dali::std::allocator<void>,
+            cuda_for_dali::std::tuple<A> const&
         >::value, "");
-        static_assert(cuda::std::is_constructible<
-            cuda::std::tuple<A>,
-            cuda::std::allocator_arg_t, cuda::std::allocator<void>,
-            cuda::std::tuple<A> &&
+        static_assert(cuda_for_dali::std::is_constructible<
+            cuda_for_dali::std::tuple<A>,
+            cuda_for_dali::std::allocator_arg_t, cuda_for_dali::std::allocator<void>,
+            cuda_for_dali::std::tuple<A> &&
         >::value, "");
-        static_assert(cuda::std::is_constructible<
-            cuda::std::tuple<ExplicitA>,
-            cuda::std::allocator_arg_t, cuda::std::allocator<void>,
-            cuda::std::tuple<ExplicitA> const&
+        static_assert(cuda_for_dali::std::is_constructible<
+            cuda_for_dali::std::tuple<ExplicitA>,
+            cuda_for_dali::std::allocator_arg_t, cuda_for_dali::std::allocator<void>,
+            cuda_for_dali::std::tuple<ExplicitA> const&
         >::value, "");
-        static_assert(cuda::std::is_constructible<
-            cuda::std::tuple<ExplicitA>,
-            cuda::std::allocator_arg_t, cuda::std::allocator<void>,
-            cuda::std::tuple<ExplicitA> &&
+        static_assert(cuda_for_dali::std::is_constructible<
+            cuda_for_dali::std::tuple<ExplicitA>,
+            cuda_for_dali::std::allocator_arg_t, cuda_for_dali::std::allocator<void>,
+            cuda_for_dali::std::tuple<ExplicitA> &&
         >::value, "");
     }
     */
     {
-        cuda::std::tuple<A&&> t(cuda::std::forward_as_tuple(A{}));
+        cuda_for_dali::std::tuple<A&&> t(cuda_for_dali::std::forward_as_tuple(A{}));
         ((void)t);
-        cuda::std::tuple<ExplicitA&&> t2(cuda::std::forward_as_tuple(ExplicitA{}));
+        cuda_for_dali::std::tuple<ExplicitA&&> t2(cuda_for_dali::std::forward_as_tuple(ExplicitA{}));
         ((void)t2);
     }
 

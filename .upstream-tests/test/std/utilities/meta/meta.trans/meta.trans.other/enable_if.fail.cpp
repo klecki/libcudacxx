@@ -13,11 +13,11 @@
 
 // enable_if
 
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/type_traits>
 
 int main(int, char**)
 {
-    typedef cuda::std::enable_if<false>::type A;
+    typedef cuda_for_dali::std::enable_if<false>::type A;
 
   return 0;
 }

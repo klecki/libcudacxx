@@ -10,8 +10,8 @@
 
 // constexpr complex(const T& re = T(), const T& im = T());
 
-#include <cuda/std/complex>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/complex>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
@@ -20,43 +20,43 @@ __host__ __device__ void
 test()
 {
     {
-    const cuda::std::complex<T> c;
+    const cuda_for_dali::std::complex<T> c;
     assert(c.real() == 0);
     assert(c.imag() == 0);
     }
     {
-    const cuda::std::complex<T> c = 7.5;
+    const cuda_for_dali::std::complex<T> c = 7.5;
     assert(c.real() == 7.5);
     assert(c.imag() == 0);
     }
     {
-    const cuda::std::complex<T> c(8.5);
+    const cuda_for_dali::std::complex<T> c(8.5);
     assert(c.real() == 8.5);
     assert(c.imag() == 0);
     }
     {
-    const cuda::std::complex<T> c(10.5, -9.5);
+    const cuda_for_dali::std::complex<T> c(10.5, -9.5);
     assert(c.real() == 10.5);
     assert(c.imag() == -9.5);
     }
 #if TEST_STD_VER >= 11
     {
-    constexpr cuda::std::complex<T> c;
+    constexpr cuda_for_dali::std::complex<T> c;
     static_assert(c.real() == 0, "");
     static_assert(c.imag() == 0, "");
     }
     {
-    constexpr cuda::std::complex<T> c = 7.5;
+    constexpr cuda_for_dali::std::complex<T> c = 7.5;
     static_assert(c.real() == 7.5, "");
     static_assert(c.imag() == 0, "");
     }
     {
-    constexpr cuda::std::complex<T> c(8.5);
+    constexpr cuda_for_dali::std::complex<T> c(8.5);
     static_assert(c.real() == 8.5, "");
     static_assert(c.imag() == 0, "");
     }
     {
-    constexpr cuda::std::complex<T> c(10.5, -9.5);
+    constexpr cuda_for_dali::std::complex<T> c(10.5, -9.5);
     static_assert(c.real() == 10.5, "");
     static_assert(c.imag() == -9.5, "");
     }

@@ -8,7 +8,7 @@
 
 // <cuda/std/type_traits>
 
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/type_traits>
 
 #include "test_macros.h"
 

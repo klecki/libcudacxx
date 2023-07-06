@@ -13,8 +13,8 @@
 // .fail. expects compilation to fail, but this would only fail at runtime with NVRTC
 // UNSUPPORTED: nvrtc
 
-#include <cuda/std/functional>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/functional>
+#include <cuda_for_dali/std/cassert>
 
 struct A
 {
@@ -41,7 +41,7 @@ test(F f)
 
 int main(int, char**)
 {
-    test(cuda::std::mem_fn(&A::data_));
+    test(cuda_for_dali::std::mem_fn(&A::data_));
 
   return 0;
 }

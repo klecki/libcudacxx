@@ -8,7 +8,7 @@
 
 // <cuda/std/cfloat>
 
-#include <cuda/std/cfloat>
+#include <cuda_for_dali/std/cfloat>
 
 #include "test_macros.h"
 

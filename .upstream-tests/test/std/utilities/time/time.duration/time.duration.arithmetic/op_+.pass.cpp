@@ -12,8 +12,8 @@
 
 // constexpr common_type_t<duration> operator+() const;
 
-#include <cuda/std/chrono>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
@@ -22,27 +22,27 @@
 int main(int, char**)
 {
     {
-    const cuda::std::chrono::minutes m(3);
-    cuda::std::chrono::minutes m2 = +m;
+    const cuda_for_dali::std::chrono::minutes m(3);
+    cuda_for_dali::std::chrono::minutes m2 = +m;
     assert(m.count() == m2.count());
     }
 #if TEST_STD_VER >= 11
     {
-    constexpr cuda::std::chrono::minutes m(3);
-    constexpr cuda::std::chrono::minutes m2 = +m;
+    constexpr cuda_for_dali::std::chrono::minutes m(3);
+    constexpr cuda_for_dali::std::chrono::minutes m2 = +m;
     static_assert(m.count() == m2.count(), "");
     }
 #endif
 
 // P0548
     {
-    typedef cuda::std::chrono::duration<int, cuda::std::ratio<10,10> > D10;
-    typedef cuda::std::chrono::duration<int, cuda::std::ratio< 1, 1> > D1;
+    typedef cuda_for_dali::std::chrono::duration<int, cuda_for_dali::std::ratio<10,10> > D10;
+    typedef cuda_for_dali::std::chrono::duration<int, cuda_for_dali::std::ratio< 1, 1> > D1;
     D10 zero(0);
     D10 one(1);
-    static_assert( (cuda::std::is_same< decltype(+one), decltype(zero-one) >::value), "");
-    static_assert( (cuda::std::is_same< decltype(zero+one), D1>::value), "");
-    static_assert( (cuda::std::is_same< decltype(+one),     D1>::value), "");
+    static_assert( (cuda_for_dali::std::is_same< decltype(+one), decltype(zero-one) >::value), "");
+    static_assert( (cuda_for_dali::std::is_same< decltype(zero+one), D1>::value), "");
+    static_assert( (cuda_for_dali::std::is_same< decltype(+one),     D1>::value), "");
     }
 
   return 0;

@@ -15,8 +15,8 @@
 // constexpr bool operator!=(const weekday_indexed& x, const weekday_indexed& y) noexcept;
 //   Returns: !(x == y)
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
@@ -24,8 +24,8 @@
 
 int main(int, char**)
 {
-    using weekday         = cuda::std::chrono::weekday;
-    using weekday_indexed = cuda::std::chrono::weekday_indexed;
+    using weekday         = cuda_for_dali::std::chrono::weekday;
+    using weekday_indexed = cuda_for_dali::std::chrono::weekday_indexed;
 
     AssertComparisons2AreNoexcept<weekday_indexed>();
     AssertComparisons2ReturnBool<weekday_indexed>();
@@ -33,8 +33,8 @@ int main(int, char**)
     static_assert( (weekday_indexed{} == weekday_indexed{}), "");
     static_assert(!(weekday_indexed{} != weekday_indexed{}), "");
 
-    static_assert(!(weekday_indexed{} == weekday_indexed{cuda::std::chrono::Tuesday, 1}), "");
-    static_assert( (weekday_indexed{} != weekday_indexed{cuda::std::chrono::Tuesday, 1}), "");
+    static_assert(!(weekday_indexed{} == weekday_indexed{cuda_for_dali::std::chrono::Tuesday, 1}), "");
+    static_assert( (weekday_indexed{} != weekday_indexed{cuda_for_dali::std::chrono::Tuesday, 1}), "");
 
 //  Some 'ok' values as well
     static_assert( (weekday_indexed{weekday{1}, 2} == weekday_indexed{weekday{1}, 2}), "");

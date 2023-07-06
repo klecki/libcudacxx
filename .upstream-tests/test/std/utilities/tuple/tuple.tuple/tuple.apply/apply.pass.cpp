@@ -6,7 +6,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-// UNSUPPORTED: c++98, c++03, c++11, c++14 
+// UNSUPPORTED: c++98, c++03, c++11, c++14
 // UNSUPPORTED: nvrtc
 
 // <cuda/std/tuple>
@@ -15,19 +15,19 @@
 
 // Test with different ref/ptr/cv qualified argument types.
 
-#include <cuda/std/tuple>
+#include <cuda_for_dali/std/tuple>
 
 // Array tests are disabled
-// #include <cuda/std/array>
+// #include <cuda_for_dali/std/array>
 
-#include <cuda/std/utility>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/utility>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 #include "type_id.h"
 
-// cuda::std::array is explicitly allowed to be initialized with A a = { init-list };.
+// cuda_for_dali::std::array is explicitly allowed to be initialized with A a = { init-list };.
 // Disable the missing braces warning for this reason.
 #include "disable_missing_braces_warning.h"
 
@@ -58,47 +58,47 @@ void test_constexpr_evaluation()
 {
     constexpr ConstexprSumT sum_obj{};
     {
-        using Tup = cuda::std::tuple<>;
+        using Tup = cuda_for_dali::std::tuple<>;
         using Fn = int(&)();
         constexpr Tup t;
-        static_assert(cuda::std::apply(static_cast<Fn>(constexpr_sum_fn), t) == 0, "");
-        static_assert(cuda::std::apply(sum_obj, t) == 0, "");
+        static_assert(cuda_for_dali::std::apply(static_cast<Fn>(constexpr_sum_fn), t) == 0, "");
+        static_assert(cuda_for_dali::std::apply(sum_obj, t) == 0, "");
     }
     {
-        using Tup = cuda::std::tuple<int>;
+        using Tup = cuda_for_dali::std::tuple<int>;
         using Fn = int(&)(int);
         constexpr Tup t(42);
-        static_assert(cuda::std::apply(static_cast<Fn>(constexpr_sum_fn), t) == 42, "");
-        static_assert(cuda::std::apply(sum_obj, t) == 42, "");
+        static_assert(cuda_for_dali::std::apply(static_cast<Fn>(constexpr_sum_fn), t) == 42, "");
+        static_assert(cuda_for_dali::std::apply(sum_obj, t) == 42, "");
     }
     {
-        using Tup = cuda::std::tuple<int, long>;
+        using Tup = cuda_for_dali::std::tuple<int, long>;
         using Fn = int(&)(int, int);
         constexpr Tup t(42, 101);
-        static_assert(cuda::std::apply(static_cast<Fn>(constexpr_sum_fn), t) == 143, "");
-        static_assert(cuda::std::apply(sum_obj, t) == 143, "");
+        static_assert(cuda_for_dali::std::apply(static_cast<Fn>(constexpr_sum_fn), t) == 143, "");
+        static_assert(cuda_for_dali::std::apply(sum_obj, t) == 143, "");
     }
     {
-        using Tup = cuda::std::pair<int, long>;
+        using Tup = cuda_for_dali::std::pair<int, long>;
         using Fn = int(&)(int, int);
         constexpr Tup t(42, 101);
-        static_assert(cuda::std::apply(static_cast<Fn>(constexpr_sum_fn), t) == 143, "");
-        static_assert(cuda::std::apply(sum_obj, t) == 143, "");
+        static_assert(cuda_for_dali::std::apply(static_cast<Fn>(constexpr_sum_fn), t) == 143, "");
+        static_assert(cuda_for_dali::std::apply(sum_obj, t) == 143, "");
     }
     {
-        using Tup = cuda::std::tuple<int, long, int>;
+        using Tup = cuda_for_dali::std::tuple<int, long, int>;
         using Fn = int(&)(int, int, int);
         constexpr Tup t(42, 101, -1);
-        static_assert(cuda::std::apply(static_cast<Fn>(constexpr_sum_fn), t) == 142, "");
-        static_assert(cuda::std::apply(sum_obj, t) == 142, "");
+        static_assert(cuda_for_dali::std::apply(static_cast<Fn>(constexpr_sum_fn), t) == 142, "");
+        static_assert(cuda_for_dali::std::apply(sum_obj, t) == 142, "");
     }
-    /* TODO: enable cuda::std::array
+    /* TODO: enable cuda_for_dali::std::array
     {
-        using Tup = cuda::std::array<int, 3>;
+        using Tup = cuda_for_dali::std::array<int, 3>;
         using Fn = int(&)(int, int, int);
         constexpr Tup t = {42, 101, -1};
-        static_assert(cuda::std::apply(static_cast<Fn>(constexpr_sum_fn), t) == 142, "");
-        static_assert(cuda::std::apply(sum_obj, t) == 142, "");
+        static_assert(cuda_for_dali::std::apply(static_cast<Fn>(constexpr_sum_fn), t) == 142, "");
+        static_assert(cuda_for_dali::std::apply(sum_obj, t) == 142, "");
     }
     */
 }
@@ -120,15 +120,15 @@ struct CallInfo {
     template <class ...Args>
     __host__ __device__
     CallInfo(CallQuals q, Args&&... xargs)
-        : quals(q), arg_types(&makeArgumentID<Args&&...>()), args(cuda::std::forward<Args>(xargs)...)
+        : quals(q), arg_types(&makeArgumentID<Args&&...>()), args(cuda_for_dali::std::forward<Args>(xargs)...)
     {}
 };
 
 template <class ...Args>
 __host__ __device__
-inline CallInfo<decltype(cuda::std::forward_as_tuple(cuda::std::declval<Args>()...))>
+inline CallInfo<decltype(cuda_for_dali::std::forward_as_tuple(cuda_for_dali::std::declval<Args>()...))>
 makeCallInfo(CallQuals quals, Args&&... args) {
-    return {quals, cuda::std::forward<Args>(args)...};
+    return {quals, cuda_for_dali::std::forward<Args>(args)...};
 }
 
 struct TrackedCallable {
@@ -138,22 +138,22 @@ struct TrackedCallable {
     template <class ...Args>
     __host__ __device__
     auto operator()(Args&&... xargs) &
-    { return makeCallInfo(CQ_LValue, cuda::std::forward<Args>(xargs)...); }
+    { return makeCallInfo(CQ_LValue, cuda_for_dali::std::forward<Args>(xargs)...); }
 
     template <class ...Args>
     __host__ __device__
     auto  operator()(Args&&... xargs) const&
-    { return makeCallInfo(CQ_ConstLValue, cuda::std::forward<Args>(xargs)...); }
+    { return makeCallInfo(CQ_ConstLValue, cuda_for_dali::std::forward<Args>(xargs)...); }
 
     template <class ...Args>
     __host__ __device__
     auto  operator()(Args&&... xargs) &&
-    { return makeCallInfo(CQ_RValue, cuda::std::forward<Args>(xargs)...); }
+    { return makeCallInfo(CQ_RValue, cuda_for_dali::std::forward<Args>(xargs)...); }
 
     template <class ...Args>
     __host__ __device__
     auto  operator()(Args&&... xargs) const&&
-    { return makeCallInfo(CQ_ConstRValue, cuda::std::forward<Args>(xargs)...); }
+    { return makeCallInfo(CQ_ConstRValue, cuda_for_dali::std::forward<Args>(xargs)...); }
 };
 
 template <class ...ExpectArgs, class Tuple>
@@ -163,25 +163,25 @@ void check_apply_quals_and_types(Tuple&& t) {
     TrackedCallable obj;
     TrackedCallable const& cobj = obj;
     {
-        auto ret = cuda::std::apply(obj, cuda::std::forward<Tuple>(t));
+        auto ret = cuda_for_dali::std::apply(obj, cuda_for_dali::std::forward<Tuple>(t));
         assert(ret.quals == CQ_LValue);
         assert(ret.arg_types == expect_args);
         assert(ret.args == t);
     }
     {
-        auto ret = cuda::std::apply(cobj, cuda::std::forward<Tuple>(t));
+        auto ret = cuda_for_dali::std::apply(cobj, cuda_for_dali::std::forward<Tuple>(t));
         assert(ret.quals == CQ_ConstLValue);
         assert(ret.arg_types == expect_args);
         assert(ret.args == t);
     }
     {
-        auto ret = cuda::std::apply(cuda::std::move(obj), cuda::std::forward<Tuple>(t));
+        auto ret = cuda_for_dali::std::apply(cuda_for_dali::std::move(obj), cuda_for_dali::std::forward<Tuple>(t));
         assert(ret.quals == CQ_RValue);
         assert(ret.arg_types == expect_args);
         assert(ret.args == t);
     }
     {
-        auto ret = cuda::std::apply(cuda::std::move(cobj), cuda::std::forward<Tuple>(t));
+        auto ret = cuda_for_dali::std::apply(cuda_for_dali::std::move(cobj), cuda_for_dali::std::forward<Tuple>(t));
         assert(ret.quals == CQ_ConstRValue);
         assert(ret.arg_types == expect_args);
         assert(ret.args == t);
@@ -191,15 +191,15 @@ void check_apply_quals_and_types(Tuple&& t) {
 __host__ __device__
 void test_call_quals_and_arg_types()
 {
-    using Tup = cuda::std::tuple<int, int const&, unsigned&&>;
+    using Tup = cuda_for_dali::std::tuple<int, int const&, unsigned&&>;
     const int x = 42;
     unsigned y = 101;
-    Tup t(-1, x, cuda::std::move(y));
+    Tup t(-1, x, cuda_for_dali::std::move(y));
     Tup const& ct = t;
     check_apply_quals_and_types<int&, int const&, unsigned&>(t);
     check_apply_quals_and_types<int const&, int const&, unsigned&>(ct);
-    check_apply_quals_and_types<int&&, int const&, unsigned&&>(cuda::std::move(t));
-    check_apply_quals_and_types<int const&&, int const&, unsigned&&>(cuda::std::move(ct));
+    check_apply_quals_and_types<int&&, int const&, unsigned&&>(cuda_for_dali::std::move(t));
+    check_apply_quals_and_types<int const&&, int const&, unsigned&&>(cuda_for_dali::std::move(ct));
 }
 
 
@@ -222,18 +222,18 @@ void test_noexcept()
     TestNoexceptCallable<false> tc;
     {
         // test that the functions noexcept-ness is propagated
-        using Tup = cuda::std::tuple<int, const char*, long>;
+        using Tup = cuda_for_dali::std::tuple<int, const char*, long>;
         Tup t;
-        LIBCPP_ASSERT_NOEXCEPT(cuda::std::apply(nec, t));
-        ASSERT_NOT_NOEXCEPT(cuda::std::apply(tc, t));
+        LIBCPP_ASSERT_NOEXCEPT(cuda_for_dali::std::apply(nec, t));
+        ASSERT_NOT_NOEXCEPT(cuda_for_dali::std::apply(tc, t));
         unused(t);
     }
     {
         // test that the noexcept-ness of the argument conversions is checked.
-        using Tup = cuda::std::tuple<NothrowMoveable, int>;
+        using Tup = cuda_for_dali::std::tuple<NothrowMoveable, int>;
         Tup t;
-        ASSERT_NOT_NOEXCEPT(cuda::std::apply(nec, t));
-        LIBCPP_ASSERT_NOEXCEPT(cuda::std::apply(nec, cuda::std::move(t)));
+        ASSERT_NOT_NOEXCEPT(cuda_for_dali::std::apply(nec, t));
+        LIBCPP_ASSERT_NOEXCEPT(cuda_for_dali::std::apply(nec, cuda_for_dali::std::move(t)));
         unused(t);
     }
 }
@@ -285,12 +285,12 @@ namespace ReturnTypeTest {
     void test()
     {
         using RawInvokeResult = decltype(f(index<Func>{}));
-        static_assert(cuda::std::is_same<RawInvokeResult, Expect>::value, "");
+        static_assert(cuda_for_dali::std::is_same<RawInvokeResult, Expect>::value, "");
         using FnType = RawInvokeResult (*) (index<Func>);
         FnType fn = f;
-        cuda::std::tuple<index<Func>> t;
-        using InvokeResult = decltype(cuda::std::apply(fn, t));
-        static_assert(cuda::std::is_same<InvokeResult, Expect>::value, "");
+        cuda_for_dali::std::tuple<index<Func>> t;
+        using InvokeResult = decltype(cuda_for_dali::std::apply(fn, t));
+        static_assert(cuda_for_dali::std::is_same<InvokeResult, Expect>::value, "");
         unused(t); unused(fn);
     }
 } // end namespace ReturnTypeTest

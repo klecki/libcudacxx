@@ -23,23 +23,23 @@
 //  constexpr chrono::day     day() const noexcept;
 //  constexpr bool             ok() const noexcept;
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using year           = cuda::std::chrono::year;
-    using day            = cuda::std::chrono::day;
-    using local_days     = cuda::std::chrono::local_days;
-    using days           = cuda::std::chrono::days;
-    using year_month_day = cuda::std::chrono::year_month_day;
+    using year           = cuda_for_dali::std::chrono::year;
+    using day            = cuda_for_dali::std::chrono::day;
+    using local_days     = cuda_for_dali::std::chrono::local_days;
+    using days           = cuda_for_dali::std::chrono::days;
+    using year_month_day = cuda_for_dali::std::chrono::year_month_day;
 
-    ASSERT_NOEXCEPT(year_month_day{cuda::std::declval<local_days>()});
+    ASSERT_NOEXCEPT(year_month_day{cuda_for_dali::std::declval<local_days>()});
 
-    auto constexpr January = cuda::std::chrono::January;
+    auto constexpr January = cuda_for_dali::std::chrono::January;
 
     {
     constexpr local_days sd{};
@@ -55,7 +55,7 @@ int main(int, char**)
     constexpr local_days sd{days{10957+32}};
     constexpr year_month_day ymd{sd};
 
-    auto constexpr February = cuda::std::chrono::February;
+    auto constexpr February = cuda_for_dali::std::chrono::February;
 
     static_assert( ymd.ok(),                             "");
     static_assert( ymd.year()  == year{2000},            "");
@@ -79,7 +79,7 @@ int main(int, char**)
     {
     local_days sd{days{-(10957+34)}};
     year_month_day ymd{sd};
-    auto constexpr November = cuda::std::chrono::November;
+    auto constexpr November = cuda_for_dali::std::chrono::November;
 
     assert( ymd.ok());
     assert( ymd.year()  == year{1939});

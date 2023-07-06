@@ -15,22 +15,22 @@
 
 // inexact conversions allowed for floating point reps
 
-#include <cuda/std/chrono>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
     {
-    cuda::std::chrono::duration<double, cuda::std::micro> us(1);
-    cuda::std::chrono::duration<double, cuda::std::milli> ms = us;
+    cuda_for_dali::std::chrono::duration<double, cuda_for_dali::std::micro> us(1);
+    cuda_for_dali::std::chrono::duration<double, cuda_for_dali::std::milli> ms = us;
     assert(ms.count() == 1./1000);
     }
 #if TEST_STD_VER >= 11
     {
-    constexpr cuda::std::chrono::duration<double, cuda::std::micro> us(1);
-    constexpr cuda::std::chrono::duration<double, cuda::std::milli> ms = us;
+    constexpr cuda_for_dali::std::chrono::duration<double, cuda_for_dali::std::micro> us(1);
+    constexpr cuda_for_dali::std::chrono::duration<double, cuda_for_dali::std::milli> ms = us;
     static_assert(ms.count() == 1./1000, "");
     }
 #endif

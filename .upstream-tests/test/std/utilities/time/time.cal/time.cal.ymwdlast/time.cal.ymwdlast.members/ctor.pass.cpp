@@ -22,22 +22,22 @@
 //  constexpr chrono::weekday_last weekday_last() const noexcept;
 //  constexpr bool                           ok() const noexcept;
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using year                    = cuda::std::chrono::year;
-    using month                   = cuda::std::chrono::month;
-    using weekday                 = cuda::std::chrono::weekday;
-    using weekday_last            = cuda::std::chrono::weekday_last;
-    using year_month_weekday_last = cuda::std::chrono::year_month_weekday_last;
+    using year                    = cuda_for_dali::std::chrono::year;
+    using month                   = cuda_for_dali::std::chrono::month;
+    using weekday                 = cuda_for_dali::std::chrono::weekday;
+    using weekday_last            = cuda_for_dali::std::chrono::weekday_last;
+    using year_month_weekday_last = cuda_for_dali::std::chrono::year_month_weekday_last;
 
-    constexpr month January = cuda::std::chrono::January;
-    constexpr weekday Tuesday = cuda::std::chrono::Tuesday;
+    constexpr month January = cuda_for_dali::std::chrono::January;
+    constexpr weekday Tuesday = cuda_for_dali::std::chrono::Tuesday;
 
     ASSERT_NOEXCEPT(year_month_weekday_last{year{1}, month{1}, weekday_last{Tuesday}});
 

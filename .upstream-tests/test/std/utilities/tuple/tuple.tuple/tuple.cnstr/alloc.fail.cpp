@@ -6,7 +6,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-// UNSUPPORTED: c++98, c++03 
+// UNSUPPORTED: c++98, c++03
 // UNSUPPORTED: nvrtc
 
 // <cuda/std/tuple>
@@ -19,13 +19,13 @@
 // Make sure we get the explicit-ness of the constructor right.
 // This is LWG 3158.
 
-#include <cuda/std/tuple>
+#include <cuda_for_dali/std/tuple>
 
 
 struct ExplicitDefault { __host__ __device__ explicit ExplicitDefault() { } };
 
 __host__ __device__ std::tuple<ExplicitDefault> explicit_default_test() {
-    return {cuda::std::allocator_arg, cuda::std::allocator<int>()}; // expected-error {{chosen constructor is explicit in copy-initialization}}
+    return {cuda_for_dali::std::allocator_arg, cuda_for_dali::std::allocator<int>()}; // expected-error {{chosen constructor is explicit in copy-initialization}}
 }
 
 int main(int, char**) {

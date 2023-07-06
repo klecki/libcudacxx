@@ -13,40 +13,40 @@
 
 #include "helpers.h"
 
-#include <cuda/std/utility>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/utility>
+#include <cuda_for_dali/std/cassert>
 
 struct pod {
     char val[10];
 };
 
-using pair_t = cuda::std::pair<int, pod>;
+using pair_t = cuda_for_dali::std::pair<int, pod>;
 
 template<int N>
 struct write
 {
-    using async = cuda::std::false_type;
+    using async = cuda_for_dali::std::false_type;
 
     template <typename Pair>
     __host__ __device__
     static void perform(Pair &p)
     {
-        cuda::std::get<0>(p) = N;
-        cuda::std::get<1>(p).val[0] = N;
+        cuda_for_dali::std::get<0>(p) = N;
+        cuda_for_dali::std::get<1>(p).val[0] = N;
     }
 };
 
 template<int N>
 struct read
 {
-    using async = cuda::std::false_type;
+    using async = cuda_for_dali::std::false_type;
 
     template <typename Pair>
     __host__ __device__
     static void perform(Pair &p)
     {
-        assert(cuda::std::get<0>(p) == N);
-        assert(cuda::std::get<1>(p).val[0] == N);
+        assert(cuda_for_dali::std::get<0>(p) == N);
+        assert(cuda_for_dali::std::get<1>(p).val[0] == N);
     }
 };
 

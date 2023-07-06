@@ -17,15 +17,15 @@
 //  Effects: Constructs an object of type day by initializing d_ with d.
 //    The value held is unspecified if d is not in the range [0, 255].
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using day = cuda::std::chrono::day;
+    using day = cuda_for_dali::std::chrono::day;
 
     ASSERT_NOEXCEPT(day{});
     ASSERT_NOEXCEPT(day(0U));

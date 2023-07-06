@@ -13,10 +13,10 @@
 // template <class Alloc>
 //   tuple(allocator_arg_t, const Alloc& a, const tuple&);
 
-// UNSUPPORTED: c++98, c++03 
+// UNSUPPORTED: c++98, c++03
 
-#include <cuda/std/tuple>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/tuple>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "allocators.h"
@@ -26,56 +26,56 @@
 int main(int, char**)
 {
     {
-        typedef cuda::std::tuple<> T;
+        typedef cuda_for_dali::std::tuple<> T;
         T t0;
-        T t(cuda::std::allocator_arg, A1<int>(), t0);
+        T t(cuda_for_dali::std::allocator_arg, A1<int>(), t0);
     }
     {
-        typedef cuda::std::tuple<int> T;
+        typedef cuda_for_dali::std::tuple<int> T;
         T t0(2);
-        T t(cuda::std::allocator_arg, A1<int>(), t0);
-        assert(cuda::std::get<0>(t) == 2);
+        T t(cuda_for_dali::std::allocator_arg, A1<int>(), t0);
+        assert(cuda_for_dali::std::get<0>(t) == 2);
     }
     {
-        typedef cuda::std::tuple<alloc_first> T;
+        typedef cuda_for_dali::std::tuple<alloc_first> T;
         T t0(2);
         alloc_first::allocator_constructed() = false;
-        T t(cuda::std::allocator_arg, A1<int>(5), t0);
+        T t(cuda_for_dali::std::allocator_arg, A1<int>(5), t0);
         assert(alloc_first::allocator_constructed());
-        assert(cuda::std::get<0>(t) == 2);
+        assert(cuda_for_dali::std::get<0>(t) == 2);
     }
     {
-        typedef cuda::std::tuple<alloc_last> T;
+        typedef cuda_for_dali::std::tuple<alloc_last> T;
         T t0(2);
         alloc_last::allocator_constructed() = false;
-        T t(cuda::std::allocator_arg, A1<int>(5), t0);
+        T t(cuda_for_dali::std::allocator_arg, A1<int>(5), t0);
         assert(alloc_last::allocator_constructed());
-        assert(cuda::std::get<0>(t) == 2);
+        assert(cuda_for_dali::std::get<0>(t) == 2);
     }
 // testing extensions
 #ifdef _LIBCUDACXX_VERSION
     {
-        typedef cuda::std::tuple<alloc_first, alloc_last> T;
+        typedef cuda_for_dali::std::tuple<alloc_first, alloc_last> T;
         T t0(2, 3);
         alloc_first::allocator_constructed() = false;
         alloc_last::allocator_constructed() = false;
-        T t(cuda::std::allocator_arg, A1<int>(5), t0);
+        T t(cuda_for_dali::std::allocator_arg, A1<int>(5), t0);
         assert(alloc_first::allocator_constructed());
         assert(alloc_last::allocator_constructed());
-        assert(cuda::std::get<0>(t) == 2);
-        assert(cuda::std::get<1>(t) == 3);
+        assert(cuda_for_dali::std::get<0>(t) == 2);
+        assert(cuda_for_dali::std::get<1>(t) == 3);
     }
     {
-        typedef cuda::std::tuple<int, alloc_first, alloc_last> T;
+        typedef cuda_for_dali::std::tuple<int, alloc_first, alloc_last> T;
         T t0(1, 2, 3);
         alloc_first::allocator_constructed() = false;
         alloc_last::allocator_constructed() = false;
-        T t(cuda::std::allocator_arg, A1<int>(5), t0);
+        T t(cuda_for_dali::std::allocator_arg, A1<int>(5), t0);
         assert(alloc_first::allocator_constructed());
         assert(alloc_last::allocator_constructed());
-        assert(cuda::std::get<0>(t) == 1);
-        assert(cuda::std::get<1>(t) == 2);
-        assert(cuda::std::get<2>(t) == 3);
+        assert(cuda_for_dali::std::get<0>(t) == 1);
+        assert(cuda_for_dali::std::get<1>(t) == 2);
+        assert(cuda_for_dali::std::get<2>(t) == 3);
     }
 #endif
 

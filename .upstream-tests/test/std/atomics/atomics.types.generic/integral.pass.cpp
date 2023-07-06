@@ -86,8 +86,8 @@
 //     integral operator^=(integral op);
 // };
 
-#include <cuda/std/atomic>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/atomic>
+#include <cuda_for_dali/std/cassert>
 
 #include <cmpxchg_loop.h>
 
@@ -108,13 +108,13 @@ do_test()
     ((void)b0); // mark as unused
     obj.store(T(0));
     assert(obj == T(0));
-    obj.store(T(1), cuda::std::memory_order_release);
+    obj.store(T(1), cuda_for_dali::std::memory_order_release);
     assert(obj == T(1));
     assert(obj.load() == T(1));
-    assert(obj.load(cuda::std::memory_order_acquire) == T(1));
+    assert(obj.load(cuda_for_dali::std::memory_order_acquire) == T(1));
     assert(obj.exchange(T(2)) == T(1));
     assert(obj == T(2));
-    assert(obj.exchange(T(3), cuda::std::memory_order_relaxed) == T(2));
+    assert(obj.exchange(T(3), cuda_for_dali::std::memory_order_relaxed) == T(2));
     assert(obj == T(3));
     T x = obj;
     assert(cmpxchg_weak_loop(obj, x, T(2)) == true);
@@ -172,7 +172,7 @@ void test()
     do_test<volatile A, T, Selector>();
 }
 
-template<template<typename, cuda::thread_scope> typename Atomic, cuda::thread_scope Scope, template<typename, typename> class Selector>
+template<template<typename, cuda_for_dali::thread_scope> typename Atomic, cuda_for_dali::thread_scope Scope, template<typename, typename> class Selector>
 __host__ __device__
 void test_for_all_types()
 {
@@ -203,11 +203,11 @@ void test_for_all_types()
     test<Atomic<uint64_t, Scope>, uint64_t, Selector>();
 }
 
-template<typename T, cuda::thread_scope Scope>
-using cuda_std_atomic = cuda::std::atomic<T>;
+template<typename T, cuda_for_dali::thread_scope Scope>
+using cuda_std_atomic = cuda_for_dali::std::atomic<T>;
 
-template<typename T, cuda::thread_scope Scope>
-using cuda_atomic = cuda::atomic<T, Scope>;
+template<typename T, cuda_for_dali::thread_scope Scope>
+using cuda_atomic = cuda_for_dali::atomic<T, Scope>;
 
 int main(int, char**)
 {
@@ -221,15 +221,15 @@ int main(int, char**)
     // confidence that this all actually works
 
 #if !defined(__CUDA_ARCH__) || __CUDA_ARCH__ >= 700
-    test_for_all_types<cuda_std_atomic, cuda::thread_scope_system, local_memory_selector>();
-    test_for_all_types<cuda_atomic, cuda::thread_scope_system, local_memory_selector>();
+    test_for_all_types<cuda_std_atomic, cuda_for_dali::thread_scope_system, local_memory_selector>();
+    test_for_all_types<cuda_atomic, cuda_for_dali::thread_scope_system, local_memory_selector>();
 #endif
 #ifdef __CUDA_ARCH__
-    test_for_all_types<cuda_std_atomic, cuda::thread_scope_system, shared_memory_selector>();
-    test_for_all_types<cuda_atomic, cuda::thread_scope_block, shared_memory_selector>();
+    test_for_all_types<cuda_std_atomic, cuda_for_dali::thread_scope_system, shared_memory_selector>();
+    test_for_all_types<cuda_atomic, cuda_for_dali::thread_scope_block, shared_memory_selector>();
 
-    test_for_all_types<cuda_std_atomic, cuda::thread_scope_system, global_memory_selector>();
-    test_for_all_types<cuda_atomic, cuda::thread_scope_device, global_memory_selector>();
+    test_for_all_types<cuda_std_atomic, cuda_for_dali::thread_scope_system, global_memory_selector>();
+    test_for_all_types<cuda_atomic, cuda_for_dali::thread_scope_device, global_memory_selector>();
 #endif
 
   return 0;

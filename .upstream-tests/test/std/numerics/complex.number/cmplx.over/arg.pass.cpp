@@ -12,9 +12,9 @@
 //   T
 //   arg(T x);
 
-#include <cuda/std/complex>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/complex>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 
 #include "test_macros.h"
@@ -22,18 +22,18 @@
 
 template <class T>
 __host__ __device__ void
-test(T x, typename cuda::std::enable_if<cuda::std::is_integral<T>::value>::type* = 0)
+test(T x, typename cuda_for_dali::std::enable_if<cuda_for_dali::std::is_integral<T>::value>::type* = 0)
 {
-    static_assert((cuda::std::is_same<decltype(cuda::std::arg(x)), double>::value), "");
-    assert(cuda::std::arg(x) == arg(cuda::std::complex<double>(static_cast<double>(x), 0)));
+    static_assert((cuda_for_dali::std::is_same<decltype(cuda_for_dali::std::arg(x)), double>::value), "");
+    assert(cuda_for_dali::std::arg(x) == arg(cuda_for_dali::std::complex<double>(static_cast<double>(x), 0)));
 }
 
 template <class T>
 __host__ __device__ void
-test(T x, typename cuda::std::enable_if<!cuda::std::is_integral<T>::value>::type* = 0)
+test(T x, typename cuda_for_dali::std::enable_if<!cuda_for_dali::std::is_integral<T>::value>::type* = 0)
 {
-    static_assert((cuda::std::is_same<decltype(cuda::std::arg(x)), T>::value), "");
-    assert(cuda::std::arg(x) == arg(cuda::std::complex<T>(x, 0)));
+    static_assert((cuda_for_dali::std::is_same<decltype(cuda_for_dali::std::arg(x)), T>::value), "");
+    assert(cuda_for_dali::std::arg(x) == arg(cuda_for_dali::std::complex<T>(x, 0)));
 }
 
 template <class T>

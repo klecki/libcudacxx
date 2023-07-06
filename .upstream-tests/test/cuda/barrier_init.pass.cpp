@@ -9,17 +9,17 @@
 
 // UNSUPPORTED: pre-sm-70
 
-#include <cuda/barrier>
+#include <cuda_for_dali/barrier>
 
 #include "cuda_space_selector.h"
 
-template<cuda::thread_scope Sco,
+template<cuda_for_dali::thread_scope Sco,
     template<typename, typename> class BarrierSelector
 >
 __host__ __device__
 void test()
 {
-    cuda::barrier<Sco> b(3);
+    cuda_for_dali::barrier<Sco> b(3);
 
     init(&b, 2);
 
@@ -28,7 +28,7 @@ void test()
     b.wait(std::move(token));
 }
 
-template<cuda::thread_scope Sco>
+template<cuda_for_dali::thread_scope Sco>
 __host__ __device__
 void test_select_barrier()
 {
@@ -41,10 +41,10 @@ void test_select_barrier()
 
 int main(int argc, char ** argv)
 {
-    test_select_barrier<cuda::thread_scope_system>();
-    test_select_barrier<cuda::thread_scope_device>();
-    test_select_barrier<cuda::thread_scope_block>();
-    test_select_barrier<cuda::thread_scope_thread>();
+    test_select_barrier<cuda_for_dali::thread_scope_system>();
+    test_select_barrier<cuda_for_dali::thread_scope_device>();
+    test_select_barrier<cuda_for_dali::thread_scope_block>();
+    test_select_barrier<cuda_for_dali::thread_scope_thread>();
 
     return 0;
 }

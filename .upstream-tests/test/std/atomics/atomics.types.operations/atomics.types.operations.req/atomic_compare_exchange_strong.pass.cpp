@@ -20,41 +20,41 @@
 //     bool
 //     atomic_compare_exchange_strong(atomic<T>* obj, T* expc, T desr);
 
-#include <cuda/std/atomic>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/atomic>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "atomic_helpers.h"
 #include "cuda_space_selector.h"
 
-template <class T, template<typename, typename> typename Selector, cuda::thread_scope>
+template <class T, template<typename, typename> typename Selector, cuda_for_dali::thread_scope>
 struct TestFn {
   __host__ __device__
   void operator()() const {
     {
-        typedef cuda::std::atomic<T> A;
+        typedef cuda_for_dali::std::atomic<T> A;
         Selector<A, constructor_initializer> sel;
         A & a = *sel.construct();
         T t(T(1));
-        cuda::std::atomic_init(&a, t);
-        assert(cuda::std::atomic_compare_exchange_strong(&a, &t, T(2)) == true);
+        cuda_for_dali::std::atomic_init(&a, t);
+        assert(cuda_for_dali::std::atomic_compare_exchange_strong(&a, &t, T(2)) == true);
         assert(a == T(2));
         assert(t == T(1));
-        assert(cuda::std::atomic_compare_exchange_strong(&a, &t, T(3)) == false);
+        assert(cuda_for_dali::std::atomic_compare_exchange_strong(&a, &t, T(3)) == false);
         assert(a == T(2));
         assert(t == T(2));
     }
     {
-        typedef cuda::std::atomic<T> A;
+        typedef cuda_for_dali::std::atomic<T> A;
         Selector<volatile A, constructor_initializer> sel;
         volatile A & a = *sel.construct();
         T t(T(1));
-        cuda::std::atomic_init(&a, t);
-        assert(cuda::std::atomic_compare_exchange_strong(&a, &t, T(2)) == true);
+        cuda_for_dali::std::atomic_init(&a, t);
+        assert(cuda_for_dali::std::atomic_compare_exchange_strong(&a, &t, T(2)) == true);
         assert(a == T(2));
         assert(t == T(1));
-        assert(cuda::std::atomic_compare_exchange_strong(&a, &t, T(3)) == false);
+        assert(cuda_for_dali::std::atomic_compare_exchange_strong(&a, &t, T(3)) == false);
         assert(a == T(2));
         assert(t == T(2));
     }

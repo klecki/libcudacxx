@@ -7,10 +7,10 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <cuda/stream_view>
+#include <cuda_for_dali/stream_view>
 #include <cassert>
 
-void foo(cuda::stream_view){}
+void foo(cuda_for_dali::stream_view){}
 
 int main(int argc, char** argv){
 

@@ -14,26 +14,26 @@
 //   constexpr weekday_last    operator[](last_spec)      const noexcept;
 
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "../../euclidian.h"
 
 int main(int, char**)
 {
-    using weekday         = cuda::std::chrono::weekday;
-    using weekday_last    = cuda::std::chrono::weekday_last;
-    using weekday_indexed = cuda::std::chrono::weekday_indexed;
+    using weekday         = cuda_for_dali::std::chrono::weekday;
+    using weekday_last    = cuda_for_dali::std::chrono::weekday_last;
+    using weekday_indexed = cuda_for_dali::std::chrono::weekday_indexed;
 
-    constexpr weekday Sunday = cuda::std::chrono::Sunday;
+    constexpr weekday Sunday = cuda_for_dali::std::chrono::Sunday;
 
-    ASSERT_NOEXCEPT(                           cuda::std::declval<weekday>()[1U]);
-    ASSERT_SAME_TYPE(weekday_indexed, decltype(cuda::std::declval<weekday>()[1U]));
+    ASSERT_NOEXCEPT(                           cuda_for_dali::std::declval<weekday>()[1U]);
+    ASSERT_SAME_TYPE(weekday_indexed, decltype(cuda_for_dali::std::declval<weekday>()[1U]));
 
-    ASSERT_NOEXCEPT(                           cuda::std::declval<weekday>()[cuda::std::chrono::last]);
-    ASSERT_SAME_TYPE(weekday_last,    decltype(cuda::std::declval<weekday>()[cuda::std::chrono::last]));
+    ASSERT_NOEXCEPT(                           cuda_for_dali::std::declval<weekday>()[cuda_for_dali::std::chrono::last]);
+    ASSERT_SAME_TYPE(weekday_last,    decltype(cuda_for_dali::std::declval<weekday>()[cuda_for_dali::std::chrono::last]));
 
     static_assert(Sunday[2].weekday() == Sunday, "");
     static_assert(Sunday[2].index  () == 2, "");
@@ -41,7 +41,7 @@ int main(int, char**)
     for (unsigned i = 0; i <= 6; ++i)
     {
         weekday wd(i);
-        weekday_last wdl = wd[cuda::std::chrono::last];
+        weekday_last wdl = wd[cuda_for_dali::std::chrono::last];
         assert(wdl.weekday() == wd);
         assert(wdl.ok());
     }

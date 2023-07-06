@@ -13,8 +13,8 @@
 // UNSUPPORTED: c++98, c++03
 // UNSUPPORTED: msvc, gcc-4.8
 
-#include <cuda/std/tuple>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/tuple>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
@@ -31,7 +31,7 @@ struct CtorAssertsT {
   __host__ __device__ CtorAssertsT() : defaulted(true) {}
   template <class T>
   __host__ __device__ constexpr CtorAssertsT(T) : defaulted(false) {
-      static_assert(!cuda::std::is_same<T, AssertOn>::value, "");
+      static_assert(!cuda_for_dali::std::is_same<T, AssertOn>::value, "");
   }
 };
 
@@ -41,12 +41,12 @@ struct AllowAssertT {
   __host__ __device__ AllowAssertT(AllowT) {}
   template <class U>
   __host__ __device__ constexpr AllowAssertT(U) {
-      static_assert(!cuda::std::is_same<U, AssertT>::value, "");
+      static_assert(!cuda_for_dali::std::is_same<U, AssertT>::value, "");
   }
 };
 
 // Construct a tuple<T1, T2> from pair<int, int> where T1 and T2
-// are not constructible from ints but T1 is constructible from cuda::std::pair.
+// are not constructible from ints but T1 is constructible from cuda_for_dali::std::pair.
 // This considers the following constructors:
 // (1) tuple(TupleLike) -> checks is_constructible<Tn, int>
 // (2) tuple(UTypes...) -> checks is_constructible<T1, pair<int, int>>
@@ -57,12 +57,12 @@ struct AllowAssertT {
 __host__ __device__ void test_tuple_like_lazy_sfinae() {
 #if defined(_LIBCUDACXX_VERSION)
     // This test requires libc++'s reduced arity initialization.
-    using T1 = ConstructibleFromT<cuda::std::pair<int, int>>;
+    using T1 = ConstructibleFromT<cuda_for_dali::std::pair<int, int>>;
     using T2 = CtorAssertsT<int>;
-    cuda::std::pair<int, int> p(42, 100);
-    cuda::std::tuple<T1, T2> t(p);
-    assert(cuda::std::get<0>(t).value == p);
-    assert(cuda::std::get<1>(t).defaulted);
+    cuda_for_dali::std::pair<int, int> p(42, 100);
+    cuda_for_dali::std::tuple<T1, T2> t(p);
+    assert(cuda_for_dali::std::get<0>(t).value == p);
+    assert(cuda_for_dali::std::get<1>(t).defaulted);
 #endif
 }
 
@@ -79,7 +79,7 @@ template <class T>
 struct BlowsUpOnConstCopy {
   BlowsUpOnConstCopy() = default;
   __host__ __device__ constexpr BlowsUpOnConstCopy(BlowsUpOnConstCopy const&) {
-      static_assert(!cuda::std::is_same<T, T>::value, "");
+      static_assert(!cuda_for_dali::std::is_same<T, T>::value, "");
   }
   BlowsUpOnConstCopy(BlowsUpOnConstCopy&) = default;
 };
@@ -93,8 +93,8 @@ __host__ __device__ void test_const_Types_lazy_sfinae()
 {
     NonConstCopyable v(42);
     BlowsUpOnConstCopy<int> b;
-    cuda::std::tuple<NonConstCopyable, BlowsUpOnConstCopy<int>> t(v, b);
-    assert(cuda::std::get<0>(t).value == 42);
+    cuda_for_dali::std::tuple<NonConstCopyable, BlowsUpOnConstCopy<int>> t(v, b);
+    assert(cuda_for_dali::std::get<0>(t).value == 42);
 }
 
 int main(int, char**) {

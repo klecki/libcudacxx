@@ -17,9 +17,9 @@
 // XFAIL: gcc-8 && c++17
 // XFAIL: gcc-7 && c++17
 
-#include <cuda/std/tuple>
-#include <cuda/std/utility>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/tuple>
+#include <cuda_for_dali/std/utility>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "MoveOnly.h"
@@ -37,13 +37,13 @@ struct NothrowConstruct
 int main(int, char**)
 {
     {
-        typedef cuda::std::tuple<NothrowConstruct, NothrowConstruct> T;
+        typedef cuda_for_dali::std::tuple<NothrowConstruct, NothrowConstruct> T;
         T t(0, 1);
         unused(t); // Prevent unused warning
 
         // Test that tuple<> handles noexcept properly
-        static_assert(cuda::std::is_nothrow_constructible<T, int, int>(), "");
-        static_assert(cuda::std::is_nothrow_constructible<NothrowConstruct, int>(), "");
+        static_assert(cuda_for_dali::std::is_nothrow_constructible<T, int, int>(), "");
+        static_assert(cuda_for_dali::std::is_nothrow_constructible<NothrowConstruct, int>(), "");
     }
 
   return 0;

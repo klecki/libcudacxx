@@ -14,28 +14,28 @@
 //  Returns: If ok() == true, returns a sys_days that represents the last weekday()
 //             of year()/month(). Otherwise the returned value is unspecified.
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 
 int main(int, char**)
 {
-    using year                    = cuda::std::chrono::year;
-    using month                   = cuda::std::chrono::month;
-    using year_month_weekday_last = cuda::std::chrono::year_month_weekday_last;
-    using sys_days                = cuda::std::chrono::sys_days;
-    using days                    = cuda::std::chrono::days;
-    using weekday                 = cuda::std::chrono::weekday;
-    using weekday_last            = cuda::std::chrono::weekday_last;
+    using year                    = cuda_for_dali::std::chrono::year;
+    using month                   = cuda_for_dali::std::chrono::month;
+    using year_month_weekday_last = cuda_for_dali::std::chrono::year_month_weekday_last;
+    using sys_days                = cuda_for_dali::std::chrono::sys_days;
+    using days                    = cuda_for_dali::std::chrono::days;
+    using weekday                 = cuda_for_dali::std::chrono::weekday;
+    using weekday_last            = cuda_for_dali::std::chrono::weekday_last;
 
-    ASSERT_NOEXCEPT(                    static_cast<sys_days>(cuda::std::declval<const year_month_weekday_last>()));
-    ASSERT_SAME_TYPE(sys_days, decltype(static_cast<sys_days>(cuda::std::declval<const year_month_weekday_last>())));
+    ASSERT_NOEXCEPT(                    static_cast<sys_days>(cuda_for_dali::std::declval<const year_month_weekday_last>()));
+    ASSERT_SAME_TYPE(sys_days, decltype(static_cast<sys_days>(cuda_for_dali::std::declval<const year_month_weekday_last>())));
 
-    auto constexpr January = cuda::std::chrono::January;
-    auto constexpr Tuesday = cuda::std::chrono::Tuesday;
+    auto constexpr January = cuda_for_dali::std::chrono::January;
+    auto constexpr Tuesday = cuda_for_dali::std::chrono::Tuesday;
 
     { // Last Tuesday in Jan 1970 was the 27th
     constexpr year_month_weekday_last ymwdl{year{1970}, January, weekday_last{Tuesday}};
@@ -59,7 +59,7 @@ int main(int, char**)
     }
 
     { // Last Tuesday in Nov 1939 was the 28th
-    year_month_weekday_last ymdl{year{1939}, cuda::std::chrono::November, weekday_last{Tuesday}};
+    year_month_weekday_last ymdl{year{1939}, cuda_for_dali::std::chrono::November, weekday_last{Tuesday}};
     sys_days sd{ymdl};
 
     assert(sd.time_since_epoch() == days{-(10957+35)});

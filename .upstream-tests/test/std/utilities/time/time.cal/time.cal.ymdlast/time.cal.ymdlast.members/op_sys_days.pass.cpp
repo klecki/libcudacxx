@@ -13,30 +13,30 @@
 // constexpr operator sys_days() const noexcept;
 //  Returns: sys_days{year()/month()/day()}.
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using year                = cuda::std::chrono::year;
-    using month_day_last      = cuda::std::chrono::month_day_last;
-    using year_month_day_last = cuda::std::chrono::year_month_day_last;
-    using sys_days            = cuda::std::chrono::sys_days;
-    using days                = cuda::std::chrono::days;
+    using year                = cuda_for_dali::std::chrono::year;
+    using month_day_last      = cuda_for_dali::std::chrono::month_day_last;
+    using year_month_day_last = cuda_for_dali::std::chrono::year_month_day_last;
+    using sys_days            = cuda_for_dali::std::chrono::sys_days;
+    using days                = cuda_for_dali::std::chrono::days;
 
-    ASSERT_NOEXCEPT(                    static_cast<sys_days>(cuda::std::declval<const year_month_day_last>()));
-    ASSERT_SAME_TYPE(sys_days, decltype(static_cast<sys_days>(cuda::std::declval<const year_month_day_last>())));
+    ASSERT_NOEXCEPT(                    static_cast<sys_days>(cuda_for_dali::std::declval<const year_month_day_last>()));
+    ASSERT_SAME_TYPE(sys_days, decltype(static_cast<sys_days>(cuda_for_dali::std::declval<const year_month_day_last>())));
 
-    auto constexpr January = cuda::std::chrono::January;
-    auto constexpr November = cuda::std::chrono::November;
+    auto constexpr January = cuda_for_dali::std::chrono::January;
+    auto constexpr November = cuda_for_dali::std::chrono::November;
 
     { // Last day in Jan 1970 was the 31st
     constexpr year_month_day_last ymdl{year{1970}, month_day_last{January}};
     constexpr sys_days sd{ymdl};
-    
+
     static_assert(sd.time_since_epoch() == days{30}, "");
     }
 

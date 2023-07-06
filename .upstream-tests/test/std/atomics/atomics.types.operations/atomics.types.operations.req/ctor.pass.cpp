@@ -18,9 +18,9 @@
 
 // constexpr atomic<T>::atomic(T value)
 
-#include <cuda/std/atomic>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/atomic>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "atomic_helpers.h"
@@ -40,12 +40,12 @@ struct UserType {
     }
 };
 
-template <class Tp, template<typename, typename> class, cuda::thread_scope Scope>
+template <class Tp, template<typename, typename> class, cuda_for_dali::thread_scope Scope>
 struct TestFunc {
     __host__ __device__
     void operator()() const {
-        typedef cuda::atomic<Tp, Scope> Atomic;
-        static_assert(cuda::std::is_literal_type<Atomic>::value, "");
+        typedef cuda_for_dali::atomic<Tp, Scope> Atomic;
+        static_assert(cuda_for_dali::std::is_literal_type<Atomic>::value, "");
         constexpr Tp t(42);
         {
             constexpr Atomic a(t);
@@ -69,13 +69,13 @@ struct TestFunc {
 int main(int, char**)
 {
 #if !defined(__CUDA_ARCH__) || __CUDA_ARCH__ >= 600
-    TestFunc<UserType, local_memory_selector, cuda::thread_scope_system>()();
-    TestEachIntegralType<TestFunc, local_memory_selector, cuda::thread_scope_system>()();
+    TestFunc<UserType, local_memory_selector, cuda_for_dali::thread_scope_system>()();
+    TestEachIntegralType<TestFunc, local_memory_selector, cuda_for_dali::thread_scope_system>()();
 #endif
-    TestFunc<UserType, local_memory_selector, cuda::thread_scope_device>()();
-    TestEachIntegralType<TestFunc, local_memory_selector, cuda::thread_scope_device>()();
-    TestFunc<UserType, local_memory_selector, cuda::thread_scope_block>()();
-    TestEachIntegralType<TestFunc, local_memory_selector, cuda::thread_scope_block>()();
+    TestFunc<UserType, local_memory_selector, cuda_for_dali::thread_scope_device>()();
+    TestEachIntegralType<TestFunc, local_memory_selector, cuda_for_dali::thread_scope_device>()();
+    TestFunc<UserType, local_memory_selector, cuda_for_dali::thread_scope_block>()();
+    TestEachIntegralType<TestFunc, local_memory_selector, cuda_for_dali::thread_scope_block>()();
 
   return 0;
 }

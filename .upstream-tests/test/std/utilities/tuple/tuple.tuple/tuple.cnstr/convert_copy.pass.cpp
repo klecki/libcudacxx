@@ -14,10 +14,10 @@
 
 // XFAIL: gcc-4.8, gcc-4.9
 
-// UNSUPPORTED: c++98, c++03 
+// UNSUPPORTED: c++98, c++03
 
-#include <cuda/std/tuple>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/tuple>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
@@ -36,7 +36,7 @@ struct ExplicitTwo {
     __host__ __device__ ExplicitTwo(ExplicitTwo const&) {}
     __host__ __device__ ExplicitTwo(ExplicitTwo &&) {}
 
-    template <class T, class = typename cuda::std::enable_if<!cuda::std::is_same<T, ExplicitTwo>::value>::type>
+    template <class T, class = typename cuda_for_dali::std::enable_if<!cuda_for_dali::std::is_same<T, ExplicitTwo>::value>::type>
     __host__ __device__ explicit ExplicitTwo(T) {}
 };
 
@@ -76,81 +76,81 @@ struct C
 int main(int, char**)
 {
     {
-        typedef cuda::std::tuple<long> T0;
-        typedef cuda::std::tuple<long long> T1;
+        typedef cuda_for_dali::std::tuple<long> T0;
+        typedef cuda_for_dali::std::tuple<long long> T1;
         T0 t0(2);
         T1 t1 = t0;
-        assert(cuda::std::get<0>(t1) == 2);
+        assert(cuda_for_dali::std::get<0>(t1) == 2);
     }
 #if TEST_STD_VER > 11
     {
-        typedef cuda::std::tuple<int> T0;
-        typedef cuda::std::tuple<A> T1;
+        typedef cuda_for_dali::std::tuple<int> T0;
+        typedef cuda_for_dali::std::tuple<A> T1;
         constexpr T0 t0(2);
         constexpr T1 t1 = t0;
-        static_assert(cuda::std::get<0>(t1) == 2, "");
+        static_assert(cuda_for_dali::std::get<0>(t1) == 2, "");
     }
     {
-        typedef cuda::std::tuple<int> T0;
-        typedef cuda::std::tuple<C> T1;
+        typedef cuda_for_dali::std::tuple<int> T0;
+        typedef cuda_for_dali::std::tuple<C> T1;
         constexpr T0 t0(2);
         constexpr T1 t1{t0};
-        static_assert(cuda::std::get<0>(t1) == C(2), "");
+        static_assert(cuda_for_dali::std::get<0>(t1) == C(2), "");
     }
 #endif
     {
-        typedef cuda::std::tuple<long, char> T0;
-        typedef cuda::std::tuple<long long, int> T1;
+        typedef cuda_for_dali::std::tuple<long, char> T0;
+        typedef cuda_for_dali::std::tuple<long long, int> T1;
         T0 t0(2, 'a');
         T1 t1 = t0;
-        assert(cuda::std::get<0>(t1) == 2);
-        assert(cuda::std::get<1>(t1) == int('a'));
+        assert(cuda_for_dali::std::get<0>(t1) == 2);
+        assert(cuda_for_dali::std::get<1>(t1) == int('a'));
     }
     {
-        typedef cuda::std::tuple<long, char, D> T0;
-        typedef cuda::std::tuple<long long, int, B> T1;
+        typedef cuda_for_dali::std::tuple<long, char, D> T0;
+        typedef cuda_for_dali::std::tuple<long long, int, B> T1;
         T0 t0(2, 'a', D(3));
         T1 t1 = t0;
-        assert(cuda::std::get<0>(t1) == 2);
-        assert(cuda::std::get<1>(t1) == int('a'));
-        assert(cuda::std::get<2>(t1).id_ == 3);
+        assert(cuda_for_dali::std::get<0>(t1) == 2);
+        assert(cuda_for_dali::std::get<1>(t1) == int('a'));
+        assert(cuda_for_dali::std::get<2>(t1).id_ == 3);
     }
     {
         D d(3);
-        typedef cuda::std::tuple<long, char, D&> T0;
-        typedef cuda::std::tuple<long long, int, B&> T1;
+        typedef cuda_for_dali::std::tuple<long, char, D&> T0;
+        typedef cuda_for_dali::std::tuple<long long, int, B&> T1;
         T0 t0(2, 'a', d);
         T1 t1 = t0;
         d.id_ = 2;
-        assert(cuda::std::get<0>(t1) == 2);
-        assert(cuda::std::get<1>(t1) == int('a'));
-        assert(cuda::std::get<2>(t1).id_ == 2);
+        assert(cuda_for_dali::std::get<0>(t1) == 2);
+        assert(cuda_for_dali::std::get<1>(t1) == int('a'));
+        assert(cuda_for_dali::std::get<2>(t1).id_ == 2);
     }
     {
-        typedef cuda::std::tuple<long, char, int> T0;
-        typedef cuda::std::tuple<long long, int, B> T1;
+        typedef cuda_for_dali::std::tuple<long, char, int> T0;
+        typedef cuda_for_dali::std::tuple<long long, int, B> T1;
         T0 t0(2, 'a', 3);
         T1 t1(t0);
-        assert(cuda::std::get<0>(t1) == 2);
-        assert(cuda::std::get<1>(t1) == int('a'));
-        assert(cuda::std::get<2>(t1).id_ == 3);
+        assert(cuda_for_dali::std::get<0>(t1) == 2);
+        assert(cuda_for_dali::std::get<1>(t1) == int('a'));
+        assert(cuda_for_dali::std::get<2>(t1).id_ == 3);
     }
     {
-        const cuda::std::tuple<int> t1(42);
-        cuda::std::tuple<Explicit> t2(t1);
-        assert(cuda::std::get<0>(t2).value == 42);
+        const cuda_for_dali::std::tuple<int> t1(42);
+        cuda_for_dali::std::tuple<Explicit> t2(t1);
+        assert(cuda_for_dali::std::get<0>(t2).value == 42);
     }
     {
-        const cuda::std::tuple<int> t1(42);
-        cuda::std::tuple<Implicit> t2 = t1;
-        assert(cuda::std::get<0>(t2).value == 42);
+        const cuda_for_dali::std::tuple<int> t1(42);
+        cuda_for_dali::std::tuple<Implicit> t2 = t1;
+        assert(cuda_for_dali::std::get<0>(t2).value == 42);
     }
     {
-        static_assert(cuda::std::is_convertible<ExplicitTwo&&, ExplicitTwo>::value, "");
-        static_assert(cuda::std::is_convertible<cuda::std::tuple<ExplicitTwo&&>&&, const cuda::std::tuple<ExplicitTwo>&>::value, "");
+        static_assert(cuda_for_dali::std::is_convertible<ExplicitTwo&&, ExplicitTwo>::value, "");
+        static_assert(cuda_for_dali::std::is_convertible<cuda_for_dali::std::tuple<ExplicitTwo&&>&&, const cuda_for_dali::std::tuple<ExplicitTwo>&>::value, "");
 
         ExplicitTwo e;
-        cuda::std::tuple<ExplicitTwo> t = cuda::std::tuple<ExplicitTwo&&>(cuda::std::move(e));
+        cuda_for_dali::std::tuple<ExplicitTwo> t = cuda_for_dali::std::tuple<ExplicitTwo&&>(cuda_for_dali::std::move(e));
         ((void)t);
     }
   return 0;

@@ -10,18 +10,18 @@
 // <chrono>
 // class year_month_weekday;
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using year_month_weekday = cuda::std::chrono::year_month_weekday;
+    using year_month_weekday = cuda_for_dali::std::chrono::year_month_weekday;
 
-    static_assert(cuda::std::is_trivially_copyable_v<year_month_weekday>, "");
-    static_assert(cuda::std::is_standard_layout_v<year_month_weekday>, "");
+    static_assert(cuda_for_dali::std::is_trivially_copyable_v<year_month_weekday>, "");
+    static_assert(cuda_for_dali::std::is_standard_layout_v<year_month_weekday>, "");
 
   return 0;
 }

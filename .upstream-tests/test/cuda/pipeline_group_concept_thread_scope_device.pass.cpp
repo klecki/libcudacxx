@@ -13,7 +13,7 @@
 
 int main(int argc, char ** argv)
 {
-    test_select_size_type<cuda::thread_scope::thread_scope_device>();
+    test_select_size_type<cuda_for_dali::thread_scope::thread_scope_device>();
 
     return 0;
 }

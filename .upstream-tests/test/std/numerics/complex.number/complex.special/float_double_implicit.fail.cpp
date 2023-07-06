@@ -16,13 +16,13 @@
 //     explicit constexpr complex(const complex<double>&);
 // };
 
-#include <cuda/std/complex>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/complex>
+#include <cuda_for_dali/std/cassert>
 
 int main(int, char**)
 {
-    const cuda::std::complex<double> cd(2.5, 3.5);
-    cuda::std::complex<float> cf = cd;
+    const cuda_for_dali::std::complex<double> cd(2.5, 3.5);
+    cuda_for_dali::std::complex<float> cf = cd;
     assert(cf.real() == cd.real());
     assert(cf.imag() == cd.imag());
 

@@ -6,8 +6,8 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <cuda/std/cstddef>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/cstddef>
+#include <cuda_for_dali/std/type_traits>
 
 #include "test_macros.h"
 
@@ -19,12 +19,12 @@
 
 int main(int, char**)
 {
-    static_assert(sizeof(cuda::std::ptrdiff_t) == sizeof(void*),
-                  "sizeof(cuda::std::ptrdiff_t) == sizeof(void*)");
-    static_assert(cuda::std::is_signed<cuda::std::ptrdiff_t>::value,
-                  "cuda::std::is_signed<cuda::std::ptrdiff_t>::value");
-    static_assert(cuda::std::is_integral<cuda::std::ptrdiff_t>::value,
-                  "cuda::std::is_integral<cuda::std::ptrdiff_t>::value");
+    static_assert(sizeof(cuda_for_dali::std::ptrdiff_t) == sizeof(void*),
+                  "sizeof(cuda_for_dali::std::ptrdiff_t) == sizeof(void*)");
+    static_assert(cuda_for_dali::std::is_signed<cuda_for_dali::std::ptrdiff_t>::value,
+                  "cuda_for_dali::std::is_signed<cuda_for_dali::std::ptrdiff_t>::value");
+    static_assert(cuda_for_dali::std::is_integral<cuda_for_dali::std::ptrdiff_t>::value,
+                  "cuda_for_dali::std::is_integral<cuda_for_dali::std::ptrdiff_t>::value");
 
   return 0;
 }

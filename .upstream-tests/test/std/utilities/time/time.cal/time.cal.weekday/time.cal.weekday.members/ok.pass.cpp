@@ -13,18 +13,18 @@
 //  constexpr bool ok() const noexcept;
 //  Returns: wd_ <= 6
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using weekday = cuda::std::chrono::weekday;
+    using weekday = cuda_for_dali::std::chrono::weekday;
 
     ASSERT_NOEXCEPT(                std::declval<const weekday>().ok());
-    ASSERT_SAME_TYPE(bool, decltype(cuda::std::declval<const weekday>().ok()));
+    ASSERT_SAME_TYPE(bool, decltype(cuda_for_dali::std::declval<const weekday>().ok()));
 
     static_assert( weekday{0}.ok(), "");
     static_assert( weekday{1}.ok(), "");

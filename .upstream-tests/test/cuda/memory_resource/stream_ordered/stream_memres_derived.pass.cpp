@@ -8,10 +8,10 @@
 //===----------------------------------------------------------------------===//
 
 #include <cassert>
-#include <cuda/memory_resource>
-#include <cuda/std/cstddef>
-#include <cuda/std/type_traits>
-#include <cuda/stream_view>
+#include <cuda_for_dali/memory_resource>
+#include <cuda_for_dali/std/cstddef>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/stream_view>
 #include <memory>
 #include <tuple>
 #include <vector>
@@ -20,9 +20,9 @@ struct event {
   enum action { ALLOCATE, DEALLOCATE };
   action act;
   std::uintptr_t pointer;
-  cuda::std::size_t bytes;
-  cuda::std::size_t alignment;
-  cuda::stream_view stream;
+  cuda_for_dali::std::size_t bytes;
+  cuda_for_dali::std::size_t alignment;
+  cuda_for_dali::stream_view stream;
 };
 
 bool operator==(event const &lhs, event const &rhs) {
@@ -31,21 +31,21 @@ bool operator==(event const &lhs, event const &rhs) {
 }
 
 template <typename Kind>
-class derived_resource : public cuda::stream_ordered_memory_resource<Kind> {
+class derived_resource : public cuda_for_dali::stream_ordered_memory_resource<Kind> {
 public:
   std::vector<event> &events() { return events_; }
 
 private:
-  void *do_allocate_async(cuda::std::size_t bytes, cuda::std::size_t alignment,
-                          cuda::stream_view stream) override {
+  void *do_allocate_async(cuda_for_dali::std::size_t bytes, cuda_for_dali::std::size_t alignment,
+                          cuda_for_dali::stream_view stream) override {
     auto p = 0xDEADBEEF;
     events().push_back(event{event::ALLOCATE, p, bytes, alignment, stream});
     return reinterpret_cast<void *>(p);
   }
 
-  void do_deallocate_async(void *p, cuda::std::size_t bytes,
-                     cuda::std::size_t alignment,
-                     cuda::stream_view stream) override {
+  void do_deallocate_async(void *p, cuda_for_dali::std::size_t bytes,
+                     cuda_for_dali::std::size_t alignment,
+                     cuda_for_dali::stream_view stream) override {
     events().push_back(event{event::DEALLOCATE,
                              reinterpret_cast<std::uintptr_t>(p), bytes,
                              alignment, stream});
@@ -56,7 +56,7 @@ private:
 
 template <typename Kind> void test_derived_resource() {
   using derived = derived_resource<Kind>;
-  using base = cuda::stream_ordered_memory_resource<Kind>;
+  using base = cuda_for_dali::stream_ordered_memory_resource<Kind>;
 
   derived d;
   base *b = &d;
@@ -64,7 +64,7 @@ template <typename Kind> void test_derived_resource() {
   assert(b->is_equal(*b));
   assert(b->is_equal(d));
 
-  cuda::stream_view default_stream;
+  cuda_for_dali::stream_view default_stream;
 
   auto p0 = b->allocate(100);
   assert(d.events().size() == 1);
@@ -90,7 +90,7 @@ template <typename Kind> void test_derived_resource() {
                                      reinterpret_cast<std::uintptr_t>(p1), 42,
                                      32, default_stream}));
 
-  cuda::stream_view s = reinterpret_cast<cudaStream_t>(13);
+  cuda_for_dali::stream_view s = reinterpret_cast<cudaStream_t>(13);
 
   auto p2 = b->allocate_async(123, s);
   assert(d.events().size() == 5);
@@ -120,10 +120,10 @@ template <typename Kind> void test_derived_resource() {
 int main(int argc, char **argv) {
 
 #ifndef __CUDA_ARCH__
-  test_derived_resource<cuda::memory_kind::host>();
-  test_derived_resource<cuda::memory_kind::device>();
-  test_derived_resource<cuda::memory_kind::managed>();
-  test_derived_resource<cuda::memory_kind::pinned>();
+  test_derived_resource<cuda_for_dali::memory_kind::host>();
+  test_derived_resource<cuda_for_dali::memory_kind::device>();
+  test_derived_resource<cuda_for_dali::memory_kind::managed>();
+  test_derived_resource<cuda_for_dali::memory_kind::pinned>();
 #endif
 
   return 0;

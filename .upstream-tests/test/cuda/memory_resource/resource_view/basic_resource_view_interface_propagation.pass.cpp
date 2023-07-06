@@ -9,15 +9,15 @@
 
 
 #include <cassert>
-#include <cuda/memory_resource>
-#include <cuda/std/cstddef>
-#include <cuda/std/type_traits>
-#include <cuda/stream_view>
+#include <cuda_for_dali/memory_resource>
+#include <cuda_for_dali/std/cstddef>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/stream_view>
 #include <memory>
 #include <tuple>
 #include <vector>
 
-class sync_resource : public cuda::memory_resource<cuda::memory_kind::pinned> {
+class sync_resource : public cuda_for_dali::memory_resource<cuda_for_dali::memory_kind::pinned> {
 public:
   int extra_sync() {
     return 42;
@@ -25,7 +25,7 @@ public:
 
   size_t allocated_size = 0, allocated_alignment = 0;
   void *allocated_pointer = nullptr;
-  mutable const cuda::memory_resource<cuda::memory_kind::pinned> *compared_resource = nullptr;
+  mutable const cuda_for_dali::memory_resource<cuda_for_dali::memory_kind::pinned> *compared_resource = nullptr;
 private:
   void *do_allocate(size_t size, size_t alignment) override {
     allocated_size = size;
@@ -42,13 +42,13 @@ private:
     allocated_alignment = 0;
   }
 
-  bool do_is_equal(const cuda::memory_resource<cuda::memory_kind::pinned> &other) const noexcept override {
+  bool do_is_equal(const cuda_for_dali::memory_resource<cuda_for_dali::memory_kind::pinned> &other) const noexcept override {
     compared_resource = &other;
     return this == &other;
   }
 };
 
-class async_resource : public cuda::stream_ordered_memory_resource<cuda::memory_kind::device> {
+class async_resource : public cuda_for_dali::stream_ordered_memory_resource<cuda_for_dali::memory_kind::device> {
 public:
   int extra_async() {
     return 42;
@@ -56,8 +56,8 @@ public:
 
   size_t allocated_size = 0, allocated_alignment = 0;
   void *allocated_pointer = nullptr;
-  cuda::stream_view allocation_stream = {};
-  mutable const cuda::memory_resource<cuda::memory_kind::device> *compared_resource = nullptr;
+  cuda_for_dali::stream_view allocation_stream = {};
+  mutable const cuda_for_dali::memory_resource<cuda_for_dali::memory_kind::device> *compared_resource = nullptr;
 private:
   void *do_allocate(size_t size, size_t alignment) override {
     allocated_size = size;
@@ -65,7 +65,7 @@ private:
     return allocated_pointer = reinterpret_cast<void*>(0x123400);
   }
 
-  void *do_allocate_async(size_t size, size_t alignment, cuda::stream_view stream) override {
+  void *do_allocate_async(size_t size, size_t alignment, cuda_for_dali::stream_view stream) override {
     allocated_size = size;
     allocated_alignment = alignment;
     allocation_stream = stream;
@@ -81,7 +81,7 @@ private:
     allocated_alignment = 0;
   }
 
-  void do_deallocate_async(void *mem, size_t size, size_t alignment, cuda::stream_view stream) override {
+  void do_deallocate_async(void *mem, size_t size, size_t alignment, cuda_for_dali::stream_view stream) override {
     assert(mem == allocated_pointer);
     assert(size == allocated_size);
     assert(stream == allocation_stream);
@@ -93,7 +93,7 @@ private:
     allocation_stream = {};
   }
 
-  bool do_is_equal(const cuda::memory_resource<cuda::memory_kind::device> &other) const noexcept override {
+  bool do_is_equal(const cuda_for_dali::memory_resource<cuda_for_dali::memory_kind::device> &other) const noexcept override {
     compared_resource = &other;
     return this == &other;
   }
@@ -104,7 +104,7 @@ int main(int argc, char **argv) {
   // syncrhonous resource
   {
     sync_resource rsrc;
-    auto view = cuda::view_resource<cuda::memory_access::host>(&rsrc);
+    auto view = cuda_for_dali::view_resource<cuda_for_dali::memory_access::host>(&rsrc);
     assert(view->extra_sync() == 42);
     void *ptr = view->allocate(23, 32);
     assert(ptr == view->allocated_pointer);
@@ -120,7 +120,7 @@ int main(int argc, char **argv) {
   }
   {
     sync_resource rsrc;
-    cuda::resource_view<cuda::memory_access::host> view = &rsrc;
+    cuda_for_dali::resource_view<cuda_for_dali::memory_access::host> view = &rsrc;
     void *ptr = view->allocate(23, 32);
     assert(ptr == rsrc.allocated_pointer);
     assert(23 == rsrc.allocated_size);
@@ -132,9 +132,9 @@ int main(int argc, char **argv) {
   }
   // stream-ordered resource
   {
-    cuda::stream_view stream((cudaStream_t)0x1234);
+    cuda_for_dali::stream_view stream((cudaStream_t)0x1234);
     async_resource rsrc;
-    auto view = cuda::view_resource<cuda::memory_access::device>(&rsrc);
+    auto view = cuda_for_dali::view_resource<cuda_for_dali::memory_access::device>(&rsrc);
 
     assert(view->extra_async() == 42);
 
@@ -165,9 +165,9 @@ int main(int argc, char **argv) {
     assert(view->compared_resource == &rsrc);
   }
   {
-    cuda::stream_view stream((cudaStream_t)0x1234);
+    cuda_for_dali::stream_view stream((cudaStream_t)0x1234);
     async_resource rsrc;
-    cuda::stream_ordered_resource_view<cuda::memory_access::device> view = &rsrc;
+    cuda_for_dali::stream_ordered_resource_view<cuda_for_dali::memory_access::device> view = &rsrc;
 
     void *ptr = view->allocate(23, 32);
     assert(ptr == rsrc.allocated_pointer);

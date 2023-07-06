@@ -8,12 +8,12 @@
 //===----------------------------------------------------------------------===//
 // UNSUPPORTED: c++98, c++03, c++11
 
-#include <cuda/std/chrono>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/cassert>
 
 int main(int, char**)
 {
-    using namespace cuda::std::chrono;
+    using namespace cuda_for_dali::std::chrono;
 
     hours h = 4h;
     assert ( h == hours(4));

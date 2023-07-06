@@ -15,14 +15,14 @@
 
 #include "helpers.h"
 
-#include <cuda/std/latch>
+#include <cuda_for_dali/std/latch>
 
-static_assert(sizeof(cuda::latch<cuda::thread_scope_device>) == 64, "");
+static_assert(sizeof(cuda_for_dali::latch<cuda_for_dali::thread_scope_device>) == 64, "");
 
 template<int N>
 struct count_down
 {
-    using async = cuda::std::true_type;
+    using async = cuda_for_dali::std::true_type;
 
     template<typename Latch>
     __host__ __device__
@@ -35,7 +35,7 @@ struct count_down
 template<int N>
 struct arrive_and_wait
 {
-    using async = cuda::std::true_type;
+    using async = cuda_for_dali::std::true_type;
 
     template<typename Latch>
     __host__ __device__
@@ -51,7 +51,7 @@ struct arrive_and_wait
 // Isn't software great?
 struct latch_wait
 {
-    using async = cuda::std::true_type;
+    using async = cuda_for_dali::std::true_type;
 
     template<typename Latch>
     __host__ __device__
@@ -95,29 +95,29 @@ using r3_aw1_aw1_aw1 = performer_list<
 void kernel_invoker()
 {
     validate_not_movable<
-        cuda::std::latch,
+        cuda_for_dali::std::latch,
         r0_w
     >(0);
     validate_not_movable<
-        cuda::latch<cuda::thread_scope_system>,
+        cuda_for_dali::latch<cuda_for_dali::thread_scope_system>,
         r0_w
     >(0);
 
     validate_not_movable<
-        cuda::std::latch,
+        cuda_for_dali::std::latch,
         r5_cd1_aw2_w_cd2
     >(0);
     validate_not_movable<
-        cuda::latch<cuda::thread_scope_system>,
+        cuda_for_dali::latch<cuda_for_dali::thread_scope_system>,
         r5_cd1_aw2_w_cd2
     >(0);
 
     validate_not_movable<
-        cuda::std::latch,
+        cuda_for_dali::std::latch,
         r3_aw1_aw1_aw1
     >(0);
     validate_not_movable<
-        cuda::latch<cuda::thread_scope_system>,
+        cuda_for_dali::latch<cuda_for_dali::thread_scope_system>,
         r3_aw1_aw1_aw1
     >(0);
 }

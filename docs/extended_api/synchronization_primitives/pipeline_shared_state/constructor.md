@@ -24,7 +24,7 @@ Construct a [`cuda::pipeline`] _shared state_ object.
 ## Example
 
 ```cuda
-#include <cuda/pipeline>
+#include <cuda_for_dali/pipeline>
 
 #pragma diag_suppress static_var_with_dynamic_init
 

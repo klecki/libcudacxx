@@ -24,12 +24,12 @@
 
 // <cuda/std/tuple>
 
-// Test that the constructors offered by cuda::std::tuple are formulated
+// Test that the constructors offered by cuda_for_dali::std::tuple are formulated
 // so they're compatible with implicit deduction guides, or if that's not
 // possible that they provide explicit guides to make it work.
 
-#include <cuda/std/tuple>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/tuple>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "archetypes.h"
@@ -40,7 +40,7 @@ constexpr bool unused(T &&) {return true;}
 
 // Overloads
 //  using A = Allocator
-//  using AT = cuda::std::allocator_arg_t
+//  using AT = cuda_for_dali::std::allocator_arg_t
 // ---------------
 // (1)  tuple(const Types&...) -> tuple<Types...>
 // (2)  tuple(pair<T1, T2>) -> tuple<T1, T2>;
@@ -54,124 +54,124 @@ constexpr bool unused(T &&) {return true;}
 // (10) tuple(AT, A const&, tuple&& t) -> decltype(t)
 __host__ __device__ void test_primary_template()
 {
-  // cuda::std::allocator not supported
-  // const cuda::std::allocator<int> A;
-  const auto AT = cuda::std::allocator_arg;
+  // cuda_for_dali::std::allocator not supported
+  // const cuda_for_dali::std::allocator<int> A;
+  const auto AT = cuda_for_dali::std::allocator_arg;
   unused(AT);
   { // Testing (1)
     int x = 101;
-    cuda::std::tuple t1(42);
-    ASSERT_SAME_TYPE(decltype(t1), cuda::std::tuple<int>);
-    cuda::std::tuple t2(x, 0.0, nullptr);
-    ASSERT_SAME_TYPE(decltype(t2), cuda::std::tuple<int, double, decltype(nullptr)>);
+    cuda_for_dali::std::tuple t1(42);
+    ASSERT_SAME_TYPE(decltype(t1), cuda_for_dali::std::tuple<int>);
+    cuda_for_dali::std::tuple t2(x, 0.0, nullptr);
+    ASSERT_SAME_TYPE(decltype(t2), cuda_for_dali::std::tuple<int, double, decltype(nullptr)>);
     unused(t1);
     unused(t2);
   }
   { // Testing (2)
-    cuda::std::pair<int, char> p1(1, 'c');
-    cuda::std::tuple t1(p1);
-    ASSERT_SAME_TYPE(decltype(t1), cuda::std::tuple<int, char>);
+    cuda_for_dali::std::pair<int, char> p1(1, 'c');
+    cuda_for_dali::std::tuple t1(p1);
+    ASSERT_SAME_TYPE(decltype(t1), cuda_for_dali::std::tuple<int, char>);
 
-    cuda::std::pair<int, cuda::std::tuple<char, long, void*>> p2(1, cuda::std::tuple<char, long, void*>('c', 3l, nullptr));
-    cuda::std::tuple t2(p2);
-    ASSERT_SAME_TYPE(decltype(t2), cuda::std::tuple<int, cuda::std::tuple<char, long, void*>>);
+    cuda_for_dali::std::pair<int, cuda_for_dali::std::tuple<char, long, void*>> p2(1, cuda_for_dali::std::tuple<char, long, void*>('c', 3l, nullptr));
+    cuda_for_dali::std::tuple t2(p2);
+    ASSERT_SAME_TYPE(decltype(t2), cuda_for_dali::std::tuple<int, cuda_for_dali::std::tuple<char, long, void*>>);
 
     int i = 3;
-    cuda::std::pair<cuda::std::reference_wrapper<int>, char> p3(cuda::std::ref(i), 'c');
-    cuda::std::tuple t3(p3);
-    ASSERT_SAME_TYPE(decltype(t3), cuda::std::tuple<cuda::std::reference_wrapper<int>, char>);
+    cuda_for_dali::std::pair<cuda_for_dali::std::reference_wrapper<int>, char> p3(cuda_for_dali::std::ref(i), 'c');
+    cuda_for_dali::std::tuple t3(p3);
+    ASSERT_SAME_TYPE(decltype(t3), cuda_for_dali::std::tuple<cuda_for_dali::std::reference_wrapper<int>, char>);
 
-    cuda::std::pair<int&, char> p4(i, 'c');
-    cuda::std::tuple t4(p4);
-    ASSERT_SAME_TYPE(decltype(t4), cuda::std::tuple<int&, char>);
+    cuda_for_dali::std::pair<int&, char> p4(i, 'c');
+    cuda_for_dali::std::tuple t4(p4);
+    ASSERT_SAME_TYPE(decltype(t4), cuda_for_dali::std::tuple<int&, char>);
 
-    cuda::std::tuple t5(cuda::std::pair<int, char>(1, 'c'));
-    ASSERT_SAME_TYPE(decltype(t5), cuda::std::tuple<int, char>);
+    cuda_for_dali::std::tuple t5(cuda_for_dali::std::pair<int, char>(1, 'c'));
+    ASSERT_SAME_TYPE(decltype(t5), cuda_for_dali::std::tuple<int, char>);
     unused(t5);
   }
   { // Testing (3)
     using T = ExplicitTestTypes::TestType;
-    static_assert(!cuda::std::is_convertible<T const&, T>::value, "");
+    static_assert(!cuda_for_dali::std::is_convertible<T const&, T>::value, "");
 
-    cuda::std::tuple t1(T{});
-    ASSERT_SAME_TYPE(decltype(t1), cuda::std::tuple<T>);
+    cuda_for_dali::std::tuple t1(T{});
+    ASSERT_SAME_TYPE(decltype(t1), cuda_for_dali::std::tuple<T>);
 
 #if defined(__GNUC__) && (__GNUC__ < 11)
     const T v{};
-    cuda::std::tuple t2(T{}, 101l, v);
-    ASSERT_SAME_TYPE(decltype(t2), cuda::std::tuple<T, long, T>);
+    cuda_for_dali::std::tuple t2(T{}, 101l, v);
+    ASSERT_SAME_TYPE(decltype(t2), cuda_for_dali::std::tuple<T, long, T>);
 #endif
   }
-  // cuda::std::allocator not supported
+  // cuda_for_dali::std::allocator not supported
   /*
   { // Testing (4)
     int x = 101;
-    cuda::std::tuple t1(AT, A, 42);
-    ASSERT_SAME_TYPE(decltype(t1), cuda::std::tuple<int>);
+    cuda_for_dali::std::tuple t1(AT, A, 42);
+    ASSERT_SAME_TYPE(decltype(t1), cuda_for_dali::std::tuple<int>);
 
-    cuda::std::tuple t2(AT, A, 42, 0.0, x);
-    ASSERT_SAME_TYPE(decltype(t2), cuda::std::tuple<int, double, int>);
+    cuda_for_dali::std::tuple t2(AT, A, 42, 0.0, x);
+    ASSERT_SAME_TYPE(decltype(t2), cuda_for_dali::std::tuple<int, double, int>);
   }
   { // Testing (5)
     using T = ExplicitTestTypes::TestType;
-    static_assert(!cuda::std::is_convertible<T const&, T>::value, "");
+    static_assert(!cuda_for_dali::std::is_convertible<T const&, T>::value, "");
 
-    cuda::std::tuple t1(AT, A, T{});
-    ASSERT_SAME_TYPE(decltype(t1), cuda::std::tuple<T>);
+    cuda_for_dali::std::tuple t1(AT, A, T{});
+    ASSERT_SAME_TYPE(decltype(t1), cuda_for_dali::std::tuple<T>);
 
     const T v{};
-    cuda::std::tuple t2(AT, A, T{}, 101l, v);
-    ASSERT_SAME_TYPE(decltype(t2), cuda::std::tuple<T, long, T>);
+    cuda_for_dali::std::tuple t2(AT, A, T{}, 101l, v);
+    ASSERT_SAME_TYPE(decltype(t2), cuda_for_dali::std::tuple<T, long, T>);
   }
   { // Testing (6)
-    cuda::std::pair<int, char> p1(1, 'c');
-    cuda::std::tuple t1(AT, A, p1);
-    ASSERT_SAME_TYPE(decltype(t1), cuda::std::tuple<int, char>);
+    cuda_for_dali::std::pair<int, char> p1(1, 'c');
+    cuda_for_dali::std::tuple t1(AT, A, p1);
+    ASSERT_SAME_TYPE(decltype(t1), cuda_for_dali::std::tuple<int, char>);
 
-    cuda::std::pair<int, cuda::std::tuple<char, long, void*>> p2(1, cuda::std::tuple<char, long, void*>('c', 3l, nullptr));
-    cuda::std::tuple t2(AT, A, p2);
-    ASSERT_SAME_TYPE(decltype(t2), cuda::std::tuple<int, cuda::std::tuple<char, long, void*>>);
+    cuda_for_dali::std::pair<int, cuda_for_dali::std::tuple<char, long, void*>> p2(1, cuda_for_dali::std::tuple<char, long, void*>('c', 3l, nullptr));
+    cuda_for_dali::std::tuple t2(AT, A, p2);
+    ASSERT_SAME_TYPE(decltype(t2), cuda_for_dali::std::tuple<int, cuda_for_dali::std::tuple<char, long, void*>>);
 
     int i = 3;
-    cuda::std::pair<cuda::std::reference_wrapper<int>, char> p3(cuda::std::ref(i), 'c');
-    cuda::std::tuple t3(AT, A, p3);
-    ASSERT_SAME_TYPE(decltype(t3), cuda::std::tuple<cuda::std::reference_wrapper<int>, char>);
+    cuda_for_dali::std::pair<cuda_for_dali::std::reference_wrapper<int>, char> p3(cuda_for_dali::std::ref(i), 'c');
+    cuda_for_dali::std::tuple t3(AT, A, p3);
+    ASSERT_SAME_TYPE(decltype(t3), cuda_for_dali::std::tuple<cuda_for_dali::std::reference_wrapper<int>, char>);
 
-    cuda::std::pair<int&, char> p4(i, 'c');
-    cuda::std::tuple t4(AT, A, p4);
-    ASSERT_SAME_TYPE(decltype(t4), cuda::std::tuple<int&, char>);
+    cuda_for_dali::std::pair<int&, char> p4(i, 'c');
+    cuda_for_dali::std::tuple t4(AT, A, p4);
+    ASSERT_SAME_TYPE(decltype(t4), cuda_for_dali::std::tuple<int&, char>);
 
-    cuda::std::tuple t5(AT, A, cuda::std::pair<int, char>(1, 'c'));
-    ASSERT_SAME_TYPE(decltype(t5), cuda::std::tuple<int, char>);
+    cuda_for_dali::std::tuple t5(AT, A, cuda_for_dali::std::pair<int, char>(1, 'c'));
+    ASSERT_SAME_TYPE(decltype(t5), cuda_for_dali::std::tuple<int, char>);
   }
   */
   { // Testing (7)
-    using Tup = cuda::std::tuple<int, decltype(nullptr)>;
+    using Tup = cuda_for_dali::std::tuple<int, decltype(nullptr)>;
     const Tup t(42, nullptr);
 
-    cuda::std::tuple t1(t);
+    cuda_for_dali::std::tuple t1(t);
     ASSERT_SAME_TYPE(decltype(t1), Tup);
     unused(t1);
   }
   { // Testing (8)
-    using Tup = cuda::std::tuple<void*, unsigned, char>;
-    cuda::std::tuple t1(Tup(nullptr, 42, 'a'));
+    using Tup = cuda_for_dali::std::tuple<void*, unsigned, char>;
+    cuda_for_dali::std::tuple t1(Tup(nullptr, 42, 'a'));
     ASSERT_SAME_TYPE(decltype(t1), Tup);
     unused(t1);
   }
-  // cuda::std::allocator not supported
+  // cuda_for_dali::std::allocator not supported
   /*
   { // Testing (9)
-    using Tup = cuda::std::tuple<int, decltype(nullptr)>;
+    using Tup = cuda_for_dali::std::tuple<int, decltype(nullptr)>;
     const Tup t(42, nullptr);
 
-    cuda::std::tuple t1(AT, A, t);
+    cuda_for_dali::std::tuple t1(AT, A, t);
     ASSERT_SAME_TYPE(decltype(t1), Tup);
     unused(t1);
   }
   { // Testing (10)
-    using Tup = cuda::std::tuple<void*, unsigned, char>;
-    cuda::std::tuple t1(AT, A, Tup(nullptr, 42, 'a'));
+    using Tup = cuda_for_dali::std::tuple<void*, unsigned, char>;
+    cuda_for_dali::std::tuple t1(AT, A, Tup(nullptr, 42, 'a'));
     ASSERT_SAME_TYPE(decltype(t1), Tup);
     unused(t1);
   }
@@ -180,7 +180,7 @@ __host__ __device__ void test_primary_template()
 
 // Overloads
 //  using A = Allocator
-//  using AT = cuda::std::allocator_arg_t
+//  using AT = cuda_for_dali::std::allocator_arg_t
 // ---------------
 // (1)  tuple() -> tuple<>
 // (2)  tuple(AT, A const&) -> tuple<>
@@ -190,43 +190,43 @@ __host__ __device__ void test_primary_template()
 // (6)  tuple(AT, A const&, tuple&&) -> tuple<>
 __host__ __device__ void test_empty_specialization()
 {
-  // cuda::std::allocator not supported
-  // cuda::std::allocator<int> A;
-  const auto AT = cuda::std::allocator_arg;
+  // cuda_for_dali::std::allocator not supported
+  // cuda_for_dali::std::allocator<int> A;
+  const auto AT = cuda_for_dali::std::allocator_arg;
   unused(AT);
   { // Testing (1)
-    cuda::std::tuple t1{};
-    ASSERT_SAME_TYPE(decltype(t1), cuda::std::tuple<>);
+    cuda_for_dali::std::tuple t1{};
+    ASSERT_SAME_TYPE(decltype(t1), cuda_for_dali::std::tuple<>);
     unused(t1);
   }
-  // cuda::std::allocator not supported
+  // cuda_for_dali::std::allocator not supported
   /*
   { // Testing (2)
-    cuda::std::tuple t1{AT, A};
-    ASSERT_SAME_TYPE(decltype(t1), cuda::std::tuple<>);
+    cuda_for_dali::std::tuple t1{AT, A};
+    ASSERT_SAME_TYPE(decltype(t1), cuda_for_dali::std::tuple<>);
   }
   */
   { // Testing (3)
-    const cuda::std::tuple<> t{};
-    cuda::std::tuple t1(t);
-    ASSERT_SAME_TYPE(decltype(t1), cuda::std::tuple<>);
+    const cuda_for_dali::std::tuple<> t{};
+    cuda_for_dali::std::tuple t1(t);
+    ASSERT_SAME_TYPE(decltype(t1), cuda_for_dali::std::tuple<>);
     unused(t1);
   }
   { // Testing (4)
-    cuda::std::tuple t1(cuda::std::tuple<>{});
-    ASSERT_SAME_TYPE(decltype(t1), cuda::std::tuple<>);
+    cuda_for_dali::std::tuple t1(cuda_for_dali::std::tuple<>{});
+    ASSERT_SAME_TYPE(decltype(t1), cuda_for_dali::std::tuple<>);
     unused(t1);
   }
-  // cuda::std::allocator not supported
+  // cuda_for_dali::std::allocator not supported
   /*
   { // Testing (5)
-    const cuda::std::tuple<> t{};
-    cuda::std::tuple t1(AT, A, t);
-    ASSERT_SAME_TYPE(decltype(t1), cuda::std::tuple<>);
+    const cuda_for_dali::std::tuple<> t{};
+    cuda_for_dali::std::tuple t1(AT, A, t);
+    ASSERT_SAME_TYPE(decltype(t1), cuda_for_dali::std::tuple<>);
   }
   { // Testing (6)
-    cuda::std::tuple t1(AT, A, cuda::std::tuple<>{});
-    ASSERT_SAME_TYPE(decltype(t1), cuda::std::tuple<>);
+    cuda_for_dali::std::tuple t1(AT, A, cuda_for_dali::std::tuple<>{});
+    ASSERT_SAME_TYPE(decltype(t1), cuda_for_dali::std::tuple<>);
   }
   */
 }

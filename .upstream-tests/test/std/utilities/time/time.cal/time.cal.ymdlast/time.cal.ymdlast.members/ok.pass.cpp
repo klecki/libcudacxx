@@ -13,23 +13,23 @@
 // constexpr bool ok() const noexcept;
 //  Returns: m_.ok() && y_.ok().
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using year                = cuda::std::chrono::year;
-    using month               = cuda::std::chrono::month;
-    using month_day_last      = cuda::std::chrono::month_day_last;
-    using year_month_day_last = cuda::std::chrono::year_month_day_last;
+    using year                = cuda_for_dali::std::chrono::year;
+    using month               = cuda_for_dali::std::chrono::month;
+    using month_day_last      = cuda_for_dali::std::chrono::month_day_last;
+    using year_month_day_last = cuda_for_dali::std::chrono::year_month_day_last;
 
-    constexpr month January = cuda::std::chrono::January;
+    constexpr month January = cuda_for_dali::std::chrono::January;
 
     ASSERT_NOEXCEPT(                std::declval<const year_month_day_last>().ok());
-    ASSERT_SAME_TYPE(bool, decltype(cuda::std::declval<const year_month_day_last>().ok()));
+    ASSERT_SAME_TYPE(bool, decltype(cuda_for_dali::std::declval<const year_month_day_last>().ok()));
 
     static_assert(!year_month_day_last{year{-32768}, month_day_last{month{}}}.ok(), ""); // both bad
     static_assert(!year_month_day_last{year{-32768}, month_day_last{January}}.ok(), ""); // Bad year

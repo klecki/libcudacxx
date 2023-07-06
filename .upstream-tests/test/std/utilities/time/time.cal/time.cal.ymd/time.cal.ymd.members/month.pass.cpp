@@ -13,21 +13,21 @@
 // constexpr chrono::month month() const noexcept;
 //  Returns: wd_
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using year           = cuda::std::chrono::year;
-    using month          = cuda::std::chrono::month;
-    using day            = cuda::std::chrono::day;
-    using year_month_day = cuda::std::chrono::year_month_day;
+    using year           = cuda_for_dali::std::chrono::year;
+    using month          = cuda_for_dali::std::chrono::month;
+    using day            = cuda_for_dali::std::chrono::day;
+    using year_month_day = cuda_for_dali::std::chrono::year_month_day;
 
     ASSERT_NOEXCEPT(                 std::declval<const year_month_day>().month());
-    ASSERT_SAME_TYPE(month, decltype(cuda::std::declval<const year_month_day>().month()));
+    ASSERT_SAME_TYPE(month, decltype(cuda_for_dali::std::declval<const year_month_day>().month()));
 
     static_assert( year_month_day{}.month() == month{}, "");
 

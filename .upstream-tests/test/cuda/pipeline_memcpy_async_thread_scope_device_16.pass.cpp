@@ -13,7 +13,7 @@
 
 int main(int argc, char ** argv)
 {
-    test_select_source<cuda::thread_scope_device, int16_t>();
+    test_select_source<cuda_for_dali::thread_scope_device, int16_t>();
 
     return 0;
 }

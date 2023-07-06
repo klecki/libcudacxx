@@ -16,16 +16,16 @@
 
 // XFAIL: gcc-4.8, gcc-4.9
 
-// UNSUPPORTED: c++98, c++03 
+// UNSUPPORTED: c++98, c++03
 
-#include <cuda/std/tuple>
-// cuda::std::array not supported
-//#include <cuda/std/array>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/tuple>
+// cuda_for_dali::std::array not supported
+//#include <cuda_for_dali/std/array>
+#include <cuda_for_dali/std/type_traits>
 
 #include "test_macros.h"
 
-template <class T, size_t Size = sizeof(cuda::std::tuple_size<T>)>
+template <class T, size_t Size = sizeof(cuda_for_dali::std::tuple_size<T>)>
 __host__ __device__ constexpr bool is_complete(int) { static_assert(Size > 0, ""); return true; }
 template <class>
 __host__ __device__ constexpr bool is_complete(long) { return false; }
@@ -35,7 +35,7 @@ __host__ __device__ constexpr bool is_complete() { return is_complete<T>(0); }
 struct Dummy1 {};
 struct Dummy2 {};
 
-namespace cuda {
+namespace cuda_for_dali {
 namespace std {
 template <> struct tuple_size<Dummy1> : public integral_constant<size_t, 0> {};
 }
@@ -60,17 +60,17 @@ __host__ __device__ void test_incomplete() {
 
 int main(int, char**)
 {
-  test_complete<cuda::std::tuple<> >();
-  test_complete<cuda::std::tuple<int&> >();
-  test_complete<cuda::std::tuple<int&&, int&, void*>>();
-  test_complete<cuda::std::pair<int, long> >();
-  // cuda::std::array not supported
-  //test_complete<cuda::std::array<int, 5> >();
+  test_complete<cuda_for_dali::std::tuple<> >();
+  test_complete<cuda_for_dali::std::tuple<int&> >();
+  test_complete<cuda_for_dali::std::tuple<int&&, int&, void*>>();
+  test_complete<cuda_for_dali::std::pair<int, long> >();
+  // cuda_for_dali::std::array not supported
+  //test_complete<cuda_for_dali::std::array<int, 5> >();
   test_complete<Dummy1>();
 
   test_incomplete<void>();
   test_incomplete<int>();
-  test_incomplete<cuda::std::tuple<int>&>();
+  test_incomplete<cuda_for_dali::std::tuple<int>&>();
   test_incomplete<Dummy2>();
 
   return 0;

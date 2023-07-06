@@ -13,12 +13,12 @@
 
 #include "helpers.h"
 
-#include <cuda/std/semaphore>
+#include <cuda_for_dali/std/semaphore>
 
 template<int N>
 struct release
 {
-    using async = cuda::std::true_type;
+    using async = cuda_for_dali::std::true_type;
 
     template<typename Semaphore>
     __host__ __device__
@@ -30,7 +30,7 @@ struct release
 
 struct acquire
 {
-    using async = cuda::std::true_type;
+    using async = cuda_for_dali::std::true_type;
 
     template<typename Semaphore>
     __host__ __device__
@@ -64,29 +64,29 @@ using a_r3_a_a = performer_list<
 void kernel_invoker()
 {
     validate_not_movable<
-        cuda::std::counting_semaphore<3>,
+        cuda_for_dali::std::counting_semaphore<3>,
         a_a_r2
     >(0);
     validate_not_movable<
-        cuda::counting_semaphore<cuda::thread_scope_system, 3>,
+        cuda_for_dali::counting_semaphore<cuda_for_dali::thread_scope_system, 3>,
         a_a_r2
     >(0);
 
     validate_not_movable<
-        cuda::std::counting_semaphore<3>,
+        cuda_for_dali::std::counting_semaphore<3>,
         a_a_a_r1_r2
     >(0);
     validate_not_movable<
-        cuda::counting_semaphore<cuda::thread_scope_system, 3>,
+        cuda_for_dali::counting_semaphore<cuda_for_dali::thread_scope_system, 3>,
         a_a_a_r1_r2
     >(0);
 
     validate_not_movable<
-        cuda::std::counting_semaphore<3>,
+        cuda_for_dali::std::counting_semaphore<3>,
         a_r3_a_a
     >(0);
     validate_not_movable<
-        cuda::counting_semaphore<cuda::thread_scope_system, 3>,
+        cuda_for_dali::counting_semaphore<cuda_for_dali::thread_scope_system, 3>,
         a_r3_a_a
     >(0);
 

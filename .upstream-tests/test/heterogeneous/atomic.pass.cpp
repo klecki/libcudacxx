@@ -11,7 +11,7 @@
 
 #include "helpers.h"
 
-#include <cuda/std/atomic>
+#include <cuda_for_dali/std/atomic>
 
 template<int Operand>
 struct store_tester
@@ -201,39 +201,39 @@ private:
 __host__ __device__
 void validate_not_lock_free()
 {
-    cuda::std::atomic<big_not_lockfree_type> test;
+    cuda_for_dali::std::atomic<big_not_lockfree_type> test;
     assert(!test.is_lock_free());
 }
 
 void kernel_invoker()
 {
-    validate_not_movable<cuda::std::atomic<signed char>, arithmetic_atomic_testers>();
-    validate_not_movable<cuda::std::atomic<signed short>, arithmetic_atomic_testers>();
-    validate_not_movable<cuda::std::atomic<signed int>, arithmetic_atomic_testers>();
-    validate_not_movable<cuda::std::atomic<signed long>, arithmetic_atomic_testers>();
-    validate_not_movable<cuda::std::atomic<signed long long>, arithmetic_atomic_testers>();
+    validate_not_movable<cuda_for_dali::std::atomic<signed char>, arithmetic_atomic_testers>();
+    validate_not_movable<cuda_for_dali::std::atomic<signed short>, arithmetic_atomic_testers>();
+    validate_not_movable<cuda_for_dali::std::atomic<signed int>, arithmetic_atomic_testers>();
+    validate_not_movable<cuda_for_dali::std::atomic<signed long>, arithmetic_atomic_testers>();
+    validate_not_movable<cuda_for_dali::std::atomic<signed long long>, arithmetic_atomic_testers>();
 
-    validate_not_movable<cuda::std::atomic<unsigned char>, bitwise_atomic_testers>();
-    validate_not_movable<cuda::std::atomic<unsigned short>, bitwise_atomic_testers>();
-    validate_not_movable<cuda::std::atomic<unsigned int>, bitwise_atomic_testers>();
-    validate_not_movable<cuda::std::atomic<unsigned long>, bitwise_atomic_testers>();
-    validate_not_movable<cuda::std::atomic<unsigned long long>, bitwise_atomic_testers>();
+    validate_not_movable<cuda_for_dali::std::atomic<unsigned char>, bitwise_atomic_testers>();
+    validate_not_movable<cuda_for_dali::std::atomic<unsigned short>, bitwise_atomic_testers>();
+    validate_not_movable<cuda_for_dali::std::atomic<unsigned int>, bitwise_atomic_testers>();
+    validate_not_movable<cuda_for_dali::std::atomic<unsigned long>, bitwise_atomic_testers>();
+    validate_not_movable<cuda_for_dali::std::atomic<unsigned long long>, bitwise_atomic_testers>();
 
-    validate_not_movable<cuda::std::atomic<big_not_lockfree_type>, basic_testers>();
+    validate_not_movable<cuda_for_dali::std::atomic<big_not_lockfree_type>, basic_testers>();
 
-    validate_not_movable<cuda::atomic<signed char, cuda::thread_scope_system>, arithmetic_atomic_testers>();
-    validate_not_movable<cuda::atomic<signed short, cuda::thread_scope_system>, arithmetic_atomic_testers>();
-    validate_not_movable<cuda::atomic<signed int, cuda::thread_scope_system>, arithmetic_atomic_testers>();
-    validate_not_movable<cuda::atomic<signed long, cuda::thread_scope_system>, arithmetic_atomic_testers>();
-    validate_not_movable<cuda::atomic<signed long long, cuda::thread_scope_system>, arithmetic_atomic_testers>();
+    validate_not_movable<cuda_for_dali::atomic<signed char, cuda_for_dali::thread_scope_system>, arithmetic_atomic_testers>();
+    validate_not_movable<cuda_for_dali::atomic<signed short, cuda_for_dali::thread_scope_system>, arithmetic_atomic_testers>();
+    validate_not_movable<cuda_for_dali::atomic<signed int, cuda_for_dali::thread_scope_system>, arithmetic_atomic_testers>();
+    validate_not_movable<cuda_for_dali::atomic<signed long, cuda_for_dali::thread_scope_system>, arithmetic_atomic_testers>();
+    validate_not_movable<cuda_for_dali::atomic<signed long long, cuda_for_dali::thread_scope_system>, arithmetic_atomic_testers>();
 
-    validate_not_movable<cuda::atomic<unsigned char, cuda::thread_scope_system>, bitwise_atomic_testers>();
-    validate_not_movable<cuda::atomic<unsigned short, cuda::thread_scope_system>, bitwise_atomic_testers>();
-    validate_not_movable<cuda::atomic<unsigned int, cuda::thread_scope_system>, bitwise_atomic_testers>();
-    validate_not_movable<cuda::atomic<unsigned long, cuda::thread_scope_system>, bitwise_atomic_testers>();
-    validate_not_movable<cuda::atomic<unsigned long long, cuda::thread_scope_system>, bitwise_atomic_testers>();
+    validate_not_movable<cuda_for_dali::atomic<unsigned char, cuda_for_dali::thread_scope_system>, bitwise_atomic_testers>();
+    validate_not_movable<cuda_for_dali::atomic<unsigned short, cuda_for_dali::thread_scope_system>, bitwise_atomic_testers>();
+    validate_not_movable<cuda_for_dali::atomic<unsigned int, cuda_for_dali::thread_scope_system>, bitwise_atomic_testers>();
+    validate_not_movable<cuda_for_dali::atomic<unsigned long, cuda_for_dali::thread_scope_system>, bitwise_atomic_testers>();
+    validate_not_movable<cuda_for_dali::atomic<unsigned long long, cuda_for_dali::thread_scope_system>, bitwise_atomic_testers>();
 
-    validate_not_movable<cuda::atomic<big_not_lockfree_type, cuda::thread_scope_system>, basic_testers>();
+    validate_not_movable<cuda_for_dali::atomic<big_not_lockfree_type, cuda_for_dali::thread_scope_system>, basic_testers>();
 }
 
 int main(int arg, char ** argv)

@@ -16,8 +16,8 @@
 //   Returns: unsigned{x} < unsigned{y}.
 
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
@@ -25,7 +25,7 @@
 
 int main(int, char**)
 {
-    using day = cuda::std::chrono::day;
+    using day = cuda_for_dali::std::chrono::day;
 
     AssertComparisons6AreNoexcept<day>();
     AssertComparisons6ReturnBool<day>();

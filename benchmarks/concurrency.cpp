@@ -39,17 +39,17 @@ THE SOFTWARE.
 #include <chrono>
 #include <algorithm>
 
-#include <cuda/std/cstdint>
-#include <cuda/std/cstddef>
-#include <cuda/std/climits>
-#include <cuda/std/ratio>
-#include <cuda/std/chrono>
-#include <cuda/std/limits>
-#include <cuda/std/type_traits>
-#include <cuda/std/atomic>
-#include <cuda/std/barrier>
-#include <cuda/std/latch>
-#include <cuda/std/semaphore>
+#include <cuda_for_dali/std/cstdint>
+#include <cuda_for_dali/std/cstddef>
+#include <cuda_for_dali/std/climits>
+#include <cuda_for_dali/std/ratio>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/limits>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/atomic>
+#include <cuda_for_dali/std/barrier>
+#include <cuda_for_dali/std/latch>
+#include <cuda_for_dali/std/semaphore>
 
 #ifdef __CUDACC__
 #  include <cuda_awbarrier.h>
@@ -70,8 +70,8 @@ inline void assert_(cudaError_t code, const char *file, int line) {
 
 template <class T>
 struct managed_allocator {
-  typedef cuda::std::size_t size_type;
-  typedef cuda::std::ptrdiff_t difference_type;
+  typedef cuda_for_dali::std::size_t size_type;
+  typedef cuda_for_dali::std::ptrdiff_t difference_type;
 
   typedef T value_type;
   typedef T* pointer;// (deprecated in C++17)(removed in C++20)    T*
@@ -134,41 +134,41 @@ struct null_mutex {
 
 struct mutex {
     _ABI void lock() noexcept {
-        while (1 == l.exchange(1, cuda::std::memory_order_acquire))
+        while (1 == l.exchange(1, cuda_for_dali::std::memory_order_acquire))
 #ifndef __NO_WAIT
-            l.wait(1, cuda::std::memory_order_relaxed)
+            l.wait(1, cuda_for_dali::std::memory_order_relaxed)
 #endif
             ;
     }
     _ABI void unlock() noexcept {
-        l.store(0, cuda::std::memory_order_release);
+        l.store(0, cuda_for_dali::std::memory_order_release);
 #ifndef __NO_WAIT
         l.notify_one();
 #endif
     }
-    alignas(64) cuda::atomic<int, cuda::thread_scope_device> l = ATOMIC_VAR_INIT(0);
+    alignas(64) cuda_for_dali::atomic<int, cuda_for_dali::thread_scope_device> l = ATOMIC_VAR_INIT(0);
 };
 
 struct ticket_mutex {
     _ABI void lock() noexcept {
-        auto const my = in.fetch_add(1, cuda::std::memory_order_acquire);
+        auto const my = in.fetch_add(1, cuda_for_dali::std::memory_order_acquire);
         while(1) {
-            auto const now = out.load(cuda::std::memory_order_acquire);
+            auto const now = out.load(cuda_for_dali::std::memory_order_acquire);
             if(now == my)
                 return;
 #ifndef __NO_WAIT
-            out.wait(now, cuda::std::memory_order_relaxed);
+            out.wait(now, cuda_for_dali::std::memory_order_relaxed);
 #endif
         }
     }
     _ABI void unlock() noexcept {
-        out.fetch_add(1, cuda::std::memory_order_release);
+        out.fetch_add(1, cuda_for_dali::std::memory_order_release);
 #ifndef __NO_WAIT
         out.notify_all();
 #endif
     }
-    alignas(64) cuda::atomic<int, cuda::thread_scope_device> in = ATOMIC_VAR_INIT(0);
-    alignas(64) cuda::atomic<int, cuda::thread_scope_device> out = ATOMIC_VAR_INIT(0);
+    alignas(64) cuda_for_dali::atomic<int, cuda_for_dali::thread_scope_device> in = ATOMIC_VAR_INIT(0);
+    alignas(64) cuda_for_dali::atomic<int, cuda_for_dali::thread_scope_device> out = ATOMIC_VAR_INIT(0);
 };
 
 struct sem_mutex {
@@ -179,7 +179,7 @@ struct sem_mutex {
         c.release();
     }
     sem_mutex() : c(1) { }
-    cuda::binary_semaphore<cuda::thread_scope_device> c;
+    cuda_for_dali::binary_semaphore<cuda_for_dali::thread_scope_device> c;
 };
 
 static constexpr int sections = 1 << 18;
@@ -211,7 +211,7 @@ __global__ void launcher(F f, int t, int s_per_t, int* p) {
 }
 #endif
 
-int get_max_threads(cuda::thread_scope scope) {
+int get_max_threads(cuda_for_dali::thread_scope scope) {
 
 #ifndef __CUDACC__
     return std::thread::hardware_concurrency();
@@ -219,14 +219,14 @@ int get_max_threads(cuda::thread_scope scope) {
     cudaDeviceProp deviceProp;
     check(cudaGetDeviceProperties(&deviceProp, 0));
     assert(deviceProp.major >= 7);
-    return scope == cuda::thread_scope_block
+    return scope == cuda_for_dali::thread_scope_block
         ? deviceProp.maxThreadsPerBlock
         : deviceProp.multiProcessorCount * deviceProp.maxThreadsPerMultiProcessor;
 #endif
 }
 
 template <class F>
-sum_mean_dev_t test_body(int threads, F f, cuda::thread_scope scope) {
+sum_mean_dev_t test_body(int threads, F f, cuda_for_dali::thread_scope scope) {
 
     std::vector<int, managed_allocator<int>> progress(threads, 0);
 
@@ -238,7 +238,7 @@ sum_mean_dev_t test_body(int threads, F f, cuda::thread_scope scope) {
 # endif
     auto f_ = make_<F>(f);
     cudaDeviceSynchronize();
-    int const max_blocks = scope == cuda::thread_scope_block ? 1 : get_max_threads(scope) / 1024;
+    int const max_blocks = scope == cuda_for_dali::thread_scope_block ? 1 : get_max_threads(scope) / 1024;
     int const blocks = (std::min)(threads, max_blocks);
     int const threads_per_block = (threads / blocks) + (threads % blocks ? 1 : 0);
     launcher<<<blocks, threads_per_block>>>(f_, threads, sections / threads, p_);
@@ -273,13 +273,13 @@ sum_mean_dev_t test_omp_body(int threads, F && f) {
 }
 
 template <class F>
-void test(std::string const& name, int threads, F && f, cuda::std::atomic<bool>& keep_going, bool use_omp, bool rate_per_thread, cuda::thread_scope scope) {
+void test(std::string const& name, int threads, F && f, cuda_for_dali::std::atomic<bool>& keep_going, bool use_omp, bool rate_per_thread, cuda_for_dali::thread_scope scope) {
 
     std::cout << name << ": " << std::flush;
 
     std::thread test_helper([&]() {
         std::this_thread::sleep_for(std::chrono::seconds(1));
-        keep_going.store(false, cuda::std::memory_order_relaxed);
+        keep_going.store(false, cuda_for_dali::std::memory_order_relaxed);
     });
 
     auto const t1 = std::chrono::steady_clock::now();
@@ -299,7 +299,7 @@ void test(std::string const& name, int threads, F && f, cuda::std::atomic<bool>&
 }
 
 template<class F>
-void test_loop(cuda::thread_scope scope, F && f) {
+void test_loop(cuda_for_dali::thread_scope scope, F && f) {
     std::cout << "============================" << std::endl;
     static int const max = get_max_threads(scope);
     static std::vector<std::pair<int, std::string>> const counts =
@@ -331,19 +331,19 @@ void test_loop(cuda::thread_scope scope, F && f) {
 
 template<class M>
 void test_mutex_contended(std::string const& name, bool use_omp = false) {
-    test_loop(cuda::thread_scope_system, [&](std::pair<int, std::string> c) {
+    test_loop(cuda_for_dali::thread_scope_system, [&](std::pair<int, std::string> c) {
         M* m = make_<M>();
-        cuda::std::atomic<bool> *keep_going = make_<cuda::std::atomic<bool>>(true);
+        cuda_for_dali::std::atomic<bool> *keep_going = make_<cuda_for_dali::std::atomic<bool>>(true);
         auto f = [=] _ABI (int, int) -> int {
             int i = 0;
-            while(keep_going->load(cuda::std::memory_order_relaxed)) {
+            while(keep_going->load(cuda_for_dali::std::memory_order_relaxed)) {
                 m->lock();
                 ++i;
                 m->unlock();
             }
             return i;
         };
-        test(name + ", " + c.second, c.first, f, *keep_going, use_omp, false, cuda::thread_scope_system);
+        test(name + ", " + c.second, c.first, f, *keep_going, use_omp, false, cuda_for_dali::thread_scope_system);
         unmake_(m);
         unmake_(keep_going);
     });
@@ -351,20 +351,20 @@ void test_mutex_contended(std::string const& name, bool use_omp = false) {
 
 template<class M>
 void test_mutex_uncontended(std::string const& name, bool use_omp = false) {
-    test_loop(cuda::thread_scope_system, [&](std::pair<int, std::string> c) {
+    test_loop(cuda_for_dali::thread_scope_system, [&](std::pair<int, std::string> c) {
         std::vector<M, managed_allocator<M>> ms(c.first);
         M* ms_ = &ms[0];
-        cuda::std::atomic<bool> *keep_going = make_<cuda::std::atomic<bool>>(true);
+        cuda_for_dali::std::atomic<bool> *keep_going = make_<cuda_for_dali::std::atomic<bool>>(true);
         auto f = [=] _ABI (int, int id) -> int {
             int i = 0;
-            while(keep_going->load(cuda::std::memory_order_relaxed)) {
+            while(keep_going->load(cuda_for_dali::std::memory_order_relaxed)) {
                 ms_[id].lock();
                 ++i;
                 ms_[id].unlock();
             }
             return i;
         };
-        test(name + ": " + c.second, c.first, f, *keep_going, use_omp, true, cuda::thread_scope_system);
+        test(name + ": " + c.second, c.first, f, *keep_going, use_omp, true, cuda_for_dali::thread_scope_system);
         unmake_(keep_going);
     });
 };
@@ -378,19 +378,19 @@ void test_mutex(std::string const& name, bool use_omp = false) {
 template<typename Barrier>
 struct scope_of_barrier
 {
-    static const constexpr auto scope = cuda::thread_scope_system;
+    static const constexpr auto scope = cuda_for_dali::thread_scope_system;
 };
 
 #ifdef __CUDACC__
 template<>
 struct scope_of_barrier<nvcuda::experimental::awbarrier>
 {
-    static const constexpr auto scope = cuda::thread_scope_block;
+    static const constexpr auto scope = cuda_for_dali::thread_scope_block;
 };
 #endif
 
-template<cuda::thread_scope Scope, typename F>
-struct scope_of_barrier<cuda::barrier<Scope, F>>
+template<cuda_for_dali::thread_scope Scope, typename F>
+struct scope_of_barrier<cuda_for_dali::barrier<Scope, F>>
 {
     static const constexpr auto scope = Scope;
 };
@@ -400,12 +400,12 @@ template<class B>
 void test_barrier_shared(std::string const& name) {
 
     constexpr auto scope = scope_of_barrier<B>::scope;
-    assert(scope == cuda::thread_scope_block);
+    assert(scope == cuda_for_dali::thread_scope_block);
     (void)scope;
 
-    test_loop(cuda::thread_scope_block, [&](std::pair<int, std::string> c) {
+    test_loop(cuda_for_dali::thread_scope_block, [&](std::pair<int, std::string> c) {
         int count = c.first;
-        cuda::std::atomic<bool> *keep_going = make_<cuda::std::atomic<bool>>(true);
+        cuda_for_dali::std::atomic<bool> *keep_going = make_<cuda_for_dali::std::atomic<bool>>(true);
         auto f = [=] __device__ (int n, int)  -> int {
             __shared__ B b;
             if (threadIdx.x == 0) {
@@ -416,7 +416,7 @@ void test_barrier_shared(std::string const& name) {
                 b.arrive_and_wait();
             return n;
         };
-        test(name + ": " + c.second, c.first, f, *keep_going, false, true, cuda::thread_scope_block);
+        test(name + ": " + c.second, c.first, f, *keep_going, false, true, cuda_for_dali::thread_scope_block);
         unmake_(keep_going);
     });
 };
@@ -429,14 +429,14 @@ void test_barrier(std::string const& name, bool use_omp = false) {
     (void)scope;
 
 #ifdef __CUDACC__
-    if (scope == cuda::thread_scope_block) {
+    if (scope == cuda_for_dali::thread_scope_block) {
         test_barrier_shared<B>(name + " __shared__");
     }
 #endif
 
     test_loop(scope_of_barrier<B>::scope, [&](std::pair<int, std::string> c) {
         B* b = make_<B>(c.first);
-        cuda::std::atomic<bool> *keep_going = make_<cuda::std::atomic<bool>>(true);
+        cuda_for_dali::std::atomic<bool> *keep_going = make_<cuda_for_dali::std::atomic<bool>>(true);
         auto f = [=] _ABI (int n, int)  -> int {
             for (int i = 0; i < n; ++i)
                 b->arrive_and_wait();
@@ -451,11 +451,11 @@ void test_barrier(std::string const& name, bool use_omp = false) {
 template<typename Latch>
 struct scope_of_latch
 {
-    static const constexpr auto scope = cuda::thread_scope_system;
+    static const constexpr auto scope = cuda_for_dali::thread_scope_system;
 };
 
-template<cuda::thread_scope Scope>
-struct scope_of_latch<cuda::latch<Scope>>
+template<cuda_for_dali::thread_scope Scope>
+struct scope_of_latch<cuda_for_dali::latch<Scope>>
 {
     static const constexpr auto scope = Scope;
 };
@@ -475,7 +475,7 @@ void test_latch(std::string const& name, bool use_omp = false) {
         for(size_t i = 0; i < n; ++i)
             new (ls + i) L(c.first);
 
-        cuda::std::atomic<bool> *keep_going = make_<cuda::std::atomic<bool>>(true);
+        cuda_for_dali::std::atomic<bool> *keep_going = make_<cuda_for_dali::std::atomic<bool>>(true);
         auto f = [=] _ABI (int, int)  -> int {
             for (int i = 0; i < n; ++i)
                 ls[i].arrive_and_wait();
@@ -490,10 +490,10 @@ void test_latch(std::string const& name, bool use_omp = false) {
 
 int main() {
 
-    int const max = get_max_threads(cuda::thread_scope_system);
+    int const max = get_max_threads(cuda_for_dali::thread_scope_system);
     std::cout << "System has " << max << " hardware threads." << std::endl;
 #ifdef __CUDACC__
-    int const block_max = get_max_threads(cuda::thread_scope_block);
+    int const block_max = get_max_threads(cuda_for_dali::thread_scope_block);
     std::cout << "System has " << block_max << " hardware threads in a single block." << std::endl;
 #endif
 
@@ -509,15 +509,15 @@ int main() {
 
 #ifndef __NO_BARRIER
 #ifdef __CUDACC__
-    test_latch<cuda::latch<cuda::thread_scope_block>>("cuda::latch<block>");
-    test_latch<cuda::latch<cuda::thread_scope_device>>("cuda::latch<device>");
+    test_latch<cuda_for_dali::latch<cuda_for_dali::thread_scope_block>>("cuda_for_dali::latch<block>");
+    test_latch<cuda_for_dali::latch<cuda_for_dali::thread_scope_device>>("cuda_for_dali::latch<device>");
 #endif
-    test_latch<cuda::latch<cuda::thread_scope_system>>("cuda::latch<system>");
+    test_latch<cuda_for_dali::latch<cuda_for_dali::thread_scope_system>>("cuda_for_dali::latch<system>");
 #ifdef __CUDACC__
-    test_barrier<cuda::barrier<cuda::thread_scope_block>>("cuda::barrier<block>");
-    test_barrier<cuda::barrier<cuda::thread_scope_device>>("cuda::barrier<device>");
+    test_barrier<cuda_for_dali::barrier<cuda_for_dali::thread_scope_block>>("cuda_for_dali::barrier<block>");
+    test_barrier<cuda_for_dali::barrier<cuda_for_dali::thread_scope_device>>("cuda_for_dali::barrier<device>");
 #endif
-    test_barrier<cuda::barrier<cuda::thread_scope_system>>("cuda::barrier<system>");
+    test_barrier<cuda_for_dali::barrier<cuda_for_dali::thread_scope_system>>("cuda_for_dali::barrier<system>");
 #ifdef __CUDACC__
     test_barrier_shared<nvcuda::experimental::awbarrier>("nvcuda::exp::awbarrier __shared__");
 #endif

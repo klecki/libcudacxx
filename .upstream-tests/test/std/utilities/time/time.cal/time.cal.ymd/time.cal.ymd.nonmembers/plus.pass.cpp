@@ -25,16 +25,16 @@
 
 
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
 
 __host__ __device__
-constexpr bool testConstexprYears(cuda::std::chrono::year_month_day ym)
+constexpr bool testConstexprYears(cuda_for_dali::std::chrono::year_month_day ym)
 {
-    cuda::std::chrono::years offset{23};
+    cuda_for_dali::std::chrono::years offset{23};
     if (static_cast<int>((ym         ).year()) !=  1) return false;
     if (static_cast<int>((ym + offset).year()) != 24) return false;
     if (static_cast<int>((offset + ym).year()) != 24) return false;
@@ -43,9 +43,9 @@ constexpr bool testConstexprYears(cuda::std::chrono::year_month_day ym)
 
 
 __host__ __device__
-constexpr bool testConstexprMonths(cuda::std::chrono::year_month_day ym)
+constexpr bool testConstexprMonths(cuda_for_dali::std::chrono::year_month_day ym)
 {
-    cuda::std::chrono::months offset{6};
+    cuda_for_dali::std::chrono::months offset{6};
     if (static_cast<unsigned>((ym         ).month()) !=  1) return false;
     if (static_cast<unsigned>((ym + offset).month()) !=  7) return false;
     if (static_cast<unsigned>((offset + ym).month()) !=  7) return false;
@@ -55,23 +55,23 @@ constexpr bool testConstexprMonths(cuda::std::chrono::year_month_day ym)
 
 int main(int, char**)
 {
-    using day        = cuda::std::chrono::day;
-    using year       = cuda::std::chrono::year;
-    using years      = cuda::std::chrono::years;
-    using month      = cuda::std::chrono::month;
-    using months     = cuda::std::chrono::months;
-    using year_month_day = cuda::std::chrono::year_month_day;
+    using day        = cuda_for_dali::std::chrono::day;
+    using year       = cuda_for_dali::std::chrono::year;
+    using years      = cuda_for_dali::std::chrono::years;
+    using month      = cuda_for_dali::std::chrono::month;
+    using months     = cuda_for_dali::std::chrono::months;
+    using year_month_day = cuda_for_dali::std::chrono::year_month_day;
 
     {   // year_month_day + months
-    ASSERT_NOEXCEPT(cuda::std::declval<year_month_day>() + std::declval<months>());
-    ASSERT_NOEXCEPT(cuda::std::declval<months>() + std::declval<year_month_day>());
+    ASSERT_NOEXCEPT(cuda_for_dali::std::declval<year_month_day>() + std::declval<months>());
+    ASSERT_NOEXCEPT(cuda_for_dali::std::declval<months>() + std::declval<year_month_day>());
 
-    ASSERT_SAME_TYPE(year_month_day, decltype(cuda::std::declval<year_month_day>() + std::declval<months>()));
-    ASSERT_SAME_TYPE(year_month_day, decltype(cuda::std::declval<months>() + std::declval<year_month_day>()));
+    ASSERT_SAME_TYPE(year_month_day, decltype(cuda_for_dali::std::declval<year_month_day>() + std::declval<months>()));
+    ASSERT_SAME_TYPE(year_month_day, decltype(cuda_for_dali::std::declval<months>() + std::declval<year_month_day>()));
 
     static_assert(testConstexprMonths(year_month_day{year{1}, month{1}, day{1}}), "");
 
-    year_month_day ym{year{1234}, cuda::std::chrono::January, day{12}};
+    year_month_day ym{year{1234}, cuda_for_dali::std::chrono::January, day{12}};
     for (int i = 0; i <= 10; ++i)  // TODO test wrap-around
     {
         year_month_day ym1 = ym + months{i};
@@ -87,15 +87,15 @@ int main(int, char**)
     }
 
     {   // year_month_day + years
-    ASSERT_NOEXCEPT(cuda::std::declval<year_month_day>() + std::declval<years>());
-    ASSERT_NOEXCEPT(cuda::std::declval<years>() + std::declval<year_month_day>());
+    ASSERT_NOEXCEPT(cuda_for_dali::std::declval<year_month_day>() + std::declval<years>());
+    ASSERT_NOEXCEPT(cuda_for_dali::std::declval<years>() + std::declval<year_month_day>());
 
-    ASSERT_SAME_TYPE(year_month_day, decltype(cuda::std::declval<year_month_day>() + std::declval<years>()));
-    ASSERT_SAME_TYPE(year_month_day, decltype(cuda::std::declval<years>() + std::declval<year_month_day>()));
+    ASSERT_SAME_TYPE(year_month_day, decltype(cuda_for_dali::std::declval<year_month_day>() + std::declval<years>()));
+    ASSERT_SAME_TYPE(year_month_day, decltype(cuda_for_dali::std::declval<years>() + std::declval<year_month_day>()));
 
     static_assert(testConstexprYears (year_month_day{year{1}, month{1}, day{1}}), "");
 
-    auto constexpr January = cuda::std::chrono::January;
+    auto constexpr January = cuda_for_dali::std::chrono::January;
 
     year_month_day ym{year{1234}, January, day{12}};
     for (int i = 0; i <= 10; ++i)

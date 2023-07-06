@@ -11,7 +11,7 @@
 
 // <cuda/std/latch>
 
-#include <cuda/std/latch>
+#include <cuda_for_dali/std/latch>
 
 #include "test_macros.h"
 

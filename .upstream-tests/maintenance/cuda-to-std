@@ -11,6 +11,6 @@ find "${root_dir}/test" -name "*.cpp" |
 while read -r file
 do
     sed -i "${file}" ${header_replacements}
-    sed -i "${file}" -e 's/cuda::std::/std::/g'
+    sed -i "${file}" -e 's/cuda_for_dali::std::/std::/g'
 done
 

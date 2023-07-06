@@ -10,9 +10,9 @@
 
 // greater_equal
 
-#include <cuda/std/functional>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/functional>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #ifndef __CUDACC_RTC__
@@ -21,11 +21,11 @@
 
 int main(int, char**)
 {
-    typedef cuda::std::greater_equal<int> F;
+    typedef cuda_for_dali::std::greater_equal<int> F;
     const F f = F();
-    static_assert((cuda::std::is_same<int, F::first_argument_type>::value), "" );
-    static_assert((cuda::std::is_same<int, F::second_argument_type>::value), "" );
-    static_assert((cuda::std::is_same<bool, F::result_type>::value), "" );
+    static_assert((cuda_for_dali::std::is_same<int, F::first_argument_type>::value), "" );
+    static_assert((cuda_for_dali::std::is_same<int, F::second_argument_type>::value), "" );
+    static_assert((cuda_for_dali::std::is_same<bool, F::result_type>::value), "" );
     assert(f(36, 36));
     assert(f(36, 6));
     assert(!f(6, 36));
@@ -33,11 +33,11 @@ int main(int, char**)
     {
         // test total ordering of int* for greater_equal<int*> and
         // greater_equal<void>.
-        do_pointer_comparison_test<int, cuda::std::greater_equal>();
+        do_pointer_comparison_test<int, cuda_for_dali::std::greater_equal>();
     }
 #endif
 #if TEST_STD_VER > 11
-    typedef cuda::std::greater_equal<> F2;
+    typedef cuda_for_dali::std::greater_equal<> F2;
     const F2 f2 = F2();
     assert(f2(36, 36));
     assert(f2(36, 6));
@@ -47,10 +47,10 @@ int main(int, char**)
     assert(!f2(6, 36.0));
     assert(!f2(6.0, 36));
 
-    constexpr bool foo = cuda::std::greater_equal<int> () (36, 36);
+    constexpr bool foo = cuda_for_dali::std::greater_equal<int> () (36, 36);
     static_assert ( foo, "" );
 
-    constexpr bool bar = cuda::std::greater_equal<> () (36.0, 36);
+    constexpr bool bar = cuda_for_dali::std::greater_equal<> () (36.0, 36);
     static_assert ( bar, "" );
 #endif
 

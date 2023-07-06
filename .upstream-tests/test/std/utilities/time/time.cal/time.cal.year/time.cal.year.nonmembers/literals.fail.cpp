@@ -14,15 +14,15 @@
 
 // constexpr year operator""y(unsigned long long y) noexcept;
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using cuda::std::chrono::year;
+    using cuda_for_dali::std::chrono::year;
     year d1 = 1234y; // expected-error-re {{no matching literal operator for call to 'operator""y' {{.*}}}}
 
   return 0;

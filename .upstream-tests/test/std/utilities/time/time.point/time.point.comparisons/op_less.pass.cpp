@@ -26,18 +26,18 @@
 //   bool
 //   operator>=(const time_point<Clock, Duration1>& lhs, const time_point<Clock, Duration2>& rhs);
 
-#include <cuda/std/chrono>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    typedef cuda::std::chrono::system_clock Clock;
-    typedef cuda::std::chrono::milliseconds Duration1;
-    typedef cuda::std::chrono::microseconds Duration2;
-    typedef cuda::std::chrono::time_point<Clock, Duration1> T1;
-    typedef cuda::std::chrono::time_point<Clock, Duration2> T2;
+    typedef cuda_for_dali::std::chrono::system_clock Clock;
+    typedef cuda_for_dali::std::chrono::milliseconds Duration1;
+    typedef cuda_for_dali::std::chrono::microseconds Duration2;
+    typedef cuda_for_dali::std::chrono::time_point<Clock, Duration1> T1;
+    typedef cuda_for_dali::std::chrono::time_point<Clock, Duration2> T2;
 
     {
     T1 t1(Duration1(3));

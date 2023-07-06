@@ -7,8 +7,8 @@
 //===----------------------------------------------------------------------===//
 
 // UNSUPPORTED: c++98, c++03, c++11
-#include <cuda/std/functional>
-// #include <cuda/std/string>
+#include <cuda_for_dali/std/functional>
+// #include <cuda_for_dali/std/string>
 
 template <class T>
 struct is_transparent
@@ -24,35 +24,35 @@ public:
 
 int main(int, char**)
 {
-    static_assert ( !is_transparent<cuda::std::plus<int>>::value, "" );
-    // static_assert ( !is_transparent<cuda::std::plus<cuda::std::string>>::value, "" );
-    static_assert (  is_transparent<cuda::std::plus<void>>::value, "" );
-    static_assert (  is_transparent<cuda::std::plus<>>::value, "" );
+    static_assert ( !is_transparent<cuda_for_dali::std::plus<int>>::value, "" );
+    // static_assert ( !is_transparent<cuda_for_dali::std::plus<cuda_for_dali::std::string>>::value, "" );
+    static_assert (  is_transparent<cuda_for_dali::std::plus<void>>::value, "" );
+    static_assert (  is_transparent<cuda_for_dali::std::plus<>>::value, "" );
 
-    static_assert ( !is_transparent<cuda::std::minus<int>>::value, "" );
-    // static_assert ( !is_transparent<cuda::std::minus<cuda::std::string>>::value, "" );
-    static_assert (  is_transparent<cuda::std::minus<void>>::value, "" );
-    static_assert (  is_transparent<cuda::std::minus<>>::value, "" );
+    static_assert ( !is_transparent<cuda_for_dali::std::minus<int>>::value, "" );
+    // static_assert ( !is_transparent<cuda_for_dali::std::minus<cuda_for_dali::std::string>>::value, "" );
+    static_assert (  is_transparent<cuda_for_dali::std::minus<void>>::value, "" );
+    static_assert (  is_transparent<cuda_for_dali::std::minus<>>::value, "" );
 
-    static_assert ( !is_transparent<cuda::std::multiplies<int>>::value, "" );
-    // static_assert ( !is_transparent<cuda::std::multiplies<cuda::std::string>>::value, "" );
-    static_assert (  is_transparent<cuda::std::multiplies<void>>::value, "" );
-    static_assert (  is_transparent<cuda::std::multiplies<>>::value, "" );
+    static_assert ( !is_transparent<cuda_for_dali::std::multiplies<int>>::value, "" );
+    // static_assert ( !is_transparent<cuda_for_dali::std::multiplies<cuda_for_dali::std::string>>::value, "" );
+    static_assert (  is_transparent<cuda_for_dali::std::multiplies<void>>::value, "" );
+    static_assert (  is_transparent<cuda_for_dali::std::multiplies<>>::value, "" );
 
-    static_assert ( !is_transparent<cuda::std::divides<int>>::value, "" );
-    // static_assert ( !is_transparent<cuda::std::divides<cuda::std::string>>::value, "" );
-    static_assert (  is_transparent<cuda::std::divides<void>>::value, "" );
-    static_assert (  is_transparent<cuda::std::divides<>>::value, "" );
+    static_assert ( !is_transparent<cuda_for_dali::std::divides<int>>::value, "" );
+    // static_assert ( !is_transparent<cuda_for_dali::std::divides<cuda_for_dali::std::string>>::value, "" );
+    static_assert (  is_transparent<cuda_for_dali::std::divides<void>>::value, "" );
+    static_assert (  is_transparent<cuda_for_dali::std::divides<>>::value, "" );
 
-    static_assert ( !is_transparent<cuda::std::modulus<int>>::value, "" );
-    // static_assert ( !is_transparent<cuda::std::modulus<cuda::std::string>>::value, "" );
-    static_assert (  is_transparent<cuda::std::modulus<void>>::value, "" );
-    static_assert (  is_transparent<cuda::std::modulus<>>::value, "" );
+    static_assert ( !is_transparent<cuda_for_dali::std::modulus<int>>::value, "" );
+    // static_assert ( !is_transparent<cuda_for_dali::std::modulus<cuda_for_dali::std::string>>::value, "" );
+    static_assert (  is_transparent<cuda_for_dali::std::modulus<void>>::value, "" );
+    static_assert (  is_transparent<cuda_for_dali::std::modulus<>>::value, "" );
 
-    static_assert ( !is_transparent<cuda::std::negate<int>>::value, "" );
-    // static_assert ( !is_transparent<cuda::std::negate<cuda::std::string>>::value, "" );
-    static_assert (  is_transparent<cuda::std::negate<void>>::value, "" );
-    static_assert (  is_transparent<cuda::std::negate<>>::value, "" );
+    static_assert ( !is_transparent<cuda_for_dali::std::negate<int>>::value, "" );
+    // static_assert ( !is_transparent<cuda_for_dali::std::negate<cuda_for_dali::std::string>>::value, "" );
+    static_assert (  is_transparent<cuda_for_dali::std::negate<void>>::value, "" );
+    static_assert (  is_transparent<cuda_for_dali::std::negate<>>::value, "" );
 
     return 0;
 }

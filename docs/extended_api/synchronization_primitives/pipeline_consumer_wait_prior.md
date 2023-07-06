@@ -35,7 +35,7 @@ If the pipeline is in a _quitted state_ (see [`cuda::pipeline::quit`]), the
 ## Example
 
 ```cuda
-#include <cuda/pipeline>
+#include <cuda_for_dali/pipeline>
 
 __global__ void example_kernel(uint64_t* global, cuda::std::size_t element_count) {
   extern __shared__ uint64_t shared[];

@@ -8,8 +8,8 @@
 
 // <cuda/std/complex>
 
-#include <cuda/std/complex>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/complex>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
@@ -17,7 +17,7 @@ template <class T>
 __host__ __device__ void
 test()
 {
-    cuda::std::complex<T> z;
+    cuda_for_dali::std::complex<T> z;
     T* a = (T*)&z;
     assert(0 == z.real());
     assert(0 == z.imag());

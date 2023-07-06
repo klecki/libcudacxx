@@ -15,8 +15,8 @@
 // constexpr year_month_day_last& operator+=(const years& d) noexcept;
 // constexpr year_month_day_last& operator-=(const years& d) noexcept;
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
@@ -37,17 +37,17 @@ constexpr bool testConstexpr(D d1)
 
 int main(int, char**)
 {
-    using year                = cuda::std::chrono::year;
-    using month               = cuda::std::chrono::month;
-    using month_day_last      = cuda::std::chrono::month_day_last;
-    using year_month_day_last = cuda::std::chrono::year_month_day_last;
-    using years               = cuda::std::chrono::years;
+    using year                = cuda_for_dali::std::chrono::year;
+    using month               = cuda_for_dali::std::chrono::month;
+    using month_day_last      = cuda_for_dali::std::chrono::month_day_last;
+    using year_month_day_last = cuda_for_dali::std::chrono::year_month_day_last;
+    using years               = cuda_for_dali::std::chrono::years;
 
-    ASSERT_NOEXCEPT(cuda::std::declval<year_month_day_last&>() += std::declval<years>());
-    ASSERT_NOEXCEPT(cuda::std::declval<year_month_day_last&>() -= std::declval<years>());
+    ASSERT_NOEXCEPT(cuda_for_dali::std::declval<year_month_day_last&>() += std::declval<years>());
+    ASSERT_NOEXCEPT(cuda_for_dali::std::declval<year_month_day_last&>() -= std::declval<years>());
 
-    ASSERT_SAME_TYPE(year_month_day_last&, decltype(cuda::std::declval<year_month_day_last&>() += std::declval<years>()));
-    ASSERT_SAME_TYPE(year_month_day_last&, decltype(cuda::std::declval<year_month_day_last&>() -= std::declval<years>()));
+    ASSERT_SAME_TYPE(year_month_day_last&, decltype(cuda_for_dali::std::declval<year_month_day_last&>() += std::declval<years>()));
+    ASSERT_SAME_TYPE(year_month_day_last&, decltype(cuda_for_dali::std::declval<year_month_day_last&>() -= std::declval<years>()));
 
     static_assert(testConstexpr<year_month_day_last, years>(year_month_day_last{year{1}, month_day_last{month{1}}}), "");
 

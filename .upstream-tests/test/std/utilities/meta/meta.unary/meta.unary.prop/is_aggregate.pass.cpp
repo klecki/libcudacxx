@@ -13,7 +13,7 @@
 // template <class T> struct is_aggregate;
 // template <class T> constexpr bool is_aggregate_v = is_aggregate<T>::value;
 
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/type_traits>
 #include "test_macros.h"
 
 template <class T>
@@ -21,14 +21,14 @@ __host__ __device__
 void test_true()
 {
 #if defined(_LIBCUDACXX_IS_AGGREGATE)
-    static_assert( cuda::std::is_aggregate<T>::value, "");
-    static_assert( cuda::std::is_aggregate<const T>::value, "");
-    static_assert( cuda::std::is_aggregate<volatile T>::value, "");
-    static_assert( cuda::std::is_aggregate<const volatile T>::value, "");
-    static_assert( cuda::std::is_aggregate_v<T>, "");
-    static_assert( cuda::std::is_aggregate_v<const T>, "");
-    static_assert( cuda::std::is_aggregate_v<volatile T>, "");
-    static_assert( cuda::std::is_aggregate_v<const volatile T>, "");
+    static_assert( cuda_for_dali::std::is_aggregate<T>::value, "");
+    static_assert( cuda_for_dali::std::is_aggregate<const T>::value, "");
+    static_assert( cuda_for_dali::std::is_aggregate<volatile T>::value, "");
+    static_assert( cuda_for_dali::std::is_aggregate<const volatile T>::value, "");
+    static_assert( cuda_for_dali::std::is_aggregate_v<T>, "");
+    static_assert( cuda_for_dali::std::is_aggregate_v<const T>, "");
+    static_assert( cuda_for_dali::std::is_aggregate_v<volatile T>, "");
+    static_assert( cuda_for_dali::std::is_aggregate_v<const volatile T>, "");
 #endif
 }
 
@@ -37,14 +37,14 @@ __host__ __device__
 void test_false()
 {
 #if defined(_LIBCUDACXX_IS_AGGREGATE)
-    static_assert(!cuda::std::is_aggregate<T>::value, "");
-    static_assert(!cuda::std::is_aggregate<const T>::value, "");
-    static_assert(!cuda::std::is_aggregate<volatile T>::value, "");
-    static_assert(!cuda::std::is_aggregate<const volatile T>::value, "");
-    static_assert(!cuda::std::is_aggregate_v<T>, "");
-    static_assert(!cuda::std::is_aggregate_v<const T>, "");
-    static_assert(!cuda::std::is_aggregate_v<volatile T>, "");
-    static_assert(!cuda::std::is_aggregate_v<const volatile T>, "");
+    static_assert(!cuda_for_dali::std::is_aggregate<T>::value, "");
+    static_assert(!cuda_for_dali::std::is_aggregate<const T>::value, "");
+    static_assert(!cuda_for_dali::std::is_aggregate<volatile T>::value, "");
+    static_assert(!cuda_for_dali::std::is_aggregate<const volatile T>::value, "");
+    static_assert(!cuda_for_dali::std::is_aggregate_v<T>, "");
+    static_assert(!cuda_for_dali::std::is_aggregate_v<const T>, "");
+    static_assert(!cuda_for_dali::std::is_aggregate_v<volatile T>, "");
+    static_assert(!cuda_for_dali::std::is_aggregate_v<const volatile T>, "");
 #endif
 }
 

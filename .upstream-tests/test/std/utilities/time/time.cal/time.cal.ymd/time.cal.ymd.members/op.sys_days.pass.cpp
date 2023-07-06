@@ -29,8 +29,8 @@
 //   static_assert(year_month_day{sys_days{2017y/January/32}} == 2017y/February/1);
 // —end example]
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
@@ -38,23 +38,23 @@
 __host__ __device__
 void RunTheExample()
 {
-    using namespace cuda::std::chrono;
+    using namespace cuda_for_dali::std::chrono;
 
     static_assert(year_month_day{sys_days{year{2017}/January/0}}  == year{2016}/December/31,"");
     static_assert(year_month_day{sys_days{year{2017}/January/31}} == year{2017}/January/31,"");
-    static_assert(year_month_day{sys_days{year{2017}/January/32}} == year{2017}/February/1,"");  
+    static_assert(year_month_day{sys_days{year{2017}/January/32}} == year{2017}/February/1,"");
 }
 
 int main(int, char**)
 {
-    using year           = cuda::std::chrono::year;
-    using month          = cuda::std::chrono::month;
-    using day            = cuda::std::chrono::day;
-    using sys_days       = cuda::std::chrono::sys_days;
-    using days           = cuda::std::chrono::days;
-    using year_month_day = cuda::std::chrono::year_month_day;
+    using year           = cuda_for_dali::std::chrono::year;
+    using month          = cuda_for_dali::std::chrono::month;
+    using day            = cuda_for_dali::std::chrono::day;
+    using sys_days       = cuda_for_dali::std::chrono::sys_days;
+    using days           = cuda_for_dali::std::chrono::days;
+    using year_month_day = cuda_for_dali::std::chrono::year_month_day;
 
-    ASSERT_NOEXCEPT(sys_days(cuda::std::declval<year_month_day>()));
+    ASSERT_NOEXCEPT(sys_days(cuda_for_dali::std::declval<year_month_day>()));
     RunTheExample();
 
     {

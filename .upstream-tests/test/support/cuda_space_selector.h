@@ -7,7 +7,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <cuda/std/cstddef>
+#include <cuda_for_dali/std/cstddef>
 
 #ifdef __CUDACC__
 #define __exec_check_disable__ #pragma nv_exec_check_disable
@@ -27,13 +27,13 @@
 #define SHARED
 #endif
 
-template<typename T, cuda::std::size_t SharedOffset>
+template<typename T, cuda_for_dali::std::size_t SharedOffset>
 struct malloc_memory_provider {
-    static const constexpr cuda::std::size_t prefix_size
+    static const constexpr cuda_for_dali::std::size_t prefix_size
         = SharedOffset % alignof(T *) == 0
             ? SharedOffset
             : SharedOffset + (alignof(T *) - SharedOffset % alignof(T *));
-    static const constexpr cuda::std::size_t shared_offset = prefix_size + sizeof(T *);
+    static const constexpr cuda_for_dali::std::size_t shared_offset = prefix_size + sizeof(T *);
 
 private:
     __host__ __device__
@@ -60,7 +60,7 @@ public:
         }
         __syncthreads();
 #endif
-        auto ptr = reinterpret_cast<cuda::std::uintptr_t>(get_pointer());
+        auto ptr = reinterpret_cast<cuda_for_dali::std::uintptr_t>(get_pointer());
         ptr += alignof(T) - ptr % alignof(T);
         return reinterpret_cast<T *>(ptr);
     }
@@ -78,10 +78,10 @@ public:
     }
 };
 
-template<typename T, cuda::std::size_t SharedOffset>
+template<typename T, cuda_for_dali::std::size_t SharedOffset>
 struct local_memory_provider {
-    static const constexpr cuda::std::size_t prefix_size = 0;
-    static const constexpr cuda::std::size_t shared_offset = SharedOffset;
+    static const constexpr cuda_for_dali::std::size_t prefix_size = 0;
+    static const constexpr cuda_for_dali::std::size_t shared_offset = SharedOffset;
 
     alignas(T) char buffer[sizeof(T)];
 
@@ -91,13 +91,13 @@ struct local_memory_provider {
     }
 };
 
-template<typename T, cuda::std::size_t SharedOffset>
+template<typename T, cuda_for_dali::std::size_t SharedOffset>
 struct device_shared_memory_provider {
-    static const constexpr cuda::std::size_t prefix_size
+    static const constexpr cuda_for_dali::std::size_t prefix_size
         = SharedOffset % alignof(T) == 0
             ? SharedOffset
             : SharedOffset + (alignof(T) - SharedOffset % alignof(T));
-    static const constexpr cuda::std::size_t shared_offset = prefix_size + sizeof(T);
+    static const constexpr cuda_for_dali::std::size_t shared_offset = prefix_size + sizeof(T);
 
     __device__
     T * get() {
@@ -131,20 +131,20 @@ struct default_initializer {
 };
 
 template<typename T,
-    template<typename, cuda::std::size_t> typename Provider,
+    template<typename, cuda_for_dali::std::size_t> typename Provider,
     typename Initializer = constructor_initializer,
-    cuda::std::size_t SharedOffset = 0>
+    cuda_for_dali::std::size_t SharedOffset = 0>
 class memory_selector
 {
     Provider<T, SharedOffset> provider;
     T * ptr;
 
 public:
-    template<cuda::std::size_t SharedOffset_>
+    template<cuda_for_dali::std::size_t SharedOffset_>
     using offsetted = memory_selector<T, Provider, Initializer, SharedOffset + SharedOffset_>;
 
-    static const constexpr cuda::std::size_t prefix_size = Provider<T, SharedOffset>::prefix_size;
-    static const constexpr cuda::std::size_t shared_offset = Provider<T, SharedOffset>::shared_offset;
+    static const constexpr cuda_for_dali::std::size_t prefix_size = Provider<T, SharedOffset>::prefix_size;
+    static const constexpr cuda_for_dali::std::size_t shared_offset = Provider<T, SharedOffset>::shared_offset;
 
 #ifndef __CUDACC_RTC__
     __exec_check_disable__

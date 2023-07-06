@@ -19,25 +19,25 @@
 //     if (is_trivially_destructible_v<T1> && is_trivially_destructible_v<T2>) is true.
 
 
-#include <cuda/std/utility>
-#include <cuda/std/type_traits>
-// cuda::std::string not supported
-// #include <cuda/std/string>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/utility>
+#include <cuda_for_dali/std/type_traits>
+// cuda_for_dali::std::string not supported
+// #include <cuda_for_dali/std/string>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "DefaultOnly.h"
 
 int main(int, char**)
 {
-  static_assert((cuda::std::is_trivially_destructible<
-      cuda::std::pair<int, float> >::value), "");
+  static_assert((cuda_for_dali::std::is_trivially_destructible<
+      cuda_for_dali::std::pair<int, float> >::value), "");
   /*
-  static_assert((!cuda::std::is_trivially_destructible<
-      cuda::std::pair<int, cuda::std::string> >::value), "");
+  static_assert((!cuda_for_dali::std::is_trivially_destructible<
+      cuda_for_dali::std::pair<int, cuda_for_dali::std::string> >::value), "");
   */
-  static_assert((!cuda::std::is_trivially_destructible<
-      cuda::std::pair<int, DefaultOnly> >::value), "");
+  static_assert((!cuda_for_dali::std::is_trivially_destructible<
+      cuda_for_dali::std::pair<int, DefaultOnly> >::value), "");
 
   return 0;
 }

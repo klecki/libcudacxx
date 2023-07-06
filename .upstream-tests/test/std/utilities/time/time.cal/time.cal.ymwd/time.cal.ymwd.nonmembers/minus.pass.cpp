@@ -17,8 +17,8 @@
 //   Returns: ymwd + (-dy).
 
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
@@ -27,12 +27,12 @@
 __host__ __device__
 constexpr bool testConstexprYears ()
 {
-    cuda::std::chrono::year_month_weekday ym0{cuda::std::chrono::year{1234}, cuda::std::chrono::January, cuda::std::chrono::weekday_indexed{cuda::std::chrono::Tuesday, 1}};
-    cuda::std::chrono::year_month_weekday ym1 = ym0 - cuda::std::chrono::years{10};
+    cuda_for_dali::std::chrono::year_month_weekday ym0{cuda_for_dali::std::chrono::year{1234}, cuda_for_dali::std::chrono::January, cuda_for_dali::std::chrono::weekday_indexed{cuda_for_dali::std::chrono::Tuesday, 1}};
+    cuda_for_dali::std::chrono::year_month_weekday ym1 = ym0 - cuda_for_dali::std::chrono::years{10};
     return
-        ym1.year()    == cuda::std::chrono::year{1234-10}
-     && ym1.month()   == cuda::std::chrono::January
-     && ym1.weekday() == cuda::std::chrono::Tuesday
+        ym1.year()    == cuda_for_dali::std::chrono::year{1234-10}
+     && ym1.month()   == cuda_for_dali::std::chrono::January
+     && ym1.weekday() == cuda_for_dali::std::chrono::Tuesday
      && ym1.index()   == 1
         ;
 }
@@ -40,12 +40,12 @@ constexpr bool testConstexprYears ()
 __host__ __device__
 constexpr bool testConstexprMonths ()
 {
-    cuda::std::chrono::year_month_weekday ym0{cuda::std::chrono::year{1234}, cuda::std::chrono::November, cuda::std::chrono::weekday_indexed{cuda::std::chrono::Tuesday, 1}};
-    cuda::std::chrono::year_month_weekday ym1 = ym0 - cuda::std::chrono::months{6};
+    cuda_for_dali::std::chrono::year_month_weekday ym0{cuda_for_dali::std::chrono::year{1234}, cuda_for_dali::std::chrono::November, cuda_for_dali::std::chrono::weekday_indexed{cuda_for_dali::std::chrono::Tuesday, 1}};
+    cuda_for_dali::std::chrono::year_month_weekday ym1 = ym0 - cuda_for_dali::std::chrono::months{6};
     return
-        ym1.year()    == cuda::std::chrono::year{1234}
-     && ym1.month()   == cuda::std::chrono::May
-     && ym1.weekday() == cuda::std::chrono::Tuesday
+        ym1.year()    == cuda_for_dali::std::chrono::year{1234}
+     && ym1.month()   == cuda_for_dali::std::chrono::May
+     && ym1.weekday() == cuda_for_dali::std::chrono::Tuesday
      && ym1.index()   == 1
         ;
 }
@@ -53,20 +53,20 @@ constexpr bool testConstexprMonths ()
 
 int main(int, char**)
 {
-    using year               = cuda::std::chrono::year;
-    using month              = cuda::std::chrono::month;
-    using weekday            = cuda::std::chrono::weekday;
-    using weekday_indexed    = cuda::std::chrono::weekday_indexed;
-    using year_month_weekday = cuda::std::chrono::year_month_weekday;
-    using years              = cuda::std::chrono::years;
-    using months             = cuda::std::chrono::months;
+    using year               = cuda_for_dali::std::chrono::year;
+    using month              = cuda_for_dali::std::chrono::month;
+    using weekday            = cuda_for_dali::std::chrono::weekday;
+    using weekday_indexed    = cuda_for_dali::std::chrono::weekday_indexed;
+    using year_month_weekday = cuda_for_dali::std::chrono::year_month_weekday;
+    using years              = cuda_for_dali::std::chrono::years;
+    using months             = cuda_for_dali::std::chrono::months;
 
-    constexpr month November  = cuda::std::chrono::November;
-    constexpr weekday Tuesday = cuda::std::chrono::Tuesday;
+    constexpr month November  = cuda_for_dali::std::chrono::November;
+    constexpr weekday Tuesday = cuda_for_dali::std::chrono::Tuesday;
 
     {  // year_month_weekday - years
     ASSERT_NOEXCEPT(                              std::declval<year_month_weekday>() - std::declval<years>());
-    ASSERT_SAME_TYPE(year_month_weekday, decltype(cuda::std::declval<year_month_weekday>() - std::declval<years>()));
+    ASSERT_SAME_TYPE(year_month_weekday, decltype(cuda_for_dali::std::declval<year_month_weekday>() - std::declval<years>()));
 
     static_assert(testConstexprYears(), "");
 
@@ -83,7 +83,7 @@ int main(int, char**)
 
     {  // year_month_weekday - months
     ASSERT_NOEXCEPT(                              std::declval<year_month_weekday>() - std::declval<months>());
-    ASSERT_SAME_TYPE(year_month_weekday, decltype(cuda::std::declval<year_month_weekday>() - std::declval<months>()));
+    ASSERT_SAME_TYPE(year_month_weekday, decltype(cuda_for_dali::std::declval<year_month_weekday>() - std::declval<months>()));
 
     static_assert(testConstexprMonths(), "");
 

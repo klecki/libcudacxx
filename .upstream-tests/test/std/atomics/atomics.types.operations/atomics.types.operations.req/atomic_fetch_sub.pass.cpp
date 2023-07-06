@@ -28,32 +28,32 @@
 //     T*
 //     atomic_fetch_sub(atomic<T*>* obj, ptrdiff_t op);
 
-#include <cuda/std/atomic>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/atomic>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "atomic_helpers.h"
 #include "cuda_space_selector.h"
 
-template <class T, template<typename, typename> typename Selector, cuda::thread_scope>
+template <class T, template<typename, typename> typename Selector, cuda_for_dali::thread_scope>
 struct TestFn {
   __host__ __device__
   void operator()() const {
     {
-        typedef cuda::std::atomic<T> A;
+        typedef cuda_for_dali::std::atomic<T> A;
         Selector<A, constructor_initializer> sel;
         A & t = *sel.construct();
-        cuda::std::atomic_init(&t, T(3));
-        assert(cuda::std::atomic_fetch_sub(&t, T(2)) == T(3));
+        cuda_for_dali::std::atomic_init(&t, T(3));
+        assert(cuda_for_dali::std::atomic_fetch_sub(&t, T(2)) == T(3));
         assert(t == T(1));
     }
     {
-        typedef cuda::std::atomic<T> A;
+        typedef cuda_for_dali::std::atomic<T> A;
         Selector<volatile A, constructor_initializer> sel;
         volatile A & t = *sel.construct();
-        cuda::std::atomic_init(&t, T(3));
-        assert(cuda::std::atomic_fetch_sub(&t, T(2)) == T(3));
+        cuda_for_dali::std::atomic_init(&t, T(3));
+        assert(cuda_for_dali::std::atomic_fetch_sub(&t, T(2)) == T(3));
         assert(t == T(1));
     }
   }
@@ -64,21 +64,21 @@ __host__ __device__
 void testp()
 {
     {
-        typedef cuda::std::atomic<T> A;
-        typedef typename cuda::std::remove_pointer<T>::type X;
+        typedef cuda_for_dali::std::atomic<T> A;
+        typedef typename cuda_for_dali::std::remove_pointer<T>::type X;
         Selector<A, constructor_initializer> sel;
         A & t = *sel.construct();
-        cuda::std::atomic_init(&t, T(3*sizeof(X)));
-        assert(cuda::std::atomic_fetch_sub(&t, 2) == T(3*sizeof(X)));
+        cuda_for_dali::std::atomic_init(&t, T(3*sizeof(X)));
+        assert(cuda_for_dali::std::atomic_fetch_sub(&t, 2) == T(3*sizeof(X)));
         assert(t == T(1*sizeof(X)));
     }
     {
-        typedef cuda::std::atomic<T> A;
-        typedef typename cuda::std::remove_pointer<T>::type X;
+        typedef cuda_for_dali::std::atomic<T> A;
+        typedef typename cuda_for_dali::std::remove_pointer<T>::type X;
         Selector<volatile A, constructor_initializer> sel;
         volatile A & t = *sel.construct();
-        cuda::std::atomic_init(&t, T(3*sizeof(X)));
-        assert(cuda::std::atomic_fetch_sub(&t, 2) == T(3*sizeof(X)));
+        cuda_for_dali::std::atomic_init(&t, T(3*sizeof(X)));
+        assert(cuda_for_dali::std::atomic_fetch_sub(&t, 2) == T(3*sizeof(X)));
         assert(t == T(1*sizeof(X)));
     }
 }

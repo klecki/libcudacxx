@@ -12,8 +12,8 @@
 //   bool
 //   operator==(const T& lhs, const complex<T>& rhs);
 
-#include <cuda/std/complex>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/complex>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
@@ -24,22 +24,22 @@ test_constexpr()
 #if TEST_STD_VER > 11
     {
     constexpr T lhs(-2.5);
-    constexpr cuda::std::complex<T> rhs(1.5,  2.5);
+    constexpr cuda_for_dali::std::complex<T> rhs(1.5,  2.5);
     static_assert(!(lhs == rhs), "");
     }
     {
     constexpr T lhs(-2.5);
-    constexpr cuda::std::complex<T> rhs(1.5,  0);
+    constexpr cuda_for_dali::std::complex<T> rhs(1.5,  0);
     static_assert(!(lhs == rhs), "");
     }
     {
     constexpr T lhs(1.5);
-    constexpr cuda::std::complex<T> rhs(1.5, 2.5);
+    constexpr cuda_for_dali::std::complex<T> rhs(1.5, 2.5);
     static_assert(!(lhs == rhs), "");
     }
     {
     constexpr T lhs(1.5);
-    constexpr cuda::std::complex<T> rhs(1.5, 0);
+    constexpr cuda_for_dali::std::complex<T> rhs(1.5, 0);
     static_assert(lhs == rhs, "");
     }
 #endif
@@ -51,22 +51,22 @@ test()
 {
     {
     T lhs(-2.5);
-    cuda::std::complex<T> rhs(1.5,  2.5);
+    cuda_for_dali::std::complex<T> rhs(1.5,  2.5);
     assert(!(lhs == rhs));
     }
     {
     T lhs(-2.5);
-    cuda::std::complex<T> rhs(1.5,  0);
+    cuda_for_dali::std::complex<T> rhs(1.5,  0);
     assert(!(lhs == rhs));
     }
     {
     T lhs(1.5);
-    cuda::std::complex<T> rhs(1.5, 2.5);
+    cuda_for_dali::std::complex<T> rhs(1.5, 2.5);
     assert(!(lhs == rhs));
     }
     {
     T lhs(1.5);
-    cuda::std::complex<T> rhs(1.5, 0);
+    cuda_for_dali::std::complex<T> rhs(1.5, 0);
     assert(lhs == rhs);
     }
 

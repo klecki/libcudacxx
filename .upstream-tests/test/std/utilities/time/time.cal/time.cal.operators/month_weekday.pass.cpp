@@ -37,8 +37,8 @@
 
 
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
@@ -46,13 +46,13 @@
 
 int main(int, char**)
 {
-    using month_weekday   = cuda::std::chrono::month_weekday;
-    using month           = cuda::std::chrono::month;
-    using weekday         = cuda::std::chrono::weekday;
-    using weekday_indexed = cuda::std::chrono::weekday_indexed;
+    using month_weekday   = cuda_for_dali::std::chrono::month_weekday;
+    using month           = cuda_for_dali::std::chrono::month;
+    using weekday         = cuda_for_dali::std::chrono::weekday;
+    using weekday_indexed = cuda_for_dali::std::chrono::weekday_indexed;
 
-    constexpr weekday Tuesday = cuda::std::chrono::Tuesday;
-    constexpr month February = cuda::std::chrono::February;
+    constexpr weekday Tuesday = cuda_for_dali::std::chrono::Tuesday;
+    constexpr month February = cuda_for_dali::std::chrono::February;
 
     { // operator/(const month& m, const weekday_indexed& wdi) (and switched)
         ASSERT_NOEXCEPT (February/Tuesday[2]);

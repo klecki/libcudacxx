@@ -14,12 +14,12 @@
 
 // tuple_element<I, pair<T1, T2> >::type
 
-#include <cuda/std/utility>
+#include <cuda_for_dali/std/utility>
 
 int main(int, char**)
 {
-    typedef cuda::std::pair<int, short> T;
-    cuda::std::tuple_element<2, T>::type foo; // expected-error@utility:* {{Index out of bounds in cuda::std::tuple_element<cuda::std::pair<T1, T2>>}}
+    typedef cuda_for_dali::std::pair<int, short> T;
+    cuda_for_dali::std::tuple_element<2, T>::type foo; // expected-error@utility:* {{Index out of bounds in cuda_for_dali::std::tuple_element<cuda_for_dali::std::pair<T1, T2>>}}
 
   return 0;
 }

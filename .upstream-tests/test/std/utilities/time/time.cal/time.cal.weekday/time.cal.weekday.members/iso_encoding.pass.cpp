@@ -14,8 +14,8 @@
 //  Returns the underlying weekday, _except_ that returns '7' for Sunday (zero)
 //    See [time.cal.wd.members]
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
@@ -30,10 +30,10 @@ constexpr bool testConstexpr()
 
 int main(int, char**)
 {
-    using weekday = cuda::std::chrono::weekday;
+    using weekday = cuda_for_dali::std::chrono::weekday;
 
     ASSERT_NOEXCEPT(                    std::declval<weekday&>().iso_encoding());
-    ASSERT_SAME_TYPE(unsigned, decltype(cuda::std::declval<weekday&>().iso_encoding()));
+    ASSERT_SAME_TYPE(unsigned, decltype(cuda_for_dali::std::declval<weekday&>().iso_encoding()));
 
     static_assert(testConstexpr<weekday>(), "");
 

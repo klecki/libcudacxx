@@ -19,17 +19,17 @@
 //  constexpr chrono::month month() const noexcept;
 //  constexpr bool             ok() const noexcept;
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using year       = cuda::std::chrono::year;
-    using month      = cuda::std::chrono::month;
-    using year_month = cuda::std::chrono::year_month;
+    using year       = cuda_for_dali::std::chrono::year;
+    using month      = cuda_for_dali::std::chrono::month;
+    using year_month = cuda_for_dali::std::chrono::year_month;
 
     ASSERT_NOEXCEPT(year_month{});
     ASSERT_NOEXCEPT(year_month{year{1}, month{1}});
@@ -39,9 +39,9 @@ int main(int, char**)
     static_assert( ym0.month() == month{}, "");
     static_assert(!ym0.ok(),               "");
 
-    constexpr year_month ym1{year{2018}, cuda::std::chrono::January};
+    constexpr year_month ym1{year{2018}, cuda_for_dali::std::chrono::January};
     static_assert( ym1.year()  == year{2018},           "");
-    static_assert( ym1.month() == cuda::std::chrono::January, "");
+    static_assert( ym1.month() == cuda_for_dali::std::chrono::January, "");
     static_assert( ym1.ok(),                            "");
 
     constexpr year_month ym2{year{2018}, month{}};

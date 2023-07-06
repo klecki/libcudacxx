@@ -7,8 +7,8 @@
 //
 //===----------------------------------------------------------------------===//
 
-#ifndef _LIBCUDACXX_FUZZING
-#define _LIBCUDACXX_FUZZING
+#ifndef _LIBCUDAFORDALICXX_FUZZING
+#define _LIBCUDAFORDALICXX_FUZZING
 
 #include <cstddef> // for size_t
 #include <cstdint> // for uint8_t
@@ -58,4 +58,4 @@ namespace fuzzing {
 
 } // namespace fuzzing
 
-#endif // _LIBCUDACXX_FUZZING
+#endif // _LIBCUDAFORDALICXX_FUZZING

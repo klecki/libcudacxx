@@ -14,40 +14,40 @@
 // using sys_seconds = sys_time<seconds>;
 // using sys_days    = sys_time<days>;
 
-// [Example: 
-//   sys_seconds{sys_days{1970y/January/1}}.time_since_epoch() is 0s. 
+// [Example:
+//   sys_seconds{sys_days{1970y/January/1}}.time_since_epoch() is 0s.
 //   sys_seconds{sys_days{2000y/January/1}}.time_since_epoch() is 946’684’800s, which is 10’957 * 86’400s.
 // —end example]
 
 
-#include <cuda/std/chrono>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using system_clock = cuda::std::chrono::system_clock;
-    using year         = cuda::std::chrono::year;
+    using system_clock = cuda_for_dali::std::chrono::system_clock;
+    using year         = cuda_for_dali::std::chrono::year;
 
-    using seconds = cuda::std::chrono::seconds;
-    using minutes = cuda::std::chrono::minutes;
-    using days    = cuda::std::chrono::days;
-    
-    using sys_seconds = cuda::std::chrono::sys_seconds;
-    using sys_minutes = cuda::std::chrono::sys_time<minutes>;
-    using sys_days    = cuda::std::chrono::sys_days;
+    using seconds = cuda_for_dali::std::chrono::seconds;
+    using minutes = cuda_for_dali::std::chrono::minutes;
+    using days    = cuda_for_dali::std::chrono::days;
 
-    constexpr cuda::std::chrono::month January = cuda::std::chrono::January;
+    using sys_seconds = cuda_for_dali::std::chrono::sys_seconds;
+    using sys_minutes = cuda_for_dali::std::chrono::sys_time<minutes>;
+    using sys_days    = cuda_for_dali::std::chrono::sys_days;
 
-    ASSERT_SAME_TYPE(cuda::std::chrono::sys_time<seconds>, sys_seconds);
-    ASSERT_SAME_TYPE(cuda::std::chrono::sys_time<days>,    sys_days);
+    constexpr cuda_for_dali::std::chrono::month January = cuda_for_dali::std::chrono::January;
+
+    ASSERT_SAME_TYPE(cuda_for_dali::std::chrono::sys_time<seconds>, sys_seconds);
+    ASSERT_SAME_TYPE(cuda_for_dali::std::chrono::sys_time<days>,    sys_days);
 
 //  Test the long form, too
-    ASSERT_SAME_TYPE(cuda::std::chrono::time_point<system_clock, seconds>, sys_seconds);
-    ASSERT_SAME_TYPE(cuda::std::chrono::time_point<system_clock, minutes>, sys_minutes);
-    ASSERT_SAME_TYPE(cuda::std::chrono::time_point<system_clock, days>,    sys_days);
-    
+    ASSERT_SAME_TYPE(cuda_for_dali::std::chrono::time_point<system_clock, seconds>, sys_seconds);
+    ASSERT_SAME_TYPE(cuda_for_dali::std::chrono::time_point<system_clock, minutes>, sys_minutes);
+    ASSERT_SAME_TYPE(cuda_for_dali::std::chrono::time_point<system_clock, days>,    sys_days);
+
 //  Test some well known values
     sys_days d0 = sys_days{year{1970}/January/1};
     sys_days d1 = sys_days{year{2000}/January/1};

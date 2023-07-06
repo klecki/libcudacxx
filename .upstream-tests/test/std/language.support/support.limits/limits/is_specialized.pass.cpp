@@ -23,8 +23,8 @@
 
 // More convenient to test it here.
 
-#include <cuda/std/limits>
-#include <cuda/std/complex>
+#include <cuda_for_dali/std/limits>
+#include <cuda_for_dali/std/complex>
 
 #include "test_macros.h"
 
@@ -32,14 +32,14 @@ template <class T>
 __host__ __device__
 void test()
 {
-    static_assert(cuda::std::numeric_limits<T>::is_specialized,
-                 "cuda::std::numeric_limits<T>::is_specialized");
-    static_assert(cuda::std::numeric_limits<const T>::is_specialized,
-                 "cuda::std::numeric_limits<const T>::is_specialized");
-    static_assert(cuda::std::numeric_limits<volatile T>::is_specialized,
-                 "cuda::std::numeric_limits<volatile T>::is_specialized");
-    static_assert(cuda::std::numeric_limits<const volatile T>::is_specialized,
-                 "cuda::std::numeric_limits<const volatile T>::is_specialized");
+    static_assert(cuda_for_dali::std::numeric_limits<T>::is_specialized,
+                 "cuda_for_dali::std::numeric_limits<T>::is_specialized");
+    static_assert(cuda_for_dali::std::numeric_limits<const T>::is_specialized,
+                 "cuda_for_dali::std::numeric_limits<const T>::is_specialized");
+    static_assert(cuda_for_dali::std::numeric_limits<volatile T>::is_specialized,
+                 "cuda_for_dali::std::numeric_limits<volatile T>::is_specialized");
+    static_assert(cuda_for_dali::std::numeric_limits<const volatile T>::is_specialized,
+                 "cuda_for_dali::std::numeric_limits<const volatile T>::is_specialized");
 }
 
 int main(int, char**)
@@ -67,11 +67,11 @@ int main(int, char**)
 #endif
     test<float>();
     test<double>();
-#ifndef _LIBCUDACXX_HAS_NO_LONG_DOUBLE    
+#ifndef _LIBCUDACXX_HAS_NO_LONG_DOUBLE
     test<long double>();
 #endif
-    static_assert(!cuda::std::numeric_limits<cuda::std::complex<double> >::is_specialized,
-                 "!cuda::std::numeric_limits<cuda::std::complex<double> >::is_specialized");
+    static_assert(!cuda_for_dali::std::numeric_limits<cuda_for_dali::std::complex<double> >::is_specialized,
+                 "!cuda_for_dali::std::numeric_limits<cuda_for_dali::std::complex<double> >::is_specialized");
 
   return 0;
 }

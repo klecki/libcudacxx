@@ -11,7 +11,7 @@
 
 // type_identity
 
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/type_traits>
 
 #include "test_macros.h"
 
@@ -19,8 +19,8 @@ template <class T>
 __host__ __device__
 void test_type_identity()
 {
-    ASSERT_SAME_TYPE(T, typename cuda::std::type_identity<T>::type);
-    ASSERT_SAME_TYPE(T,          cuda::std::type_identity_t<T>);
+    ASSERT_SAME_TYPE(T, typename cuda_for_dali::std::type_identity<T>::type);
+    ASSERT_SAME_TYPE(T,          cuda_for_dali::std::type_identity_t<T>);
 }
 
 int main(int, char**)

@@ -13,7 +13,7 @@ struct large_type
 
     __host__ __device__
     large_type(int val = 0) {
-        for (cuda::std::size_t i = 0; i < size; ++i) {
+        for (cuda_for_dali::std::size_t i = 0; i < size; ++i) {
             storage[i] = val;
         }
     }
@@ -23,7 +23,7 @@ struct large_type
 
     __host__ __device__
     friend bool operator==(const large_type & lhs, const large_type & rhs) {
-        for (cuda::std::size_t i = 0; i < size; ++i) {
+        for (cuda_for_dali::std::size_t i = 0; i < size; ++i) {
             if (lhs.storage[i] != rhs.storage[i]) {
                 return false;
             }

@@ -12,26 +12,26 @@
 //   complex<T>
 //   pow(const T& x, const complex<T>& y);
 
-#include <cuda/std/complex>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/complex>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "../cases.h"
 
 template <class T>
 __host__ __device__ void
-test(const T& a, const cuda::std::complex<T>& b, cuda::std::complex<T> x)
+test(const T& a, const cuda_for_dali::std::complex<T>& b, cuda_for_dali::std::complex<T> x)
 {
-    cuda::std::complex<T> c = pow(a, b);
+    cuda_for_dali::std::complex<T> c = pow(a, b);
     is_about(real(c), real(x));
-    assert(cuda::std::abs(imag(c)) < 1.e-6);
+    assert(cuda_for_dali::std::abs(imag(c)) < 1.e-6);
 }
 
 template <class T>
 __host__ __device__ void
 test()
 {
-    test(T(2), cuda::std::complex<T>(2), cuda::std::complex<T>(4));
+    test(T(2), cuda_for_dali::std::complex<T>(2), cuda_for_dali::std::complex<T>(4));
 }
 
 __host__ __device__ void test_edges()
@@ -42,16 +42,16 @@ __host__ __device__ void test_edges()
     {
         for (unsigned j = 0; j < N; ++j)
         {
-            cuda::std::complex<double> r = pow(real(testcases[i]), testcases[j]);
-            cuda::std::complex<double> z = exp(testcases[j] * log(cuda::std::complex<double>(real(testcases[i]))));
-            if (cuda::std::isnan(real(r)))
-                assert(cuda::std::isnan(real(z)));
+            cuda_for_dali::std::complex<double> r = pow(real(testcases[i]), testcases[j]);
+            cuda_for_dali::std::complex<double> z = exp(testcases[j] * log(cuda_for_dali::std::complex<double>(real(testcases[i]))));
+            if (cuda_for_dali::std::isnan(real(r)))
+                assert(cuda_for_dali::std::isnan(real(z)));
             else
             {
                 assert(real(r) == real(z));
             }
-            if (cuda::std::isnan(imag(r)))
-                assert(cuda::std::isnan(imag(z)));
+            if (cuda_for_dali::std::isnan(imag(r)))
+                assert(cuda_for_dali::std::isnan(imag(z)));
             else
             {
                 assert(imag(r) == imag(z));

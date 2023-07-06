@@ -6,7 +6,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <cuda/std/limits>
+#include <cuda_for_dali/std/limits>
 
 #include "test_macros.h"
 
@@ -43,29 +43,29 @@ __host__ __device__
 void test(T) {}
 
 #define TEST_NUMERIC_LIMITS(type) \
-  test(cuda::std::numeric_limits<type>::is_specialized); \
-  test(cuda::std::numeric_limits<type>::digits); \
-  test(cuda::std::numeric_limits<type>::digits10); \
-  test(cuda::std::numeric_limits<type>::max_digits10); \
-  test(cuda::std::numeric_limits<type>::is_signed); \
-  test(cuda::std::numeric_limits<type>::is_integer); \
-  test(cuda::std::numeric_limits<type>::is_exact); \
-  test(cuda::std::numeric_limits<type>::radix); \
-  test(cuda::std::numeric_limits<type>::min_exponent); \
-  test(cuda::std::numeric_limits<type>::min_exponent10); \
-  test(cuda::std::numeric_limits<type>::max_exponent); \
-  test(cuda::std::numeric_limits<type>::max_exponent10); \
-  test(cuda::std::numeric_limits<type>::has_infinity); \
-  test(cuda::std::numeric_limits<type>::has_quiet_NaN); \
-  test(cuda::std::numeric_limits<type>::has_signaling_NaN); \
-  test(cuda::std::numeric_limits<type>::has_denorm); \
-  test(cuda::std::numeric_limits<type>::has_denorm_loss); \
-  test(cuda::std::numeric_limits<type>::is_iec559); \
-  test(cuda::std::numeric_limits<type>::is_bounded); \
-  test(cuda::std::numeric_limits<type>::is_modulo); \
-  test(cuda::std::numeric_limits<type>::traps); \
-  test(cuda::std::numeric_limits<type>::tinyness_before); \
-  test(cuda::std::numeric_limits<type>::round_style);
+  test(cuda_for_dali::std::numeric_limits<type>::is_specialized); \
+  test(cuda_for_dali::std::numeric_limits<type>::digits); \
+  test(cuda_for_dali::std::numeric_limits<type>::digits10); \
+  test(cuda_for_dali::std::numeric_limits<type>::max_digits10); \
+  test(cuda_for_dali::std::numeric_limits<type>::is_signed); \
+  test(cuda_for_dali::std::numeric_limits<type>::is_integer); \
+  test(cuda_for_dali::std::numeric_limits<type>::is_exact); \
+  test(cuda_for_dali::std::numeric_limits<type>::radix); \
+  test(cuda_for_dali::std::numeric_limits<type>::min_exponent); \
+  test(cuda_for_dali::std::numeric_limits<type>::min_exponent10); \
+  test(cuda_for_dali::std::numeric_limits<type>::max_exponent); \
+  test(cuda_for_dali::std::numeric_limits<type>::max_exponent10); \
+  test(cuda_for_dali::std::numeric_limits<type>::has_infinity); \
+  test(cuda_for_dali::std::numeric_limits<type>::has_quiet_NaN); \
+  test(cuda_for_dali::std::numeric_limits<type>::has_signaling_NaN); \
+  test(cuda_for_dali::std::numeric_limits<type>::has_denorm); \
+  test(cuda_for_dali::std::numeric_limits<type>::has_denorm_loss); \
+  test(cuda_for_dali::std::numeric_limits<type>::is_iec559); \
+  test(cuda_for_dali::std::numeric_limits<type>::is_bounded); \
+  test(cuda_for_dali::std::numeric_limits<type>::is_modulo); \
+  test(cuda_for_dali::std::numeric_limits<type>::traps); \
+  test(cuda_for_dali::std::numeric_limits<type>::tinyness_before); \
+  test(cuda_for_dali::std::numeric_limits<type>::round_style);
 
 struct other {};
 

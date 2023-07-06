@@ -14,8 +14,8 @@
 // constexpr bool operator!=(const weekday& x, const weekday& y) noexcept;
 
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
@@ -23,7 +23,7 @@
 
 int main(int, char**)
 {
-    using weekday = cuda::std::chrono::weekday;
+    using weekday = cuda_for_dali::std::chrono::weekday;
 
     AssertComparisons2AreNoexcept<weekday>();
     AssertComparisons2ReturnBool<weekday>();

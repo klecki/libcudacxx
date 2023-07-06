@@ -22,9 +22,9 @@ THE SOFTWARE.
 
 */
 
-#include <cuda/std/cstddef>
-#include <cuda/std/cstdint>
-#include <cuda/std/atomic>
+#include <cuda_for_dali/std/cstddef>
+#include <cuda_for_dali/std/cstdint>
+#include <cuda_for_dali/std/atomic>
 
 template<class T> static constexpr T minimum(T a, T b) { return a < b ? a : b; }
 
@@ -46,7 +46,7 @@ __host__ __device__
 void make_trie(/* trie to insert word counts into */ trie& root,
                /* bump allocator to get new nodes*/ cuda::std::atomic<trie*>& bump,
                /* input */ const char* begin, const char* end,
-               /* thread this invocation is for */ unsigned index, 
+               /* thread this invocation is for */ unsigned index,
                /* how many threads there are */ unsigned domain) {
 
     auto const size = end - begin;
@@ -79,19 +79,19 @@ void make_trie(/* trie to insert word counts into */ trie& root,
                 auto next = bump.fetch_add(1, cuda::std::memory_order_relaxed);
                 n->next[index].ptr.store(next, cuda::std::memory_order_release);
 		n->next[index].ptr.notify_all();
-            } 
-        } 
+            }
+        }
         n = n->next[index].ptr.load(cuda::std::memory_order_relaxed);
     }
 }
 
-__global__ // __launch_bounds__(1024, 1) 
+__global__ // __launch_bounds__(1024, 1)
 void call_make_trie(trie* t, cuda::std::atomic<trie*>* bump, const char* begin, const char* end) {
-    
+
     auto const index = blockDim.x * blockIdx.x + threadIdx.x;
     auto const domain = gridDim.x * blockDim.x;
     make_trie(*t, *bump, begin, end, index, domain);
-    
+
 }
 
 __global__ void do_nothing() { }
@@ -132,8 +132,8 @@ struct managed_allocator {
     check(cudaMallocManaged(&out, n*sizeof(T)));
     return static_cast<T*>(out);
   }
-  void deallocate(T* p, std::size_t) noexcept { 
-      check(cudaFree(p)); 
+  void deallocate(T* p, std::size_t) noexcept {
+      check(cudaFree(p));
   }
 };
 template<class T, class... Args>
@@ -144,10 +144,10 @@ T* make_(Args &&... args) {
 
 template<class String>
 void do_trie(String const& input, bool use_cuda, int blocks, int threads) {
-    
+
     std::vector<trie, managed_allocator<trie>> nodes(1<<17);
     if(use_cuda) check(cudaMemset(nodes.data(), 0, nodes.size()*sizeof(trie)));
- 
+
     auto t = nodes.data();
     auto b = make_<cuda::std::atomic<trie*>>(nodes.data()+1);
 

@@ -8,7 +8,7 @@
 
 // <cuda/std/cstdint>
 
-#include <cuda/std/cstdint>
+#include <cuda_for_dali/std/cstdint>
 
 #include "test_macros.h"
 

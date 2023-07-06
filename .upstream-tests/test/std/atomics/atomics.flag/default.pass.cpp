@@ -15,8 +15,8 @@
 
 // atomic_flag() = default;
 
-#include <cuda/std/atomic>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/atomic>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
@@ -29,13 +29,13 @@ template<template<typename, typename> class Selector>
 __host__ __device__
 void test()
 {
-    Selector<cuda::std::atomic_flag, default_initializer> sel;
-    cuda::std::atomic_flag & f = *sel.construct();
+    Selector<cuda_for_dali::std::atomic_flag, default_initializer> sel;
+    cuda_for_dali::std::atomic_flag & f = *sel.construct();
     f.clear();
     assert(f.test_and_set() == 0);
     {
 #if !defined(__CUDA_ARCH__) || __CUDA_ARCH__ >= 700
-        typedef cuda::std::atomic_flag A;
+        typedef cuda_for_dali::std::atomic_flag A;
         TEST_ALIGNAS_TYPE(A) char storage[sizeof(A)] = {1};
         A& zero = *new (storage) A();
         assert(!zero.test_and_set());

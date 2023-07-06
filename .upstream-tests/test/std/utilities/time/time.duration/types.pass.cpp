@@ -15,14 +15,14 @@
 // typedef Rep rep;
 // typedef Period period;
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 
 int main(int, char**)
 {
-    typedef cuda::std::chrono::duration<long, cuda::std::ratio<3, 2> > D;
-    static_assert((cuda::std::is_same<D::rep, long>::value), "");
-    static_assert((cuda::std::is_same<D::period, cuda::std::ratio<3, 2> >::value), "");
+    typedef cuda_for_dali::std::chrono::duration<long, cuda_for_dali::std::ratio<3, 2> > D;
+    static_assert((cuda_for_dali::std::is_same<D::rep, long>::value), "");
+    static_assert((cuda_for_dali::std::is_same<D::period, cuda_for_dali::std::ratio<3, 2> >::value), "");
 
   return 0;
 }

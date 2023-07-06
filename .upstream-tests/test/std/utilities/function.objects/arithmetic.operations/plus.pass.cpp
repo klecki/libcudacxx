@@ -10,31 +10,31 @@
 
 // plus
 
-#include <cuda/std/functional>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/functional>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    typedef cuda::std::plus<int> F;
+    typedef cuda_for_dali::std::plus<int> F;
     const F f = F();
-    static_assert((cuda::std::is_same<int, F::first_argument_type>::value), "" );
-    static_assert((cuda::std::is_same<int, F::second_argument_type>::value), "" );
-    static_assert((cuda::std::is_same<int, F::result_type>::value), "" );
+    static_assert((cuda_for_dali::std::is_same<int, F::first_argument_type>::value), "" );
+    static_assert((cuda_for_dali::std::is_same<int, F::second_argument_type>::value), "" );
+    static_assert((cuda_for_dali::std::is_same<int, F::result_type>::value), "" );
     assert(f(3, 2) == 5);
 #if TEST_STD_VER > 11
-    typedef cuda::std::plus<> F2;
+    typedef cuda_for_dali::std::plus<> F2;
     const F2 f2 = F2();
     assert(f2(3,2) == 5);
     assert(f2(3.0, 2) == 5);
     assert(f2(3, 2.5) == 5.5);
 
-    constexpr int foo = cuda::std::plus<int> () (3, 2);
+    constexpr int foo = cuda_for_dali::std::plus<int> () (3, 2);
     static_assert ( foo == 5, "" );
 
-    constexpr double bar = cuda::std::plus<> () (3.0, 2);
+    constexpr double bar = cuda_for_dali::std::plus<> () (3.0, 2);
     static_assert ( bar == 5.0, "" );
 #endif
 

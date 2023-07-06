@@ -12,8 +12,8 @@
 //   T
 //   arg(const complex<T>& x);
 
-#include <cuda/std/complex>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/complex>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "../cases.h"
@@ -22,35 +22,35 @@ template <class T>
 __host__ __device__ void
 test()
 {
-    cuda::std::complex<T> z(1, 0);
+    cuda_for_dali::std::complex<T> z(1, 0);
     assert(arg(z) == 0);
 }
 
 __host__ __device__ void test_edges()
 {
-    const double pi = cuda::std::atan2(+0., -0.);
+    const double pi = cuda_for_dali::std::atan2(+0., -0.);
     auto testcases = get_testcases();
     const unsigned N = sizeof(testcases) / sizeof(testcases[0]);
     for (unsigned i = 0; i < N; ++i)
     {
         double r = arg(testcases[i]);
-        if (cuda::std::isnan(testcases[i].real()) || cuda::std::isnan(testcases[i].imag()))
-            assert(cuda::std::isnan(r));
+        if (cuda_for_dali::std::isnan(testcases[i].real()) || cuda_for_dali::std::isnan(testcases[i].imag()))
+            assert(cuda_for_dali::std::isnan(r));
         else
         {
             switch (classify(testcases[i]))
             {
             case zero:
-                if (cuda::std::signbit(testcases[i].real()))
+                if (cuda_for_dali::std::signbit(testcases[i].real()))
                 {
-                    if (cuda::std::signbit(testcases[i].imag()))
+                    if (cuda_for_dali::std::signbit(testcases[i].imag()))
                         is_about(r, -pi);
                     else
                         is_about(r, pi);
                 }
                 else
                 {
-                    assert(cuda::std::signbit(testcases[i].imag()) == cuda::std::signbit(r));
+                    assert(cuda_for_dali::std::signbit(testcases[i].imag()) == cuda_for_dali::std::signbit(r));
                 }
                 break;
             case non_zero:
@@ -65,7 +65,7 @@ __host__ __device__ void test_edges()
                 {
                     if (testcases[i].real() < 0)
                     {
-                        if (cuda::std::signbit(testcases[i].imag()))
+                        if (cuda_for_dali::std::signbit(testcases[i].imag()))
                             is_about(r, -pi);
                         else
                             is_about(r, pi);
@@ -73,7 +73,7 @@ __host__ __device__ void test_edges()
                     else
                     {
                         assert(r == 0);
-                        assert(cuda::std::signbit(testcases[i].imag()) == cuda::std::signbit(r));
+                        assert(cuda_for_dali::std::signbit(testcases[i].imag()) == cuda_for_dali::std::signbit(r));
                     }
                 }
                 else if (testcases[i].imag() > 0)
@@ -82,7 +82,7 @@ __host__ __device__ void test_edges()
                     assert(r < 0);
                 break;
             case inf:
-                if (cuda::std::isinf(testcases[i].real()) && cuda::std::isinf(testcases[i].imag()))
+                if (cuda_for_dali::std::isinf(testcases[i].real()) && cuda_for_dali::std::isinf(testcases[i].imag()))
                 {
                     if (testcases[i].real() < 0)
                     {
@@ -99,11 +99,11 @@ __host__ __device__ void test_edges()
                             is_about(r, -0.25 * pi);
                     }
                 }
-                else if (cuda::std::isinf(testcases[i].real()))
+                else if (cuda_for_dali::std::isinf(testcases[i].real()))
                 {
                     if (testcases[i].real() < 0)
                     {
-                        if (cuda::std::signbit(testcases[i].imag()))
+                        if (cuda_for_dali::std::signbit(testcases[i].imag()))
                             is_about(r, -pi);
                         else
                             is_about(r, pi);
@@ -111,7 +111,7 @@ __host__ __device__ void test_edges()
                     else
                     {
                         assert(r == 0);
-                        assert(cuda::std::signbit(r) == cuda::std::signbit(testcases[i].imag()));
+                        assert(cuda_for_dali::std::signbit(r) == cuda_for_dali::std::signbit(testcases[i].imag()));
                     }
                 }
                 else

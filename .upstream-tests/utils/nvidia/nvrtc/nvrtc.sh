@@ -15,7 +15,7 @@ echo "${nvcc}" >> ${logdir}/log
 original_flags=${@}
 echo "original flags: ${original_flags[@]}" >> ${logdir}/log
 
-original_flags=("${original_flags[@]}" -D__LIBCUDACXX_NVRTC_TEST__=1)
+original_flags=("${original_flags[@]}" -D__LIBCUDAFORDALICXX_NVRTC_TEST__=1)
 
 declare -a modified_flags
 declare -a gpu_archs
@@ -106,7 +106,7 @@ cg_include_dir=$(
         | grep -e ' /.*/cooperative_groups\.h' -o \
         | xargs dirname)
 ext_include_dir=$(
-    echo '#include <cuda/pipeline>' \
+    echo '#include <cuda_for_dali/pipeline>' \
         | ${nvcc} -x cu - -M -E "${includes[@]}" -arch sm_70 -std=c++11 \
         | grep -e ' /.*/cuda/pipeline' -o \
         | xargs dirname | xargs dirname)

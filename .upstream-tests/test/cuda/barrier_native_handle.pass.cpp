@@ -12,18 +12,18 @@
 #pragma nv_diag_suppress static_var_with_dynamic_init
 #pragma nv_diag_suppress set_but_not_used
 
-#include <cuda/barrier>
+#include <cuda_for_dali/barrier>
 
 int main(int argc, char ** argv)
 {
 #if __CUDA_ARCH__ >= 800
-    __shared__ cuda::barrier<cuda::thread_scope_block> b;
+    __shared__ cuda_for_dali::barrier<cuda_for_dali::thread_scope_block> b;
     init(&b, 2);
 
     uint64_t token;
     asm volatile ("mbarrier.arrive.b64 %0, [%1];"
         : "=l"(token)
-        : "l"(cuda::device::barrier_native_handle(b))
+        : "l"(cuda_for_dali::device::barrier_native_handle(b))
         : "memory");
     (void)token;
 

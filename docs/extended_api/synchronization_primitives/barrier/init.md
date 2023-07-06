@@ -41,7 +41,7 @@ It can be silenced using `#pragma diag_suppress static_var_with_dynamic_init`.
 ## Example
 
 ```cuda
-#include <cuda/barrier>
+#include <cuda_for_dali/barrier>
 
 // Disables `pipeline_shared_state` initialization warning.
 #pragma diag_suppress static_var_with_dynamic_init

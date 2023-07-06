@@ -13,8 +13,8 @@
 // time_point& operator-=(const duration& d);
 // constexpr in c++17
 
-#include <cuda/std/chrono>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
@@ -22,9 +22,9 @@
 __host__ __device__
 constexpr bool constexpr_test()
 {
-    typedef cuda::std::chrono::system_clock Clock;
-    typedef cuda::std::chrono::milliseconds Duration;
-    cuda::std::chrono::time_point<Clock, Duration> t(Duration(5));
+    typedef cuda_for_dali::std::chrono::system_clock Clock;
+    typedef cuda_for_dali::std::chrono::milliseconds Duration;
+    cuda_for_dali::std::chrono::time_point<Clock, Duration> t(Duration(5));
     t -= Duration(4);
     return t.time_since_epoch() == Duration(1);
 }
@@ -33,9 +33,9 @@ constexpr bool constexpr_test()
 int main(int, char**)
 {
     {
-    typedef cuda::std::chrono::system_clock Clock;
-    typedef cuda::std::chrono::milliseconds Duration;
-    cuda::std::chrono::time_point<Clock, Duration> t(Duration(3));
+    typedef cuda_for_dali::std::chrono::system_clock Clock;
+    typedef cuda_for_dali::std::chrono::milliseconds Duration;
+    cuda_for_dali::std::chrono::time_point<Clock, Duration> t(Duration(3));
     t -= Duration(2);
     assert(t.time_since_epoch() == Duration(1));
     }

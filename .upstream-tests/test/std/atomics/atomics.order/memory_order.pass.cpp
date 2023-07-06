@@ -17,21 +17,21 @@
 //     memory_order_release, memory_order_acq_rel, memory_order_seq_cst
 // } memory_order;
 
-#include <cuda/std/atomic>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/atomic>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    assert(static_cast<int>(cuda::std::memory_order_relaxed) == 0);
-    assert(static_cast<int>(cuda::std::memory_order_consume) == 1);
-    assert(static_cast<int>(cuda::std::memory_order_acquire) == 2);
-    assert(static_cast<int>(cuda::std::memory_order_release) == 3);
-    assert(static_cast<int>(cuda::std::memory_order_acq_rel) == 4);
-    assert(static_cast<int>(cuda::std::memory_order_seq_cst) == 5);
+    assert(static_cast<int>(cuda_for_dali::std::memory_order_relaxed) == 0);
+    assert(static_cast<int>(cuda_for_dali::std::memory_order_consume) == 1);
+    assert(static_cast<int>(cuda_for_dali::std::memory_order_acquire) == 2);
+    assert(static_cast<int>(cuda_for_dali::std::memory_order_release) == 3);
+    assert(static_cast<int>(cuda_for_dali::std::memory_order_acq_rel) == 4);
+    assert(static_cast<int>(cuda_for_dali::std::memory_order_seq_cst) == 5);
 
-    cuda::std::memory_order o = cuda::std::memory_order_seq_cst;
+    cuda_for_dali::std::memory_order o = cuda_for_dali::std::memory_order_seq_cst;
     assert(static_cast<int>(o) == 5);
 
     return 0;

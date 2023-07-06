@@ -14,15 +14,15 @@
 //  y_ % 4 == 0 && (y_ % 100 != 0 || y_ % 400 == 0)
 //
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using year = cuda::std::chrono::year;
+    using year = cuda_for_dali::std::chrono::year;
 
     ASSERT_NOEXCEPT(                year(1).is_leap());
     ASSERT_SAME_TYPE(bool, decltype(year(1).is_leap()));

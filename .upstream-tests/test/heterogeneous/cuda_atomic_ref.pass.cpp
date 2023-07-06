@@ -11,7 +11,7 @@
 
 #include "helpers.h"
 
-#include <cuda/atomic>
+#include <cuda_for_dali/atomic>
 
 template<int Operand>
 struct store_tester
@@ -20,7 +20,7 @@ struct store_tester
     __host__ __device__
     static void initialize(A & v)
     {
-        cuda::atomic_ref<A, cuda::thread_scope_system> a(v);
+        cuda_for_dali::atomic_ref<A, cuda_for_dali::thread_scope_system> a(v);
         using T = decltype(a.load());
         a.store(static_cast<T>(Operand));
     }
@@ -29,7 +29,7 @@ struct store_tester
     __host__ __device__
     static void validate(A & v)
     {
-        cuda::atomic_ref<A, cuda::thread_scope_system> a(v);
+        cuda_for_dali::atomic_ref<A, cuda_for_dali::thread_scope_system> a(v);
         using T = decltype(a.load());
         assert(a.load() == static_cast<T>(Operand));
     }
@@ -42,7 +42,7 @@ struct exchange_tester
     __host__ __device__
     static void initialize(A & v)
     {
-        cuda::atomic_ref<A, cuda::thread_scope_system> a(v);
+        cuda_for_dali::atomic_ref<A, cuda_for_dali::thread_scope_system> a(v);
         using T = decltype(a.load());
         assert(a.exchange(static_cast<T>(Operand)) == static_cast<T>(PreviousValue));
     }
@@ -51,7 +51,7 @@ struct exchange_tester
     __host__ __device__
     static void validate(A & v)
     {
-        cuda::atomic_ref<A, cuda::thread_scope_system> a(v);
+        cuda_for_dali::atomic_ref<A, cuda_for_dali::thread_scope_system> a(v);
         using T = decltype(a.load());
         assert(a.load() == static_cast<T>(Operand));
     }
@@ -65,7 +65,7 @@ struct strong_cas_tester
     __host__ __device__
     static void initialize(A & v)
     {
-        cuda::atomic_ref<A, cuda::thread_scope_system> a(v);
+        cuda_for_dali::atomic_ref<A, cuda_for_dali::thread_scope_system> a(v);
         using T = decltype(a.load());
         T expected = static_cast<T>(Expected);
         assert(a.compare_exchange_strong(expected, static_cast<T>(Desired)) == ShouldSucceed);
@@ -76,7 +76,7 @@ struct strong_cas_tester
     __host__ __device__
     static void validate(A & v)
     {
-        cuda::atomic_ref<A, cuda::thread_scope_system> a(v);
+        cuda_for_dali::atomic_ref<A, cuda_for_dali::thread_scope_system> a(v);
         using T = decltype(a.load());
         assert(a.load() == static_cast<T>(Result));
     }
@@ -90,7 +90,7 @@ struct weak_cas_tester
     __host__ __device__
     static void initialize(A & v)
     {
-        cuda::atomic_ref<A, cuda::thread_scope_system> a(v);
+        cuda_for_dali::atomic_ref<A, cuda_for_dali::thread_scope_system> a(v);
         using T = decltype(a.load());
         T expected = static_cast<T>(Expected);
         if (!ShouldSucceed)
@@ -108,7 +108,7 @@ struct weak_cas_tester
     __host__ __device__
     static void validate(A & v)
     {
-        cuda::atomic_ref<A, cuda::thread_scope_system> a(v);
+        cuda_for_dali::atomic_ref<A, cuda_for_dali::thread_scope_system> a(v);
         using T = decltype(a.load());
         assert(a.load() == static_cast<T>(Result));
     }
@@ -122,7 +122,7 @@ struct weak_cas_tester
         __host__ __device__ \
         static void initialize(A & v) \
         { \
-            cuda::atomic_ref<A, cuda::thread_scope_system> a(v); \
+            cuda_for_dali::atomic_ref<A, cuda_for_dali::thread_scope_system> a(v); \
             using T = decltype(a.load()); \
             assert(a.operation(Operand) == static_cast<T>(PreviousValue)); \
         } \
@@ -131,7 +131,7 @@ struct weak_cas_tester
         __host__ __device__ \
         static void validate(A & v) \
         { \
-            cuda::atomic_ref<A, cuda::thread_scope_system> a(v); \
+            cuda_for_dali::atomic_ref<A, cuda_for_dali::thread_scope_system> a(v); \
             using T = decltype(a.load()); \
             assert(a.load() == static_cast<T>(ExpectedValue)); \
         } \

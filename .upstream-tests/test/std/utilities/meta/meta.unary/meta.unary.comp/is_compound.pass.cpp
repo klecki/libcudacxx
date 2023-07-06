@@ -10,23 +10,23 @@
 
 // is_compound
 
-#include <cuda/std/type_traits>
-#include <cuda/std/cstddef>         // for cuda::std::nullptr_t
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cstddef>         // for cuda_for_dali::std::nullptr_t
 #include "test_macros.h"
 
 template <class T>
 __host__ __device__
 void test_is_compound()
 {
-    static_assert( cuda::std::is_compound<T>::value, "");
-    static_assert( cuda::std::is_compound<const T>::value, "");
-    static_assert( cuda::std::is_compound<volatile T>::value, "");
-    static_assert( cuda::std::is_compound<const volatile T>::value, "");
+    static_assert( cuda_for_dali::std::is_compound<T>::value, "");
+    static_assert( cuda_for_dali::std::is_compound<const T>::value, "");
+    static_assert( cuda_for_dali::std::is_compound<volatile T>::value, "");
+    static_assert( cuda_for_dali::std::is_compound<const volatile T>::value, "");
 #if TEST_STD_VER > 11
-    static_assert( cuda::std::is_compound_v<T>, "");
-    static_assert( cuda::std::is_compound_v<const T>, "");
-    static_assert( cuda::std::is_compound_v<volatile T>, "");
-    static_assert( cuda::std::is_compound_v<const volatile T>, "");
+    static_assert( cuda_for_dali::std::is_compound_v<T>, "");
+    static_assert( cuda_for_dali::std::is_compound_v<const T>, "");
+    static_assert( cuda_for_dali::std::is_compound_v<volatile T>, "");
+    static_assert( cuda_for_dali::std::is_compound_v<const volatile T>, "");
 #endif
 }
 
@@ -34,15 +34,15 @@ template <class T>
 __host__ __device__
 void test_is_not_compound()
 {
-    static_assert(!cuda::std::is_compound<T>::value, "");
-    static_assert(!cuda::std::is_compound<const T>::value, "");
-    static_assert(!cuda::std::is_compound<volatile T>::value, "");
-    static_assert(!cuda::std::is_compound<const volatile T>::value, "");
+    static_assert(!cuda_for_dali::std::is_compound<T>::value, "");
+    static_assert(!cuda_for_dali::std::is_compound<const T>::value, "");
+    static_assert(!cuda_for_dali::std::is_compound<volatile T>::value, "");
+    static_assert(!cuda_for_dali::std::is_compound<const volatile T>::value, "");
 #if TEST_STD_VER > 11
-    static_assert(!cuda::std::is_compound_v<T>, "");
-    static_assert(!cuda::std::is_compound_v<const T>, "");
-    static_assert(!cuda::std::is_compound_v<volatile T>, "");
-    static_assert(!cuda::std::is_compound_v<const volatile T>, "");
+    static_assert(!cuda_for_dali::std::is_compound_v<T>, "");
+    static_assert(!cuda_for_dali::std::is_compound_v<const T>, "");
+    static_assert(!cuda_for_dali::std::is_compound_v<volatile T>, "");
+    static_assert(!cuda_for_dali::std::is_compound_v<const volatile T>, "");
 #endif
 }
 
@@ -94,7 +94,7 @@ int main(int, char**)
     test_is_compound<NotEmpty>();
     test_is_compound<Abstract>();
 
-    test_is_not_compound<cuda::std::nullptr_t>();
+    test_is_not_compound<cuda_for_dali::std::nullptr_t>();
     test_is_not_compound<void>();
     test_is_not_compound<int>();
     test_is_not_compound<double>();

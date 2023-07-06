@@ -10,8 +10,8 @@
 
 // max_exponent
 
-#include <cuda/std/limits>
-#include <cuda/std/cfloat>
+#include <cuda_for_dali/std/limits>
+#include <cuda_for_dali/std/cfloat>
 
 #include "test_macros.h"
 
@@ -20,10 +20,10 @@ __host__ __device__
 void
 test()
 {
-    static_assert(cuda::std::numeric_limits<T>::max_exponent == expected, "max_exponent test 1");
-    static_assert(cuda::std::numeric_limits<const T>::max_exponent == expected, "max_exponent test 2");
-    static_assert(cuda::std::numeric_limits<volatile T>::max_exponent == expected, "max_exponent test 3");
-    static_assert(cuda::std::numeric_limits<const volatile T>::max_exponent == expected, "max_exponent test 4");
+    static_assert(cuda_for_dali::std::numeric_limits<T>::max_exponent == expected, "max_exponent test 1");
+    static_assert(cuda_for_dali::std::numeric_limits<const T>::max_exponent == expected, "max_exponent test 2");
+    static_assert(cuda_for_dali::std::numeric_limits<volatile T>::max_exponent == expected, "max_exponent test 3");
+    static_assert(cuda_for_dali::std::numeric_limits<const volatile T>::max_exponent == expected, "max_exponent test 4");
 }
 
 int main(int, char**)

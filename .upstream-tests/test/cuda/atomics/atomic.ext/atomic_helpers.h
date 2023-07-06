@@ -9,8 +9,8 @@
 #ifndef ATOMIC_HELPERS_H
 #define ATOMIC_HELPERS_H
 
-#include <cuda/std/atomic>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/atomic>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
@@ -26,10 +26,10 @@ struct UserAtomicType
     { return x.i == y.i; }
 };
 
-template < template <class, template<typename, typename> class, cuda::thread_scope> class TestFunctor,
-    template<typename, typename> class Selector, cuda::thread_scope Scope
+template < template <class, template<typename, typename> class, cuda_for_dali::thread_scope> class TestFunctor,
+    template<typename, typename> class Selector, cuda_for_dali::thread_scope Scope
 #if !defined(__CUDA_ARCH__) || __CUDA_ARCH__ >= 600
-    = cuda::thread_scope_system
+    = cuda_for_dali::thread_scope_system
 #endif
 >
 struct TestEachIntegralType {
@@ -47,7 +47,7 @@ struct TestEachIntegralType {
         TestFunctor<long long, Selector, Scope>()();
         TestFunctor<unsigned long long, Selector, Scope>()();
         TestFunctor<wchar_t, Selector, Scope>();
-#ifndef _LIBCUDACXX_HAS_NO_UNICODE_CHARS
+#ifndef _LIBCUDAFORDALICXX_HAS_NO_UNICODE_CHARS
         TestFunctor<char16_t, Selector, Scope>()();
         TestFunctor<char32_t, Selector, Scope>()();
 #endif
@@ -62,10 +62,10 @@ struct TestEachIntegralType {
     }
 };
 
-template < template <class, template<typename, typename> class, cuda::thread_scope> class TestFunctor,
-    template<typename, typename> class Selector, cuda::thread_scope Scope
+template < template <class, template<typename, typename> class, cuda_for_dali::thread_scope> class TestFunctor,
+    template<typename, typename> class Selector, cuda_for_dali::thread_scope Scope
 #if !defined(__CUDA_ARCH__) || __CUDA_ARCH__ >= 600
-    = cuda::thread_scope_system
+    = cuda_for_dali::thread_scope_system
 #endif
 >
 struct TestEachAtomicType {

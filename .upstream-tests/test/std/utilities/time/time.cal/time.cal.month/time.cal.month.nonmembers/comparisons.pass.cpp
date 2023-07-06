@@ -18,8 +18,8 @@
 // constexpr bool operator>=(const month& x, const month& y) noexcept;
 
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
@@ -28,7 +28,7 @@
 
 int main(int, char**)
 {
-    using month = cuda::std::chrono::month;
+    using month = cuda_for_dali::std::chrono::month;
 
     AssertComparisons6AreNoexcept<month>();
     AssertComparisons6ReturnBool<month>();

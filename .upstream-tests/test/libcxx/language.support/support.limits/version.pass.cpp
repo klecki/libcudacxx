@@ -8,7 +8,7 @@
 
 // <cuda/std/version>
 
-#include <cuda/std/version>
+#include <cuda_for_dali/std/version>
 
 #include "test_macros.h"
 

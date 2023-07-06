@@ -9,7 +9,7 @@
 
 // UNSUPPORTED: pgi, nvc++
 
-#include <nv/target>
+#include <nv_for_dali/target>
 
 #if !defined(__CUDACC_RTC__)
 #include <assert.h>

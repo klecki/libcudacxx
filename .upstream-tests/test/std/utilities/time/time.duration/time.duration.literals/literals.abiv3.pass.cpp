@@ -14,9 +14,9 @@
 
 #define _LIBCUDACXX_CUDA_ABI_VERSION 3
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 template <typename T>
@@ -25,7 +25,7 @@ constexpr bool unused(T &&) {return true;}
 
 int main(int, char**)
 {
-    using namespace cuda::std::literals::chrono_literals;
+    using namespace cuda_for_dali::std::literals::chrono_literals;
 
 // long long ABI v3 check
   {
@@ -43,19 +43,19 @@ int main(int, char**)
     unused(_us);
     unused(_ns);
 
-    static_assert(cuda::std::is_same< decltype(_h.count()),   cuda::std::chrono::hours::rep        >::value, "");
-    static_assert(cuda::std::is_same< decltype(_min.count()), cuda::std::chrono::minutes::rep      >::value, "");
-    static_assert(cuda::std::is_same< decltype(_s.count()),   cuda::std::chrono::seconds::rep      >::value, "");
-    static_assert(cuda::std::is_same< decltype(_ms.count()),  cuda::std::chrono::milliseconds::rep >::value, "");
-    static_assert(cuda::std::is_same< decltype(_us.count()),  cuda::std::chrono::microseconds::rep >::value, "");
-    static_assert(cuda::std::is_same< decltype(_ns.count()),  cuda::std::chrono::nanoseconds::rep  >::value, "");
+    static_assert(cuda_for_dali::std::is_same< decltype(_h.count()),   cuda_for_dali::std::chrono::hours::rep        >::value, "");
+    static_assert(cuda_for_dali::std::is_same< decltype(_min.count()), cuda_for_dali::std::chrono::minutes::rep      >::value, "");
+    static_assert(cuda_for_dali::std::is_same< decltype(_s.count()),   cuda_for_dali::std::chrono::seconds::rep      >::value, "");
+    static_assert(cuda_for_dali::std::is_same< decltype(_ms.count()),  cuda_for_dali::std::chrono::milliseconds::rep >::value, "");
+    static_assert(cuda_for_dali::std::is_same< decltype(_us.count()),  cuda_for_dali::std::chrono::microseconds::rep >::value, "");
+    static_assert(cuda_for_dali::std::is_same< decltype(_ns.count()),  cuda_for_dali::std::chrono::nanoseconds::rep  >::value, "");
 
-    static_assert ( cuda::std::is_same<decltype(3h), cuda::std::chrono::hours>::value, "" );
-    static_assert ( cuda::std::is_same<decltype(3min), cuda::std::chrono::minutes>::value, "" );
-    static_assert ( cuda::std::is_same<decltype(3s), cuda::std::chrono::seconds>::value, "" );
-    static_assert ( cuda::std::is_same<decltype(3ms), cuda::std::chrono::milliseconds>::value, "" );
-    static_assert ( cuda::std::is_same<decltype(3us), cuda::std::chrono::microseconds>::value, "" );
-    static_assert ( cuda::std::is_same<decltype(3ns), cuda::std::chrono::nanoseconds>::value, "" );
+    static_assert ( cuda_for_dali::std::is_same<decltype(3h), cuda_for_dali::std::chrono::hours>::value, "" );
+    static_assert ( cuda_for_dali::std::is_same<decltype(3min), cuda_for_dali::std::chrono::minutes>::value, "" );
+    static_assert ( cuda_for_dali::std::is_same<decltype(3s), cuda_for_dali::std::chrono::seconds>::value, "" );
+    static_assert ( cuda_for_dali::std::is_same<decltype(3ms), cuda_for_dali::std::chrono::milliseconds>::value, "" );
+    static_assert ( cuda_for_dali::std::is_same<decltype(3us), cuda_for_dali::std::chrono::microseconds>::value, "" );
+    static_assert ( cuda_for_dali::std::is_same<decltype(3ns), cuda_for_dali::std::chrono::nanoseconds>::value, "" );
   }
 
 // long double ABI v3 check
@@ -74,17 +74,17 @@ int main(int, char**)
     unused(_us);
     unused(_ns);
 
-    using cuda::std::ratio;
-    using cuda::std::milli;
-    using cuda::std::micro;
-    using cuda::std::nano;
+    using cuda_for_dali::std::ratio;
+    using cuda_for_dali::std::milli;
+    using cuda_for_dali::std::micro;
+    using cuda_for_dali::std::nano;
 
-    static_assert(cuda::std::is_same< decltype(_h.count()),   cuda::std::chrono::duration<long double, ratio<3600>>::rep        >::value, "");
-    static_assert(cuda::std::is_same< decltype(_min.count()), cuda::std::chrono::duration<long double, ratio<  60>>::rep      >::value, "");
-    // static_assert(cuda::std::is_same< decltype(s.count()),   cuda::std::chrono::duration<long double             >::rep      >::value, "");
-    static_assert(cuda::std::is_same< decltype(_ms.count()),  cuda::std::chrono::duration<long double,       milli>::rep >::value, "");
-    static_assert(cuda::std::is_same< decltype(_us.count()),  cuda::std::chrono::duration<long double,       micro>::rep >::value, "");
-    static_assert(cuda::std::is_same< decltype(_ns.count()),  cuda::std::chrono::duration<long double,        nano>::rep  >::value, "");
+    static_assert(cuda_for_dali::std::is_same< decltype(_h.count()),   cuda_for_dali::std::chrono::duration<long double, ratio<3600>>::rep        >::value, "");
+    static_assert(cuda_for_dali::std::is_same< decltype(_min.count()), cuda_for_dali::std::chrono::duration<long double, ratio<  60>>::rep      >::value, "");
+    // static_assert(cuda_for_dali::std::is_same< decltype(s.count()),   cuda_for_dali::std::chrono::duration<long double             >::rep      >::value, "");
+    static_assert(cuda_for_dali::std::is_same< decltype(_ms.count()),  cuda_for_dali::std::chrono::duration<long double,       milli>::rep >::value, "");
+    static_assert(cuda_for_dali::std::is_same< decltype(_us.count()),  cuda_for_dali::std::chrono::duration<long double,       micro>::rep >::value, "");
+    static_assert(cuda_for_dali::std::is_same< decltype(_ns.count()),  cuda_for_dali::std::chrono::duration<long double,        nano>::rep  >::value, "");
   }
 
   return 0;

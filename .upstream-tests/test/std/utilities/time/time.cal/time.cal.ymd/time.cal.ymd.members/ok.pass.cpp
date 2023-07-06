@@ -13,23 +13,23 @@
 // constexpr bool ok() const noexcept;
 //  Returns: m_.ok() && y_.ok().
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using year           = cuda::std::chrono::year;
-    using month          = cuda::std::chrono::month;
-    using day            = cuda::std::chrono::day;
-    using year_month_day = cuda::std::chrono::year_month_day;
+    using year           = cuda_for_dali::std::chrono::year;
+    using month          = cuda_for_dali::std::chrono::month;
+    using day            = cuda_for_dali::std::chrono::day;
+    using year_month_day = cuda_for_dali::std::chrono::year_month_day;
 
-    constexpr month January = cuda::std::chrono::January;
+    constexpr month January = cuda_for_dali::std::chrono::January;
 
     ASSERT_NOEXCEPT(                std::declval<const year_month_day>().ok());
-    ASSERT_SAME_TYPE(bool, decltype(cuda::std::declval<const year_month_day>().ok()));
+    ASSERT_SAME_TYPE(bool, decltype(cuda_for_dali::std::declval<const year_month_day>().ok()));
 
     static_assert(!year_month_day{year{-32768}, month{}, day{}}.ok(), ""); // All three bad
 
@@ -71,8 +71,8 @@ int main(int, char**)
     static_assert( year_month_day{year{2020},   month{11}, day{30}}.ok(), "");
     static_assert( year_month_day{year{2020},   month{12}, day{30}}.ok(), "");
 
-    static_assert(!year_month_day{year{2019},   cuda::std::chrono::February, day{29}}.ok(), ""); // Not a leap year
-    static_assert( year_month_day{year{2020},   cuda::std::chrono::February, day{29}}.ok(), ""); // Ok; 2020 is a leap year
+    static_assert(!year_month_day{year{2019},   cuda_for_dali::std::chrono::February, day{29}}.ok(), ""); // Not a leap year
+    static_assert( year_month_day{year{2020},   cuda_for_dali::std::chrono::February, day{29}}.ok(), ""); // Ok; 2020 is a leap year
 
     for (unsigned i = 0; i <= 50; ++i)
     {

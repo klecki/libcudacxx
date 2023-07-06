@@ -12,14 +12,14 @@
 
 #define _LIBCUDACXX_DISABLE_DEPRECATION_WARNINGS
 
-#include <cuda/std/functional>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/functional>
+#include <cuda_for_dali/std/cassert>
 
 int main(int, char**)
 {
-    typedef cuda::std::logical_not<int> F;
-    assert(cuda::std::not1(F())(36));
-    assert(!cuda::std::not1(F())(0));
+    typedef cuda_for_dali::std::logical_not<int> F;
+    assert(cuda_for_dali::std::not1(F())(36));
+    assert(!cuda_for_dali::std::not1(F())(0));
 
   return 0;
 }

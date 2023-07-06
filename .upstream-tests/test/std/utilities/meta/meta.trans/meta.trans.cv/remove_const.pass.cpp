@@ -10,7 +10,7 @@
 
 // remove_const
 
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/type_traits>
 
 #include "test_macros.h"
 
@@ -18,9 +18,9 @@ template <class T, class U>
 __host__ __device__
 void test_remove_const_imp()
 {
-    ASSERT_SAME_TYPE(U, typename cuda::std::remove_const<T>::type);
+    ASSERT_SAME_TYPE(U, typename cuda_for_dali::std::remove_const<T>::type);
 #if TEST_STD_VER > 11
-    ASSERT_SAME_TYPE(U,        cuda::std::remove_const_t<T>);
+    ASSERT_SAME_TYPE(U,        cuda_for_dali::std::remove_const_t<T>);
 #endif
 }
 

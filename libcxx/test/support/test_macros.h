@@ -10,7 +10,7 @@
 #ifndef SUPPORT_TEST_MACROS_HPP
 #define SUPPORT_TEST_MACROS_HPP
 
-// Attempt to get STL specific macros like _LIBCUDACXX_VERSION using the most
+// Attempt to get STL specific macros like _LIBCUDAFORDALICXX_VERSION using the most
 // minimal header possible. If we're testing libc++, we should use `<__config>`.
 // If <__config> isn't available, fall back to <ciso646>.
 #ifdef __has_include
@@ -109,7 +109,7 @@
 #      define TEST_STD_VER 17
 #    else
 #      define TEST_STD_VER 99  // Greater than current standard.
-       // This is deliberately different than _LIBCUDACXX_STD_VER to discourage matching them up.
+       // This is deliberately different than _LIBCUDAFORDALICXX_STD_VER to discourage matching them up.
 #    endif
 #  else
 #    if   __cplusplus <= 199711L
@@ -122,7 +122,7 @@
 #      define TEST_STD_VER 17
 #    else
 #      define TEST_STD_VER 99  // Greater than current standard.
-       // This is deliberately different than _LIBCUDACXX_STD_VER to discourage matching them up.
+       // This is deliberately different than _LIBCUDAFORDALICXX_STD_VER to discourage matching them up.
 #    endif
 #  endif
 #endif  // TEST_STD_VER
@@ -182,7 +182,7 @@
 #    define TEST_HAS_TIMESPEC_GET
 #  elif defined(__linux__)
 // This block preserves the old behavior used by include/__config:
-// _LIBCUDACXX_GLIBC_PREREQ would be defined to 0 if __GLIBC_PREREQ was not
+// _LIBCUDAFORDALICXX_GLIBC_PREREQ would be defined to 0 if __GLIBC_PREREQ was not
 // available. The configuration here may be too vague though, as Bionic, uClibc,
 // newlib, etc may all support these features but need to be configured.
 #    if defined(TEST_GLIBC_PREREQ)
@@ -190,7 +190,7 @@
 #        define TEST_HAS_TIMESPEC_GET
 #        define TEST_HAS_C11_FEATURES
 #      endif
-#    elif defined(_LIBCUDACXX_HAS_MUSL_LIBC)
+#    elif defined(_LIBCUDAFORDALICXX_HAS_MUSL_LIBC)
 #      define TEST_HAS_C11_FEATURES
 #      define TEST_HAS_TIMESPEC_GET
 #    endif
@@ -233,20 +233,20 @@
 #define TEST_HAS_SANITIZERS
 #endif
 
-#if defined(_LIBCUDACXX_NORETURN)
-#define TEST_NORETURN _LIBCUDACXX_NORETURN
+#if defined(_LIBCUDAFORDALICXX_NORETURN)
+#define TEST_NORETURN _LIBCUDAFORDALICXX_NORETURN
 #else
 #define TEST_NORETURN [[noreturn]]
 #endif
 
-#if defined(_LIBCUDACXX_HAS_NO_ALIGNED_ALLOCATION) || \
+#if defined(_LIBCUDAFORDALICXX_HAS_NO_ALIGNED_ALLOCATION) || \
   (!(TEST_STD_VER > 14 || \
     (defined(__cpp_aligned_new) && __cpp_aligned_new >= 201606L)))
 #define TEST_HAS_NO_ALIGNED_ALLOCATION
 #endif
 
-#if defined(_LIBCUDACXX_SAFE_STATIC)
-#define TEST_SAFE_STATIC _LIBCUDACXX_SAFE_STATIC
+#if defined(_LIBCUDAFORDALICXX_SAFE_STATIC)
+#define TEST_SAFE_STATIC _LIBCUDAFORDALICXX_SAFE_STATIC
 #else
 #define TEST_SAFE_STATIC
 #endif
@@ -269,7 +269,7 @@
 #endif
 
 /* Macros for testing libc++ specific behavior and extensions */
-#if defined(_LIBCUDACXX_VERSION)
+#if defined(_LIBCUDAFORDALICXX_VERSION)
 #define LIBCPP_ASSERT(...) assert(__VA_ARGS__)
 #define LIBCPP_STATIC_ASSERT(...) static_assert(__VA_ARGS__)
 #define LIBCPP_ASSERT_NOEXCEPT(...) ASSERT_NOEXCEPT(__VA_ARGS__)
@@ -311,13 +311,13 @@ struct is_same<T, T> { enum {value = 1}; };
 
 #if defined(__GNUC__) || defined(__clang__) || defined(__CUDACC_RTC__)
 template <class Tp>
-inline _LIBCUDACXX_INLINE_VISIBILITY
+inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 void DoNotOptimize(Tp const& value) {
     asm volatile("" : : "r,m"(value) : "memory");
 }
 
 template <class Tp>
-inline _LIBCUDACXX_INLINE_VISIBILITY
+inline _LIBCUDAFORDALICXX_INLINE_VISIBILITY
 void DoNotOptimize(Tp& value) {
 #if defined(__clang__)
   asm volatile("" : "+r,m"(value) : : "memory");

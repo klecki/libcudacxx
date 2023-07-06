@@ -7,8 +7,8 @@
 //===----------------------------------------------------------------------===//
 
 // UNSUPPORTED: c++98, c++03, c++11
-#include <cuda/std/functional>
-// #include <cuda/std/string>
+#include <cuda_for_dali/std/functional>
+// #include <cuda_for_dali/std/string>
 
 template <class T>
 struct is_transparent
@@ -24,35 +24,35 @@ public:
 
 int main(int, char**)
 {
-    static_assert ( !is_transparent<cuda::std::less<int>>::value, "" );
-    // static_assert ( !is_transparent<cuda::std::less<cuda::std::string>>::value, "" );
-    static_assert (  is_transparent<cuda::std::less<void>>::value, "" );
-    static_assert (  is_transparent<cuda::std::less<>>::value, "" );
+    static_assert ( !is_transparent<cuda_for_dali::std::less<int>>::value, "" );
+    // static_assert ( !is_transparent<cuda_for_dali::std::less<cuda_for_dali::std::string>>::value, "" );
+    static_assert (  is_transparent<cuda_for_dali::std::less<void>>::value, "" );
+    static_assert (  is_transparent<cuda_for_dali::std::less<>>::value, "" );
 
-    static_assert ( !is_transparent<cuda::std::less_equal<int>>::value, "" );
-    // static_assert ( !is_transparent<cuda::std::less_equal<cuda::std::string>>::value, "" );
-    static_assert (  is_transparent<cuda::std::less_equal<void>>::value, "" );
-    static_assert (  is_transparent<cuda::std::less_equal<>>::value, "" );
+    static_assert ( !is_transparent<cuda_for_dali::std::less_equal<int>>::value, "" );
+    // static_assert ( !is_transparent<cuda_for_dali::std::less_equal<cuda_for_dali::std::string>>::value, "" );
+    static_assert (  is_transparent<cuda_for_dali::std::less_equal<void>>::value, "" );
+    static_assert (  is_transparent<cuda_for_dali::std::less_equal<>>::value, "" );
 
-    static_assert ( !is_transparent<cuda::std::equal_to<int>>::value, "" );
-    // static_assert ( !is_transparent<cuda::std::equal_to<cuda::std::string>>::value, "" );
-    static_assert (  is_transparent<cuda::std::equal_to<void>>::value, "" );
-    static_assert (  is_transparent<cuda::std::equal_to<>>::value, "" );
+    static_assert ( !is_transparent<cuda_for_dali::std::equal_to<int>>::value, "" );
+    // static_assert ( !is_transparent<cuda_for_dali::std::equal_to<cuda_for_dali::std::string>>::value, "" );
+    static_assert (  is_transparent<cuda_for_dali::std::equal_to<void>>::value, "" );
+    static_assert (  is_transparent<cuda_for_dali::std::equal_to<>>::value, "" );
 
-    static_assert ( !is_transparent<cuda::std::not_equal_to<int>>::value, "" );
-    // static_assert ( !is_transparent<cuda::std::not_equal_to<cuda::std::string>>::value, "" );
-    static_assert (  is_transparent<cuda::std::not_equal_to<void>>::value, "" );
-    static_assert (  is_transparent<cuda::std::not_equal_to<>>::value, "" );
+    static_assert ( !is_transparent<cuda_for_dali::std::not_equal_to<int>>::value, "" );
+    // static_assert ( !is_transparent<cuda_for_dali::std::not_equal_to<cuda_for_dali::std::string>>::value, "" );
+    static_assert (  is_transparent<cuda_for_dali::std::not_equal_to<void>>::value, "" );
+    static_assert (  is_transparent<cuda_for_dali::std::not_equal_to<>>::value, "" );
 
-    static_assert ( !is_transparent<cuda::std::greater<int>>::value, "" );
-    // static_assert ( !is_transparent<cuda::std::greater<cuda::std::string>>::value, "" );
-    static_assert (  is_transparent<cuda::std::greater<void>>::value, "" );
-    static_assert (  is_transparent<cuda::std::greater<>>::value, "" );
+    static_assert ( !is_transparent<cuda_for_dali::std::greater<int>>::value, "" );
+    // static_assert ( !is_transparent<cuda_for_dali::std::greater<cuda_for_dali::std::string>>::value, "" );
+    static_assert (  is_transparent<cuda_for_dali::std::greater<void>>::value, "" );
+    static_assert (  is_transparent<cuda_for_dali::std::greater<>>::value, "" );
 
-    static_assert ( !is_transparent<cuda::std::greater_equal<int>>::value, "" );
-    // static_assert ( !is_transparent<cuda::std::greater_equal<cuda::std::string>>::value, "" );
-    static_assert (  is_transparent<cuda::std::greater_equal<void>>::value, "" );
-    static_assert (  is_transparent<cuda::std::greater_equal<>>::value, "" );
+    static_assert ( !is_transparent<cuda_for_dali::std::greater_equal<int>>::value, "" );
+    // static_assert ( !is_transparent<cuda_for_dali::std::greater_equal<cuda_for_dali::std::string>>::value, "" );
+    static_assert (  is_transparent<cuda_for_dali::std::greater_equal<void>>::value, "" );
+    static_assert (  is_transparent<cuda_for_dali::std::greater_equal<>>::value, "" );
 
     return 0;
 }

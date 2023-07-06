@@ -12,7 +12,7 @@
 
 // tuple_element<I, pair<T1, T2> >::type
 
-#include <cuda/std/utility>
+#include <cuda_for_dali/std/utility>
 
 #include "test_macros.h"
 
@@ -22,30 +22,30 @@ __host__ __device__ void test()
     {
     typedef T1 Exp1;
     typedef T2 Exp2;
-    typedef cuda::std::pair<T1, T2> P;
-    static_assert((cuda::std::is_same<typename cuda::std::tuple_element<0, P>::type, Exp1>::value), "");
-    static_assert((cuda::std::is_same<typename cuda::std::tuple_element<1, P>::type, Exp2>::value), "");
+    typedef cuda_for_dali::std::pair<T1, T2> P;
+    static_assert((cuda_for_dali::std::is_same<typename cuda_for_dali::std::tuple_element<0, P>::type, Exp1>::value), "");
+    static_assert((cuda_for_dali::std::is_same<typename cuda_for_dali::std::tuple_element<1, P>::type, Exp2>::value), "");
     }
     {
     typedef T1 const Exp1;
     typedef T2 const Exp2;
-    typedef cuda::std::pair<T1, T2> const P;
-    static_assert((cuda::std::is_same<typename cuda::std::tuple_element<0, P>::type, Exp1>::value), "");
-    static_assert((cuda::std::is_same<typename cuda::std::tuple_element<1, P>::type, Exp2>::value), "");
+    typedef cuda_for_dali::std::pair<T1, T2> const P;
+    static_assert((cuda_for_dali::std::is_same<typename cuda_for_dali::std::tuple_element<0, P>::type, Exp1>::value), "");
+    static_assert((cuda_for_dali::std::is_same<typename cuda_for_dali::std::tuple_element<1, P>::type, Exp2>::value), "");
     }
     {
     typedef T1 volatile Exp1;
     typedef T2 volatile Exp2;
-    typedef cuda::std::pair<T1, T2> volatile P;
-    static_assert((cuda::std::is_same<typename cuda::std::tuple_element<0, P>::type, Exp1>::value), "");
-    static_assert((cuda::std::is_same<typename cuda::std::tuple_element<1, P>::type, Exp2>::value), "");
+    typedef cuda_for_dali::std::pair<T1, T2> volatile P;
+    static_assert((cuda_for_dali::std::is_same<typename cuda_for_dali::std::tuple_element<0, P>::type, Exp1>::value), "");
+    static_assert((cuda_for_dali::std::is_same<typename cuda_for_dali::std::tuple_element<1, P>::type, Exp2>::value), "");
     }
     {
     typedef T1 const volatile Exp1;
     typedef T2 const volatile Exp2;
-    typedef cuda::std::pair<T1, T2> const volatile P;
-    static_assert((cuda::std::is_same<typename cuda::std::tuple_element<0, P>::type, Exp1>::value), "");
-    static_assert((cuda::std::is_same<typename cuda::std::tuple_element<1, P>::type, Exp2>::value), "");
+    typedef cuda_for_dali::std::pair<T1, T2> const volatile P;
+    static_assert((cuda_for_dali::std::is_same<typename cuda_for_dali::std::tuple_element<0, P>::type, Exp1>::value), "");
+    static_assert((cuda_for_dali::std::is_same<typename cuda_for_dali::std::tuple_element<1, P>::type, Exp2>::value), "");
     }
 }
 

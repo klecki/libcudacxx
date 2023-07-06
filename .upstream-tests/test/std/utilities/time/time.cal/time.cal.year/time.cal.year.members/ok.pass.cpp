@@ -18,18 +18,18 @@
 //  static constexpr year max() noexcept;
 //   Returns year{-32767};
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using year = cuda::std::chrono::year;
+    using year = cuda_for_dali::std::chrono::year;
 
     ASSERT_NOEXCEPT(                std::declval<const year>().ok());
-    ASSERT_SAME_TYPE(bool, decltype(cuda::std::declval<const year>().ok()));
+    ASSERT_SAME_TYPE(bool, decltype(cuda_for_dali::std::declval<const year>().ok()));
 
     ASSERT_NOEXCEPT(                year::max());
     ASSERT_SAME_TYPE(year, decltype(year::max()));

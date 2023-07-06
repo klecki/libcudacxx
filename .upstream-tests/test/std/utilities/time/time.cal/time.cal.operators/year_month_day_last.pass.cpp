@@ -31,8 +31,8 @@
 // Returns: year(y) / mdl.
 
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
@@ -40,14 +40,14 @@
 
 int main(int, char**)
 {
-    using month               = cuda::std::chrono::month;
-    using year_month          = cuda::std::chrono::year_month;
-    using year                = cuda::std::chrono::year;
-    using month_day_last      = cuda::std::chrono::month_day_last;
-    using year_month_day_last = cuda::std::chrono::year_month_day_last;
+    using month               = cuda_for_dali::std::chrono::month;
+    using year_month          = cuda_for_dali::std::chrono::year_month;
+    using year                = cuda_for_dali::std::chrono::year;
+    using month_day_last      = cuda_for_dali::std::chrono::month_day_last;
+    using year_month_day_last = cuda_for_dali::std::chrono::year_month_day_last;
 
-    constexpr month February = cuda::std::chrono::February;
-    constexpr cuda::std::chrono::last_spec last = cuda::std::chrono::last;
+    constexpr month February = cuda_for_dali::std::chrono::February;
+    constexpr cuda_for_dali::std::chrono::last_spec last = cuda_for_dali::std::chrono::last;
 
     { // operator/(const year_month& ym, last_spec)
         constexpr year_month Feb2018{year{2018}, February};

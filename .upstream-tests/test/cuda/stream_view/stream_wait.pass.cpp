@@ -7,7 +7,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <cuda/stream_view>
+#include <cuda_for_dali/stream_view>
 #include <cassert>
 #include "../exception_helper.h"
 
@@ -16,7 +16,7 @@ int main(int argc, char** argv){
 #ifndef __CUDA_ARCH__
   cudaStream_t s;
   cudaStreamCreate(&s);
-  cuda::stream_view sv{s};
+  cuda_for_dali::stream_view sv{s};
   _LIBCUDACXX_TEST_TRY {
     sv.wait();
   } _LIBCUDACXX_TEST_CATCH(...) {

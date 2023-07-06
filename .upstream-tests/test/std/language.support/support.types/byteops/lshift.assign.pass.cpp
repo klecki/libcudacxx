@@ -6,7 +6,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#include <cuda/std/cstddef>
+#include <cuda_for_dali/std/cstddef>
 #include <test_macros.h>
 
 // UNSUPPORTED: c++98, c++03, c++11, c++14
@@ -18,20 +18,20 @@
 
 
 __host__ __device__
-constexpr cuda::std::byte test(cuda::std::byte b) {
+constexpr cuda_for_dali::std::byte test(cuda_for_dali::std::byte b) {
     return b <<= 2;
     }
 
 
 int main(int, char**) {
-    cuda::std::byte b;  // not constexpr, just used in noexcept check
-    constexpr cuda::std::byte b2{static_cast<cuda::std::byte>(2)};
-    constexpr cuda::std::byte b3{static_cast<cuda::std::byte>(3)};
+    cuda_for_dali::std::byte b;  // not constexpr, just used in noexcept check
+    constexpr cuda_for_dali::std::byte b2{static_cast<cuda_for_dali::std::byte>(2)};
+    constexpr cuda_for_dali::std::byte b3{static_cast<cuda_for_dali::std::byte>(3)};
 
     static_assert(noexcept(b <<= 2), "" );
 
-    static_assert(cuda::std::to_integer<int>(test(b2)) ==  8, "" );
-    static_assert(cuda::std::to_integer<int>(test(b3)) == 12, "" );
+    static_assert(cuda_for_dali::std::to_integer<int>(test(b2)) ==  8, "" );
+    static_assert(cuda_for_dali::std::to_integer<int>(test(b3)) == 12, "" );
 
 
   return 0;

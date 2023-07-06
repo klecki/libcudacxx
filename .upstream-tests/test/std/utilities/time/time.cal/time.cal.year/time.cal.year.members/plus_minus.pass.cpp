@@ -13,8 +13,8 @@
 // constexpr year operator+() const noexcept;
 // constexpr year operator-() const noexcept;
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
@@ -31,7 +31,7 @@ constexpr bool testConstexpr()
 
 int main(int, char**)
 {
-    using year  = cuda::std::chrono::year;
+    using year  = cuda_for_dali::std::chrono::year;
 
     ASSERT_NOEXCEPT(+std::declval<year>());
     ASSERT_NOEXCEPT(-std::declval<year>());

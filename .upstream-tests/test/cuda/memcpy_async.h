@@ -9,7 +9,7 @@
 
 // UNSUPPORTED: pre-sm-70
 
-#include <cuda/barrier>
+#include <cuda_for_dali/barrier>
 
 #include "cuda_space_selector.h"
 #include "large_type.h"
@@ -18,7 +18,7 @@ template <class T,
     template<typename, typename> class SourceSelector,
     template<typename, typename> class DestSelector,
     template<typename, typename> class BarrierSelector,
-    cuda::thread_scope BarrierScope,
+    cuda_for_dali::thread_scope BarrierScope,
     typename ...CompletionF
 >
 __host__ __device__ __noinline__
@@ -27,16 +27,16 @@ void test_fully_specialized()
     SourceSelector<T, constructor_initializer> source_sel;
     typename DestSelector<T, constructor_initializer>
         ::template offsetted<decltype(source_sel)::shared_offset> dest_sel;
-    BarrierSelector<cuda::barrier<BarrierScope, CompletionF...>, constructor_initializer> bar_sel;
+    BarrierSelector<cuda_for_dali::barrier<BarrierScope, CompletionF...>, constructor_initializer> bar_sel;
 
     T * source = source_sel.construct(static_cast<T>(12));
     T * dest = dest_sel.construct(static_cast<T>(0));
-    cuda::barrier<BarrierScope, CompletionF...> * bar = bar_sel.construct(1);
+    cuda_for_dali::barrier<BarrierScope, CompletionF...> * bar = bar_sel.construct(1);
 
     assert(*source == 12);
     assert(*dest == 0);
 
-    cuda::memcpy_async(dest, source, sizeof(T), *bar);
+    cuda_for_dali::memcpy_async(dest, source, sizeof(T), *bar);
 
     bar->arrive_and_wait();
 
@@ -45,7 +45,7 @@ void test_fully_specialized()
 
     *source = 24;
 
-    cuda::memcpy_async(static_cast<void *>(dest), static_cast<void *>(source), sizeof(T), *bar);
+    cuda_for_dali::memcpy_async(static_cast<void *>(dest), static_cast<void *>(source), sizeof(T), *bar);
 
     bar->arrive_and_wait();
 
@@ -67,14 +67,14 @@ template <class T,
 __host__ __device__ __noinline__
 void test_select_scope()
 {
-    test_fully_specialized<T, SourceSelector, DestSelector, BarrierSelector, cuda::thread_scope_system>();
-    test_fully_specialized<T, SourceSelector, DestSelector, BarrierSelector, cuda::thread_scope_device>();
-    test_fully_specialized<T, SourceSelector, DestSelector, BarrierSelector, cuda::thread_scope_block>();
+    test_fully_specialized<T, SourceSelector, DestSelector, BarrierSelector, cuda_for_dali::thread_scope_system>();
+    test_fully_specialized<T, SourceSelector, DestSelector, BarrierSelector, cuda_for_dali::thread_scope_device>();
+    test_fully_specialized<T, SourceSelector, DestSelector, BarrierSelector, cuda_for_dali::thread_scope_block>();
     // Test one of the scopes with a non-default completion. Testing them all would make this test take twice as much time to compile.
     // Selected block scope because the block scope barrier with the default completion has a special path, so this tests both that the
     // API entrypoints accept barriers with arbitrary completion function, and that the synchronization mechanism detects it correctly.
-    test_fully_specialized<T, SourceSelector, DestSelector, BarrierSelector, cuda::thread_scope_block, completion>();
-    test_fully_specialized<T, SourceSelector, DestSelector, BarrierSelector, cuda::thread_scope_thread>();
+    test_fully_specialized<T, SourceSelector, DestSelector, BarrierSelector, cuda_for_dali::thread_scope_block, completion>();
+    test_fully_specialized<T, SourceSelector, DestSelector, BarrierSelector, cuda_for_dali::thread_scope_thread>();
 }
 
 template <class T,

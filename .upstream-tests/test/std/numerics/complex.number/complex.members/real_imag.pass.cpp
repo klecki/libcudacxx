@@ -11,8 +11,8 @@
 // void real(T val);
 // void imag(T val);
 
-#include <cuda/std/complex>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/complex>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
@@ -21,13 +21,13 @@ __host__ __device__ void
 test_constexpr()
 {
 #if TEST_STD_VER > 11
-    constexpr cuda::std::complex<T> c1;
+    constexpr cuda_for_dali::std::complex<T> c1;
     static_assert(c1.real() == 0, "");
     static_assert(c1.imag() == 0, "");
-    constexpr cuda::std::complex<T> c2(3);
+    constexpr cuda_for_dali::std::complex<T> c2(3);
     static_assert(c2.real() == 3, "");
     static_assert(c2.imag() == 0, "");
-    constexpr cuda::std::complex<T> c3(3, 4);
+    constexpr cuda_for_dali::std::complex<T> c3(3, 4);
     static_assert(c3.real() == 3, "");
     static_assert(c3.imag() == 4, "");
 #endif
@@ -37,7 +37,7 @@ template <class T>
 __host__ __device__ void
 test()
 {
-    cuda::std::complex<T> c;
+    cuda_for_dali::std::complex<T> c;
     assert(c.real() == 0);
     assert(c.imag() == 0);
     c.real(3.5);

@@ -10,31 +10,31 @@
 
 // divides
 
-#include <cuda/std/functional>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/functional>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    typedef cuda::std::divides<int> F;
+    typedef cuda_for_dali::std::divides<int> F;
     const F f = F();
-    static_assert((cuda::std::is_same<int, F::first_argument_type>::value), "" );
-    static_assert((cuda::std::is_same<int, F::second_argument_type>::value), "" );
-    static_assert((cuda::std::is_same<int, F::result_type>::value), "" );
+    static_assert((cuda_for_dali::std::is_same<int, F::first_argument_type>::value), "" );
+    static_assert((cuda_for_dali::std::is_same<int, F::second_argument_type>::value), "" );
+    static_assert((cuda_for_dali::std::is_same<int, F::result_type>::value), "" );
     assert(f(36, 4) == 9);
 #if TEST_STD_VER > 11
-    typedef cuda::std::divides<> F2;
+    typedef cuda_for_dali::std::divides<> F2;
     const F2 f2 = F2();
     assert(f2(36, 4) == 9);
     assert(f2(36.0, 4) == 9);
     assert(f2(18, 4.0) == 4.5); // exact in binary
 
-    constexpr int foo = cuda::std::divides<int> () (3, 2);
+    constexpr int foo = cuda_for_dali::std::divides<int> () (3, 2);
     static_assert ( foo == 1, "" );
 
-    constexpr double bar = cuda::std::divides<> () (3.0, 2);
+    constexpr double bar = cuda_for_dali::std::divides<> () (3.0, 2);
     static_assert ( bar == 1.5, "" ); // exact in binary
 #endif
 

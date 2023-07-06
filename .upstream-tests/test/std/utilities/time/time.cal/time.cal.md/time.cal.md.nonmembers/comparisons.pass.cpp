@@ -19,8 +19,8 @@
 //      Otherwise, if x.month() > y.month() returns false.
 //      Otherwise, returns x.day() < y.day().
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
@@ -28,26 +28,26 @@
 
 int main(int, char**)
 {
-    using day       = cuda::std::chrono::day;
-    using month     = cuda::std::chrono::month;
-    using month_day = cuda::std::chrono::month_day;
+    using day       = cuda_for_dali::std::chrono::day;
+    using month     = cuda_for_dali::std::chrono::month;
+    using month_day = cuda_for_dali::std::chrono::month_day;
 
     AssertComparisons6AreNoexcept<month_day>();
     AssertComparisons6ReturnBool<month_day>();
 
     static_assert( testComparisons6(
-        month_day{cuda::std::chrono::January, day{1}},
-        month_day{cuda::std::chrono::January, day{1}},
+        month_day{cuda_for_dali::std::chrono::January, day{1}},
+        month_day{cuda_for_dali::std::chrono::January, day{1}},
         true, false), "");
 
     static_assert( testComparisons6(
-        month_day{cuda::std::chrono::January, day{1}},
-        month_day{cuda::std::chrono::January, day{2}},
+        month_day{cuda_for_dali::std::chrono::January, day{1}},
+        month_day{cuda_for_dali::std::chrono::January, day{2}},
         false, true), "");
 
     static_assert( testComparisons6(
-        month_day{cuda::std::chrono::January,  day{1}},
-        month_day{cuda::std::chrono::February, day{1}},
+        month_day{cuda_for_dali::std::chrono::January,  day{1}},
+        month_day{cuda_for_dali::std::chrono::February, day{1}},
         false, true), "");
 
 //  same day, different months

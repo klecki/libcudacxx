@@ -19,32 +19,32 @@
 //     Integral
 //     atomic_fetch_and(atomic<Integral>* obj, Integral op);
 
-#include <cuda/std/atomic>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/atomic>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "atomic_helpers.h"
 #include "cuda_space_selector.h"
 
-template <class T, template<typename, typename> typename Selector, cuda::thread_scope>
+template <class T, template<typename, typename> typename Selector, cuda_for_dali::thread_scope>
 struct TestFn {
   __host__ __device__
   void operator()() const {
     {
-        typedef cuda::std::atomic<T> A;
+        typedef cuda_for_dali::std::atomic<T> A;
         Selector<A, constructor_initializer> sel;
         A & t = *sel.construct();
-        cuda::std::atomic_init(&t, T(1));
-        assert(cuda::std::atomic_fetch_and(&t, T(2)) == T(1));
+        cuda_for_dali::std::atomic_init(&t, T(1));
+        assert(cuda_for_dali::std::atomic_fetch_and(&t, T(2)) == T(1));
         assert(t == T(0));
     }
     {
-        typedef cuda::std::atomic<T> A;
+        typedef cuda_for_dali::std::atomic<T> A;
         Selector<volatile A, constructor_initializer> sel;
         volatile A & t = *sel.construct();
-        cuda::std::atomic_init(&t, T(3));
-        assert(cuda::std::atomic_fetch_and(&t, T(2)) == T(3));
+        cuda_for_dali::std::atomic_init(&t, T(3));
+        assert(cuda_for_dali::std::atomic_fetch_and(&t, T(2)) == T(3));
         assert(t == T(2));
     }
   }

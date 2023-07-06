@@ -16,9 +16,9 @@
 // UNSUPPORTED: c++98, c++03
 // UNSUPPORTED: msvc
 
-#include <cuda/std/utility>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/utility>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
@@ -32,7 +32,7 @@
 
 struct DeletedDefault {
     // A class with a deleted default constructor. Used to test the SFINAE
-    // on cuda::std::pair's default constructor.
+    // on cuda_for_dali::std::pair's default constructor.
     __host__ __device__ constexpr explicit DeletedDefault(int x) : value(x) {}
     __host__ __device__ constexpr DeletedDefault() = delete;
     int value;
@@ -42,11 +42,11 @@ template <class Tp, bool>
 struct DependantType: public Tp {};
 
 template <class T, bool Val>
-using DependantIsDefault = DependantType<cuda::std::is_default_constructible<T>, Val>;
+using DependantIsDefault = DependantType<cuda_for_dali::std::is_default_constructible<T>, Val>;
 
 template <class T>
 struct DefaultSFINAES {
-    template <bool Dummy = false, class = typename cuda::std::enable_if<
+    template <bool Dummy = false, class = typename cuda_for_dali::std::enable_if<
              DependantIsDefault<T, Dummy>::value
                 >::type
             >
@@ -64,19 +64,19 @@ template <class Tp>
 __host__ __device__ void test_not_is_default_constructible()
 {
     {
-        typedef cuda::std::pair<int, Tp> P;
-        static_assert(!cuda::std::is_default_constructible<P>::value, "");
-        static_assert(cuda::std::is_constructible<P, int, Tp>::value, "");
+        typedef cuda_for_dali::std::pair<int, Tp> P;
+        static_assert(!cuda_for_dali::std::is_default_constructible<P>::value, "");
+        static_assert(cuda_for_dali::std::is_constructible<P, int, Tp>::value, "");
     }
     {
-        typedef cuda::std::pair<Tp, int> P;
-        static_assert(!cuda::std::is_default_constructible<P>::value, "");
-        static_assert(cuda::std::is_constructible<P, Tp, int>::value, "");
+        typedef cuda_for_dali::std::pair<Tp, int> P;
+        static_assert(!cuda_for_dali::std::is_default_constructible<P>::value, "");
+        static_assert(cuda_for_dali::std::is_constructible<P, Tp, int>::value, "");
     }
     {
-        typedef cuda::std::pair<Tp, Tp> P;
-        static_assert(!cuda::std::is_default_constructible<P>::value, "");
-        static_assert(cuda::std::is_constructible<P, Tp, Tp>::value, "");
+        typedef cuda_for_dali::std::pair<Tp, Tp> P;
+        static_assert(!cuda_for_dali::std::is_default_constructible<P>::value, "");
+        static_assert(cuda_for_dali::std::is_constructible<P, Tp, Tp>::value, "");
     }
 }
 
@@ -84,16 +84,16 @@ template <class Tp>
 __host__ __device__ void test_is_default_constructible()
 {
     {
-        typedef cuda::std::pair<int, Tp> P;
-        static_assert(cuda::std::is_default_constructible<P>::value, "");
+        typedef cuda_for_dali::std::pair<int, Tp> P;
+        static_assert(cuda_for_dali::std::is_default_constructible<P>::value, "");
     }
     {
-        typedef cuda::std::pair<Tp, int> P;
-        static_assert(cuda::std::is_default_constructible<P>::value, "");
+        typedef cuda_for_dali::std::pair<Tp, int> P;
+        static_assert(cuda_for_dali::std::is_default_constructible<P>::value, "");
     }
     {
-        typedef cuda::std::pair<Tp, Tp> P;
-        static_assert(cuda::std::is_default_constructible<P>::value, "");
+        typedef cuda_for_dali::std::pair<Tp, Tp> P;
+        static_assert(cuda_for_dali::std::is_default_constructible<P>::value, "");
     }
 }
 
@@ -119,21 +119,21 @@ typedef IllFormedDefaultImp<int> IllFormedDefault;
 __host__ __device__ void test_illformed_default()
 {
     {
-    typedef cuda::std::pair<IllFormedDefault, int> P;
-    static_assert((cuda::std::is_constructible<P, IllFormedDefault, int>::value), "");
+    typedef cuda_for_dali::std::pair<IllFormedDefault, int> P;
+    static_assert((cuda_for_dali::std::is_constructible<P, IllFormedDefault, int>::value), "");
     CONSTEXPR_CXX14 P p(IllFormedDefault(42), -5);
     STATIC_ASSERT_CXX14(p.first.value == 42 && p.second == -5);
     }
     {
-    typedef cuda::std::pair<int, IllFormedDefault> P;
-    static_assert((cuda::std::is_constructible<P, int, IllFormedDefault>::value), "");
+    typedef cuda_for_dali::std::pair<int, IllFormedDefault> P;
+    static_assert((cuda_for_dali::std::is_constructible<P, int, IllFormedDefault>::value), "");
     CONSTEXPR_CXX14 IllFormedDefault dd(-5);
     CONSTEXPR_CXX14 P p(42, dd);
     STATIC_ASSERT_CXX14(p.first == 42 && p.second.value == -5);
     }
     {
-    typedef cuda::std::pair<IllFormedDefault, IllFormedDefault> P;
-    static_assert((cuda::std::is_constructible<P, IllFormedDefault, IllFormedDefault>::value), "");
+    typedef cuda_for_dali::std::pair<IllFormedDefault, IllFormedDefault> P;
+    static_assert((cuda_for_dali::std::is_constructible<P, IllFormedDefault, IllFormedDefault>::value), "");
     CONSTEXPR_CXX14 P p(IllFormedDefault(42), IllFormedDefault(-5));
     STATIC_ASSERT_CXX14(p.first.value == 42 && p.second.value == -5);
     }

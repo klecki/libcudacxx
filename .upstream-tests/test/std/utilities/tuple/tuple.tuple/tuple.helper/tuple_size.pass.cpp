@@ -14,32 +14,32 @@
 //   class tuple_size<tuple<Types...>>
 //     : public integral_constant<size_t, sizeof...(Types)> { };
 
-// UNSUPPORTED: c++98, c++03 
+// UNSUPPORTED: c++98, c++03
 
-#include <cuda/std/tuple>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/tuple>
+#include <cuda_for_dali/std/type_traits>
 
 #include "test_macros.h"
 
-template <class T, cuda::std::size_t N>
+template <class T, cuda_for_dali::std::size_t N>
 __host__ __device__ void test()
 {
-    static_assert((cuda::std::is_base_of<cuda::std::integral_constant<cuda::std::size_t, N>,
-                                   cuda::std::tuple_size<T> >::value), "");
-    static_assert((cuda::std::is_base_of<cuda::std::integral_constant<cuda::std::size_t, N>,
-                                   cuda::std::tuple_size<const T> >::value), "");
-    static_assert((cuda::std::is_base_of<cuda::std::integral_constant<cuda::std::size_t, N>,
-                                   cuda::std::tuple_size<volatile T> >::value), "");
-    static_assert((cuda::std::is_base_of<cuda::std::integral_constant<cuda::std::size_t, N>,
-                                   cuda::std::tuple_size<const volatile T> >::value), "");
+    static_assert((cuda_for_dali::std::is_base_of<cuda_for_dali::std::integral_constant<cuda_for_dali::std::size_t, N>,
+                                   cuda_for_dali::std::tuple_size<T> >::value), "");
+    static_assert((cuda_for_dali::std::is_base_of<cuda_for_dali::std::integral_constant<cuda_for_dali::std::size_t, N>,
+                                   cuda_for_dali::std::tuple_size<const T> >::value), "");
+    static_assert((cuda_for_dali::std::is_base_of<cuda_for_dali::std::integral_constant<cuda_for_dali::std::size_t, N>,
+                                   cuda_for_dali::std::tuple_size<volatile T> >::value), "");
+    static_assert((cuda_for_dali::std::is_base_of<cuda_for_dali::std::integral_constant<cuda_for_dali::std::size_t, N>,
+                                   cuda_for_dali::std::tuple_size<const volatile T> >::value), "");
 }
 
 int main(int, char**)
 {
-    test<cuda::std::tuple<>, 0>();
-    test<cuda::std::tuple<int>, 1>();
-    test<cuda::std::tuple<char, int>, 2>();
-    test<cuda::std::tuple<char, char*, int>, 3>();
+    test<cuda_for_dali::std::tuple<>, 0>();
+    test<cuda_for_dali::std::tuple<int>, 1>();
+    test<cuda_for_dali::std::tuple<char, int>, 2>();
+    test<cuda_for_dali::std::tuple<char, char*, int>, 3>();
 
   return 0;
 }

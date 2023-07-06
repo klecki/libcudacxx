@@ -12,36 +12,36 @@
 //   complex<T>
 //   polar(const T& rho, const T& theta = T());  // changed from '0' by LWG#2870
 
-#include <cuda/std/complex>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/complex>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "../cases.h"
 
 template <class T>
 __host__ __device__ void
-test(const T& rho, cuda::std::complex<T> x)
+test(const T& rho, cuda_for_dali::std::complex<T> x)
 {
-    assert(cuda::std::polar(rho) == x);
+    assert(cuda_for_dali::std::polar(rho) == x);
 }
 
 template <class T>
 __host__ __device__ void
-test(const T& rho, const T& theta, cuda::std::complex<T> x)
+test(const T& rho, const T& theta, cuda_for_dali::std::complex<T> x)
 {
-    assert(cuda::std::polar(rho, theta) == x);
+    assert(cuda_for_dali::std::polar(rho, theta) == x);
 }
 
 template <class T>
 __host__ __device__ void
 test()
 {
-    test(T(0), cuda::std::complex<T>(0, 0));
-    test(T(1), cuda::std::complex<T>(1, 0));
-    test(T(100), cuda::std::complex<T>(100, 0));
-    test(T(0), T(0), cuda::std::complex<T>(0, 0));
-    test(T(1), T(0), cuda::std::complex<T>(1, 0));
-    test(T(100), T(0), cuda::std::complex<T>(100, 0));
+    test(T(0), cuda_for_dali::std::complex<T>(0, 0));
+    test(T(1), cuda_for_dali::std::complex<T>(1, 0));
+    test(T(100), cuda_for_dali::std::complex<T>(100, 0));
+    test(T(0), T(0), cuda_for_dali::std::complex<T>(0, 0));
+    test(T(1), T(0), cuda_for_dali::std::complex<T>(1, 0));
+    test(T(100), T(0), cuda_for_dali::std::complex<T>(100, 0));
 }
 
 __host__ __device__ void test_edges()
@@ -52,29 +52,29 @@ __host__ __device__ void test_edges()
     {
         double r = real(testcases[i]);
         double theta = imag(testcases[i]);
-        cuda::std::complex<double> z = cuda::std::polar(r, theta);
+        cuda_for_dali::std::complex<double> z = cuda_for_dali::std::polar(r, theta);
         switch (classify(r))
         {
         case zero:
-            if (cuda::std::signbit(r) || classify(theta) == inf || classify(theta) == NaN)
+            if (cuda_for_dali::std::signbit(r) || classify(theta) == inf || classify(theta) == NaN)
             {
                 int c = classify(z);
                 assert(c == NaN || c == non_zero_nan);
             }
             else
             {
-                assert(z == cuda::std::complex<double>());
+                assert(z == cuda_for_dali::std::complex<double>());
             }
             break;
         case non_zero:
-            if (cuda::std::signbit(r) || classify(theta) == inf || classify(theta) == NaN)
+            if (cuda_for_dali::std::signbit(r) || classify(theta) == inf || classify(theta) == NaN)
             {
                 int c = classify(z);
                 assert(c == NaN || c == non_zero_nan);
             }
             else
             {
-                is_about(cuda::std::abs(z), r);
+                is_about(cuda_for_dali::std::abs(z), r);
             }
             break;
         case inf:

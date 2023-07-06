@@ -14,7 +14,7 @@
 // Unlike 'std::is_convertible' which only allows checking for single argument
 // conversions.
 
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/type_traits>
 
 #include "test_macros.h"
 
@@ -27,7 +27,7 @@ namespace detail {
 
     template <class Tp, class ...Args>
     __host__ __device__ constexpr auto test_convertible_imp(int)
-        -> decltype(eat_type<Tp>({cuda::std::declval<Args>()...}), true)
+        -> decltype(eat_type<Tp>({cuda_for_dali::std::declval<Args>()...}), true)
     { return true; }
 
     template <class Tp, class ...Args>

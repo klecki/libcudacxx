@@ -20,28 +20,28 @@
 //     T
 //     atomic_exchange(atomic<T>* obj, T desr);
 
-#include <cuda/std/atomic>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/atomic>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "atomic_helpers.h"
 #include "cuda_space_selector.h"
 
-template <class T, template<typename, typename> typename Selector, cuda::thread_scope>
+template <class T, template<typename, typename> typename Selector, cuda_for_dali::thread_scope>
 struct TestFn {
   __host__ __device__
   void operator()() const {
-    typedef cuda::std::atomic<T> A;
+    typedef cuda_for_dali::std::atomic<T> A;
     Selector<A, constructor_initializer> sel;
     A & t = *sel.construct();
-    cuda::std::atomic_init(&t, T(1));
-    assert(cuda::std::atomic_exchange(&t, T(2)) == T(1));
+    cuda_for_dali::std::atomic_init(&t, T(1));
+    assert(cuda_for_dali::std::atomic_exchange(&t, T(2)) == T(1));
     assert(t == T(2));
     Selector<volatile A, constructor_initializer> vsel;
     volatile A & vt = *vsel.construct();
-    cuda::std::atomic_init(&vt, T(3));
-    assert(cuda::std::atomic_exchange(&vt, T(4)) == T(3));
+    cuda_for_dali::std::atomic_init(&vt, T(3));
+    assert(cuda_for_dali::std::atomic_exchange(&vt, T(4)) == T(3));
     assert(vt == T(4));
   }
 };

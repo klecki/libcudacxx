@@ -10,18 +10,18 @@
 // <chrono>
 // class year;
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using year = cuda::std::chrono::year;
+    using year = cuda_for_dali::std::chrono::year;
 
-    static_assert(cuda::std::is_trivially_copyable_v<year>, "");
-    static_assert(cuda::std::is_standard_layout_v<year>, "");
+    static_assert(cuda_for_dali::std::is_trivially_copyable_v<year>, "");
+    static_assert(cuda_for_dali::std::is_standard_layout_v<year>, "");
 
   return 0;
 }

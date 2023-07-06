@@ -22,7 +22,7 @@
 // least check that they are lowered at all (otherwise there is a compile
 // failure with GCC).
 
-#include <cuda/std/atomic>
+#include <cuda_for_dali/std/atomic>
 
 #include "test_macros.h"
 #include "cuda_space_selector.h"
@@ -31,22 +31,22 @@ template<template<typename, typename> class Selector>
 __host__ __device__
 void test()
 {
-    Selector<cuda::std::atomic<int>, default_initializer> sel;
-    Selector<volatile cuda::std::atomic<int>, default_initializer> vsel;
+    Selector<cuda_for_dali::std::atomic<int>, default_initializer> sel;
+    Selector<volatile cuda_for_dali::std::atomic<int>, default_initializer> vsel;
 
-    cuda::std::atomic<int> & i = *sel.construct();
-    volatile cuda::std::atomic<int> & v = *vsel.construct();
+    cuda_for_dali::std::atomic<int> & i = *sel.construct();
+    volatile cuda_for_dali::std::atomic<int> & v = *vsel.construct();
     int exp = 0;
 
-    (void) i.compare_exchange_weak(exp, 0, cuda::std::memory_order_acq_rel);
-    (void) i.compare_exchange_weak(exp, 0, cuda::std::memory_order_release);
-    i.compare_exchange_strong(exp, 0, cuda::std::memory_order_acq_rel);
-    i.compare_exchange_strong(exp, 0, cuda::std::memory_order_release);
+    (void) i.compare_exchange_weak(exp, 0, cuda_for_dali::std::memory_order_acq_rel);
+    (void) i.compare_exchange_weak(exp, 0, cuda_for_dali::std::memory_order_release);
+    i.compare_exchange_strong(exp, 0, cuda_for_dali::std::memory_order_acq_rel);
+    i.compare_exchange_strong(exp, 0, cuda_for_dali::std::memory_order_release);
 
-    (void) v.compare_exchange_weak(exp, 0, cuda::std::memory_order_acq_rel);
-    (void) v.compare_exchange_weak(exp, 0, cuda::std::memory_order_release);
-    v.compare_exchange_strong(exp, 0, cuda::std::memory_order_acq_rel);
-    v.compare_exchange_strong(exp, 0, cuda::std::memory_order_release);
+    (void) v.compare_exchange_weak(exp, 0, cuda_for_dali::std::memory_order_acq_rel);
+    (void) v.compare_exchange_weak(exp, 0, cuda_for_dali::std::memory_order_release);
+    v.compare_exchange_strong(exp, 0, cuda_for_dali::std::memory_order_acq_rel);
+    v.compare_exchange_strong(exp, 0, cuda_for_dali::std::memory_order_release);
 }
 
 int main(int, char**)

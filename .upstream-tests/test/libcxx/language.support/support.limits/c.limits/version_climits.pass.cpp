@@ -8,7 +8,7 @@
 
 // <cuda/std/climits>
 
-#include <cuda/std/climits>
+#include <cuda_for_dali/std/climits>
 
 #include "test_macros.h"
 

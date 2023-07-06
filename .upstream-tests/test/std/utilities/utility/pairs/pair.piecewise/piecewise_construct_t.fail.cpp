@@ -20,10 +20,10 @@
 
 // This test checks for LWG 2510.
 
-#include <cuda/std/utility>
+#include <cuda_for_dali/std/utility>
 
 
-__host__ __device__ cuda::std::piecewise_construct_t f() { return {}; } // expected-error 1 {{chosen constructor is explicit in copy-initialization}}
+__host__ __device__ cuda_for_dali::std::piecewise_construct_t f() { return {}; } // expected-error 1 {{chosen constructor is explicit in copy-initialization}}
 
 int main(int, char**) {
     return 0;

@@ -31,19 +31,19 @@
 // If we're just building the test and not executing it, it should pass.
 // UNSUPPORTED: no_execute
 
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 #include "test_macros.h"
 
 template <class T>
 __host__ __device__
 void test_is_trivially_copyable_volatile()
 {
-    static_assert( cuda::std::is_trivially_copyable<volatile T>::value, "");
-    static_assert( cuda::std::is_trivially_copyable<const volatile T>::value, "");
+    static_assert( cuda_for_dali::std::is_trivially_copyable<volatile T>::value, "");
+    static_assert( cuda_for_dali::std::is_trivially_copyable<const volatile T>::value, "");
 #if TEST_STD_VER > 11
-    static_assert( cuda::std::is_trivially_copyable_v<volatile T>, "");
-    static_assert( cuda::std::is_trivially_copyable_v<const volatile T>, "");
+    static_assert( cuda_for_dali::std::is_trivially_copyable_v<volatile T>, "");
+    static_assert( cuda_for_dali::std::is_trivially_copyable_v<const volatile T>, "");
 #endif
 }
 
@@ -51,11 +51,11 @@ template <class T>
 __host__ __device__
 void test_is_not_trivially_copyable_volatile()
 {
-    static_assert(!cuda::std::is_trivially_copyable<volatile T>::value, "");
-    static_assert(!cuda::std::is_trivially_copyable<const volatile T>::value, "");
+    static_assert(!cuda_for_dali::std::is_trivially_copyable<volatile T>::value, "");
+    static_assert(!cuda_for_dali::std::is_trivially_copyable<const volatile T>::value, "");
 #if TEST_STD_VER > 11
-    static_assert(!cuda::std::is_trivially_copyable_v<volatile T>, "");
-    static_assert(!cuda::std::is_trivially_copyable_v<const volatile T>, "");
+    static_assert(!cuda_for_dali::std::is_trivially_copyable_v<volatile T>, "");
+    static_assert(!cuda_for_dali::std::is_trivially_copyable_v<const volatile T>, "");
 #endif
 }
 

@@ -19,14 +19,14 @@
 // .fail. expects compilation to fail, but this would only fail at runtime with NVRTC
 // UNSUPPORTED: nvrtc
 
-#include <cuda/std/chrono>
+#include <cuda_for_dali/std/chrono>
 
 int main(int, char**)
 {
-    typedef cuda::std::chrono::system_clock Clock;
-    typedef cuda::std::chrono::time_point<Clock, cuda::std::chrono::milliseconds> FromTimePoint;
-    typedef cuda::std::chrono::time_point<Clock, cuda::std::chrono::minutes> ToTimePoint;
-    cuda::std::chrono::time_point_cast<ToTimePoint>(FromTimePoint(cuda::std::chrono::milliseconds(3)));
+    typedef cuda_for_dali::std::chrono::system_clock Clock;
+    typedef cuda_for_dali::std::chrono::time_point<Clock, cuda_for_dali::std::chrono::milliseconds> FromTimePoint;
+    typedef cuda_for_dali::std::chrono::time_point<Clock, cuda_for_dali::std::chrono::minutes> ToTimePoint;
+    cuda_for_dali::std::chrono::time_point_cast<ToTimePoint>(FromTimePoint(cuda_for_dali::std::chrono::milliseconds(3)));
 
   return 0;
 }

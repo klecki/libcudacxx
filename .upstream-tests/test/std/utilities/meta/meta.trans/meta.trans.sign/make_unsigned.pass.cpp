@@ -10,7 +10,7 @@
 
 // make_unsigned
 
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/type_traits>
 
 #include "test_macros.h"
 
@@ -37,9 +37,9 @@ template <class T, class U>
 __host__ __device__
 void test_make_unsigned()
 {
-    ASSERT_SAME_TYPE(U, typename cuda::std::make_unsigned<T>::type);
+    ASSERT_SAME_TYPE(U, typename cuda_for_dali::std::make_unsigned<T>::type);
 #if TEST_STD_VER > 11
-    ASSERT_SAME_TYPE(U, cuda::std::make_unsigned_t<T>);
+    ASSERT_SAME_TYPE(U, cuda_for_dali::std::make_unsigned_t<T>);
 #endif
 }
 
@@ -56,11 +56,11 @@ int main(int, char**)
     test_make_unsigned<unsigned long, unsigned long> ();
     test_make_unsigned<long long, unsigned long long> ();
     test_make_unsigned<unsigned long long, unsigned long long> ();
-    test_make_unsigned<wchar_t, cuda::std::conditional<sizeof(wchar_t) == 4, unsigned int, unsigned short>::type> ();
-    test_make_unsigned<const wchar_t, cuda::std::conditional<sizeof(wchar_t) == 4, const unsigned int, const unsigned short>::type> ();
-    test_make_unsigned<const Enum, cuda::std::conditional<sizeof(Enum) == sizeof(int), const unsigned int, const unsigned char>::type >();
+    test_make_unsigned<wchar_t, cuda_for_dali::std::conditional<sizeof(wchar_t) == 4, unsigned int, unsigned short>::type> ();
+    test_make_unsigned<const wchar_t, cuda_for_dali::std::conditional<sizeof(wchar_t) == 4, const unsigned int, const unsigned short>::type> ();
+    test_make_unsigned<const Enum, cuda_for_dali::std::conditional<sizeof(Enum) == sizeof(int), const unsigned int, const unsigned char>::type >();
     test_make_unsigned<BigEnum,
-                   cuda::std::conditional<sizeof(long) == 4, unsigned long long, unsigned long>::type> ();
+                   cuda_for_dali::std::conditional<sizeof(long) == 4, unsigned long long, unsigned long>::type> ();
 #ifndef _LIBCUDACXX_HAS_NO_INT128
     test_make_unsigned<__int128_t, __uint128_t>();
     test_make_unsigned<__uint128_t, __uint128_t>();

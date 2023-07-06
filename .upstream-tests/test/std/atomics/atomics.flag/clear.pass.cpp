@@ -16,8 +16,8 @@
 // void clear(memory_order = memory_order_seq_cst);
 // void clear(memory_order = memory_order_seq_cst) volatile;
 
-#include <cuda/std/atomic>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/atomic>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "cuda_space_selector.h"
@@ -27,67 +27,67 @@ __host__ __device__
 void test()
 {
     {
-        Selector<cuda::std::atomic_flag, default_initializer> sel;
-        cuda::std::atomic_flag & f = *sel.construct();
+        Selector<cuda_for_dali::std::atomic_flag, default_initializer> sel;
+        cuda_for_dali::std::atomic_flag & f = *sel.construct();
         f.clear();
         assert(f.test_and_set() == 0);
         f.clear();
         assert(f.test_and_set() == 0);
     }
     {
-        Selector<cuda::std::atomic_flag, default_initializer> sel;
-        cuda::std::atomic_flag & f = *sel.construct();
-        f.clear(cuda::std::memory_order_relaxed);
+        Selector<cuda_for_dali::std::atomic_flag, default_initializer> sel;
+        cuda_for_dali::std::atomic_flag & f = *sel.construct();
+        f.clear(cuda_for_dali::std::memory_order_relaxed);
         assert(f.test_and_set() == 0);
-        f.clear(cuda::std::memory_order_relaxed);
-        assert(f.test_and_set() == 0);
-    }
-    {
-        Selector<cuda::std::atomic_flag, default_initializer> sel;
-        cuda::std::atomic_flag & f = *sel.construct();
-        f.clear(cuda::std::memory_order_release);
-        assert(f.test_and_set() == 0);
-        f.clear(cuda::std::memory_order_release);
+        f.clear(cuda_for_dali::std::memory_order_relaxed);
         assert(f.test_and_set() == 0);
     }
     {
-        Selector<cuda::std::atomic_flag, default_initializer> sel;
-        cuda::std::atomic_flag & f = *sel.construct();
-        f.clear(cuda::std::memory_order_seq_cst);
+        Selector<cuda_for_dali::std::atomic_flag, default_initializer> sel;
+        cuda_for_dali::std::atomic_flag & f = *sel.construct();
+        f.clear(cuda_for_dali::std::memory_order_release);
         assert(f.test_and_set() == 0);
-        f.clear(cuda::std::memory_order_seq_cst);
+        f.clear(cuda_for_dali::std::memory_order_release);
         assert(f.test_and_set() == 0);
     }
     {
-        Selector<volatile cuda::std::atomic_flag, default_initializer> sel;
-        volatile cuda::std::atomic_flag & f = *sel.construct();
+        Selector<cuda_for_dali::std::atomic_flag, default_initializer> sel;
+        cuda_for_dali::std::atomic_flag & f = *sel.construct();
+        f.clear(cuda_for_dali::std::memory_order_seq_cst);
+        assert(f.test_and_set() == 0);
+        f.clear(cuda_for_dali::std::memory_order_seq_cst);
+        assert(f.test_and_set() == 0);
+    }
+    {
+        Selector<volatile cuda_for_dali::std::atomic_flag, default_initializer> sel;
+        volatile cuda_for_dali::std::atomic_flag & f = *sel.construct();
         f.clear();
         assert(f.test_and_set() == 0);
         f.clear();
         assert(f.test_and_set() == 0);
     }
     {
-        Selector<volatile cuda::std::atomic_flag, default_initializer> sel;
-        volatile cuda::std::atomic_flag & f = *sel.construct();
-        f.clear(cuda::std::memory_order_relaxed);
+        Selector<volatile cuda_for_dali::std::atomic_flag, default_initializer> sel;
+        volatile cuda_for_dali::std::atomic_flag & f = *sel.construct();
+        f.clear(cuda_for_dali::std::memory_order_relaxed);
         assert(f.test_and_set() == 0);
-        f.clear(cuda::std::memory_order_relaxed);
-        assert(f.test_and_set() == 0);
-    }
-    {
-        Selector<volatile cuda::std::atomic_flag, default_initializer> sel;
-        volatile cuda::std::atomic_flag & f = *sel.construct();
-        f.clear(cuda::std::memory_order_release);
-        assert(f.test_and_set() == 0);
-        f.clear(cuda::std::memory_order_release);
+        f.clear(cuda_for_dali::std::memory_order_relaxed);
         assert(f.test_and_set() == 0);
     }
     {
-        Selector<volatile cuda::std::atomic_flag, default_initializer> sel;
-        volatile cuda::std::atomic_flag & f = *sel.construct();
-        f.clear(cuda::std::memory_order_seq_cst);
+        Selector<volatile cuda_for_dali::std::atomic_flag, default_initializer> sel;
+        volatile cuda_for_dali::std::atomic_flag & f = *sel.construct();
+        f.clear(cuda_for_dali::std::memory_order_release);
         assert(f.test_and_set() == 0);
-        f.clear(cuda::std::memory_order_seq_cst);
+        f.clear(cuda_for_dali::std::memory_order_release);
+        assert(f.test_and_set() == 0);
+    }
+    {
+        Selector<volatile cuda_for_dali::std::atomic_flag, default_initializer> sel;
+        volatile cuda_for_dali::std::atomic_flag & f = *sel.construct();
+        f.clear(cuda_for_dali::std::memory_order_seq_cst);
+        assert(f.test_and_set() == 0);
+        f.clear(cuda_for_dali::std::memory_order_seq_cst);
         assert(f.test_and_set() == 0);
     }
 }

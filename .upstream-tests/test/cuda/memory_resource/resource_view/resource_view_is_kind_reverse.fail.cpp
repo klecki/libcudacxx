@@ -8,18 +8,18 @@
 //===----------------------------------------------------------------------===//
 
 #include <cassert>
-#include <cuda/memory_resource>
-#include <cuda/std/cstddef>
-#include <cuda/std/type_traits>
-#include <cuda/stream_view>
+#include <cuda_for_dali/memory_resource>
+#include <cuda_for_dali/std/cstddef>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/stream_view>
 #include <memory>
 #include <tuple>
 #include <vector>
 
 int main(int argc, char **argv) {
 #ifndef __CUDA_ARCH__
-  cuda::resource_view<cuda::memory_access::host, cuda::oversubscribable, cuda::memory_location::host> props_only;
-  cuda::resource_view<cuda::is_kind<cuda::memory_kind::host>> kind_only;
+  cuda_for_dali::resource_view<cuda_for_dali::memory_access::host, cuda_for_dali::oversubscribable, cuda_for_dali::memory_location::host> props_only;
+  cuda_for_dali::resource_view<cuda_for_dali::is_kind<cuda_for_dali::memory_kind::host>> kind_only;
   kind_only = props_only;  // no conversion from a list of properties back to memory kind
 #endif
   return 0;

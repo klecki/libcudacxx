@@ -13,17 +13,17 @@
 // constexpr bool ok() const noexcept;
 //  Returns: 1 <= d_ && d_ <= 31
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using day = cuda::std::chrono::day;
+    using day = cuda_for_dali::std::chrono::day;
     ASSERT_NOEXCEPT(                std::declval<const day>().ok());
-    ASSERT_SAME_TYPE(bool, decltype(cuda::std::declval<const day>().ok()));
+    ASSERT_SAME_TYPE(bool, decltype(cuda_for_dali::std::declval<const day>().ok()));
 
     static_assert(!day{0}.ok(), "");
     static_assert( day{1}.ok(), "");

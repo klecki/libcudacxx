@@ -18,8 +18,8 @@
 //     Returns: os << mdl.month() << "/last".
 
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 #include <iostream>
 
@@ -27,10 +27,10 @@
 
 int main(int, char**)
 {
-    using month_weekday_last = cuda::std::chrono::month_weekday_last;
-    using month              = cuda::std::chrono::month;
-    using weekday            = cuda::std::chrono::weekday;
-    using weekday_last       = cuda::std::chrono::weekday_last;
+    using month_weekday_last = cuda_for_dali::std::chrono::month_weekday_last;
+    using month              = cuda_for_dali::std::chrono::month;
+    using weekday            = cuda_for_dali::std::chrono::weekday;
+    using weekday_last       = cuda_for_dali::std::chrono::weekday_last;
 
     std::cout << month_weekday_last{month{1}, weekday_last{weekday{3}}};
 

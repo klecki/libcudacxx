@@ -43,7 +43,7 @@ If `Alignment` is not a [valid alignment], the behavior is undefined.
 ## Example
 
 ```cuda
-#include <cuda/barrier>
+#include <cuda_for_dali/barrier>
 
 __global__ void example_kernel(void* dst, void* src, size_t size) {
   cuda::barrier<cuda::thread_scope_system> bar;

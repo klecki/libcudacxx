@@ -20,9 +20,9 @@
 //   complex<promote<T, U>::type>
 //   pow(const complex<T>& x, const complex<U>& y);
 
-#include <cuda/std/complex>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/complex>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "../cases.h"
@@ -33,7 +33,7 @@
 
 template <class T>
 __host__ __device__ double
-promote(T, typename cuda::std::enable_if<cuda::std::is_integral<T>::value>::type* = 0);
+promote(T, typename cuda_for_dali::std::enable_if<cuda_for_dali::std::is_integral<T>::value>::type* = 0);
 
 __host__ __device__ float promote(float);
 __host__ __device__ double promote(double);
@@ -41,46 +41,46 @@ __host__ __device__ long double promote(long double);
 
 template <class T, class U>
 __host__ __device__ void
-test(T x, const cuda::std::complex<U>& y)
+test(T x, const cuda_for_dali::std::complex<U>& y)
 {
     typedef decltype(promote(x)+promote(real(y))) V;
-    static_assert((cuda::std::is_same<decltype(cuda::std::pow(x, y)), cuda::std::complex<V> >::value), "");
-    assert(cuda::std::pow(x, y) == pow(cuda::std::complex<V>(x, 0), cuda::std::complex<V>(y)));
+    static_assert((cuda_for_dali::std::is_same<decltype(cuda_for_dali::std::pow(x, y)), cuda_for_dali::std::complex<V> >::value), "");
+    assert(cuda_for_dali::std::pow(x, y) == pow(cuda_for_dali::std::complex<V>(x, 0), cuda_for_dali::std::complex<V>(y)));
 }
 
 template <class T, class U>
 __host__ __device__ void
-test(const cuda::std::complex<T>& x, U y)
+test(const cuda_for_dali::std::complex<T>& x, U y)
 {
     typedef decltype(promote(real(x))+promote(y)) V;
-    static_assert((cuda::std::is_same<decltype(cuda::std::pow(x, y)), cuda::std::complex<V> >::value), "");
-    assert(cuda::std::pow(x, y) == pow(cuda::std::complex<V>(x), cuda::std::complex<V>(y, 0)));
+    static_assert((cuda_for_dali::std::is_same<decltype(cuda_for_dali::std::pow(x, y)), cuda_for_dali::std::complex<V> >::value), "");
+    assert(cuda_for_dali::std::pow(x, y) == pow(cuda_for_dali::std::complex<V>(x), cuda_for_dali::std::complex<V>(y, 0)));
 }
 
 template <class T, class U>
 __host__ __device__ void
-test(const cuda::std::complex<T>& x, const cuda::std::complex<U>& y)
+test(const cuda_for_dali::std::complex<T>& x, const cuda_for_dali::std::complex<U>& y)
 {
     typedef decltype(promote(real(x))+promote(real(y))) V;
-    static_assert((cuda::std::is_same<decltype(cuda::std::pow(x, y)), cuda::std::complex<V> >::value), "");
-    assert(cuda::std::pow(x, y) == pow(cuda::std::complex<V>(x), cuda::std::complex<V>(y)));
+    static_assert((cuda_for_dali::std::is_same<decltype(cuda_for_dali::std::pow(x, y)), cuda_for_dali::std::complex<V> >::value), "");
+    assert(cuda_for_dali::std::pow(x, y) == pow(cuda_for_dali::std::complex<V>(x), cuda_for_dali::std::complex<V>(y)));
 }
 
 template <class T, class U>
 __host__ __device__ void
-test(typename cuda::std::enable_if<cuda::std::is_integral<T>::value>::type* = 0, typename cuda::std::enable_if<!cuda::std::is_integral<U>::value>::type* = 0)
+test(typename cuda_for_dali::std::enable_if<cuda_for_dali::std::is_integral<T>::value>::type* = 0, typename cuda_for_dali::std::enable_if<!cuda_for_dali::std::is_integral<U>::value>::type* = 0)
 {
-    test(T(3), cuda::std::complex<U>(4, 5));
-    test(cuda::std::complex<U>(3, 4), T(5));
+    test(T(3), cuda_for_dali::std::complex<U>(4, 5));
+    test(cuda_for_dali::std::complex<U>(3, 4), T(5));
 }
 
 template <class T, class U>
 __host__ __device__ void
-test(typename cuda::std::enable_if<!cuda::std::is_integral<T>::value>::type* = 0, typename cuda::std::enable_if<!cuda::std::is_integral<U>::value>::type* = 0)
+test(typename cuda_for_dali::std::enable_if<!cuda_for_dali::std::is_integral<T>::value>::type* = 0, typename cuda_for_dali::std::enable_if<!cuda_for_dali::std::is_integral<U>::value>::type* = 0)
 {
-    test(T(3), cuda::std::complex<U>(4, 5));
-    test(cuda::std::complex<T>(3, 4), U(5));
-    test(cuda::std::complex<T>(3, 4), cuda::std::complex<U>(5, 6));
+    test(T(3), cuda_for_dali::std::complex<U>(4, 5));
+    test(cuda_for_dali::std::complex<T>(3, 4), U(5));
+    test(cuda_for_dali::std::complex<T>(3, 4), cuda_for_dali::std::complex<U>(5, 6));
 }
 
 int main(int, char**)

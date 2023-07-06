@@ -25,8 +25,8 @@
 
 
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
@@ -47,14 +47,14 @@ constexpr bool testConstexpr()
 
 int main(int, char**)
 {
-    using weekday = cuda::std::chrono::weekday;
-    using days    = cuda::std::chrono::days;
+    using weekday = cuda_for_dali::std::chrono::weekday;
+    using days    = cuda_for_dali::std::chrono::days;
 
     ASSERT_NOEXCEPT(                   std::declval<weekday>() + std::declval<days>());
-    ASSERT_SAME_TYPE(weekday, decltype(cuda::std::declval<weekday>() + std::declval<days>()));
+    ASSERT_SAME_TYPE(weekday, decltype(cuda_for_dali::std::declval<weekday>() + std::declval<days>()));
 
     ASSERT_NOEXCEPT(                   std::declval<days>() + std::declval<weekday>());
-    ASSERT_SAME_TYPE(weekday, decltype(cuda::std::declval<days>() + std::declval<weekday>()));
+    ASSERT_SAME_TYPE(weekday, decltype(cuda_for_dali::std::declval<days>() + std::declval<weekday>()));
 
     static_assert(testConstexpr<weekday, days>(), "");
 

@@ -13,23 +13,23 @@
 // constexpr chrono::month month() const noexcept;
 //  Returns: m_
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using month              = cuda::std::chrono::month;
-    using weekday            = cuda::std::chrono::weekday;
-    using weekday_last       = cuda::std::chrono::weekday_last;
-    using month_weekday_last = cuda::std::chrono::month_weekday_last;
+    using month              = cuda_for_dali::std::chrono::month;
+    using weekday            = cuda_for_dali::std::chrono::weekday;
+    using weekday_last       = cuda_for_dali::std::chrono::weekday_last;
+    using month_weekday_last = cuda_for_dali::std::chrono::month_weekday_last;
 
-    constexpr weekday Tuesday = cuda::std::chrono::Tuesday;
+    constexpr weekday Tuesday = cuda_for_dali::std::chrono::Tuesday;
 
     ASSERT_NOEXCEPT(                 std::declval<const month_weekday_last>().month());
-    ASSERT_SAME_TYPE(month, decltype(cuda::std::declval<const month_weekday_last>().month()));
+    ASSERT_SAME_TYPE(month, decltype(cuda_for_dali::std::declval<const month_weekday_last>().month()));
 
     static_assert( month_weekday_last{month{}, weekday_last{Tuesday}}.month() == month{}, "");
 

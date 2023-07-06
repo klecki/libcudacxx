@@ -16,14 +16,14 @@
 
 // XFAIL: gcc-4.8, gcc-4.9
 
-// UNSUPPORTED: c++98, c++03 
+// UNSUPPORTED: c++98, c++03
 
-#include <cuda/std/tuple>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/tuple>
+#include <cuda_for_dali/std/type_traits>
 
 #include "test_macros.h"
 
-template <class T, class = decltype(cuda::std::tuple_size<T>::value)>
+template <class T, class = decltype(cuda_for_dali::std::tuple_size<T>::value)>
 __host__ __device__ constexpr bool has_value(int) { return true; }
 template <class>
 __host__ __device__ constexpr bool has_value(long) { return false; }
@@ -34,12 +34,12 @@ struct Dummy {};
 
 int main(int, char**) {
   // Test that the ::value member does not exist
-  static_assert(has_value<cuda::std::tuple<int> const>(), "");
-  static_assert(has_value<cuda::std::pair<int, long> volatile>(), "");
+  static_assert(has_value<cuda_for_dali::std::tuple<int> const>(), "");
+  static_assert(has_value<cuda_for_dali::std::pair<int, long> volatile>(), "");
   static_assert(!has_value<int>(), "");
   static_assert(!has_value<const int>(), "");
   static_assert(!has_value<volatile void>(), "");
-  static_assert(!has_value<const volatile cuda::std::tuple<int>&>(), "");
+  static_assert(!has_value<const volatile cuda_for_dali::std::tuple<int>&>(), "");
 
   return 0;
 }

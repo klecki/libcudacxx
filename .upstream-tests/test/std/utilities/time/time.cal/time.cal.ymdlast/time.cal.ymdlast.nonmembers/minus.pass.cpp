@@ -21,46 +21,46 @@
 //   Returns: ymdl + (-dy).
 
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
 
 __host__ __device__
-constexpr bool testConstexprYears (cuda::std::chrono::year_month_day_last ymdl)
+constexpr bool testConstexprYears (cuda_for_dali::std::chrono::year_month_day_last ymdl)
 {
-    cuda::std::chrono::year_month_day_last ym1 = ymdl - cuda::std::chrono::years{10};
+    cuda_for_dali::std::chrono::year_month_day_last ym1 = ymdl - cuda_for_dali::std::chrono::years{10};
     return
-        ym1.year()  == cuda::std::chrono::year{static_cast<int>(ymdl.year()) - 10}
+        ym1.year()  == cuda_for_dali::std::chrono::year{static_cast<int>(ymdl.year()) - 10}
      && ym1.month() == ymdl.month()
         ;
 }
 
 __host__ __device__
-constexpr bool testConstexprMonths (cuda::std::chrono::year_month_day_last ymdl)
+constexpr bool testConstexprMonths (cuda_for_dali::std::chrono::year_month_day_last ymdl)
 {
-    cuda::std::chrono::year_month_day_last ym1 = ymdl - cuda::std::chrono::months{6};
+    cuda_for_dali::std::chrono::year_month_day_last ym1 = ymdl - cuda_for_dali::std::chrono::months{6};
     return
         ym1.year()  == ymdl.year()
-     && ym1.month() == cuda::std::chrono::month{static_cast<unsigned>(ymdl.month()) - 6}
+     && ym1.month() == cuda_for_dali::std::chrono::month{static_cast<unsigned>(ymdl.month()) - 6}
         ;
 }
 
 int main(int, char**)
 {
-    using year                = cuda::std::chrono::year;
-    using month               = cuda::std::chrono::month;
-    using month_day_last      = cuda::std::chrono::month_day_last;
-    using year_month_day_last = cuda::std::chrono::year_month_day_last;
-    using months              = cuda::std::chrono::months;
-    using years               = cuda::std::chrono::years;
+    using year                = cuda_for_dali::std::chrono::year;
+    using month               = cuda_for_dali::std::chrono::month;
+    using month_day_last      = cuda_for_dali::std::chrono::month_day_last;
+    using year_month_day_last = cuda_for_dali::std::chrono::year_month_day_last;
+    using months              = cuda_for_dali::std::chrono::months;
+    using years               = cuda_for_dali::std::chrono::years;
 
-    constexpr month December = cuda::std::chrono::December;
+    constexpr month December = cuda_for_dali::std::chrono::December;
 
     { // year_month_day_last - years
     ASSERT_NOEXCEPT(                               std::declval<year_month_day_last>() - std::declval<years>());
-    ASSERT_SAME_TYPE(year_month_day_last, decltype(cuda::std::declval<year_month_day_last>() - std::declval<years>()));
+    ASSERT_SAME_TYPE(year_month_day_last, decltype(cuda_for_dali::std::declval<year_month_day_last>() - std::declval<years>()));
 
     static_assert(testConstexprYears(year_month_day_last{year{1234}, month_day_last{December}}), "");
     year_month_day_last ym{year{1234}, month_day_last{December}};
@@ -74,7 +74,7 @@ int main(int, char**)
 
     { // year_month_day_last - months
     ASSERT_NOEXCEPT(                               std::declval<year_month_day_last>() - std::declval<months>());
-    ASSERT_SAME_TYPE(year_month_day_last, decltype(cuda::std::declval<year_month_day_last>() - std::declval<months>()));
+    ASSERT_SAME_TYPE(year_month_day_last, decltype(cuda_for_dali::std::declval<year_month_day_last>() - std::declval<months>()));
 
     static_assert(testConstexprMonths(year_month_day_last{year{1234}, month_day_last{December}}), "");
 //  TODO test wrapping

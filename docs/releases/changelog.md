@@ -196,7 +196,7 @@ Included in: CUDA Toolkit 11.1.
 - ABI version 3 has been introduced and is now the default.
   A new ABI version was necessary to improve the performance of
     `cuda::[std::]barrier` by changing its alignment.
-  Users may define `_LIBCUDACXX_CUDA_ABI_VERSION=2` before including any libcu++
+  Users may define `_LIBCUDAFORDALICXX_CUDA_ABI_VERSION=2` before including any libcu++
     or CUDA headers to use ABI version 2, which was the default for the 1.1.0 /
     CUDA 11.0 release.
   Both ABI version 3 and ABI version 2 will be supported until the next major
@@ -206,12 +206,12 @@ Included in: CUDA Toolkit 11.1.
 
 - `<cuda/pipeline>`: `cuda::pipeline`, a facility for coordinating
     `cuda::memcpy_async` operations.
-- `<cuda/std/version>`: API version macros `_LIBCUDACXX_CUDA_API_VERSION`,
-    `_LIBCUDACXX_CUDA_API_VERSION_MAJOR`, `_LIBCUDACXX_CUDA_API_VERSION_MINOR`,
-    and `_LIBCUDACXX_CUDA_API_VERSION_PATCH`.
-- ABI version switching: users can define `_LIBCUDACXX_CUDA_ABI_VERSION`
+- `<cuda/std/version>`: API version macros `_LIBCUDAFORDALICXX_CUDA_API_VERSION`,
+    `_LIBCUDAFORDALICXX_CUDA_API_VERSION_MAJOR`, `_LIBCUDAFORDALICXX_CUDA_API_VERSION_MINOR`,
+    and `_LIBCUDAFORDALICXX_CUDA_API_VERSION_PATCH`.
+- ABI version switching: users can define `_LIBCUDAFORDALICXX_CUDA_ABI_VERSION`
     to request a particular supported ABI version.
-  `_LIBCUDACXX_CUDA_ABI_VERSION_LATEST` is set to the latest ABI version, which
+  `_LIBCUDAFORDALICXX_CUDA_ABI_VERSION_LATEST` is set to the latest ABI version, which
     is always the default.
 
 ### Other Enhancements

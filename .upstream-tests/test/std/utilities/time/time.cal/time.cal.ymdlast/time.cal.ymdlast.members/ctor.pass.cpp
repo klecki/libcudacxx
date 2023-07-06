@@ -21,22 +21,22 @@
 //  constexpr chrono::month_day_last month_day_last() const noexcept;
 //  constexpr bool                               ok() const noexcept;
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using year                = cuda::std::chrono::year;
-    using month               = cuda::std::chrono::month;
-    using month_day_last      = cuda::std::chrono::month_day_last;
-    using year_month_day_last = cuda::std::chrono::year_month_day_last;
+    using year                = cuda_for_dali::std::chrono::year;
+    using month               = cuda_for_dali::std::chrono::month;
+    using month_day_last      = cuda_for_dali::std::chrono::month_day_last;
+    using year_month_day_last = cuda_for_dali::std::chrono::year_month_day_last;
 
     ASSERT_NOEXCEPT(year_month_day_last{year{1}, month_day_last{month{1}}});
 
-    constexpr month January = cuda::std::chrono::January;
+    constexpr month January = cuda_for_dali::std::chrono::January;
 
     constexpr year_month_day_last ymdl0{year{}, month_day_last{month{}}};
     static_assert( ymdl0.year()           == year{},                  "");

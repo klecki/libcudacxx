@@ -18,7 +18,7 @@ __device__ __host__ __noinline__
 static void negative_test_access_property_functions() {
     size_t ARR_SZ = 1 << 20;
     int* arr1 = nullptr;
-    cuda::access_property ap(cuda::access_property::persisting{});
+    cuda_for_dali::access_property ap(cuda_for_dali::access_property::persisting{});
 
     arr1 = (int*)malloc(ARR_SZ * sizeof(int));
 

@@ -52,8 +52,8 @@
 //     T operator=(T) noexcept;
 // };
 
-#include <cuda/std/atomic>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/atomic>
+#include <cuda_for_dali/std/cassert>
 
 struct NotTriviallyCopyable {
     __host__ __device__ NotTriviallyCopyable ( int i ) : i_(i) {}
@@ -64,7 +64,7 @@ struct NotTriviallyCopyable {
 template <class T>
 __host__ __device__
 void test ( T t ) {
-    cuda::std::atomic<T> t0(t);
+    cuda_for_dali::std::atomic<T> t0(t);
 }
 
 

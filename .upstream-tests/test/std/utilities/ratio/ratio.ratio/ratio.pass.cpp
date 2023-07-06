@@ -9,14 +9,14 @@
 // test ratio:  The static data members num and den shall have the common
 //    divisor of the absolute values of N and D:
 
-#include <cuda/std/ratio>
+#include <cuda_for_dali/std/ratio>
 
 template <long long N, long long D, long long eN, long long eD>
 __host__ __device__
 void test()
 {
-    static_assert((cuda::std::ratio<N, D>::num == eN), "");
-    static_assert((cuda::std::ratio<N, D>::den == eD), "");
+    static_assert((cuda_for_dali::std::ratio<N, D>::num == eN), "");
+    static_assert((cuda_for_dali::std::ratio<N, D>::den == eD), "");
 }
 
 int main(int, char**)

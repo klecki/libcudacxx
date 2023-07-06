@@ -22,8 +22,8 @@
 //      Otherwise, returns x.day() < y.day()
 
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
@@ -31,16 +31,16 @@
 
 int main(int, char**)
 {
-    using day        = cuda::std::chrono::day;
-    using year       = cuda::std::chrono::year;
-    using month      = cuda::std::chrono::month;
-    using year_month_day = cuda::std::chrono::year_month_day;
+    using day        = cuda_for_dali::std::chrono::day;
+    using year       = cuda_for_dali::std::chrono::year;
+    using month      = cuda_for_dali::std::chrono::month;
+    using year_month_day = cuda_for_dali::std::chrono::year_month_day;
 
     AssertComparisons6AreNoexcept<year_month_day>();
     AssertComparisons6ReturnBool<year_month_day>();
 
-    constexpr month January = cuda::std::chrono::January;
-    constexpr month February = cuda::std::chrono::February;
+    constexpr month January = cuda_for_dali::std::chrono::January;
+    constexpr month February = cuda_for_dali::std::chrono::February;
 
     static_assert( testComparisons6(
         year_month_day{year{1234}, January, day{1}},

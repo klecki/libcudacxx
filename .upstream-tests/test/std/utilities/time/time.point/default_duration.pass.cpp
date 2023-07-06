@@ -15,13 +15,13 @@
 // template <class Clock, class Duration = typename Clock::duration>
 //   class time_point;
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 
 int main(int, char**)
 {
-    static_assert((cuda::std::is_same<cuda::std::chrono::system_clock::duration,
-                   cuda::std::chrono::time_point<cuda::std::chrono::system_clock>::duration>::value), "");
+    static_assert((cuda_for_dali::std::is_same<cuda_for_dali::std::chrono::system_clock::duration,
+                   cuda_for_dali::std::chrono::time_point<cuda_for_dali::std::chrono::system_clock>::duration>::value), "");
 
   return 0;
 }

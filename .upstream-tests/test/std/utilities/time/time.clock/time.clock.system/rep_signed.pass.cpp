@@ -12,13 +12,13 @@
 
 // rep should be signed
 
-#include <cuda/std/chrono>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/cassert>
 
 int main(int, char**)
 {
-    assert(cuda::std::chrono::system_clock::duration::min() <
-           cuda::std::chrono::system_clock::duration::zero());
+    assert(cuda_for_dali::std::chrono::system_clock::duration::min() <
+           cuda_for_dali::std::chrono::system_clock::duration::zero());
 
   return 0;
 }

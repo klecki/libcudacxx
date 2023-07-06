@@ -14,11 +14,11 @@ It provides a heterogeneous implementation of the C++ Standard Library that can
 If you know how to use your C++ Standard Library, then you know how to use
   libcu++.
 All you have to do is add `cuda/std/` to the start of your Standard Library
-  includes and `cuda::` before any uses of `std::`:
+  includes and `cuda_for_dali::` before any uses of `std::`:
 
 ```cuda
-#include <cuda/std/atomic>
-cuda::std::atomic<int> x;
+#include <cuda_for_dali/std/atomic>
+cuda_for_dali::std::atomic<int> x;
 ```
 
 The NVIDIA C++ Standard Library is an open source project; it is available on
@@ -26,7 +26,7 @@ The NVIDIA C++ Standard Library is an open source project; it is available on
 If you have one of those SDKs installed, no additional installation or compiler
   flags are needed to use libcu++.
 
-## `cuda::` and `cuda::std::`
+## `cuda_for_dali::` and `cuda_for_dali::std::`
 
 When used with NVCC, NVIDIA C++ Standard Library facilities live in their own
   header hierarchy and namespace with the same structure as, but distinct from,
@@ -38,12 +38,12 @@ When used with NVCC, NVIDIA C++ Standard Library facilities live in their own
       `__device__` code.
     With NVCC, libcu++ does not replace or interfere with host compiler's
       Standard Library.
-* `cuda::std::`/`<cuda/std/*>`: Strictly conforming implementations of
+* `cuda_for_dali::std::`/`<cuda/std/*>`: Strictly conforming implementations of
       facilities from the Standard Library that work in `__host__ __device__`
       code.
-* `cuda::`/`<cuda/*>`: Conforming extensions to the Standard Library that
+* `cuda_for_dali::`/`<cuda/*>`: Conforming extensions to the Standard Library that
       work in `__host__ __device__` code.
-* `cuda::device`/`<cuda/device/*>`: Conforming extensions to the Standard
+* `cuda_for_dali::device`/`<cuda/device/*>`: Conforming extensions to the Standard
       Library that work only in `__device__` code.
 
 ```cuda
@@ -53,13 +53,13 @@ std::atomic<int> x;
 
 // CUDA C++, __host__ __device__.
 // Strictly conforming to the C++ Standard.
-#include <cuda/std/atomic>
-cuda::std::atomic<int> x;
+#include <cuda_for_dali/std/atomic>
+cuda_for_dali::std::atomic<int> x;
 
 // CUDA C++, __host__ __device__.
 // Conforming extensions to the C++ Standard.
-#include <cuda/atomic>
-cuda::atomic<int, cuda::thread_scope_block> x;
+#include <cuda_for_dali/atomic>
+cuda_for_dali::atomic<int, cuda_for_dali::thread_scope_block> x;
 ```
 
 ## libcu++ is Heterogeneous
@@ -67,7 +67,7 @@ cuda::atomic<int, cuda::thread_scope_block> x;
 The NVIDIA C++ Standard Library works across your entire codebase, both in and
   across host and device code.
 libcu++ is a C++ Standard Library for your entire system, not just
-Everything in `cuda::` is `__host__ __device__`.
+Everything in `cuda_for_dali::` is `__host__ __device__`.
 
 libcu++ facilities are designed to be passed between host and device code.
 Unless otherwise noted, any libcu++ object which is copyable or movable can be
@@ -78,12 +78,12 @@ Synchronization objects work across host and device code, and can be used to
 However, there are some restrictions to be aware of; please see the
   [synchronization library section] for more details.
 
-### `cuda::device::`
+### `cuda_for_dali::device::`
 
 A small number of libcu++ facilities only work in device code, usually because
   there is no sensible implementation in host code.
 
-Such facilities live in `cuda::device::`.
+Such facilities live in `cuda_for_dali::device::`.
 
 ## libcu++ is Incremental
 

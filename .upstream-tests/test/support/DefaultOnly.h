@@ -9,7 +9,7 @@
 #ifndef DEFAULTONLY_H
 #define DEFAULTONLY_H
 
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/cassert>
 
 class DefaultOnly
 {

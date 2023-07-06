@@ -11,7 +11,7 @@
 
 // <cuda/std/semaphore>
 
-#include <cuda/std/semaphore>
+#include <cuda_for_dali/std/semaphore>
 
 #include "test_macros.h"
 

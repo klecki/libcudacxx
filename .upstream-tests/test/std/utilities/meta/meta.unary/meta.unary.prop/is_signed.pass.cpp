@@ -10,22 +10,22 @@
 
 // is_signed
 
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/type_traits>
 #include "test_macros.h"
 
 template <class T>
 __host__ __device__
 void test_is_signed()
 {
-    static_assert( cuda::std::is_signed<T>::value, "");
-    static_assert( cuda::std::is_signed<const T>::value, "");
-    static_assert( cuda::std::is_signed<volatile T>::value, "");
-    static_assert( cuda::std::is_signed<const volatile T>::value, "");
+    static_assert( cuda_for_dali::std::is_signed<T>::value, "");
+    static_assert( cuda_for_dali::std::is_signed<const T>::value, "");
+    static_assert( cuda_for_dali::std::is_signed<volatile T>::value, "");
+    static_assert( cuda_for_dali::std::is_signed<const volatile T>::value, "");
 #if TEST_STD_VER > 11
-    static_assert( cuda::std::is_signed_v<T>, "");
-    static_assert( cuda::std::is_signed_v<const T>, "");
-    static_assert( cuda::std::is_signed_v<volatile T>, "");
-    static_assert( cuda::std::is_signed_v<const volatile T>, "");
+    static_assert( cuda_for_dali::std::is_signed_v<T>, "");
+    static_assert( cuda_for_dali::std::is_signed_v<const T>, "");
+    static_assert( cuda_for_dali::std::is_signed_v<volatile T>, "");
+    static_assert( cuda_for_dali::std::is_signed_v<const volatile T>, "");
 #endif
 }
 
@@ -33,15 +33,15 @@ template <class T>
 __host__ __device__
 void test_is_not_signed()
 {
-    static_assert(!cuda::std::is_signed<T>::value, "");
-    static_assert(!cuda::std::is_signed<const T>::value, "");
-    static_assert(!cuda::std::is_signed<volatile T>::value, "");
-    static_assert(!cuda::std::is_signed<const volatile T>::value, "");
+    static_assert(!cuda_for_dali::std::is_signed<T>::value, "");
+    static_assert(!cuda_for_dali::std::is_signed<const T>::value, "");
+    static_assert(!cuda_for_dali::std::is_signed<volatile T>::value, "");
+    static_assert(!cuda_for_dali::std::is_signed<const volatile T>::value, "");
 #if TEST_STD_VER > 11
-    static_assert(!cuda::std::is_signed_v<T>, "");
-    static_assert(!cuda::std::is_signed_v<const T>, "");
-    static_assert(!cuda::std::is_signed_v<volatile T>, "");
-    static_assert(!cuda::std::is_signed_v<const volatile T>, "");
+    static_assert(!cuda_for_dali::std::is_signed_v<T>, "");
+    static_assert(!cuda_for_dali::std::is_signed_v<const T>, "");
+    static_assert(!cuda_for_dali::std::is_signed_v<volatile T>, "");
+    static_assert(!cuda_for_dali::std::is_signed_v<const volatile T>, "");
 #endif
 }
 

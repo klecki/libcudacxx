@@ -41,8 +41,8 @@
 //
 
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 #include <iostream>
 
@@ -50,7 +50,7 @@
 
 int main(int, char**)
 {
-   using day = cuda::std::chrono::day;
+   using day = cuda_for_dali::std::chrono::day;
    std::cout << day{1};
 
   return 0;

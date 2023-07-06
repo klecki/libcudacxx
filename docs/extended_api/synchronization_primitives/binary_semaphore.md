@@ -9,7 +9,7 @@ nav_order: 4
 Defined in header `<cuda/semaphore>`:
 
 ```cuda
-namespace cuda {
+namespace cuda_for_dali {
 
 template <cuda::thread_scope Scope>
 using binary_semaphore = cuda::std::counting_semaphore<Scope, 1>;
@@ -49,7 +49,7 @@ For each [`cuda::thread_scope`] `S`, `cuda::binary_semaphore<S>::max()` is as
 ## Example
 
 ```cuda
-#include <cuda/semaphore>
+#include <cuda_for_dali/semaphore>
 
 __global__ void example_kernel() {
   // This semaphore is suitable for all threads in the system.

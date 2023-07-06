@@ -11,7 +11,7 @@
 
 // <cuda/std/atomic>
 
-#include <cuda/std/atomic>
+#include <cuda_for_dali/std/atomic>
 
 #include "test_macros.h"
 

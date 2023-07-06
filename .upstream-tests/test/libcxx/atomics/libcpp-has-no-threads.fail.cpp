@@ -22,7 +22,7 @@
 #define _LIBCUDACXX_HAS_NO_THREADS
 #endif
 
-#include <cuda/std/atomic>
+#include <cuda_for_dali/std/atomic>
 
 int main(int, char**)
 {

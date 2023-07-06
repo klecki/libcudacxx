@@ -12,8 +12,8 @@
 
 // duration& operator*=(const rep& rhs);
 
-#include <cuda/std/chrono>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
@@ -21,7 +21,7 @@
 __host__ __device__
 constexpr bool test_constexpr()
 {
-    cuda::std::chrono::seconds s(3);
+    cuda_for_dali::std::chrono::seconds s(3);
     s *= 5;
     return s.count() == 15;
 }
@@ -30,7 +30,7 @@ constexpr bool test_constexpr()
 int main(int, char**)
 {
     {
-    cuda::std::chrono::nanoseconds ns(3);
+    cuda_for_dali::std::chrono::nanoseconds ns(3);
     ns *= 5;
     assert(ns.count() == 15);
     }

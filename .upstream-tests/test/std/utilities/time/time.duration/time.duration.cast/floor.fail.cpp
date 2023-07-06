@@ -20,11 +20,11 @@
 // .fail. expects compilation to fail, but this would only fail at runtime with NVRTC
 // UNSUPPORTED: nvrtc
 
-#include <cuda/std/chrono>
+#include <cuda_for_dali/std/chrono>
 
 int main(int, char**)
 {
-    cuda::std::chrono::floor<int>(cuda::std::chrono::milliseconds(3));
+    cuda_for_dali::std::chrono::floor<int>(cuda_for_dali::std::chrono::milliseconds(3));
 
   return 0;
 }

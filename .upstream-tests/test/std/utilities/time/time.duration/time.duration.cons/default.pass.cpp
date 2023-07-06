@@ -14,8 +14,8 @@
 
 // Rep must be default initialized, not initialized with 0
 
-#include <cuda/std/chrono>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "../../rep.h"
@@ -35,7 +35,7 @@ test()
 
 int main(int, char**)
 {
-    test<cuda::std::chrono::duration<Rep> >();
+    test<cuda_for_dali::std::chrono::duration<Rep> >();
 
   return 0;
 }

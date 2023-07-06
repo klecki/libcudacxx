@@ -12,16 +12,16 @@
 
 // XFAIL: gcc-4.8, gcc-4.9
 
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/type_traits>
 #include "test_macros.h"
 
 template <class T>
 __host__ __device__
 void test_is_trivially_move_constructible()
 {
-    static_assert( cuda::std::is_trivially_move_constructible<T>::value, "");
+    static_assert( cuda_for_dali::std::is_trivially_move_constructible<T>::value, "");
 #if TEST_STD_VER > 11
-    static_assert( cuda::std::is_trivially_move_constructible_v<T>, "");
+    static_assert( cuda_for_dali::std::is_trivially_move_constructible_v<T>, "");
 #endif
 }
 
@@ -29,9 +29,9 @@ template <class T>
 __host__ __device__
 void test_has_not_trivial_move_constructor()
 {
-    static_assert(!cuda::std::is_trivially_move_constructible<T>::value, "");
+    static_assert(!cuda_for_dali::std::is_trivially_move_constructible<T>::value, "");
 #if TEST_STD_VER > 11
-    static_assert(!cuda::std::is_trivially_move_constructible_v<T>, "");
+    static_assert(!cuda_for_dali::std::is_trivially_move_constructible_v<T>, "");
 #endif
 }
 
@@ -97,8 +97,8 @@ int main(int, char**)
     test_is_trivially_move_constructible<bit_zero>();
 
 #if TEST_STD_VER >= 11
-    static_assert(!cuda::std::is_trivially_move_constructible<MoveOnly1>::value, "");
-    static_assert( cuda::std::is_trivially_move_constructible<MoveOnly2>::value, "");
+    static_assert(!cuda_for_dali::std::is_trivially_move_constructible<MoveOnly1>::value, "");
+    static_assert( cuda_for_dali::std::is_trivially_move_constructible<MoveOnly2>::value, "");
 #endif
 
   return 0;

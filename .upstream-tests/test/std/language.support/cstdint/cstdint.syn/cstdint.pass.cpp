@@ -8,167 +8,167 @@
 
 // test <cuda/std/cstdint>
 
-#include <cuda/std/cstdint>
-#include <cuda/std/cstddef>
-// #include <cuda/std/cwchar>
-// #include <cuda/std/csignal>
-// #include <cuda/std/cwctype>
-#include <cuda/std/climits>
-#include <cuda/std/type_traits>
-// #include <cuda/std/limits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/cstdint>
+#include <cuda_for_dali/std/cstddef>
+// #include <cuda_for_dali/std/cwchar>
+// #include <cuda_for_dali/std/csignal>
+// #include <cuda_for_dali/std/cwctype>
+#include <cuda_for_dali/std/climits>
+#include <cuda_for_dali/std/type_traits>
+// #include <cuda_for_dali/std/limits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    // typedef cuda::std::int8_t
-    static_assert(sizeof(cuda::std::int8_t)*CHAR_BIT == 8,
-                 "sizeof(cuda::std::int8_t)*CHAR_BIT == 8");
-    static_assert(cuda::std::is_signed<cuda::std::int8_t>::value,
-                 "cuda::std::is_signed<cuda::std::int8_t>::value");
-    // typedef cuda::std::int16_t
-    static_assert(sizeof(cuda::std::int16_t)*CHAR_BIT == 16,
-                 "sizeof(cuda::std::int16_t)*CHAR_BIT == 16");
-    static_assert(cuda::std::is_signed<cuda::std::int16_t>::value,
-                 "cuda::std::is_signed<cuda::std::int16_t>::value");
-    // typedef cuda::std::int32_t
-    static_assert(sizeof(cuda::std::int32_t)*CHAR_BIT == 32,
-                 "sizeof(cuda::std::int32_t)*CHAR_BIT == 32");
-    static_assert(cuda::std::is_signed<cuda::std::int32_t>::value,
-                 "cuda::std::is_signed<cuda::std::int32_t>::value");
-    // typedef cuda::std::int64_t
-    static_assert(sizeof(cuda::std::int64_t)*CHAR_BIT == 64,
-                 "sizeof(cuda::std::int64_t)*CHAR_BIT == 64");
-    static_assert(cuda::std::is_signed<cuda::std::int64_t>::value,
-                 "cuda::std::is_signed<cuda::std::int64_t>::value");
+    // typedef cuda_for_dali::std::int8_t
+    static_assert(sizeof(cuda_for_dali::std::int8_t)*CHAR_BIT == 8,
+                 "sizeof(cuda_for_dali::std::int8_t)*CHAR_BIT == 8");
+    static_assert(cuda_for_dali::std::is_signed<cuda_for_dali::std::int8_t>::value,
+                 "cuda_for_dali::std::is_signed<cuda_for_dali::std::int8_t>::value");
+    // typedef cuda_for_dali::std::int16_t
+    static_assert(sizeof(cuda_for_dali::std::int16_t)*CHAR_BIT == 16,
+                 "sizeof(cuda_for_dali::std::int16_t)*CHAR_BIT == 16");
+    static_assert(cuda_for_dali::std::is_signed<cuda_for_dali::std::int16_t>::value,
+                 "cuda_for_dali::std::is_signed<cuda_for_dali::std::int16_t>::value");
+    // typedef cuda_for_dali::std::int32_t
+    static_assert(sizeof(cuda_for_dali::std::int32_t)*CHAR_BIT == 32,
+                 "sizeof(cuda_for_dali::std::int32_t)*CHAR_BIT == 32");
+    static_assert(cuda_for_dali::std::is_signed<cuda_for_dali::std::int32_t>::value,
+                 "cuda_for_dali::std::is_signed<cuda_for_dali::std::int32_t>::value");
+    // typedef cuda_for_dali::std::int64_t
+    static_assert(sizeof(cuda_for_dali::std::int64_t)*CHAR_BIT == 64,
+                 "sizeof(cuda_for_dali::std::int64_t)*CHAR_BIT == 64");
+    static_assert(cuda_for_dali::std::is_signed<cuda_for_dali::std::int64_t>::value,
+                 "cuda_for_dali::std::is_signed<cuda_for_dali::std::int64_t>::value");
 
-    // typedef cuda::std::uint8_t
-    static_assert(sizeof(cuda::std::uint8_t)*CHAR_BIT == 8,
-                 "sizeof(cuda::std::uint8_t)*CHAR_BIT == 8");
-    static_assert(cuda::std::is_unsigned<cuda::std::uint8_t>::value,
-                 "cuda::std::is_unsigned<cuda::std::uint8_t>::value");
-    // typedef cuda::std::uint16_t
-    static_assert(sizeof(cuda::std::uint16_t)*CHAR_BIT == 16,
-                 "sizeof(cuda::std::uint16_t)*CHAR_BIT == 16");
-    static_assert(cuda::std::is_unsigned<cuda::std::uint16_t>::value,
-                 "cuda::std::is_unsigned<cuda::std::uint16_t>::value");
-    // typedef cuda::std::uint32_t
-    static_assert(sizeof(cuda::std::uint32_t)*CHAR_BIT == 32,
-                 "sizeof(cuda::std::uint32_t)*CHAR_BIT == 32");
-    static_assert(cuda::std::is_unsigned<cuda::std::uint32_t>::value,
-                 "cuda::std::is_unsigned<cuda::std::uint32_t>::value");
-    // typedef cuda::std::uint64_t
-    static_assert(sizeof(cuda::std::uint64_t)*CHAR_BIT == 64,
-                 "sizeof(cuda::std::uint64_t)*CHAR_BIT == 64");
-    static_assert(cuda::std::is_unsigned<cuda::std::uint64_t>::value,
-                 "cuda::std::is_unsigned<cuda::std::uint64_t>::value");
+    // typedef cuda_for_dali::std::uint8_t
+    static_assert(sizeof(cuda_for_dali::std::uint8_t)*CHAR_BIT == 8,
+                 "sizeof(cuda_for_dali::std::uint8_t)*CHAR_BIT == 8");
+    static_assert(cuda_for_dali::std::is_unsigned<cuda_for_dali::std::uint8_t>::value,
+                 "cuda_for_dali::std::is_unsigned<cuda_for_dali::std::uint8_t>::value");
+    // typedef cuda_for_dali::std::uint16_t
+    static_assert(sizeof(cuda_for_dali::std::uint16_t)*CHAR_BIT == 16,
+                 "sizeof(cuda_for_dali::std::uint16_t)*CHAR_BIT == 16");
+    static_assert(cuda_for_dali::std::is_unsigned<cuda_for_dali::std::uint16_t>::value,
+                 "cuda_for_dali::std::is_unsigned<cuda_for_dali::std::uint16_t>::value");
+    // typedef cuda_for_dali::std::uint32_t
+    static_assert(sizeof(cuda_for_dali::std::uint32_t)*CHAR_BIT == 32,
+                 "sizeof(cuda_for_dali::std::uint32_t)*CHAR_BIT == 32");
+    static_assert(cuda_for_dali::std::is_unsigned<cuda_for_dali::std::uint32_t>::value,
+                 "cuda_for_dali::std::is_unsigned<cuda_for_dali::std::uint32_t>::value");
+    // typedef cuda_for_dali::std::uint64_t
+    static_assert(sizeof(cuda_for_dali::std::uint64_t)*CHAR_BIT == 64,
+                 "sizeof(cuda_for_dali::std::uint64_t)*CHAR_BIT == 64");
+    static_assert(cuda_for_dali::std::is_unsigned<cuda_for_dali::std::uint64_t>::value,
+                 "cuda_for_dali::std::is_unsigned<cuda_for_dali::std::uint64_t>::value");
 
-    // typedef cuda::std::int_least8_t
-    static_assert(sizeof(cuda::std::int_least8_t)*CHAR_BIT >= 8,
-                 "sizeof(cuda::std::int_least8_t)*CHAR_BIT >= 8");
-    static_assert(cuda::std::is_signed<cuda::std::int_least8_t>::value,
-                 "cuda::std::is_signed<cuda::std::int_least8_t>::value");
-    // typedef cuda::std::int_least16_t
-    static_assert(sizeof(cuda::std::int_least16_t)*CHAR_BIT >= 16,
-                 "sizeof(cuda::std::int_least16_t)*CHAR_BIT >= 16");
-    static_assert(cuda::std::is_signed<cuda::std::int_least16_t>::value,
-                 "cuda::std::is_signed<cuda::std::int_least16_t>::value");
-    // typedef cuda::std::int_least32_t
-    static_assert(sizeof(cuda::std::int_least32_t)*CHAR_BIT >= 32,
-                 "sizeof(cuda::std::int_least32_t)*CHAR_BIT >= 32");
-    static_assert(cuda::std::is_signed<cuda::std::int_least32_t>::value,
-                 "cuda::std::is_signed<cuda::std::int_least32_t>::value");
-    // typedef cuda::std::int_least64_t
-    static_assert(sizeof(cuda::std::int_least64_t)*CHAR_BIT >= 64,
-                 "sizeof(cuda::std::int_least64_t)*CHAR_BIT >= 64");
-    static_assert(cuda::std::is_signed<cuda::std::int_least64_t>::value,
-                 "cuda::std::is_signed<cuda::std::int_least64_t>::value");
+    // typedef cuda_for_dali::std::int_least8_t
+    static_assert(sizeof(cuda_for_dali::std::int_least8_t)*CHAR_BIT >= 8,
+                 "sizeof(cuda_for_dali::std::int_least8_t)*CHAR_BIT >= 8");
+    static_assert(cuda_for_dali::std::is_signed<cuda_for_dali::std::int_least8_t>::value,
+                 "cuda_for_dali::std::is_signed<cuda_for_dali::std::int_least8_t>::value");
+    // typedef cuda_for_dali::std::int_least16_t
+    static_assert(sizeof(cuda_for_dali::std::int_least16_t)*CHAR_BIT >= 16,
+                 "sizeof(cuda_for_dali::std::int_least16_t)*CHAR_BIT >= 16");
+    static_assert(cuda_for_dali::std::is_signed<cuda_for_dali::std::int_least16_t>::value,
+                 "cuda_for_dali::std::is_signed<cuda_for_dali::std::int_least16_t>::value");
+    // typedef cuda_for_dali::std::int_least32_t
+    static_assert(sizeof(cuda_for_dali::std::int_least32_t)*CHAR_BIT >= 32,
+                 "sizeof(cuda_for_dali::std::int_least32_t)*CHAR_BIT >= 32");
+    static_assert(cuda_for_dali::std::is_signed<cuda_for_dali::std::int_least32_t>::value,
+                 "cuda_for_dali::std::is_signed<cuda_for_dali::std::int_least32_t>::value");
+    // typedef cuda_for_dali::std::int_least64_t
+    static_assert(sizeof(cuda_for_dali::std::int_least64_t)*CHAR_BIT >= 64,
+                 "sizeof(cuda_for_dali::std::int_least64_t)*CHAR_BIT >= 64");
+    static_assert(cuda_for_dali::std::is_signed<cuda_for_dali::std::int_least64_t>::value,
+                 "cuda_for_dali::std::is_signed<cuda_for_dali::std::int_least64_t>::value");
 
-    // typedef cuda::std::uint_least8_t
-    static_assert(sizeof(cuda::std::uint_least8_t)*CHAR_BIT >= 8,
-                 "sizeof(cuda::std::uint_least8_t)*CHAR_BIT >= 8");
-    static_assert(cuda::std::is_unsigned<cuda::std::uint_least8_t>::value,
-                 "cuda::std::is_unsigned<cuda::std::uint_least8_t>::value");
-    // typedef cuda::std::uint_least16_t
-    static_assert(sizeof(cuda::std::uint_least16_t)*CHAR_BIT >= 16,
-                 "sizeof(cuda::std::uint_least16_t)*CHAR_BIT >= 16");
-    static_assert(cuda::std::is_unsigned<cuda::std::uint_least16_t>::value,
-                 "cuda::std::is_unsigned<cuda::std::uint_least16_t>::value");
-    // typedef cuda::std::uint_least32_t
-    static_assert(sizeof(cuda::std::uint_least32_t)*CHAR_BIT >= 32,
-                 "sizeof(cuda::std::uint_least32_t)*CHAR_BIT >= 32");
-    static_assert(cuda::std::is_unsigned<cuda::std::uint_least32_t>::value,
-                 "cuda::std::is_unsigned<cuda::std::uint_least32_t>::value");
-    // typedef cuda::std::uint_least64_t
-    static_assert(sizeof(cuda::std::uint_least64_t)*CHAR_BIT >= 64,
-                 "sizeof(cuda::std::uint_least64_t)*CHAR_BIT >= 64");
-    static_assert(cuda::std::is_unsigned<cuda::std::uint_least64_t>::value,
-                 "cuda::std::is_unsigned<cuda::std::uint_least64_t>::value");
+    // typedef cuda_for_dali::std::uint_least8_t
+    static_assert(sizeof(cuda_for_dali::std::uint_least8_t)*CHAR_BIT >= 8,
+                 "sizeof(cuda_for_dali::std::uint_least8_t)*CHAR_BIT >= 8");
+    static_assert(cuda_for_dali::std::is_unsigned<cuda_for_dali::std::uint_least8_t>::value,
+                 "cuda_for_dali::std::is_unsigned<cuda_for_dali::std::uint_least8_t>::value");
+    // typedef cuda_for_dali::std::uint_least16_t
+    static_assert(sizeof(cuda_for_dali::std::uint_least16_t)*CHAR_BIT >= 16,
+                 "sizeof(cuda_for_dali::std::uint_least16_t)*CHAR_BIT >= 16");
+    static_assert(cuda_for_dali::std::is_unsigned<cuda_for_dali::std::uint_least16_t>::value,
+                 "cuda_for_dali::std::is_unsigned<cuda_for_dali::std::uint_least16_t>::value");
+    // typedef cuda_for_dali::std::uint_least32_t
+    static_assert(sizeof(cuda_for_dali::std::uint_least32_t)*CHAR_BIT >= 32,
+                 "sizeof(cuda_for_dali::std::uint_least32_t)*CHAR_BIT >= 32");
+    static_assert(cuda_for_dali::std::is_unsigned<cuda_for_dali::std::uint_least32_t>::value,
+                 "cuda_for_dali::std::is_unsigned<cuda_for_dali::std::uint_least32_t>::value");
+    // typedef cuda_for_dali::std::uint_least64_t
+    static_assert(sizeof(cuda_for_dali::std::uint_least64_t)*CHAR_BIT >= 64,
+                 "sizeof(cuda_for_dali::std::uint_least64_t)*CHAR_BIT >= 64");
+    static_assert(cuda_for_dali::std::is_unsigned<cuda_for_dali::std::uint_least64_t>::value,
+                 "cuda_for_dali::std::is_unsigned<cuda_for_dali::std::uint_least64_t>::value");
 
-    // typedef cuda::std::int_fast8_t
-    static_assert(sizeof(cuda::std::int_fast8_t)*CHAR_BIT >= 8,
-                 "sizeof(cuda::std::int_fast8_t)*CHAR_BIT >= 8");
-    static_assert(cuda::std::is_signed<cuda::std::int_fast8_t>::value,
-                 "cuda::std::is_signed<cuda::std::int_fast8_t>::value");
-    // typedef cuda::std::int_fast16_t
-    static_assert(sizeof(cuda::std::int_fast16_t)*CHAR_BIT >= 16,
-                 "sizeof(cuda::std::int_fast16_t)*CHAR_BIT >= 16");
-    static_assert(cuda::std::is_signed<cuda::std::int_fast16_t>::value,
-                 "cuda::std::is_signed<cuda::std::int_fast16_t>::value");
-    // typedef cuda::std::int_fast32_t
-    static_assert(sizeof(cuda::std::int_fast32_t)*CHAR_BIT >= 32,
-                 "sizeof(cuda::std::int_fast32_t)*CHAR_BIT >= 32");
-    static_assert(cuda::std::is_signed<cuda::std::int_fast32_t>::value,
-                 "cuda::std::is_signed<cuda::std::int_fast32_t>::value");
-    // typedef cuda::std::int_fast64_t
-    static_assert(sizeof(cuda::std::int_fast64_t)*CHAR_BIT >= 64,
-                 "sizeof(cuda::std::int_fast64_t)*CHAR_BIT >= 64");
-    static_assert(cuda::std::is_signed<cuda::std::int_fast64_t>::value,
-                 "cuda::std::is_signed<cuda::std::int_fast64_t>::value");
+    // typedef cuda_for_dali::std::int_fast8_t
+    static_assert(sizeof(cuda_for_dali::std::int_fast8_t)*CHAR_BIT >= 8,
+                 "sizeof(cuda_for_dali::std::int_fast8_t)*CHAR_BIT >= 8");
+    static_assert(cuda_for_dali::std::is_signed<cuda_for_dali::std::int_fast8_t>::value,
+                 "cuda_for_dali::std::is_signed<cuda_for_dali::std::int_fast8_t>::value");
+    // typedef cuda_for_dali::std::int_fast16_t
+    static_assert(sizeof(cuda_for_dali::std::int_fast16_t)*CHAR_BIT >= 16,
+                 "sizeof(cuda_for_dali::std::int_fast16_t)*CHAR_BIT >= 16");
+    static_assert(cuda_for_dali::std::is_signed<cuda_for_dali::std::int_fast16_t>::value,
+                 "cuda_for_dali::std::is_signed<cuda_for_dali::std::int_fast16_t>::value");
+    // typedef cuda_for_dali::std::int_fast32_t
+    static_assert(sizeof(cuda_for_dali::std::int_fast32_t)*CHAR_BIT >= 32,
+                 "sizeof(cuda_for_dali::std::int_fast32_t)*CHAR_BIT >= 32");
+    static_assert(cuda_for_dali::std::is_signed<cuda_for_dali::std::int_fast32_t>::value,
+                 "cuda_for_dali::std::is_signed<cuda_for_dali::std::int_fast32_t>::value");
+    // typedef cuda_for_dali::std::int_fast64_t
+    static_assert(sizeof(cuda_for_dali::std::int_fast64_t)*CHAR_BIT >= 64,
+                 "sizeof(cuda_for_dali::std::int_fast64_t)*CHAR_BIT >= 64");
+    static_assert(cuda_for_dali::std::is_signed<cuda_for_dali::std::int_fast64_t>::value,
+                 "cuda_for_dali::std::is_signed<cuda_for_dali::std::int_fast64_t>::value");
 
-    // typedef cuda::std::uint_fast8_t
-    static_assert(sizeof(cuda::std::uint_fast8_t)*CHAR_BIT >= 8,
-                 "sizeof(cuda::std::uint_fast8_t)*CHAR_BIT >= 8");
-    static_assert(cuda::std::is_unsigned<cuda::std::uint_fast8_t>::value,
-                 "cuda::std::is_unsigned<cuda::std::uint_fast8_t>::value");
-    // typedef cuda::std::uint_fast16_t
-    static_assert(sizeof(cuda::std::uint_fast16_t)*CHAR_BIT >= 16,
-                 "sizeof(cuda::std::uint_fast16_t)*CHAR_BIT >= 16");
-    static_assert(cuda::std::is_unsigned<cuda::std::uint_fast16_t>::value,
-                 "cuda::std::is_unsigned<cuda::std::uint_fast16_t>::value");
-    // typedef cuda::std::uint_fast32_t
-    static_assert(sizeof(cuda::std::uint_fast32_t)*CHAR_BIT >= 32,
-                 "sizeof(cuda::std::uint_fast32_t)*CHAR_BIT >= 32");
-    static_assert(cuda::std::is_unsigned<cuda::std::uint_fast32_t>::value,
-                 "cuda::std::is_unsigned<cuda::std::uint_fast32_t>::value");
-    // typedef cuda::std::uint_fast64_t
-    static_assert(sizeof(cuda::std::uint_fast64_t)*CHAR_BIT >= 64,
-                 "sizeof(cuda::std::uint_fast64_t)*CHAR_BIT >= 64");
-    static_assert(cuda::std::is_unsigned<cuda::std::uint_fast64_t>::value,
-                 "cuda::std::is_unsigned<cuda::std::uint_fast64_t>::value");
+    // typedef cuda_for_dali::std::uint_fast8_t
+    static_assert(sizeof(cuda_for_dali::std::uint_fast8_t)*CHAR_BIT >= 8,
+                 "sizeof(cuda_for_dali::std::uint_fast8_t)*CHAR_BIT >= 8");
+    static_assert(cuda_for_dali::std::is_unsigned<cuda_for_dali::std::uint_fast8_t>::value,
+                 "cuda_for_dali::std::is_unsigned<cuda_for_dali::std::uint_fast8_t>::value");
+    // typedef cuda_for_dali::std::uint_fast16_t
+    static_assert(sizeof(cuda_for_dali::std::uint_fast16_t)*CHAR_BIT >= 16,
+                 "sizeof(cuda_for_dali::std::uint_fast16_t)*CHAR_BIT >= 16");
+    static_assert(cuda_for_dali::std::is_unsigned<cuda_for_dali::std::uint_fast16_t>::value,
+                 "cuda_for_dali::std::is_unsigned<cuda_for_dali::std::uint_fast16_t>::value");
+    // typedef cuda_for_dali::std::uint_fast32_t
+    static_assert(sizeof(cuda_for_dali::std::uint_fast32_t)*CHAR_BIT >= 32,
+                 "sizeof(cuda_for_dali::std::uint_fast32_t)*CHAR_BIT >= 32");
+    static_assert(cuda_for_dali::std::is_unsigned<cuda_for_dali::std::uint_fast32_t>::value,
+                 "cuda_for_dali::std::is_unsigned<cuda_for_dali::std::uint_fast32_t>::value");
+    // typedef cuda_for_dali::std::uint_fast64_t
+    static_assert(sizeof(cuda_for_dali::std::uint_fast64_t)*CHAR_BIT >= 64,
+                 "sizeof(cuda_for_dali::std::uint_fast64_t)*CHAR_BIT >= 64");
+    static_assert(cuda_for_dali::std::is_unsigned<cuda_for_dali::std::uint_fast64_t>::value,
+                 "cuda_for_dali::std::is_unsigned<cuda_for_dali::std::uint_fast64_t>::value");
 
-    // typedef cuda::std::intptr_t
-    static_assert(sizeof(cuda::std::intptr_t) >= sizeof(void*),
-                 "sizeof(cuda::std::intptr_t) >= sizeof(void*)");
-    static_assert(cuda::std::is_signed<cuda::std::intptr_t>::value,
-                 "cuda::std::is_signed<cuda::std::intptr_t>::value");
-    // typedef cuda::std::uintptr_t
-    static_assert(sizeof(cuda::std::uintptr_t) >= sizeof(void*),
-                 "sizeof(cuda::std::uintptr_t) >= sizeof(void*)");
-    static_assert(cuda::std::is_unsigned<cuda::std::uintptr_t>::value,
-                 "cuda::std::is_unsigned<cuda::std::uintptr_t>::value");
+    // typedef cuda_for_dali::std::intptr_t
+    static_assert(sizeof(cuda_for_dali::std::intptr_t) >= sizeof(void*),
+                 "sizeof(cuda_for_dali::std::intptr_t) >= sizeof(void*)");
+    static_assert(cuda_for_dali::std::is_signed<cuda_for_dali::std::intptr_t>::value,
+                 "cuda_for_dali::std::is_signed<cuda_for_dali::std::intptr_t>::value");
+    // typedef cuda_for_dali::std::uintptr_t
+    static_assert(sizeof(cuda_for_dali::std::uintptr_t) >= sizeof(void*),
+                 "sizeof(cuda_for_dali::std::uintptr_t) >= sizeof(void*)");
+    static_assert(cuda_for_dali::std::is_unsigned<cuda_for_dali::std::uintptr_t>::value,
+                 "cuda_for_dali::std::is_unsigned<cuda_for_dali::std::uintptr_t>::value");
 
-    // typedef cuda::std::intmax_t
-    static_assert(sizeof(cuda::std::intmax_t) >= sizeof(long long),
-                 "sizeof(cuda::std::intmax_t) >= sizeof(long long)");
-    static_assert(cuda::std::is_signed<cuda::std::intmax_t>::value,
-                 "cuda::std::is_signed<cuda::std::intmax_t>::value");
-    // typedef cuda::std::uintmax_t
-    static_assert(sizeof(cuda::std::uintmax_t) >= sizeof(unsigned long long),
-                 "sizeof(cuda::std::uintmax_t) >= sizeof(unsigned long long)");
-    static_assert(cuda::std::is_unsigned<cuda::std::uintmax_t>::value,
-                 "cuda::std::is_unsigned<cuda::std::uintmax_t>::value");
+    // typedef cuda_for_dali::std::intmax_t
+    static_assert(sizeof(cuda_for_dali::std::intmax_t) >= sizeof(long long),
+                 "sizeof(cuda_for_dali::std::intmax_t) >= sizeof(long long)");
+    static_assert(cuda_for_dali::std::is_signed<cuda_for_dali::std::intmax_t>::value,
+                 "cuda_for_dali::std::is_signed<cuda_for_dali::std::intmax_t>::value");
+    // typedef cuda_for_dali::std::uintmax_t
+    static_assert(sizeof(cuda_for_dali::std::uintmax_t) >= sizeof(unsigned long long),
+                 "sizeof(cuda_for_dali::std::uintmax_t) >= sizeof(unsigned long long)");
+    static_assert(cuda_for_dali::std::is_unsigned<cuda_for_dali::std::uintmax_t>::value,
+                 "cuda_for_dali::std::is_unsigned<cuda_for_dali::std::uintmax_t>::value");
 
     // INTN_MIN
     static_assert(INT8_MIN == -128, "INT8_MIN == -128");
@@ -208,49 +208,49 @@ int main(int, char**)
 
 #if 0
     // INTPTR_MIN
-    assert(INTPTR_MIN == cuda::std::numeric_limits<cuda::std::intptr_t>::min());
+    assert(INTPTR_MIN == cuda_for_dali::std::numeric_limits<cuda_for_dali::std::intptr_t>::min());
 
     // INTPTR_MAX
-    assert(INTPTR_MAX == cuda::std::numeric_limits<cuda::std::intptr_t>::max());
+    assert(INTPTR_MAX == cuda_for_dali::std::numeric_limits<cuda_for_dali::std::intptr_t>::max());
 
     // UINTPTR_MAX
-    assert(UINTPTR_MAX == cuda::std::numeric_limits<cuda::std::uintptr_t>::max());
+    assert(UINTPTR_MAX == cuda_for_dali::std::numeric_limits<cuda_for_dali::std::uintptr_t>::max());
 
     // INTMAX_MIN
-    assert(INTMAX_MIN == cuda::std::numeric_limits<cuda::std::intmax_t>::min());
+    assert(INTMAX_MIN == cuda_for_dali::std::numeric_limits<cuda_for_dali::std::intmax_t>::min());
 
     // INTMAX_MAX
-    assert(INTMAX_MAX == cuda::std::numeric_limits<cuda::std::intmax_t>::max());
+    assert(INTMAX_MAX == cuda_for_dali::std::numeric_limits<cuda_for_dali::std::intmax_t>::max());
 
     // UINTMAX_MAX
-    assert(UINTMAX_MAX == cuda::std::numeric_limits<cuda::std::uintmax_t>::max());
+    assert(UINTMAX_MAX == cuda_for_dali::std::numeric_limits<cuda_for_dali::std::uintmax_t>::max());
 
     // PTRDIFF_MIN
-    assert(PTRDIFF_MIN == cuda::std::numeric_limits<cuda::std::ptrdiff_t>::min());
+    assert(PTRDIFF_MIN == cuda_for_dali::std::numeric_limits<cuda_for_dali::std::ptrdiff_t>::min());
 
     // PTRDIFF_MAX
-    assert(PTRDIFF_MAX == cuda::std::numeric_limits<cuda::std::ptrdiff_t>::max());
+    assert(PTRDIFF_MAX == cuda_for_dali::std::numeric_limits<cuda_for_dali::std::ptrdiff_t>::max());
 
     // SIG_ATOMIC_MIN
-    // assert(SIG_ATOMIC_MIN == cuda::std::numeric_limits<cuda::std::sig_atomic_t>::min());
+    // assert(SIG_ATOMIC_MIN == cuda_for_dali::std::numeric_limits<cuda_for_dali::std::sig_atomic_t>::min());
 
     // SIG_ATOMIC_MAX
-    // assert(SIG_ATOMIC_MAX == cuda::std::numeric_limits<cuda::std::sig_atomic_t>::max());
+    // assert(SIG_ATOMIC_MAX == cuda_for_dali::std::numeric_limits<cuda_for_dali::std::sig_atomic_t>::max());
 
     // SIZE_MAX
-    assert(SIZE_MAX == cuda::std::numeric_limits<cuda::std::size_t>::max());
+    assert(SIZE_MAX == cuda_for_dali::std::numeric_limits<cuda_for_dali::std::size_t>::max());
 
     // WCHAR_MIN
-    // assert(WCHAR_MIN == cuda::std::numeric_limits<wchar_t>::min());
+    // assert(WCHAR_MIN == cuda_for_dali::std::numeric_limits<wchar_t>::min());
 
     // WCHAR_MAX
-    // assert(WCHAR_MAX == cuda::std::numeric_limits<wchar_t>::max());
+    // assert(WCHAR_MAX == cuda_for_dali::std::numeric_limits<wchar_t>::max());
 
     // WINT_MIN
-    // assert(WINT_MIN == cuda::std::numeric_limits<cuda::std::wint_t>::min());
+    // assert(WINT_MIN == cuda_for_dali::std::numeric_limits<cuda_for_dali::std::wint_t>::min());
 
     // WINT_MAX
-    // assert(WINT_MAX == cuda::std::numeric_limits<cuda::std::wint_t>::max());
+    // assert(WINT_MAX == cuda_for_dali::std::numeric_limits<cuda_for_dali::std::wint_t>::max());
 #endif
 
 #ifndef INT8_C

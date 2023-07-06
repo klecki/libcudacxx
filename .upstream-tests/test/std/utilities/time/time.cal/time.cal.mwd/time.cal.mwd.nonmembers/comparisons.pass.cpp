@@ -14,8 +14,8 @@
 //   Returns: x.month() == y.month() && x.day() == y.day().
 //
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
@@ -23,40 +23,40 @@
 
 int main(int, char**)
 {
-    using month_weekday   = cuda::std::chrono::month_weekday;
-    using month           = cuda::std::chrono::month;
-    using weekday_indexed = cuda::std::chrono::weekday_indexed;
-    using weekday         = cuda::std::chrono::weekday;
+    using month_weekday   = cuda_for_dali::std::chrono::month_weekday;
+    using month           = cuda_for_dali::std::chrono::month;
+    using weekday_indexed = cuda_for_dali::std::chrono::weekday_indexed;
+    using weekday         = cuda_for_dali::std::chrono::weekday;
 
-    constexpr weekday Sunday = cuda::std::chrono::Sunday;
-    constexpr weekday Monday = cuda::std::chrono::Monday;
+    constexpr weekday Sunday = cuda_for_dali::std::chrono::Sunday;
+    constexpr weekday Monday = cuda_for_dali::std::chrono::Monday;
 
     AssertComparisons2AreNoexcept<month_weekday>();
     AssertComparisons2ReturnBool<month_weekday>();
 
     static_assert( testComparisons2(
-        month_weekday{cuda::std::chrono::January, weekday_indexed{Sunday, 1}},
-        month_weekday{cuda::std::chrono::January, weekday_indexed{Sunday, 1}},
+        month_weekday{cuda_for_dali::std::chrono::January, weekday_indexed{Sunday, 1}},
+        month_weekday{cuda_for_dali::std::chrono::January, weekday_indexed{Sunday, 1}},
         true), "");
 
     static_assert( testComparisons2(
-        month_weekday{cuda::std::chrono::January, weekday_indexed{Sunday, 1}},
-        month_weekday{cuda::std::chrono::January, weekday_indexed{Sunday, 2}},
+        month_weekday{cuda_for_dali::std::chrono::January, weekday_indexed{Sunday, 1}},
+        month_weekday{cuda_for_dali::std::chrono::January, weekday_indexed{Sunday, 2}},
         false), "");
 
     static_assert( testComparisons2(
-        month_weekday{cuda::std::chrono::January,  weekday_indexed{Sunday, 1}},
-        month_weekday{cuda::std::chrono::February, weekday_indexed{Sunday, 1}},
+        month_weekday{cuda_for_dali::std::chrono::January,  weekday_indexed{Sunday, 1}},
+        month_weekday{cuda_for_dali::std::chrono::February, weekday_indexed{Sunday, 1}},
         false), "");
 
     static_assert( testComparisons2(
-        month_weekday{cuda::std::chrono::January, weekday_indexed{Monday, 1}},
-        month_weekday{cuda::std::chrono::January, weekday_indexed{Sunday, 2}},
+        month_weekday{cuda_for_dali::std::chrono::January, weekday_indexed{Monday, 1}},
+        month_weekday{cuda_for_dali::std::chrono::January, weekday_indexed{Sunday, 2}},
         false), "");
 
     static_assert( testComparisons2(
-        month_weekday{cuda::std::chrono::January,  weekday_indexed{Monday, 1}},
-        month_weekday{cuda::std::chrono::February, weekday_indexed{Sunday, 1}},
+        month_weekday{cuda_for_dali::std::chrono::January,  weekday_indexed{Monday, 1}},
+        month_weekday{cuda_for_dali::std::chrono::February, weekday_indexed{Sunday, 1}},
         false), "");
 
 //  same day, different months

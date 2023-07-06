@@ -15,9 +15,9 @@
 // struct piecewise_construct_t { explicit piecewise_construct_t() = default; };
 // constexpr piecewise_construct_t piecewise_construct = piecewise_construct_t();
 
-#include <cuda/std/utility>
-#include <cuda/std/tuple>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/utility>
+#include <cuda_for_dali/std/tuple>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
@@ -45,9 +45,9 @@ public:
 
 int main(int, char**)
 {
-    cuda::std::pair<A, B> p(cuda::std::piecewise_construct,
-                      cuda::std::make_tuple(4, 'a'),
-                      cuda::std::make_tuple(3.5, 6u, 2u));
+    cuda_for_dali::std::pair<A, B> p(cuda_for_dali::std::piecewise_construct,
+                      cuda_for_dali::std::make_tuple(4, 'a'),
+                      cuda_for_dali::std::make_tuple(3.5, 6u, 2u));
     assert(p.first.get_i() == 4);
     assert(p.first.get_c() == 'a');
     assert(p.second.get_d() == 3.5);

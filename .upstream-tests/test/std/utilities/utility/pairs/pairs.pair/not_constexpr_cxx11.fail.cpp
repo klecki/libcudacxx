@@ -13,8 +13,8 @@
 
 // Test that only the default constructor is constexpr in C++11
 
-#include <cuda/std/utility>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/utility>
+#include <cuda_for_dali/std/cassert>
 
 struct ExplicitT {
   __host__ __device__ constexpr explicit ExplicitT(int x) : value(x) {}
@@ -31,7 +31,7 @@ struct ImplicitT {
 int main(int, char**)
 {
     {
-        using P = cuda::std::pair<int, int>;
+        using P = cuda_for_dali::std::pair<int, int>;
         constexpr int x = 42;
         constexpr P default_p{};
         constexpr P copy_p(default_p);
@@ -39,16 +39,16 @@ int main(int, char**)
         constexpr P U_V(42, 101); // expected-error {{must be initialized by a constant expression}}
     }
     {
-        using P = cuda::std::pair<ExplicitT, ExplicitT>;
-        constexpr cuda::std::pair<int, int> other;
+        using P = cuda_for_dali::std::pair<ExplicitT, ExplicitT>;
+        constexpr cuda_for_dali::std::pair<int, int> other;
         constexpr ExplicitT e(99);
         constexpr P const_U_V(e, e); // expected-error {{must be initialized by a constant expression}}
         constexpr P U_V(42, 101); // expected-error {{must be initialized by a constant expression}}
         constexpr P pair_U_V(other); // expected-error {{must be initialized by a constant expression}}
     }
     {
-        using P = cuda::std::pair<ImplicitT, ImplicitT>;
-        constexpr cuda::std::pair<int, int> other;
+        using P = cuda_for_dali::std::pair<ImplicitT, ImplicitT>;
+        constexpr cuda_for_dali::std::pair<int, int> other;
         constexpr ImplicitT i = 99;
         constexpr P const_U_V = {i, i}; // expected-error {{must be initialized by a constant expression}}
         constexpr P U_V = {42, 101}; // expected-error {{must be initialized by a constant expression}}

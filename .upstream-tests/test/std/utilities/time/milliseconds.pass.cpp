@@ -10,19 +10,19 @@
 
 // typedef duration<signed integral type of at least 45 bits, milli> milliseconds;
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
-#include <cuda/std/limits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/limits>
 
 int main(int, char**)
 {
-    typedef cuda::std::chrono::milliseconds D;
+    typedef cuda_for_dali::std::chrono::milliseconds D;
     typedef D::rep Rep;
     typedef D::period Period;
-    static_assert(cuda::std::is_signed<Rep>::value, "");
-    static_assert(cuda::std::is_integral<Rep>::value, "");
-    static_assert(cuda::std::numeric_limits<Rep>::digits >= 44, "");
-    static_assert((cuda::std::is_same<Period, cuda::std::milli>::value), "");
+    static_assert(cuda_for_dali::std::is_signed<Rep>::value, "");
+    static_assert(cuda_for_dali::std::is_integral<Rep>::value, "");
+    static_assert(cuda_for_dali::std::numeric_limits<Rep>::digits >= 44, "");
+    static_assert((cuda_for_dali::std::is_same<Period, cuda_for_dali::std::milli>::value), "");
 
   return 0;
 }

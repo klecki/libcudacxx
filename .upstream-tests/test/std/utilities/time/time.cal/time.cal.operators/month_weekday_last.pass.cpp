@@ -29,8 +29,8 @@
 
 
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
@@ -38,15 +38,15 @@
 
 int main(int, char**)
 {
-    using month_weekday      = cuda::std::chrono::month_weekday;
-    using month              = cuda::std::chrono::month;
-    using weekday            = cuda::std::chrono::weekday;
-    using weekday_last       = cuda::std::chrono::weekday_last;
-    using month_weekday_last = cuda::std::chrono::month_weekday_last;
+    using month_weekday      = cuda_for_dali::std::chrono::month_weekday;
+    using month              = cuda_for_dali::std::chrono::month;
+    using weekday            = cuda_for_dali::std::chrono::weekday;
+    using weekday_last       = cuda_for_dali::std::chrono::weekday_last;
+    using month_weekday_last = cuda_for_dali::std::chrono::month_weekday_last;
 
-    constexpr weekday Tuesday = cuda::std::chrono::Tuesday;
-    constexpr month February = cuda::std::chrono::February;
-    constexpr cuda::std::chrono::last_spec last = cuda::std::chrono::last;
+    constexpr weekday Tuesday = cuda_for_dali::std::chrono::Tuesday;
+    constexpr month February = cuda_for_dali::std::chrono::February;
+    constexpr cuda_for_dali::std::chrono::last_spec last = cuda_for_dali::std::chrono::last;
 
     { // operator/(const month& m, const weekday_last& wdi) (and switched)
         ASSERT_NOEXCEPT (February/Tuesday[last]);

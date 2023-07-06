@@ -17,10 +17,10 @@
 // template<class U, class V> pair(U&& x, V&& y);
 
 
-#include <cuda/std/utility>
+#include <cuda_for_dali/std/utility>
 // cuda/std/memory not supported
-// #include <cuda/std/memory>
-#include <cuda/std/cassert>
+// #include <cuda_for_dali/std/memory>
+#include <cuda_for_dali/std/cassert>
 
 #include "archetypes.h"
 #include "test_convertible.h"
@@ -31,12 +31,12 @@ using namespace ImplicitTypes; // Get implicitly archetypes
 template <class T1, class T1Arg,
           bool CanCopy = true, bool CanConvert = CanCopy>
 __host__ __device__ void test_sfinae() {
-    using P1 = cuda::std::pair<T1, int>;
-    using P2 = cuda::std::pair<int, T1>;
+    using P1 = cuda_for_dali::std::pair<T1, int>;
+    using P2 = cuda_for_dali::std::pair<int, T1>;
     using T2 = int const&;
-    static_assert(cuda::std::is_constructible<P1, T1Arg, T2>::value == CanCopy, "");
+    static_assert(cuda_for_dali::std::is_constructible<P1, T1Arg, T2>::value == CanCopy, "");
     static_assert(test_convertible<P1,   T1Arg, T2>() == CanConvert, "");
-    static_assert(cuda::std::is_constructible<P2, T2,   T1Arg>::value == CanCopy, "");
+    static_assert(cuda_for_dali::std::is_constructible<P2, T2,   T1Arg>::value == CanCopy, "");
     static_assert(test_convertible<P2,   T2,   T1Arg>() == CanConvert, "");
 }
 
@@ -56,8 +56,8 @@ int main(int, char**)
     // cuda/std/memory not supported
     /*
     {
-        typedef cuda::std::pair<cuda::std::unique_ptr<int>, short*> P;
-        P p(cuda::std::unique_ptr<int>(new int(3)), nullptr);
+        typedef cuda_for_dali::std::pair<cuda_for_dali::std::unique_ptr<int>, short*> P;
+        P p(cuda_for_dali::std::unique_ptr<int>(new int(3)), nullptr);
         assert(*p.first == 3);
         assert(p.second == nullptr);
     }
@@ -94,12 +94,12 @@ int main(int, char**)
     }
 #if TEST_STD_VER > 11
     { // explicit constexpr test
-        constexpr cuda::std::pair<ExplicitT, ExplicitT> p(42, 43);
+        constexpr cuda_for_dali::std::pair<ExplicitT, ExplicitT> p(42, 43);
         static_assert(p.first.value == 42, "");
         static_assert(p.second.value == 43, "");
     }
     { // implicit constexpr test
-        constexpr cuda::std::pair<ImplicitT, ImplicitT> p = {42, 43};
+        constexpr cuda_for_dali::std::pair<ImplicitT, ImplicitT> p = {42, 43};
         static_assert(p.first.value == 42, "");
         static_assert(p.second.value == 43, "");
     }

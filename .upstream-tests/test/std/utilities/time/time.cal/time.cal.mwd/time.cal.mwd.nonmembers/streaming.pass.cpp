@@ -17,8 +17,8 @@
 //
 //     Returns: os << mwd.month() << '/' << mwd.weekday_indexed().
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 #include <iostream>
 
@@ -26,10 +26,10 @@
 
 int main(int, char**)
 {
-    using month_weekday   = cuda::std::chrono::month_weekday;
-    using month           = cuda::std::chrono::month;
-    using weekday_indexed = cuda::std::chrono::weekday_indexed;
-    using weekday         = cuda::std::chrono::weekday;
+    using month_weekday   = cuda_for_dali::std::chrono::month_weekday;
+    using month           = cuda_for_dali::std::chrono::month;
+    using weekday_indexed = cuda_for_dali::std::chrono::weekday_indexed;
+    using weekday         = cuda_for_dali::std::chrono::weekday;
 
     std::cout << month_weekday{month{1}, weekday_indexed{weekday{3}, 3}};
 

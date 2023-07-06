@@ -10,33 +10,33 @@
 
 // quiet_NaN()
 
-#include <cuda/std/limits>
-#include <cuda/std/cmath>
-#include <cuda/std/type_traits>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/limits>
+#include <cuda_for_dali/std/cmath>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 template <class T>
 __host__ __device__
 void
-test_imp(cuda::std::true_type)
+test_imp(cuda_for_dali::std::true_type)
 {
-    assert(cuda::std::isnan(cuda::std::numeric_limits<T>::quiet_NaN()));
-    assert(cuda::std::isnan(cuda::std::numeric_limits<const T>::quiet_NaN()));
-    assert(cuda::std::isnan(cuda::std::numeric_limits<volatile T>::quiet_NaN()));
-    assert(cuda::std::isnan(cuda::std::numeric_limits<const volatile T>::quiet_NaN()));
+    assert(cuda_for_dali::std::isnan(cuda_for_dali::std::numeric_limits<T>::quiet_NaN()));
+    assert(cuda_for_dali::std::isnan(cuda_for_dali::std::numeric_limits<const T>::quiet_NaN()));
+    assert(cuda_for_dali::std::isnan(cuda_for_dali::std::numeric_limits<volatile T>::quiet_NaN()));
+    assert(cuda_for_dali::std::isnan(cuda_for_dali::std::numeric_limits<const volatile T>::quiet_NaN()));
 }
 
 template <class T>
 __host__ __device__
 void
-test_imp(cuda::std::false_type)
+test_imp(cuda_for_dali::std::false_type)
 {
-    assert(cuda::std::numeric_limits<T>::quiet_NaN() == T());
-    assert(cuda::std::numeric_limits<const T>::quiet_NaN() == T());
-    assert(cuda::std::numeric_limits<volatile T>::quiet_NaN() == T());
-    assert(cuda::std::numeric_limits<const volatile T>::quiet_NaN() == T());
+    assert(cuda_for_dali::std::numeric_limits<T>::quiet_NaN() == T());
+    assert(cuda_for_dali::std::numeric_limits<const T>::quiet_NaN() == T());
+    assert(cuda_for_dali::std::numeric_limits<volatile T>::quiet_NaN() == T());
+    assert(cuda_for_dali::std::numeric_limits<const volatile T>::quiet_NaN() == T());
 }
 
 template <class T>
@@ -45,7 +45,7 @@ inline
 void
 test()
 {
-    test_imp<T>(cuda::std::is_floating_point<T>());
+    test_imp<T>(cuda_for_dali::std::is_floating_point<T>());
 }
 
 int main(int, char**)

@@ -12,14 +12,14 @@
 //   complex<T>
 //   conj(const complex<T>& x);
 
-#include <cuda/std/complex>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/complex>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 template <class T>
 __host__ __device__ void
-test(const cuda::std::complex<T>& z, cuda::std::complex<T> x)
+test(const cuda_for_dali::std::complex<T>& z, cuda_for_dali::std::complex<T> x)
 {
     assert(conj(z) == x);
 }
@@ -28,10 +28,10 @@ template <class T>
 __host__ __device__ void
 test()
 {
-    test(cuda::std::complex<T>(1, 2), cuda::std::complex<T>(1, -2));
-    test(cuda::std::complex<T>(-1, 2), cuda::std::complex<T>(-1, -2));
-    test(cuda::std::complex<T>(1, -2), cuda::std::complex<T>(1, 2));
-    test(cuda::std::complex<T>(-1, -2), cuda::std::complex<T>(-1, 2));
+    test(cuda_for_dali::std::complex<T>(1, 2), cuda_for_dali::std::complex<T>(1, -2));
+    test(cuda_for_dali::std::complex<T>(-1, 2), cuda_for_dali::std::complex<T>(-1, -2));
+    test(cuda_for_dali::std::complex<T>(1, -2), cuda_for_dali::std::complex<T>(1, 2));
+    test(cuda_for_dali::std::complex<T>(-1, -2), cuda_for_dali::std::complex<T>(-1, 2));
 }
 
 int main(int, char**)

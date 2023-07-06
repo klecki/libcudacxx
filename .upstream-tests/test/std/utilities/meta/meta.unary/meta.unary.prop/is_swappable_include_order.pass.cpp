@@ -22,9 +22,9 @@
 //   3) swap(T (&)[N], T (&)[N])
 // This test checks that (1) and (2) see forward declarations
 // for (3).
-#include <cuda/std/type_traits>
-#include <cuda/std/algorithm>
-#include <cuda/std/utility>
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/algorithm>
+#include <cuda_for_dali/std/utility>
 
 #include "test_macros.h"
 
@@ -33,16 +33,16 @@ int main(int, char**)
     // Use a builtin type so we don't get ADL lookup.
     typedef double T[17][29];
     {
-        LIBCPP_STATIC_ASSERT(cuda::std::__is_swappable<T>::value, "");
+        LIBCPP_STATIC_ASSERT(cuda_for_dali::std::__is_swappable<T>::value, "");
 #if TEST_STD_VER > 11
-        static_assert(cuda::std::is_swappable_v<T>, "");
+        static_assert(cuda_for_dali::std::is_swappable_v<T>, "");
 #endif
     }
     {
         T t1 = {};
         T t2 = {};
-       cuda::std::iter_swap(t1, t2);
-       cuda::std::swap_ranges(t1, t1 + 17, t2);
+       cuda_for_dali::std::iter_swap(t1, t2);
+       cuda_for_dali::std::swap_ranges(t1, t1 + 17, t2);
     }
 
   return 0;

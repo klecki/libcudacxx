@@ -16,8 +16,8 @@
 //   ...
 // };
 
-#include <cuda/std/complex>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/complex>
+#include <cuda_for_dali/std/type_traits>
 
 #include "test_macros.h"
 
@@ -25,8 +25,8 @@ template <class T>
 __host__ __device__ void
 test()
 {
-    typedef cuda::std::complex<T> C;
-    static_assert((cuda::std::is_same<typename C::value_type, T>::value), "");
+    typedef cuda_for_dali::std::complex<T> C;
+    static_assert((cuda_for_dali::std::is_same<typename C::value_type, T>::value), "");
 }
 
 int main(int, char**)

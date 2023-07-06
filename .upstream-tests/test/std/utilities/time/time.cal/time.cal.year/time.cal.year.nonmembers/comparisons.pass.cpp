@@ -18,8 +18,8 @@
 // constexpr bool operator>=(const year& x, const year& y) noexcept;
 
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
@@ -28,7 +28,7 @@
 
 int main(int, char**)
 {
-    using year = cuda::std::chrono::year;
+    using year = cuda_for_dali::std::chrono::year;
 
     AssertComparisons6AreNoexcept<year>();
     AssertComparisons6ReturnBool<year>();

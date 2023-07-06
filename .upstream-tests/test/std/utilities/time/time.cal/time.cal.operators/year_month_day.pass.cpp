@@ -35,8 +35,8 @@
 // Returns: year(y) / md.
 
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
@@ -44,14 +44,14 @@
 
 int main(int, char**)
 {
-    using year           = cuda::std::chrono::year;
-    using month          = cuda::std::chrono::month;
-    using day            = cuda::std::chrono::day;
-    using year_month     = cuda::std::chrono::year_month;
-    using month_day      = cuda::std::chrono::month_day;
-    using year_month_day = cuda::std::chrono::year_month_day;
+    using year           = cuda_for_dali::std::chrono::year;
+    using month          = cuda_for_dali::std::chrono::month;
+    using day            = cuda_for_dali::std::chrono::day;
+    using year_month     = cuda_for_dali::std::chrono::year_month;
+    using month_day      = cuda_for_dali::std::chrono::month_day;
+    using year_month_day = cuda_for_dali::std::chrono::year_month_day;
 
-    constexpr month February = cuda::std::chrono::February;
+    constexpr month February = cuda_for_dali::std::chrono::February;
     constexpr year_month Feb2018{year{2018}, February};
 
     { // operator/(const year_month& ym, const day& d)

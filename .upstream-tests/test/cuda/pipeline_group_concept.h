@@ -12,7 +12,7 @@
 // TODO: Remove pointless comparison suppression when compiler fixes short-circuiting
 #pragma nv_diag_suppress 186
 
-#include <cuda/pipeline>
+#include <cuda_for_dali/pipeline>
 
 template <typename T_size, typename T_thread_rank>
 struct single_thread_test_group {
@@ -24,17 +24,17 @@ struct single_thread_test_group {
     T_thread_rank thread_rank() const { return 0; }
 };
 
-template <cuda::thread_scope Scope, typename T_size, typename T_thread_rank>
+template <cuda_for_dali::thread_scope Scope, typename T_size, typename T_thread_rank>
 __host__ __device__
 void test_fully_specialized()
 {
 
     auto group = single_thread_test_group<T_size, T_thread_rank>{};
 
-    cuda::pipeline_shared_state<Scope, 1> shared_state;
+    cuda_for_dali::pipeline_shared_state<Scope, 1> shared_state;
     auto pipe_partitioned_implicit = make_pipeline(group, &shared_state, 1);
-    auto pipe_partitioned_explicit_consumer = make_pipeline(group, &shared_state, cuda::pipeline_role::consumer);
-    auto pipe_partitioned_explicit_producer = make_pipeline(group, &shared_state, cuda::pipeline_role::producer);
+    auto pipe_partitioned_explicit_consumer = make_pipeline(group, &shared_state, cuda_for_dali::pipeline_role::consumer);
+    auto pipe_partitioned_explicit_producer = make_pipeline(group, &shared_state, cuda_for_dali::pipeline_role::producer);
     auto pipe_unified = make_pipeline(group, &shared_state);
 
     char src[2] = { 1, 2 };
@@ -42,7 +42,7 @@ void test_fully_specialized()
 
     pipe_unified.producer_acquire();
     memcpy_async(group, &dst[0], &src[0], 1, pipe_unified);
-    memcpy_async(group, &dst[1], &src[1], cuda::aligned_size_t<1>(1), pipe_unified);
+    memcpy_async(group, &dst[1], &src[1], cuda_for_dali::aligned_size_t<1>(1), pipe_unified);
     pipe_unified.producer_commit();
     pipe_unified.consumer_wait();
     assert(dst[0] == 1);
@@ -50,7 +50,7 @@ void test_fully_specialized()
     pipe_unified.consumer_release();
 }
 
-template <cuda::thread_scope Scope, typename T_size>
+template <cuda_for_dali::thread_scope Scope, typename T_size>
 __host__ __device__
 void test_select_thread_rank_type()
 {
@@ -65,7 +65,7 @@ void test_select_thread_rank_type()
     test_fully_specialized<Scope, T_size, uint64_t>();
 }
 
-template <cuda::thread_scope Scope>
+template <cuda_for_dali::thread_scope Scope>
 __host__ __device__
 void test_select_size_type()
 {

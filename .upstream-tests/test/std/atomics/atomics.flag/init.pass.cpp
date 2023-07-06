@@ -16,15 +16,15 @@
 
 // atomic_flag() = ATOMIC_FLAG_INIT;
 
-#include <cuda/std/atomic>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/atomic>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
 #if !defined(__CUDA_ARCH__) || __CUDA_ARCH__ >= 700
-    cuda::std::atomic_flag f = ATOMIC_FLAG_INIT;
+    cuda_for_dali::std::atomic_flag f = ATOMIC_FLAG_INIT;
     assert(f.test_and_set() == 0);
 #endif
 

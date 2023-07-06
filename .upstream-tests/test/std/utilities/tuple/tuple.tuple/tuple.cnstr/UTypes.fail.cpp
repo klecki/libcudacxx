@@ -13,7 +13,7 @@
 // template <class... UTypes>
 //   explicit tuple(UTypes&&... u);
 
-// UNSUPPORTED: c++98, c++03 
+// UNSUPPORTED: c++98, c++03
 // UNSUPPORTED: nvrtc
 
 /*
@@ -21,8 +21,8 @@
     from UTypes are bound by the explicit tuple constructor.
 */
 
-#include <cuda/std/tuple>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/tuple>
+#include <cuda_for_dali/std/cassert>
 
 template <typename T>
 __host__ __device__
@@ -50,7 +50,7 @@ public:
 int main(int, char**)
 {
     {
-        cuda::std::tuple<MoveOnly> t = 1;
+        cuda_for_dali::std::tuple<MoveOnly> t = 1;
         unused(t);
     }
 

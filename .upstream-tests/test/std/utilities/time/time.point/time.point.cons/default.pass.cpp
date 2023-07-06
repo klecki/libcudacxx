@@ -12,23 +12,23 @@
 
 // time_point();
 
-#include <cuda/std/chrono>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 #include "../../rep.h"
 
 int main(int, char**)
 {
-    typedef cuda::std::chrono::system_clock Clock;
-    typedef cuda::std::chrono::duration<Rep, cuda::std::milli> Duration;
+    typedef cuda_for_dali::std::chrono::system_clock Clock;
+    typedef cuda_for_dali::std::chrono::duration<Rep, cuda_for_dali::std::milli> Duration;
     {
-    cuda::std::chrono::time_point<Clock, Duration> t;
+    cuda_for_dali::std::chrono::time_point<Clock, Duration> t;
     assert(t.time_since_epoch() == Duration::zero());
     }
 #if TEST_STD_VER > 11
     {
-    constexpr cuda::std::chrono::time_point<Clock, Duration> t;
+    constexpr cuda_for_dali::std::chrono::time_point<Clock, Duration> t;
     static_assert(t.time_since_epoch() == Duration::zero(), "");
     }
 #endif

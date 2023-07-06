@@ -10,23 +10,23 @@
 
 // is_scalar
 
-#include <cuda/std/type_traits>
-#include <cuda/std/cstddef>         // for cuda::std::nullptr_t
+#include <cuda_for_dali/std/type_traits>
+#include <cuda_for_dali/std/cstddef>         // for cuda_for_dali::std::nullptr_t
 #include "test_macros.h"
 
 template <class T>
 __host__ __device__
 void test_is_scalar()
 {
-    static_assert( cuda::std::is_scalar<T>::value, "");
-    static_assert( cuda::std::is_scalar<const T>::value, "");
-    static_assert( cuda::std::is_scalar<volatile T>::value, "");
-    static_assert( cuda::std::is_scalar<const volatile T>::value, "");
+    static_assert( cuda_for_dali::std::is_scalar<T>::value, "");
+    static_assert( cuda_for_dali::std::is_scalar<const T>::value, "");
+    static_assert( cuda_for_dali::std::is_scalar<volatile T>::value, "");
+    static_assert( cuda_for_dali::std::is_scalar<const volatile T>::value, "");
 #if TEST_STD_VER > 11
-    static_assert( cuda::std::is_scalar_v<T>, "");
-    static_assert( cuda::std::is_scalar_v<const T>, "");
-    static_assert( cuda::std::is_scalar_v<volatile T>, "");
-    static_assert( cuda::std::is_scalar_v<const volatile T>, "");
+    static_assert( cuda_for_dali::std::is_scalar_v<T>, "");
+    static_assert( cuda_for_dali::std::is_scalar_v<const T>, "");
+    static_assert( cuda_for_dali::std::is_scalar_v<volatile T>, "");
+    static_assert( cuda_for_dali::std::is_scalar_v<const volatile T>, "");
 #endif
 }
 
@@ -34,15 +34,15 @@ template <class T>
 __host__ __device__
 void test_is_not_scalar()
 {
-    static_assert(!cuda::std::is_scalar<T>::value, "");
-    static_assert(!cuda::std::is_scalar<const T>::value, "");
-    static_assert(!cuda::std::is_scalar<volatile T>::value, "");
-    static_assert(!cuda::std::is_scalar<const volatile T>::value, "");
+    static_assert(!cuda_for_dali::std::is_scalar<T>::value, "");
+    static_assert(!cuda_for_dali::std::is_scalar<const T>::value, "");
+    static_assert(!cuda_for_dali::std::is_scalar<volatile T>::value, "");
+    static_assert(!cuda_for_dali::std::is_scalar<const volatile T>::value, "");
 #if TEST_STD_VER > 11
-    static_assert(!cuda::std::is_scalar_v<T>, "");
-    static_assert(!cuda::std::is_scalar_v<const T>, "");
-    static_assert(!cuda::std::is_scalar_v<volatile T>, "");
-    static_assert(!cuda::std::is_scalar_v<const volatile T>, "");
+    static_assert(!cuda_for_dali::std::is_scalar_v<T>, "");
+    static_assert(!cuda_for_dali::std::is_scalar_v<const T>, "");
+    static_assert(!cuda_for_dali::std::is_scalar_v<volatile T>, "");
+    static_assert(!cuda_for_dali::std::is_scalar_v<const volatile T>, "");
 #endif
 }
 
@@ -79,10 +79,10 @@ typedef void (*FunctionPtr)();
 int main(int, char**)
 {
 //  Arithmetic types (3.9.1), enumeration types, pointer types, pointer to member types (3.9.2),
-//    cuda::std::nullptr_t, and cv-qualified versions of these types (3.9.3)
+//    cuda_for_dali::std::nullptr_t, and cv-qualified versions of these types (3.9.3)
 //    are collectively called scalar types.
 
-    test_is_scalar<cuda::std::nullptr_t>();
+    test_is_scalar<cuda_for_dali::std::nullptr_t>();
     test_is_scalar<short>();
     test_is_scalar<unsigned short>();
     test_is_scalar<int>();

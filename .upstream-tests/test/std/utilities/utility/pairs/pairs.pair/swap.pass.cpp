@@ -12,8 +12,8 @@
 
 // void swap(pair& p);
 
-#include <cuda/std/utility>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/utility>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 
@@ -29,7 +29,7 @@ struct S {
 int main(int, char**)
 {
     {
-        typedef cuda::std::pair<int, short> P1;
+        typedef cuda_for_dali::std::pair<int, short> P1;
         P1 p1(3, static_cast<short>(4));
         P1 p2(5, static_cast<short>(6));
         p1.swap(p2);
@@ -39,7 +39,7 @@ int main(int, char**)
         assert(p2.second == 4);
     }
     {
-        typedef cuda::std::pair<int, S> P1;
+        typedef cuda_for_dali::std::pair<int, S> P1;
         P1 p1(3, S(4));
         P1 p2(5, S(6));
         p1.swap(p2);

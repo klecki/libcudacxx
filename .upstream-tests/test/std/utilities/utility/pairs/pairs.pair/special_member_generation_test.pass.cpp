@@ -22,10 +22,10 @@
 // Test that the copy/move constructors and assignment operators are
 // correctly defined or deleted based on the properties of `T` and `U`.
 
-#include <cuda/std/cassert>
-// cuda::std::string not supported
-// #include <cuda/std/string>
-#include <cuda/std/tuple>
+#include <cuda_for_dali/std/cassert>
+// cuda_for_dali::std::string not supported
+// #include <cuda_for_dali/std/string>
+#include <cuda_for_dali/std/tuple>
 
 #include "archetypes.h"
 
@@ -36,12 +36,12 @@ namespace ConstructorTest {
 
 template <class T1, bool CanCopy = true, bool CanMove = CanCopy>
 __host__ __device__ void test() {
-  using P1 = cuda::std::pair<T1, int>;
-  using P2 = cuda::std::pair<int, T1>;
-  static_assert(cuda::std::is_copy_constructible<P1>::value == CanCopy, "");
-  static_assert(cuda::std::is_move_constructible<P1>::value == CanMove, "");
-  static_assert(cuda::std::is_copy_constructible<P2>::value == CanCopy, "");
-  static_assert(cuda::std::is_move_constructible<P2>::value == CanMove, "");
+  using P1 = cuda_for_dali::std::pair<T1, int>;
+  using P2 = cuda_for_dali::std::pair<int, T1>;
+  static_assert(cuda_for_dali::std::is_copy_constructible<P1>::value == CanCopy, "");
+  static_assert(cuda_for_dali::std::is_move_constructible<P1>::value == CanMove, "");
+  static_assert(cuda_for_dali::std::is_copy_constructible<P2>::value == CanCopy, "");
+  static_assert(cuda_for_dali::std::is_move_constructible<P2>::value == CanMove, "");
 };
 
 } // namespace ConstructorTest
@@ -85,12 +85,12 @@ namespace AssignmentOperatorTest {
 
 template <class T1, bool CanCopy = true, bool CanMove = CanCopy>
 __host__ __device__ void test() {
-  using P1 = cuda::std::pair<T1, int>;
-  using P2 = cuda::std::pair<int, T1>;
-  static_assert(cuda::std::is_copy_assignable<P1>::value == CanCopy, "");
-  static_assert(cuda::std::is_move_assignable<P1>::value == CanMove, "");
-  static_assert(cuda::std::is_copy_assignable<P2>::value == CanCopy, "");
-  static_assert(cuda::std::is_move_assignable<P2>::value == CanMove, "");
+  using P1 = cuda_for_dali::std::pair<T1, int>;
+  using P2 = cuda_for_dali::std::pair<int, T1>;
+  static_assert(cuda_for_dali::std::is_copy_assignable<P1>::value == CanCopy, "");
+  static_assert(cuda_for_dali::std::is_move_assignable<P1>::value == CanMove, "");
+  static_assert(cuda_for_dali::std::is_copy_assignable<P2>::value == CanCopy, "");
+  static_assert(cuda_for_dali::std::is_move_assignable<P2>::value == CanMove, "");
 };
 
 } // namespace AssignmentOperatorTest

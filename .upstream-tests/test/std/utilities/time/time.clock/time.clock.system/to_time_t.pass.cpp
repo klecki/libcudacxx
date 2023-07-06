@@ -12,13 +12,13 @@
 
 // time_t to_time_t(const time_point& t);
 
-#include <cuda/std/chrono>
-#include <cuda/std/ctime>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/ctime>
 
 int main(int, char**)
 {
-    typedef cuda::std::chrono::system_clock C;
-    cuda::std::time_t t1 = C::to_time_t(C::now());
+    typedef cuda_for_dali::std::chrono::system_clock C;
+    cuda_for_dali::std::time_t t1 = C::to_time_t(C::now());
     ((void)t1);
 
   return 0;

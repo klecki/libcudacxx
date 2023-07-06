@@ -19,10 +19,10 @@
 
 // explicit(see-below) constexpr pair();
 
-// This test checks the conditional explicitness of cuda::std::pair's default
+// This test checks the conditional explicitness of cuda_for_dali::std::pair's default
 // constructor as introduced by the resolution of LWG 2510.
 
-#include <cuda/std/utility>
+#include <cuda_for_dali/std/utility>
 
 
 struct ImplicitlyDefaultConstructible {
@@ -33,10 +33,10 @@ struct ExplicitlyDefaultConstructible {
     explicit ExplicitlyDefaultConstructible() = default;
 };
 
-cuda::std::pair<ImplicitlyDefaultConstructible, ExplicitlyDefaultConstructible> test1() { return {}; } // expected-error 1 {{chosen constructor is explicit in copy-initialization}}
-cuda::std::pair<ExplicitlyDefaultConstructible, ImplicitlyDefaultConstructible> test2() { return {}; } // expected-error 1 {{chosen constructor is explicit in copy-initialization}}
-cuda::std::pair<ExplicitlyDefaultConstructible, ExplicitlyDefaultConstructible> test3() { return {}; } // expected-error 1 {{chosen constructor is explicit in copy-initialization}}
-cuda::std::pair<ImplicitlyDefaultConstructible, ImplicitlyDefaultConstructible> test4() { return {}; }
+cuda_for_dali::std::pair<ImplicitlyDefaultConstructible, ExplicitlyDefaultConstructible> test1() { return {}; } // expected-error 1 {{chosen constructor is explicit in copy-initialization}}
+cuda_for_dali::std::pair<ExplicitlyDefaultConstructible, ImplicitlyDefaultConstructible> test2() { return {}; } // expected-error 1 {{chosen constructor is explicit in copy-initialization}}
+cuda_for_dali::std::pair<ExplicitlyDefaultConstructible, ExplicitlyDefaultConstructible> test3() { return {}; } // expected-error 1 {{chosen constructor is explicit in copy-initialization}}
+cuda_for_dali::std::pair<ImplicitlyDefaultConstructible, ImplicitlyDefaultConstructible> test4() { return {}; }
 
 int main(int, char**) {
     return 0;

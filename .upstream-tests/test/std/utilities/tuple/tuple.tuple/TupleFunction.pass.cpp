@@ -6,13 +6,13 @@
 //
 //===----------------------------------------------------------------------===//
 
-// UNSUPPORTED: c++98, c++03 
+// UNSUPPORTED: c++98, c++03
 
 // This is for bugs 18853 and 19118
 
-#include <cuda/std/tuple>
-// cuda::std::function not supported
-//#include <cuda/std/functional>
+#include <cuda_for_dali/std/tuple>
+// cuda_for_dali::std::function not supported
+//#include <cuda_for_dali/std/functional>
 
 #include "test_macros.h"
 
@@ -28,10 +28,10 @@ struct X
 
 int main(int, char**)
 {
-  // cuda::std::function not supported
+  // cuda_for_dali::std::function not supported
   /*
     X x;
-    cuda::std::function<void()> f(x);
+    cuda_for_dali::std::function<void()> f(x);
   */
   return 0;
 }

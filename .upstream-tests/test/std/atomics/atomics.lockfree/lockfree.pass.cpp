@@ -22,8 +22,8 @@
 // #define ATOMIC_LLONG_LOCK_FREE unspecified
 // #define ATOMIC_POINTER_LOCK_FREE unspecified
 
-#include <cuda/std/atomic>
-#include <cuda/std/cassert>
+#include <cuda_for_dali/std/atomic>
+#include <cuda_for_dali/std/cassert>
 
 #include "test_macros.h"
 

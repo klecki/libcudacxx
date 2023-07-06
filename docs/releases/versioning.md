@@ -47,7 +47,7 @@ The NVIDIA C++ Standard Library API uses [semantic versioning].
 The versioning scheme, `MMM.mmm.ppp`, consists of three components and four
   macros defined in `<cuda/std/version>`:
 
-- `MMM`/`_LIBCUDACXX_CUDA_API_VERSION_MAJOR`: Major version, an 8 bit unsigned
+- `MMM`/`_LIBCUDAFORDALICXX_CUDA_API_VERSION_MAJOR`: Major version, an 8 bit unsigned
       integer.
     The major version represents API stability to the best of our ability
         (outstanding, but not perfect).
@@ -57,17 +57,17 @@ The versioning scheme, `MMM.mmm.ppp`, consists of three components and four
         released.
     ABI changes that do not have an associated API-backwards-incompatible change
         do not trigger a new major release.
-- `mmm`/`_LIBCUDACXX_CUDA_API_VERSION_MINOR`: Minor version, an 8 bit unsigned
+- `mmm`/`_LIBCUDAFORDALICXX_CUDA_API_VERSION_MINOR`: Minor version, an 8 bit unsigned
         integer.
     When API-backwards-compatible features are added are made, this component is
         incremented.
     Such changes may be made at any time.
-- `ppp`/`_LIBCUDACXX_CUDA_API_VERSION_PATCH`: Subminor version, an 8 bit
+- `ppp`/`_LIBCUDAFORDALICXX_CUDA_API_VERSION_PATCH`: Subminor version, an 8 bit
         unsigned integer.
     When changes are made that do not qualify for an increase in either of the
         other two versions, it is incremented.
     Such changes may be made at any time.
-- `MMMmmmppp`/`_LIBCUDACXX_CUDA_API_VERSION`: A concatenation of the decimal
+- `MMMmmmppp`/`_LIBCUDAFORDALICXX_CUDA_API_VERSION`: A concatenation of the decimal
     digits of all three components, a 32 bit unsigned integer.
 
 A single API version is supported in any given snapshot of the codebase.
@@ -125,13 +125,13 @@ A new NVIDIA C++ Standard Library ABI version is introduced and becomes the
 
 A snapshot of the codebase may support multiple ABI versions at the same time.
 They always use the latest available ABI version by default.
-The macro `_LIBCUDACXX_CUDA_ABI_VERSION_LATEST` from `<cuda/std/version>`
+The macro `_LIBCUDAFORDALICXX_CUDA_ABI_VERSION_LATEST` from `<cuda/std/version>`
   defines the value of the latest ABI version.
 
 New ABI versions may be introduced at any point in time, which means that the
   default ABI version may change in any release.
 A subset of older ABI versions can be used instead by defining
-  `_LIBCUDACXX_CUDA_ABI_VERSION` to the desired version.
+  `_LIBCUDAFORDALICXX_CUDA_ABI_VERSION` to the desired version.
 
 For more information on specific ABI versions, please see the [releases section]
   and [changelog].

@@ -16,8 +16,8 @@
 //   ...
 // };
 
-#include <cuda/std/complex>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/complex>
+#include <cuda_for_dali/std/type_traits>
 
 #include "test_macros.h"
 
@@ -25,7 +25,7 @@ template <class T>
 __host__ __device__ void
 test()
 {
-    typedef cuda::std::complex<T> C;
+    typedef cuda_for_dali::std::complex<T> C;
 
     static_assert(sizeof(C) == (sizeof(T)*2), "wrong size");
     static_assert(alignof(C) == (alignof(T)*2), "misaligned");

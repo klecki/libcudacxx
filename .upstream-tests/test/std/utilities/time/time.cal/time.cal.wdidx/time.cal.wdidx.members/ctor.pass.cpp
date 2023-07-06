@@ -20,16 +20,16 @@
 //  constexpr unsigned        index()   const noexcept;
 //  constexpr bool ok()                 const noexcept;
 
-#include <cuda/std/chrono>
-#include <cuda/std/type_traits>
+#include <cuda_for_dali/std/chrono>
+#include <cuda_for_dali/std/type_traits>
 #include <cassert>
 
 #include "test_macros.h"
 
 int main(int, char**)
 {
-    using weekday  = cuda::std::chrono::weekday;
-    using weekday_indexed = cuda::std::chrono::weekday_indexed;
+    using weekday  = cuda_for_dali::std::chrono::weekday;
+    using weekday_indexed = cuda_for_dali::std::chrono::weekday_indexed;
 
     ASSERT_NOEXCEPT(weekday_indexed{});
     ASSERT_NOEXCEPT(weekday_indexed(weekday{1}, 1));
@@ -39,12 +39,12 @@ int main(int, char**)
     static_assert( wdi0.index() == 0,           "");
     static_assert(!wdi0.ok(),                   "");
 
-    constexpr weekday_indexed wdi1{cuda::std::chrono::Sunday, 2};
-    static_assert( wdi1.weekday() == cuda::std::chrono::Sunday, "");
+    constexpr weekday_indexed wdi1{cuda_for_dali::std::chrono::Sunday, 2};
+    static_assert( wdi1.weekday() == cuda_for_dali::std::chrono::Sunday, "");
     static_assert( wdi1.index() == 2,                     "");
     static_assert( wdi1.ok(),                             "");
 
-    auto constexpr Tuesday = cuda::std::chrono::Tuesday;
+    auto constexpr Tuesday = cuda_for_dali::std::chrono::Tuesday;
 
     for (unsigned i = 1; i <= 5; ++i)
     {
